@@ -1,0 +1,1756 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tanya UMT - UMTacademy</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="UMT-Logo - Copy (5).png">
+    <style>
+        :root {
+            --primary-blue: #3B82F6;
+            --primary-blue-hover: #2563EB;
+            --success-green: #10B981;
+            --bg-dark: #141414;
+            --bg-card: #1E293B;
+            --bg-input: #334155;
+            --text-primary: #F1F5F9;
+            --text-secondary: #94A3B8;
+            --border-color: #475569;
+            --shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+            --radius: 16px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #141414;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        .header {
+            background: #141414;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #a3a3a3;
+            font-weight: 500;
+            transition: color 0.3s;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .breadcrumb-link {
+            color: #888;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .breadcrumb-link:hover {
+            color: white;
+        }
+        .breadcrumb-arrow {
+            color: #666;
+            font-size: 14px;
+        }
+        .breadcrumb-current {
+            color: white;
+            font-weight: 500;
+        }
+
+        /* Dropdown Styles */
+        /* .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-toggle {
+            color: var(--text-primary);
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: var(--transition);
+            background: rgba(74, 144, 226, 0.1);
+        } */
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-toggle {
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 16px;
+            transition: color 0.3s ease;
+            font-size: 14px;
+        }
+
+        .dropdown-toggle:hover {
+            color: #007bff;
+        }
+
+        .dropdown-arrow {
+            font-size: 12px;
+            transition: transform 0.3s ease;
+        }
+
+        .dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 8px;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .dropdown.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 12px 16px;
+            color: #ccc;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #333;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .dropdown-item:first-child {
+            border-radius: 8px 8px 0 0;
+        }
+
+        .dropdown-item:hover {
+            background: #007bff;
+            color: white;
+        }
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: #141414;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -30px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+
+        /* Header */
+        /* .header {
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        } */
+
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .logo-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--primary-blue);
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 1rem;
+            position: relative;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 1rem;
+            background: white;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Form Card */
+        .form-card {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 2.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--success-green));
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .form-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* Form Groups */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        label {
+            display: block;
+            color: var(--text-primary);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 1rem 1rem 1rem 2.5rem;
+            background: var(--bg-input);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+            transform: translateY(-2px);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+            padding-top: 1rem;
+        }
+
+        .textarea-wrapper .input-icon {
+            top: 1rem;
+            transform: none;
+        }
+
+        /* File Input */
+        .file-input {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-input input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-input-label {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem;
+            background: var(--bg-input);
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-secondary);
+        }
+
+        .file-input-label:hover {
+            border-color: var(--primary-blue);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .file-selected {
+            border-color: var(--success-green) !important;
+            background: rgba(16, 185, 129, 0.1) !important;
+            color: var(--success-green) !important;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-hover));
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.4);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Loading Animation */
+        .loader {
+            display: none;
+            margin: 1rem auto;
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(59, 130, 246, 0.3);
+            border-top: 3px solid var(--primary-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--success-green);
+            color: var(--success-green);
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            text-align: center;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .form-card {
+                padding: 2rem;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .header-content {
+                padding: 0 1rem;
+            }
+        }
+
+        /* Floating Elements */
+        .floating-icon {
+            position: absolute;
+            opacity: 0.1;
+            animation: floatIcon 15s ease-in-out infinite;
+        }
+
+        .floating-icon:nth-child(1) {
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-icon:nth-child(2) {
+            top: 70%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+
+        .floating-icon:nth-child(3) {
+            bottom: 20%;
+            left: 5%;
+            animation-delay: 10s;
+        }
+
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+        footer {
+    background-color: #141414;
+    color: white;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(to bottom, rgba(28, 28, 28, 1) 0%, rgba(28, 28, 28, 0) 100%);
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+    margin: 20px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    
+    justify-content: center;
+}
+
+.footer-section h3 {
+    color: white;
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #bbb;
+    transition: color 0.3s;
+    font-size: 14px;
+}
+
+.footer-section ul li a:hover {
+    color: white;
+}
+
+.contact-list img {
+    width: 16px;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #444;
+    margin-top: 20px;
+    padding-top: 10px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.social-icons a img {
+    width: 24px;
+    transition: opacity 0.3s;
+}
+
+.social-icons a img:hover {
+    opacity: 0.7;
+}
+
+/* Agar footer tetap responsif di layar kecil */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+}
+.dropdown-toggle {
+    user-select: none;         /* supaya tidak bisa dipilih */
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+.dropdown-toggle:focus {
+    outline: none;             /* hilangkan outline jika ada */
+}
+@media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .search-input {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .books-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+            .category-tabs {
+                justify-content: center;
+            }
+
+            .pagination {
+                gap: 0.25rem;
+            }
+
+            .page-btn {
+                padding: 0.5rem 0.75rem;
+                min-width: 40px;
+            }
+
+            .page-title h1 {
+                font-size: 2rem;
+            }
+        }
+        :root {
+            --header-height: 70px;
+        }
+
+        /* ===== RESET & BASE STYLES ===== */
+        * { 
+            box-sizing: border-box; 
+        }
+
+        body {
+            background-color: #141414; 
+            font-family: 'Poppins', sans-serif; 
+            color: white;
+            margin: 0; 
+            padding: 0; 
+            line-height: 1.6;
+            padding-top: var(--header-height);
+        }
+
+        body.sidebar-open { 
+            overflow: hidden; 
+        }
+
+        html { 
+            scroll-behavior: smooth; 
+        }
+
+        /* ===== MAIN HEADER ===== */
+        .main-header {
+            background-color: #1c1c1c; 
+            padding: 0 20px;
+            height: var(--header-height);
+            position: fixed;
+            top: 0; 
+            left: 0; 
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-container {
+            width: 100%;
+            max-width: 1200px; 
+            margin: 0 auto; 
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+        }
+
+        .header-logo {
+            display: flex; 
+            align-items: center; 
+            text-decoration: none;
+            color: white; 
+            font-weight: 600; 
+            font-size: 20px;
+        }
+
+        .header-logo img { 
+            height: 40px; 
+            margin-right: 10px; 
+        }
+
+        /* ===== HAMBURGER MENU ===== */
+        .hamburger-menu {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 1200;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger-menu .bar {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Animasi hamburger saat aktif */
+        .hamburger-menu.active .bar:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger-menu.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active .bar:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* ===== NAVIGASI DESKTOP ===== */
+        .main-nav { 
+            display: flex; 
+        }
+
+        .nav-links {
+            list-style: none; 
+            margin: 0; 
+            padding: 0;
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+        }
+
+        .nav-links li a {
+            color: #ccc; 
+            text-decoration: none; 
+            font-size: 14px;
+            font-weight: 500; 
+            padding: 8px 12px; 
+            border-radius: 6px;
+            white-space: nowrap; 
+            transition: all 0.2s ease;
+        }
+
+        .nav-links li a:hover { 
+            background-color: rgba(255, 255, 255, 0.1); 
+            color: white; 
+        }
+
+        /* ===== SIDEBAR NAVIGATION ===== */
+        .sidebar-nav {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 500px; 
+            height: 100%;
+            background-color: #1a1a1a; 
+            box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+            padding-top: 60px; 
+            transform: translateX(-100%);
+            transition: transform 0.4s ease-in-out; 
+            z-index: 1100; 
+            overflow-y: auto;
+            display: none; /* Sembunyikan di desktop */
+        }
+
+        .sidebar-nav.active { 
+            transform: translateX(0); 
+        }
+
+        .sidebar-nav .nav-links { 
+            flex-direction: column; 
+            align-items: stretch; 
+            gap: 0; 
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar-nav .nav-links li a { 
+            display: flex; 
+            gap: 15px; 
+            padding: 15px 30px; 
+            font-size: 16px; 
+            border-radius: 0;
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-nav .nav-links li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .sidebar-nav .nav-group-title {
+            padding: 20px 30px 10px; 
+            font-size: 12px; 
+            font-weight: 600;
+            color: #888; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+        }
+
+        .sidebar-nav .nav-group-title:not(:first-child){ 
+            border-top: 1px solid #333; 
+            margin-top: 10px; 
+        }
+
+        .sidebar-nav .sidebar-close-btn {
+            position: absolute; 
+            top: 15px; 
+            right: 20px; 
+            background: none; 
+            border: none;
+            color: #aaa; 
+            font-size: 36px; 
+            font-weight: 300; 
+            line-height: 1;
+            cursor: pointer; 
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .sidebar-nav .sidebar-close-btn:hover { 
+            color: white; 
+            transform: rotate(90deg); 
+        }
+
+        /* ===== SIDEBAR OVERLAY ===== */
+        .sidebar-overlay {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); 
+            z-index: 1050;
+            opacity: 0; 
+            visibility: hidden; 
+            transition: opacity 0.4s, visibility 0.4s;
+        }
+
+        .sidebar-overlay.active { 
+            opacity: 1; 
+            visibility: visible; 
+        }
+
+        /* ===== EMOJI ICONS ===== */
+        .emoji-icon {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        /* ===== MEDIA QUERIES ===== */
+        /* Tablet dan Mobile */
+        @media screen and (max-width: 1024px) {
+            .main-nav { 
+                display: none; 
+            } /* Sembunyikan nav desktop */
+            
+            .hamburger-menu { 
+                display: flex; 
+            } /* Tampilkan hamburger */
+            
+            .sidebar-nav { 
+                display: block; 
+            } /* Aktifkan sidebar */
+        }
+
+        /* Mobile Medium */
+        @media screen and (max-width: 768px) {
+            .header-logo span {
+                font-size: 18px;
+            }
+            
+            .header-logo img {
+                height: 35px;
+            }
+            
+            .sidebar-nav {
+                width: 400px;
+            }
+        }
+
+        /* Mobile Small */
+        @media screen and (max-width: 480px) {
+            .sidebar-nav {
+                width: 260px;
+            }
+            
+            .header-logo span {
+                font-size: 16px;
+            }
+            
+            .header-logo img {
+                height: 30px;
+            }
+        }
+
+        /* ===== DEMO CONTENT STYLES (hapus saat implementasi) ===== */
+        .demo-content {
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .demo-content h1 {
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .demo-content p {
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .demo-section {
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .demo-section h3 {
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+/* ----- ROOT VARIABLES ----- */
+:root {
+    --header-height: 70px;
+}
+
+/* ----- BODY ADJUSTMENT FOR FIXED HEADER ----- */
+body {
+    padding-top: var(--header-height);
+}
+
+body.sidebar-open { 
+    overflow: hidden; 
+}
+
+/* ----- MAIN HEADER ----- */
+.main-header {
+    background-color: #1c1c1c; 
+    padding: 0 20px;
+    height: var(--header-height);
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+}
+
+.header-container {
+    width: 100%;
+    max-width: 1200px; 
+    margin: 0 auto; 
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+/* ----- HEADER LOGO ----- */
+.header-logo {
+    display: flex; 
+    align-items: center; 
+    text-decoration: none;
+    color: white; 
+    font-weight: 600; 
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+.header-logo img { 
+    height: 40px; 
+    margin-right: 10px; 
+}
+
+/* ----- HAMBURGER MENU ----- */
+.hamburger-menu {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 1200;
+    transition: all 0.3s ease;
+}
+
+.hamburger-menu .bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Animasi hamburger saat aktif */
+.hamburger-menu.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger-menu.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ----- NAVIGASI DESKTOP (DEFAULT) ----- */
+.main-nav { 
+    display: flex; 
+    align-items: center; 
+    gap: 20px; 
+}
+
+.nav-links {
+    list-style: none; 
+    margin: 0; 
+    padding: 0;
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
+}
+
+.nav-links li a {
+    color: #ccc; 
+    text-decoration: none; 
+    font-size: 14px;
+    font-weight: 500; 
+    padding: 8px 12px; 
+    border-radius: 6px;
+    white-space: nowrap; 
+    transition: all 0.2s ease;
+}
+
+.nav-links li a:hover { 
+    background-color: rgba(255, 255, 255, 0.1); 
+    color: white; 
+}
+
+/* ----- HEADER AUTH BUTTONS ----- */
+.header-auth { 
+    display: flex; 
+    gap: 10px; 
+}
+
+.auth-btn {
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.auth-btn.login {
+    color: #ccc;
+    background-color: transparent;
+    border: 1px solid #555;
+}
+
+.auth-btn.login:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-color: #888;
+}
+
+.auth-btn.register {
+    color: white;
+    background-color: #6A0DAD;
+    border: 1px solid #6A0DAD;
+}
+
+.auth-btn.register:hover {
+    background-color: #7D2ED1;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(106, 13, 173, 0.5);
+}
+
+/* ----- SIDEBAR & MOBILE NAVIGATION ----- */
+.sidebar-nav {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 500px; 
+    height: 100%;
+    background-color: #1a1a1a; 
+    box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+    padding-top: 60px; 
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-in-out; 
+    z-index: 1100; 
+    overflow-y: auto;
+    display: none; /* Sembunyikan di desktop */
+}
+
+.sidebar-nav.active { 
+    transform: translateX(0); 
+}
+
+.sidebar-nav .nav-links { 
+    flex-direction: column; 
+    align-items: stretch; 
+    gap: 0; 
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-nav .nav-links li a { 
+    display: flex; 
+    gap: 15px; 
+    padding: 15px 30px; 
+    font-size: 16px; 
+    border-radius: 0;
+    color: #ccc;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.sidebar-nav .nav-links li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.sidebar-nav .nav-group-title {
+    padding: 20px 30px 10px; 
+    font-size: 12px; 
+    font-weight: 600;
+    color: #888; 
+    text-transform: uppercase; 
+    letter-spacing: 1px;
+}
+
+.sidebar-nav .nav-group-title:not(:first-child){ 
+    border-top: 1px solid #333; 
+    margin-top: 10px; 
+}
+
+.sidebar-nav .sidebar-close-btn {
+    position: absolute; 
+    top: 15px; 
+    right: 20px; 
+    background: none; 
+    border: none;
+    color: #aaa; 
+    font-size: 36px; 
+    font-weight: 300; 
+    line-height: 1;
+    cursor: pointer; 
+    transition: color 0.3s, transform 0.3s;
+}
+
+.sidebar-nav .sidebar-close-btn:hover { 
+    color: white; 
+    transform: rotate(90deg); 
+}
+
+/* ----- SIDEBAR AUTH BUTTONS ----- */
+.sidebar-auth {
+    padding: 20px 30px;
+    border-bottom: 1px solid #333;
+    margin-bottom: 10px;
+}
+
+.sidebar-auth .auth-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-left: 0;
+}
+
+.sidebar-auth .auth-btn {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* ----- SIDEBAR OVERLAY ----- */
+.sidebar-overlay {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); 
+    z-index: 1050;
+    opacity: 0; 
+    visibility: hidden; 
+    transition: opacity 0.4s, visibility 0.4s;
+}
+
+.sidebar-overlay.active { 
+    opacity: 1; 
+    visibility: visible; 
+}
+
+/* ----- EMOJI ICON ----- */
+.emoji-icon {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+/* ----- MEDIA QUERIES ----- */
+@media screen and (max-width: 1024px) {
+    .main-nav { 
+        display: none; 
+    } /* Sembunyikan nav desktop */
+    
+    .hamburger-menu { 
+        display: flex; 
+    } /* Tampilkan hamburger */
+    
+    .sidebar-nav { 
+        display: block; 
+    } /* Aktifkan sidebar */
+}
+
+/* Responsive untuk layar yang lebih kecil */
+@media screen and (max-width: 768px) {
+    .header-logo span {
+        font-size: 18px;
+    }
+    
+    .header-logo img {
+        height: 35px;
+    }
+    
+    .sidebar-nav {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .sidebar-nav {
+        width: 260px;
+    }
+    
+    .header-logo span {
+        font-size: 16px;
+    }
+    
+    .header-logo img {
+        height: 30px;
+    }
+}
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <a href="../" class="header-logo">
+                <img src="UMT-Logo - Copy (5).png" alt="UMT Academy Logo">
+                <span>UMTacademy</span>
+            </a>
+
+            <!-- Navigasi Desktop -->
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="../Materi-Belajar/">Materi Belajar</a></li>
+                    <li><a href="../Video-Pembelajaran/">Video</a></li>
+                    <li><a href="../Bank-Soal/">Bank Soal</a></li>
+                    <li><a href="../Perpustakaan/">Perpustakaan</a></li>
+                    <li><a href="../UMT-Lab/">UMT Lab</a></li>
+                    <li><a href="../tryout/">Tryout</a></li>
+                    <li><a href="#">TanyaUMT</a></li>
+                    <li><a href="../Forum-Belajar-UMT/">Forum</a></li>
+                    <li><a href="../Arsip-Live-Class/">Live Class</a></li>
+                </ul>
+                <div class="header-auth">
+                    <a href="login.html" class="auth-btn login">Masuk</a>
+                    <a href="Form-Pendaftaran.html" class="auth-btn register">Daftar</a>
+                </div>
+            </nav>
+
+            <!-- Hamburger Menu untuk Mobile -->
+            <button class="hamburger-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Sidebar Navigation untuk Mobile -->
+    <nav class="sidebar-nav">
+        <button class="sidebar-close-btn">×</button>
+        <div class="sidebar-auth">
+            <div class="auth-buttons">
+                <a href="login.html" class="auth-btn login">Masuk</a>
+                <a href="Form-Pendaftaran.html" class="auth-btn register">Daftar</a>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li class="nav-group-title">Konten Inti</li>
+            <li><a href="../Materi-Belajar/"><span class="emoji-icon">📘</span>Materi Belajar</a></li>
+            <li><a href="../Video-Pembelajaran/"><span class="emoji-icon">🎥</span>Video Pembelajaran</a></li>
+            <li><a href="../UMT-Lab/"><span class="emoji-icon">🔬</span>UMT Lab</a></li>
+            <li><a href="../Perpustakaan/"><span class="emoji-icon">📚</span>Perpustakaan</a></li>
+
+            <li class="nav-group-title">Alat Belajar</li>
+            <li><a href="../Bank-Soal/"><span class="emoji-icon">📝</span>Bank Soal</a></li>
+            <li><a href="../tryout/"><span class="emoji-icon">✏️</span>Tryout</a></li>
+            <li><a href="#"><span class="emoji-icon">❓</span>TanyaUMT</a></li>
+
+            <li class="nav-group-title">Komunitas & Info</li>
+            <li><a href="../Forum-Belajar-UMT/"><span class="emoji-icon">💬</span>Forum Belajar</a></li>
+            <li><a href="../Arsip-Live-Class/"><span class="emoji-icon">🎭</span>Arsip Live Class</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Overlay untuk Sidebar -->
+    <div class="sidebar-overlay"></div>
+        <header class="header">
+        <div class="nav-container">
+            <!-- <a href="#" class="logo">
+                <div class="logo-icon">📚</div>
+                Perpustakaan UMT
+            </a> -->
+            <nav>
+                <ul class="nav-links">
+                    <nav class="breadcrumb">
+                        <a href="../" class="breadcrumb-link">Home</a>
+                        <span class="breadcrumb-arrow">›</span>
+                        <div class="dropdown" id="umtDropdown">
+                            <span class="dropdown-toggle">
+                                Tanya UMT
+                            </span>
+                        </div>
+                    </nav>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <div class="bg-animation"></div>
+    
+    <!-- Floating Icons -->
+    <!-- <div class="floating-icon" style="font-size: 3rem; color: var(--primary-blue);">
+        <i class="fas fa-graduation-cap"></i>
+    </div>
+    <div class="floating-icon" style="font-size: 2.5rem; color: var(--success-green);">
+        <i class="fas fa-book"></i>
+    </div>
+    <div class="floating-icon" style="font-size: 2rem; color: var(--primary-blue);">
+        <i class="fas fa-lightbulb"></i>
+    </div> -->
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero">
+            <h1>Tanya UMT</h1>
+            <p>Punya pertanyaan tentang matematika? Tim ahli kami siap membantu Anda dengan jawaban yang akurat dan mudah dipahami.</p>
+        </div>
+
+        <!-- Form Card -->
+        <div class="form-card">
+            <h2 class="form-title">
+                <i class="fas fa-question-circle"></i>
+                Kirim Pertanyaan Anda
+            </h2>
+            <p class="form-subtitle">Isi formulir di bawah ini dan tim kami akan merespon pertanyaan Anda sesegera mungkin.</p>
+
+            <form id="umtForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Nama Lengkap</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" id="name" placeholder="Masukkan nama lengkap Anda" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope input-icon"></i>
+                            <input type="email" id="email" placeholder="contoh@email.com" required>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Nomor Telepon</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-phone input-icon"></i>
+                        <input type="tel" id="phone" placeholder="08xxxxxxxxxx" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="question">Pertanyaan</label>
+                    <div class="input-wrapper textarea-wrapper">
+                        <i class="fas fa-comment-alt input-icon"></i>
+                        <textarea id="question" placeholder="Tulis pertanyaan Anda dengan detail..." required></textarea>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Lampiran (Opsional)</label>
+                    <div class="file-input">
+                        <input type="file" id="fileInput" accept="image/*,application/pdf,.doc,.docx">
+                        <label for="fileInput" class="file-input-label" id="fileLabel">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span>Pilih file atau drag & drop disini</span>
+                            <small>(Gambar, PDF, Word)</small>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <i class="fas fa-paper-plane"></i>
+                    Kirim Pertanyaan
+                </button>
+
+                <div class="loader" id="loader"></div>
+                <div class="success-message" id="successMessage">
+                    <i class="fas fa-check-circle"></i>
+                    Pertanyaan Anda berhasil dikirim! Tim kami akan segera merespon.
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>Tentang Kami</h3>
+                    <ul>
+                        <li><a href="https://www.umt6174.site/tentang-umt" target="_blank">Tentang UMT</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Produk UMT</h3>
+                    <ul>
+                        <li><a href="../UMT-Lab/">UMT Lab</a></li>
+                        <li><a href="../Materi-Belajar/">Materi Pembelajaran</a></li>
+                        <li><a href="../Video-Pembelajaran/">Video Pembelajaran</a></li>
+                        <li><a href="../tryout/">Tryout</a></li>
+                        <li><a href="../Tanya-UMT/">TanyaUMT</a></li>
+                        <li><a href="../Bank-Soal/">Bank Soal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Punya Pertanyaan?</h3>
+                    <ul class="contact-list">
+                        <li><a href="https://ig.me/m/umt.6174"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" target="_blank">@umt.6174</a></li>
+                        <li><a href="mailto:business@gradient.academy"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email" target="_blank"> umt.math.6174@gmail.com</a></li>
+                        <li><a href="https://wa.me/6282189524610"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" target="_blank"> +6282189524610</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 UMT Academy. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="https://youtube.com/@umt6174?si=Cdivet0_By8EWJ8v"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" target="_blank"></a>
+                    <a href="https://www.instagram.com/umt.6174/"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" target="_blank"></a>
+                    <a href="https://www.tiktok.com/@umt6174?is_from_webapp=1&sender_device=pc"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046126.png" alt="TikTok" target="_blank"></a>
+                </div>
+            </div>
+    </footer>
+
+    <script>
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+        const sidebarNav = document.querySelector('.sidebar-nav');
+        const sidebarOverlay = document.querySelector('.sidebar-overlay');
+        const sidebarCloseBtn = document.querySelector('.sidebar-close-btn');
+        const body = document.body;
+
+        function toggleSidebar() {
+            sidebarNav.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+            body.classList.toggle('sidebar-open');
+        }
+
+        // Pastikan semua elemen ada sebelum menambahkan listener
+        if (hamburgerMenu && sidebarNav && sidebarOverlay && sidebarCloseBtn) {
+            hamburgerMenu.addEventListener('click', toggleSidebar);
+            sidebarOverlay.addEventListener('click', toggleSidebar);
+            sidebarCloseBtn.addEventListener('click', toggleSidebar);
+        }
+        const BOT_TOKEN = "8190855135:AAGcCThjfTjQEuJ4f3SO58RyLo8JWbXLt7Q";      // ←── Ganti dengan token bot Telegram Anda
+        const CHAT_ID = "6919363709";        // ←── Ganti dengan Chat ID Telegram Anda
+
+        const form = document.getElementById("umtForm");
+        const loader = document.getElementById("loader");
+        const submitBtn = document.getElementById("submitBtn");
+        const successMessage = document.getElementById("successMessage");
+        const fileInput = document.getElementById("fileInput");
+        const fileLabel = document.getElementById("fileLabel");
+
+        // File input handling
+        fileInput.addEventListener("change", function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                fileLabel.classList.add("file-selected");
+                fileLabel.innerHTML = `
+                    <i class="fas fa-file-alt"></i>
+                    <span>${file.name}</span>
+                    <small>(${(file.size / 1024 / 1024).toFixed(2)} MB)</small>
+                `;
+            } else {
+                fileLabel.classList.remove("file-selected");
+                fileLabel.innerHTML = `
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <span>Pilih file atau drag & drop disini</span>
+                    <small>(Gambar, PDF, Word)</small>
+                `;
+            }
+        });
+
+        // Drag and drop handling
+        const fileInputWrapper = document.querySelector(".file-input");
+        
+        ["dragenter", "dragover", "dragleave", "drop"].forEach(eventName => {
+            fileInputWrapper.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ["dragenter", "dragover"].forEach(eventName => {
+            fileInputWrapper.addEventListener(eventName, highlight, false);
+        });
+
+        ["dragleave", "drop"].forEach(eventName => {
+            fileInputWrapper.addEventListener(eventName, unhighlight, false);
+        });
+
+        function highlight(e) {
+            fileLabel.style.borderColor = "var(--primary-blue)";
+            fileLabel.style.background = "rgba(59, 130, 246, 0.1)";
+        }
+
+        function unhighlight(e) {
+            fileLabel.style.borderColor = "var(--border-color)";
+            fileLabel.style.background = "var(--bg-input)";
+        }
+
+        fileInputWrapper.addEventListener("drop", handleDrop, false);
+
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            fileInput.files = files;
+            fileInput.dispatchEvent(new Event("change"));
+        }
+
+        // Form submission
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            
+            // Show loading state
+            loader.style.display = "block";
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mengirim...';
+
+            try {
+                // Collect form data
+                const name = document.getElementById("name").value.trim();
+                const email = document.getElementById("email").value.trim();
+                const phone = document.getElementById("phone").value.trim();
+                const question = document.getElementById("question").value.trim();
+                const file = fileInput.files[0] || null;
+
+                // Send text message
+                const textMsg = `📩 *Pertanyaan Baru dari Tanya UMT*\n\n` +
+                               `👤 *Nama:* ${name}\n` +
+                               `📧 *Email:* ${email}\n` +
+                               `📱 *Telepon:* ${phone}\n\n` +
+                               `❓ *Pertanyaan:*\n${question}\n\n` +
+                               `🕐 *Waktu:* ${new Date().toLocaleString('id-ID')}`;
+
+                await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                        chat_id: CHAT_ID,
+                        text: textMsg,
+                        parse_mode: "Markdown"
+                    })
+                });
+
+                // Send file if attached
+                if (file) {
+                    const formData = new FormData();
+                    formData.append("chat_id", CHAT_ID);
+                    formData.append("document", file);
+                    formData.append("caption", `📎 Lampiran dari ${name}`);
+
+                    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendDocument`, {
+                        method: "POST",
+                        body: formData
+                    });
+                }
+
+                // Show success message
+                successMessage.style.display = "block";
+                form.reset();
+                
+                // Reset file input display
+                fileLabel.classList.remove("file-selected");
+                fileLabel.innerHTML = `
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <span>Pilih file atau drag & drop disini</span>
+                    <small>(Gambar, PDF, Word)</small>
+                `;
+
+            } catch (error) {
+                console.error("Error:", error);
+                alert("Terjadi kesalahan saat mengirim pertanyaan. Silakan coba lagi atau hubungi administrator.");
+            } finally {
+                // Hide loading state
+                loader.style.display = "none";
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Kirim Pertanyaan';
+            }
+        });
+
+        // Phone number formatting
+        document.getElementById("phone").addEventListener("input", function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.startsWith('0')) {
+                value = '+62' + value.substring(1);
+            }
+            e.target.value = value;
+        });
+
+        // Input animations
+        document.querySelectorAll('input, textarea').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'translateY(-2px)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'translateY(0)';
+            });
+        });
+        const dropdown = document.getElementById('umtDropdown');
+    const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+    
+    dropdownToggle.addEventListener('click', function(e) {
+        e.stopPropagation();
+        dropdown.classList.toggle('active');
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!dropdown.contains(e.target)) {
+            dropdown.classList.remove('active');
+        }
+    });
+
+    // Close dropdown when pressing Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            dropdown.classList.remove('active');
+        }
+    });
+    </script>
+</body>
+</html>
