@@ -1,0 +1,2497 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMT Lab</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMTacademy - Belajar Matematika Lengkap & Interaktif</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="UMT-Logo - Copy (3).png">
+    <style>
+/* ===== ROOT VARIABLES ===== */
+:root {
+    --header-height: 70px;
+    --primary-color: #007bff;
+    --primary-hover: #0056b3;
+    --secondary-color: #6A0DAD;
+    --secondary-hover: #7D2ED1;
+    --success-color: #28a745;
+    --warning-color: #FBC02D;
+    --dark-bg: #141414;
+    --dark-card: #1f1f1f;
+    --dark-secondary: #1c1c1c;
+    --dark-tertiary: #2a2a2a;
+    --border-color: #333;
+    --border-hover: #444;
+    --text-primary: #ffffff;
+    --text-secondary: #ccc;
+    --text-muted: #888;
+    --text-dark: #121212;
+    --shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 10px 30px rgba(0, 0, 0, 0.5);
+    --transition: all 0.3s ease;
+    --border-radius: 8px;
+    --border-radius-large: 16px;
+}
+
+/* ===== RESET & BASE STYLES ===== */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: var(--dark-bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    line-height: 1.6;
+    padding-top: var(--header-height);
+}
+
+body.sidebar-open {
+    overflow: hidden;
+}
+
+/* ===== MAIN HEADER ===== */
+.main-header {
+    background-color: var(--dark-secondary);
+    padding: 0 20px;
+    height: var(--header-height);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+}
+
+.header-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+.header-logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+/* ===== NAVIGATION ===== */
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-links li a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: var(--border-radius);
+    white-space: nowrap;
+    transition: var(--transition);
+}
+
+.nav-links li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+/* ===== HEADER AUTH BUTTONS ===== */
+.header-auth {
+    display: flex;
+    gap: 10px;
+}
+
+.auth-btn {
+    padding: 8px 18px;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+    text-align: center;
+    white-space: nowrap;
+}
+
+.auth-btn.login {
+    color: var(--text-secondary);
+    background-color: transparent;
+    border: 1px solid #555;
+}
+
+.auth-btn.login:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    border-color: var(--text-muted);
+}
+
+.auth-btn.register {
+    color: var(--text-primary);
+    background-color: var(--secondary-color);
+    border: 1px solid var(--secondary-color);
+}
+
+.auth-btn.register:hover {
+    background-color: var(--secondary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(106, 13, 173, 0.5);
+}
+
+/* ===== HAMBURGER MENU ===== */
+.hamburger-menu {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 1200;
+    transition: var(--transition);
+}
+
+.hamburger-menu .bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-primary);
+    border-radius: 2px;
+    transition: var(--transition);
+}
+
+.hamburger-menu.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger-menu.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ===== SIDEBAR NAVIGATION ===== */
+.sidebar-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 500px;
+    height: 100%;
+    background-color: #1a1a1a;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.5);
+    padding-top: 60px;
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-in-out;
+    z-index: 1100;
+    overflow-y: auto;
+    display: none;
+}
+
+.sidebar-nav.active {
+    transform: translateX(0);
+}
+
+.sidebar-nav .nav-links {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-nav .nav-links li a {
+    display: flex;
+    gap: 15px;
+    padding: 15px 30px;
+    font-size: 16px;
+    border-radius: 0;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.sidebar-nav .nav-links li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+.sidebar-nav .nav-group-title {
+    padding: 20px 30px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.sidebar-nav .nav-group-title:not(:first-child) {
+    border-top: 1px solid var(--border-color);
+    margin-top: 10px;
+}
+
+.sidebar-nav .sidebar-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 36px;
+    font-weight: 300;
+    line-height: 1;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.sidebar-nav .sidebar-close-btn:hover {
+    color: var(--text-primary);
+    transform: rotate(90deg);
+}
+
+.sidebar-auth {
+    padding: 20px 30px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 10px;
+}
+
+.sidebar-auth .auth-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-left: 0;
+}
+
+.sidebar-auth .auth-btn {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* ===== SIDEBAR OVERLAY ===== */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1050;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s, visibility 0.4s;
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* ===== CONTAINER ===== */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ===== HEADER SECTION ===== */
+.header {
+    padding: 20px 0 30px 0;
+}
+
+.breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: var(--text-muted);
+}
+
+.breadcrumb-arrow {
+    color: #666;
+}
+
+.breadcrumb-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: var(--transition);
+    cursor: pointer;
+}
+
+.breadcrumb-link:hover {
+    color: var(--text-primary);
+}
+
+.breadcrumb-current {
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+/* ===== DROPDOWN STYLES ===== */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-toggle {
+    color: var(--text-primary);
+    font-weight: 500;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding: 5px 0;
+    transition: var(--transition);
+}
+
+.dropdown-toggle:hover {
+    color: var(--primary-color);
+}
+
+.dropdown-arrow {
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
+
+.dropdown.active .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: var(--dark-tertiary);
+    border: 1px solid var(--border-hover);
+    border-radius: var(--border-radius);
+    min-width: 200px;
+    box-shadow: var(--shadow-hover);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: var(--transition);
+    z-index: 1000;
+}
+
+.dropdown.active .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-item {
+    display: block;
+    padding: 12px 16px;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    transition: var(--transition);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.dropdown-item:last-child {
+    border-bottom: none;
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+.dropdown-item:first-child {
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.dropdown-item:hover {
+    background: var(--primary-color);
+    color: var(--text-primary);
+}
+
+/* ===== NAVIGATION TABS ===== */
+.nav-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    position: relative;
+}
+
+.nav-tabs::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--border-color);
+}
+
+.nav-tab {
+    padding: 12px 24px;
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 16px;
+    white-space: nowrap;
+    border-bottom: 3px solid transparent;
+    transition: var(--transition);
+    position: relative;
+    z-index: 1;
+}
+
+.nav-tab.active {
+    color: var(--text-primary);
+    border-bottom-color: var(--text-primary);
+}
+
+.nav-tab:hover {
+    color: var(--text-primary);
+}
+
+/* ===== SEARCH ===== */
+.search-container {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.search-input {
+    width: 100%;
+    padding: 15px 20px;
+    background: var(--border-color);
+    border: 1px solid var(--border-hover);
+    border-radius: 50px;
+    color: var(--text-primary);
+    font-size: 16px;
+    outline: none;
+    transition: var(--transition);
+}
+
+.search-input:focus {
+    border-color: var(--text-muted);
+}
+
+.search-input::placeholder {
+    color: var(--text-muted);
+}
+
+.search-icon {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    cursor: pointer;
+}
+
+/* ===== CARDS GRID ===== */
+.cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 40px;
+    min-height: 600px;
+}
+
+.card {
+    background: linear-gradient(145deg, var(--dark-tertiary) 0%, var(--dark-card) 100%);
+    border-radius: var(--border-radius-large);
+    padding: 24px;
+    border: 1px solid var(--border-color);
+    transition: var(--transition);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: var(--text-primary);
+    box-shadow: var(--shadow);
+}
+
+.card-content {
+    display: flex;
+    gap: 20px;
+}
+
+.card-image {
+    width: 80px;
+    height: 100px;
+    border-radius: var(--border-radius);
+    flex-shrink: 0;
+    position: relative;
+    overflow: hidden;
+    background: var(--border-color);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    font-size: 12px;
+    text-align: center;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+}
+
+.card-info {
+    flex: 1;
+}
+
+.card-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1.3;
+}
+
+.card-author {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 12px;
+}
+
+.card-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.star {
+    color: #ffd700;
+    font-size: 14px;
+}
+
+.rating-number {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* ===== CARD TAGS ===== */
+.card-tag {
+    display: inline-block;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-right: 8px;
+    margin-bottom: 4px;
+}
+
+.tag-analisis-kajian {
+    background: var(--primary-color);
+    color: var(--text-primary);
+}
+
+.tag-eksplorasi-teori {
+    background: var(--success-color);
+    color: var(--text-primary);
+}
+
+.tag-free {
+    background: linear-gradient(135deg, var(--success-color), #20c997);
+    color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+    transition: var(--transition);
+}
+
+.tag-free:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+}
+
+.tag-premium {
+    background: linear-gradient(135deg, var(--primary-color), #6f42c1);
+    color: var(--text-primary);
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+    position: relative;
+    transition: var(--transition);
+}
+
+/* .tag-premium::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+} */
+
+.tag-premium:hover::before {
+    left: 100%;
+}
+
+.tag-premium:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.4);
+}
+
+/* ===== LOCKED CARDS ===== */
+.card.locked {
+    position: relative;
+    opacity: 0.8;
+}
+
+.card.locked::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, transparent 30%, rgba(0, 0, 0, 0.1) 50%, transparent 70%);
+    border-radius: var(--border-radius-large);
+    pointer-events: none;
+}
+
+.card.locked .card-image::after {
+    content: '🔒';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+    background: rgba(0, 0, 0, 0.8);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ffd700;
+}
+
+.card.locked:hover {
+    transform: translateY(-3px);
+    border-color: #ffd700;
+}
+
+/* ===== PAGINATION ===== */
+.pagination-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 40px 0;
+    flex-wrap: wrap;
+}
+
+.pagination-btn,
+.pagination-nav {
+    background: var(--border-color);
+    border: 1px solid var(--border-hover);
+    color: var(--text-muted);
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    font-size: 14px;
+    min-width: 40px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pagination-btn:hover:not(.disabled),
+.pagination-nav:hover:not(.disabled) {
+    background: var(--primary-color);
+    color: var(--text-primary);
+    border-color: var(--primary-color);
+}
+
+.pagination-btn.active {
+    background: var(--primary-color);
+    color: var(--text-primary);
+    border-color: var(--primary-color);
+}
+
+.pagination-btn.disabled,
+.pagination-nav.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.pagination-ellipsis {
+    color: var(--text-muted);
+    padding: 10px 5px;
+    font-size: 14px;
+}
+
+.pagination-nav {
+    gap: 5px;
+}
+
+/* ===== MODAL STYLES ===== */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 20px;
+    transition: opacity 0.3s ease;
+}
+
+.modal-content {
+    background: var(--dark-card);
+    border-radius: 20px;
+    width: 90%;
+    height: 90%;
+    max-width: 1200px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: var(--shadow-hover);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 1px solid var(--border-hover);
+    background: var(--dark-card);
+    border-radius: 20px 20px 0 0;
+}
+
+.modal-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.modal-controls {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.download-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
+    color: var(--text-primary);
+    border: none;
+    padding: 10px 20px;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.download-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.download-btn:hover::before {
+    left: 100%;
+}
+
+.download-btn:hover {
+    background: linear-gradient(135deg, var(--primary-hover), #004085);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 123, 255, 0.4);
+}
+
+.download-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+.download-icon {
+    width: 16px;
+    height: 16px;
+    stroke-width: 2;
+}
+
+.modal-close {
+    color: var(--text-primary);
+    font-size: 28px;
+    font-weight: 300;
+    line-height: 1;
+    cursor: pointer;
+    transition: var(--transition);
+    padding: 5px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+}
+
+.modal-close:hover {
+    color: var(--text-secondary);
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.pdf-container {
+    flex-grow: 1;
+    width: 100%;
+    height: calc(100% - 80px);
+    overflow: hidden;
+}
+
+.pdf-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* ===== PRICING MODAL ===== */
+.pricing-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: stretch;
+    gap: 25px;
+}
+
+.pricing-card {
+    background-color: var(--dark-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 25px;
+    width: 220px;
+    text-align: center;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.pricing-card:hover {
+    transform: translateY(-8px);
+}
+
+.pricing-card.best-value {
+    width: 240px;
+    border: 2px solid var(--warning-color);
+    transform: scale(1.05);
+    box-shadow: 0 0 25px rgba(251, 192, 45, 0.25), 0 4px 15px rgba(0, 0, 0, 0.3);
+    background: radial-gradient(circle, #3a331c, var(--dark-card));
+    padding-top: 60px;
+}
+
+.best-value-banner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 5px;
+    background-color: var(--warning-color);
+    color: var(--text-dark);
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.card-title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+.best-value .card-title {
+    color: var(--warning-color);
+    margin-top: 0;
+}
+
+.card-price {
+    font-size: 34px;
+    font-weight: 700;
+    margin: 0;
+}
+
+.original-price {
+    text-decoration: line-through;
+    color: #777;
+    font-size: 15px;
+    margin-bottom: 8px;
+    height: 22px;
+}
+
+.card-info-wrapper {
+    min-height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+}
+
+.savings-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.best-value .savings-badge {
+    background-color: var(--warning-color);
+    color: var(--text-dark);
+    font-weight: 700;
+}
+
+.per-day-cost {
+    font-size: 13px;
+    color: #aaa;
+    margin-bottom: 20px;
+}
+
+.best-value .per-day-cost {
+    color: var(--warning-color);
+    font-weight: 600;
+}
+
+.cta-button {
+    width: 100%;
+    padding: 12px;
+    border-radius: var(--border-radius);
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    border: 1px solid var(--text-muted);
+    background-color: transparent;
+    color: var(--text-primary);
+    margin-top: auto;
+}
+
+.cta-button:hover {
+    background-color: var(--border-color);
+    border-color: var(--border-color);
+}
+
+.best-value .cta-button {
+    background: linear-gradient(90deg, #FDD835, var(--warning-color));
+    border: none;
+    color: var(--text-dark);
+    font-weight: 700;
+    box-shadow: 0 4px 15px rgba(251, 192, 45, 0.2);
+}
+
+.best-value .cta-button:hover {
+    filter: brightness(1.1);
+}
+
+/* ===== FOOTER ===== */
+footer {
+    background-color: var(--dark-bg);
+    color: var(--text-primary);
+    padding: 20px;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(to bottom, rgba(28, 28, 28, 1) 0%, rgba(28, 28, 28, 0) 100%);
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+}
+
+.footer-section h3 {
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    font-size: 18px;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #bbb;
+    transition: var(--transition);
+    font-size: 14px;
+}
+
+.footer-section ul li a:hover {
+    color: var(--text-primary);
+}
+
+.contact-list img {
+    width: 16px;
+    vertical-align: middle;
+    margin-right: 8px;
+}
+
+.footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border-hover);
+    margin-top: 20px;
+    padding-top: 10px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.social-icons a img {
+    width: 24px;
+    transition: opacity 0.3s;
+}
+
+.social-icons a img:hover {
+    opacity: 0.7;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+.card:nth-child(5) { animation-delay: 0.5s; }
+.card:nth-child(6) { animation-delay: 0.6s; }
+
+/* ===== UTILITIES ===== */
+.emoji-icon {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+
+/* Tablet dan Mobile */
+@media screen and (max-width: 1024px) {
+    .main-nav {
+        display: none;
+    }
+    
+    .hamburger-menu {
+        display: flex;
+    }
+    
+    .sidebar-nav {
+        display: block;
+    }
+    
+    .pricing-container {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .pricing-card.best-value {
+        transform: scale(1);
+    }
+}
+
+/* Tablet */
+@media screen and (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .cards-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .card {
+        padding: 20px;
+    }
+
+    .card-content {
+        gap: 15px;
+    }
+
+    .card-image {
+        width: 60px;
+        height: 75px;
+    }
+
+    .nav-tabs {
+        padding-bottom: 0;
+    }
+
+    .nav-tab {
+        padding: 10px 16px;
+        font-size: 14px;
+    }
+
+    .dropdown-menu {
+        min-width: 180px;
+    }
+
+    .pagination-container {
+        gap: 5px;
+        margin: 20px 0;
+    }
+
+    .pagination-btn,
+    .pagination-nav {
+        padding: 8px 12px;
+        font-size: 12px;
+        min-width: 35px;
+    }
+
+    .header-logo span {
+        font-size: 18px;
+    }
+    
+    .header-logo img {
+        height: 35px;
+    }
+    
+    .sidebar-nav {
+        width: 400px;
+    }
+
+    .modal-content {
+        padding: 25px 20px;
+    }
+    
+    .modal-content h2 {
+        font-size: 20px;
+    }
+    
+    .card-price {
+        font-size: 28px;
+    }
+    
+    .price s {
+        font-size: 16px;
+    }
+
+    .modal-header {
+        padding: 15px 20px;
+    }
+    
+    .modal-title {
+        font-size: 16px;
+    }
+    
+    .download-btn {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+    
+    .download-icon {
+        width: 14px;
+        height: 14px;
+    }
+    
+    .modal-close {
+        font-size: 24px;
+        width: 32px;
+        height: 32px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+}
+
+/* Mobile */
+@media screen and (max-width: 480px) {
+    .card-content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .card-image {
+        width: 80px;
+        height: 100px;
+    }
+
+    .pagination-container {
+        gap: 3px;
+    }
+
+    .pagination-btn,
+    .pagination-nav {
+        padding: 6px 10px;
+        font-size: 11px;
+        min-width: 30px;
+    }
+
+    .sidebar-nav {
+        width: 260px;
+    }
+    
+    .header-logo span {
+        font-size: 16px;
+    }
+    
+    .header-logo img {
+        height: 30px;
+    }
+
+    .modal-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .modal-controls {
+        gap: 10px;
+    }
+    
+    .download-btn span {
+        display: none;
+    }
+}
+
+/* ===== PRINT STYLES ===== */
+@media print {
+    .main-header,
+    .sidebar-nav,
+    .sidebar-overlay,
+    .modal-overlay,
+    footer {
+        display: none !important;
+    }
+    
+    body {
+        padding-top: 0;
+        background: white;
+        color: black;
+    }
+    
+    .container {
+        max-width: none;
+        padding: 0;
+    }
+    
+    .card {
+        break-inside: avoid;
+        background: white;
+        border: 1px solid #ccc;
+        color: black;
+    }
+}
+    /* === PAYWALL MODAL STYLES (REVISED) === */
+    .modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(10px);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 10000;
+        padding: 20px;
+    }
+    .modal-content {
+        background: #1e1e1e;
+        border-radius: 20px;
+        padding: 30px 40px;
+        width: 100%;
+        max-width: 950px;
+        position: relative;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+        /* Perbaikan untuk vertical overflow */
+        max-height: 90vh; 
+        overflow-y: auto;
+    }
+    .modal-content h2 {
+        font-size: 24px;
+        margin-bottom: 30px;
+    }
+    .close-modal {
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        font-size: 28px;
+        color: #888;
+        cursor: pointer;
+        transition: color 0.3s ease;
+    }
+    .close-modal:hover { color: #fff; }
+    
+    .pricing-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 25px;
+    }
+    .pricing-card {
+        background: #2a2a2a;
+        padding: 25px;
+        border-radius: 15px;
+        border: 1px solid #444;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s ease;
+    }
+    .pricing-card:hover {
+        transform: translateY(-5px);
+        border-color: #8A2BE2;
+    }
+    .pricing-card.best-offer {
+        border: 2px solid #8A2BE2;
+        transform: scale(1.05);
+        position: relative;
+    }
+    .best-offer-badge {
+        position: absolute;
+        top: -15px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #8A2BE2;
+        color: white;
+        padding: 5px 15px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: bold;
+    }
+    .pricing-card h3 { font-size: 20px; margin-bottom: 15px; }
+    .price { font-size: 36px; font-weight: bold; color: #fff; margin-bottom: 5px; }
+    .price s { font-size: 18px; color: #888; font-weight: normal; margin-left: 10px; }
+    .features-list { list-style: none; text-align: left; margin: 20px 0; padding: 0 10px; flex-grow: 1; }
+    .features-list li { margin-bottom: 12px; display: flex; align-items: center; gap: 10px; font-size: 14px; }
+    .features-list li span { color: #4CAF50; }
+    .subscribe-btn {
+        background: #8A2BE2;
+        color: white;
+        border: none;
+        padding: 15px;
+        border-radius: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s ease;
+        width: 100%;
+    }
+    .subscribe-btn:hover { background: #7323bf; }
+
+    /* === RESPONSIVE FIXES (REVISED) === */
+    @media (max-width: 1024px) {
+        .content-wrapper { grid-template-columns: 1fr; }
+        .video-section { order: -1; } /* Tetap di atas pada tablet */
+        .pricing-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+        .pricing-card.best-offer {
+            transform: scale(1); /* Reset scale di tampilan tablet/mobile */
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .modal-content {
+            padding: 25px 20px; /* Kurangi padding untuk mobile */
+        }
+        .modal-content h2 {
+            font-size: 20px; /* Kecilkan judul modal */
+        }
+        .price {
+            font-size: 28px; /* Kecilkan ukuran harga */
+        }
+        .price s {
+            font-size: 16px;
+        }
+    }
+        .pricing-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            gap: 25px;
+        }
+
+        .pricing-card {
+            background-color: #1e1e1e;
+            border: 1px solid #333333;
+            border-radius: 12px;
+            padding: 25px;
+            width: 220px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .card-price {
+            font-size: 34px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        /* Gaya untuk harga asli yang dicoret */
+        .original-price {
+            text-decoration: line-through;
+            color: #777;
+            font-size: 15px;
+            margin-bottom: 8px;
+            height: 22px; /* Jaga agar layout stabil */
+        }
+
+        .card-info-wrapper {
+            min-height: 30px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+
+        .savings-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .per-day-cost {
+            font-size: 13px;
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #888;
+            background-color: transparent;
+            color: #ffffff;
+            margin-top: auto;
+        }
+
+        .cta-button:hover {
+            background-color: #333;
+            border-color: #333;
+        }
+
+        /* --- HIGHLIGHT BARU UNTUK KARTU "BEST VALUE" --- */
+        .pricing-card.best-value {
+            width: 240px;
+            border: 2px solid #FBC02D; /* Warna emas yang lebih cerah */
+            transform: scale(1.05);
+            /* Efek glowing dan gradasi background */
+            box-shadow: 0 0 25px rgba(251, 192, 45, 0.25), 0 4px 15px rgba(0,0,0,0.3);
+            background: radial-gradient(circle, #3a331c, #1e1e1e);
+            padding-top: 60px; /* Beri ruang untuk banner atas */
+        }
+
+        .best-value .card-title {
+            color: #FBC02D;
+            margin-top: 0;
+        }
+        
+        /* Banner atas sebagai pengganti badge miring */
+        .best-value-banner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 5px;
+            background-color: #FBC02D;
+            color: #121212;
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+            border-top-left-radius: 10px; /* Sesuaikan dengan border-radius kartu */
+            border-top-right-radius: 10px;
+        }
+
+        .best-value .savings-badge {
+            background-color: #FBC02D;
+            color: #121212;
+            font-weight: 700;
+        }
+
+        .best-value .per-day-cost {
+            color: #FBC02D;
+            font-weight:600;
+        }
+        
+        .best-value .cta-button {
+            background: linear-gradient(90deg, #FDD835, #FBC02D);
+            border: none;
+            color: #121212;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(251, 192, 45, 0.2);
+        }
+        
+        .best-value .cta-button:hover {
+            filter: brightness(1.1);
+        }
+
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <a href="../" class="header-logo">
+                <img src="UMT-Logo - Copy (3).png" alt="UMT Academy Logo">
+                <span>UMTacademy</span>
+            </a>
+
+            <!-- Navigasi Desktop -->
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="../Materi-Belajar/">Materi Belajar</a></li>
+                    <li><a href="../Video-Pembelajaran/">Video</a></li>
+                    <li><a href="../Bank-Soal/">Bank Soal</a></li>
+                    <li><a href="../Perpustakaan/">Perpustakaan</a></li>
+                    <li><a href="#">UMT Lab</a></li>
+                    <li><a href="../tryout/">Tryout</a></li>
+                    <li><a href="../Tanya-UMT/">TanyaUMT</a></li>
+                    <li><a href="../Forum-Belajar-UMT/">Forum</a></li>
+                    <li><a href="../Arsip-Live-Class/">Live Class</a></li>
+                </ul>
+                <div class="header-auth">
+                    <a href="login.html" class="auth-btn login">Masuk</a>
+                    <a href="Form-Pendaftaran.html" class="auth-btn register">Daftar</a>
+                </div>
+            </nav>
+
+            <!-- Hamburger Menu untuk Mobile -->
+            <button class="hamburger-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Sidebar Navigation untuk Mobile -->
+    <nav class="sidebar-nav">
+        <button class="sidebar-close-btn">×</button>
+        <div class="sidebar-auth">
+            <div class="auth-buttons">
+                <a href="login.html" class="auth-btn login">Masuk</a>
+                <a href="Form-Pendaftaran.html" class="auth-btn register">Daftar</a>
+            </div>
+        </div>
+
+
+        <ul class="nav-links">
+            <li class="nav-group-title">Konten Inti</li>
+            <li><a href="../Materi-Belajar/"><span class="emoji-icon">📘</span>Materi Belajar</a></li>
+            <li><a href="../Video-Pembelajaran/"><span class="emoji-icon">🎥</span>Video Pembelajaran</a></li>
+            <li><a href="#"><span class="emoji-icon">🔬</span>UMT Lab</a></li>
+            <li><a href="../Perpustakaan/"><span class="emoji-icon">📚</span>Perpustakaan</a></li>
+
+            <li class="nav-group-title">Alat Belajar</li>
+            <li><a href="../Bank-Soal/"><span class="emoji-icon">📝</span>Bank Soal</a></li>
+            <li><a href="../tryout/"><span class="emoji-icon">✏️</span>Tryout</a></li>
+            <li><a href="../Tanya-UMT/"><span class="emoji-icon">❓</span>TanyaUMT</a></li>
+
+            <li class="nav-group-title">Komunitas & Info</li>
+            <li><a href="../Forum-Belajar-UMT/"><span class="emoji-icon">💬</span>Forum Belajar</a></li>
+            <li><a href="../Arsip-Live-Class/"><span class="emoji-icon">🎭</span>Arsip Live Class</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Overlay untuk Sidebar -->
+    <div class="sidebar-overlay"></div>
+    <div class="container">
+        <header class="header">
+            <nav class="breadcrumb">
+                <a href="../" class="breadcrumb-link" target="_blank">Home</a>
+                <span class="breadcrumb-arrow">›</span>
+                <div class="dropdown" id="umtDropdown">
+                    <span class="dropdown-toggle">
+                        UMT Lab
+                    </span>
+                </div>
+            </nav>
+            <h1 class="title">UMT Lab</h1>
+            
+            <div class="nav-tabs">
+                <button class="nav-tab active" data-tab="semua">Semua</button>
+                <button class="nav-tab" data-tab="analisis-kajian">Analisis Dan Kajian</button>
+                <button class="nav-tab" data-tab="eksplorasi-teori">Eksplorasi Teori</button>
+            </div>
+        </header>
+
+        <main>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Cari" id="searchInput">
+                <div class="search-icon">🔍</div>
+            </div>
+
+            <div class="cards-grid" id="cardsGrid">
+                <!-- Cards akan diisi oleh JavaScript -->
+            </div>
+
+             <div id="pdf-modal" class="modal-overlay">
+                 <div class="modal-content">
+                     <div class="modal-header">
+                         <div class="modal-title" id="modal-title">Document Preview</div>
+                         <div class="modal-controls">
+                             <button class="download-btn" id="download-btn">
+                                 <svg class="download-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                        <polyline points="7,10 12,15 17,10"/>
+                        <line x1="12" y1="15" x2="12" y2="3"/>
+                                 </svg>
+                                 Download
+                             </button>
+                             <span class="modal-close" id="modal-close-btn">&times;</span>
+                         </div>
+                     </div>
+                     <div id="pdf-content" class="pdf-container"></div>
+                 </div>
+             </div>
+
+             <div id="paywallModal" class="modal-overlay">
+               <div class="modal-content">
+                   <span class="close-modal" id="closeModalBtn">&times;</span>
+                   <h2>Beli untuk melihat Analisis Dan Kajian ini selengkapnya</h2>
+                   <div class="pricing-container">
+        
+                   <div class="pricing-card">
+                       <h3 class="card-title">1 Tahun Akses</h3>
+                       <p class="card-price">Rp 99.000</p>
+                       <p class="original-price">Rp 299.999</p>
+                       <div class="card-info-wrapper">
+                           <span class="savings-badge" style="background-color: #2E7D32;">Hemat 67%</span>
+                       </div>
+                       <p class="per-day-cost">Rp 271 / hari</p>
+                       <button class="cta-button" onclick="window.location.href = '../Form-Pendaftaran.html?paket=1 Tahun';">Pilih Paket</button>
+                   </div>
+        
+                   <div class="pricing-card">
+                       <h3 class="card-title">6 Bulan Akses</h3>
+                       <p class="card-price">Rp 75.000</p>
+                       <p class="original-price">Rp 149.999</p>
+                       <div class="card-info-wrapper">
+                           <span class="savings-badge" style="background-color: #2E7D32;">Hemat 50%</span>
+                       </div>
+                       <p class="per-day-cost">Rp 417 / hari</p>
+                       <button class="cta-button" onclick="window.location.href = ',,/Form-Pendaftaran.html?paket=6 Bulan';">Pilih Paket</button>
+                   </div>
+
+                   <div class="pricing-card best-value">
+                       <div class="best-value-banner">PENAWARAN TERBAIK</div>
+                       <h3 class="card-title">Lifetime Akses</h3>
+                       <p class="card-price">Rp 10.000</p>
+                       <p class="original-price">Rp 499.000</p>
+                       <div class="card-info-wrapper">
+                           <span class="savings-badge">Hemat 98%</span>
+                       </div>
+                       <p class="per-day-cost">Akses Untuk Selamanya!</p>
+                       <button class="cta-button" onclick="window.location.href = '../Form-Pendaftaran.html?paket=Lifetime';">Dapatkan Akses</button>
+                   </div>
+
+                   <div class="pricing-card">
+                       <h3 class="card-title">1 Bulan Akses</h3>
+                       <p class="card-price">Rp 25.000</p>
+                       <p class="original-price">Rp 49.999</p>
+                       <div class="card-info-wrapper">
+                           <span class="savings-badge" style="background-color: #2E7D32;">Hemat 50%</span>
+                       </div>
+                       <p class="per-day-cost">Rp 833 / hari</p>
+                       <button class="cta-button" onclick="window.location.href = '../Form-Pendaftaran.html?paket=1 Bulan';">Pilih Paket</button>
+                   </div>
+
+                   <div class="pricing-card">
+                       <h3 class="card-title">3 Bulan Akses</h3>
+                       <p class="card-price">Rp 49.000</p>
+                       <p class="original-price">Rp 74.999</p>
+                       <div class="card-info-wrapper">
+                           <span class="savings-badge" style="background-color: #2E7D32;">Hemat 35%</span>
+                       </div>
+                       <p class="per-day-cost">Rp 544 / hari</p>
+                       <button class="cta-button" onclick="window.location.href = '../Form-Pendaftaran.html?paket=3 Bulan';">Pilih Paket</button>
+                   </div>
+
+                   </div>
+               </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination-container" id="paginationContainer">
+                <!-- Pagination akan diisi oleh JavaScript -->
+            </div>
+        </main>
+
+        <footer>
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>Tentang Kami</h3>
+                    <ul>
+                        <li><a href="https://www.umt6174.site/tentang-umt" target="_blank">Tentang UMT</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Produk UMT</h3>
+                    <ul>
+                        <li><a href="../UMT-Lab/">UMT Lab</a></li>
+                        <li><a href="../Materi-Belajar/">Materi Pembelajaran</a></li>
+                        <li><a href="../Video-Pembelajaran/">Video Pembelajaran</a></li>
+                        <li><a href="../tryout/">Tryout</a></li>
+                        <li><a href="../Tanya-UMT/">TanyaUMT</a></li>
+                        <li><a href="../Bank-Soal/">Bank Soal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Punya Pertanyaan?</h3>
+                    <ul class="contact-list">
+                        <li><a href="https://ig.me/m/umt.6174"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" target="_blank">@umt.6174</a></li>
+                        <li><a href="mailto:business@gradient.academy"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email" target="_blank"> umt.math.6174@gmail.com</a></li>
+                        <li><a href="https://wa.me/6282189524610"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" target="_blank"> +6282189524610</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 UMT Academy. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="https://youtube.com/@umt6174?si=Cdivet0_By8EWJ8v"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" target="_blank"></a>
+                    <a href="https://www.instagram.com/umt.6174/"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" target="_blank"></a>
+                    <a href="https://www.tiktok.com/@umt6174?is_from_webapp=1&sender_device=pc"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046126.png" alt="TikTok" target="_blank"></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+// Hamburger menu functionality
+const hamburgerMenu = document.querySelector('.hamburger-menu');
+const sidebarNav = document.querySelector('.sidebar-nav');
+const sidebarOverlay = document.querySelector('.sidebar-overlay');
+const sidebarCloseBtn = document.querySelector('.sidebar-close-btn');
+const body = document.body;
+
+function toggleSidebar() {
+    sidebarNav.classList.toggle('active');
+    sidebarOverlay.classList.toggle('active');
+    body.classList.toggle('sidebar-open');
+}
+
+// Pastikan semua elemen ada sebelum menambahkan listener
+if (hamburgerMenu && sidebarNav && sidebarOverlay && sidebarCloseBtn) {
+    hamburgerMenu.addEventListener('click', toggleSidebar);
+    sidebarOverlay.addEventListener('click', toggleSidebar);
+    sidebarCloseBtn.addEventListener('click', toggleSidebar);
+}
+
+// Data kartu
+const cardsData = [
+    // Card gratis
+    {
+        id: 1,
+        title: "Perbandingan dan Proporsi dalam Resep Masakan dan Nutrisi",
+        author: "Tim UMT",
+        category: "analisis-kajian",
+        free: "free",
+        image: "Perbandingan dan Proporsi dalam Resep Masakan dan Nutrisi-1_page-0001.jpg",
+        link: "17LF0oMFszhFVC96yg-xEHTqtHOCWeN5x"
+    },
+    {
+        id: 2,
+        title: "Statistika Deskriptif untuk Analisis Data",
+        author: "Tim UMT",
+        category: "eksplorasi-teori",
+        free: "free",
+        image: "Statistika Deskriptif untuk Analisis Data-1_page-0001.jpg",
+        link: "1adG2PFd1fxStIy3uZRK9lNQ7D_8u2Mw6" // Ganti dengan ID yang benar
+    },
+    // Card premium (contoh)
+    {
+    id: 16,
+    title: "Kalkulus Diferensial untuk Optimisasi",
+    author: "Tim UMT",
+    category: "eksplorasi-teori",
+    free: "free",
+    image: "Kalkulus Diferensial untuk Optimisas-1_page-0001.jpg",
+    link: "1nBBQAq7y7heHCHjkOXw85Ok2AeHN4zsc"
+},
+{
+    id: 10,
+    title: "Penerapan Matematika dalam Menentukan Harga Optimal Produk",
+    author: "Tim UMT",
+    category: "analisis-kajian",
+    free: "premium",
+    image: "9.jpg",
+    link: null
+},
+{
+    id: 13,
+    title: "Barisan Aritmetika untuk Perencanaan Keuangan",
+    author: "Tim UMT",
+    category: "analisis-kajian",
+    free: "premium",
+    image: "8.jpg",
+    link: null
+},
+{
+    id: 3,
+    title: "Model Permintaan dan Penawaran",
+    author: "Tim UMT",
+    category: "analisis-kajian",
+    free: "premium",
+    image: "10.jpg",
+    link: null
+},
+{
+    id: 9,
+    title: "Trigonometri dalam Analisis Gelombang",
+    author: "Tim UMT",
+    category: "analisis-kajian",
+    image: "Trigonometri dalam Analisis Gelombang-1_page-0001.jpg",
+    link: null
+},
+{
+    id: 15,
+    title: "Penerapan Persen dalam Diskon Belanja dan Cashback",
+    author: "Tim UMT",
+    category: "analisis-kajian",
+    free: "premium",
+    image: "Penerapan Persen dalam Diskon Belanja dan Cashback-1_page-0001.jpg",
+    link: null
+},
+{
+    id: 17,
+    title: "Matematika dalam Kriptografi dan Keamanan Data",
+    author: "Tim UMT",
+    category: "analisis-kajian",
+    free: "premium",
+    image: "Matematika dalam Kriptografi dan Keamanan Data-1_page-0001.jpg",
+    link: null
+},
+{
+    id: 18,
+    title: "Geometri dalam Penataan Ruang dan Furniture",
+    author: "Tim UMT",
+    category: "analisis-kajian",
+    free: "premium",
+    image: "Geometri dalam Penataan Ruang dan Furniture-1_page-0001.jpg",
+    link: null
+},
+            
+            
+            // eksplorasi teori
+{
+    id: 4,
+    title: "Menemukan titik maksimum dan minimum hanya dengan turunan pertama",
+    author: "Tim UMT",
+    category: "eksplorasi-teori",
+    free: "premium",
+    image: "1.png",
+    link: null
+},
+            
+{
+    id: 5,
+    title: "Pertidaksamaan : Hal yang perlu di ketahui dalam bentuk bentuk pertidaksamaan",
+    author: "Tim UMT",
+    category: "eksplorasi-teori",
+    free: "premium",
+    image: "2.png",
+    link: null
+},
+{
+    id: 6,
+    title: "Memahami Sistem Persamaann Linear Dan Penyelesaiannya",
+    author: "Tim UMT",
+    category: "eksplorasi-teori",
+    free: "premium",
+    image: "3.png",
+    link: null
+},
+{
+    id: 7,
+    title: "Pengaruh Nilai Diskriminan(D) pada grafik fungsi kuadrat",
+    author: "Tim UMT",
+    category: "eksplorasi-teori",
+    free: "premium",
+    image: "6.png",
+    link: null
+},
+{
+    id: 8,
+    title: "Pengaruh Nilai a pada grafik fungsi kuadrat",
+    author: "Tim UMT",
+    category: "eksplorasi-teori",
+    free: "premium",
+    image: "7.png",
+    link: null
+},
+{
+    id: 11,
+    title: "Matriks dan Aplikasinya dalam Sistem Linear",
+    author: "Tim UMT",
+    category: "eksplorasi-teori",
+    free: "premium",
+    image: "MatriksdanAplikasinyadalamSistemLinear-1_page-0001.jpg",
+    link: null
+},
+            
+{
+    id: 14,
+    title: "Geometri Analitik dalam Koordinat Kartesian",
+    author: "Tim UMT",
+    category: "eksplorasi-teori",
+    free: "premium",
+    image: "",
+    link: null
+}
+];
+
+// Variabel global
+let currentPage = 1;
+let filteredCards = [...cardsData];
+const cardsPerPage = 6;
+
+// Elemen DOM
+const cardsGrid = document.getElementById('cardsGrid');
+const paginationContainer = document.getElementById('paginationContainer');
+const searchInput = document.getElementById('searchInput');
+const tabs = document.querySelectorAll('.nav-tab');
+
+// Fungsi untuk membuat HTML kartu
+function createCardHTML(card) {
+    const tagClass = card.category === 'analisis-kajian' ? 'tag-analisis-kajian' : 'tag-eksplorasi-teori';
+    const tagText = card.category === 'analisis-kajian' ? 'Analisis Dan Kajian' : 'Eksplorasi Teori';
+    const tagfree = card.free === 'free' ? 'tag-free' : 'tag-premium';
+    const tagfreeText = card.free === 'free' ? 'Gratis' : 'Premium';
+    const lockedClass = card.free === 'premium' ? 'locked' : '';
+    
+    return `
+        <div class="card ${lockedClass}" data-category="${card.category}" data-pdf-id="${card.link}" data-free="${card.free}">
+            <div class="card-content">
+                <div class="card-image">
+                    <span><img src="${card.image}" alt="" onerror="this.parentElement.innerHTML='No Image'"></span>
+                </div>
+                <div class="card-info">
+                    <h3 class="card-title">${card.title}</h3>
+                    <p class="card-author">${card.author}</p>
+                    <div class="category">
+                        <span class="card-tag ${tagClass}">${tagText}</span>
+                        <span class="card-tag ${tagfree}">${tagfreeText}</span>
+                    </div>    
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Fungsi untuk render cards dengan pagination
+function renderCards() {
+    // Hitung cards yang akan ditampilkan berdasarkan halaman
+    const startIndex = (currentPage - 1) * cardsPerPage;
+    const endIndex = startIndex + cardsPerPage;
+    const cardsToShow = filteredCards.slice(startIndex, endIndex);
+    
+    // Render cards
+    cardsGrid.innerHTML = cardsToShow.map(card => createCardHTML(card)).join('');
+    
+    // Tambahkan event listeners ke cards
+    addCardEventListeners();
+}
+
+// Fungsi terpisah untuk menambahkan event listeners
+function addCardEventListeners() {
+    const pdfModal = document.getElementById('pdf-modal');
+    const pdfContent = document.getElementById('pdf-content');
+    const paywallModal = document.getElementById('paywallModal');
+
+    document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('click', () => {
+            const pdfId = card.getAttribute('data-pdf-id');
+            const cardTitle = card.querySelector('.card-title').textContent;
+            const isFree = card.getAttribute('data-free') === 'free';
+            
+            // Jika card premium (locked)
+            if (!isFree) {
+                if (paywallModal) {
+                    paywallModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+                return;
+            }
+            
+            // Jika card gratis, lanjutkan seperti biasa
+            if (pdfId && pdfId !== 'undefined' && pdfId !== "null") {
+                const embedUrl = `https://drive.google.com/file/d/${pdfId}/preview?embedded=true`;
+                const downloadUrl = `https://drive.google.com/uc?export=download&id=${pdfId}`;
+                
+                // Set modal title (pastikan element ada)
+                const modalTitle = document.getElementById('modal-title');
+                if (modalTitle) {
+                    modalTitle.textContent = cardTitle;
+                }
+                
+                // Set PDF content
+                if (pdfContent) {
+                    pdfContent.innerHTML = `<iframe src="${embedUrl}" allow="fullscreen"></iframe>`;
+                }
+                
+                // Set download button
+                const downloadBtn = document.getElementById('download-btn');
+                if (downloadBtn) {
+                    downloadBtn.onclick = () => {
+                        const link = document.createElement('a');
+                        link.href = downloadUrl;
+                        link.download = `${cardTitle}.pdf`;
+                        link.target = '_blank';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    };
+                }
+                
+                if (pdfModal) {
+                    pdfModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                }
+            } else {
+                alert(`File PDF belum tersedia.`);
+            }
+        });
+    });
+}
+
+// Fungsi untuk membuat pagination
+function createPagination() {
+    const totalPages = Math.ceil(filteredCards.length / cardsPerPage);
+    
+    if (totalPages <= 1) {
+        paginationContainer.innerHTML = '';
+        return;
+    }
+
+    let paginationHTML = '';
+
+    // Tombol Previous
+    const prevDisabled = currentPage === 1 ? 'disabled' : '';
+    paginationHTML += `
+        <button class="pagination-nav ${prevDisabled}" onclick="goToPage(${currentPage - 1})">
+            ← Previous
+        </button>
+    `;
+
+    // Logic untuk menampilkan nomor halaman
+    const maxVisiblePages = 5;
+    
+    if (totalPages <= maxVisiblePages) {
+        // Jika total halaman <= 5, tampilkan semua
+        for (let i = 1; i <= totalPages; i++) {
+            const activeClass = i === currentPage ? 'active' : '';
+            paginationHTML += `
+                <button class="pagination-btn ${activeClass}" onclick="goToPage(${i})">
+                    ${i}
+                </button>
+            `;
+        }
+    } else {
+        // Logic untuk smart pagination
+        if (currentPage <= 3) {
+            // Tampilkan 1, 2, 3, ..., last
+            for (let i = 1; i <= 3; i++) {
+                const activeClass = i === currentPage ? 'active' : '';
+                paginationHTML += `
+                    <button class="pagination-btn ${activeClass}" onclick="goToPage(${i})">
+                        ${i}
+                    </button>
+                `;
+            }
+            paginationHTML += `<span class="pagination-ellipsis">...</span>`;
+            paginationHTML += `
+                <button class="pagination-btn" onclick="goToPage(${totalPages})">
+                    ${totalPages}
+                </button>
+            `;
+        } else if (currentPage >= totalPages - 2) {
+            // Tampilkan first, ..., n-2, n-1, n
+            paginationHTML += `
+                <button class="pagination-btn" onclick="goToPage(1)">
+                    1
+                </button>
+            `;
+            paginationHTML += `<span class="pagination-ellipsis">...</span>`;
+            for (let i = totalPages - 2; i <= totalPages; i++) {
+                const activeClass = i === currentPage ? 'active' : '';
+                paginationHTML += `
+                    <button class="pagination-btn ${activeClass}" onclick="goToPage(${i})">
+                        ${i}
+                    </button>
+                `;
+            }
+        } else {
+            // Tampilkan first, ..., current-1, current, current+1, ..., last
+            paginationHTML += `
+                <button class="pagination-btn" onclick="goToPage(1)">
+                    1
+                </button>
+            `;
+            paginationHTML += `<span class="pagination-ellipsis">...</span>`;
+            
+            for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+                const activeClass = i === currentPage ? 'active' : '';
+                paginationHTML += `
+                    <button class="pagination-btn ${activeClass}" onclick="goToPage(${i})">
+                        ${i}
+                    </button>
+                `;
+            }
+            
+            paginationHTML += `<span class="pagination-ellipsis">...</span>`;
+            paginationHTML += `
+                <button class="pagination-btn" onclick="goToPage(${totalPages})">
+                    ${totalPages}
+                </button>
+            `;
+        }
+    }
+
+    // Tombol Next
+    const nextDisabled = currentPage === totalPages ? 'disabled' : '';
+    paginationHTML += `
+        <button class="pagination-nav ${nextDisabled}" onclick="goToPage(${currentPage + 1})">
+            Next →
+        </button>
+    `;
+
+    paginationContainer.innerHTML = paginationHTML;
+}
+
+// Fungsi untuk pindah halaman
+function goToPage(page) {
+    const totalPages = Math.ceil(filteredCards.length / cardsPerPage);
+    
+    if (page < 1 || page > totalPages || page === currentPage) {
+        return;
+    }
+    
+    currentPage = page;
+    renderCards();
+    createPagination();
+    
+    // Scroll ke atas setelah pindah halaman
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// Fungsi untuk filter berdasarkan kategori
+function filterByCategory(category) {
+    if (category === 'semua') {
+        filteredCards = [...cardsData];
+    } else {
+        filteredCards = cardsData.filter(card => card.category === category);
+    }
+    currentPage = 1;
+    renderCards();
+    createPagination();
+}
+
+// Fungsi untuk pencarian
+function searchCards(query) {
+    const searchTerm = query.toLowerCase().trim();
+    
+    if (searchTerm === '') {
+        // Jika pencarian kosong, filter berdasarkan tab aktif
+        const activeTab = document.querySelector('.nav-tab.active');
+        if (activeTab) {
+            filterByCategory(activeTab.getAttribute('data-tab'));
+        }
+    } else {
+        // Filter berdasarkan judul dan author
+        filteredCards = cardsData.filter(card => 
+            card.title.toLowerCase().includes(searchTerm) ||
+            card.author.toLowerCase().includes(searchTerm)
+        );
+        currentPage = 1;
+        renderCards();
+        createPagination();
+    }
+}
+
+// Fungsi untuk setup modal controls
+function setupModalControls() {
+    // PDF Modal Controls
+    const pdfModal = document.getElementById('pdf-modal');
+    const pdfContent = document.getElementById('pdf-content');
+    const pdfCloseBtn = document.getElementById('modal-close-btn');
+
+    function closePdfModal() {
+        if (pdfModal) {
+            pdfModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+        if (pdfContent) {
+            pdfContent.innerHTML = '';
+        }
+    }
+
+    if (pdfCloseBtn) {
+        pdfCloseBtn.addEventListener('click', closePdfModal);
+    }
+
+    if (pdfModal) {
+        pdfModal.addEventListener('click', (event) => {
+            if (event.target === pdfModal) {
+                closePdfModal();
+            }
+        });
+    }
+
+    // Paywall Modal Controls
+    const paywallModal = document.getElementById('paywallModal');
+    const paywallCloseBtn = document.getElementById('closeModalBtn');
+
+    function closePaywallModal() {
+        if (paywallModal) {
+            paywallModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    }
+
+    if (paywallCloseBtn) {
+        paywallCloseBtn.addEventListener('click', closePaywallModal);
+    }
+
+    if (paywallModal) {
+        paywallModal.addEventListener('click', function(e) {
+            if (e.target === paywallModal) {
+                closePaywallModal();
+            }
+        });
+    }
+
+    // ESC key untuk menutup modal
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            if (pdfModal && pdfModal.style.display === 'flex') {
+                closePdfModal();
+            }
+            if (paywallModal && paywallModal.style.display === 'flex') {
+                closePaywallModal();
+            }
+        }
+    });
+}
+
+// Event Listeners untuk DOM Content Loaded
+document.addEventListener('DOMContentLoaded', function() {
+    // Setup modal controls
+    setupModalControls();
+    
+    // Render initial cards
+    renderCards();
+    createPagination();
+
+    // Tab navigation
+    if (tabs) {
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Update active tab
+                tabs.forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Filter cards
+                const category = this.getAttribute('data-tab');
+                filterByCategory(category);
+            });
+        });
+    }
+
+    // Search functionality
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            searchCards(this.value);
+        });
+
+        // Search on Enter key
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchCards(this.value);
+            }
+        });
+    }
+
+    // Dropdown functionality
+    const dropdown = document.getElementById('umtDropdown');
+    if (dropdown) {
+        const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+        
+        if (dropdownToggle) {
+            dropdownToggle.addEventListener('click', function(e) {
+                e.stopPropagation();
+                dropdown.classList.toggle('active');
+            });
+        }
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!dropdown.contains(e.target)) {
+                dropdown.classList.remove('active');
+            }
+        });
+
+        // Close dropdown when clicking on menu items
+        const dropdownItems = dropdown.querySelectorAll('.dropdown-item');
+        dropdownItems.forEach(item => {
+            item.addEventListener('click', function() {
+                dropdown.classList.remove('active');
+            });
+        });
+    }
+});
+
+// Keyboard navigation untuk pagination
+document.addEventListener('keydown', function(e) {
+    const totalPages = Math.ceil(filteredCards.length / cardsPerPage);
+    
+    // Pastikan tidak ada modal yang terbuka dan tidak ada input yang focus
+    const isModalOpen = document.getElementById('pdf-modal')?.style.display === 'flex' || 
+                       document.getElementById('paywallModal')?.style.display === 'flex';
+    const isInputFocused = document.activeElement.tagName === 'INPUT';
+    
+    if (!isModalOpen && !isInputFocused) {
+        if (e.key === 'ArrowLeft' && currentPage > 1) {
+            goToPage(currentPage - 1);
+        } else if (e.key === 'ArrowRight' && currentPage < totalPages) {
+            goToPage(currentPage + 1);
+        }
+    }
+});
+    </script>
+</body>
+</html>
