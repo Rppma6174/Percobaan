@@ -1,0 +1,2038 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMTacademy - Belajar Matematika Lengkap & Interaktif</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="UMT-Logo.png">
+    <style>
+        :root {
+            --header-height: 70px;
+        }
+        * { box-sizing: border-box; }
+        body {
+            background-color: #141414; font-family: 'Poppins', sans-serif; color: white;
+            margin: 0; padding: 0; line-height: 1.6;
+            padding-top: var(--header-height);
+        }
+        body.sidebar-open { overflow: hidden; }
+        html { scroll-behavior: smooth; }
+
+        /* ----- HEADER ----- */
+        .main-header {
+            background-color: #1c1c1c; padding: 0 20px;
+            height: var(--header-height);
+            position: fixed;
+            top: 0; left: 0; width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+            display: flex;
+            align-items: center;
+        }
+        .header-container {
+            width: 100%;
+            max-width: 1200px; margin: 0 auto; display: flex;
+            justify-content: space-between; align-items: center;
+        }
+        .header-logo {
+            display: flex; align-items: center; text-decoration: none;
+            color: white; font-weight: 600; font-size: 20px;
+        }
+        .header-logo img { height: 40px; margin-right: 10px; }
+
+        /* ----- HAMBURGER MENU ----- */
+        .hamburger-menu {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 1200;
+            transition: all 0.3s ease;
+        }
+        .hamburger-menu .bar {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        /* Animasi hamburger saat aktif */
+        .hamburger-menu.active .bar:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        .hamburger-menu.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+        .hamburger-menu.active .bar:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* ----- NAVIGASI DESKTOP (DEFAULT) ----- */
+        .main-nav { display: flex; align-items: center; gap: 20px; }
+        .nav-links {
+            list-style: none; margin: 0; padding: 0;
+            display: flex; align-items: center; gap: 10px;
+        }
+        .nav-links li a {
+            color: #ccc; text-decoration: none; font-size: 14px;
+            font-weight: 500; padding: 8px 12px; border-radius: 6px;
+            white-space: nowrap; transition: all 0.2s ease;
+        }
+        .nav-links li a:hover { background-color: rgba(255, 255, 255, 0.1); color: white; }
+
+        /* ----- HEADER AUTH BUTTONS (NEW) ----- */
+        .header-auth { display: flex; gap: 10px; }
+        .auth-btn {
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            text-align: center;
+            white-space: nowrap;
+        }
+        .auth-btn.login {
+            color: #ccc;
+            background-color: transparent;
+            border: 1px solid #555;
+        }
+        .auth-btn.login:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-color: #888;
+        }
+        .auth-btn.register {
+            color: white;
+            background-color: #6A0DAD;
+            border: 1px solid #6A0DAD;
+        }
+        .auth-btn.register:hover {
+            background-color: #7D2ED1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(106, 13, 173, 0.5);
+        }
+
+        /* ----- SIDEBAR & MOBILE ----- */
+        .sidebar-nav {
+            position: fixed; top: 0; left: 0; width: 500px; height: 100%;
+            background-color: #1a1a1a; box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+            padding-top: 60px; transform: translateX(-100%);
+            transition: transform 0.4s ease-in-out; z-index: 1100; overflow-y: auto;
+            display: none; /* Sembunyikan di desktop */
+        }
+        .sidebar-nav.active { transform: translateX(0); }
+
+        .sidebar-nav .nav-links { 
+            flex-direction: column; 
+            align-items: stretch; 
+            gap: 0; 
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .sidebar-nav .nav-links li a { 
+            display: flex; 
+            gap: 15px; 
+            padding: 15px 30px; 
+            font-size: 16px; 
+            border-radius: 0;
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+        .sidebar-nav .nav-links li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        .sidebar-nav .nav-group-title {
+            padding: 20px 30px 10px; font-size: 12px; font-weight: 600;
+            color: #888; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .sidebar-nav .nav-group-title:not(:first-child){ 
+            border-top: 1px solid #333; 
+            margin-top: 10px; 
+        }
+        .sidebar-nav .sidebar-close-btn {
+            position: absolute; top: 15px; right: 20px; background: none; border: none;
+            color: #aaa; font-size: 36px; font-weight: 300; line-height: 1;
+            cursor: pointer; transition: color 0.3s, transform 0.3s;
+        }
+        .sidebar-nav .sidebar-close-btn:hover { 
+            color: white; 
+            transform: rotate(90deg); 
+        }
+
+        .sidebar-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); z-index: 1050;
+            opacity: 0; visibility: hidden; transition: opacity 0.4s, visibility 0.4s;
+        }
+        .sidebar-overlay.active { opacity: 1; visibility: visible; }
+
+        .emoji-icon {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        /* ----- MEDIA QUERIES ----- */
+        @media screen and (max-width: 1024px) {
+            .main-nav { display: none; } /* Sembunyikan nav desktop */
+            .hamburger-menu { display: flex; } /* Tampilkan hamburger */
+            .sidebar-nav { display: block; } /* Aktifkan sidebar */
+        }
+
+        /* Responsive untuk layar yang lebih kecil */
+        @media screen and (max-width: 768px) {
+            .header-logo span {
+                font-size: 18px;
+            }
+            .header-logo img {
+                height: 35px;
+            }
+            .sidebar-nav {
+                width: 400px;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .sidebar-nav {
+                width: 260px;
+            }
+            .header-logo span {
+                font-size: 16px;
+            }
+            .header-logo img {
+                height: 30px;
+            }
+        }
+
+        .top-promo-bar { 
+            background-color: #FF0000; 
+            color: white; 
+            text-align: center; 
+            padding: 10px 20px; 
+            font-size: 14px; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 15px; 
+            flex-wrap: wrap; 
+            border-bottom: 1px solid rgba(255,255,255,0.1); 
+        }
+
+        .top-promo-bar a { 
+            color: white; 
+            text-decoration: none; 
+            font-weight: 600; 
+            padding: 5px 15px; 
+            border: 1px solid white; 
+            border-radius: 20px; 
+            transition: background-color 0.3s ease; 
+        }
+
+        .top-promo-bar a:hover { 
+            background-color: rgba(255, 255, 255, 0.2); 
+        }
+
+        /* Hero Section */
+        .hero-section { 
+            background-color: #1c1c1c; 
+            padding: 80px 20px; 
+            text-align: center; 
+            position: relative; 
+            overflow: hidden; 
+        }
+
+        .hero-section::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 0; 
+            background: linear-gradient(rgba(20,20,20,0.8), rgba(20,20,20,0.4)); 
+            z-index: 1; 
+        }
+
+        .hero-content { 
+            max-width: 800px; 
+            margin: 0 auto; 
+            position: relative; 
+            z-index: 2; 
+        }
+
+        .hero-content h1 { 
+            font-size: 48px; 
+            font-weight: 700; 
+            margin-bottom: 20px; 
+            line-height: 1.2; 
+            color: #ffffff; 
+            text-shadow: 0 0 10px rgba(255,255,255,0.1); 
+        }
+
+        .hero-content p { 
+            font-size: 18px; 
+            color: #ccc; 
+            margin-bottom: 30px; 
+        }
+
+        .hero-cta { 
+            background-color: #6A0DAD; 
+            color: white; 
+            padding: 15px 35px; 
+            font-size: 20px; 
+            font-weight: 600; 
+            text-decoration: none; 
+            border-radius: 30px; 
+            transition: background-color 0.3s ease, transform 0.2s ease; 
+            display: inline-block; 
+        }
+
+        .hero-cta:hover { 
+            background-color: #7D2ED1; 
+            transform: translateY(-3px); 
+        }
+
+        /* Main Content Wrapper */
+        .main-content-wrapper { 
+            max-width: 1000px; 
+            margin: 40px auto; 
+            padding: 0 20px; 
+        }
+
+        /* Section Title */
+        .section-title { 
+            font-size: 28px; 
+            font-weight: 600; 
+            text-align: center; 
+            margin-bottom: 30px; 
+            color: white; 
+        }
+
+        /* Highlights Section */
+        .highlights-section { 
+            background-color: #1a1a1a; 
+            padding: 60px 20px; 
+            text-align: center; 
+            margin-bottom: 50px; 
+            border-radius: 12px; 
+            padding-bottom: 70px; 
+        }
+
+        .highlights-section .section-title { 
+            margin-bottom: 40px; 
+        }
+
+        /* Highlight Grid */
+        .highlight-grid { 
+            display: flex; 
+            flex-wrap: nowrap; 
+            overflow-x: auto; 
+            -webkit-overflow-scrolling: touch; 
+            gap: 30px; 
+            max-width: 1000px; 
+            margin: 0 auto; 
+            padding-bottom: 20px; 
+            justify-content: flex-start; 
+        }
+
+        .highlight-card { 
+            flex-shrink: 0; 
+            min-width: 280px; 
+            max-width: 320px; 
+            background-color: #2e2e2e; 
+            border-radius: 12px; 
+            overflow: hidden; 
+            text-align: left; 
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+            text-decoration: none; 
+            color: inherit; 
+        }
+
+        .highlight-card:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.5); 
+        }
+
+        .highlight-card img { 
+            width: 100%; 
+            height: 180px; 
+            object-fit: cover; 
+            border-bottom: 1px solid #3e3e3e; 
+        }
+
+        .highlight-card-content { 
+            padding: 20px; 
+        }
+
+        .highlight-card-content h3 { 
+            font-size: 20px; 
+            font-weight: 700; 
+            margin-top: 0; 
+            margin-bottom: 10px; 
+            color: #ffffff; 
+        }
+
+        .highlight-card-content p { 
+            font-size: 14px; 
+            color: #bbb; 
+            margin-bottom: 15px; 
+        }
+
+        .highlight-card-content .read-more { 
+            color: white; 
+            font-weight: 600; 
+            text-decoration: none; 
+            font-size: 14px; 
+        }
+
+        .highlight-card-content .read-more:hover { 
+            text-decoration: underline; 
+        }
+
+        /* Scrollbar untuk highlight grid */
+        .highlight-grid::-webkit-scrollbar { 
+            height: 10px; 
+        }
+
+        .highlight-grid::-webkit-scrollbar-track { 
+            background: #333; 
+            border-radius: 5px; 
+        }
+
+        .highlight-grid::-webkit-scrollbar-thumb { 
+            background: white; 
+            border-radius: 5px; 
+        }
+
+        .highlight-grid::-webkit-scrollbar-thumb:hover { 
+            background: white; 
+        }
+
+        /* Categories Grid (Commented out in HTML but CSS exists) */
+        .categories-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+            gap: 25px; 
+            margin-bottom: 50px; 
+        }
+
+        .category-card { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 30px 25px; 
+            background-color: #2e2e2e; 
+            border-radius: 12px; 
+            text-align: center; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            position: relative; 
+            overflow: hidden; 
+            text-decoration: none; 
+            color: inherit; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+        }
+
+        .category-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.4); 
+            background-color: #3e3e3e; 
+        }
+
+        .category-card::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 5px; 
+            height: 100%; 
+            background-color: white; 
+            transform: scaleY(0); 
+            transition: transform 0.3s ease; 
+        }
+
+        .category-card:hover::before { 
+            transform: scaleY(1); 
+        }
+
+        .category-icon { 
+            width: 70px; 
+            height: 70px; 
+            margin-bottom: 20px; 
+            background-color: #3a3a3a; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 32px; 
+            color: #ffffff; 
+            transition: all 0.3s ease; 
+        }
+
+        .category-card:hover .category-icon { 
+            transform: scale(1.15); 
+            background-color: white; 
+        }
+
+        .category-title { 
+            font-size: 18px; 
+            font-weight: 700; 
+            margin-bottom: 10px; 
+            color: #ffffff; 
+        }
+
+        .category-description { 
+            font-size: 14px; 
+            color: #bbb; 
+            line-height: 1.5; 
+        }
+
+        /* Feature Explanation Section */
+        .feature-explanation-section {
+            padding: 10px 0;
+        }
+
+        .feature-group {
+            margin-bottom: 60px;
+        }
+
+        .feature-group-title {
+            font-size: 28px;
+            font-weight: 600;
+            color: #e0e0e0;
+            text-align: center;
+            margin-bottom: 40px;
+            border-bottom: 2px solid #6A0DAD;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .title-wrapper {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .feature-card {
+            background-color: #242424;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            border: 1px solid #333;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px rgba(106, 13, 173, 0.3);
+        }
+
+        .feature-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-bottom: 1px solid #333;
+        }
+
+        .feature-card-content {
+            padding: 25px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .feature-card-content h3 {
+            font-size: 22px;
+            margin: 0 0 10px 0;
+            color: #ffffff;
+        }
+
+        .feature-card-content p {
+            font-size: 15px;
+            color: #b0b0b0;
+            margin: 0 0 20px 0;
+            flex-grow: 1;
+        }
+
+        .feature-card-content a {
+            color: #ffffff;
+            font-weight: 600;
+            text-decoration: none;
+            background-color: #6A0DAD;
+            padding: 10px 15px;
+            border-radius: 8px;
+            text-align: center;
+            transition: background-color 0.3s;
+        }
+
+        .feature-card-content a:hover {
+            background-color: #6A0DAD;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #141414;
+            padding: 40px 0 20px 0;
+            margin-top: 80px;
+            border-top: 1px solid #30363d;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+
+        .footer-section h3 {
+            color: #f0f6fc;
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: #8b949e;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section ul li a:hover {
+            color: #f0f6fc;
+        }
+
+        .contact-list li a {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .contact-list li a img {
+            width: 20px;
+            height: 20px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #30363d;
+            margin-top: 40px;
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        .footer-bottom p {
+            color: #8b949e;
+            font-size: 14px;
+            margin: 0;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-icons a img {
+            width: 24px;
+            height: 24px;
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-icons a:hover img {
+            opacity: 1;
+        }
+
+        /* ===== MEDIA QUERIES UNTUK MAIN CONTENT ===== */
+
+        /* Mobile Styles */
+        @media screen and (max-width: 768px) {
+            .hero-content h1 { 
+                font-size: 36px; 
+            }
+            
+            .hero-content p { 
+                font-size: 16px; 
+            }
+            
+            .hero-cta { 
+                font-size: 18px; 
+                padding: 12px 25px; 
+            }
+            
+            .categories-grid { 
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); 
+            }
+            
+            .category-icon { 
+                width: 50px; 
+                height: 50px; 
+                font-size: 24px; 
+            }
+            
+            .category-title { 
+                font-size: 16px; 
+            }
+            
+            .category-description { 
+                font-size: 12px; 
+            }
+            
+            .highlights-section { 
+                padding: 40px 10px; 
+            }
+            
+            .highlight-card { 
+                min-width: 250px; 
+            }
+
+            .footer-bottom {
+                justify-content: center;
+                text-align: center;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .hero-content h1 { 
+                font-size: 30px; 
+            }
+            
+            .hero-content p { 
+                font-size: 14px; 
+            }
+            
+            .top-promo-bar { 
+                font-size: 12px; 
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        /* ----- NEW STYLES FOR KOMUNITAS & INFO SECTION ----- */
+        /* Overrides existing .card and .feature-card styles for this specific use case */
+        .feature-group .feature-grid .card { /* Targeting cards specifically within Komunitas & Info feature-grid */
+            background-color: #1c1c1c; /* Slightly darker than other feature-cards for subtle distinction */
+            border-radius: 15px;
+            padding: 35px;
+            /* width and max-width set by .feature-grid itself */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none; /* Remove border from feature-card if present */
+            min-width: 300px; /* Ensure minimum width in the grid */
+        }
+
+        .feature-group .feature-grid .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .feature-group .feature-grid .card h3 {
+            color: #9370db; /* Ungu sedang */
+            margin-bottom: 15px;
+            font-size: 1.6em;
+        }
+
+        .feature-group .feature-grid .card p {
+            font-size: 1.05em;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            color: #ccc;
+        }
+
+        /* Subscription Hero - Specific to Komunitas & Info */
+        .feature-group .feature-grid .subscription-hero {
+            grid-column: span 3; /* Make it span all columns in the grid */
+            background-image: linear-gradient(to right, #6a0dad, #4b0082); /* Gradien ungu tua */
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin: 0; /* Remove margin as it's part of the grid */
+            max-width: 100%; /* Take full width of its grid container */
+            text-align: center;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+            display: flex; /* Use flex for internal alignment */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .feature-group .feature-grid .subscription-hero::before { /* Efek overlay/pattern */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .feature-group .feature-grid .subscription-hero > * { /* Pastikan konten di atas overlay */
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-group .feature-grid .subscription-hero h3 {
+            font-size: 3em;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            font-weight: bold;
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+            color: #fff;
+        }
+
+        .feature-group .feature-grid .subscription-hero p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            max-width: 800px;
+            color: #e0e0e0;
+        }
+
+        .feature-group .feature-grid .btn-hero-cta {
+            background-color: #ffd700; /* Kuning cerah */
+            color: #333;
+            padding: 18px 45px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.3em;
+            font-weight: bolder;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            display: inline-block; /* Ensure button behaves like block for padding/margins */
+        }
+
+        .feature-group .feature-grid .btn-hero-cta:hover {
+            background-color: #ffc107;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Responsive adjustments for Komunitas & Info specific cards/hero */
+        @media (max-width: 1024px) {
+            .feature-group .feature-grid .subscription-hero {
+                grid-column: span 2; /* Adjust span for 2-column layout on tablets */
+                padding: 40px 25px;
+            }
+            .feature-group .feature-grid .subscription-hero h3 {
+                font-size: 2.2em;
+            }
+            .feature-group .feature-grid .subscription-hero p {
+                font-size: 1.1em;
+            }
+            .feature-group .feature-grid .btn-hero-cta {
+                padding: 15px 35px;
+                font-size: 1.1em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .feature-group .feature-grid {
+                grid-template-columns: 1fr; /* Single column on mobile */
+            }
+            .feature-group .feature-grid .card {
+                width: 100%; /* Take full width of grid item */
+                max-width: none; /* Remove max-width constraint */
+            }
+            .feature-group .feature-grid .subscription-hero {
+                grid-column: span 1; /* Reset span to 1 for single column */
+                padding: 30px 20px;
+            }
+            .feature-group .feature-grid .subscription-hero h3 {
+                font-size: 1.7em;
+            }
+            .feature-group .feature-grid .subscription-hero p {
+                font-size: 0.95em;
+                margin-bottom: 30px;
+            }
+            .feature-group .feature-grid .btn-hero-cta {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+        }
+        .btn-primary {
+            background-color: #8a2be2; /* Ungu cerah */
+            color: white;
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 1.05em;
+            font-weight: bold;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            align-self: flex-start; /* Untuk tombol di kiri bawah */
+        }
+
+        .btn-primary:hover {
+            background-color: #6a1bae;
+            transform: translateY(-2px);
+        }
+        .cards-grid {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap; /* Agar responsif */
+            margin-bottom: 50px; /* Jarak dengan bagian di bawahnya */
+        }
+
+        .card {
+            background-color: #1c1c1c; /* Warna card lebih gelap */
+            border-radius: 15px;
+            padding: 35px;
+            width: calc(45% - 30px); /* Dua card per baris */
+            max-width: 500px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            text-align: left;
+            display: flex; /* Untuk layout internal */
+            flex-direction: column;
+            justify-content: space-between; /* Menjaga tombol di bawah */
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .card h3 {
+            color: #9370db; /* Ungu sedang */
+            margin-bottom: 15px;
+            font-size: 1.6em;
+        }
+
+        .card p {
+            font-size: 1.05em;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            color: #ccc;
+        }
+        .subscription-hero {
+            background-image: linear-gradient(to right, #6a0dad, #4b0082); /* Gradien ungu tua */
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin: 80px auto; /* Jarak atas/bawah dan tengah */
+            max-width: 90%;
+            text-align: center;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden; /* Untuk efek overlay */
+        }
+
+        .subscription-hero::before { /* Efek overlay/pattern */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .subscription-hero > * { /* Pastikan konten di atas overlay */
+            position: relative;
+            z-index: 1;
+        }
+
+        .subscription-hero h3 {
+            font-size: 3em;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            font-weight: bold;
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+            color: #fff; /* Pastikan putih */
+        }
+
+        .subscription-hero p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #e0e0e0;
+        }
+
+        .btn-hero-cta {
+            background-color: #ffd700; /* Kuning cerah */
+            color: #333;
+            padding: 18px 45px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.3em;
+            font-weight: bolder;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-hero-cta:hover {
+            background-color: #ffc107;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+                @media (max-width: 1024px) {
+            .cards-grid {
+                flex-direction: column;
+                align-items: center;
+            }
+            .card {
+                width: 85%; /* Lebih lebar di tablet */
+            }
+            .subscription-hero {
+                padding: 40px 25px;
+                margin: 60px auto;
+            }
+            .subscription-hero h3 {
+                font-size: 2.2em;
+            }
+            .subscription-hero p {
+                font-size: 1.1em;
+            }
+            .btn-hero-cta {
+                padding: 15px 35px;
+                font-size: 1.1em;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h2 {
+                font-size: 2em;
+                margin-bottom: 40px;
+            }
+            .card {
+                width: 90%; /* Hampir penuh di mobile */
+                padding: 25px;
+            }
+            .card h3 {
+                font-size: 1.4em;
+            }
+            .card p {
+                font-size: 0.95em;
+            }
+            .btn-primary {
+                padding: 12px 20px;
+                font-size: 0.95em;
+            }
+            .subscription-hero {
+                padding: 30px 20px;
+                margin: 40px auto;
+            }
+            .subscription-hero h3 {
+                font-size: 1.7em;
+            }
+            .subscription-hero p {
+                font-size: 0.95em;
+                margin-bottom: 30px;
+            }
+            .btn-hero-cta {
+                padding: 12px 25px;
+                font-size: 1em;
+            }
+        }
+                /* --- CAROUSEL STYLES FOR MOBILE --- */
+                @media (max-width: 768px) {
+                    .feature-group .feature-grid {
+                        display: flex; /* Use flex for horizontal scrolling */
+                        overflow-x: auto; /* Enable horizontal scrolling */
+                        scroll-snap-type: x mandatory; /* Snap to individual cards */
+                        -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+                        gap: 20px; /* Adjust gap for mobile carousel */
+                        padding-bottom: 20px; /* Space for scrollbar */
+                        justify-content: flex-start; /* Align items to start */
+                        /* Hide scrollbar visually */
+                        scrollbar-width: none; /* Firefox */
+                        -ms-overflow-style: none; /* IE and Edge */
+                    }
+
+                    .feature-group .feature-grid::-webkit-scrollbar {
+                        display: none; /* Chrome, Safari, Opera */
+                    }
+
+                    .feature-group .feature-grid .feature-card,
+                    .feature-group .feature-grid .card { /* Target both types of cards within feature-grid */
+                        flex-shrink: 0; /* Prevent cards from shrinking */
+                        width: calc(100% - 40px); /* Adjust width to show one full card + peek of next */
+                        max-width: 320px; /* Or a fixed max-width for consistency */
+                        scroll-snap-align: start; /* Snap to the start of each card */
+                        margin-left: 20px; /* Add margin to left for first card alignment */
+                        margin-right: 0; /* Reset right margin */
+                    }
+
+                    .feature-group .feature-grid .feature-card:last-child,
+                    .feature-group .feature-grid .card:last-child {
+                        margin-right: 20px; /* Add margin to the last card for consistency */
+                    }
+
+                    /* For the subscription hero, make it span 1 column again */
+                    .feature-group .feature-grid .subscription-hero {
+                        grid-column: span 1; /* Reset to 1 column span */
+                        width: calc(100% - 40px); /* Adjust width for mobile carousel */
+                        margin-left: 20px; /* Align with other carousel items */
+                        margin-right: 0;
+                    }
+                }
+        
+        @media screen and (max-width: 480px) {
+            .hero-content h1 { 
+                font-size: 30px; 
+            }
+            
+            .hero-content p { 
+                font-size: 14px; 
+            }
+            
+            .top-promo-bar { 
+                font-size: 12px; 
+            }
+
+            .footer-container {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+
+        /* ----- NEW STYLES FOR KOMUNITAS & INFO SECTION ----- */
+        /* Overrides existing .card and .feature-card styles for this specific use case */
+        /* These styles will apply on desktop, and be overridden by mobile carousel styles when applicable */
+        .feature-group .feature-grid .card { /* Targeting cards specifically within Komunitas & Info feature-grid */
+            background-color: #1c1c1c; /* Slightly darker than other feature-cards for subtle distinction */
+            border-radius: 15px;
+            padding: 35px;
+            /* width and max-width are managed by the grid or flex context */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none; /* Remove border from feature-card if present */
+            min-width: 300px; /* Ensure minimum width in the grid */
+        }
+
+        .feature-group .feature-grid .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
+        }
+
+        .feature-group .feature-grid .card h3 {
+            color: #9370db; /* Ungu sedang */
+            margin-bottom: 15px;
+            font-size: 1.6em;
+        }
+
+        .feature-group .feature-grid .card p {
+            font-size: 1.05em;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            color: #ccc;
+        }
+
+        /* Subscription Hero - Specific to Komunitas & Info */
+        .feature-group .feature-grid .subscription-hero {
+            /* On desktop/tablet, it spans columns */
+            grid-column: span 3; /* For larger screens where feature-grid is a grid */
+            background-image: linear-gradient(to right, #6a0dad, #4b0082); /* Gradien ungu tua */
+            border-radius: 20px;
+            padding: 60px 40px;
+            margin: 0; /* Managed by grid/flex parent */
+            max-width: 100%; /* Take full width of its grid container */
+            text-align: center;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+            position: relative;
+            overflow: hidden;
+            display: flex; /* Use flex for internal alignment */
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .feature-group .feature-grid .subscription-hero::before { /* Efek overlay/pattern */
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        .feature-group .feature-grid .subscription-hero > * { /* Pastikan konten di atas overlay */
+            position: relative;
+            z-index: 1;
+        }
+
+        .feature-group .feature-grid .subscription-hero h3 {
+            font-size: 3em;
+            margin-bottom: 25px;
+            line-height: 1.2;
+            font-weight: bold;
+            text-shadow: 0 3px 6px rgba(0, 0, 0, 0.3);
+            color: #fff;
+        }
+
+        .feature-group .feature-grid .subscription-hero p {
+            font-size: 1.3em;
+            margin-bottom: 40px;
+            max-width: 800px;
+            color: #e0e0e0;
+        }
+
+        .feature-group .feature-grid .btn-hero-cta {
+            background-color: #ffd700; /* Kuning cerah */
+            color: #333;
+            padding: 18px 45px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.3em;
+            font-weight: bolder;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+            display: inline-block; /* Ensure button behaves like block for padding/margins */
+        }
+
+        .feature-group .feature-grid .btn-hero-cta:hover {
+            background-color: #ffc107;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Responsive adjustments for Komunitas & Info specific cards/hero (Desktop/Tablet) */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            .feature-group .feature-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Adjust grid columns for tablets */
+            }
+            .feature-group .feature-grid .subscription-hero {
+                grid-column: span 2; /* Adjust span for 2-column layout on tablets */
+                padding: 40px 25px;
+            }
+            .feature-group .feature-grid .subscription-hero h3 {
+                font-size: 2.2em;
+            }
+            .feature-group .feature-grid .subscription-hero p {
+                font-size: 1.1em;
+            }
+            .feature-group .feature-grid .btn-hero-cta {
+                padding: 15px 35px;
+                font-size: 1.1em;
+            }
+        }
+        /* ----- SIDEBAR AUTH BUTTONS ----- */
+        .sidebar-auth {
+            padding: 20px 30px;
+            border-bottom: 1px solid #333;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-auth .auth-buttons {
+            display: flex; /* Changed from flex-direction to display */
+            flex-direction: column;
+            gap: 12px;
+            margin-left: 0;
+        }
+
+        .sidebar-auth .auth-btn {
+            width: 100%;
+            padding: 12px 20px;
+            font-size: 16px;
+            text-align: center;
+        }
+    .hero-section-a {
+    display: flex;
+    flex-direction: row;
+    gap: 12px; /* sesuaikan jarak antar tombol */
+    margin-top: 20px; /* Tambahkan jarak atas */
+    align-items: center;
+    justify-content: center;
+}
+.header-logo {
+    margin-right: 8px;
+}
+.pricing-section {
+    padding: 60px 0;
+    text-align: center;
+}
+
+/* Style untuk judul utama di atas tabel */
+.pricing-section .section-title {
+    font-size: 36px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+/* Kontainer yang membungkus seluruh tabel */
+.pricing-table-container {
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: #1c1c1c; /* Warna latar tabel */
+    border-radius: 12px;
+    overflow: hidden; /* Penting untuk efek sudut membulat */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Pengaturan dasar tabel */
+.pricing-table {
+    width: 100%;
+    border-collapse: collapse; /* Menghilangkan spasi antar sel */
+    color: #ccc; /* Warna teks default */
+}
+
+/* Pengaturan untuk semua sel (header dan data) */
+.pricing-table th, .pricing-table td {
+    padding: 20px;
+    text-align: left;
+    border-bottom: 1px solid #333; /* Garis pemisah antar baris */
+}
+
+/* Style khusus untuk header tabel (Benefits, Free, Premium) */
+.pricing-table thead th {
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    text-align: center;
+}
+
+/* Menghilangkan garis pemisah di baris paling bawah */
+.pricing-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Meratakan teks di kolom "Free" dan "Premium" ke tengah */
+.pricing-table td:nth-child(2), 
+.pricing-table td:nth-child(3) {
+    text-align: center;
+    font-size: 20px;
+}
+
+/* Memberi warna latar belakang khusus untuk kolom Premium */
+.pricing-table .premium-column {
+    background-color: #2a2a2a;
+}
+
+/* Memberi sudut membulat di pojok kanan atas kolom Premium */
+.pricing-table thead th.premium-column {
+    border-top-right-radius: 12px;
+}
+
+/* Memberi sudut membulat di pojok kanan bawah kolom Premium */
+.pricing-table tbody tr:last-child td.premium-column {
+    border-bottom-right-radius: 12px;
+}
+
+/* Warna hijau untuk ikon centang */
+.pricing-table .check-mark {
+    color: #28a745; 
+}
+
+/* Warna merah untuk ikon silang */
+.pricing-table .cross-mark {
+    color: #dc3545;
+}
+
+/* Style untuk subjudul di bawah tabel */
+.pricing-section .subtitle {
+    margin-top: 30px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+/* Penyesuaian untuk layar yang lebih kecil (mobile) */
+@media (max-width: 600px) {
+    .pricing-table th, .pricing-table td {
+        padding: 15px 10px;
+        font-size: 14px;
+    }
+    .pricing-section .section-title {
+        font-size: 28px;
+    }
+    .pricing-section .subtitle {
+        font-size: 22px;
+    }
+}
+        .faq {
+            margin-bottom: 40px;
+        }
+
+        .faq h2 {
+            font-size: 1.8em;
+            font-weight: 600;
+            margin-bottom: 25px;
+            text-align: center;
+            color: #ffffff;
+        }
+
+        .faq-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .faq-item {
+            background-color: #1e1e1e;
+            padding: 18px 25px;
+            margin-bottom: 10px;
+            border-radius: 6px;
+            border: 1px solid #2e2e2e;
+            overflow: hidden; /* For smooth toggle */
+        }
+
+        .faq-item h3 {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin: 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+        }
+
+        .faq-item h3::after {
+            content: '+';
+            font-size: 1.5em;
+            font-weight: 400;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.open h3::after {
+            content: '-';
+            transform: rotate(180deg); /* Rotate for 'minus' effect */
+        }
+
+        .faq-item p {
+            color: #ccc;
+            font-size: 0.95em;
+            margin-top: 15px;
+            max-height: 0; /* Hidden by default */
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, margin-top 0.3s ease-out;
+        }
+
+        .faq-item.open p {
+            max-height: 200px; /* Max height when open (adjust as needed) */
+            margin-top: 15px;
+        }
+        .pricing-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: stretch;
+            gap: 25px;
+        }
+
+        .pricing-card {
+            background-color: #1e1e1e;
+            border: 1px solid #333333;
+            border-radius: 12px;
+            padding: 25px;
+            width: 220px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .card-price {
+            font-size: 34px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        /* Gaya untuk harga asli yang dicoret */
+        .original-price {
+            text-decoration: line-through;
+            color: #777;
+            font-size: 15px;
+            margin-bottom: 8px;
+            height: 22px; /* Jaga agar layout stabil */
+        }
+
+        .card-info-wrapper {
+            min-height: 30px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 8px;
+        }
+
+        .savings-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+        }
+        
+        .per-day-cost {
+            font-size: 13px;
+            color: #aaa;
+            margin-bottom: 20px;
+        }
+
+        .cta-button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid #888;
+            background-color: transparent;
+            color: #ffffff;
+            margin-top: auto;
+        }
+
+        .cta-button:hover {
+            background-color: #333;
+            border-color: #333;
+        }
+
+        /* --- HIGHLIGHT BARU UNTUK KARTU "BEST VALUE" --- */
+        .pricing-card.best-value {
+            width: 240px;
+            border: 2px solid #FBC02D; /* Warna emas yang lebih cerah */
+            transform: scale(1.05);
+            /* Efek glowing dan gradasi background */
+            box-shadow: 0 0 25px rgba(251, 192, 45, 0.25), 0 4px 15px rgba(0,0,0,0.3);
+            background: radial-gradient(circle, #3a331c, #1e1e1e);
+            padding-top: 60px; /* Beri ruang untuk banner atas */
+        }
+
+        .best-value .card-title {
+            color: #FBC02D;
+            margin-top: 0;
+        }
+        
+        /* Banner atas sebagai pengganti badge miring */
+        .best-value-banner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 5px;
+            background-color: #FBC02D;
+            color: #121212;
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+            border-top-left-radius: 10px; /* Sesuaikan dengan border-radius kartu */
+            border-top-right-radius: 10px;
+        }
+
+        .best-value .savings-badge {
+            background-color: #FBC02D;
+            color: #121212;
+            font-weight: 700;
+        }
+
+        .best-value .per-day-cost {
+            color: #FBC02D;
+            font-weight:600;
+        }
+        
+        .best-value .cta-button {
+            background: linear-gradient(90deg, #FDD835, #FBC02D);
+            border: none;
+            color: #121212;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(251, 192, 45, 0.2);
+        }
+        
+        .best-value .cta-button:hover {
+            filter: brightness(1.1);
+        }
+        .subtitle {
+    margin-top: 30px;
+    font-size: 28px;
+    font-weight: 600;
+    text-align: center;
+}
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <a href="#" class="header-logo">
+                <img src="UMT-Logo.png" alt="UMT Academy Logo">
+                <span>UMTacademy</span>
+            </a>
+            
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="Materi-Belajar/">Materi Belajar</a></li>
+                    <li><a href="Video-Pembelajaran/">Video</a></li>
+                    <li><a href="Bank-Soal/">Bank Soal</a></li>
+                    <li><a href="Perpustakaan/">Perpustakaan</a></li>
+                    <li><a href="UMT-Lab/">UMT Lab</a></li>
+                    <li><a href="tryout/">Tryout</a></li>
+                    <li><a href="Tanya-UMT/">TanyaUMT</a></li>
+                    <li><a href="Forum-Belajar-UMT/">Forum</a></li>
+                    <li><a href="Arsip-Live-Class/">Live Class</a></li>
+                </ul>
+                <div class="header-auth">
+                    <a href="login.html" class="auth-btn login">Masuk</a>
+                    <a href="Form-Pendaftaran.html" class="auth-btn register">Daftar</a>
+                </div>
+            </nav>
+
+            <button class="hamburger-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+    
+    <nav class="sidebar-nav">
+        <button class="sidebar-close-btn">×</button>
+        <div class="sidebar-auth">
+            <div class="auth-buttons">
+                <a href="login.html" class="auth-btn login">Masuk</a>
+                <a href="Form-Pendaftaran.html" class="auth-btn register">Daftar</a>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li class="nav-group-title">Konten Inti</li>
+            <li><a href="Materi-Belajar/"><span class="emoji-icon">📘</span>Materi Belajar</a></li>
+            <li><a href="Video-Pembelajaran/"><span class="emoji-icon">🎥</span>Video Pembelajaran</a></li>
+            <li><a href="UMT-Lab/"><span class="emoji-icon">🔬</span>UMT Lab</a></li>
+            <li><a href="Perpustakaan/"><span class="emoji-icon">📚</span>Perpustakaan</a></li>
+
+            <li class="nav-group-title">Alat Belajar</li>
+            <li><a href="Bank-Soal/"><span class="emoji-icon">📝</span>Bank Soal</a></li>
+            <li><a href="tryout/"><span class="emoji-icon">✏️</span>Tryout</a></li>
+            <li><a href="Tanya-UMT/"><span class="emoji-icon">❓</span>TanyaUMT</a></li>
+
+            <li class="nav-group-title">Komunitas & Info</li>
+            <li><a href="Forum-Belajar-UMT/"><span class="emoji-icon">💬</span>Forum Belajar</a></li>
+            <li><a href="Arsip-Live-Class/"><span class="emoji-icon">🎭</span>Arsip Live Class</a></li>
+        </ul>
+    </nav>
+    
+    <div class="sidebar-overlay"></div>
+
+    <main id="main-content">
+        <div class="top-promo-bar">
+            <span>Akses Seluruh Fasilitas UMT Academy!</span>
+            <a href="Form-Pendaftaran.html">Akses Sekarang!!!</a>
+        </div>
+
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Platform Belajar Matematika Online Terlengkap</h1>
+                <p>Kuasai konsep, pecahkan soal, dan raih prestasi impianmu bersama UMT Academy. Materi interaktif, video penjelasan mendalam, dan ribuan soal latihan!</p>
+                <div class="hero-section-a">
+                    <a href="#jelajahi-fasilitas" class="hero-cta">Mulai Belajar Sekarang!</a>
+                </div>
+            </div>
+        </section>
+
+        <div class="main-content-wrapper">
+          <section id="jelajahi-fasilitas">
+            <section class="highlights-section">
+                <h2 class="section-title">Konten Unggulan Kami ✨</h2>
+                <div class="highlight-grid">
+                    <a href="Video-Pembelajaran/" class="highlight-card">
+                        <img src="nilai-mutlak.png" alt="Video Pembelajaran"> <div class="highlight-card-content">
+                            <h3>Video Pembelajaran Terpopuler</h3>
+                            <p>Tonton penjelasan mendalam untuk setiap konsep matematika dari dasar hingga lanjutan.</p>
+                            <span class="read-more">Tonton Sekarang →</span>
+                        </div>
+                    </a>
+                    <a href="tryout/" class="highlight-card">
+                        <img src="tryout.jpeg" alt="Tryout UMT"> <div class="highlight-card-content">
+                            <h3>Uji Kemampuanmu dengan Tryout</h3>
+                            <p>Latih kemampuan Anda dengan soal-soal standar ujian dan analisis hasil yang akurat.</p>
+                            <span class="read-more">Ikuti Tryout →</span>
+                        </div>
+                    </a>
+                    <a href="Materi-Belajar/" class="highlight-card">
+                        <img src="Koordinat Kartesius.png" alt="Materi Belajar"> <div class="highlight-card-content">
+                            <h3>Materi Belajar Lengkap</h3>
+                            <p>Akses modul dan rangkuman materi dari kelas X, XI, dan XII yang disusun sistematis.</p>
+                            <span class="read-more">Baca Selengkapnya →</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+          </section>
+            
+            <h2 class="section-title">Jelajahi Fasilitas Kami</h2>
+            <section id="penjelasan-fitur" class="feature-explanation-section">
+
+                <div class="feature-group">
+                    <div class="carousel-indicators"></div>
+                    <div class="title-wrapper"><h2 class="feature-group-title">Konten Inti</h2></div>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <img src="video-Pembelajaran.png" alt="Video Pembelajaran">
+                            <div class="feature-card-content">
+                                <h3>Video Pemahaman Konsep</h3>
+                                <p>Diajarkan oleh mentor ahli di bidangnya. Pahami setiap materi dari dasar hingga tingkat lanjut dengan video on-demand.</p>
+                                <a href="Video-Pembelajaran/">Lihat Video</a>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <img src="UMT-Lab.png" alt="UMT Lab">
+                            <div class="feature-card-content">
+                                <h3>UMT Lab</h3>
+                                <p>Ruang eksplorasi untuk kajian dan analisis mendalam berbagai konsep. Cocok untuk kamu yang ingin riset lebih jauh.</p>
+                                <a href="UMT-Lab/">Masuk ke Lab</a>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                           <img src="Materi-Belajar.png" alt="Materi Belajar">
+                           <div class="feature-card-content">
+                                <h3>Materi Pembelajaran</h3>
+                                <p>Pelajari semua topik penting dari dasar hingga lanjutan, disusun secara rapi sesuai kurikulum dan gaya belajar UMT</p>
+                                <a href="Materi-Belajar/">Eksplor Materi</a>
+                           </div>
+                        </div>
+                        <div class="feature-card">
+                           <img src="Perpustakaan.png" alt="Perpustakaan Digital">
+                           <div class="feature-card-content">
+                                <h3>Perpustakaan & Ebook UMT</h3>
+                                <p>Akses textbook populer dan temukan kunci jawaban dari soal-soal latihan yang ada di buku kuliahmu.</p>
+                                <a href="Perpustakaan/">Kunjungi Perpustakaan</a>
+                           </div>
+                        </div>
+                </div>
+
+                <div class="feature-group">
+                    <div class="title-wrapper"><h2 class="feature-group-title">Alat Belajar Interaktif</h2></div>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <img src="Tanya-UMT.png" alt="AI Copilot">
+                            <div class="feature-card-content">
+                                <h3>Tanya UMT</h3>
+                                <p>Asisten belajar AI yang siap menjawab pertanyaan apa pun, bantu kerjakan soal, dan buat flashcard secara instan.</p>
+                                <a href="Tanya-UMT/">Coba TanyaUMT</a>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <img src="Tryout.png" alt="Tryout Online">
+                            <div class="feature-card-content">
+                                <h3>Tryout Berbasis Ujian</h3>
+                                <p>Simulasikan kondisi ujian sebenarnya. Dapatkan analisis performa yang mendalam untuk evaluasi belajar.</p>
+                                <a href="tryout/">Ikuti Tryout</a>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <img src="Bank-Soal.png" alt="Bank Soal">
+                            <div class="feature-card-content">
+                                <h3>Bank Soal & Latihan</h3>
+                                <p>Perdalam pemahaman dengan ribuan soal ujian dan pembahasan detail untuk mengasah kemampuanmu.</p>
+                                <a href="Bank-Soal/">Buka Bank Soal</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="feature-group">
+                    <div class="title-wrapper"><h2 class="feature-group-title">Komunitas & Info</h2></div>
+                    <div class="cards-grid">
+                        <div class="card">
+                            <div>
+                                <h3>Arsip Live Class ✨</h3>
+                                <p>Ketinggalan sesi live? Jangan khawatir! Tonton ulang semua rekaman kelas interaktif kapan saja dan di mana saja. Materi lengkap, bebas diakses sesuai jadwal Anda.</p>
+                            </div>
+                            <button class="btn-primary" onclick="window.location.href = 'Arsip-Live-Class/';">Lihat Arsip</button>
+                        </div>
+                        <div class="card">
+                            <div>
+                                <h3>Forum Belajar 💬</h3>
+                                <p>Punya pertanyaan atau ingin berdiskusi? Gabung di forum kami! Diskusikan materi, soal, atau topik apa pun dengan sesama pelajar dan para mentor ahli dari UMT Academy.</p>
+                            </div>
+                            <button class="btn-primary" onclick="window.location.href = 'Forum-Belajar/';">Gabung Forum</button>
+                        </div>
+                        <div class="subscription-hero">
+                            <h3>🚀 Raih Potensi Maksimal dengan Akses Lifetime Hanya dengan Rp. 10.000 Saja!</h3>
+                            <p>Tertarik untuk membuka seluruh materi belajar, mengikuti tryout ujian tak terbatas, serta mendapatkan dukungan Tanya UMT yang responsif? Langganan sekarang dan rasakan pengalaman belajar yang revolusioner!</p>
+                            <button class="btn-hero-cta" onclick="window.location.href = 'Form-Pendaftaran.html';">Langganan Sekarang & Hemat!</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+
+            </section>
+            <h2 class="section-title">Beda Member Free vs PRO? Nih, biar gak bingung</h2>
+            <section class="pricing-section">
+                <div class="pricing-table-container">
+                    <table class="pricing-table">
+                        <thead>
+                            <tr>
+                                <th>Benefits</th>
+                                <th>Free</th>
+                                <th class="premium-column">Pro</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Materi UMT Learning</td>
+                                <td>Limited access</td>
+                                <td class="premium-column"><span class="check-mark">✓</span></td>
+                            </tr>
+                            <tr>
+                                <td>Video materi pembelajaran</td>
+                                <td>Limited access</td>
+                                <td class="premium-column"><span class="check-mark">✓</span></td>
+                            </tr>
+                            <tr>
+                                <td>Latihan Bank Soal </td>
+                                <td><span class="check-mark">✓</span></td>
+                                <td class="premium-column"><span class="check-mark">✓</span></td>
+                            </tr>
+                            <tr>
+                                <td>UMT Lab</td>
+                                <td>Limited access</td>
+                                <td class="premium-column"><span class="check-mark">✓</span></td>
+                            </tr>
+                            <tr>
+                                <td>Kunci jawaban & pembahasan soal</td>
+                                <td><span class="cross-mark">×</span></td>
+                                <td class="premium-column"><span class="check-mark">✓</span></td>
+                            </tr>
+                            <tr>
+                                <td>Try Out </td>
+                                <td>Limited access</td>
+                                <td class="premium-column"><span class="check-mark">✓</span></td>
+                            </tr>
+                            <tr>
+                                <td>Arsip Live Class </td>
+                                <td>Limited access</td>
+                                <td class="premium-column"><span class="check-mark">✓</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+            <div class="faq">
+            <h2>Masih Ada Pertanyaan ?</h2>
+            <ul class="faq-list">
+                <li class="faq-item">
+                    <h3>Apa itu UMT?</h3>
+                    <p>UMT (Understanding Mathematical Thinking) adalah platform pembelajaran yang berfokus pada pemahaman konsep dan kejelasan matematika secara mendalam, bukan sekadar hafalan rumus. Kami menyediakan materi, komunitas, dan bimbingan untuk membantu kamu berpikir seperti seorang matematikawan.</p>
+                </li>
+                <li class="faq-item">
+                    <h3>Bedanya UMT dengan bimbel lain?</h3>
+                    <p>UMT tidak hanya fokus pada latihan soal atau mengejar nilai, tetapi membimbing kamu memahami cara berpikir matematis. Kami mendorong kamu untuk memahami makna di balik konsep, alasan di balik rumus, dan membangun pemahaman jangka panjang.
+Di UMT, kamu bukan hanya belajar "apa" dan "bagaimana", tapi juga "mengapa".</p>
+                </li>
+                <li class="faq-item">
+                    <h3>Apakah UMT punya kurikulum?</h3>
+                    <p>Ya. Tapi kurikulum UMT bukan sekadar daftar topik.
+Kami menyusun alur belajar berdasarkan bagaimana seseorang memahami, bertanya, dan menggali makna dalam matematika.
+UMT berfokus pada membangun pemahaman yang jelas, bukan hafalan cepat.
+Kami ingin kamu tidak hanya tahu “bagaimana cara menghitung”, tapi juga “mengapa itu masuk akal”.</p>
+                </li>
+                <li class="faq-item">
+                    <h3>Apa saja yang bisa saya pelajari di UMT?</h3>
+                    <p>Di UMT, kamu bisa belajar konsep-konsep matematika dari dasar hingga tingkat lanjut, termasuk materi SMA, SMP, UTBK, hingga eksplorasi dan kajian teori matematika. Kami juga menyediakan video pembelajaran, forum, sesi live class, dan sesi Tanya UMT yang kalian bisa manfaatkan untuk keperluan belajar kalian.</p>
+                </li>
+                <li class="faq-item">
+                    <h3>Apakah UMT berbayar atau gratis?</h3>
+                    <p>Sebagian materi dan fasilitas kami lainnya tersedia secara gratis. Namun, ada juga konten premium yang lebih lengkap dan layanan tambahan yang bisa diakses dengan biaya tertentu untuk mendukung pengembangan platform.</p>
+                </li>
+            </ul>
+            <h3 class="subtitle">Upgrade cara belajar kamu Bersama UMT Academy</h3>
+            </div>
+        <div class="pricing-container">
+            
+            <div class="pricing-card">
+                <h3 class="card-title">1 Tahun Akses</h3>
+                <p class="card-price">Rp 99.000</p>
+                <p class="original-price">Rp 299.999</p>
+                <div class="card-info-wrapper">
+                    <span class="savings-badge" style="background-color: #2E7D32;">Hemat 67%</span>
+                </div>
+                <p class="per-day-cost">Rp 271 / hari</p>
+                <button class="cta-button" onclick="window.location.href = 'Form-Pendaftaran.html?paket=1 Tahun';">Pilih Paket</button>
+            </div>
+            
+            <div class="pricing-card">
+                <h3 class="card-title">6 Bulan Akses</h3>
+                <p class="card-price">Rp 75.000</p>
+                <p class="original-price">Rp 149.999</p>
+                <div class="card-info-wrapper">
+                    <span class="savings-badge" style="background-color: #2E7D32;">Hemat 50%</span>
+                </div>
+                <p class="per-day-cost">Rp 417 / hari</p>
+                <button class="cta-button" onclick="window.location.href = 'Form-Pendaftaran.html?paket=6 Bulan';">Pilih Paket</button>
+            </div>
+
+            <div class="pricing-card best-value">
+                <div class="best-value-banner">PENAWARAN TERBAIK</div>
+                <h3 class="card-title">Lifetime Akses</h3>
+                <p class="card-price">Rp 10.000</p>
+                <p class="original-price">Rp 499.000</p>
+                <div class="card-info-wrapper">
+                    <span class="savings-badge">Hemat 98%</span>
+                </div>
+                <p class="per-day-cost">Akses Untuk Selamanya!</p>
+                <button class="cta-button" onclick="window.location.href = 'Form-Pendaftaran.html?paket=Lifetime';">Dapatkan Akses</button>
+            </div>
+
+            <div class="pricing-card">
+                <h3 class="card-title">1 Bulan Akses</h3>
+                <p class="card-price">Rp 25.000</p>
+                <p class="original-price">Rp 49.999</p>
+                <div class="card-info-wrapper">
+                    <span class="savings-badge" style="background-color: #2E7D32;">Hemat 50%</span>
+                </div>
+                <p class="per-day-cost">Rp 833 / hari</p>
+                <button class="cta-button" onclick="window.location.href = 'Form-Pendaftaran.html?paket=1 Bulan';">Pilih Paket</button>
+            </div>
+
+            <div class="pricing-card">
+                <h3 class="card-title">3 Bulan Akses</h3>
+                <p class="card-price">Rp 49.000</p>
+                <p class="original-price">Rp 74.999</p>
+                <div class="card-info-wrapper">
+                    <span class="savings-badge" style="background-color: #2E7D32;">Hemat 35%</span>
+                </div>
+                <p class="per-day-cost">Rp 544 / hari</p>
+                <button class="cta-button" onclick="window.location.href = 'Form-Pendaftaran.html?paket=3 Bulan';">Pilih Paket</button>
+            </div>
+
+        </div>                
+        </div>
+
+        <footer>
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>Tentang Kami</h3>
+                    <ul>
+                        <li><a href="">Tentang UMT</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Produk UMT</h3>
+                    <ul>
+                        <li><a href="">UMT Lab</a></li>
+                        <li><a href="">Materi Pembelajaran</a></li>
+                        <li><a href="">Video Pembelajaran</a></li>
+                        <li><a href="">Tryout</a></li>
+                        <li><a href="">TanyaUMT</a></li>
+                        <li><a href="">Bank Soal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Punya Pertanyaan?</h3>
+                    <ul class="contact-list">
+                        <li><a href="https://ig.me/m/umt.6174"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" target="_blank">@umt.6174</a></li>
+                        <li><a href="mailto:umt.math.6174@gmail.com"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email" target="_blank"> umt.math.6174@gmail.com</a></li>
+                        <li><a href="https://wa.me/6282189524610"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" target="_blank"> +6282189524610</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 UMT Academy. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="https://youtube.com/@umt6174?si=Cdivet0_By8EWJ8v"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" target="_blank"></a>
+                    <a href="https://www.instagram.com/umt.6174/"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" target="_blank"></a> 
+                    <a href="https://www.tiktok.com/@umt6174?is_from_webapp=1&sender_device=pc"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046126.png" alt="TikTok" target="_blank"></a>
+                </div>
+            </div>
+        </footer>
+    </main>
+    
+    <script>
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+        const sidebarNav = document.querySelector('.sidebar-nav');
+        const sidebarOverlay = document.querySelector('.sidebar-overlay');
+        const sidebarCloseBtn = document.querySelector('.sidebar-close-btn');
+        const body = document.body;
+
+        function toggleSidebar() {
+            sidebarNav.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+            body.classList.toggle('sidebar-open');
+        }
+
+        // Pastikan semua elemen ada sebelum menambahkan listener
+        if (hamburgerMenu && sidebarNav && sidebarOverlay && sidebarCloseBtn) {
+            hamburgerMenu.addEventListener('click', toggleSidebar);
+            sidebarOverlay.addEventListener('click', toggleSidebar);
+            sidebarCloseBtn.addEventListener('click', toggleSidebar);
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const header = item.querySelector('h3');
+                header.addEventListener('click', function() {
+                    item.classList.toggle('open');
+                    const paragraph = item.querySelector('p');
+                    if (item.classList.contains('open')) {
+                        paragraph.style.maxHeight = paragraph.scrollHeight + "px"; // Expand to full height
+                    } else {
+                        paragraph.style.maxHeight = "0"; // Collapse
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
