@@ -121,6 +121,19 @@
             .modal-cover img { max-width: 100%; margin: 0; }
             .modal-details h2 { text-align: left; }
         }
+        #loginBtn {
+            margin-left: 0px;
+        }
+        @media screen and (max-width: 480px) {
+            .header-logo img {
+            height: 30px;
+            }   
+        }
+        @media screen and (max-width: 375px) {
+            .header-logo img {
+            height: 30px;
+            }   
+        }
     </style>
 </head>
 <body>
@@ -271,7 +284,7 @@
             sidebar.innerHTML = `
                 <button class="sidebar-close-btn">×</button>
                 <div class="sidebar-auth">
-                    <div class="auth-buttons"><a href="login.html" class="auth-btn login">Masuk</a><a href="Form-Pendaftaran.html" class="auth-btn register">Daftar</a></div>
+                    <div class="auth-buttons"><a href="login.html" class="auth-btn login" id="loginBtn">Masuk</a><a href="Form-Pendaftaran.html" class="auth-btn register">Daftar</a></div>
                 </div>
                 <ul class="nav-links">
                     <li class="nav-group-title">Konten Inti</li>
