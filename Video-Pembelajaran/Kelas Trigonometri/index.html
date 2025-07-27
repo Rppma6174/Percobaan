@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Pembelajaran UMT - Bentuk Akar</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.2/dist/confetti.browser.min.js"></script>
+    <link rel="icon" type="image/png" href="UMT-Logo.png">
+    <style>
+        * {
+  /* Mencegah kursor teks muncul dan teks bisa diseleksi */
+  user-select: none;
+  -webkit-user-select: none; /* Kompatibilitas untuk browser Safari & Chrome lama */
+  -ms-user-select: none;    /* Kompatibilitas untuk Internet Explorer/Edge */
+
+  /* (Tambahan) Menghilangkan highlight saat disentuh di mobile */
+  -webkit-tap-highlight-color: transparent;
+}
+        :root {
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --bg-tertiary: #2a2a2a;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --text-tertiary: #888888;
+            --accent-primary: #4285f4;
+            --accent-secondary: #32CD32;
+            --accent-quiz: #ff6b35;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            --text-muted: #888;
+        }
+
+        [data-theme="light"] {
+            --bg-primary: #f0f2f5;
+            --bg-secondary: #ffffff;
+            --bg-tertiary: #f8f9fa;
+            --border-color: rgba(0, 0, 0, 0.1);
+            --text-primary: #000000;
+            --text-secondary: #555555;
+            --text-tertiary: #888888;
+            --shadow-color: rgba(0, 0, 0, 0.1);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: background-color 0.3s ease, color 0.3s ease; }
+        body { font-family: var(--font-family); background: var(--bg-primary); color: var(--text-primary); min-height: 100vh; }
+        body.modal-open { overflow: hidden; }
+
+        .container { max-width: 1300px; margin: 0 auto; padding: 25px; }
+        .header { display: flex; justify-content: space-between; align-items: center; padding: 15px 25px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 15px; margin-bottom: 30px; box-shadow: 0 5px 20px var(--shadow-color); }
+        .header-left { display: flex; align-items: center; gap: 15px; }
+        .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 14px; color: var(--text-tertiary); flex-wrap: wrap; }
+        .breadcrumb a { color: var(--text-tertiary); text-decoration: none; transition: color 0.3s; }
+        .content-wrapper { display: grid; grid-template-columns: 1fr 400px; gap: 30px; }
+        .video-section { display: flex; flex-direction: column; gap: 20px; }
+        .video-player-card { background: var(--bg-secondary); border-radius: 20px; overflow: hidden; border: 1px solid var(--border-color); box-shadow: 0 10px 30px var(--shadow-color); }
+        .video-player { position: relative; aspect-ratio: 16/9; background: #000; }
+        .video-player iframe { width: 100%; height: 100%; border: none; }
+        .video-loading { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; }
+        .video-info { background: var(--bg-secondary); padding: 25px; border-radius: 20px; border: 1px solid var(--border-color); }
+        .video-title { font-size: 1.8rem; font-weight: bold; margin-bottom: 15px; }
+        .video-meta { display: flex; gap: 20px; margin-bottom: 20px; font-size: 14px; color: var(--text-secondary); }
+        .meta-item { display: flex; align-items: center; gap: 8px; }
+        .video-description { line-height: 1.7; color: var(--text-secondary); margin-bottom: 25px; }
+        .action-buttons { display: flex; gap: 15px; flex-wrap: wrap; border-top: 1px solid var(--border-color); padding-top: 20px; }
+        .btn { padding: 12px 25px; border: none; border-radius: 25px; font-weight: 600; font-size: 14px; cursor: pointer; transition: all 0.3s ease; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+        .btn:hover:not(:disabled) { transform: translateY(-2px); }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .btn-complete { background: var(--accent-secondary); color: white; }
+        .btn-download { background: var(--accent-primary); color: white; }
+        .btn-quiz { background: var(--accent-quiz); color: white; }
+        .sidebar { display: flex; flex-direction: column; gap: 25px; }
+        .sidebar-card { background: var(--bg-secondary); border-radius: 20px; padding: 25px; border: 1px solid var(--border-color); box-shadow: 0 5px 20px var(--shadow-color); }
+        .card-title { font-size: 1.3rem; font-weight: bold; margin-bottom: 20px; }
+        .progress-bar { background: var(--bg-tertiary); height: 12px; border-radius: 6px; overflow: hidden; margin-bottom: 15px; }
+        .progress-fill { background: var(--accent-secondary); height: 100%; border-radius: 6px; transition: width 0.5s ease; }
+        .progress-text { color: var(--text-secondary); font-size: 14px; }
+        .video-list { display: flex; flex-direction: column; gap: 15px; max-height: 450px; overflow-y: auto; padding-right: 10px;}
+        .video-item { display: flex; gap: 15px; padding: 12px; background: var(--bg-tertiary); border-radius: 12px; cursor: pointer; transition: all 0.2s ease; border: 1px solid transparent; }
+        .video-item:hover { transform: translateX(5px); }
+        .video-item.current { border-color: var(--accent-primary); }
+        .video-item.completed .video-details h4 { text-decoration: line-through; color: var(--text-tertiary); }
+        .video-thumb { width: 100px; height: 56px; border-radius: 8px; flex-shrink: 0; position: relative; background-size: cover; background-position: center; display: flex; justify-content: center; align-items: center; background-color: #333; }
+        .play-icon { width: 30px; height: 30px; background: rgba(0,0,0,0.6); border-radius: 50%; color: white; display: flex; justify-content: center; align-items: center; font-size: 14px; }
+        .video-item.completed .play-icon { background: var(--accent-secondary); }
+        .video-details h4 { font-size: 14px; font-weight: 600; margin-bottom: 5px; color: var(--text-primary); }
+        .video-details p { font-size: 12px; color: var(--text-tertiary); }
+        
+        /* Gaya untuk Video Terkunci */
+        .video-item.locked .video-thumb { filter: grayscale(80%); }
+        .video-item.locked .video-details h4,
+        .video-item.locked .video-details p { color: var(--text-tertiary); }
+        .video-item.locked:hover { transform: none; }
+        
+        /* Gaya Modal Paywall */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7); backdrop-filter: blur(8px);
+            z-index: 10001; display: flex; justify-content: center; align-items: center;
+            opacity: 0; visibility: hidden; transition: opacity 0.3s, visibility 0.3s;
+        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
+        
+        .modal-content {
+            background: var(--bg-secondary); border-radius: 20px;
+            width: 90%; max-width: 800px;
+            box-shadow: 0 10px 40px var(--shadow-color);
+            position: relative; padding: 30px; text-align: center;
+            transform: scale(0.95); transition: transform 0.3s;
+        }
+        .modal-overlay.active .modal-content { transform: scale(1); }
+
+        .modal-content h2 { font-size: 1.5rem; margin-bottom: 25px; }
+        
+        .close-modal {
+            position: absolute; top: 15px; right: 20px;
+            font-size: 28px; color: var(--text-tertiary);
+            cursor: pointer; transition: color 0.2s;
+        }
+        .close-modal:hover { color: var(--text-primary); }
+
+        .pricing-container {
+            display: flex; flex-wrap: wrap; justify-content: center;
+            gap: 15px; overflow-y: auto; max-height: 60vh; padding: 10px;
+        }
+
+        .pricing-card {
+            background-color: var(--bg-tertiary); border: 1px solid var(--border-color);
+            border-radius: 12px; padding: 20px; width: 220px;
+            text-align: center; display: flex; flex-direction: column;
+        }
+        .pricing-card.best-value {
+            border: 2px solid #FBC02D;
+            background: radial-gradient(circle, #3a331c, var(--bg-tertiary));
+            position: relative; padding-top: 50px;
+        }
+        .best-value-banner {
+            position: absolute; top: 0; left: 0; right: 0;
+            padding: 5px; background-color: #FBC02D; color: #121212;
+            font-size: 14px; font-weight: 700;
+            border-top-left-radius: 10px; border-top-right-radius: 10px;
+        }
+        .pricing-card .card-title { font-size: 1rem; font-weight: 600; margin-bottom: 10px; }
+        .pricing-card .card-price { font-size: 1.8rem; font-weight: 700; margin: 0; }
+        .pricing-card .original-price { text-decoration: line-through; color: var(--text-tertiary); font-size: 0.9rem; height: 20px; }
+        .pricing-card .savings-badge { display: inline-block; padding: 4px 8px; border-radius: 6px; font-size: 0.8rem; font-weight: 600; background-color: #2E7D32; color: white; }
+        .pricing-card.best-value .savings-badge { background-color: #FBC02D; color: #121212; }
+        .pricing-card .per-day-cost { font-size: 0.8rem; color: var(--text-tertiary); margin: 8px 0 15px 0; }
+        .pricing-card .cta-button {
+            width: 100%; padding: 10px; border-radius: 8px;
+            font-size: 0.9rem; font-weight: 600; cursor: pointer;
+            border: 1px solid var(--text-muted); background: transparent; color: var(--text-primary);
+            margin-top: auto; transition: background-color 0.2s;
+        }
+        .pricing-card .cta-button:hover { background-color: var(--border-color); }
+        .pricing-card.best-value .cta-button { background: #FBC02D; border: 1px solid var(--text-muted); color: #121212; }
+        .pricing-card.best-value .cta-button:hover { filter: brightness(1.1); }
+        
+        @media (max-width: 1200px) { .content-wrapper { grid-template-columns: 1fr; } .video-section { order: -1; } }
+        @media (max-width: 768px) { .container { padding: 15px; } .header { flex-direction: column; align-items: flex-start; gap: 15px; } .action-buttons { flex-direction: column; } .btn { width: 100%; justify-content: center; } .breadcrumb { font-size: 12px; } }
+        :root {
+    --header-height: 70px;
+    --primary-purple: #6A0DAD;
+    --secondary-purple: #7D2ED1;
+    --card-bg: #1c1c1c;
+    --border-color: #333;
+    --text-primary: #ffffff;
+    --text-secondary: #ccc;
+    --text-muted: #888;
+}
+
+/* ===== BASE STYLE Terkait Body ===== */
+body {
+    padding-top: var(--header-height);
+}
+
+body.sidebar-open {
+    overflow: hidden;
+}
+
+/* ===== HEADER STYLES ===== */
+.main-header {
+    background-color: var(--card-bg);
+    padding: 0 20px;
+    height: var(--header-height);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+}
+
+.header-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.header-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: var(--text-primary);
+    font-weight: 600;
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+.header-logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+/* ===== NAVIGATION STYLES ===== */
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nav-links li a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 6px;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.nav-links li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+/* ===== HEADER AUTH BUTTONS ===== */
+.header-auth {
+    display: flex;
+    gap: 10px;
+}
+
+.auth-btn {
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.auth-btn.login {
+    color: var(--text-secondary);
+    background-color: transparent;
+    border: 1px solid #555;
+}
+
+.auth-btn.login:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+    border-color: var(--text-muted);
+}
+
+.auth-btn.register {
+    color: var(--text-primary);
+    background-color: var(--primary-purple);
+    border: 1px solid var(--primary-purple);
+}
+
+.auth-btn.register:hover {
+    background-color: var(--secondary-purple);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(106, 13, 173, 0.5);
+}
+
+/* ===== HAMBURGER MENU ===== */
+.hamburger-menu {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 1200;
+    transition: all 0.3s ease;
+}
+
+.hamburger-menu .bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-primary);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+.hamburger-menu.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger-menu.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ===== SIDEBAR STYLES ===== */
+.sidebar-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 500px;
+    height: 100%;
+    background-color: #1a1a1a;
+    box-shadow: 2px 0 15px var(--shadow-heavy);
+    padding-top: 60px;
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-in-out;
+    z-index: 1100;
+    overflow-y: auto;
+    display: none;
+}
+
+.sidebar-nav.active {
+    transform: translateX(0);
+}
+
+.sidebar-nav .nav-links {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-nav .nav-links li a {
+    display: flex;
+    gap: 15px;
+    padding: 15px 30px;
+    font-size: 16px;
+    border-radius: 0;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.sidebar-nav .nav-links li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+.sidebar-nav .nav-group-title {
+    padding: 20px 30px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.sidebar-nav .nav-group-title:not(:first-child) {
+    border-top: 1px solid var(--border-color);
+    margin-top: 10px;
+}
+
+.sidebar-nav .sidebar-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    color: #aaa;
+    font-size: 36px;
+    font-weight: 300;
+    line-height: 1;
+    cursor: pointer;
+    transition: color 0.3s, transform 0.3s;
+}
+
+.sidebar-nav .sidebar-close-btn:hover {
+    color: var(--text-primary);
+    transform: rotate(90deg);
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1050;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s, visibility 0.4s;
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.sidebar-auth {
+    padding: 20px 30px;
+    border-bottom: 1px solid var(--border-color);
+    margin-bottom: 10px;
+}
+
+.sidebar-auth .auth-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-left: 0;
+}
+
+.sidebar-auth .auth-btn {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.emoji-icon {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+/* ===== RESPONSIVE DESIGN (Terkait Header & Navbar) ===== */
+@media screen and (max-width: 1024px) {
+    .main-nav { display: none; }
+    .hamburger-menu { display: flex; }
+    .sidebar-nav { display: block; }
+}
+
+@media screen and (max-width: 768px) {
+    .header-logo span {
+        font-size: 18px;
+    }
+
+    .header-logo img {
+        height: 35px;
+    }
+
+    .sidebar-nav {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .sidebar-nav {
+        width: 260px;
+    }
+
+    .header-logo span {
+        font-size: 16px;
+    }
+
+    .header-logo img {
+        height: 30px;
+    }
+    .breadcrumb {
+    font-size: 12px;
+}
+}
+body.modal-open {
+    overflow: hidden;
+}
+/* ===== Gaya Notifikasi Pencapaian (Achievement Card) ===== */
+
+/* Kontainer utama notifikasi */
+.achievement-card {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px var(--shadow-color);
+    z-index: 10000;
+    border: 1px solid var(--border-color);
+    width: 320px;
+    animation: slideUpIn 0.5s ease-out forwards;
+}
+
+/* Animasi untuk muncul dan menghilang */
+@keyframes slideUpIn {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideDownOut {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+/* Bagian header di dalam notifikasi (untuk ikon dan judul) */
+.achievement-card .header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 15px;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    background: transparent;
+}
+
+/* Ikon centang ✅ */
+.achievement-card .icon {
+    font-size: 24px;
+    color: var(--accent-secondary);
+}
+
+/* Judul "Pencapaian Terbuka!" */
+.achievement-card h4 {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+/* Judul video yang telah selesai */
+.achievement-card .video-title-completed {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-bottom: 15px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Teks progress kecil */
+.achievement-card .mini-progress-text {
+    font-size: 12px;
+    color: var(--text-tertiary);
+    margin-bottom: 5px;
+}
+
+/* Progress bar yang ada di dalam notifikasi */
+.progress-bar {
+    background: var(--bg-tertiary);
+    height: 12px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 15px;
+}
+
+/* Isian dari progress bar */
+.progress-fill {
+    background: var(--accent-secondary);
+    height: 100%;
+    border-radius: 6px;
+    transition: width 0.5s ease;
+}
+    </style>
+</head>
+<body>
+        <header class="main-header">
+        <div class="header-container">
+            <a href="../../" class="header-logo">
+                <img src="UMT-Logo.png" alt="UMT Academy Logo">
+                <span>UMTacademy</span>
+            </a>
+            
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="../../Materi-Belajar/">Materi Belajar</a></li>
+                    <li><a href="../../Video-Pembelajaran/">Video</a></li>
+                    <li><a href="../../Bank-Soal/">Bank Soal</a></li>
+                    <li><a href="../../Perpustakaan/">Perpustakaan</a></li>
+                    <li><a href="../../UMT-Lab/">UMT Lab</a></li>
+                    <li><a href="../../tryout/">Tryout</a></li>
+                    <li><a href="../../Tanya-UMT/">TanyaUMT</a></li>
+                    <li><a href="../../Forum-Belajar-UMT/">Forum</a></li>
+                    <li><a href="../../Arsip-Live-Class/">Live Class</a></li>
+                </ul>
+                <div class="header-auth">
+                    <a href="login.html" class="auth-btn login">Masuk</a>
+                    <a href="Form-Pendaftaran.html" class="auth-btn register">Daftar</a>
+                </div>
+            </nav>
+
+            <button class="hamburger-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+    
+    <nav class="sidebar-nav">
+        <button class="sidebar-close-btn">×</button>
+        <div class="sidebar-auth">
+            <div class="auth-buttons">
+                <a href="login.html" class="auth-btn login">Masuk</a>
+                <a href="Form-Pendaftaran.html" class="auth-btn register">Daftar</a>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li class="nav-group-title">Konten Inti</li>
+            <li><a href="../../Materi-Belajar/"><span class="emoji-icon">📘</span>Materi Belajar</a></li>
+            <li><a href="../../Video-Pembelajaran/"><span class="emoji-icon">🎥</span>Video Pembelajaran</a></li>
+            <li><a href="../../UMT-Lab/"><span class="emoji-icon">🔬</span>UMT Lab</a></li>
+            <li><a href="../../Perpustakaan/"><span class="emoji-icon">📚</span>Perpustakaan</a></li>
+
+            <li class="nav-group-title">Alat Belajar</li>
+            <li><a href="../../Bank-Soal/"><span class="emoji-icon">📝</span>Bank Soal</a></li>
+            <li><a href="../../tryout/"><span class="emoji-icon">✏️</span>Tryout</a></li>
+            <li><a href="../../Tanya-UMT/"><span class="emoji-icon">❓</span>TanyaUMT</a></li>
+
+            <li class="nav-group-title">Komunitas & Info</li>
+            <li><a href="../../Forum-Belajar-UMT/"><span class="emoji-icon">💬</span>Forum Belajar</a></li>
+            <li><a href="../../Arsip-Live-Class/"><span class="emoji-icon">🎭</span>Arsip Live Class</a></li>
+        </ul>
+    </nav>
+    
+    <div class="sidebar-overlay"></div>
+
+    <div class="container">
+        <header class="header">
+            <div class="header-left">
+                <div class="breadcrumb">
+                    <a href="../../index.html">Home</a>
+                    <span>></span>
+                    <a href="../">Video Pembelajaran</a>
+                    <span>></span>
+                    <span>Kelas Limit Fungsi</span>
+                </div>
+            </div>
+        </header>
+
+        <main class="content-wrapper">
+            <section class="video-section">
+                <div class="video-player-card">
+                    <div class="video-player" id="videoPlayer">
+                        <div class="video-loading">Pilih video dari daftar untuk memulai 🎓</div>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <h1 class="video-title" id="videoTitle">Selamat Datang di Kelas Limit Fungsi</h1>
+                    <div class="video-meta" id="videoMeta">
+                        <div class="meta-item"><span>⏱️</span><span id="videoDuration">--:--</span></div>
+                        <div class="meta-item"><span>👁️</span><span id="videoViews">--</span></div>
+                        <div class="meta-item"><span>📅</span><span id="videoDate">--</span></div>
+                    </div>
+                    <p class="video-description" id="videoDescription">Pilih salah satu video dari daftar di samping untuk memulai perjalanan belajar Anda.</p>
+                    <div class="action-buttons">
+                        <button class="btn btn-complete" id="completeBtn" onclick="markAsComplete()" disabled><span>✓</span> Tandai Selesai</button>
+                        <a href="#" class="btn btn-download" id="downloadBtn" target="_blank" download><span>📝</span> Unduh Catatan</a>
+                        <a href="#" class="btn btn-quiz" id="quizBtn" target="_blank"><span>🎯</span> Uji Kemampuan</a>
+                    </div>
+                </div>
+            </section>
+            
+            <aside class="sidebar">
+                <div class="sidebar-card">
+                    <h3 class="card-title">📈 Progress Anda</h3>
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill" style="width: 0%;"></div>
+                    </div>
+                    <p class="progress-text" id="progressText">0 dari 5 video selesai (0%)</p>
+                </div>
+                <div class="sidebar-card">
+                    <h3 class="card-title">📚 Daftar Putar Video</h3>
+                    <div class="video-list" id="videoList"></div>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <div id="paywallModal" class="modal-overlay">
+        <div class="modal-content">
+            <span class="close-modal" id="closeModalBtn">×</span>
+            <h2>Beli untuk melihat Analisis Dan Kajian ini selengkapnya</h2>
+            <div class="pricing-container">
+                <div class="pricing-card">
+                    <h3 class="card-title">1 Tahun Akses</h3>
+                    <p class="card-price">Rp 99.000</p>
+                    <p class="original-price">Rp 299.999</p>
+                    <span class="savings-badge">Hemat 67%</span>
+                    <p class="per-day-cost">Rp 271 / hari</p>
+                    <button class="cta-button" onclick="window.location.href = 'Form-Pendaftaran.html?paket=1 Tahun';">Pilih Paket</button>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="card-title">6 Bulan Akses</h3>
+                    <p class="card-price">Rp 75.000</p>
+                    <p class="original-price">Rp 149.999</p>
+                    <span class="savings-badge">Hemat 50%</span>
+                    <p class="per-day-cost">Rp 417 / hari</p>
+                    <button class="cta-button" onclick="window.location.href = 'Form-Pendaftaran.html?paket=6 Bulan';">Pilih Paket</button>
+                </div>
+                <div class="pricing-card best-value">
+                    <div class="best-value-banner">PENAWARAN TERBAIK</div>
+                    <h3 class="card-title">Lifetime Akses</h3>
+                    <p class="card-price">Rp 10.000</p>
+                    <p class="original-price">Rp 499.000</p>
+                    <span class="savings-badge">Hemat 98%</span>
+                    <p class="per-day-cost">Akses Untuk Selamanya!</p>
+                    <button class="cta-button" onclick="window.location.href = 'Form-Pendaftaran.html?paket=Lifetime';">Dapatkan Akses</button>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="card-title">1 Bulan Akses</h3>
+                    <p class="card-price">Rp 25.000</p>
+                    <p class="original-price">Rp 49.999</p>
+                    <span class="savings-badge">Hemat 50%</span>
+                    <p class="per-day-cost">Rp 833 / hari</p>
+                    <button class="cta-button" onclick="window.location.href = 'Form-Pendaftaran.html?paket=1 Bulan';">Pilih Paket</button>
+                </div>
+                <div class="pricing-card">
+                    <h3 class="card-title">3 Bulan Akses</h3>
+                    <p class="card-price">Rp 49.000</p>
+                    <p class="original-price">Rp 74.999</p>
+                    <span class="savings-badge">Hemat 35%</span>
+                    <p class="per-day-cost">Rp 544 / hari</p>
+                    <button class="cta-button" onclick="window.location.href = 'Form-Pendaftaran.html?paket=3 Bulan';">Pilih Paket</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+const videoData = {
+    'matematika-10': [
+        {
+        id: 'bonus', 
+        title: 'Pembuktian Sifat Penjumlahan Sinus Dua Sudut', 
+        youtubeId: 'sJaOX0vTqGk', 
+        duration: '02:07', 
+        description: 'Video ini membahas pembukitan sifat penjumlahan sinus dua sudut.', 
+        pdfUrl: 'link_drive_pdf_1.pdf', 
+        quizUrl: 'link_quiz_1' 
+    },
+        {
+        id: 'bonus berbayar', 
+        title: 'Pembuktian Aturan Cosinus', 
+        youtubeId: null, 
+        duration: '02:00', 
+        description: 'Video ini membahas pembuktian aturan cosinus. Beli akses untuk menonton.', 
+        pdfUrl: null, 
+        quizUrl: null, 
+    },
+    ]
+};
+
+let currentCourse = 'matematika-10';
+let currentVideoIndex = -1;
+
+// --- FUNGSI UTAMA ---
+
+function initializePage() {
+    loadProgress();
+    renderVideoList();
+    updateProgress();
+    
+    // Inisialisasi event listener untuk modal paywall
+    const paywallModal = document.getElementById('paywallModal');
+    const closeModalBtn = document.getElementById('closeModalBtn');
+    if (paywallModal && closeModalBtn) {
+        paywallModal.addEventListener('click', (e) => {
+            if (e.target === paywallModal) {
+                closePaywallModal();
+            }
+        });
+        closeModalBtn.addEventListener('click', closePaywallModal);
+    }
+    
+    // Inisialisasi event listener untuk menu sidebar (jika ada)
+    const hamburgerMenu = document.querySelector('.hamburger-menu');
+    if (hamburgerMenu) {
+        const sidebarNav = document.querySelector('.sidebar-nav');
+        const sidebarOverlay = document.querySelector('.sidebar-overlay');
+        const sidebarCloseBtn = document.querySelector('.sidebar-close-btn');
+        const body = document.body;
+
+        function toggleSidebar() {
+            sidebarNav.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+            body.classList.toggle('sidebar-open');
+        }
+
+        if (sidebarNav && sidebarOverlay && sidebarCloseBtn) {
+            hamburgerMenu.addEventListener('click', toggleSidebar);
+            sidebarOverlay.addEventListener('click', toggleSidebar);
+            sidebarCloseBtn.addEventListener('click', toggleSidebar);
+        }
+    }
+    
+    if (currentVideoIndex > -1 && videoData[currentCourse][currentVideoIndex].youtubeId !== null) {
+        selectVideo(currentVideoIndex, false);
+    }
+}
+
+function selectVideo(index, autoplay = true) {
+    const video = videoData[currentCourse][index];
+    if (video.youtubeId === null) {
+        openPaywallModal();
+        return;
+    }
+    currentVideoIndex = index;
+    loadVideo(video, autoplay);
+    updateVideoInfo(video);
+    renderVideoList();
+    updateCompleteButton(video.completed);
+    saveProgress();
+}
+
+// --- FUNGSI PAYWALL MODAL ---
+
+function openPaywallModal() {
+    const modal = document.getElementById('paywallModal');
+    if (modal) {
+        document.body.classList.add('modal-open');
+        modal.classList.add('active');
+    }
+}
+
+function closePaywallModal() {
+    const modal = document.getElementById('paywallModal');
+    if (modal) {
+        document.body.classList.remove('modal-open');
+        modal.classList.remove('active');
+    }
+}
+
+// --- FUNGSI RENDER & UPDATE UI ---
+
+function renderVideoList() {
+    const videoListContainer = document.getElementById('videoList');
+    if (videoListContainer) {
+        videoListContainer.innerHTML = videoData[currentCourse].map((video, index) => {
+            const isLocked = video.youtubeId === null;
+            const itemClass = `video-item ${isLocked ? 'locked' : ''} ${video.completed ? 'completed' : ''} ${index === currentVideoIndex ? 'current' : ''}`;
+            const clickAction = isLocked ? 'openPaywallModal()' : `selectVideo(${index})`;
+            const icon = isLocked ? '🔒' : (video.completed ? '✓' : '▶');
+            const thumbnailUrl = isLocked ? 'https://i.ytimg.com/vi/5yL6u5DXA8E/mqdefault.jpg' : `https://i.ytimg.com/vi/${video.youtubeId}/mqdefault.jpg`;
+
+            return `
+                <div class="${itemClass}" onclick="${clickAction}">
+                    <div class="video-thumb" style="background-image: url('${thumbnailUrl}');">
+                        <div class="play-icon">${icon}</div>
+                    </div>
+                    <div class="video-details">
+                        <h4>${video.title}</h4>
+                        <p>${video.duration} • Tim UMT</p>
+                    </div>
+                </div>`;
+        }).join('');
+    }
+}
+
+function updateVideoInfo(video) {
+    document.getElementById('videoTitle').textContent = video.title;
+    document.getElementById('videoDuration').textContent = video.duration;
+    document.getElementById('videoDescription').textContent = video.description;
+    document.getElementById('downloadBtn').href = video.pdfUrl;
+    document.getElementById('quizBtn').href = video.quizUrl;
+    document.getElementById('videoViews').textContent = `${Math.floor(Math.random() * 5000 + 1000).toLocaleString('id-ID')} x ditonton`;
+    document.getElementById('videoDate').textContent = `${Math.floor(Math.random() * 28 + 1)} hari yang lalu`;
+}
+
+function loadVideo(video, autoplay) {
+    const videoPlayer = document.getElementById('videoPlayer');
+    if (videoPlayer) {
+        videoPlayer.innerHTML = `<iframe id="youtube-player" src="https://www.youtube.com/embed/${video.youtubeId}?enablejsapi=1&autoplay=${autoplay ? 1 : 0}&rel=0&modestbranding=1&iv_load_policy=3" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>`;
+    }
+}
+
+function updateProgress() {
+    const videos = videoData[currentCourse];
+    const completedCount = videos.filter(v => v.completed).length;
+    const totalCount = videos.length;
+    const percentage = totalCount > 0 ? (completedCount / totalCount) * 100 : 0;
+    document.getElementById('progressFill').style.width = `${percentage}%`;
+    document.getElementById('progressText').textContent = `${completedCount} dari ${totalCount} video selesai (${Math.round(percentage)}%)`;
+}
+
+function updateCompleteButton(isCompleted) {
+    const btn = document.getElementById('completeBtn');
+    btn.disabled = isCompleted;
+    btn.innerHTML = isCompleted ? `<span>✓</span> Selesai Ditonton` : `<span>✓</span> Tandai Selesai`;
+    isCompleted ? btn.classList.add('completed') : btn.classList.remove('completed');
+}
+
+// --- FUNGSI PROGRESS & NOTIFIKASI ---
+
+function markAsComplete() {
+    if (currentVideoIndex < 0) return;
+    const video = videoData[currentCourse][currentVideoIndex];
+    if (!video.completed) {
+        video.completed = true;
+        updateCompleteButton(true);
+        renderVideoList();
+        updateProgress();
+        saveProgress();
+        
+        // MEMANGGIL KEMBALI NOTIFIKASI PENCAPAIAN
+        showSingleVideoCompletion(video);
+        
+        // MEMANGGIL KEMBALI LOGIKA LANJUTAN
+        setTimeout(() => {
+            const nextIndex = currentVideoIndex + 1;
+            if (nextIndex < videoData[currentCourse].length) {
+                selectVideo(nextIndex);
+            } else {
+                showCourseCompletionModal();
+            }
+        }, 5000);
+    }
+}
+
+function showSingleVideoCompletion(video) {
+    const oldCard = document.querySelector('.achievement-card');
+    if (oldCard) oldCard.remove();
+    const videos = videoData[currentCourse];
+    const completedCount = videos.filter(v => v.completed).length;
+    const totalCount = videos.length;
+    const percentage = Math.round((completedCount / totalCount) * 100);
+    const card = document.createElement('div');
+    card.className = 'achievement-card';
+    card.innerHTML = `
+        <div class="header">
+            <span class="icon">✅</span>
+            <h4>Pencapaian Terbuka!</h4>
+        </div>
+        <p class="video-title-completed" title="${video.title}">Selesai: <strong>${video.title}</strong></p>
+        <p class="mini-progress-text">Progress Kursus: ${completedCount} dari ${totalCount}</p>
+        <div class="progress-bar" style="height: 8px;">
+            <div class="progress-fill" style="width: ${percentage}%;"></div>
+        </div>`;
+    document.body.appendChild(card);
+    setTimeout(() => {
+        card.style.animation = 'slideDownOut 0.5s ease-in forwards';
+        setTimeout(() => card.remove(), 500);
+    }, 4500);
+}
+
+function showCourseCompletionModal() {
+    const oldModal = document.querySelector('.modal-overlay.completion-modal');
+    if (oldModal) oldModal.remove();
+
+    document.body.classList.add('modal-open');
+
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay completion-modal'; // Tambahkan kelas khusus
+    modal.innerHTML = `
+        <div class="modal-content">
+            <div class="trophy">🏆</div>
+            <h2>Kursus Selesai!</h2>
+            <p>Luar biasa! Anda telah menyelesaikan semua video. Teruslah semangat belajar!</p>
+            <div class="modal-actions">
+                <button class="btn btn-primary" onclick="window.location.href='../../index.html'">Kembali ke Beranda</button>
+                <button class="btn btn-secondary" onclick="resetCourseProgress()">Ulangi Kursus Ini</button>
+            </div>
+        </div>`;
+    document.body.appendChild(modal);
+    
+    // Efek Konfeti
+    const duration = 5 * 1000;
+    const animationEnd = Date.now() + duration;
+    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 10002 };
+    function randomInRange(min, max) { return Math.random() * (max - min) + min; }
+    const interval = setInterval(function() {
+        const timeLeft = animationEnd - Date.now();
+        if (timeLeft <= 0) { return clearInterval(interval); }
+        const particleCount = 50 * (timeLeft / duration);
+        confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 } });
+        confetti({ ...defaults, particleCount, origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 } });
+    }, 250);
+}
+
+function resetCourseProgress() {
+    document.body.classList.remove('modal-open');
+    const modal = document.querySelector('.modal-overlay.completion-modal');
+    if (modal) modal.remove();
+
+    videoData[currentCourse].forEach(v => v.completed = false);
+    currentVideoIndex = -1;
+    saveProgress();
+    location.reload();
+}
+
+// --- FUNGSI PENYIMPANAN & UTILITAS ---
+
+function saveProgress() {
+    localStorage.setItem('umtVideoProgress_limitFungsi', JSON.stringify({
+        completedStatus: videoData[currentCourse].map(v => v.completed),
+        lastVideoIndex: currentVideoIndex
+    }));
+}
+
+function loadProgress() {
+    const saved = localStorage.getItem('umtVideoProgress_limitFungsi');
+    if (saved) {
+        const progress = JSON.parse(saved);
+        if (progress.completedStatus && progress.completedStatus.length === videoData[currentCourse].length) {
+            videoData[currentCourse].forEach((video, index) => {
+                video.completed = progress.completedStatus[index] || false;
+            });
+        }
+        currentVideoIndex = progress.lastVideoIndex ?? -1;
+    }
+}
+
+// --- EVENT LISTENER UTAMA ---
+
+document.addEventListener('DOMContentLoaded', initializePage);
+    </script>
+</body>
+</html>
