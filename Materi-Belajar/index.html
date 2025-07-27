@@ -1,0 +1,2536 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materi Matematika</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMTacademy - Belajar Matematika Lengkap & Interaktif</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="UMT-Logo - Copy.png">
+    <style>
+        *{
+            font-family: 'Poppins', sans-serif;
+        }
+body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #141414;
+            color: white;
+            padding-top: 0px;
+            /* Prevent text selection on entire body */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        /* Allow text selection only for content areas where it's needed */
+        .class-description,
+        .subject-description,
+        .recent-info,
+        input,
+        textarea {
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #888;
+            margin: 20px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .breadcrumb-arrow {
+            color: #666;
+        }
+
+        .breadcrumb-link {
+            color: #888;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .breadcrumb-link:hover {
+            color: white;
+        }
+
+        .breadcrumb-current {
+            color: white;
+            font-weight: 500;
+        }
+
+        /* Dropdown Styles */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-toggle {
+            color: white;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 0;
+            transition: color 0.3s ease;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .dropdown-toggle:hover {
+            color: #007bff;
+        }
+
+        .dropdown-arrow {
+            font-size: 12px;
+            transition: transform 0.3s ease;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .dropdown.active .dropdown-arrow {
+            transform: rotate(180deg);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 8px;
+            min-width: 200px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .dropdown.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 12px 16px;
+            color: #ccc;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #333;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .dropdown-item:last-child {
+            border-bottom: none;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .dropdown-item:first-child {
+            border-radius: 8px 8px 0 0;
+        }
+
+        .dropdown-item:hover {
+            background: #007bff;
+            color: white;
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 500;
+            margin-bottom: 40px;
+            color: #ffffff;
+            margin: 0px 20px 30px 20px;
+            text-align: center;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #888;
+            font-size: 1rem;
+            margin: 0px 20px 30px 20px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        .card-title {
+            color: #fff;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .tabs {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: #141414;
+            display: flex;
+            justify-content: center;
+            border-bottom: 2px solid #333;
+            z-index: 1000;
+        }
+
+        .tab {
+            padding: 15px 25px;
+            cursor: pointer;
+            color: #ccc;
+            font-weight: bold;
+            transition: color 0.3s;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .tab:hover {
+            color: #ffffff;
+        }
+
+        .tab.active {
+            color: #ffffff;
+            border-bottom: 2px solid #ffffff;
+        }
+
+        .content {
+            display: none;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .content.active {
+            display: grid;
+        }
+
+        .card {
+            background: #2c2c2c;
+            border-radius: 10px;
+            overflow: hidden;
+            text-align: center;
+            transition: transform 0.3s;
+            position: relative;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .card:hover {
+            transform: scale(1.05);
+        }
+
+        .card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            pointer-events: none; /* Prevent dragging images */
+        }
+
+        .card-title {
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        .recently-opened {
+            border: 2px solid white;
+            box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+        }
+
+        .recent-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #333;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: bold;
+            z-index: 2;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .recent-materials {
+            background: #2a2a2a;
+            margin: 30px 20px 20px 20px;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #444;
+        }
+
+        .recent-materials h3 {
+            margin: 0 0 10px 0;
+            color: white;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .recent-item {
+            display: flex;
+            align-items: center;
+            padding: 8px;
+            margin: 5px 0;
+            background: #333;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .recent-item:hover {
+            background: #444;
+        }
+
+        .recent-item img {
+            width: 40px;
+            height: 40px;
+            border-radius: 5px;
+            margin-right: 10px;
+            object-fit: cover;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .recent-info {
+            flex: 1;
+            /* Allow text selection for content */
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        .recent-title {
+            font-weight: bold;
+            margin-bottom: 2px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .recent-time {
+            font-size: 12px;
+            color: #aaa;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .clear-history {
+            background: #f44336;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
+            margin-top: 10px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .clear-history:hover {
+            background: #d32f2f;
+        }
+
+        /* Desktop Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 1rem;
+            margin: 0 20px 2rem 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            justify-content: center;
+        }
+        
+        .filter-tab {
+            padding: 1rem 2rem;
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            color: #888;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        .filter-tab.active {
+            border-bottom-color: #4CAF50;
+            color: #4CAF50;
+        }
+
+        .filter-tab:hover {
+            color: white;
+        }
+
+        /* Mobile Dropdown */
+        .mobile-dropdown {
+            display: none;
+            margin: 20px;
+            position: relative;
+        }
+
+        .dropdown-button {
+            width: 100%;
+            background: #333;
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .dropdown-button:hover {
+            background: #444;
+        }
+
+        .mobile-dropdown .dropdown-menu {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+            z-index: 1000;
+            margin-top: 5px;
+        }
+
+        .mobile-dropdown.active .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .mobile-dropdown .dropdown-item {
+            display: block;
+            padding: 15px 20px;
+            color: #ccc;
+            text-decoration: none;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            border-bottom: 1px solid #333;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .mobile-dropdown .dropdown-item:last-child {
+            border-bottom: none;
+            border-radius: 0 0 8px 8px;
+        }
+
+        .mobile-dropdown .dropdown-item:first-child {
+            border-radius: 8px 8px 0 0;
+        }
+
+        .mobile-dropdown .dropdown-item.active {
+            background: #007bff;
+            color: white;
+        }
+
+        /* Class Content Section */
+        .class-content {
+            background: #2a2a2a;
+            margin: 20px;
+            padding: 20px;
+            border-radius: 10px;
+            border: 1px solid #444;
+        }
+
+        .class-title {
+            color: #4CAF50;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .class-description {
+            color: #ccc;
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 20px;
+            /* Allow text selection for content */
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        .subject-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .subject-card {
+            background: #333;
+            border-radius: 8px;
+            padding: 15px;
+            border-left: 4px solid #4CAF50;
+            transition: all 0.3s ease;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .subject-card:hover {
+            background: #404040;
+            transform: translateY(-2px);
+        }
+
+        .subject-name {
+            color: #4CAF50;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .subject-description {
+            color: #bbb;
+            font-size: 0.9rem;
+            line-height: 1.4;
+            /* Allow text selection for content */
+            -webkit-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
+        }
+
+        .content.active {
+            margin: 0px 20px 0px 20px;
+        }
+
+footer {
+    background-color: #141414;
+    color: white;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    background: linear-gradient(to bottom, rgba(28, 28, 28, 1) 0%, rgba(28, 28, 28, 0) 100%);
+}
+
+.footer-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    align-items: center;
+    margin: 20px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 250px;
+    justify-content: center;
+}
+
+.footer-section h3 {
+    color: white;
+    margin-bottom: 10px;
+    font-size: 18px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.footer-section ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+    text-decoration: none;
+    color: #bbb;
+    transition: color 0.3s;
+    font-size: 14px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.footer-section ul li a:hover {
+    color: white;
+}
+
+.contact-list img {
+    width: 16px;
+    vertical-align: middle;
+    margin-right: 8px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+.footer-bottom {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #444;
+    margin-top: 20px;
+    padding-top: 10px;
+}
+
+.social-icons {
+    display: flex;
+    gap: 10px;
+}
+
+.social-icons a img {
+    width: 24px;
+    transition: opacity 0.3s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+}
+
+.social-icons a img:hover {
+    opacity: 0.7;
+}
+
+/* Prevent text selection and image dragging globally */
+* {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+/* Allow text selection only for specific content areas */
+input,
+textarea,
+.class-description,
+.subject-description,
+.recent-info,
+[contenteditable="true"] {
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+/* Prevent image dragging */
+img {
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    /* -user-drag: none; */
+    pointer-events: none;
+}
+
+/* Allow pointer events for clickable images */
+.clickable-image {
+    pointer-events: auto;
+}
+
+/* Agar footer tetap responsif di layar kecil */
+@media (max-width: 768px) {
+    .footer-container {
+        flex-direction: column;
+        text-align: center;
+    }
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+}
+
+.content.active {
+    margin: 0px 20px 0px 20px;
+}
+
+@media (max-width: 480px) {
+    .recent-materials {
+        margin: 30px 10px 10px 10px
+    }
+}
+
+.filter-tabs {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-left: 16px
+}
+
+.filter-tab {
+    padding: 1rem 0;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.filter-tab.active {
+    border-bottom-color: #4285f4;
+    color: #4285f4;
+}
+
+@media (max-width: 768px) {
+    .filter-tabs {
+        display: none; /* Sembunyikan filter tabs di layar kecil */
+    }
+    .tab-nav {
+        display: none;
+    }
+    
+    .mobile-dropdown {
+        display: block;
+    }
+    
+    .container {
+        padding: 0 10px;
+    }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .content-area {
+        padding: 20px;
+    }
+    
+    .content-title {
+        font-size: 1.5rem;
+    }
+    
+    .feature-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .filter-tabs {
+        display: none; /* Sembunyikan filter tabs di layar kecil */
+    }
+    .tab-button {
+        padding: 12px 15px;
+        font-size: 0.9rem;
+        min-width: 70px;
+    }
+    
+    .header h1 {
+        font-size: 1.7rem;
+    }
+    
+    .content-area {
+        padding: 15px;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 360px) {
+    .filter-tabs {
+        display: none; /* Sembunyikan filter tabs di layar kecil */
+    }
+    .tab-button {
+        padding: 10px 12px;
+        font-size: 0.8rem;
+    }
+    
+    .header h1 {
+        font-size: 1.5rem;
+    }
+}
+        :root {
+            --header-height: 70px;
+        }
+
+        /* ===== RESET & BASE STYLES ===== */
+        * { 
+            box-sizing: border-box; 
+        }
+
+        body {
+            background-color: #141414; 
+            font-family: 'Poppins', sans-serif; 
+            color: white;
+            margin: 0; 
+            padding: 0; 
+            line-height: 1.6;
+            padding-top: var(--header-height);
+        }
+
+        body.sidebar-open { 
+            overflow: hidden; 
+        }
+
+        html { 
+            scroll-behavior: smooth; 
+        }
+
+        /* ===== MAIN HEADER ===== */
+        .main-header {
+            background-color: #1c1c1c; 
+            padding: 0 20px;
+            height: var(--header-height);
+            position: fixed;
+            top: 0; 
+            left: 0; 
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-container {
+            width: 100%;
+            max-width: 1200px; 
+            margin: 0 auto; 
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+        }
+
+        .header-logo {
+            display: flex; 
+            align-items: center; 
+            text-decoration: none;
+            color: white; 
+            font-weight: 600; 
+            font-size: 20px;
+        }
+
+        .header-logo img { 
+            height: 40px; 
+            margin-right: 10px; 
+        }
+
+        /* ===== HAMBURGER MENU ===== */
+        .hamburger-menu {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 1200;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger-menu .bar {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Animasi hamburger saat aktif */
+        .hamburger-menu.active .bar:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger-menu.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active .bar:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* ===== NAVIGASI DESKTOP ===== */
+        .main-nav { 
+            display: flex; 
+        }
+
+        .nav-links {
+            list-style: none; 
+            margin: 0; 
+            padding: 0;
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+        }
+
+        .nav-links li a {
+            color: #ccc; 
+            text-decoration: none; 
+            font-size: 14px;
+            font-weight: 500; 
+            padding: 8px 12px; 
+            border-radius: 6px;
+            white-space: nowrap; 
+            transition: all 0.2s ease;
+        }
+
+        .nav-links li a:hover { 
+            background-color: rgba(255, 255, 255, 0.1); 
+            color: white; 
+        }
+
+        /* ===== SIDEBAR NAVIGATION ===== */
+        .sidebar-nav {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 500px; 
+            height: 100%;
+            background-color: #1a1a1a; 
+            box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+            padding-top: 60px; 
+            transform: translateX(-100%);
+            transition: transform 0.4s ease-in-out; 
+            z-index: 1100; 
+            overflow-y: auto;
+            display: none; /* Sembunyikan di desktop */
+        }
+
+        .sidebar-nav.active { 
+            transform: translateX(0); 
+        }
+
+        .sidebar-nav .nav-links { 
+            flex-direction: column; 
+            align-items: stretch; 
+            gap: 0; 
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar-nav .nav-links li a { 
+            display: flex; 
+            gap: 15px; 
+            padding: 15px 30px; 
+            font-size: 16px; 
+            border-radius: 0;
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-nav .nav-links li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .sidebar-nav .nav-group-title {
+            padding: 20px 30px 10px; 
+            font-size: 12px; 
+            font-weight: 600;
+            color: #888; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+        }
+
+        .sidebar-nav .nav-group-title:not(:first-child){ 
+            border-top: 1px solid #333; 
+            margin-top: 10px; 
+        }
+
+        .sidebar-nav .sidebar-close-btn {
+            position: absolute; 
+            top: 15px; 
+            right: 20px; 
+            background: none; 
+            border: none;
+            color: #aaa; 
+            font-size: 36px; 
+            font-weight: 300; 
+            line-height: 1;
+            cursor: pointer; 
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .sidebar-nav .sidebar-close-btn:hover { 
+            color: white; 
+            transform: rotate(90deg); 
+        }
+
+        /* ===== SIDEBAR OVERLAY ===== */
+        .sidebar-overlay {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); 
+            z-index: 1050;
+            opacity: 0; 
+            visibility: hidden; 
+            transition: opacity 0.4s, visibility 0.4s;
+        }
+
+        .sidebar-overlay.active { 
+            opacity: 1; 
+            visibility: visible; 
+        }
+
+        /* ===== EMOJI ICONS ===== */
+        .emoji-icon {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        /* ===== MEDIA QUERIES ===== */
+        /* Tablet dan Mobile */
+        @media screen and (max-width: 1024px) {
+            .main-nav { 
+                display: none; 
+            } /* Sembunyikan nav desktop */
+            
+            .hamburger-menu { 
+                display: flex; 
+            } /* Tampilkan hamburger */
+            
+            .sidebar-nav { 
+                display: block; 
+            } /* Aktifkan sidebar */
+        }
+
+        /* Mobile Medium */
+        @media screen and (max-width: 768px) {
+            .header-logo span {
+                font-size: 18px;
+            }
+            
+            .header-logo img {
+                height: 35px;
+            }
+            
+            .sidebar-nav {
+                width: 400px;
+            }
+        }
+
+        /* Mobile Small */
+        @media screen and (max-width: 480px) {
+            .sidebar-nav {
+                width: 260px;
+            }
+            
+            .header-logo span {
+                font-size: 16px;
+            }
+            
+            .header-logo img {
+                height: 30px;
+            }
+        }
+
+        /* ===== DEMO CONTENT STYLES (hapus saat implementasi) ===== */
+        .demo-content {
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .demo-content h1 {
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .demo-content p {
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .demo-section {
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .demo-section h3 {
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+.card-badge {
+    position: absolute;
+    top: 10px;
+    left: 10px; /* Changed from right to left for better visibility */
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    z-index: 2; /* Ensures the badge is on top of the image */
+}
+
+.badge-gratis {
+    background-color: #4CAF50; /* Green for 'GRATIS' */
+}
+
+.badge-premium {
+    background-color: #FFC107; /* Yellow/Gold for 'PREMIUM' */
+    color: #141414; /* Dark text for better contrast on yellow */
+}
+/* ----- ROOT VARIABLES ----- */
+:root {
+    --header-height: 70px;
+}
+
+/* ----- BODY ADJUSTMENT FOR FIXED HEADER ----- */
+body {
+    padding-top: var(--header-height);
+}
+
+body.sidebar-open { 
+    overflow: hidden; 
+}
+
+/* ----- MAIN HEADER ----- */
+.main-header {
+    background-color: #1c1c1c; 
+    padding: 0 20px;
+    height: var(--header-height);
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+}
+
+.header-container {
+    width: 100%;
+    max-width: 1200px; 
+    margin: 0 auto; 
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+/* ----- HEADER LOGO ----- */
+.header-logo {
+    display: flex; 
+    align-items: center; 
+    text-decoration: none;
+    color: white; 
+    font-weight: 600; 
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+.header-logo img { 
+    height: 40px; 
+    margin-right: 10px; 
+}
+
+/* ----- HAMBURGER MENU ----- */
+.hamburger-menu {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 1200;
+    transition: all 0.3s ease;
+}
+
+.hamburger-menu .bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Animasi hamburger saat aktif */
+.hamburger-menu.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger-menu.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ----- NAVIGASI DESKTOP (DEFAULT) ----- */
+.main-nav { 
+    display: flex; 
+    align-items: center; 
+    gap: 20px; 
+}
+
+.nav-links {
+    list-style: none; 
+    margin: 0; 
+    padding: 0;
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
+}
+
+.nav-links li a {
+    color: #ccc; 
+    text-decoration: none; 
+    font-size: 14px;
+    font-weight: 500; 
+    padding: 8px 12px; 
+    border-radius: 6px;
+    white-space: nowrap; 
+    transition: all 0.2s ease;
+}
+
+.nav-links li a:hover { 
+    background-color: rgba(255, 255, 255, 0.1); 
+    color: white; 
+}
+
+/* ----- HEADER AUTH BUTTONS ----- */
+.header-auth { 
+    display: flex; 
+    gap: 10px; 
+}
+
+.auth-btn {
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.auth-btn.login {
+    color: #ccc;
+    background-color: transparent;
+    border: 1px solid #555;
+}
+
+.auth-btn.login:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-color: #888;
+}
+
+.auth-btn.register {
+    color: white;
+    background-color: #6A0DAD;
+    border: 1px solid #6A0DAD;
+}
+
+.auth-btn.register:hover {
+    background-color: #7D2ED1;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(106, 13, 173, 0.5);
+}
+
+/* ----- SIDEBAR & MOBILE NAVIGATION ----- */
+.sidebar-nav {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 500px; 
+    height: 100%;
+    background-color: #1a1a1a; 
+    box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+    padding-top: 60px; 
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-in-out; 
+    z-index: 1100; 
+    overflow-y: auto;
+    display: none; /* Sembunyikan di desktop */
+}
+
+.sidebar-nav.active { 
+    transform: translateX(0); 
+}
+
+.sidebar-nav .nav-links { 
+    flex-direction: column; 
+    align-items: stretch; 
+    gap: 0; 
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-nav .nav-links li a { 
+    display: flex; 
+    gap: 15px; 
+    padding: 15px 30px; 
+    font-size: 16px; 
+    border-radius: 0;
+    color: #ccc;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.sidebar-nav .nav-links li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.sidebar-nav .nav-group-title {
+    padding: 20px 30px 10px; 
+    font-size: 12px; 
+    font-weight: 600;
+    color: #888; 
+    text-transform: uppercase; 
+    letter-spacing: 1px;
+}
+
+.sidebar-nav .nav-group-title:not(:first-child){ 
+    border-top: 1px solid #333; 
+    margin-top: 10px; 
+}
+
+.sidebar-nav .sidebar-close-btn {
+    position: absolute; 
+    top: 15px; 
+    right: 20px; 
+    background: none; 
+    border: none;
+    color: #aaa; 
+    font-size: 36px; 
+    font-weight: 300; 
+    line-height: 1;
+    cursor: pointer; 
+    transition: color 0.3s, transform 0.3s;
+}
+
+.sidebar-nav .sidebar-close-btn:hover { 
+    color: white; 
+    transform: rotate(90deg); 
+}
+
+/* ----- SIDEBAR AUTH BUTTONS ----- */
+.sidebar-auth {
+    padding: 20px 30px;
+    border-bottom: 1px solid #333;
+    margin-bottom: 10px;
+}
+
+.sidebar-auth .auth-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-left: 0;
+}
+
+.sidebar-auth .auth-btn {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* ----- SIDEBAR OVERLAY ----- */
+.sidebar-overlay {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); 
+    z-index: 1050;
+    opacity: 0; 
+    visibility: hidden; 
+    transition: opacity 0.4s, visibility 0.4s;
+}
+
+.sidebar-overlay.active { 
+    opacity: 1; 
+    visibility: visible; 
+}
+
+/* ----- EMOJI ICON ----- */
+.emoji-icon {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+/* ----- MEDIA QUERIES ----- */
+@media screen and (max-width: 1024px) {
+    .main-nav { 
+        display: none; 
+    } /* Sembunyikan nav desktop */
+    
+    .hamburger-menu { 
+        display: flex; 
+    } /* Tampilkan hamburger */
+    
+    .sidebar-nav { 
+        display: block; 
+    } /* Aktifkan sidebar */
+}
+
+/* Responsive untuk layar yang lebih kecil */
+@media screen and (max-width: 768px) {
+    .header-logo span {
+        font-size: 18px;
+    }
+    
+    .header-logo img {
+        height: 35px;
+    }
+    
+    .sidebar-nav {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .sidebar-nav {
+        width: 260px;
+    }
+    
+    .header-logo span {
+        font-size: 16px;
+    }
+    
+    .header-logo img {
+        height: 30px;
+    }
+}
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <a href="../index.html" class="header-logo">
+                <img src="UMT-Logo - Copy.png" alt="UMT Academy Logo">
+                <span>UMTacademy</span>
+            </a>
+            
+            <!-- Navigasi Desktop -->
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="#">Materi Belajar</a></li>
+                    <li><a href="../Video-Pembelajaran/">Video</a></li>
+                    <li><a href="../Bank-Soal/">Bank Soal</a></li>
+                    <li><a href="../Perpustakaan/">Perpustakaan</a></li>
+                    <li><a href="../UMT-Lab/">UMT Lab</a></li>
+                    <li><a href="../tryout/">Tryout</a></li>
+                    <li><a href="../Tanya-UMT/">TanyaUMT</a></li>
+                    <li><a href="../Forum-Belajar-UMT/">Forum</a></li>
+                    <li><a href="../Arsip-Live-Class/">Live Class</a></li>
+                </ul>
+                <div class="header-auth">
+                    <a href="login.html" class="auth-btn login">Masuk</a>
+                    <a href="Form-Pendaftaran.html" class="auth-btn register">Daftar</a>
+                </div>
+            </nav>
+
+            <!-- Hamburger Menu untuk Mobile -->
+            <button class="hamburger-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Sidebar Navigation untuk Mobile -->
+    <nav class="sidebar-nav">
+        <button class="sidebar-close-btn">×</button>
+        <div class="sidebar-auth">
+            <div class="auth-buttons">
+                <a href="login.html" class="auth-btn login">Masuk</a>
+                <a href="Form-Pendaftaran.html" class="auth-btn register">Daftar</a>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li class="nav-group-title">Konten Inti</li>
+            <li><a href="#"><span class="emoji-icon">📘</span>Materi Belajar</a></li>
+            <li><a href="../Video-Pembelajaran/"><span class="emoji-icon">🎥</span>Video Pembelajaran</a></li>
+            <li><a href="../UMT-Lab/"><span class="emoji-icon">🔬</span>UMT Lab</a></li>
+            <li><a href="../Perpustakaan/"><span class="emoji-icon">📚</span>Perpustakaan</a></li>
+
+            <li class="nav-group-title">Alat Belajar</li>
+            <li><a href="../Bank-Soal/"><span class="emoji-icon">📝</span>Bank Soal</a></li>
+            <li><a href="../tryout/"><span class="emoji-icon">✏️</span>Tryout</a></li>
+            <li><a href="../Tanya-UMT/"><span class="emoji-icon">❓</span>TanyaUMT</a></li>
+
+            <li class="nav-group-title">Komunitas & Info</li>
+            <li><a href="../Forum-Belajar-UMT/"><span class="emoji-icon">💬</span>Forum Belajar</a></li>
+            <li><a href="../Arsip-Live-Class/"><span class="emoji-icon">🎭</span>Arsip Live Class</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Overlay untuk Sidebar -->
+    <div class="sidebar-overlay"></div>
+
+    <nav class="breadcrumb">
+        <a href="../" class="breadcrumb-link">Home</a>
+        <span class="breadcrumb-arrow">›</span>
+        <div class="dropdown" id="umtDropdown">
+            <span class="dropdown-toggle">
+                Materi Pembelajaran
+            <!-- <span class="dropdown-arrow">▼</span>
+            </span>
+            <div class="dropdown-menu">
+                        <a href="" class="dropdown-item">Home</a>
+                        <a href="" class="dropdown-item">UMT Lab</a>
+                        <a href="" class="dropdown-item">Materi Pembelajaran</a>
+                        <a href="" class="dropdown-item">Video Pembelajaran</a>
+                        <a href="" class="dropdown-item">Tryout</a>
+                        <a href="" class="dropdown-item">Perpustakaan</a>
+                        <a href="" class="dropdown-item">Bank Soal UMT</a>
+                        <a href="" class="dropdown-item">Arsip Live Class</a>
+                        <a href="https://www.umt6174.site/forum-belajar-umt" class="dropdown-item">Forum Belajar UMT</a>
+                        <a href="https://www.umt6174.site/tanya-umt" class="dropdown-item">Tanya UMT</a>
+            </div> -->
+        </div>
+    </nav>
+
+    <h1>Materi Pembelajaran</h1>
+
+    <div class="filter-tabs">
+        <div class="filter-tab active" onclick="showContent(event,'kelas10')">Materi Kelas X</div>
+        <div class="filter-tab" onclick="showContent(event,'kelas11')">Materi Kelas XI</div>
+        <div class="filter-tab" onclick="showContent(event,'kelas12')">Materi Kelas XII</div>
+        <div class="filter-tab" onclick="showContent(event,'kelas9')">Materi Kelas IX</div>
+        <div class="filter-tab" onclick="showContent(event,'kelas8')">Materi Kelas VIII</div>
+        <div class="filter-tab" onclick="showContent(event,'kelas7')">Materi Kelas VII</div>
+    </div>
+
+    <div class="mobile-dropdown">
+        <button class="dropdown-button" onclick="toggleDropdown()">
+            <span id="selected-class">Kelas X</span>
+            <span class="dropdown-arrow">▼</span>
+        </button>
+        <div class="dropdown-menu" id="dropdown-menu">
+            <div class="dropdown-item active" onclick="selectClass(this, 'kelas-x', 'Kelas X')">Materi Kelas X</div>
+            <div class="dropdown-item" onclick="selectClass(this, 'kelas-xi', 'Kelas XI')">Materi Kelas XI</div>
+            <div class="dropdown-item" onclick="selectClass(this, 'kelas-xii', 'Kelas XII')">Materi Kelas XII</div>
+            <div class="dropdown-item" onclick="selectClass(this, 'kelas-ix', 'Kelas IX')">Materi Kelas IX</div>
+            <div class="dropdown-item" onclick="selectClass(this, 'kelas-viii', 'Kelas VIII')">Materi Kelas VIII</div>
+            <div class="dropdown-item" onclick="selectClass(this, 'kelas-vii', 'Kelas VII')">Materi Kelas VII</div>
+        </div>
+    </div>
+
+    <!-- Section untuk menampilkan materi yang baru dibuka -->
+    <div class="recent-materials" id="recentMaterials" style="display: none;">
+        <h3>📚 Materi Terakhir Dibuka</h3>
+        <div id="recentList"></div>
+        <button class="clear-history" onclick="clearHistory()">Hapus Riwayat</button>
+    </div>
+
+    <div id="kelas7" class="content">
+        <a href="https://drive.google.com/file/d/1zK2Cf2aOJTWHvwcBfyFfrtorkNsGr-fp/view?usp=drive_link" target="_blank" onclick="saveToHistory('Himpunan', 'Himpunan.jpeg', 'Kelas 7')">
+            <div class="card" data-title="Himpunan">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Himpunan.jpeg">
+                <div class="card-title">Himpunan</div>
+            </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1L-F0GqangkuFN9icSE5KH8n8ktYgI1Wv/view?usp=drive_link" target="_blank" onclick="saveToHistory('Aritmetika Sosial', 'Aritmetika Sosial.jpeg', 'Kelas 7')">
+            <div class="card" data-title="Aritmetika Sosial">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Aritmetika Sosial.jpeg">
+                <div class="card-title">Aritmetika Sosial</div>
+            </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1gc3RwyFRtjsoTfhBw28Nae-x7Oe7wgl4/view?usp=drive_link" target="_blank" onclick="saveToHistory('PLSV & PTLSV', 'PLSV & PTLSV.png', 'Kelas 7')">
+            <div class="card" data-title="PLSV & PTLSV">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="PLSV & PTLSV.png">
+                <div class="card-title">Persamaan & Pertidaksamaan Linear Satu Variabel</div>
+            </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1XJITZBhz4EWfceB8r2ZIjugxem1qpwZQ/view?usp=drive_link" target="_blank" onclick="saveToHistory('Pecahan 1', 'Pecahan.jpeg', 'Kelas 7')">
+            <div class="card" data-title="Pecahan 1">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Pecahan.jpeg">
+                <div class="card-title">Pecahan 1</div>
+            </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1YOV-WN6cHNyT0r6POLtnS8bbmLGOzIHG/view?usp=drive_link" target="_blank" onclick="saveToHistory('Bilangan Bulat', 'Bilangan Bulat.png', 'Kelas 7')">
+            <div class="card" data-title="Bilangan Bulat">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Bilangan Bulat.png">
+                <div class="card-title">Bilangan Bulat</div>
+            </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1pCUTqwFnyVthxIXZhKMUMCJvk5M5CMxW/view?usp=drive_link" target="_blank" onclick="saveToHistory('Garis & Sudut', 'garis dan sudut.png', 'Kelas 7')">
+            <div class="card" data-title="Garis & Sudut">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="garis dan sudut.png">
+                <div class="card-title">Garis & Sudut</div>
+            </div>
+        </a>
+        <a href="https://drive.google.com/file/d/18EwZKrg7-OgLq9BmL2KmZp0qa8YncrFG/view?usp=drive_link" target="_blank" onclick="saveToHistory('Bentuk Akar', 'Bentuk Akar.png', 'Kelas 7')">
+            <div class="card" data-title="Bentuk Akar">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Bentuk Akar.png">
+                <div class="card-title">Bentuk Akar</div>
+            </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1ptVb2pMt6SjX2HOcM2PZOJmpra3JIhcH/view?usp=drive_link" target="_blank" onclick="saveToHistory('Eksponen (Perpangkatan)', 'Eksponen.png', 'Kelas 7')">
+            <div class="card" data-title="Eksponen (Perpangkatan)">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Eksponen.png">
+                <div class="card-title">Eksponen (Perpangkatan)</div>
+            </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1WMz86ypsNDsix694quSXMqoYxRA8W8Jn/view?usp=drive_link" target="_blank" onclick="saveToHistory('Bentuk Aljabar', 'Bentuk Aljabar.png', 'Kelas 7')">
+            <div class="card" data-title="Bentuk Aljabar">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Bentuk Aljabar.png">
+                <div class="card-title">Bentuk Aljabar</div>
+            </div>
+        </a>
+        <a href="https://drive.google.com/file/d/15VexpUOC9niRpJYgdPKzmobcW4-zhV3w/view?usp=drive_link" target="_blank" onclick="saveToHistory('FPB & KPK', 'fpb dan kpk.png', 'Kelas 7')">
+            <div class="card" data-title="FPB & KPK">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="fpb dan kpk.png">
+                <div class="card-title">FPB & KPK</div>
+            </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1bR4Nj6kPe8SH19krqeNyQ0Dsbbdt11P7/view?usp=drive_link" target="_blank" onclick="saveToHistory('Perbandingan', 'Perbandingan.jpeg', 'Kelas 7')">
+            <div class="card" data-title="Perbandingan">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Perbandingan.jpeg">
+                <div class="card-title">Perbandingan</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/14yvDIsCJ9MarZlLzeOgkZpGxVtcypKnF/view?usp=drive_link" target="_blank" onclick="saveToHistory('Pecahan 2', 'Pecahan.jpeg', 'Kelas 7')">
+            <div class="card" data-title="Pecahan 2">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Pecahan.jpeg">
+                <div class="card-title">Pecahan 2</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1egoIHxA4p0RQTKlOv28GtH9rvcJbSgEl/view?usp=drive_link" target="_blank" onclick="saveToHistory('Bentuk Aljabar Lanjutan', 'Bentuk Aljabar.png', 'Kelas 7')">
+            <div class="card" data-title="Bentuk Aljabar Lanjutan">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Bentuk Aljabar.png">
+                <div class="card-title">Bentuk Aljabar Lanjutan</div>
+            </div>
+        </a>
+    </div>
+
+    <div id="kelas8" class="content">
+        <a href="https://drive.google.com/file/d/1CyO8pVjhQdw20hfDGC9GKtYvZCzc6OY-/view?usp=drive_link" target="_blank" onclick="saveToHistory('Pola Bilangan', 'Pola Bilangan.png', 'Kelas 8')">
+            <div class="card" data-title="Pola Bilangan">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Pola Bilangan.png">
+                <div class="card-title">Pola Bilangan</div>
+            </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1AYAo61Bgj4ecs47pgBuufXEmOiu4H5vW/view?usp=drive_link" target="_blank" onclick="saveToHistory('Koordinat Kartesius', 'Koordinat Kartesius.png', 'Kelas 8')">
+            <div class="card" data-title="Koordinat Kartesius">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Koordinat Kartesius.png">
+                <div class="card-title">Koordinat Kartesius</div>
+            </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1ZcBa1q4fusdvKPvmLR74nZ6MogduaoXc/view?usp=drive_link" target="_blank" onclick="saveToHistory('Relasi Dan Fungsi', 'Relasi Dan Fungsi.png', 'Kelas 8')">
+            <div class="card" data-title="Relasi Dan Fungsi">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Relasi Dan Fungsi.png">
+                <div class="card-title">Relasi Dan Fungsi</div>
+            </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1G4BW0i3MNTP6ez7n86kOxZXXHMLJOxWc/view?usp=drive_link" target="_blank" onclick="saveToHistory('Persamaan Garis Lurus', 'Persamaan Garis Lurus.png', 'Kelas 8')">
+            <div class="card" data-title="Persamaan Garis Lurus">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Persamaan Garis Lurus.png">
+                <div class="card-title">Persamaan Garis Lurus</div>
+            </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1VaDciHucXklOenNNKmGkmeOoj8HTXFwC/view?usp=drive_link" target="_blank" onclick="saveToHistory('Sistem Persamaan Linear Dua Variabel', 'SPLDV.png', 'Kelas 8')">
+            <div class="card" data-title="Sistem Persamaan Linear Dua Variabel">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="SPLDV.png">
+                <div class="card-title">Sistem Persamaan Linear Dua Variabel</div>
+            </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1LwMUXs33hahRJAeqIws1hboRiQ2CBMKn/view?usp=drive_link" target="_blank" onclick="saveToHistory('Teorema Pythagoras', 'Teorema Phytagoras.png', 'Kelas 8')">
+            <div class="card" data-title="Teorema Pythagoras">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Teorema Phytagoras.png">
+                <div class="card-title">Teorema Pythagoras</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1weh21ut66EUUMGfQQ824QbGX2h9oVlOI/view?usp=drive_link" target="_blank" onclick="saveToHistory('Teori Peluang (Revisi)', 'Peluang.png', 'Kelas XII')">
+            <div class="card" data-title="Teori Peluang (Revisi)">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Peluang.png">
+                <div class="card-title">Teori Peluang (Revisi 1)</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1xVv-0zIGZcwuOHXuL2G1KQHmyl73t3xL/view?usp=drive_link" target="_blank" onclick="saveToHistory('Lingkaran', 'Lingkaran.png', 'Kelas 8')">
+            <div class="card" data-title="Lingkaran">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Lingkaran.png">
+                <div class="card-title">Lingkaran</div>
+            </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1M0KgQsoshN08P9pBpSlAH_uszvIFvqrp/view?usp=drive_link" target="_blank" onclick="saveToHistory('Garis Singgung Lingkaran', 'Garis Singgung Lingkaran.png', 'Kelas 8')">
+            <div class="card" data-title="Garis Singgung Lingkaran">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Garis Singgung Lingkaran.png">
+                <div class="card-title">Garis Singgung Lingkaran</div>
+            </div>
+        </a>
+        <a href="https://drive.google.com/file/d/1mKXYxOtYDrSD0ECoXbgMatv9BSbAbkwh/view?usp=drive_link" target="_blank" onclick="saveToHistory('Statistika', 'Statistika.png', 'Kelas 8')">
+            <div class="card" data-title="Statistika">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Statistika.png">
+                <div class="card-title">Statistika</div>
+            </div>
+        </a>
+        <a href="https://drive.google.com/file/d/139WvHq2o0CvxR9Mh52u0Zqoj-15_q3cn/view?usp=drive_link" target="_blank" onclick="saveToHistory('Peluang', 'Peluang.png', 'Kelas 8')">
+            <div class="card" data-title="Peluang">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Peluang.png">
+                <div class="card-title">Peluang</div>
+            </div>
+        </a>
+    </div>
+
+    <div id="kelas9" class="content">
+        <a href="https://drive.google.com/file/d/1bmqLNbQm51drnr2o34odS0ZroHTqBRDH/view?usp=drive_link" target="_blank" onclick="saveToHistory('Eksponen', 'Eksponen.png', 'Kelas X')">
+            <div class="card" data-title="Eksponen">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Eksponen.png">
+                <div class="card-title">Eksponen</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1wafxSfL1dF417LIMoYrWZWmE4hpJknay/view?usp=drive_link" target="_blank" onclick="saveToHistory('Bentuk Akar', 'Bentuk Akar.png', 'Kelas X')">
+            <div class="card" data-title="Bentuk Akar">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Bentuk Akar.png">
+                <div class="card-title">Bentuk Akar</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1T2OY-FVYe8NC0emtD-oaBcVg_BJAQLF-/view?usp=drive_link" target="_blank" onclick="saveToHistory('Persamaan Kuadrat', 'Persamaan Kuadrat.jpeg', 'Kelas X')">
+            <div class="card" data-title="Persamaan Kuadrat">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Persamaan Kuadrat.jpeg">
+                <div class="card-title">Persamaan Kuadrat</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1M8z4n9JCl3D7v9UNB4MKA7oac1WmZI0m/view?usp=drive_link" target="_blank" onclick="saveToHistory('Fungsi Kuadrat', 'Fungsi Kuadrat.jpeg', 'Kelas X')">
+            <div class="card" data-title="Fungsi Kuadrat">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Fungsi Kuadrat.jpeg">
+                <div class="card-title">Fungsi Kuadrat</div>
+            </div>
+        </a>
+
+        <a href="" target="_blank" onclick="saveToHistory('Kekongruenan dan Kesebangunan', 'Kekongruenan dan Kesebangunan.png', 'Kelas X')">
+            <div class="card" data-title="Kekongruenan dan Kesebangunan">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Kekongruenan dan Kesebangunan.png">
+                <div class="card-title">Kekongruenan dan Kesebangunan</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1-Qg8Pk5luUv-ltBeMTxEdqEPtOpMKaNO/view?usp=drive_link" target="_blank" onclick="saveToHistory('Persamaan Kuadrat(Revisi)', 'Persamaan Kuadrat.jpeg', 'Kelas X')">
+            <div class="card" data-title="Persamaan Kuadrat">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Persamaan Kuadrat.jpeg">
+                <div class="card-title">Persamaan Kuadrat (Revisi)</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1RSlnqEVed5UF7eK3r9HZp8_EIXZs29yX/view?usp=drive_link" target="_blank" onclick="saveToHistory('Transformasi Geometri', 'Transformasi Geometri.png', 'Kelas XI')">
+            <div class="card" data-title="Transformasi Geometri">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Transformasi Geometri.png">
+                <div class="card-title">Transformasi Geometri</div>
+            </div>
+        </a>
+    </div>
+
+    <div id="kelas10" class="content active">
+        <a href="https://drive.google.com/file/d/1bmqLNbQm51drnr2o34odS0ZroHTqBRDH/view?usp=drive_link" target="_blank" onclick="saveToHistory('Eksponen', 'Eksponen.png', 'Kelas X')">
+            <div class="card" data-title="Eksponen">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Eksponen.png">
+                <div class="card-title">Eksponen</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1wafxSfL1dF417LIMoYrWZWmE4hpJknay/view?usp=drive_link" target="_blank" onclick="saveToHistory('Bentuk Akar', 'Bentuk Akar.png', 'Kelas X')">
+            <div class="card" data-title="Bentuk Akar">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Bentuk Akar.png">
+                <div class="card-title">Bentuk Akar</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1VABZdzdJYmwvy-v6BL-R4hOqHe2svy9H/view?usp=drive_link" target="_blank" onclick="saveToHistory('Logaritma', 'Logaritma.png', 'Kelas X')">
+            <div class="card" data-title="Logaritma">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Logaritma.png">
+                <div class="card-title">Logaritma</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1weh21ut66EUUMGfQQ824QbGX2h9oVlOI/view?usp=drive_link" target="_blank" onclick="saveToHistory('Teori Peluang (Revisi)', 'Peluang.png', 'Kelas XII')">
+            <div class="card" data-title="Teori Peluang (Revisi)">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Peluang.png">
+                <div class="card-title">Teori Peluang (Revisi 1)</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1M8z4n9JCl3D7v9UNB4MKA7oac1WmZI0m/view?usp=drive_link" target="_blank" onclick="saveToHistory('Fungsi Kuadrat', 'Fungsi Kuadrat.jpeg', 'Kelas X')">
+            <div class="card" data-title="Fungsi Kuadrat">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Fungsi Kuadrat.jpeg">
+                <div class="card-title">Fungsi Kuadrat</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1T2OY-FVYe8NC0emtD-oaBcVg_BJAQLF-/view?usp=drive_link" target="_blank" onclick="saveToHistory('Persamaan Kuadrat', 'Persamaan Kuadrat.jpeg', 'Kelas X')">
+            <div class="card" data-title="Persamaan Kuadrat">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Persamaan Kuadrat.jpeg">
+                <div class="card-title">Persamaan Kuadrat</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1zEkhmDPYYa3_5oT5_BZKLmLreK_dH3ik/view?usp=drive_link" target="_blank" onclick="saveToHistory('Pertidaksamaan Kuadrat', 'Pertidaksamaan Kuadrat.png', 'Kelas X')">
+            <div class="card" data-title="Pertidaksamaan Kuadrat">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Pertidaksamaan Kuadrat.png">
+                <div class="card-title">Pertidaksamaan Kuadrat</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1U2g52CR46pMXv4R9k0BfFNo62dfNsrvU/view?usp=drive_link" target="_blank" onclick="saveToHistory('Barisan Aritmetika', 'Barisan Aritmetika.png', 'Kelas X')">
+            <div class="card" data-title="Barisan Aritmetika">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Barisan Aritmetika.png">
+                <div class="card-title">Barisan Aritmetika</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1nArpC8wGbhURiHAyIhFx6-orcu_FG57u/view?usp=drive_link" target="_blank" onclick="saveToHistory('Notasi Sigma', 'Notasi Sigma.png', 'Kelas X')">
+            <div class="card" data-title="Notasi Sigma">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Notasi Sigma.png">
+                <div class="card-title">Notasi Sigma</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1hGfNwxbJ13XT5YPWKK2OHGtW2pW1GxaO/view?usp=drive_link" target="_blank" onclick="saveToHistory('Vektor', 'Vektor.png', 'Kelas X')">
+            <div class="card" data-title="Vektor">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Vektor.png">
+                <div class="card-title">Vektor</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/188IfEhfNSfA1Nf08X5LVu2CpnSY_r3zr/view?usp=drive_link" target="_blank" onclick="saveToHistory('Trigonometri', 'Trigonometri.png', 'Kelas X')">
+            <div class="card" data-title="Trigonometri">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Trigonometri.png">
+                <div class="card-title">Trigonometri</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1U_dAivXJQNIuote8fkiDTvUMyZ0nXLUI/view?usp=drive_link" target="_blank" onclick="saveToHistory('Peluang', 'Peluang.png', 'Kelas X')">
+            <div class="card" data-title="Peluang">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Peluang.png">
+                <div class="card-title">Peluang</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/14hrugQLa1k34JR_M-dnjYXPAEkaRrHBs/view?usp=drive_link" target="_blank" onclick="saveToHistory('Aturan Pencacahan', 'Aturan Pencacahan.png', 'Kelas X')">
+            <div class="card" data-title="Aturan Pencacahan">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Aturan Pencacahan.png">
+                <div class="card-title">Aturan Pencacahan</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1g0XcfHuaAlVQJwh5WQBP32F5IDpPYf5f/view?usp=drive_link" target="_blank" onclick="saveToHistory('Program Linear', 'Program Linear.png', 'Kelas X')">
+            <div class="card" data-title="Program Linear">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Program Linear.png">
+                <div class="card-title">Program Linear</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1eJCNFc3OCGxJAr9dnOrFzsyrHf5AMcsC/view?usp=drive_link" target="_blank" onclick="saveToHistory('Fungsi, Persamaan dan Pertidaksamaan Linear', 'Fungsi, Persamaan dan Pertidaksamaan Linear.png', 'Kelas X')">
+            <div class="card" data-title="Fungsi, Persamaan dan Pertidaksamaan Linear">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Fungsi, Persamaan dan Pertidaksamaan Linear.png">
+                <div class="card-title">Fungsi, Persamaan dan Pertidaksamaan Linear</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1vlNYQfw_jR2feQS8hARrh2-kDlAMKQJw/view?usp=drive_link" target="_blank" onclick="saveToHistory('Statistika Deskriptif', 'Statistika.png', 'Kelas X')">
+            <div class="card" data-title="Statistika Deskriptif">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Statistika.png">
+                <div class="card-title">Statistika Deskriptif</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1wQC3Svqapk3Sq3oy1epl1OdjWTFpQ2RF/view?usp=drive_link" target="_blank" onclick="saveToHistory('Barisan Geometri', 'Barisan Geometri.png', 'Kelas X')">
+            <div class="card" data-title="Barisan Geometri">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Barisan Geometri.png">
+                <div class="card-title">Barisan Geometri</div>
+            </div>
+        </a>
+    </div>
+
+    <div id="kelas11" class="content">
+        <a href="https://drive.google.com/file/d/1VJfUBrTne_7MrFm_DpA5HWE13A3U5rK5/view?usp=drive_link" target="_blank" onclick="saveToHistory('Prasyarat : Fungsi', 'Relasi Dan Fungsi.png', 'Kelas XI')">
+            <div class="card" data-title="Prasyarat : Fungsi">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Relasi Dan Fungsi.png">
+                <div class="card-title">Prasyarat : Fungsi</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1gVgkFED7w3JrnZaryU-dFL6KOshpY2Ac/view?usp=drive_link" target="_blank" onclick="saveToHistory('Prasyarat : Lingkaran', 'Lingkaran.png', 'Kelas XI')">
+            <div class="card" data-title="Prasyarat : Lingkaran">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Lingkaran.png">
+                <div class="card-title">Prasyarat : Lingkaran</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/11XjPmMvfiTbEQt3rwH6MQ61tKNR9CQSW/view?usp=drive_link" target="_blank" onclick="saveToHistory('Fungsi Komposisi dan Invers', 'Fungsi Komposisi dan Invers Fungsi.png', 'Kelas XI')">
+            <div class="card" data-title="Fungsi Komposisi dan Invers">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Fungsi Komposisi dan Invers.png">
+                <div class="card-title">Fungsi Komposisi dan Invers</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1Ka_yW0nWe6jegm7yxmNB3LS86oOiETVR/view?usp=drive_link" target="_blank" onclick="saveToHistory('Prasyarat : Garis Singgung Lingkaran', 'Garis Singgung Lingkaran.png', 'Kelas XI')">
+            <div class="card" data-title="Prasyarat : Garis Singgung Lingkaran">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Garis Singgung Lingkaran.png">
+                <div class="card-title">Prasyarat : Garis Singgung Lingkaran</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1T5SIsXqLjb3pXt-LSBYzNJwCRWqZtmGm/view?usp=drive_link" target="_blank" onclick="saveToHistory('Statistika Terapan', 'Statistika.png', 'Kelas XI')">
+            <div class="card" data-title="Statistika Terapan">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Statistika.png">
+                <div class="card-title">Statistika Terapan</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1OGewBu0P_X0gT1Ucieo-rzPJUnmQxdlb/view?usp=drive_link" target="_blank" onclick="saveToHistory('Bilangan Kompleks', 'Bilangan Kompleks.png', 'Kelas XI')">
+            <div class="card" data-title="Bilangan Kompleks">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Bilangan Kompleks.png">
+                <div class="card-title">Bilangan Kompleks</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1_gPBmi_d4d0zio3UEfkfqox2MpBYMnda/view?usp=drive_link" target="_blank" onclick="saveToHistory('Matriks', 'Matriks.png', 'Kelas XI')">
+            <div class="card" data-title="Matriks">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Matriks.png">
+                <div class="card-title">Matriks</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1RSlnqEVed5UF7eK3r9HZp8_EIXZs29yX/view?usp=drive_link" target="_blank" onclick="saveToHistory('Transformasi Geometri', 'Transformasi Geometri.png', 'Kelas XI')">
+            <div class="card" data-title="Transformasi Geometri">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Transformasi Geometri.png">
+                <div class="card-title">Transformasi Geometri</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1SBuTa7HBmDf46WqOsQhiRiwyq4jrQLZ7/view?usp=drive_link" target="_blank" onclick="saveToHistory('Fungsi Persamaan dan Pertidaksamaan Rasional', 'Fungsi, Persamaan Dan Pertidaksamaan Rasional.png', 'Kelas XI')">
+            <div class="card" data-title="Fungsi Persamaan dan Pertidaksamaan Rasional">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Fungsi, Persamaan Dan Pertidaksamaan Rasional.png">
+                <div class="card-title">Fungsi Persamaan dan Pertidaksamaan Rasional</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1xfdgTwSunhCw1Y5JcA4YRUDJJ4oOZwaT/view?usp=drive_link" target="_blank" onclick="saveToHistory('Fungsi Persamaan dan Pertidaksamaan Irasional', 'https://imgur.com/SloXxIc.png', 'Kelas XI')">
+            <div class="card" data-title="Fungsi Persamaan dan Pertidaksamaan Irasional">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Fungsi, Persamaan Dan Pertidaksamaan Irasional.png">
+                <div class="card-title">Fungsi Persamaan dan Pertidaksamaan Irasional</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1b8BkZ0ytDIhk6EzRfUqTeTCt6_u2eiXZ/view?usp=drive_link" target="_blank" onclick="saveToHistory('Fungsi Persamaan dan Pertidaksamaan Logaritma', 'Fungsi, Persamaan Dan Pertidaksamaan Logaritma.png', 'Kelas XI')">
+            <div class="card" data-title="Fungsi Persamaan dan Pertidaksamaan Logaritma">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Fungsi, Persamaan Dan Pertidaksamaan Logaritma.png">
+                <div class="card-title">Fungsi Persamaan dan Pertidaksamaan Logaritma</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1iNgLDsRbZ7np7bximON0SMWsPO8h9k64/view?usp=drive_link" target="_blank" onclick="saveToHistory('Fungsi Persamaan dan Pertidaksamaan Eksponen', 'Fungsi, Persamaan, dan Pertidaksamaan Eksponen.png', 'Kelas XI')">
+            <div class="card" data-title="Fungsi Persamaan dan Pertidaksamaan Eksponen">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Fungsi, Persamaan, dan Pertidaksamaan Eksponen.png">
+                <div class="card-title">Fungsi Persamaan dan Pertidaksamaan Eksponen</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1NGLBTG6W8w6oXya8pJCaIaXDmz9ZfA6D/view?usp=drive_link" target="_blank" onclick="saveToHistory('Fungsi Persamaan dan Pertidaksamaan Nilai Mutlak', 'Fungsi Persamaan dan pertidaksamaan nilai mutlak.png', 'Kelas XI')">
+            <div class="card" data-title="Fungsi Persamaan dan Pertidaksamaan Nilai Mutlak">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Fungsi Persamaan dan pertidaksamaan nilai mutlak.png">
+                <div class="card-title">Fungsi Persamaan dan Pertidaksamaan Nilai Mutlak</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1Gh4znoZ5P0fK2PIUJGeZS94mP8ccFmLO/view?usp=drive_link" target="_blank" onclick="saveToHistory('Fungsi Trigonometri', 'Fungsi Trigonometri.png', 'Kelas XI')">
+            <div class="card" data-title="Fungsi Trigonometri">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Fungsi Trigonometri.png">
+                <div class="card-title">Fungsi Trigonometri</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1dya8zlcQp_BcacgL7FKGTkwN9V-pD3D_/view?usp=drive_link" target="_blank" onclick="saveToHistory('Persamaan Trigonometri', 'Persamaan Trigonometri.png', 'Kelas XI')">
+            <div class="card" data-title="Persamaan Trigonometri">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Persamaan Trigonometri.png">
+                <div class="card-title">Persamaan Trigonometri</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/16OxGv_DV3r1-YBZml8dTi08ZxaIOXSjb/view?usp=drive_link" target="_blank" onclick="saveToHistory('Suku Banyak (Polinomial)', 'Polinomial.png', 'Kelas XI')">
+            <div class="card" data-title="Suku Banyak (Polinomial)">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Polinomial.png">
+                <div class="card-title">Suku Banyak (Polinomial)</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1YBaIadS-NhgTVW0Ny2_yLICtbuZTXPk7/view?usp=drive_link" target="_blank" onclick="saveToHistory('Trigonometri Analitika', 'trigonometri analitika.png', 'Kelas XI')">
+            <div class="card" data-title="Trigonometri Analitika">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="trigonometri analitika.png">
+                <div class="card-title">Trigonometri Analitika</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1dsPOv4VMvx0_R0MGy_SMgfaLAJmix_LF/view?usp=drive_link" target="_blank" onclick="saveToHistory('Logika Matematika', 'logika matematika.png', 'Kelas XI')">
+            <div class="card" data-title="Logika Matematika">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="logika matematika.png">
+                <div class="card-title">Logika Matematika</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/16PXMcJg7KQEm9zxJ8EvR_wfrzW-HykVX/view?usp=drive_link" target="_blank" onclick="saveToHistory('Induksi Matematika', 'Induksi Matematika.png', 'Kelas XI')">
+            <div class="card" data-title="Induksi Matematika">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Induksi Matematika.png">
+                <div class="card-title">Induksi Matematika</div>
+            </div>
+        </a>
+    </div>
+
+    <div id="kelas12" class="content">
+        <a href="https://drive.google.com/file/d/1O3X3-VJo5RVoMl18I7ujIt2Qo58M11Fy/view?usp=drive_link" target="_blank" onclick="saveToHistory('Distribusi Binomial dan Distribusi Bernoulli', 'distribusi binomial dan bernoulli.png', 'Kelas XII')">
+            <div class="card" data-title="Distribusi Binomial dan Distribusi Bernoulli">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="distribusi binomial dan bernoulli.png">
+                <div class="card-title">Distribusi Binomial dan Distribusi Bernoulli</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1oClisEpBYAbEF5BAYdTyij_l1Wu2u6cf/view?usp=drive_link" target="_blank" onclick="saveToHistory('Lingkaran Analitika', 'Lingkaran Analitika.png', 'Kelas XII')">
+            <div class="card" data-title="Lingkaran Analitika">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Lingkaran Analitika.png">
+                <div class="card-title">Lingkaran Analitika</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/164utZlxVBrW24cRz0dtugeZH0UmE9OAB/view?usp=drive_link" target="_blank" onclick="saveToHistory('Irisan Dua Lingkaran', 'irisan dua lingkaran.png', 'Kelas XII')">
+            <div class="card" data-title="Irisan Dua Lingkaran">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="irisan dua lingkaran.png">
+                <div class="card-title">Irisan Dua Lingkaran</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1N6W2lrgfIgrMsKe4VQI4EnoE3tdQ4e7S/view?usp=drive_link" target="_blank" onclick="saveToHistory('Irisan Kerucut', 'irisan kerucut.png', 'Kelas XII')">
+            <div class="card" data-title="Irisan Kerucut">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="irisan kerucut.png">
+                <div class="card-title">Irisan Kerucut</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1KzV_O6b9FiWTIE6hSyNshraiTz1UInDO/view?usp=drive_link" target="_blank" onclick="saveToHistory('Bidang Ruang (Dimensi Tiga) 1', 'bidang ruang dimensi tiga.png', 'Kelas XII')">
+            <div class="card" data-title="Bidang Ruang (Dimensi Tiga) 1">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="bidang ruang dimensi tiga.png">
+                <div class="card-title">Bidang Ruang (Dimensi Tiga) 1</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/14a22ZgX-1vG9jN3Kr59mrczpFZw6CyPV/view?usp=drive_link" target="_blank" onclick="saveToHistory('Limit Fungsi Aljabar', 'Limit.png', 'Kelas XII')">
+            <div class="card" data-title="Limit Fungsi Aljabar">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Limit.png">
+                <div class="card-title">Limit Fungsi Aljabar</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1weh21ut66EUUMGfQQ824QbGX2h9oVlOI/view?usp=drive_link" target="_blank" onclick="saveToHistory('Teori Peluang (Revisi)', 'Peluang.png', 'Kelas XII')">
+            <div class="card" data-title="Teori Peluang (Revisi)">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Peluang.png">
+                <div class="card-title">Teori Peluang (Revisi 1)</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/10W1kqiduNRskvz4yD0riSnQDdKqY4RPb/view?usp=drive_link" target="_blank" onclick="saveToHistory('Turunan Fungsi Aljabar', 'Turunan.png', 'Kelas XII')">
+            <div class="card" data-title="Turunan Fungsi Aljabar">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Turunan.png">
+                <div class="card-title">Turunan Fungsi Aljabar</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1t9DHzEFYFKAHMovtEOsTG1C9lhD11zmW/view?usp=drive_link" target="_blank" onclick="saveToHistory('Integral Fungsi Aljabar', 'integral.png', 'Kelas XII')">
+            <div class="card" data-title="Integral Fungsi Aljabar">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="integral.png">
+                <div class="card-title">Integral Fungsi Aljabar</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1lAvwPvQ4nTJd_z5Tu8vbph3TuCFMMdX7/view?usp=drive_link" target="_blank" onclick="saveToHistory('Teori Peluang (Lanjutan)', 'Peluang.png', 'Kelas XII')">
+            <div class="card" data-title="Teori Peluang (Lanjutan)">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Peluang.png">
+                <div class="card-title">Teori Peluang (Lanjutan)</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1O3kSasVcbQDoz3v_QUJ2AsVP6Dkk3Z6w/view?usp=drive_link" target="_blank" onclick="saveToHistory('Distribusi Normal dan Uji Hipotesis', 'Distribusi Normal dan Uji Hipotesis.png', 'Kelas XII')">
+            <div class="card" data-title="Distribusi Normal dan Uji Hipotesis">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="Distribusi Normal dan Uji Hipotesis.png">
+                <div class="card-title">Distribusi Normal dan Uji Hipotesis</div>
+            </div>
+        </a>
+
+        <a href="https://drive.google.com/file/d/1h8K3O_5foDjoiihudEZZRioNLCC4wb49/view?usp=drive_link" target="_blank" onclick="saveToHistory('Bidang Ruang (Dimensi Tiga) 2', 'bidang ruang dimensi tiga.png', 'Kelas XII')">
+            <div class="card" data-title="Bidang Ruang (Dimensi Tiga) 2">
+                <div class="card-badge badge-gratis">GRATIS</div>
+                <img src="bidang ruang dimensi tiga.png">
+                <div class="card-title">Bidang Ruang (Dimensi Tiga) 2</div>
+            </div>
+        </a>
+    </div>
+
+    <footer>
+            <div class="footer-container">
+                <div class="footer-section">
+                    <h3>Tentang Kami</h3>
+                    <ul>
+                        <li><a href="https://www.umt6174.site/tentang-umt" target="_blank">Tentang UMT</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Produk UMT</h3>
+                    <ul>
+                        <li><a href="../UMT-Lab/" >UMT Lab</a></li>
+                        <li><a href="../Materi-Belajar/" >Materi Pembelajaran</a></li>
+                        <li><a href="../Video-Pembelajaran/" >Video Pembelajaran</a></li>
+                        <li><a href="../tryout/" >Tryout</a></li>
+                        <li><a href="../Tanya-UMT/" >TanyaUMT</a></li>
+                        <li><a href="#" >Bank Soal</a>
+                    </li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Punya Pertanyaan?</h3>
+                    <ul class="contact-list">
+                        <li><a href="https://ig.me/m/umt.6174"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" target="_blank">@umt.6174</a></li>
+                        <li><a href="mailto:business@gradient.academy"><img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Email" target="_blank"> umt.math.6174@gmail.com</a></li>
+                        <li><a href="https://wa.me/6282189524610"><img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="WhatsApp" target="_blank"> +6282189524610</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 UMT Academy. All rights reserved.</p>
+                <div class="social-icons">
+                    <a href="https://youtube.com/@umt6174?si=Cdivet0_By8EWJ8v"><img src="https://cdn-icons-png.flaticon.com/512/1384/1384060.png" alt="YouTube" target="_blank"></a>
+                    <a href="https://www.instagram.com/umt.6174/"><img src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png" alt="Instagram" target="_blank"></a>
+                    <a href="https://www.tiktok.com/@umt6174?is_from_webapp=1&sender_device=pc"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046126.png" alt="TikTok" target="_blank"></a>
+                </div>
+            </div>
+    </footer>
+    <script>
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+        const sidebarNav = document.querySelector('.sidebar-nav');
+        const sidebarOverlay = document.querySelector('.sidebar-overlay');
+        const sidebarCloseBtn = document.querySelector('.sidebar-close-btn');
+        const body = document.body;
+
+        function toggleSidebar() {
+            sidebarNav.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+            body.classList.toggle('sidebar-open');
+        }
+
+        // Pastikan semua elemen ada sebelum menambahkan listener
+        if (hamburgerMenu && sidebarNav && sidebarOverlay && sidebarCloseBtn) {
+            hamburgerMenu.addEventListener('click', toggleSidebar);
+            sidebarOverlay.addEventListener('click', toggleSidebar);
+            sidebarCloseBtn.addEventListener('click', toggleSidebar);
+        }
+// Fungsi untuk mengecek apakah localStorage tersedia
+function isLocalStorageAvailable() {
+    try {
+        const testKey = '__test__';
+        localStorage.setItem(testKey, testKey);
+        localStorage.removeItem(testKey);
+        return true;
+    } catch (e) {
+        console.warn("localStorage tidak tersedia.");
+        return false;
+    }
+}
+
+// Fungsi untuk menampilkan konten berdasarkan tab
+function showContent(e, id) {
+    document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    e.currentTarget.classList.add('active');
+}
+
+// FUNGSI DROPDOWN MOBILE YANG DIPERBAIKI
+function toggleDropdown() {
+    const dropdown = document.querySelector('.mobile-dropdown');
+    dropdown.classList.toggle('active');
+}
+
+function selectClass(element, classId, className) {
+    // Update tampilan dropdown
+    document.getElementById('selected-class').textContent = className;
+    
+    // Update active state di dropdown items
+    document.querySelectorAll('.mobile-dropdown .dropdown-item').forEach(item => {
+        item.classList.remove('active');
+    });
+    element.classList.add('active');
+    
+    // Tutup dropdown
+    document.querySelector('.mobile-dropdown').classList.remove('active');
+    
+    // Mapping nama class ke ID yang benar
+    const classMapping = {
+        'kelas-x': 'kelas10',
+        'kelas-xi': 'kelas11',
+        'kelas-xii': 'kelas12',
+        'kelas-ix': 'kelas9',
+        'kelas-viii': 'kelas8',
+        'kelas-vii': 'kelas7'
+    };
+    
+    // Tampilkan konten yang sesuai
+    const actualClassId = classMapping[classId] || classId;
+    document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
+    document.getElementById(actualClassId).classList.add('active');
+}
+
+// Tutup dropdown ketika klik di luar
+document.addEventListener('click', function(e) {
+    const dropdown = document.querySelector('.mobile-dropdown');
+    if (dropdown && !dropdown.contains(e.target)) {
+        dropdown.classList.remove('active');
+    }
+});
+
+function saveToHistory(title, image, grade) {
+    if (!isLocalStorageAvailable()) {
+        console.warn("Tidak dapat menyimpan riwayat: localStorage tidak tersedia.");
+        return;
+    }
+
+    const now = new Date();
+    const historyItem = {
+        title: title,
+        image: image,
+        grade: grade,
+        timestamp: now.getTime(),
+        timeString: formatTime(now)
+    };
+
+    let history = JSON.parse(localStorage.getItem('mathHistory') || '[]');
+    history = history.filter(item => item.title !== title);
+    history.unshift(historyItem);
+    history = history.slice(0, 10);
+    localStorage.setItem('mathHistory', JSON.stringify(history));
+    displayHistory();
+}
+
+// Fungsi untuk menampilkan riwayat
+function displayHistory() {
+    const history = JSON.parse(localStorage.getItem('mathHistory') || '[]');
+    const recentMaterials = document.getElementById('recentMaterials');
+    const recentList = document.getElementById('recentList');
+
+    if (history.length === 0) {
+        recentMaterials.style.display = 'none';
+        return;
+    }
+
+    recentMaterials.style.display = 'block';
+    recentList.innerHTML = '';
+
+    history.forEach((item, index) => {
+        const recentItem = document.createElement('div');
+        recentItem.className = 'recent-item';
+        recentItem.innerHTML = `
+            <img src="${item.image}" alt="${item.title}">
+            <div class="recent-info">
+                <div class="recent-title">${item.title}</div>
+                <div class="recent-time">${item.grade} • ${item.timeString}</div>
+            </div>
+        `;
+
+        // Ganti addEventListener dengan onclick karena mungkin tidak didukung penuh
+        recentItem.style.cursor = "pointer";
+        recentItem.onclick = function () {
+            const allLinks = document.querySelectorAll('a[target="_blank"]');
+            for (const link of allLinks) {
+                const cardTitle = link.querySelector('.card-title');
+                if (cardTitle && cardTitle.textContent.trim() === item.title) {
+                    window.open(link.href, '_blank');
+                    break;
+                }
+            }
+        };
+
+        recentList.appendChild(recentItem);
+    });
+
+    highlightRecentlyOpened(history);
+}
+
+// Fungsi untuk menandai materi yang baru dibuka
+function highlightRecentlyOpened(history) {
+    document.querySelectorAll('.card').forEach(card => {
+        card.classList.remove('recently-opened');
+        const badge = card.querySelector('.recent-badge');
+        if (badge) badge.remove();
+    });
+
+    const recentTitles = history.slice(0, 3).map(item => item.title);
+
+    document.querySelectorAll('.card').forEach(card => {
+        const title = card.getAttribute && card.getAttribute('data-title');
+        if (title && recentTitles.includes(title)) {
+            card.classList.add('recently-opened');
+            const badge = document.createElement('div');
+            badge.className = 'recent-badge';
+            badge.textContent = 'Baru';
+            card.appendChild(badge);
+        }
+    });
+}
+
+// Fungsi untuk memformat waktu
+function formatTime(date) {
+    const now = new Date();
+    const diffMs = now - date;
+    const diffMins = Math.floor(diffMs / 60000);
+    const diffHours = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+
+    if (diffMins < 1) return 'Baru saja';
+    if (diffMins < 60) return `${diffMins} menit lalu`;
+    if (diffHours < 24) return `${diffHours} jam lalu`;
+    if (diffDays < 7) return `${diffDays} hari lalu`;
+
+    return date.toLocaleDateString('id-ID', { 
+        day: 'numeric', 
+        month: 'short', 
+        year: 'numeric' 
+    });
+}
+
+// Fungsi untuk menghapus riwayat
+function clearHistory() {
+    // Langsung hapus riwayat tanpa konfirmasi
+    localStorage.removeItem('mathHistory');
+    displayHistory();
+}
+
+// Debugging error JS
+window.onerror = function(message, source, lineno, colno, error) {
+    console.error("Error JS:", message, "di", source, "baris", lineno);
+    return true;
+};
+
+// Jalankan setelah DOM siap
+document.addEventListener('DOMContentLoaded', function() {
+    setTimeout(displayHistory, 500); // Delay kecil jika konten belum siap
+});
+
+// Dropdown breadcrumb
+const dropdown = document.getElementById('umtDropdown');
+const dropdownToggle = dropdown.querySelector('.dropdown-toggle');
+
+dropdownToggle.addEventListener('click', (e) => {
+    e.preventDefault();
+    dropdown.classList.toggle('active');
+});
+
+// Close dropdown when clicking outside
+document.addEventListener('click', (e) => {
+    if (!dropdown.contains(e.target)) {
+        dropdown.classList.remove('active');
+    }
+});
+
+// Prevent dropdown from closing when clicking inside the menu
+dropdown.querySelector('.dropdown-menu').addEventListener('click', (e) => {
+    e.stopPropagation();
+});
+
+
+    </script>
+</body>
+</html>
