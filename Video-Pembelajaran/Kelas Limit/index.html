@@ -679,7 +679,7 @@ body.modal-open {
                     <div class="action-buttons">
                         <button class="btn btn-complete" id="completeBtn" onclick="markAsComplete()" disabled><span>✓</span> Tandai Selesai</button>
                         <a href="#" class="btn btn-download" id="downloadBtn" target="_blank" download><span>📝</span> Unduh Catatan</a>
-                        <a href="#" class="btn btn-quiz" id="quizBtn" target="_blank"><span>🎯</span> Uji Kemampuan</a>
+                        <a href="#" class="btn btn-quiz" id="quizBtn"><span>🎯</span> Uji Kemampuan</a>
                     </div>
                 </div>
             </section>
@@ -754,24 +754,168 @@ body.modal-open {
 const videoData = {
     'matematika-10': [
         { 
-        id: 'pengertian', 
-        title: '1. Esensi Limit', 
-        youtubeId: 'mcY7-GYIpHA', 
-        duration: '08:00', 
-        description: 'Video ini membahas pemahaman dasar tentang Limit.', 
-        pdfUrl: 'link_drive_pdf_1.pdf', 
-        quizUrl: 'link_quiz_1' 
-    },
+            id: 'pengertian', 
+            title: '1. Esensi Limit (Pendekatan Intuitif)', 
+            youtubeId: 'mcY7-GYIpHA', 
+            duration: '09:15', 
+            description: 'Video ini membahas pemahaman dasar tentang Limit menggunakan pendekatan intuitif dan ilustrasi.', 
+            pdfUrl: 'catatan-limit-01.pdf', 
+            quizUrl: 'kuis.html?id=limit-01' 
+        },
         // Video premium ditandai dengan youtubeId: null
         { 
-        id: 'penyederhanaan', 
-        title: '2. Definisi Limit', 
-        youtubeId: null, 
-        duration: '12:30', 
-        description: 'Video premium membahas Definisi Limit Limit. Beli akses untuk menonton.', 
-        pdfUrl: null, 
-        quizUrl: null 
-    },
+            id: 'notasi', 
+            title: '2. Notasi dan Cara Membaca Limit', 
+            youtubeId: null, 
+            duration: '05:30', 
+            description: 'Video premium ini menjelaskan cara menulis dan membaca notasi limit dengan benar. Beli akses untuk menonton.', 
+            pdfUrl: null, 
+            quizUrl: null 
+        },
+        { 
+            id: 'nilai-fungsi-vs-limit', 
+            title: '3. Perbedaan Nilai Fungsi dan Nilai Limit', 
+            youtubeId: null, 
+            duration: '07:45', 
+            description: 'Video premium ini membahas perbedaan krusial antara f(c) dan lim f(x) x→c. Beli akses untuk menonton.', 
+            pdfUrl: null, 
+            quizUrl: null 
+        },
+        { 
+            id: 'limit-kiri-kanan', 
+            title: '4. Limit Kiri dan Limit Kanan', 
+            youtubeId: null, 
+            duration: '10:05', 
+            description: 'Video premium ini menjelaskan syarat utama keberadaan sebuah limit. Beli akses untuk menonton.', 
+            pdfUrl: null, 
+            quizUrl: null 
+        },
+        { 
+            id: 'substitusi', 
+            title: '5. Metode Substitusi Langsung', 
+            youtubeId: null, 
+            duration: '06:20', 
+            description: 'Video premium ini membahas metode paling dasar dalam menyelesaikan limit. Beli akses untuk menonton.', 
+            pdfUrl: null, 
+            quizUrl: null 
+        },
+        { 
+            id: 'bentuk-tak-tentu', 
+            title: '6. Bentuk Tak Tentu (0/0)', 
+            youtubeId: null, 
+            duration: '04:50', 
+            description: 'Video premium ini menjelaskan konsep bentuk tak tentu dan kenapa perlu metode lain. Beli akses untuk menonton.', 
+            pdfUrl: null, 
+            quizUrl: null 
+        },
+        { 
+            id: 'faktorisasi', 
+            title: '7. Metode Faktorisasi', 
+            youtubeId: null, 
+            duration: '12:10', 
+            description: 'Video premium ini membahas solusi utama untuk mengatasi bentuk 0/0 pada fungsi polinomial. Beli akses untuk menonton.', 
+            pdfUrl: null, 
+            quizUrl: null 
+        },
+        { 
+            id: 'akar-sekawan', 
+            title: '8. Metode Mengalikan Akar Sekawan', 
+            youtubeId: null, 
+            duration: '14:00', 
+            description: 'Video premium ini membahas solusi untuk bentuk 0/0 yang melibatkan bentuk akar. Beli akses untuk menonton.', 
+            pdfUrl: null, 
+            quizUrl: null 
+        },
+        { 
+            id: 'sifat-sifat', 
+            title: '9. Sifat-sifat Limit', 
+            youtubeId: null, 
+            duration: '11:25', 
+            description: 'Video premium ini menjelaskan aturan aljabar pada limit (penjumlahan, perkalian, dll). Beli akses untuk menonton.', 
+            pdfUrl: null, 
+            quizUrl: null 
+        },
+        { 
+            id: 'limit-tak-hingga', 
+            title: '10. Limit di Tak Hingga (x → ∞)', 
+            youtubeId: null, 
+            duration: '13:40', 
+            description: 'Video premium ini membahas metode membagi dengan pangkat tertinggi untuk limit di tak hingga. Beli akses untuk menonton.', 
+            pdfUrl: null, 
+            quizUrl: null 
+        },
+        { 
+            id: 'asimtot-datar', 
+            title: '11. Aplikasi: Asimtot Datar', 
+            youtubeId: null, 
+            duration: '09:55', 
+            description: 'Video premium ini menghubungkan konsep limit di tak hingga dengan grafik fungsi. Beli akses untuk menonton.', 
+            pdfUrl: null, 
+            quizUrl: null 
+        },
+        { 
+            id: 'trigo-dasar', 
+            title: '12. Limit Fungsi Trigonometri (Dasar)', 
+            youtubeId: null, 
+            duration: '15:10', 
+            description: 'Video premium ini membahas pembuktian dan penggunaan rumus dasar limit trigonometri. Beli akses untuk menonton.', 
+            pdfUrl: null, 
+            quizUrl: null 
+        },
+        { 
+            id: 'trigo-cepat', 
+            title: '13. Trik Cepat Limit Trigonometri', 
+            youtubeId: null, 
+            duration: '10:30', 
+            description: 'Video premium ini membahas pola cepat untuk menyelesaikan variasi soal limit trigonometri. Beli akses untuk menonton.', 
+            pdfUrl: null, 
+            quizUrl: null 
+        },
+        { 
+            id: 'trigo-lanjutan', 
+            title: '14. Soal Lanjutan Limit Trigonometri', 
+            youtubeId: null, 
+            duration: '12:45', 
+            description: 'Video premium ini membahas soal yang memerlukan penggunaan identitas trigonometri. Beli akses untuk menonton.', 
+            pdfUrl: null, 
+            quizUrl: null 
+        },
+        { 
+            id: 'kontinuitas', 
+            title: '15. Kontinuitas Fungsi', 
+            youtubeId: null, 
+            duration: '11:50', 
+            description: 'Video premium ini menjelaskan syarat sebuah fungsi kontinu di suatu titik. Beli akses untuk menonton.', 
+            pdfUrl: null, 
+            quizUrl: null 
+        },
+        { 
+            id: 'hubungan-turunan', 
+            title: '16. Hubungan Limit dan Turunan', 
+            youtubeId: null, 
+            duration: '16:00', 
+            description: 'Video premium ini menunjukkan bagaimana turunan adalah aplikasi langsung dari limit. Beli akses untuk menonton.', 
+            pdfUrl: null, 
+            quizUrl: null 
+        },
+        { 
+            id: 'teorema-apit', 
+            title: '17. Teorema Apit (Squeeze Theorem)', 
+            youtubeId: null, 
+            duration: '09:20', 
+            description: 'Video premium ini membahas penggunaan Teorema Apit untuk soal-soal yang sulit. Beli akses untuk menonton.', 
+            pdfUrl: null, 
+            quizUrl: null 
+        },
+        { 
+            id: 'studi-kasus', 
+            title: '18. Studi Kasus & Soal HOTS', 
+            youtubeId: null, 
+            duration: '18:30', 
+            description: 'Video premium ini membahas soal-soal kompleks yang menggabungkan beberapa metode. Beli akses untuk menonton.', 
+            pdfUrl: null, 
+            quizUrl: null 
+        }
         ]
 };
 
