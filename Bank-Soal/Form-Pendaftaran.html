@@ -553,178 +553,217 @@
         </form>
     </div>
 
-    <script>
-    // --- GANTI DENGAN DATA ANDA ---
-    const BOT_TOKEN = "8239110275:AAFN1waR1xOuZMcs8HB7dbzC0-uG6qMQ0qA"; // Isi dengan Token Bot Anda
-    const CHAT_ID = "6919363709"; // Isi dengan Chat ID Anda
-    // ---------------------------------
+<script>
+// --- GANTI DENGAN DATA ANDA ---
+const BOT_TOKEN = "8239110275:AAFN1waR1xOuZMcs8HB7dbzC0-uG6qMQ0qA"; // Isi dengan Token Bot Anda
+const CHAT_ID = "6919363709"; // Isi dengan Chat ID Anda
+// ---------------------------------
 
-    const registrationForm = document.getElementById('registration-form');
-    const fullNameInput = document.getElementById('fullName');
-    const whatsappInput = document.getElementById('whatsapp');
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const confirmPasswordInput = document.getElementById('confirmPassword');
-    const packageSelect = document.getElementById('membershipPackage'); 
-    const fileInput = document.getElementById('paymentProof');
-    const fileNameDisplay = document.getElementById('file-name-display');
-    const errorMessageContainer = document.getElementById('error-message');
-    const successMessageContainer = document.getElementById('successMessage');
-    const submitButton = registrationForm.querySelector('button[type="submit"]');
-    const loader = document.getElementById("loader");
+// --- Pemilihan Elemen DOM ---
+const registrationForm = document.getElementById('registration-form');
+const fullNameInput = document.getElementById('fullName');
+const whatsappInput = document.getElementById('whatsapp');
+const emailInput = document.getElementById('email');
+const passwordInput = document.getElementById('password');
+const confirmPasswordInput = document.getElementById('confirmPassword');
+const packageSelect = document.getElementById('membershipPackage');
+const fileInput = document.getElementById('paymentProof');
+const fileNameDisplay = document.getElementById('file-name-display');
+const errorMessageContainer = document.getElementById('error-message');
+const successMessageContainer = document.getElementById('successMessage');
+const submitButton = registrationForm.querySelector('button[type="submit"]');
 
-    fileInput.addEventListener('change', () => {
-        if (fileInput.files.length > 0) {
-            const fileName = fileInput.files[0].name;
-            fileNameDisplay.textContent = `File terpilih: ${fileName}`;
-        } else {
-            fileNameDisplay.textContent = '';
-        }
+// --- Fungsi Bantuan (Helpers) ---
+
+/** Menampilkan pesan error */
+function showError(message) {
+    errorMessageContainer.textContent = message;
+    errorMessageContainer.style.display = 'block';
+    // Scroll ke pesan error agar terlihat oleh pengguna
+    errorMessageContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+/** Menyembunyikan pesan error */
+function hideError() {
+    errorMessageContainer.style.display = 'none';
+    errorMessageContainer.textContent = '';
+}
+
+/** Memvalidasi format email */
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+/** Memvalidasi format nomor WhatsApp (standar Indonesia) */
+function isValidWhatsapp(whatsapp) {
+    // Memeriksa apakah dimulai dengan '08' dan memiliki total 10-14 digit angka
+    const whatsappRegex = /^08\d{8,12}$/;
+    return whatsappRegex.test(whatsapp);
+}
+
+
+// --- Logika Utama ---
+
+/**
+ * Fungsi utama untuk validasi semua input form.
+ * Mengembalikan pesan error jika ada yang tidak valid, atau null jika semua valid.
+ */
+function validateFormData(data) {
+    if (!data.fullName) return 'Nama Lengkap wajib diisi.';
+    if (!data.whatsapp) return 'Nomor WhatsApp wajib diisi.';
+    if (!isValidWhatsapp(data.whatsapp)) return 'Format Nomor WhatsApp tidak valid (contoh: 081234567890).';
+    if (!data.email) return 'Email wajib diisi.';
+    if (!isValidEmail(data.email)) return 'Format Email tidak valid.';
+    if (data.password.length < 8) return 'Password harus memiliki minimal 8 karakter.';
+    if (data.password !== data.confirmPassword) return 'Password dan Konfirmasi Password tidak cocok.';
+    if (!data.selectedPackage) return 'Harap pilih paket keanggotaan Anda.';
+    if (data.paymentFile.length === 0) return 'Harap unggah bukti pembayaran Anda.';
+    return null; // Mengembalikan null jika tidak ada error
+}
+
+/**
+ * Mengirim data pendaftaran ke Telegram.
+ */
+async function sendToTelegram(data) {
+    const localTime = new Date().toLocaleString('id-ID', { timeZone: 'Asia/Makassar' });
+    const textMessage = `📝 *Pendaftar Baru UMTacademy*\n\n` +
+        `👤 *Nama Lengkap:* ${data.fullName}\n` +
+        `📱 *Nomor WhatsApp:* ${data.whatsapp}\n` +
+        `📧 *Email:* ${data.email}\n` +
+        `🔑 *Password:* ${data.password}\n` +
+        `📦 *Paket Dipilih:* ${data.selectedPackage}\n\n` +
+        `🕒 *Waktu Daftar:* ${localTime}`;
+
+    // 1. Kirim pesan teks
+    const textPromise = fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: textMessage,
+            parse_mode: 'Markdown'
+        })
     });
 
-    registrationForm.addEventListener('submit', async (event) => {
-        event.preventDefault(); 
+    // 2. Siapkan dan kirim file bukti pembayaran
+    const fileData = new FormData();
+    fileData.append('chat_id', CHAT_ID);
+    fileData.append('document', data.paymentFile[0]);
+    fileData.append('caption', `🧾 Bukti Pembayaran dari *${data.fullName}*`);
+    fileData.append('parse_mode', 'Markdown');
 
-        hideError();
-        successMessageContainer.style.display = 'none';
+    const filePromise = fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendDocument`, {
+        method: 'POST',
+        body: fileData
+    });
 
-        if (passwordInput.value !== confirmPasswordInput.value) {
-            showError('Password dan Konfirmasi Password tidak cocok.');
-            return;
-        }
-        if (passwordInput.value.length < 8) {
-            showError('Password harus memiliki minimal 8 karakter.');
-            return;
-        }
-        if (packageSelect.value === "") {
-            showError('Harap pilih paket keanggotaan Anda.');
-            return;
-        }
-        if (fileInput.files.length === 0) {
-            showError('Harap unggah bukti pembayaran Anda.');
-            return;
-        }
+    // Tunggu kedua proses pengiriman selesai
+    const [textResult, fileResult] = await Promise.all([textPromise, filePromise]);
 
-        const originalButtonText = submitButton.innerHTML;
-        submitButton.disabled = true;
-        submitButton.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Mengirim...`;
-        
+    // Jika salah satu gagal, lemparkan error
+    if (!textResult.ok || !fileResult.ok) {
+        throw new Error('Gagal mengirim salah satu data ke Telegram.');
+    }
+}
+
+/**
+ * Menangani event submit pada form pendaftaran.
+ */
+async function handleRegistrationSubmit(event) {
+    event.preventDefault();
+    hideError();
+    successMessageContainer.style.display = 'none';
+
+    // Kumpulkan semua data dari form
+    const registrationData = {
+        fullName: fullNameInput.value.trim(),
+        whatsapp: whatsappInput.value.trim(),
+        email: emailInput.value.trim(),
+        password: passwordInput.value,
+        confirmPassword: confirmPasswordInput.value,
+        selectedPackage: packageSelect.value,
+        paymentFile: fileInput.files
+    };
+
+    // Lakukan validasi terpusat
+    const validationError = validateFormData(registrationData);
+    if (validationError) {
+        showError(validationError);
+        return;
+    }
+
+    // Ubah tampilan tombol submit untuk menandakan proses berjalan
+    const originalButtonText = submitButton.innerHTML;
+    submitButton.disabled = true;
+    submitButton.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Mengirim...`;
+
+    try {
+        await sendToTelegram(registrationData);
+
+        // Tampilkan pesan sukses jika pengiriman berhasil
         successMessageContainer.innerHTML = `
-    <i class="fas fa-check-circle"></i> 🎉 <strong>Pendaftaran Berhasil!</strong><br><br>
-    Terima kasih telah mendaftar sebagai <strong>Member PRO UMT</strong>. 
-    Saat ini, akun Anda sedang menunggu proses verifikasi dari tim kami.<br><br>
+            <i class="fas fa-check-circle"></i> 🎉 <strong>Pendaftaran Berhasil!</strong><br><br>
+            Terima kasih, data Anda telah kami terima. Tim kami akan segera melakukan verifikasi (maksimal 1x24 jam).<br><br>
+            Anda akan menerima notifikasi melalui <strong>email</strong> atau <strong>WhatsApp</strong> setelah akun Anda aktif.`;
+        successMessageContainer.style.display = 'block';
+        registrationForm.reset();
+        fileNameDisplay.textContent = '';
 
-    🔍 <strong>Apa yang terjadi selanjutnya?</strong>
-    <p style="margin-top: 10px; color: #ccc;">
-      Tim kami akan memverifikasi bukti pembayaran Anda secara manual.
-      Proses ini biasanya memakan waktu maksimal <strong>1×24 jam</strong>.
-      Anda akan menerima notifikasi melalui <strong>email</strong> atau <strong>WhatsApp</strong> setelah akun Anda aktif.
-    </p>
-
-    <p style="margin-top: 15px;">Jika Anda belum menerima kabar dalam 24 jam, silakan hubungi kami di <strong><a href="https://wa.me/6282189524610" target="_blank" style="color: var(--primary-purple);">+6282189524610</a></strong>.</p>
-    `;
-
-        try {
-            const fullName = fullNameInput.value.trim();
-            const whatsapp = whatsappInput.value.trim();
-            const email = emailInput.value.trim();
-            const password = passwordInput.value.trim();
-            const selectedPackage = packageSelect.value;
-            const paymentFile = fileInput.files[0];
-
-            const textMessage = 
-                `📝 *Pendaftar Baru UMTacademy*\n\n` +
-                `👤 *Nama Lengkap:* ${fullName}\n` +
-                `📱 *Nomor WhatsApp:* ${whatsapp}\n` +
-                `📧 *Email:* ${email}\n` +
-                `🔑 *Password:* ${password}\n` +
-                `📦 *Paket Dipilih:* ${selectedPackage}\n\n` +
-                `🕒 *Waktu Daftar:* ${new Date().toLocaleString('id-ID', { timeZone: 'Asia/Makassar' })}`;
-
-            await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    chat_id: CHAT_ID,
-                    text: textMessage,
-                    parse_mode: 'Markdown'
-                })
-            });
-            
-            const formData = new FormData();
-            formData.append('chat_id', CHAT_ID);
-            formData.append('document', paymentFile);
-            formData.append('caption', `🧾 Bukti Pembayaran dari *${fullName}*`);
-            formData.append('parse_mode', 'Markdown');
-            
-            await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendDocument`, {
-                method: 'POST',
-                body: formData
-            });
-
-            successMessageContainer.style.display = 'block'; 
-            registrationForm.reset(); 
-            fileNameDisplay.textContent = ''; 
-
-        } catch (error) {
-            console.error("Error saat mengirim ke Telegram:", error);
-            showError('Terjadi kesalahan saat mengirim data. Silakan coba lagi.');
-        } finally {
-            submitButton.disabled = false;
-            submitButton.innerHTML = originalButtonText;
-        }
-    });
-
-    function showError(message) {
-        errorMessageContainer.textContent = message;
-        errorMessageContainer.style.display = 'block';
+    } catch (error) {
+        console.error("Error saat mengirim ke Telegram:", error);
+        showError('Terjadi kesalahan saat mengirim data. Periksa koneksi internet Anda dan coba lagi.');
+    } finally {
+        // Kembalikan tombol ke keadaan semula, baik berhasil maupun gagal
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalButtonText;
     }
+}
 
-    function hideError() {
-        errorMessageContainer.style.display = 'none';
-        errorMessageContainer.textContent = '';
-    }
 
-    document.querySelectorAll('.copy-btn').forEach(button => {
-        button.addEventListener('click', () => {
-            const textToCopy = button.dataset.copy;
-            navigator.clipboard.writeText(textToCopy).then(() => {
-                const originalText = button.textContent;
-                button.textContent = 'Tersalin!';
-                button.classList.add('copied');
-                
-                setTimeout(() => {
-                    button.textContent = originalText;
-                    button.classList.remove('copied');
-                }, 2000); 
-            }).catch(err => {
-                console.error('Gagal menyalin teks: ', err);
-                alert('Gagal menyalin. Silakan salin secara manual.');
-            });
+// --- Pendaftaran Event Listener ---
+
+// Menangani event submit form
+registrationForm.addEventListener('submit', handleRegistrationSubmit);
+
+// Menampilkan nama file yang dipilih
+fileInput.addEventListener('change', () => {
+    fileNameDisplay.textContent = fileInput.files.length > 0 ?
+        `File terpilih: ${fileInput.files[0].name}` : '';
+});
+
+// Menangani klik pada tombol salin (copy)
+document.querySelectorAll('.copy-btn').forEach(button => {
+    button.addEventListener('click', () => {
+        const textToCopy = button.dataset.copy;
+        navigator.clipboard.writeText(textToCopy).then(() => {
+            const originalText = button.textContent;
+            button.textContent = 'Tersalin!';
+            button.classList.add('copied');
+            setTimeout(() => {
+                button.textContent = originalText;
+                button.classList.remove('copied');
+            }, 2000);
+        }).catch(err => {
+            console.error('Gagal menyalin teks: ', err);
+            alert('Gagal menyalin. Silakan salin secara manual.');
         });
     });
+});
 
-    // <-- SCRIPT BARU UNTUK MEMILIH PAKET OTOMATIS -->
-    document.addEventListener('DOMContentLoaded', () => {
-        // 1. Ambil parameter 'paket' dari URL
-        const urlParams = new URLSearchParams(window.location.search);
-        const selectedPackageFromURL = urlParams.get('paket');
+// Memilih paket otomatis berdasarkan parameter URL
+document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const selectedPackageFromURL = urlParams.get('paket');
 
-        // 2. Jika parameter 'paket' ada di URL
-        if (selectedPackageFromURL) {
-            const packageSelectElement = document.getElementById('membershipPackage');
-            
-            // 3. Cek apakah nilai dari URL ada sebagai opsi di dropdown
-            const optionExists = [...packageSelectElement.options].some(option => option.value === selectedPackageFromURL);
-
-            if (optionExists) {
-                // 4. Jika ada, atur nilainya dan nonaktifkan (kunci) dropdown
-                packageSelectElement.value = selectedPackageFromURL;
-                packageSelectElement.disabled = true;
-            }
+    if (selectedPackageFromURL) {
+        const optionExists = [...packageSelect.options].some(option => option.value === selectedPackageFromURL);
+        if (optionExists) {
+            packageSelect.value = selectedPackageFromURL;
+            packageSelect.disabled = true;
         }
-    });
-    // <-- AKHIR SCRIPT BARU -->
-    </script>
+    }
+});
+</script>
 </body>
 </html>
