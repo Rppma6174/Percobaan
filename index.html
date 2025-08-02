@@ -2167,6 +2167,104 @@ footer {
         padding: 10px 15px;
     }
 }
+/* ===== [BARU] NEWS TICKER STYLES ===== */
+#news-ticker {
+    position: fixed;
+    top: var(--header-height); /* Tepat di bawah header utama */
+    left: 0;
+    width: 100%;
+    background-color: var(--primary-purple);
+    color: var(--text-primary);
+    padding: 8px 0;
+    z-index: 999; /* Di bawah header tapi di atas konten lain */
+    display: flex;
+    align-items: center;
+    overflow: hidden; /* Penting untuk menyembunyikan konten yang keluar */
+    border-bottom: 1px solid var(--secondary-purple);
+}
+
+.ticker-label {
+    background-color: rgba(0,0,0,0.2);
+    padding: 8px 15px;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    white-space: nowrap;
+    margin-left: 10px;
+    border-radius: 4px;
+}
+.ticker-label a{
+    text-decoration: none;
+    color: var(--text-primary);
+}
+
+.ticker-wrap {
+    flex-grow: 1;
+    overflow: hidden; /* Wajib untuk efek marquee */
+}
+
+.ticker-content {
+    display: inline-block; /* Agar bisa dianimasikan sebagai satu blok */
+    white-space: nowrap; /* Mencegah item berita turun baris */
+    animation: scroll-ticker 35s linear infinite;
+}
+
+/* Tombol play/pause saat hover */
+.ticker-wrap:hover .ticker-content {
+    animation-play-state: paused;
+}
+
+.ticker-content ul {
+    display: inline-block;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ticker-content li {
+    display: inline-block;
+    padding: 0 25px; /* Jarak antar berita */
+    font-size: 14px;
+}
+
+.ticker-content li a {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.ticker-content li a:hover {
+    color: #ffd700; /* Warna kuning saat hover */
+    text-decoration: underline;
+}
+
+/* Animasi untuk menggerakkan teks */
+@keyframes scroll-ticker {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(-50%); /* Bergerak sejauh 1 blok (karena ada 2 blok) */
+    }
+}
+
+/* Penyesuaian agar tidak menimpa konten utama */
+body {
+    padding-top: calc(var(--header-height) + 40px); /* Header + Tinggi Ticker */
+}
+
+@media screen and (max-width: 768px) {
+    .ticker-label {
+        font-size: 11px;
+        padding: 6px 10px;
+    }
+    .ticker-content li {
+        font-size: 13px;
+    }
+    body {
+        padding-top: calc(var(--header-height) + 36px); /* Disesuaikan untuk mobile */
+    }
+}
     </style>
 </head>
 <body>
@@ -2286,6 +2384,26 @@ footer {
         </div>
     </header>
     
+    <div id="news-ticker">
+        <div class="ticker-label"><a href="News/News.html">INFO TERKINI</a></div>
+        <div class="ticker-wrap">
+            <div class="ticker-content">
+                <ul>
+                    <li><a href="tryout/">🚀 Tryout Challange UMT - Season 1 Telah Hadir Daftar Sekarang!</a></li>
+                    <li><a href="News/News.html#artikel2">💡 5 Strategi Jitu Mengerjakan Soal HOTS dengan Cepat</a></li>
+                    <li><a href="News/News.html#artikel3">🎉 Webinar Eksklusif: Kupas Tuntas Jurusan Favorit di PTN</a></li>
+                    <li><a href="#pricing-container">🔥 PROMO: Dapatkan Akses Lifetime Hanya dengan Rp 15.000! Hemat 97%</a></li>
+                </ul>
+                <ul>
+                    <li><a href="News/News.html#artikel1">🚀 Jadwal Tryout Nasional 2025 Telah Dirilis! Cek Sekarang!</a></li>
+                    <li><a href="News/News.html#artikel2">💡 5 Strategi Jitu Mengerjakan Soal HOTS dengan Cepat</a></li>
+                    <li><a href="News/News.html#artikel3">🎉 Webinar Eksklusif: Kupas Tuntas Jurusan Favorit di PTN</a></li>
+                    <li><a href="#pricing-container">🔥 PROMO: Dapatkan Akses Lifetime Hanya dengan Rp 15.000! Hemat 97%</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
     <nav class="sidebar-nav">
         <button class="sidebar-close-btn">×</button>
         <div class="sidebar-auth">
@@ -2315,10 +2433,6 @@ footer {
     <div class="sidebar-overlay"></div>
 
     <main id="main-content">
-        <div class="top-promo-bar">
-            <span>Akses Seluruh Fasilitas UMT Academy!</span>
-            <a href="Form-Pendaftaran.html">Akses Sekarang!!!</a>
-        </div>
 
         <section class="hero-section">
                         <div class="bg-elements">
@@ -2877,5 +2991,6 @@ Kami ingin kamu tidak hanya tahu “bagaimana cara menghitung”, tapi juga “m
     </script>
 </body>
 </html>
+
 
 
