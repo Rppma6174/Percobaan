@@ -277,7 +277,7 @@
                 <div class="stat-item"><div class="stat-number" id="wrongAnswers">0</div><div class="stat-label">Salah</div></div>
             </div>
             <div style="margin-top: 30px;">
-                <button class="btn btn-primary" onclick="window.location.href = '../index.html'">
+                <button class="btn btn-primary" onclick="window.location.href = 'index.html'">
                     <i class="fas fa-arrow-left"></i> Kembali ke Halaman Utama
                 </button>
             </div>
@@ -298,7 +298,7 @@
         let userData = {};
         let activityLog = { startTime: null, endTime: null, timePerQuestion: [] };
         let questionStartTime, questions = [], tryoutDuration = 0, tryoutTitle = "", currentQuestion = 0, answers = {}, flaggedQuestions = new Set(), timeLeft, timerInterval;
-        let isTryoutFinished = false; // <-- VARIABEL BARU UNTUK KEAMANAN
+        let isTryoutFinished = false; 
 
         // --- Alur Halaman ---
         document.addEventListener('DOMContentLoaded', () => {
@@ -308,12 +308,61 @@
                 document.getElementById('registrationModal').style.display = 'none';
                 document.getElementById('errorContainer').style.display = 'block';
             }
+
+            // ===================================================================
+            // ===== [KODE BARU] ANTI-CHEAT DETEKSI INSPECT ELEMENT DIMULAI ======
+            // ===================================================================
+
+            // Fungsi yang akan dipanggil jika aktivitas mencurigakan terdeteksi
+            function forceStopTryoutDueToCheating() {
+                // Cek apakah tryout sedang berjalan dan belum selesai
+                if (!isTryoutFinished && timerInterval) {
+                    console.warn("Aktivitas mencurigakan terdeteksi. Menghentikan tryout...");
+                    
+                    // Hentikan interval deteksi agar tidak berjalan terus
+                    if (window.devtoolsInterval) {
+                        clearInterval(window.devtoolsInterval);
+                    }
+
+                    // Beri tahu pengguna alasannya
+                    alert("Aktivitas mencurigakan terdeteksi! Tryout Anda akan dihentikan dan diselesaikan secara otomatis.");
+                    
+                    // Panggil fungsi finishTryout() yang sudah ada untuk mengakhiri sesi
+                    finishTryout();
+                }
+            }
+
+            // Fungsi deteksi utama menggunakan debugger
+            function detectDevTools() {
+                const threshold = 160;
+                const startTime = new Date();
+                debugger;
+                const endTime = new Date();
+                if (endTime.getTime() - startTime.getTime() > threshold) {
+                    forceStopTryoutDueToCheating();
+                }
+            }
+
+            // Jalankan deteksi secara terus-menerus setiap 1 detik
+            window.devtoolsInterval = setInterval(detectDevTools, 1000);
+
+            // Bonus: Deteksi dengan klik kanan
+            window.addEventListener('contextmenu', function (e) { 
+                // Hanya aktif jika tryout sedang berjalan
+                if (!isTryoutFinished && timerInterval) {
+                    e.preventDefault(); 
+                    forceStopTryoutDueToCheating();
+                }
+            }, false);
+
+            // ===================================================================
+            // ==================== ANTI-CHEAT DETEKSI SELESAI ===================
+            // ===================================================================
+
         });
 
-        // --- FITUR KEAMANAN BARU ---
-        // Mendeteksi jika pengguna meninggalkan halaman/tab
+        // --- FITUR KEAMANAN TAMBAHAN (DETEKSI PINDAH TAB) ---
         document.addEventListener('visibilitychange', () => {
-            // Cek jika halaman disembunyikan DAN tryout sedang berjalan
             if (document.hidden && !isTryoutFinished && timerInterval) {
                 alert("Anda telah meninggalkan halaman tryout. Sesi Anda akan diakhiri secara otomatis.");
                 finishTryout();
@@ -384,10 +433,11 @@
 
         // --- Alur Penyelesaian Tryout ---
         function finishTryout() {
-            if (isTryoutFinished) return; // Mencegah fungsi berjalan dua kali
-            isTryoutFinished = true; // Tandai tryout sudah selesai
+            if (isTryoutFinished) return; 
+            isTryoutFinished = true; 
 
             clearInterval(timerInterval);
+            timerInterval = null; // Set timerInterval ke null
             closeFinishModal();
             recordQuestionTime();
             activityLog.endTime = new Date();
