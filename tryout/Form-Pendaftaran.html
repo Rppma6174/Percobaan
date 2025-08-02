@@ -23,12 +23,12 @@
             --text-secondary: #ccc;
             --border-color: #333;
             --error-color: #f44336;
-            --success-color: #10B981;
         }
         
+        /* CSS Lengkap dari sebelumnya... (tidak ada perubahan di sini) */
         body {
             font-family: 'Poppins', sans-serif;
-            background: var(--dark-bg);
+            background: #141414;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -39,12 +39,22 @@
         }
 
         .bg-animation {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
         }
 
-        .particle {
-            position: absolute; background: rgba(106, 13, 173, 0.1); border-radius: 50%; animation: float 15s infinite linear;
-        }
+        /* .particle {
+            position: absolute;
+            background: rgba(106, 13, 173, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        } */
+
         .particle:nth-child(1) { width: 80px; height: 80px; top: 10%; left: 10%; animation-delay: 0s; }
         .particle:nth-child(2) { width: 60px; height: 60px; top: 70%; left: 80%; animation-delay: 2s; }
         .particle:nth-child(3) { width: 100px; height: 100px; top: 40%; left: 5%; animation-delay: 4s; }
@@ -57,184 +67,394 @@
         }
 
         #registration-form-container {
-            background: var(--dark-bg); backdrop-filter: blur(20px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 24px; padding: 50px 40px; width: 90%; max-width: 500px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 80px rgba(106, 13, 173, 0.1); position: relative; z-index: 1; animation: slideInUp 0.8s ease-out; text-align: center;
+            background: #141414;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 50px 40px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 80px rgba(106, 13, 173, 0.1);
+            position: relative;
+            z-index: 1;
+            animation: slideInUp 0.8s ease-out;
+            text-align: center;
         }
 
         @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        .registration-header { margin-bottom: 40px; }
-        .logo-container { display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
-        .logo-image { width: 60px; height: 60px; border-radius: 12px; margin-right: 15px; box-shadow: 0 4px 15px rgba(106, 13, 173, 0.3); object-fit: cover; }
-        .logo-text { font-size: 28px; font-weight: 700; color: var(--text-primary); text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); }
-        h2 { font-size: 24px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
-        .registration-subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 1.5rem; }
-        .form-group { margin-bottom: 25px; position: relative; text-align: left; }
-        .form-label { display: block; color: var(--text-secondary); font-size: 14px; font-weight: 500; margin-bottom: 8px; }
-        
-        input[type="text"], input[type="email"], input[type="tel"], input[type="password"] {
-            width: 100%; padding: 16px 20px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: var(--text-primary); font-size: 16px; font-family: inherit; transition: all 0.3s ease; outline: none; box-sizing: border-box;
+        .registration-header {
+            margin-bottom: 40px;
         }
-        input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="password"]:focus {
-            border-color: var(--primary-purple); background: rgba(255, 255, 255, 0.08); box-shadow: 0 0 0 4px rgba(106, 13, 173, 0.1); transform: translateY(-2px);
-        }
-        input[type="file"] { display: none; }
-        
-        .file-upload-label { display: flex; align-items: center; justify-content: center; width: 100%; padding: 16px 20px; background: rgba(255, 255, 255, 0.05); border: 2px dashed rgba(255, 255, 255, 0.2); border-radius: 12px; color: var(--text-secondary); cursor: pointer; transition: all 0.3s ease; }
-        .file-upload-label:hover { border-color: var(--primary-purple); color: var(--text-primary); background: rgba(106, 13, 173, 0.1); }
-        .file-upload-label i { margin-right: 10px; }
-        #file-name-display { font-size: 12px; color: var(--text-secondary); margin-top: 8px; text-align: left; word-break: break-all; }
-        
-        button[type="submit"] { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%); border: none; border-radius: 12px; color: var(--text-primary); font-size: 16px; font-weight: 600; font-family: inherit; cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden; margin-top: 10px; margin-bottom: 20px; }
-        button[type="submit"]:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(106, 13, 173, 0.4); }
 
-        #error-message { background: rgba(244, 67, 54, 0.1); border: 1px solid rgba(244, 67, 54, 0.3); color: var(--error-color); padding: 12px 16px; border-radius: 8px; font-size: 14px; min-height: 1.2em; margin-top: 1rem; display: none; animation: slideDown 0.3s ease-out; text-align: left; }
-        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .login-link { text-align: center; color: var(--text-secondary); font-size: 14px; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
-        .login-link a { color: var(--primary-purple); text-decoration: none; font-weight: 600; transition: color 0.3s ease; }
-
-        .success-message { display: none; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: var(--success-color); padding: 1rem; border-radius: 12px; margin-top: 1rem; text-align: left; animation: slideIn 0.5s ease; }
-        @keyframes slideIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        .payment-info-box { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); border-radius: 12px; padding: 20px; margin-top: 10px; }
-        .payment-info-box p { color: var(--text-secondary); font-size: 14px; margin-bottom: 20px; }
-        .payment-methods { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 15px; }
-        .payment-methods li { background: rgba(255, 255, 255, 0.05); border-radius: 8px; padding: 12px 15px; display: flex; justify-content: space-between; align-items: center; }
-        .payment-brand { display: flex; align-items: center; gap: 12px; color: var(--text-primary); font-weight: 500; }
-        .payment-details { display: flex; align-items: center; gap: 10px; font-family: monospace; font-size: 15px; color: #fff; }
-        .copy-btn { background: var(--primary-purple); color: white; border: none; border-radius: 6px; padding: 5px 10px; font-size: 12px; cursor: pointer; transition: background 0.2s ease; font-family: 'Poppins', sans-serif; }
-        .copy-btn:hover { background: var(--secondary-purple); }
-        .copy-btn.copied { background-color: var(--success-color); }
-
-        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 28px; color: var(--text-secondary); text-decoration: none; transition: color 0.3s ease, transform 0.3s ease; line-height: 1; }
-        .close-btn:hover { color: var(--text-primary); transform: scale(1.2); }
-
-        @media (max-width: 540px) { #registration-form-container { padding: 40px 25px; } }
-
-        /* --- CSS BARU UNTUK POP-UP SOSIAL MEDIA --- */
-        #social-modal-overlay {
-            display: none; /* Sembunyi dulu */
-            position: fixed;
-            top: 0; left: 0;
-            width: 100vw; height: 100vh;
-            background-color: rgba(20, 20, 20, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 10000;
-            justify-content: center;
+        .logo-container {
+            display: flex;
             align-items: center;
-            padding: 20px;
+            justify-content: center;
+            margin-bottom: 20px;
         }
 
-        .social-modal-content {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 24px;
-            padding: 40px;
-            width: 100%;
-            max-width: 500px;
-            text-align: center;
+        .logo-image {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            margin-right: 15px;
+            box-shadow: 0 4px 15px rgba(106, 13, 173, 0.3);
+            object-fit: cover;
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 700;
             color: var(--text-primary);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            animation: slideInUp 0.5s ease-out;
-            position: relative;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
         }
 
-        .social-modal-content.shake {
-            animation: shake 0.5s ease-in-out;
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 8px;
         }
 
-        @keyframes shake {
-            0%, 100% { transform: translateX(0); }
-            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
-            20%, 40%, 60%, 80% { transform: translateX(5px); }
-        }
-
-        .social-modal-content h3 {
-            font-size: 26px;
-            margin-bottom: 10px;
-            color: var(--primary-purple);
-        }
-
-        .social-modal-content p {
-            font-size: 15px;
+        .registration-subtitle {
             color: var(--text-secondary);
-            margin-bottom: 30px;
-            line-height: 1.6;
+            font-size: 14px;
+            margin-bottom: 1.5rem;
         }
 
-        .social-links {
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 8px;
+        }
+        
+        input[type="text"], input[type="email"], input[type="tel"], input[type="password"], select {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            outline: none;
+            box-sizing: border-box;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+        }
+        
+        select:disabled {
+            background-color: rgba(255, 255, 255, 0.08);
+            color: var(--text-secondary);
+        }
+
+        select {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23ccc' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+        }
+
+        input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, input[type="password"]:focus, select:focus {
+            border-color: var(--primary-purple);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 4px rgba(106, 13, 173, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        select option {
+            background: var(--dark-bg);
+            color: var(--text-primary);
+        }
+
+        select:required:invalid {
+            color: var(--text-secondary);
+        }
+        option[value=""][disabled] {
+            display: none;
+        }
+        
+        .lifetime-option {
+            background: linear-gradient(135deg, #FFD700, #DAA520);
+            color: #2b1d00;
+            font-weight: 700;
+        }
+        
+        input[type="file"] {
+            display: none; 
+        }
+        
+        .file-upload-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-upload-label:hover {
+            border-color: var(--primary-purple);
+            color: var(--text-primary);
+            background: rgba(106, 13, 173, 0.1);
+        }
+
+        .file-upload-label i {
+            margin-right: 10px;
+        }
+
+        #file-name-display {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 8px;
+            text-align: left;
+            word-break: break-all;
+        }
+        
+        button[type="submit"] {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            border: none;
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 16px;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            margin-top: 10px;
+            margin-bottom: 20px;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(106, 13, 173, 0.4);
+        }
+
+        #error-message {
+            background: rgba(244, 67, 54, 0.1);
+            border: 1px solid rgba(244, 67, 54, 0.3);
+            color: var(--error-color);
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 14px;
+            min-height: 1.2em;
+            margin-top: 1rem;
+            display: none;
+            animation: slideDown 0.3s ease-out;
+            text-align: left;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-link {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .login-link a {
+            color: var(--primary-purple);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        @media (max-width: 540px) {
+            #registration-form-container {
+                padding: 40px 25px;
+            }
+        }
+        .loader {
+            display: none;
+            margin: 1rem auto;
+            width: 40px;
+            height: 40px;
+            border: 3px solid rgba(59, 130, 246, 0.3);
+            border-top: 3px solid var(--primary-blue);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .success-message {
+            display: none;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            color: #10B981;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            text-align: left;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .payment-info-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 10px;
+        }
+
+        .payment-info-box p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 20px;
+        }
+
+        .payment-info-box strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .payment-info-box small {
+            display: block;
+            margin-top: 15px;
+            color: var(--text-secondary);
+            font-style: italic;
+            font-size: 12px;
+        }
+
+        .payment-methods {
             list-style: none;
             padding: 0;
-            margin: 0 0 20px 0;
+            margin: 0;
             display: flex;
             flex-direction: column;
             gap: 15px;
         }
 
-        .social-btn {
+        .payment-methods li {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 12px 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .payment-brand {
             display: flex;
             align-items: center;
-            justify-content: center;
             gap: 12px;
-            padding: 14px;
-            border-radius: 12px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-        }
-        
-        .social-btn .fa-check { display: none; } /* Sembunyikan ceklis */
-
-        .social-btn.clicked {
-            background-color: var(--success-color) !important;
-            color: white !important;
-            border-color: var(--success-color);
-            pointer-events: none; /* Nonaktifkan setelah diklik */
-        }
-        .social-btn.clicked .fa-check { display: inline-block; } /* Tampilkan ceklis */
-        .social-btn.clicked .fab, .social-btn.clicked .fas { display: none; } /* Sembunyikan ikon lama */
-        .social-btn.clicked span { text-decoration: line-through; }
-
-
-        .whatsapp-btn { background-color: #25D366; color: white; }
-        .instagram-btn { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
-        .youtube-btn { background-color: #FF0000; color: white; }
-        .tiktok-btn { background-color: #010101; color: white; border: 2px solid white; }
-
-        .social-btn:hover { transform: translateY(-3px) scale(1.02); }
-
-        #close-modal-btn {
-            width: 100%; padding: 16px; background: var(--primary-purple); border: none; border-radius: 12px; color: var(--text-primary); font-size: 16px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;
-        }
-        #close-modal-btn:hover { background: var(--secondary-purple); }
-
-        #modal-warning-message {
-            display: none;
-            color: var(--error-color);
-            font-size: 13px;
-            margin-top: 20px;
+            color: var(--text-primary);
             font-weight: 500;
         }
-        /* --- AKHIR CSS BARU --- */
 
+        .payment-brand img {
+            height: 24px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .payment-details {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-family: monospace;
+            font-size: 15px;
+            color: #fff;
+        }
+
+        .copy-btn {
+            background: var(--primary-purple);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            padding: 5px 10px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .copy-btn:hover {
+            background: var(--secondary-purple);
+        }
+
+        .copy-btn.copied {
+            background-color: #10B981;
+        }
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 28px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease, transform 0.3s ease;
+            line-height: 1;
+        }
+
+        .close-btn:hover {
+            color: var(--text-primary);
+            transform: scale(1.2);
+        }
     </style>
 </head>
 <body>
-    <div class="bg-animation"> </div>
+    <div class="bg-animation">
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+        <div class="particle"></div>
+    </div>
 
     <div id="registration-form-container">
-        <a href="../index.html" class="close-btn" title="Keluar">&times;</a>
+        <a href="index.html" class="close-btn" title="Keluar">&times;</a>
         <form id="registration-form">
             <div class="registration-header">
                 <div class="logo-container">
                     <img src="UMT-Logo.png" alt="Logo" class="logo-image">
                     <span class="logo-text">UMTacademy</span>
                 </div>
-                <h2>Pendaftaran Kompetisi UMT</h2>
+                <h2>Buat Akun Baru</h2>
                 <p class="registration-subtitle">Lengkapi data diri Anda untuk mendaftar.</p>
             </div>
 
@@ -265,20 +485,42 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="membershipPackage" class="form-label">Pilih Paket Keanggotaan</label>
+                    <select id="membershipPackage" required>
+                        <option value="" disabled selected>Pilih Paket</option>
+                        <option value="1 Bulan">1 Bulan</option>
+                        <option value="3 Bulan">3 Bulan</option>
+                        <option value="6 Bulan">6 Bulan</option>
+                        <option value="1 Tahun">1 Tahun</option>
+                        <option value="Lifetime" class="lifetime-option">Lifetime (Penawaran Terbaik)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
                     <label class="form-label" style="font-size: 16px; font-weight: 600; color: var(--text-primary);">
                         <i class="fas fa-wallet"></i> Lakukan Pembayaran
                     </label>
                     <div class="payment-info-box">
-                        <p>Silakan lakukan pembayaran ke salah satu tujuan berikut:</p>
+                        <p>Silakan lakukan pembayaran pendaftaran sebesar <strong>Rp. 10.000</strong> ke salah satu tujuan berikut:</p>
                         
                         <ul class="payment-methods">
                             <li>
-                                <div class="payment-brand"><span>Gopay / Dana / OVO / ShopeePay</span></div>
-                                <div class="payment-details"><span>085961160545</span><button type="button" class="copy-btn" data-copy="085961160545">Salin</button></div>
+                                <div class="payment-brand">
+                                    <span>Gopay / Dana / OVO / ShopeePay</span>
+                                </div>
+                                <div class="payment-details">
+                                    <span>085961160545</span>
+                                    <button type="button" class="copy-btn" data-copy="085961160545">Salin</button>
+                                </div>
                             </li>
                             <li>
-                                <div class="payment-brand"><span>Seabank</span></div>
-                                <div class="payment-details"><span>901165420223</span><button type="button" class="copy-btn" data-copy="901165420223">Salin</button></div>
+                                <div class="payment-brand">
+                                    <span>Seabank</span>
+                                </div>
+                                <div class="payment-details">
+                                    <span>901165420223</span>
+                                    <button type="button" class="copy-btn" data-copy="901165420223">Salin</button>
+                                </div>
                             </li>
                         </ul>
                     </div>
@@ -296,239 +538,193 @@
                     <div id="file-name-display"></div>
                 </div>
 
-                <div class="success-message" id="successMessage"></div>
+                <div class="loader" id="loader"></div>
+                <div class="success-message" id="successMessage">
+                </div>
+
                 <div id="error-message"></div>
 
                 <button type="submit">Daftar Sekarang</button>
 
                 <div class="login-link">
-                    Sudah punya akun? <a href="../login-tryout.html">Login di sini</a>
+                    Sudah punya akun? <a href="login.html">Login di sini</a>
                 </div>
             </div>
         </form>
     </div>
 
-    <div id="social-modal-overlay">
-        <div class="social-modal-content">
-            <h3>🎉 Satu Langkah Lagi!</h3>
-            <p>Agar tidak ketinggalan informasi penting seputar tryout, silakan bergabung ke grup dan ikuti sosial media kami.</p>
-            
-            <ul class="social-links">
-                <li><a href="https://chat.whatsapp.com/GpyKRFFjMINBcjqGEYSXQ6" target="_blank" class="social-btn whatsapp-btn required-link" data-action="group"><i class="fab fa-whatsapp"></i> <span>Gabung Grup WhatsApp</span> <i class="fas fa-check"></i></a></li>
-                <li><a href="https://www.instagram.com/umt.6174/profilecard/?igsh=bHI0ZjFtdXN1NmUx" target="_blank" class="social-btn instagram-btn required-link" data-action="instagram"><i class="fab fa-instagram"></i> <span>Follow Instagram</span> <i class="fas fa-check"></i></a></li>
-                <li><a href="https://youtube.com/@umt6174?si=10EDDJwW_HS73y79" target="_blank" class="social-btn youtube-btn"><i class="fab fa-youtube"></i> <span>Subscribe YouTube</span></a></li>
-                <li><a href="https://www.tiktok.com/@umt6174?is_from_webapp=1&sender_device=pc" target="_blank" class="social-btn tiktok-btn"><i class="fab fa-tiktok"></i> <span>Follow TikTok</span></a></li>
-            </ul>
-
-            <button type="button" id="close-modal-btn">Selesai & Tutup</button>
-            <div id="modal-warning-message">
-                <i class="fas fa-exclamation-triangle"></i> Anda harus bergabung ke grup dan follow Instagram kami sebagai persyaratan wajib untuk dapat menerima info terkait tryout dari kami.
-            </div>
-        </div>
-    </div>
     <script>
-// --- GANTI DENGAN DATA ANDA ---
-const BOT_TOKEN = "8204701308:AAFEmEp9nh72bayu3Jrvb1Z1drcumv8bv2c"; // Isi dengan Token Bot Anda
-const CHAT_ID = "6919363709"; // Isi dengan Chat ID Anda
-// ---------------------------------
+    // --- GANTI DENGAN DATA ANDA ---
+    const BOT_TOKEN = "8239110275:AAFN1waR1xOuZMcs8HB7dbzC0-uG6qMQ0qA"; // Isi dengan Token Bot Anda
+    const CHAT_ID = "6919363709"; // Isi dengan Chat ID Anda
+    // ---------------------------------
 
-// --- Pemilihan Elemen DOM ---
-const registrationForm = document.getElementById('registration-form');
-const fullNameInput = document.getElementById('fullName');
-const whatsappInput = document.getElementById('whatsapp');
-const emailInput = document.getElementById('email');
-const passwordInput = document.getElementById('password');
-const confirmPasswordInput = document.getElementById('confirmPassword');
-const fileInput = document.getElementById('paymentProof');
-const fileNameDisplay = document.getElementById('file-name-display');
-const errorMessageContainer = document.getElementById('error-message');
-const successMessageContainer = document.getElementById('successMessage');
-const submitButton = registrationForm.querySelector('button[type="submit"]');
-// --- Elemen DOM BARU untuk Modal ---
-const socialModalOverlay = document.getElementById('social-modal-overlay');
-const socialModalContent = document.querySelector('.social-modal-content');
-const closeModalBtn = document.getElementById('close-modal-btn');
-const requiredLinks = document.querySelectorAll('.required-link');
-const modalWarningMessage = document.getElementById('modal-warning-message');
+    const registrationForm = document.getElementById('registration-form');
+    const fullNameInput = document.getElementById('fullName');
+    const whatsappInput = document.getElementById('whatsapp');
+    const emailInput = document.getElementById('email');
+    const passwordInput = document.getElementById('password');
+    const confirmPasswordInput = document.getElementById('confirmPassword');
+    const packageSelect = document.getElementById('membershipPackage'); 
+    const fileInput = document.getElementById('paymentProof');
+    const fileNameDisplay = document.getElementById('file-name-display');
+    const errorMessageContainer = document.getElementById('error-message');
+    const successMessageContainer = document.getElementById('successMessage');
+    const submitButton = registrationForm.querySelector('button[type="submit"]');
+    const loader = document.getElementById("loader");
 
-// --- State untuk melacak aksi wajib ---
-let requiredActionsCompleted = {
-    group: false,
-    instagram: false
-};
-
-/** Menampilkan pesan error */
-function showError(message) {
-    errorMessageContainer.textContent = message;
-    errorMessageContainer.style.display = 'block';
-    errorMessageContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-
-/** Menyembunyikan pesan error */
-function hideError() {
-    errorMessageContainer.style.display = 'none';
-    errorMessageContainer.textContent = '';
-}
-
-/** Memvalidasi format email */
-function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
-/** Memvalidasi format nomor WhatsApp */
-function isValidWhatsapp(whatsapp) {
-    const whatsappRegex = /^08\d{8,12}$/;
-    return whatsappRegex.test(whatsapp);
-}
-
-/** Fungsi validasi form */
-function validateFormData(data) {
-    if (!data.fullName) return 'Nama Lengkap wajib diisi.';
-    if (!isValidWhatsapp(data.whatsapp)) return 'Format Nomor WhatsApp tidak valid (contoh: 081234567890).';
-    if (!isValidEmail(data.email)) return 'Format Email tidak valid.';
-    if (data.password.length < 8) return 'Password harus memiliki minimal 8 karakter.';
-    if (data.password !== data.confirmPassword) return 'Password dan Konfirmasi Password tidak cocok.';
-    if (data.paymentFile.length === 0) return 'Harap unggah bukti pembayaran Anda.';
-    return null;
-}
-
-/** Mengirim data ke Telegram */
-async function sendToTelegram(data) {
-    const localTime = new Date().toLocaleString('id-ID', { timeZone: 'Asia/Makassar' });
-    const textMessage = `📝 *Pendaftar Baru UMTacademy*\n\n` +
-        `👤 *Nama Lengkap:* ${data.fullName}\n` +
-        `📱 *Nomor WhatsApp:* ${data.whatsapp}\n` +
-        `📧 *Email:* ${data.email}\n` +
-        `🔑 *Password:* ${data.password}\n\n` +
-        `🕒 *Waktu Daftar:* ${localTime}`;
-
-    const textPromise = fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ chat_id: CHAT_ID, text: textMessage, parse_mode: 'Markdown' })
+    fileInput.addEventListener('change', () => {
+        if (fileInput.files.length > 0) {
+            const fileName = fileInput.files[0].name;
+            fileNameDisplay.textContent = `File terpilih: ${fileName}`;
+        } else {
+            fileNameDisplay.textContent = '';
+        }
     });
 
-    const fileData = new FormData();
-    fileData.append('chat_id', CHAT_ID);
-    fileData.append('document', data.paymentFile[0]);
-    fileData.append('caption', `🧾 Bukti Pembayaran dari *${data.fullName}*`);
-    fileData.append('parse_mode', 'Markdown');
+    registrationForm.addEventListener('submit', async (event) => {
+        event.preventDefault(); 
 
-    const filePromise = fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendDocument`, {
-        method: 'POST', body: fileData
-    });
+        hideError();
+        successMessageContainer.style.display = 'none';
 
-    const [textResult, fileResult] = await Promise.all([textPromise, filePromise]);
-    if (!textResult.ok || !fileResult.ok) {
-        throw new Error('Gagal mengirim data ke Telegram.');
-    }
-}
+        if (passwordInput.value !== confirmPasswordInput.value) {
+            showError('Password dan Konfirmasi Password tidak cocok.');
+            return;
+        }
+        if (passwordInput.value.length < 8) {
+            showError('Password harus memiliki minimal 8 karakter.');
+            return;
+        }
+        if (packageSelect.value === "") {
+            showError('Harap pilih paket keanggotaan Anda.');
+            return;
+        }
+        if (fileInput.files.length === 0) {
+            showError('Harap unggah bukti pembayaran Anda.');
+            return;
+        }
 
-/** Menampilkan modal sosial media */
-function showSocialModal() {
-    socialModalOverlay.style.display = 'flex';
-}
-
-/** Menangani submit form pendaftaran */
-async function handleRegistrationSubmit(event) {
-    event.preventDefault();
-    hideError();
-    successMessageContainer.style.display = 'none';
-
-    const registrationData = {
-        fullName: fullNameInput.value.trim(),
-        whatsapp: whatsappInput.value.trim(),
-        email: emailInput.value.trim(),
-        password: passwordInput.value,
-        confirmPassword: confirmPasswordInput.value,
-        paymentFile: fileInput.files
-    };
-
-    const validationError = validateFormData(registrationData);
-    if (validationError) {
-        showError(validationError);
-        return;
-    }
-
-    const originalButtonText = submitButton.innerHTML;
-    submitButton.disabled = true;
-    submitButton.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Mengirim...`;
-
-    try {
-        await sendToTelegram(registrationData);
-        // Jangan reset form dulu, tampilkan modal
-        showSocialModal(); 
-    } catch (error) {
-        console.error("Error:", error);
-        showError('Terjadi kesalahan. Periksa koneksi internet Anda dan coba lagi.');
-    } finally {
-        submitButton.disabled = false;
-        submitButton.innerHTML = originalButtonText;
-    }
-}
-
-// --- Event Listeners ---
-registrationForm.addEventListener('submit', handleRegistrationSubmit);
-
-fileInput.addEventListener('change', () => {
-    fileNameDisplay.textContent = fileInput.files.length > 0 ? `File terpilih: ${fileInput.files[0].name}` : '';
-});
-
-document.querySelectorAll('.copy-btn').forEach(button => {
-    button.addEventListener('click', () => {
-        const textToCopy = button.dataset.copy;
-        navigator.clipboard.writeText(textToCopy).then(() => {
-            const originalText = button.textContent;
-            button.textContent = 'Tersalin!';
-            button.classList.add('copied');
-            setTimeout(() => {
-                button.textContent = originalText;
-                button.classList.remove('copied');
-            }, 2000);
-        }).catch(err => console.error('Gagal menyalin', err));
-    });
-});
-
-// --- LOGIKA BARU UNTUK MODAL ---
-
-// Listener untuk link/tombol yang wajib diklik
-requiredLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        const action = link.dataset.action; // 'group' atau 'instagram'
-        requiredActionsCompleted[action] = true;
-        link.classList.add('clicked');
-    });
-});
-
-// Listener untuk tombol "Selesai & Tutup"
-closeModalBtn.addEventListener('click', () => {
-    // Cek apakah semua aksi wajib sudah dilakukan
-    if (requiredActionsCompleted.group && requiredActionsCompleted.instagram) {
-        socialModalOverlay.style.display = 'none'; // Tutup modal
-
-        // Tampilkan pesan sukses di form utama dan reset form
+        const originalButtonText = submitButton.innerHTML;
+        submitButton.disabled = true;
+        submitButton.innerHTML = `<i class="fas fa-spinner fa-spin"></i> Mengirim...`;
+        
         successMessageContainer.innerHTML = `
-            <i class="fas fa-check-circle"></i> 🎉 <strong>Pendaftaran Berhasil & Info Diterima!</strong><br><br>
-            Data Anda telah kami kirim dan akan diverifikasi (maks. 1x24 jam). Info tryout akan diumumkan di grup dan Instagram.`;
-        successMessageContainer.style.display = 'block';
-        registrationForm.reset();
-        fileNameDisplay.textContent = '';
-        successMessageContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    <i class="fas fa-check-circle"></i> 🎉 <strong>Pendaftaran Berhasil!</strong><br><br>
+    Terima kasih telah mendaftar sebagai <strong>Member PRO UMT</strong>. 
+    Saat ini, akun Anda sedang menunggu proses verifikasi dari tim kami.<br><br>
 
-    } else {
-        // Jika belum, tampilkan peringatan dan goyangkan modal
-        modalWarningMessage.style.display = 'block';
-        socialModalContent.classList.add('shake');
+    🔍 <strong>Apa yang terjadi selanjutnya?</strong>
+    <p style="margin-top: 10px; color: #ccc;">
+      Tim kami akan memverifikasi bukti pembayaran Anda secara manual.
+      Proses ini biasanya memakan waktu maksimal <strong>1×24 jam</strong>.
+      Anda akan menerima notifikasi melalui <strong>email</strong> atau <strong>WhatsApp</strong> setelah akun Anda aktif.
+    </p>
 
-        // Hapus animasi dan sembunyikan pesan setelah selesai
-        setTimeout(() => {
-            socialModalContent.classList.remove('shake');
-            modalWarningMessage.style.display = 'none';
-        }, 2000);
+    <p style="margin-top: 15px;">Jika Anda belum menerima kabar dalam 24 jam, silakan hubungi kami di <strong><a href="https://wa.me/6282189524610" target="_blank" style="color: var(--primary-purple);">+6282189524610</a></strong>.</p>
+    `;
+
+        try {
+            const fullName = fullNameInput.value.trim();
+            const whatsapp = whatsappInput.value.trim();
+            const email = emailInput.value.trim();
+            const password = passwordInput.value.trim();
+            const selectedPackage = packageSelect.value;
+            const paymentFile = fileInput.files[0];
+
+            const textMessage = 
+                `📝 *Pendaftar Baru UMTacademy*\n\n` +
+                `👤 *Nama Lengkap:* ${fullName}\n` +
+                `📱 *Nomor WhatsApp:* ${whatsapp}\n` +
+                `📧 *Email:* ${email}\n` +
+                `🔑 *Password:* ${password}\n` +
+                `📦 *Paket Dipilih:* ${selectedPackage}\n\n` +
+                `🕒 *Waktu Daftar:* ${new Date().toLocaleString('id-ID', { timeZone: 'Asia/Makassar' })}`;
+
+            await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    chat_id: CHAT_ID,
+                    text: textMessage,
+                    parse_mode: 'Markdown'
+                })
+            });
+            
+            const formData = new FormData();
+            formData.append('chat_id', CHAT_ID);
+            formData.append('document', paymentFile);
+            formData.append('caption', `🧾 Bukti Pembayaran dari *${fullName}*`);
+            formData.append('parse_mode', 'Markdown');
+            
+            await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendDocument`, {
+                method: 'POST',
+                body: formData
+            });
+
+            successMessageContainer.style.display = 'block'; 
+            registrationForm.reset(); 
+            fileNameDisplay.textContent = ''; 
+
+        } catch (error) {
+            console.error("Error saat mengirim ke Telegram:", error);
+            showError('Terjadi kesalahan saat mengirim data. Silakan coba lagi.');
+        } finally {
+            submitButton.disabled = false;
+            submitButton.innerHTML = originalButtonText;
+        }
+    });
+
+    function showError(message) {
+        errorMessageContainer.textContent = message;
+        errorMessageContainer.style.display = 'block';
     }
-});
 
-</script>
+    function hideError() {
+        errorMessageContainer.style.display = 'none';
+        errorMessageContainer.textContent = '';
+    }
+
+    document.querySelectorAll('.copy-btn').forEach(button => {
+        button.addEventListener('click', () => {
+            const textToCopy = button.dataset.copy;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                const originalText = button.textContent;
+                button.textContent = 'Tersalin!';
+                button.classList.add('copied');
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.classList.remove('copied');
+                }, 2000); 
+            }).catch(err => {
+                console.error('Gagal menyalin teks: ', err);
+                alert('Gagal menyalin. Silakan salin secara manual.');
+            });
+        });
+    });
+
+    // <-- SCRIPT BARU UNTUK MEMILIH PAKET OTOMATIS -->
+    document.addEventListener('DOMContentLoaded', () => {
+        // 1. Ambil parameter 'paket' dari URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedPackageFromURL = urlParams.get('paket');
+
+        // 2. Jika parameter 'paket' ada di URL
+        if (selectedPackageFromURL) {
+            const packageSelectElement = document.getElementById('membershipPackage');
+            
+            // 3. Cek apakah nilai dari URL ada sebagai opsi di dropdown
+            const optionExists = [...packageSelectElement.options].some(option => option.value === selectedPackageFromURL);
+
+            if (optionExists) {
+                // 4. Jika ada, atur nilainya dan nonaktifkan (kunci) dropdown
+                packageSelectElement.value = selectedPackageFromURL;
+                packageSelectElement.disabled = true;
+            }
+        }
+    });
+    // <-- AKHIR SCRIPT BARU -->
+    </script>
 </body>
 </html>
