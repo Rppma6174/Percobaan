@@ -7,335 +7,189 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="UMT-Logo.png">
     <style>
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-:root {
-    --primary-purple: #6A0DAD;
-    --secondary-purple: #7D2ED1;
-    --dark-bg: #141414;
-    --card-bg: #1c1c1c;
-    --text-primary: #ffffff;
-    --text-secondary: #ccc;
-    --border-color: #333;
-    --error-color: #f44336;
-}
+        :root {
+            --primary-purple: #6A0DAD;
+            --secondary-purple: #7D2ED1;
+            --dark-bg: #141414;
+            --card-bg: #1c1c1c;
+            --text-primary: #ffffff;
+            --text-secondary: #ccc;
+            --border-color: #333;
+            --error-color: #f44336;
+        }
 
-body {
-    font-family: 'Poppins', sans-serif;
-    background: #141414;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem 0; /* Disesuaikan */
-    position: relative;
-    overflow-x: hidden;
-}
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #141414;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem 0;
+            position: relative;
+            overflow-x: hidden;
+        }
 
-/* Animated background particles */
-.bg-animation {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 0;
-    pointer-events: none;
-}
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
 
-/* .particle {
-    position: absolute;
-    background: rgba(106, 13, 173, 0.1);
-    border-radius: 50%;
-    animation: float 15s infinite linear;
-} */
+        .particle {
+            position: absolute;
+            background: rgba(106, 13, 173, 0.1);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
 
-.particle:nth-child(1) { width: 80px; height: 80px; top: 10%; left: 10%; animation-delay: 0s; }
-.particle:nth-child(2) { width: 60px; height: 60px; top: 70%; left: 80%; animation-delay: 2s; }
-.particle:nth-child(3) { width: 100px; height: 100px; top: 40%; left: 5%; animation-delay: 4s; }
-.particle:nth-child(4) { width: 40px; height: 40px; top: 20%; left: 90%; animation-delay: 6s; }
-.particle:nth-child(5) { width: 120px; height: 120px; top: 80%; left: 20%; animation-delay: 8s; }
+        .particle:nth-child(1) { width: 80px; height: 80px; top: 10%; left: 10%; animation-delay: 0s; }
+        .particle:nth-child(2) { width: 60px; height: 60px; top: 70%; left: 80%; animation-delay: 2s; }
+        .particle:nth-child(3) { width: 100px; height: 100px; top: 40%; left: 5%; animation-delay: 4s; }
+        .particle:nth-child(4) { width: 40px; height: 40px; top: 20%; left: 90%; animation-delay: 6s; }
+        .particle:nth-child(5) { width: 120px; height: 120px; top: 80%; left: 20%; animation-delay: 8s; }
 
-@keyframes float {
-    0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
-    50% { transform: translateY(-20px) rotate(180deg); opacity: 0.7; }
-}
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
+            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.7; }
+        }
 
-/* Overlay tetap ada karena bagian dari HTML, namun form di dalamnya disamakan */
-#login-modal-overlay {
-    position: relative;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: #141414;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    backdrop-filter: blur(5px);
-}
+        #login-modal-overlay {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #141414;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+        }
 
-#login-form {
-    background: #141414;
-    backdrop-filter: blur(20px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 24px;
-    padding: 50px 40px;
-    width: 90%;
-    max-width: 500px; /* Disesuaikan agar sama lebar dengan form pendaftaran */
-    box-shadow: 
-        0 20px 40px rgba(0, 0, 0, 0.4),
-        0 0 80px rgba(106, 13, 173, 0.1);
-    position: relative;
-    z-index: 1;
-    animation: slideInUp 0.8s ease-out;
-    text-align: center;
-}
+        #login-form {
+            background: #141414;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 50px 40px;
+            width: 90%;
+            max-width: 500px;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                0 0 80px rgba(106, 13, 173, 0.1);
+            position: relative;
+            z-index: 1;
+            animation: slideInUp 0.8s ease-out;
+            text-align: center;
+        }
 
-@keyframes slideInUp {
-    from {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.login-header {
-    margin-bottom: 40px;
-}
+        .login-header { margin-bottom: 40px; }
+        .logo-container { display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+        .logo-image { width: 60px; height: 60px; border-radius: 12px; margin-right: 15px; box-shadow: 0 4px 15px rgba(106, 13, 173, 0.3); object-fit: cover; }
+        .logo-text { font-size: 28px; font-weight: 700; color: var(--text-primary); text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); }
+        h2 { font-size: 24px; font-weight: 600; color: var(--text-primary); margin-bottom: 8px; }
+        .login-subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 1.5rem; }
+        .form-group { margin-bottom: 25px; position: relative; text-align: left; }
+        .form-label { display: block; color: var(--text-secondary); font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+        input[type="email"], input[type="password"] { width: 100%; padding: 16px 20px; background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1); border-radius: 12px; color: var(--text-primary); font-size: 16px; font-family: inherit; transition: all 0.3s ease; outline: none; box-sizing: border-box; }
+        input[type="email"]:focus, input[type="password"]:focus { border-color: var(--primary-purple); background: rgba(255, 255, 255, 0.08); box-shadow: 0 0 0 4px rgba(106, 13, 173, 0.1); transform: translateY(-2px); }
+        button[type="submit"] { width: 100%; padding: 16px; background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%); border: none; border-radius: 12px; color: var(--text-primary); font-size: 16px; font-weight: 600; font-family: inherit; cursor: pointer; transition: all 0.3s ease; position: relative; overflow: hidden; margin-top: 10px; margin-bottom: 20px; }
+        button[type="submit"]:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(106, 13, 173, 0.4); }
+        button[type="submit"]:active { transform: translateY(-1px); }
+        button[type="submit"]:disabled { background: rgba(106, 13, 173, 0.5); cursor: not-allowed; transform: none; box-shadow: none; }
+        #error-message { background: rgba(244, 67, 54, 0.1); border: 1px solid rgba(244, 67, 54, 0.3); color: var(--error-color); padding: 12px 16px; border-radius: 8px; font-size: 14px; min-height: 1.2em; margin-top: 1rem; display: none; animation: slideDown 0.3s ease-out; text-align: left; }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        .loading { display: none; width: 20px; height: 20px; border: 2px solid rgba(255, 255, 255, 0.3); border-radius: 50%; border-top-color: white; animation: spin 1s ease-in-out infinite; margin: 0 auto; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .form-options { text-align: center; margin: 20px 0 30px 0; }
+        .forgot-password { color: var(--primary-purple); text-decoration: none; font-weight: 500; font-size: 14px; transition: all 0.3s ease; }
+        .forgot-password:hover { color: var(--secondary-purple); text-decoration: underline; }
+        .register-link { text-align: center; color: var(--text-secondary); font-size: 14px; margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.1); }
+        .register-link a { color: var(--primary-purple); text-decoration: none; font-weight: 600; transition: color 0.3s ease; }
+        @media (max-width: 540px) { #login-form { padding: 40px 25px; } }
+        .ripple { position: absolute; border-radius: 50%; transform: scale(0); animation: ripple 0.6s linear; background-color: rgba(255, 255, 255, 0.3); }
+        @keyframes ripple { to { transform: scale(4); opacity: 0; } }
+        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 28px; color: var(--text-secondary); text-decoration: none; transition: color 0.3s ease, transform 0.3s ease; line-height: 1; }
+        .close-btn:hover { color: var(--text-primary); transform: scale(1.2); }
 
-.logo-container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 20px;
-}
+        /* --- CSS BARU UNTUK POP-UP --- */
+        #popup-overlay {
+            display: none; /* Sembunyikan secara default */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-color: rgba(20, 20, 20, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
 
-.logo-image {
-    width: 60px;
-    height: 60px;
-    border-radius: 12px;
-    margin-right: 15px;
-    box-shadow: 0 4px 15px rgba(106, 13, 173, 0.3);
-    object-fit: cover;
-}
+        .popup-content {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+            color: var(--text-primary);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            animation: slideInUp 0.8s ease-out;
+        }
 
-.logo-text {
-    font-size: 28px;
-    font-weight: 700;
-    color: var(--text-primary);
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
+        .popup-content .icon {
+            font-size: 48px;
+            color: var(--primary-purple);
+            margin-bottom: 20px;
+        }
 
-h2 {
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 8px;
-    /* Animasi dihapus agar sama dengan form pendaftaran */
-}
+        .popup-content h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+        }
 
-.login-subtitle {
-    color: var(--text-secondary);
-    font-size: 14px;
-    margin-bottom: 1.5rem;
-    /* Animasi dihapus agar sama dengan form pendaftaran */
-}
+        .popup-content p {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
 
-.form-group {
-    margin-bottom: 25px;
-    position: relative;
-    text-align: left;
-}
-
-.form-label {
-    display: block;
-    color: var(--text-secondary);
-    font-size: 14px;
-    font-weight: 500;
-    margin-bottom: 8px;
-}
-
-input[type="email"], input[type="password"] {
-    width: 100%;
-    padding: 16px 20px;
-    background: rgba(255, 255, 255, 0.05);
-    border: 2px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    color: var(--text-primary);
-    font-size: 16px;
-    font-family: inherit;
-    transition: all 0.3s ease;
-    outline: none;
-    box-sizing: border-box;
-}
-
-input[type="email"]:focus, input[type="password"]:focus {
-    border-color: var(--primary-purple);
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 0 4px rgba(106, 13, 173, 0.1);
-    transform: translateY(-2px);
-}
-
-button[type="submit"] {
-    width: 100%;
-    padding: 16px;
-    background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
-    border: none;
-    border-radius: 12px;
-    color: var(--text-primary);
-    font-size: 16px;
-    font-weight: 600;
-    font-family: inherit;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
-    margin-top: 10px; /* Disesuaikan */
-    margin-bottom: 20px;
-}
-
-/* Efek hover shimmer dihapus agar sama dengan form pendaftaran */
-button[type="submit"]:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(106, 13, 173, 0.4);
-}
-
-button[type="submit"]:active {
-    transform: translateY(-1px);
-}
-
-button[type="submit"]:disabled {
-    background: rgba(106, 13, 173, 0.5);
-    cursor: not-allowed;
-    transform: none;
-    box-shadow: none;
-}
-
-#error-message {
-    background: rgba(244, 67, 54, 0.1);
-    border: 1px solid rgba(244, 67, 54, 0.3);
-    color: var(--error-color);
-    padding: 12px 16px;
-    border-radius: 8px;
-    font-size: 14px;
-    min-height: 1.2em;
-    margin-top: 1rem;
-    display: none;
-    animation: slideDown 0.3s ease-out;
-    text-align: left; /* Disesuaikan */
-}
-
-@keyframes slideDown {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-/* Loading animation (tetap ada karena bagian dari fungsionalitas login) */
-.loading {
-    display: none;
-    width: 20px;
-    height: 20px;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    border-top-color: white;
-    animation: spin 1s ease-in-out infinite;
-    margin: 0 auto;
-}
-
-@keyframes spin {
-    to { transform: rotate(360deg); }
-}
-
-.form-options {
-    text-align: center;
-    margin: 20px 0 30px 0;
-}
-
-.forgot-password {
-    color: var(--primary-purple);
-    text-decoration: none;
-    font-weight: 500;
-    font-size: 14px;
-    transition: all 0.3s ease;
-}
-
-.forgot-password:hover {
-    color: var(--secondary-purple);
-    text-decoration: underline;
-}
-
-.register-link {
-    text-align: center;
-    color: var(--text-secondary);
-    font-size: 14px;
-    margin-top: 20px;
-    padding-top: 20px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-.register-link a {
-    color: var(--primary-purple);
-    text-decoration: none;
-    font-weight: 600;
-    transition: color 0.3s ease;
-}
-
-/* Responsive Design (disamakan dengan form pendaftaran) */
-@media (max-width: 540px) {
-    #login-form {
-        padding: 40px 25px;
-    }
-}
-
-/* Ripple effect (tetap ada karena bagian dari fungsionalitas login) */
-.ripple {
-    position: absolute;
-    border-radius: 50%;
-    transform: scale(0);
-    animation: ripple 0.6s linear;
-    background-color: rgba(255, 255, 255, 0.3);
-}
-
-@keyframes ripple {
-    to {
-        transform: scale(4);
-        opacity: 0;
-    }
-}
-.close-btn {
-    position: absolute;
-    top: 20px;
-    right: 25px;
-    font-size: 28px;
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: color 0.3s ease, transform 0.3s ease;
-    line-height: 1;
-}
-
-.close-btn:hover {
-    color: var(--text-primary);
-    transform: scale(1.2);
-}
+        #countdown {
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            background: rgba(106, 13, 173, 0.1);
+            padding: 15px 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(106, 13, 173, 0.3);
+        }
+        /* --- AKHIR CSS BARU --- */
     </style>
 </head>
 <body>
-    <!-- Background Animation -->
     <div class="bg-animation">
         <div class="particle"></div>
         <div class="particle"></div>
@@ -344,6 +198,17 @@ button[type="submit"]:disabled {
         <div class="particle"></div>
     </div>
 
+    <div id="popup-overlay">
+        <div class="popup-content">
+            <div class="icon">🕒</div>
+            <h2>Tryout Belum Dimulai</h2>
+            <p>
+                Tryout akan dapat diakses pada <strong>Minggu, 10 Agustus 2025</strong> pukul <strong>07:00 WIB</strong>.
+                Halaman login akan terbuka secara otomatis saat waktunya tiba.
+            </p>
+            <div id="countdown">Menghitung waktu...</div>
+        </div>
+    </div>
     <div id="login-modal-overlay">
         <form id="login-form" onsubmit="handleLoginAttempt(event)">
             <a href="../index.html" class="close-btn" title="Keluar">&times;</a>
@@ -357,7 +222,6 @@ button[type="submit"]:disabled {
             </div>
 
             <div id="login-form-container">
-
                 <div class="form-group">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" id="email" placeholder="Masukkan email Anda" required>
@@ -380,16 +244,66 @@ button[type="submit"]:disabled {
                 <div id="error-message"></div>
 
                 <div class="register-link">
-                    Belum Mendaftar? <a href="Form-Pendaftaran.html">Daftar sekarang</a>
+                    Belum punya akun? <a href="Form-Pendaftaran.html">Daftar sekarang</a>
                 </div>
             </div>
         </form>
     </div>
-<script>
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyP3jpWgs6ikQcA-9MsInRZYbLFQsshjxgo22twwXrzpACSPV9BREogrKUd-60crXV_mg/exec';
 
-    // Cek jika pengguna sudah login, langsung arahkan ke halaman utama tryout
-    // Cek ini opsional, bisa dihapus jika tidak ingin ada pengalihan otomatis
+<script>
+    // --- JAVASCRIPT BARU UNTUK KONTROL WAKTU ---
+    document.addEventListener('DOMContentLoaded', function() {
+        // Atur tanggal dan waktu tryout dimulai (Tahun, Bulan-1, Hari, Jam, Menit, Detik)
+        // Format ISO 8601 'YYYY-MM-DDTHH:mm:ss+07:00' lebih aman untuk zona waktu WIB (UTC+7)
+        const tryoutStartDate = new Date('2025-08-10T07:00:00+07:00');
+
+        const popupOverlay = document.getElementById('popup-overlay');
+        const loginModal = document.getElementById('login-modal-overlay');
+        const countdownElement = document.getElementById('countdown');
+
+        function checkTryoutTime() {
+            const now = new Date();
+
+            if (now < tryoutStartDate) {
+                // Jika waktu sekarang SEBELUM waktu tryout
+                popupOverlay.style.display = 'flex'; // Tampilkan pop-up
+                loginModal.style.display = 'none';   // Sembunyikan form login
+
+                // Mulai countdown timer
+                const intervalId = setInterval(() => {
+                    const distance = tryoutStartDate.getTime() - new Date().getTime();
+
+                    if (distance < 0) {
+                        clearInterval(intervalId);
+                        window.location.reload(); // Muat ulang halaman saat waktunya tiba
+                        return;
+                    }
+
+                    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                    
+                    // Format agar selalu dua digit (misal: 01, 02, ...)
+                    const f = (n) => n.toString().padStart(2, '0');
+
+                    countdownElement.innerHTML = `${days} Hari : ${f(hours)} Jam : ${f(minutes)} Menit : ${f(seconds)} Detik`;
+
+                }, 1000);
+
+            } else {
+                // Jika sudah waktunya, pastikan pop-up tersembunyi dan login terlihat
+                popupOverlay.style.display = 'none';
+                loginModal.style.display = 'flex';
+            }
+        }
+
+        checkTryoutTime(); // Jalankan pengecekan saat halaman dimuat
+    });
+    // --- AKHIR JAVASCRIPT BARU ---
+
+
+    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyP3jpWgs6ikQcA-9MsInRZYbLFQsshjxgo22twwXrzpACSPV9BREogrKUd-60crXV_mg/exec';
 
     function getDeviceFingerprint() {
         const userAgent = navigator.userAgent;
@@ -405,7 +319,6 @@ button[type="submit"]:disabled {
         const btnText = document.getElementById('btnText');
         const loading = document.getElementById('loading');
         
-        // Tampilkan status loading
         btnText.style.display = 'none';
         loading.style.display = 'block';
         loginButton.disabled = true;
@@ -428,22 +341,15 @@ button[type="submit"]:disabled {
             const result = await response.json();
 
             if (result.status === 'success') {
-                // Simpan token sesi di browser
                 sessionStorage.setItem('sessionToken', result.token);
                 sessionStorage.setItem('sessionEmail', result.email);
                 
-                // === LOGIKA PENGALIHAN CERDAS ===
-                // 1. Cek apakah ada 'catatan' URL tujuan yang disimpan dari halaman tryout
                 const redirectUrl = sessionStorage.getItem('redirectUrl');
 
                 if (redirectUrl) {
-                    // 2. Jika ADA, hapus catatannya agar tidak dipakai lagi
                     sessionStorage.removeItem('redirectUrl');
-                    // 3. Arahkan pengguna kembali ke URL tryout yang spesifik
                     window.location.href = redirectUrl;
                 } else {
-                    // 4. Jika TIDAK ADA, arahkan ke halaman daftar tryout (halaman default setelah login)
-                    // PASTIKAN PATH INI BENAR SESUAI STRUKTUR FOLDER ANDA
                     window.location.href = '../index.html'; 
                 }
                 
@@ -454,14 +360,12 @@ button[type="submit"]:disabled {
             errorMessage.textContent = error.message;
             errorMessage.style.display = 'block';
         } finally {
-            // Kembalikan tombol ke kondisi normal
             btnText.style.display = 'block';
             loading.style.display = 'none';
             loginButton.disabled = false;
         }
     }
 
-    // Fungsi untuk efek ripple pada tombol
     function createRipple(event) {
         const button = event.currentTarget;
         const circle = document.createElement("span");
@@ -483,7 +387,6 @@ button[type="submit"]:disabled {
 
     document.getElementById('login-button').addEventListener('click', createRipple);
 
-    // Auto-focus input email saat halaman dimuat
     window.addEventListener('load', function() {
         document.getElementById('email').focus();
     });
