@@ -977,6 +977,29 @@ body.sidebar-open {
     </footer>
 
     <script>
+        // Hamburger menu toggle
+        const hamburger = document.querySelector('.hamburger-menu');
+        const sidebarNav = document.querySelector('.sidebar-nav');
+        const sidebarOverlay = document.querySelector('.sidebar-overlay');
+        const sidebarCloseBtn = document.querySelector('.sidebar-close-btn');
+
+        hamburger.addEventListener('click', () => {
+            sidebarNav.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+            document.body.classList.toggle('sidebar-open');
+        });
+
+        sidebarCloseBtn.addEventListener('click', () => {
+            sidebarNav.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.classList.remove('sidebar-open');
+        });
+
+        sidebarOverlay.addEventListener('click', () => {
+            sidebarNav.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
+            document.body.classList.remove('sidebar-open');
+        });
         document.addEventListener('DOMContentLoaded', function() {
             const searchInput = document.getElementById('searchInput');
             // Selector .news-card sekarang akan memilih tag <a>, jadi JS tetap berfungsi!
