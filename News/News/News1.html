@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tryout Challenge S1: Rayakan Sistem Baru! - UMTacademy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="icon" type="image/png" href="UMT-Logo.png">
+    <style>
+        :root {
+            --primary-purple: #6A0DAD;
+            --secondary-purple: #7D2ED1;
+            --dark-bg: #141414;
+            --card-bg: #1c1c1c;
+            --text-primary: #ffffff;
+            --text-secondary: #ccc;
+            --border-color: #333;
+            --success-color: #10B981;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+        .page-header {
+            display: flex; justify-content: center; align-items: center;
+            padding: 20px 0; border-bottom: 1px solid var(--border-color); margin-bottom: 40px;
+        }
+        .logo-link { display: flex; align-items: center; text-decoration: none; }
+        .logo-image { width: 50px; height: 50px; margin-right: 15px; border-radius: 10px; }
+        .logo-text { font-size: 24px; font-weight: 700; color: var(--text-primary); }
+        .article-header { text-align: center; margin-bottom: 30px; }
+        .article-title { font-size: 2.8rem; font-weight: 700; line-height: 1.3; margin-bottom: 15px; color: var(--text-primary); }
+        .article-meta { color: var(--text-secondary); font-size: 1rem; }
+        .article-banner {
+            width: 100%; height: auto; max-height: 400px; object-fit: cover;
+            border-radius: 16px; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .article-content { font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); }
+        .article-content h3 {
+            font-size: 1.5rem; color: var(--primary-purple); margin-top: 40px; margin-bottom: 20px;
+            padding-bottom: 10px; border-bottom: 2px solid var(--border-color);
+        }
+        .article-content p { margin-bottom: 20px; }
+        .article-content ul { list-style-position: inside; padding-left: 10px; margin-bottom: 20px; }
+        .article-content li { margin-bottom: 10px; }
+        .article-content strong { color: var(--text-primary); font-weight: 600; }
+        .important-note {
+            background-color: rgba(106, 13, 173, 0.1);
+            border-left: 5px solid var(--primary-purple);
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+        .important-note p { margin-bottom: 0; }
+        
+        .cta-button-container { text-align: center; margin-top: 40px; }
+        .cta-button {
+            display: inline-block; background: var(--success-color); color: white;
+            padding: 16px 40px; font-size: 1.2rem; font-weight: 700;
+            text-decoration: none; border-radius: 12px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+        }
+        .cta-button:hover { background-color: #059669; transform: translateY(-3px); }
+        .back-button-container { text-align: center; margin-top: 20px; }
+        .back-button {
+            color: var(--text-secondary); text-decoration: none; font-size: 0.9rem;
+        }
+        .back-button:hover { text-decoration: underline; }
+
+        .suggestions-section { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border-color); }
+        .suggestions-title { text-align: center; font-size: 2rem; font-weight: 700; margin-bottom: 40px; }
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .news-card {
+            background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px;
+            overflow: hidden; display: flex; flex-direction: column; text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .news-card:hover { transform: translateY(-8px); box-shadow: 0 12px 40px rgba(106, 13, 173, 0.2); }
+        .card-image img { width: 100%; height: 180px; object-fit: cover; }
+        .card-content { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-category {
+            background: var(--primary-purple); color: white; font-size: 12px; font-weight: 600;
+            padding: 5px 12px; border-radius: 20px; align-self: flex-start; margin-bottom: 15px;
+        }
+        .card-title { font-size: 1.2rem; font-weight: 600; color: var(--text-primary); margin-bottom: 10px; line-height: 1.4; }
+        .card-excerpt { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; flex-grow: 1; }
+        .card-meta { display: flex; align-items: center; font-size: 0.8rem; color: #888; margin-top: 15px; }
+        .card-meta i { margin-right: 8px; color: var(--primary-purple); }
+
+        .page-footer { text-align: center; padding: 30px 0; margin-top: 50px; color: var(--text-secondary); }
+/* === CSS UNTUK TOMBOL KEMBALI === */
+.back-button-container {
+    text-align: center; /* Membuat link di dalamnya menjadi center */
+    margin-top: 20px;   /* Memberi jarak dari tombol hijau di atasnya */
+}
+
+.back-button {
+    color: var(--text-secondary); /* Menggunakan warna abu-abu yang tidak terlalu mencolok */
+    text-decoration: none;        /* Menghilangkan garis bawah default */
+    font-size: 0.9rem;            /* Membuat ukurannya sedikit lebih kecil */
+    transition: color 0.3s ease;  /* Animasi halus saat hover */
+}
+
+.back-button:hover {
+    color: var(--text-primary);   /* Warna menjadi lebih terang (putih) saat disentuh mouse */
+    text-decoration: underline;   /* Menambahkan garis bawah sebagai penanda interaksi */
+}        
+    </style>
+</head>
+<body>
+    <header class="page-header">
+        <a href="index.html" class="logo-link">
+            <img src="UMT-Logo.png" alt="Logo" class="logo-image">
+            <span class="logo-text">UMTacademy</span>
+        </a>
+    </header>
+
+    <div class="container">
+        <main class="article-container">
+            <header class="article-header">
+                <h1 class="article-title">Tryout Challenge S1: Rayakan Sistem Baru & Rebut Hadiah Rp200.000!</h1>
+                <p class="article-meta">
+                    <i class="fas fa-calendar-alt"></i> Diterbitkan pada 1 Agustus 2025
+                </p>
+            </header>
+
+            <img src="tryout.png" alt="Banner Tryout Challenge" class="article-banner">
+
+            <div class="article-content">
+                <p>
+                    Halo, guys! Ada kabar luar biasa dari kami. Setelah melalui pengembangan intensif, kami dengan bangga mengumumkan bahwa <strong>Sistem Tryout UMTacademy yang baru telah resmi selesai dibuat!</strong>
+                </p>
+                <p>
+                    Untuk merayakan pencapaian ini dan mengajak kalian semua merasakan pengalaman tryout yang lebih canggih, cepat, dan akurat, kami mempersembahkan event spesial: <strong>Tryout Challenge UMT - Season 1!</strong> Ini bukan sekadar tryout biasa, ini adalah ajang untuk unjuk gigi, berkompetisi secara sehat, dan tentunya memenangkan hadiah menarik!
+                </p>
+
+                <h3>🗓️ Jadwal Pelaksanaan</h3>
+                <ul>
+                    <li><strong>Acara:</strong> Tryout Challenge UMT - Season 1</li>
+                    <li><strong>Hari & Tanggal:</strong> Minggu, 10 Agustus 2025</li>
+                    <li><strong>Waktu Pengerjaan:</strong> 07.00 WIB - 23.59 WIB (Fleksibel, kerjakan kapan saja di hari H)</li>
+                    <li><strong>Biaya Pendaftaran:</strong> <strong>Rp 10.000</strong></li>
+                </ul>
+                
+                <h3>🏆 Rincian Hadiah Total Rp200.000</h3>
+                <p>Buktikan kemampuanmu dan jadilah salah satu dari 5 pemenang teratas!</p>
+                <ul>
+                    <li><strong>Peringkat 1:</strong> Saldo E-Wallet senilai <strong>Rp 100.000</strong></li>
+                    <li><strong>Peringkat 2:</strong> Saldo E-Wallet senilai <strong>Rp 60.000</strong></li>
+                    <li><strong>Peringkat 3:</strong> Saldo E-Wallet senilai <strong>Rp 40.000</strong></li>
+                    <li><strong>Peringkat 4 & 5:</strong> Akses <strong>Paket Pro UMTacademy</strong> selama 1 bulan.</li>
+                </ul>
+
+                <div class="important-note">
+                    <p><strong>Penting: Mengenai Hadiah Paket Pro</strong><br>
+                    Untuk pemenang peringkat 4 dan 5, hadiah akses Paket Pro selama 1 bulan akan mulai dihitung <strong>setelah halaman dan fitur Paket Pro kami rilis secara resmi.</strong> Kami akan memberikan notifikasi lebih lanjut kepada para pemenang. Terima kasih atas pengertiannya!</p>
+                </div>
+
+                <h3>⚙️ Format Kompetisi</h3>
+                <ul>
+                    <li><strong>Satu Tahap:</strong> Tidak ada babak eliminasi. Hasilmu langsung menentukan peringkat.</li>
+                    <li><strong>Penilaian:</strong> Peringkat ditentukan berdasarkan skor tertinggi yang diperoleh.</li>
+                    <li><strong>Tujuan:</strong> Menguji kecepatan, ketepatan, dan strategimu dalam mengerjakan soal di bawah tekanan kompetisi.</li>
+                </ul>
+
+                <h3>🚀 Cara Mendaftar</h3>
+                <p>
+                    Pendaftaran sangat mudah! Cukup klik tombol di bawah ini dan ikuti instruksi yang tertera. Pastikan kamu mendaftar sebelum kuota penuh!
+                </p>
+
+                <div class="cta-button-container">
+                    <a href="https://umt6174.site/tryout" target="_blank" class="cta-button">
+                        <i class="fas fa-rocket"></i> Daftar Sekarang!
+                    </a>
+                </div>
+                <div class="back-button-container">
+                     <a href="../News.html" class="back-button">atau kembali ke semua berita</a>
+                </div>
+            </div>
+        </main>
+        
+        <!-- <section class="suggestions-section">
+            <h2 class="suggestions-title">Baca Juga Artikel Lainnya</h2>
+            <div class="news-grid">
+                 <a href="detail-berita-tryout.html" class="news-card">
+                    <div class="card-image"><img src="https://placehold.co/600x400/7D2ED1/FFFFFF?text=Pengumuman" alt="Gambar Ilustrasi Pengumuman"></div>
+                    <div class="card-content">
+                        <span class="card-category">Pengumuman</span>
+                        <h2 class="card-title">Jadwal Tryout Akbar Nasional 2025 Telah Dirilis!</h2>
+                        <p class="card-excerpt">Persiapkan dirimu! Jadwal lengkap untuk Tryout Akbar Nasional 2025 kini telah tersedia...</p>
+                        <div class="card-meta"><i class="fas fa-calendar-alt"></i><span>1 Agustus 2025</span></div>
+                    </div>
+                </a>
+                <a href="detail-tips-hots.html" class="news-card">
+                    <div class="card-image"><img src="https://placehold.co/600x400/10B981/FFFFFF?text=Tips" alt="Gambar Ilustrasi Tips"></div>
+                    <div class="card-content">
+                        <span class="card-category">Tips & Trik</span>
+                        <h2 class="card-title">5 Strategi Jitu Mengerjakan Soal HOTS dengan Cepat</h2>
+                        <p class="card-excerpt">Soal HOTS seringkali menjadi tantangan. Pelajari lima strategi efektif untuk menaklukkan soal-soal sulit...</p>
+                        <div class="card-meta"><i class="fas fa-calendar-alt"></i><span>28 Juli 2025</span></div>
+                    </div>
+                </a>
+            </div>
+        </section> -->
+    </div>
+
+    <footer class="page-footer">
+        <p>&copy; 2025 UMTacademy. Semua Hak Cipta Dilindungi.</p>
+    </footer>
+</body>
+</html>
