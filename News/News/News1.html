@@ -114,17 +114,710 @@
 .back-button:hover {
     color: var(--text-primary);   /* Warna menjadi lebih terang (putih) saat disentuh mouse */
     text-decoration: underline;   /* Menambahkan garis bawah sebagai penanda interaksi */
+}
+        /* ===== RESET & BASE STYLES ===== */
+        * { 
+            box-sizing: border-box; 
+        }
+
+        body {
+            background-color: #141414; 
+            font-family: 'Poppins', sans-serif; 
+            color: white;
+            margin: 0; 
+            padding: 0; 
+            line-height: 1.6;
+            padding-top: var(--header-height);
+        }
+
+        body.sidebar-open { 
+            overflow: hidden; 
+        }
+
+        html { 
+            scroll-behavior: smooth; 
+        }
+
+        /* ===== MAIN HEADER ===== */
+        .main-header {
+            background-color: #1c1c1c; 
+            padding: 0 20px;
+            height: var(--header-height);
+            position: fixed;
+            top: 0; 
+            left: 0; 
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-container {
+            width: 100%;
+            max-width: 1200px; 
+            margin: 0 auto; 
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+        }
+
+        .header-logo {
+            display: flex; 
+            align-items: center; 
+            text-decoration: none;
+            color: white; 
+            font-weight: 600; 
+            font-size: 20px;
+        }
+
+        .header-logo img { 
+            height: 40px; 
+            margin-right: 10px; 
+        }
+
+        /* ===== HAMBURGER MENU ===== */
+        .hamburger-menu {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 1200;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger-menu .bar {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Animasi hamburger saat aktif */
+        .hamburger-menu.active .bar:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger-menu.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active .bar:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* ===== NAVIGASI DESKTOP ===== */
+        .main-nav { 
+            display: flex; 
+        }
+
+        .nav-links {
+            list-style: none; 
+            margin: 0; 
+            padding: 0;
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+        }
+
+        .nav-links li a {
+            color: #ccc; 
+            text-decoration: none; 
+            font-size: 14px;
+            font-weight: 500; 
+            padding: 8px 12px; 
+            border-radius: 6px;
+            white-space: nowrap; 
+            transition: all 0.2s ease;
+        }
+
+        .nav-links li a:hover { 
+            background-color: rgba(255, 255, 255, 0.1); 
+            color: white; 
+        }
+
+        /* ===== SIDEBAR NAVIGATION ===== */
+        .sidebar-nav {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 500px; 
+            height: 100%;
+            background-color: #1a1a1a; 
+            box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+            padding-top: 60px; 
+            transform: translateX(-100%);
+            transition: transform 0.4s ease-in-out; 
+            z-index: 1100; 
+            overflow-y: auto;
+            display: none; /* Sembunyikan di desktop */
+        }
+
+        .sidebar-nav.active { 
+            transform: translateX(0); 
+        }
+
+        .sidebar-nav .nav-links { 
+            flex-direction: column; 
+            align-items: stretch; 
+            gap: 0; 
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar-nav .nav-links li a { 
+            display: flex; 
+            gap: 15px; 
+            padding: 15px 30px; 
+            font-size: 16px; 
+            border-radius: 0;
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-nav .nav-links li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .sidebar-nav .nav-group-title {
+            padding: 20px 30px 10px; 
+            font-size: 12px; 
+            font-weight: 600;
+            color: #888; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+        }
+
+        .sidebar-nav .nav-group-title:not(:first-child){ 
+            border-top: 1px solid #333; 
+            margin-top: 10px; 
+        }
+
+        .sidebar-nav .sidebar-close-btn {
+            position: absolute; 
+            top: 15px; 
+            right: 20px; 
+            background: none; 
+            border: none;
+            color: #aaa; 
+            font-size: 36px; 
+            font-weight: 300; 
+            line-height: 1;
+            cursor: pointer; 
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .sidebar-nav .sidebar-close-btn:hover { 
+            color: white; 
+            transform: rotate(90deg); 
+        }
+
+        /* ===== SIDEBAR OVERLAY ===== */
+        .sidebar-overlay {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); 
+            z-index: 1050;
+            opacity: 0; 
+            visibility: hidden; 
+            transition: opacity 0.4s, visibility 0.4s;
+        }
+
+        .sidebar-overlay.active { 
+            opacity: 1; 
+            visibility: visible; 
+        }
+
+        /* ===== EMOJI ICONS ===== */
+        .emoji-icon {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        /* ===== MEDIA QUERIES ===== */
+        /* Tablet dan Mobile */
+        @media screen and (max-width: 1024px) {
+            .main-nav { 
+                display: none; 
+            } /* Sembunyikan nav desktop */
+            
+            .hamburger-menu { 
+                display: flex; 
+            } /* Tampilkan hamburger */
+            
+            .sidebar-nav { 
+                display: block; 
+            } /* Aktifkan sidebar */
+        }
+
+        /* Mobile Medium */
+        @media screen and (max-width: 768px) {
+            .header-logo span {
+                font-size: 18px;
+            }
+            
+            .header-logo img {
+                height: 35px;
+            }
+            
+            .sidebar-nav {
+                width: 400px;
+            }
+        }
+
+        /* Mobile Small */
+        @media screen and (max-width: 480px) {
+            .sidebar-nav {
+                width: 260px;
+            }
+            
+            .header-logo span {
+                font-size: 16px;
+            }
+            
+            .header-logo img {
+                height: 30px;
+            }
+        }
+
+        /* ===== DEMO CONTENT STYLES (hapus saat implementasi) ===== */
+        .demo-content {
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .demo-content h1 {
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .demo-content p {
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .demo-section {
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .demo-section h3 {
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+/* ----- ROOT VARIABLES ----- */
+:root {
+    --header-height: 70px;
+}
+
+/* ----- BODY ADJUSTMENT FOR FIXED HEADER ----- */
+body {
+    padding-top: var(--header-height);
+}
+
+body.sidebar-open { 
+    overflow: hidden; 
+}
+
+/* ----- MAIN HEADER ----- */
+.main-header {
+    background-color: #1c1c1c; 
+    padding: 0 20px;
+    height: var(--header-height);
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+}
+
+.header-container {
+    width: 100%;
+    max-width: 1200px; 
+    margin: 0 auto; 
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+/* ----- HEADER LOGO ----- */
+.header-logo {
+    display: flex; 
+    align-items: center; 
+    text-decoration: none;
+    color: white; 
+    font-weight: 600; 
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+.header-logo img { 
+    height: 40px; 
+    margin-right: 10px; 
+}
+
+/* ----- HAMBURGER MENU ----- */
+.hamburger-menu {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 1200;
+    transition: all 0.3s ease;
+}
+
+.hamburger-menu .bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Animasi hamburger saat aktif */
+.hamburger-menu.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger-menu.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ----- NAVIGASI DESKTOP (DEFAULT) ----- */
+.main-nav { 
+    display: flex; 
+    align-items: center; 
+    gap: 20px; 
+}
+
+.nav-links {
+    list-style: none; 
+    margin: 0; 
+    padding: 0;
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
+}
+
+.nav-links li a {
+    color: #ccc; 
+    text-decoration: none; 
+    font-size: 14px;
+    font-weight: 500; 
+    padding: 8px 12px; 
+    border-radius: 6px;
+    white-space: nowrap; 
+    transition: all 0.2s ease;
+}
+
+.nav-links li a:hover { 
+    background-color: rgba(255, 255, 255, 0.1); 
+    color: white; 
+}
+
+/* ----- HEADER AUTH BUTTONS ----- */
+.header-auth { 
+    display: flex; 
+    gap: 10px; 
+}
+
+.auth-btn {
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.auth-btn.login {
+    color: #ccc;
+    background-color: transparent;
+    border: 1px solid #555;
+}
+
+.auth-btn.login:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-color: #888;
+}
+
+.auth-btn.register {
+    color: white;
+    background-color: #6A0DAD;
+    border: 1px solid #6A0DAD;
+}
+
+.auth-btn.register:hover {
+    background-color: #7D2ED1;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(106, 13, 173, 0.5);
+}
+
+/* ----- SIDEBAR & MOBILE NAVIGATION ----- */
+.sidebar-nav {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 500px; 
+    height: 100%;
+    background-color: #1a1a1a; 
+    box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+    padding-top: 60px; 
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-in-out; 
+    z-index: 1100; 
+    overflow-y: auto;
+    display: none; /* Sembunyikan di desktop */
+}
+
+.sidebar-nav.active { 
+    transform: translateX(0); 
+}
+
+.sidebar-nav .nav-links { 
+    flex-direction: column; 
+    align-items: stretch; 
+    gap: 0; 
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-nav .nav-links li a { 
+    display: flex; 
+    gap: 15px; 
+    padding: 15px 30px; 
+    font-size: 16px; 
+    border-radius: 0;
+    color: #ccc;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.sidebar-nav .nav-links li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.sidebar-nav .nav-group-title {
+    padding: 20px 30px 10px; 
+    font-size: 12px; 
+    font-weight: 600;
+    color: #888; 
+    text-transform: uppercase; 
+    letter-spacing: 1px;
+}
+
+.sidebar-nav .nav-group-title:not(:first-child){ 
+    border-top: 1px solid #333; 
+    margin-top: 10px; 
+}
+
+.sidebar-nav .sidebar-close-btn {
+    position: absolute; 
+    top: 15px; 
+    right: 20px; 
+    background: none; 
+    border: none;
+    color: #aaa; 
+    font-size: 36px; 
+    font-weight: 300; 
+    line-height: 1;
+    cursor: pointer; 
+    transition: color 0.3s, transform 0.3s;
+}
+
+.sidebar-nav .sidebar-close-btn:hover { 
+    color: white; 
+    transform: rotate(90deg); 
+}
+
+/* ----- SIDEBAR AUTH BUTTONS ----- */
+.sidebar-auth {
+    padding: 20px 30px;
+    border-bottom: 1px solid #333;
+    margin-bottom: 10px;
+}
+
+.sidebar-auth .auth-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-left: 0;
+}
+
+.sidebar-auth .auth-btn {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* ----- SIDEBAR OVERLAY ----- */
+.sidebar-overlay {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); 
+    z-index: 1050;
+    opacity: 0; 
+    visibility: hidden; 
+    transition: opacity 0.4s, visibility 0.4s;
+}
+
+.sidebar-overlay.active { 
+    opacity: 1; 
+    visibility: visible; 
+}
+
+/* ----- EMOJI ICON ----- */
+.emoji-icon {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+/* ----- MEDIA QUERIES ----- */
+@media screen and (max-width: 1024px) {
+    .main-nav { 
+        display: none; 
+    } /* Sembunyikan nav desktop */
+    
+    .hamburger-menu { 
+        display: flex; 
+    } /* Tampilkan hamburger */
+    
+    .sidebar-nav { 
+        display: block; 
+    } /* Aktifkan sidebar */
+}
+
+/* Responsive untuk layar yang lebih kecil */
+@media screen and (max-width: 768px) {
+    .header-logo span {
+        font-size: 18px;
+    }
+    
+    .header-logo img {
+        height: 35px;
+    }
+    
+    .sidebar-nav {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .sidebar-nav {
+        width: 260px;
+    }
+    
+    .header-logo span {
+        font-size: 16px;
+    }
+    
+    .header-logo img {
+        height: 30px;
+    }
 }        
     </style>
 </head>
 <body>
-    <header class="page-header">
-        <a href="index.html" class="logo-link">
-            <img src="UMT-Logo.png" alt="Logo" class="logo-image">
-            <span class="logo-text">UMTacademy</span>
-        </a>
-    </header>
+    <header class="main-header">
+        <div class="header-container">
+            <a href="../" class="header-logo">
+                <img src="UMT-Logo.png" alt="UMT Academy Logo">
+                <span>UMTacademy</span>
+            </a>
 
+            <!-- Navigasi Desktop -->
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="../Materi-Belajar/">Materi Belajar</a></li>
+                    <li><a href="../Video-Pembelajaran/">Video</a></li>
+                    <li><a href="../Bank-Soal/">Bank Soal</a></li>
+                    <li><a href="../Perpustakaan/">Perpustakaan</a></li>
+                    <li><a href="../UMT-Lab/">UMT Lab</a></li>
+                    <li><a href="../tryout/">Tryout</a></li>
+                    <li><a href="../Tanya-UMT/">TanyaUMT</a></li>
+                    <li><a href="../Forum-Belajar-UMT/">Forum</a></li>
+                    <li><a href="#">Live Class</a></li>
+                </ul>
+                <div class="header-auth">
+                    <a href="login.html" class="auth-btn login">Masuk</a>
+                    <a href="Form-Pendaftaran.html" class="auth-btn register">Daftar</a>
+                </div>
+            </nav>
+
+            <!-- Hamburger Menu untuk Mobile -->
+            <button class="hamburger-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Sidebar Navigation untuk Mobile -->
+    <nav class="sidebar-nav">
+        <button class="sidebar-close-btn">×</button>
+        <div class="sidebar-auth">
+            <div class="auth-buttons">
+                <a href="login.html" class="auth-btn login">Masuk</a>
+                <a href="Form-Pendaftaran.html" class="auth-btn register">Daftar</a>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li class="nav-group-title">Berita & Informasi UMT</li>
+            <li><a href="News/News.html"><span class="emoji-icon">📰</span>News</a></li>
+            <li class="nav-group-title">Konten Inti</li>
+            <li><a href="Materi-Belajar/"><span class="emoji-icon">📘</span>Materi Belajar</a></li>
+            <li><a href="Video-Pembelajaran/"><span class="emoji-icon">🎥</span>Video Pembelajaran</a></li>
+            <li><a href="UMT-Lab/"><span class="emoji-icon">🔬</span>UMT Lab</a></li>
+            <li><a href="Perpustakaan/"><span class="emoji-icon">📚</span>Perpustakaan</a></li>
+
+            <li class="nav-group-title">Alat Belajar</li>
+            <li><a href="Bank-Soal/"><span class="emoji-icon">📝</span>Bank Soal</a></li>
+            <li><a href="tryout/"><span class="emoji-icon">✏️</span>Tryout</a></li>
+            <li><a href="Tanya-UMT/"><span class="emoji-icon">❓</span>TanyaUMT</a></li>
+
+            <li class="nav-group-title">Komunitas & Info</li>
+            <li><a href="Forum-Belajar-UMT/"><span class="emoji-icon">💬</span>Forum Belajar</a></li>
+            <li><a href="Arsip-Live-Class/"><span class="emoji-icon">🎭</span>Arsip Live Class</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Overlay untuk Sidebar -->
+    <div class="sidebar-overlay"></div>
     <div class="container">
         <main class="article-container">
             <header class="article-header">
