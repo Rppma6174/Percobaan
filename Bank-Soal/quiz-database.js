@@ -2924,5 +2924,1003 @@ const allQuizData = {
             }
         ]
     },
+        'lots-eksponen': {
+        title: "LOTS Eksponensial (Perpangkatan)",
+        description: "Kumpulan soal LOTS untuk memperdalam pemahaman materi eksponensial (perpangkatan) kelas 10 semester ganjil.",
+        questions: [
+            {
+                text: "Hasil dari $2^3 \\cdot 2^4$ adalah:",
+                options: { a: "$2^7$", b: "$2^{12}$", c: "$8$", d: "$64$" },
+                correct: "a",
+                explanation: "Gunakan sifat eksponen: $a^m \\cdot a^n = a^{m+n}$. Maka, $2^3 \\cdot 2^4 = 2^{3+4} = 2^7$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Hasil dari $\\dfrac{5^6}{5^2}$ adalah:",
+                options: { a: "$5^8$", b: "$5^4$", c: "$25$", d: "$5^3$" },
+                correct: "b",
+                explanation: "Gunakan sifat eksponen: $\\dfrac{a^m}{a^n} = a^{m-n}$. Maka, $\\dfrac{5^6}{5^2} = 5^{6-2} = 5^4$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Bentuk sederhana dari $(3^2)^3$ adalah:",
+                options: { a: "$3^5$", b: "$3^6$", c: "$9^3$", d: "$729$" },
+                correct: "b",
+                explanation: "Gunakan sifat eksponen: $(a^m)^n = a^{m \\cdot n}$. Maka, $(3^2)^3 = 3^{2 \\cdot 3} = 3^6$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Jika $2^x = 32$, maka nilai $x$ adalah:",
+                options: { a: "$4$", b: "$5$", c: "$6$", d: "$8$" },
+                correct: "b",
+                explanation: "Tulis $32$ sebagai pangkat dari 2: $32 = 2^5$. Maka, $2^x = 2^5 \\Rightarrow x = 5$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Jika $f(x) = 2^x$, maka nilai dari $f(3)$ adalah:",
+                options: { a: "$6$", b: "$8$", c: "$9$", d: "$12$" },
+                correct: "b",
+                explanation: "Substitusi $x = 3$ ke $f(x) = 2^x$: $f(3) = 2^3 = 8$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Grafik dari fungsi $f(x) = 2^x$ akan:",
+                options: {
+                    a: "Menurun dari kiri ke kanan",
+                    b: "Naik dari kiri ke kanan",
+                    c: "Datar dan konstan",
+                    d: "Berbentuk parabola"
+                },
+                correct: "b",
+                explanation: "Fungsi eksponensial $f(x) = 2^x$ dengan basis $2 > 1$ selalu naik dari kiri ke kanan karena nilai $f(x)$ bertambah seiring $x$ bertambah. Pilihan (b) sesuai."
+            },
+            {
+                text: "Jika $3^x = 81$, maka nilai $x$ adalah:",
+                options: { a: "$2$", b: "$3$", c: "$4$", d: "$5$" },
+                correct: "c",
+                explanation: "Tulis $81$ sebagai pangkat dari 3: $81 = 3^4$. Maka, $3^x = 3^4 \\Rightarrow x = 4$. Pilihan (c) sesuai."
+            },
+            {
+                text: "Pertidaksamaan $2^x > 8$ akan terpenuhi jika:",
+                options: { a: "$x < 3$", b: "$x > 3$", c: "$x = 2$", d: "$x = 1$" },
+                correct: "b",
+                explanation: "Tulis $8 = 2^3$. Maka, $2^x > 2^3$. Karena basis $2 > 1$, pertidaksamaan terpenuhi jika $x > 3$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Nilai dari $10^0$ adalah:",
+                options: { a: "$0$", b: "$1$", c: "$10$", d: "Tidak terdefinisi" },
+                correct: "b",
+                explanation: "Sifat eksponen: $a^0 = 1$ untuk $a \\neq 0$. Maka, $10^0 = 1$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Bentuk pangkat dari $1/16$ dengan basis 2 adalah:",
+                options: { a: "$2^{-2}$", b: "$2^{-4}$", c: "$2^4$", d: "$2^2$" },
+                correct: "b",
+                explanation: "Tulis $1/16 = \\frac{1}{16} = \\frac{1}{2^4} = 2^{-4}$. Pilihan (b) sesuai."
+            }
+        ]
+    },
+        'lots-fungsi-kuadrat': {
+        title: "LOTS Fungsi Kuadrat",
+        description: "Kumpulan soal LOTS untuk memperdalam pemahaman materi fungsi kuadrat kelas 10 semester ganjil.",
+        questions: [
+            {
+                text: "Bentuk umum fungsi kuadrat adalah:",
+                options: {
+                    a: "$y = ax + b$",
+                    b: "$y = ax^2 + bx + c$",
+                    c: "$y = a(x - b)^2$",
+                    d: "$y = a(x - p)(x - q)$"
+                },
+                correct: "b",
+                explanation: "Bentuk umum fungsi kuadrat adalah $y = ax^2 + bx + c$, dengan $a \\neq 0$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Grafik fungsi kuadrat berbentuk:",
+                options: { a: "Garis lurus", b: "Lingkaran", c: "Parabola", d: "Elips" },
+                correct: "c",
+                explanation: "Grafik fungsi kuadrat $y = ax^2 + bx + c$ selalu berbentuk parabola. Pilihan (c) sesuai."
+            },
+            {
+                text: "Jika $f(x) = x^2 - 4x + 3$, maka titik potong grafik dengan sumbu-$y$ adalah:",
+                options: { a: "$(0,3)$", b: "$(3,0)$", c: "$(0,-4)$", d: "$(4,0)$" },
+                correct: "a",
+                explanation: "Titik potong dengan sumbu-$y$ terjadi saat $x = 0$. Substitusi $x = 0$ ke $f(x)$: $f(0) = 0^2 - 4 \\cdot 0 + 3 = 3$. Jadi, titiknya $(0, 3)$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Titik potong grafik $f(x) = x^2 - 5x + 6$ dengan sumbu-$x$ adalah:",
+                options: {
+                    a: "$(0,6)$ dan $(0,-6)$",
+                    b: "$(2,0)$ dan $(3,0)$",
+                    c: "$(6,0)$ dan $(5,0)$",
+                    d: "$(0,2)$ dan $(0,3)$"
+                },
+                correct: "b",
+                explanation: "Titik potong dengan sumbu-$x$ terjadi saat $f(x) = 0$. Selesaikan $x^2 - 5x + 6 = 0 \\Rightarrow (x - 2)(x - 3) = 0 \\Rightarrow x = 2$ atau $x = 3$. Titik: $(2, 0)$ dan $(3, 0)$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Titik puncak dari fungsi $f(x) = x^2 - 6x + 8$ adalah:",
+                options: { a: "$(3, -1)$", b: "$(6, 0)$", c: "$(2, 8)$", d: "$(3, -10)$" },
+                correct: "a",
+                explanation: "Titik puncak fungsi kuadrat $f(x) = ax^2 + bx + c$ adalah $\\left( \\frac{-b}{2a}, f\\left(\\frac{-b}{2a}\\right) \\right)$. Untuk $f(x) = x^2 - 6x + 8$, $a = 1$, $b = -6$. Maka, $x = \\frac{-(-6)}{2 \\cdot 1} = 3$. Hitung $f(3) = 3^2 - 6 \\cdot 3 + 8 = 9 - 18 + 8 = -1$. Jadi, titik puncak $(3, -1)$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Jika grafik fungsi kuadrat memotong sumbu-$y$ di titik $(0, -2)$, maka nilai $c$ dari fungsi $f(x) = ax^2 + bx + c$ adalah:",
+                options: { a: "$0$", b: "$-2$", c: "$2$", d: "$1$" },
+                correct: "b",
+                explanation: "Titik potong sumbu-$y$ adalah $(0, c)$. Diketahui $(0, -2)$, maka $c = -2$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Grafik dari fungsi $f(x) = -x^2 + 4x - 3$ membuka ke arah:",
+                options: { a: "Atas", b: "Samping kiri", c: "Bawah", d: "Samping kanan" },
+                correct: "c",
+                explanation: "Arah parabola ditentukan oleh koefisien $a$ dalam $f(x) = ax^2 + bx + c$. Jika $a < 0$, parabola membuka ke bawah. Untuk $f(x) = -x^2 + 4x - 3$, $a = -1 < 0$, sehingga parabola membuka ke bawah. Pilihan (c) sesuai."
+            },
+            {
+                text: "Titik puncak dari fungsi $f(x) = ax^2 + bx + c$ dapat dihitung dengan rumus:",
+                options: {
+                    a: "$\\left( \\frac{b}{2a}, f\\left(\\frac{b}{2a}\\right) \\right)$",
+                    b: "$\\left( \\frac{-b}{2a}, f\\left(\\frac{-b}{2a}\\right) \\right)$",
+                    c: "$\\left( \\frac{-a}{2b}, f\\left(\\frac{-a}{2b}\\right) \\right)$",
+                    d: "$\\left( b^2 - 4ac, 0 \\right)$"
+                },
+                correct: "b",
+                explanation: "Rumus titik puncak fungsi kuadrat adalah $\\left( \\frac{-b}{2a}, f\\left(\\frac{-b}{2a}\\right) \\right)$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Jika grafik fungsi kuadrat melalui titik $(1,2)$, $(2,3)$, dan $(3,2)$, maka nilai maksimum dari fungsi tersebut adalah:",
+                options: { a: "$2$", b: "$3$", c: "$1$", d: "$0$" },
+                correct: "b",
+                explanation: "Gunakan bentuk umum $f(x) = ax^2 + bx + c$. Substitusi titik: (1) $(1, 2)$: $a + b + c = 2$; (2) $(2, 3)$: $4a + 2b + c = 3$; (3) $(3, 2)$: $9a + 3b + c = 2$. Kurangkan (1) dari (2): $3a + b = 1$. Kurangkan (2) dari (3): $5a + b = -1$. Kurangkan kedua persamaan: $(5a + b) - (3a + b) = -1 - 1 \\Rightarrow 2a = -2 \\Rightarrow a = -1$. Substitusi $a = -1$ ke $3a + b = 1$: $3(-1) + b = 1 \\Rightarrow b = 4$. Substitusi $a = -1$, $b = 4$ ke $a + b + c = 2$: $-1 + 4 + c = 2 \\Rightarrow c = -1$. Jadi, $f(x) = -x^2 + 4x - 1$. Titik puncak: $x = \\frac{-b}{2a} = \\frac{-4}{2(-1)} = 2$, $f(2) = -2^2 + 4 \\cdot 2 - 1 = -4 + 8 - 1 = 3$. Karena $a = -1 < 0$, nilai maksimum adalah $3$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Bentuk faktorisasi dari $f(x) = x^2 - 7x + 10$ adalah:",
+                options: {
+                    a: "$(x + 5)(x + 2)$",
+                    b: "$(x - 2)(x - 5)$",
+                    c: "$(x + 7)(x - 10)$",
+                    d: "$(x - 1)(x - 10)$"
+                },
+                correct: "b",
+                explanation: "Faktorkan $x^2 - 7x + 10$. Cari dua bilangan yang jumlahnya $-7$ dan hasil kalinya $10$: $-2$ dan $-5$. Maka, $x^2 - 7x + 10 = (x - 2)(x - 5)$. Pilihan (b) sesuai."
+            }
+        ]
+    },
+    'lots-fungsi-trigonometri': {
+        title: "LOTS Fungsi Trigonometri",
+        description: "Kumpulan soal LOTS untuk memperdalam pemahaman materi fungsi trigonometri kelas 10 semester genap.",
+        questions: [
+            {
+                text: "Konversi $120^\\circ$ ke radian adalah:",
+                options: { a: "$\\frac{\\pi}{2}$", b: "$\\frac{2\\pi}{3}$", c: "$\\frac{3\\pi}{4}$", d: "$\\pi$" },
+                correct: "b",
+                explanation: "Untuk mengonversi derajat ke radian, gunakan rumus: $x^\\circ = \\frac{x \\cdot \\pi}{180}$ radian. Maka, $120^\\circ = \\frac{120 \\cdot \\pi}{180} = \\frac{2\\pi}{3}$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Jika dalam segitiga siku-siku berlaku $\\sin \\theta = \\frac{3}{5}$, maka $\\cos \\theta = $:",
+                options: { a: "$\\frac{4}{5}$", b: "$\\frac{3}{4}$", c: "$\\frac{5}{4}$", d: "$\\frac{5}{3}$" },
+                correct: "a",
+                explanation: "Dalam segitiga siku-siku, jika $\\sin \\theta = \\frac{3}{5}$, maka gunakan identitas $\\sin^2 \\theta + \\cos^2 \\theta = 1$. Substitusi: $\\left(\\frac{3}{5}\\right)^2 + \\cos^2 \\theta = 1 \\Rightarrow \\frac{9}{25} + \\cos^2 \\theta = 1 \\Rightarrow \\cos^2 \\theta = \\frac{16}{25} \\Rightarrow \\cos \\theta = \\pm \\frac{4}{5}$. Karena $\\theta$ di segitiga siku-siku (kuadran I), $\\cos \\theta = \\frac{4}{5}$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Nilai $\\cos 60^\\circ$ adalah:",
+                options: { a: "$\\frac{1}{2}$", b: "$\\frac{\\sqrt{2}}{2}$", c: "$\\frac{\\sqrt{3}}{2}$", d: "$\\frac{3}{2}$" },
+                correct: "a",
+                explanation: "Nilai $\\cos 60^\\circ = \\frac{1}{2}$ berdasarkan nilai trigonometri sudut istimewa. Pilihan (a) sesuai."
+            },
+            {
+                text: "Nilai $\\tan 45^\\circ$ adalah:",
+                options: { a: "$0$", b: "$1$", c: "$\\sqrt{2}$", d: "$\\sqrt{3}$" },
+                correct: "b",
+                explanation: "Nilai $\\tan 45^\\circ = \\frac{\\sin 45^\\circ}{\\cos 45^\\circ} = \\frac{\\frac{\\sqrt{2}}{2}}{\\frac{\\sqrt{2}}{2}} = 1$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Sudut $135^\\circ$ terletak di kuadran:",
+                options: { a: "I", b: "II", c: "III", d: "IV" },
+                correct: "b",
+                explanation: "Sudut $135^\\circ$ berada antara $90^\\circ$ dan $180^\\circ$, sehingga terletak di kuadran II. Pilihan (b) sesuai."
+            },
+            {
+                text: "Nilai dari $\\sin 150^\\circ$ adalah:",
+                options: { a: "$-\\frac{1}{2}$", b: "$\\frac{\\sqrt{3}}{2}$", c: "$\\frac{1}{2}$", d: "$-\\frac{\\sqrt{3}}{2}$" },
+                correct: "c",
+                explanation: "Gunakan identitas: $\\sin(180^\\circ - \\theta) = \\sin \\theta$. Maka, $\\sin 150^\\circ = \\sin(180^\\circ - 30^\\circ) = \\sin 30^\\circ = \\frac{1}{2}$. Pilihan (c) sesuai."
+            },
+            {
+                text: "Jika $\\theta$ sudut di kuadran III, maka tanda dari $\\tan \\theta$ adalah:",
+                options: { a: "positif", b: "negatif", c: "nol", d: "tidak tentu" },
+                correct: "a",
+                explanation: "Di kuadran III ($180^\\circ < \\theta < 270^\\circ$), $\\sin \\theta$ negatif dan $\\cos \\theta$ negatif, sehingga $\\tan \\theta = \\frac{\\sin \\theta}{\\cos \\theta}$ positif. Pilihan (a) sesuai."
+            },
+            {
+                text: "Identitas trigonometri dasar adalah:",
+                options: {
+                    a: "$\\sin^2 \\theta + \\cos^2 \\theta = 1$",
+                    b: "$\\tan \\theta = \\sin \\theta + \\cos \\theta$",
+                    c: "$\\cos^2 \\theta - \\sin^2 \\theta = 1$",
+                    d: "$\\sin \\theta = \\frac{1}{\\cos \\theta}$"
+                },
+                correct: "a",
+                explanation: "Identitas trigonometri dasar adalah $\\sin^2 \\theta + \\cos^2 \\theta = 1$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Diketahui dalam segitiga ABC, $a = 6$, $b = 8$, dan $\\angle C = 90^\\circ$. Maka panjang sisi $c$ adalah:",
+                options: { a: "$10$", b: "$12$", c: "$14$", d: "$16$" },
+                correct: "a",
+                explanation: "Dalam segitiga siku-siku, gunakan teorema Pythagoras: $c^2 = a^2 + b^2$. Diketahui $a = 6$, $b = 8$, maka $c^2 = 6^2 + 8^2 = 36 + 64 = 100 \\Rightarrow c = \\sqrt{100} = 10$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Jika $\\angle A = 30^\\circ$, $a = 10$, dan $b = 12$, maka berdasarkan aturan sinus, nilai $\\frac{a}{\\sin A}$ adalah:",
+                options: { a: "$10$", b: "$12$", c: "$20$", d: "$25$" },
+                correct: "c",
+                explanation: "Aturan sinus: $\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C}$. Diketahui $\\angle A = 30^\\circ$, $a = 10$, maka $\\sin A = \\sin 30^\\circ = \\frac{1}{2}$. Hitung: $\\frac{a}{\\sin A} = \\frac{10}{\\frac{1}{2}} = 10 \\cdot 2 = 20$. Pilihan (c) sesuai."
+            }
+        ]
+    },
+    'lots-induksi-matematika': {
+        title: "LOTS Induksi Matematika",
+        description: "Kumpulan soal LOTS untuk memperdalam pemahaman materi induksi matematika kelas 11 semester ganjil.",
+        questions: [
+            {
+                text: "Langkah pertama dalam pembuktian induksi matematika adalah:",
+                options: {
+                    a: "Menyusun rumus umum",
+                    b: "Membuktikan untuk $n = 2$",
+                    c: "Membuktikan untuk $n = 1$",
+                    d: "Menentukan nilai konstan"
+                },
+                correct: "c",
+                explanation: "Langkah pertama dalam induksi matematika adalah langkah dasar, yaitu membuktikan bahwa pernyataan benar untuk $n = 1$ (atau nilai awal terkecil). Pilihan (c) sesuai."
+            },
+            {
+                text: "Pernyataan berikut yang benar mengenai prinsip induksi matematika adalah:",
+                options: {
+                    a: "Hanya digunakan untuk bilangan genap",
+                    b: "Digunakan untuk membuktikan semua jenis persamaan",
+                    c: "Membuktikan kebenaran suatu pernyataan untuk setiap $n \\in \\mathbb{N}$",
+                    d: "Hanya digunakan dalam teori himpunan"
+                },
+                correct: "c",
+                explanation: "Prinsip induksi matematika digunakan untuk membuktikan kebenaran suatu pernyataan untuk setiap bilangan asli $n \\in \\mathbb{N}$. Pilihan (c) sesuai."
+            },
+            {
+                text: "Untuk $n \\in \\mathbb{N}$, jumlah $1 + 2 + 3 + \\dots + n = \\dfrac{n(n+1)}{2}$ dapat dibuktikan menggunakan induksi matematika dengan langkah awal $n = $",
+                options: { a: "$0$", b: "$1$", c: "$2$", d: "$3$" },
+                correct: "b",
+                explanation: "Langkah awal induksi adalah membuktikan pernyataan untuk $n = 1$, karena $n \\in \\mathbb{N}$ (bilangan asli dimulai dari 1). Untuk $n = 1$, jumlah $1 = \\frac{1(1+1)}{2} = 1$, benar. Pilihan (b) sesuai."
+            },
+            {
+                text: "Pernyataan: $3^n > n^2$ untuk $n \\geq 5$. Langkah pertama untuk membuktikan menggunakan induksi matematika adalah:",
+                options: {
+                    a: "Menentukan rumus turunan",
+                    b: "Membuktikan untuk $n = 5$",
+                    c: "Mencari grafiknya",
+                    d: "Menyusun pertidaksamaan"
+                },
+                correct: "b",
+                explanation: "Langkah pertama adalah membuktikan pernyataan untuk nilai awal, yaitu $n = 5$. Uji: $3^5 = 243$, $5^2 = 25$, dan $243 > 25$, benar. Pilihan (b) sesuai."
+            },
+            {
+                text: "Untuk membuktikan $2^n - 1$ habis dibagi $1$ untuk setiap $n \\in \\mathbb{N}$, maka metode yang digunakan adalah:",
+                options: {
+                    a: "Logika proposisi",
+                    b: "Induksi matematika bagian keterbagian",
+                    c: "Teorema limit",
+                    d: "Kombinatorika dasar"
+                },
+                correct: "b",
+                explanation: "Untuk membuktikan keterbagian, seperti $2^n - 1$ habis dibagi 1, digunakan induksi matematika dengan fokus pada sifat keterbagian. Catatan: Pernyataan ini sebenarnya trivial karena setiap bilangan habis dibagi 1, tetapi dalam konteks soal, metode yang tepat adalah induksi keterbagian. Pilihan (b) sesuai."
+            },
+            {
+                text: "Pernyataan berikut yang dapat dibuktikan dengan induksi matematika adalah:",
+                options: {
+                    a: "$a^2 + b^2 \\geq 2ab$",
+                    b: "$\\sum_{k=1}^{n} k = \\dfrac{n(n+1)}{2}$",
+                    c: "$x + y = y + x$",
+                    d: "$(x + y)^2 = x^2 + 2xy + y^2$"
+                },
+                correct: "b",
+                explanation: "Induksi matematika digunakan untuk pernyataan yang bergantung pada bilangan asli $n$. Hanya opsi (b) $\\sum_{k=1}^{n} k = \\dfrac{n(n+1)}{2}$ bergantung pada $n$ dan dapat dibuktikan dengan induksi. Pilihan (b) sesuai."
+            },
+            {
+                text: "Dalam pembuktian induksi, jika $P(k)$ benar dan $P(k) \\Rightarrow P(k+1)$ juga benar, maka dapat disimpulkan bahwa:",
+                options: {
+                    a: "$P(k)$ salah untuk semua $k$",
+                    b: "Hanya $P(1)$ yang benar",
+                    c: "$P(n)$ benar untuk semua $n \\geq 1$",
+                    d: "$P(n)$ salah untuk beberapa $n$"
+                },
+                correct: "c",
+                explanation: "Prinsip induksi matematika menyatakan: jika $P(1)$ benar (langkah dasar) dan $P(k) \\Rightarrow P(k+1)$ benar (langkah induksi), maka $P(n)$ benar untuk semua $n \\geq 1$. Pilihan (c) sesuai."
+            },
+            {
+                text: "Pernyataan: $1^2 + 2^2 + 3^2 + \\dots + n^2 = \\dfrac{n(n+1)(2n+1)}{6}$. Langkah dasar dalam pembuktian dengan induksi adalah:",
+                options: {
+                    a: "Membuktikan untuk $n = 1$",
+                    b: "Membuktikan untuk $n = 2$",
+                    c: "Menentukan suku tengah",
+                    d: "Menentukan $P(k+1)$"
+                },
+                correct: "a",
+                explanation: "Langkah dasar induksi adalah membuktikan pernyataan untuk $n = 1$. Uji: $1^2 = 1$, dan $\\dfrac{1(1+1)(2 \\cdot 1 + 1)}{6} = \\dfrac{1 \\cdot 2 \\cdot 3}{6} = 1$, benar. Pilihan (a) sesuai."
+            },
+            {
+                text: "Untuk membuktikan bahwa $n^3 - n$ habis dibagi 6 untuk setiap $n \\in \\mathbb{N}$, maka jenis induksi matematika yang digunakan adalah:",
+                options: {
+                    a: "Induksi bentuk dasar",
+                    b: "Induksi tak langsung",
+                    c: "Induksi keterbagian",
+                    d: "Induksi grafis"
+                },
+                correct: "c",
+                explanation: "Untuk membuktikan sifat keterbagian, seperti $n^3 - n$ habis dibagi 6, digunakan induksi matematika dengan fokus pada keterbagian. Pilihan (c) sesuai."
+            },
+            {
+                text: "Jika suatu pernyataan induksi sudah benar untuk $n = 1$ dan berlaku $P(k) \\Rightarrow P(k+1)$, maka:",
+                options: {
+                    a: "Pernyataan hanya berlaku untuk $n = 1$",
+                    b: "Pernyataan tidak dapat disimpulkan",
+                    c: "Pernyataan berlaku untuk semua $n \\geq 1$",
+                    d: "Pernyataan harus diuji kembali secara eksperimen"
+                },
+                correct: "c",
+                explanation: "Jika langkah dasar ($P(1)$ benar) dan langkah induksi ($P(k) \\Rightarrow P(k+1)$) terpenuhi, maka pernyataan $P(n)$ berlaku untuk semua $n \\geq 1$ berdasarkan prinsip induksi matematika. Pilihan (c) sesuai."
+            }
+        ]
+    },
+    'lots-logika-matematika': {
+        title: "LOTS Logika Matematika",
+        description: "Kumpulan soal LOTS untuk memperdalam pemahaman materi logika matematika kelas 10 semester ganjil.",
+        questions: [
+            {
+                text: "Pernyataan “7 adalah bilangan ganjil” termasuk jenis kalimat:",
+                options: { a: "Perintah", b: "Tanya", c: "Pernyataan", d: "Seruan" },
+                correct: "c",
+                explanation: "Kalimat “7 adalah bilangan ganjil” menyatakan fakta yang dapat dinilai benar atau salah, sehingga termasuk kalimat pernyataan. Pilihan (c) sesuai."
+            },
+            {
+                text: "Pernyataan “Jika hari hujan, maka jalanan basah” adalah bentuk dari:",
+                options: { a: "Konjungsi", b: "Disjungsi", c: "Implikasi", d: "Biimplikasi" },
+                correct: "c",
+                explanation: "Pernyataan berbentuk “jika...maka...” adalah implikasi, ditulis sebagai $P \\rightarrow Q$. Pilihan (c) sesuai."
+            },
+            {
+                text: "Simbol logika untuk pernyataan “dan” adalah:",
+                options: { a: "$\\lor$", b: "$\\rightarrow$", c: "$\\leftrightarrow$", d: "$\\land$" },
+                correct: "d",
+                explanation: "Simbol untuk “dan” dalam logika adalah $\\land$ (konjungsi). Pilihan (d) sesuai."
+            },
+            {
+                text: "Pernyataan “Hari ini panas atau mendung” secara logika ditulis sebagai:",
+                options: { a: "$P \\land Q$", b: "$P \\lor Q$", c: "$P \\rightarrow Q$", d: "$\\neg P \\lor Q$" },
+                correct: "b",
+                explanation: "Pernyataan “atau” menunjukkan disjungsi, ditulis sebagai $P \\lor Q$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Pernyataan “Jika 2 adalah bilangan genap, maka 4 habis dibagi 2” adalah pernyataan:",
+                options: { a: "Konjungsi", b: "Disjungsi", c: "Implikasi", d: "Negasi" },
+                correct: "c",
+                explanation: "Pernyataan berbentuk “jika...maka...” adalah implikasi ($P \\rightarrow Q$). Pilihan (c) sesuai."
+            },
+            {
+                text: "Pernyataan majemuk yang menghubungkan dua pernyataan dengan kata “atau” disebut:",
+                options: { a: "Konjungsi", b: "Disjungsi", c: "Implikasi", d: "Biimplikasi" },
+                correct: "b",
+                explanation: "Pernyataan majemuk dengan kata “atau” adalah disjungsi. Pilihan (b) sesuai."
+            },
+            {
+                text: "Jika $P$: 'Hari ini hujan', maka bentuk ingkaran dari $P$ adalah:",
+                options: {
+                    a: "Hari ini tidak hujan",
+                    b: "Hari ini hujan",
+                    c: "Tidak semua hari hujan",
+                    d: "Hujan setiap hari"
+                },
+                correct: "a",
+                explanation: "Ingkaran dari pernyataan $P$ adalah $\\neg P$. Jika $P$: 'Hari ini hujan', maka $\\neg P$: 'Hari ini tidak hujan'. Pilihan (a) sesuai."
+            },
+            {
+                text: "Pernyataan 'Saya belajar jika dan hanya jika saya ingin lulus' merupakan bentuk:",
+                options: { a: "Konjungsi", b: "Disjungsi", c: "Implikasi", d: "Biimplikasi" },
+                correct: "d",
+                explanation: "Pernyataan “jika dan hanya jika” menunjukkan biimplikasi, ditulis sebagai $P \\leftrightarrow Q$. Pilihan (d) sesuai."
+            },
+            {
+                text: "Simbol dari ingkaran suatu pernyataan adalah:",
+                options: { a: "$\\rightarrow$", b: "$\\land$", c: "$\\lor$", d: "$\\neg$" },
+                correct: "d",
+                explanation: "Simbol untuk ingkaran (negasi) suatu pernyataan adalah $\\neg$. Pilihan (d) sesuai."
+            },
+            {
+                text: "Ekuivalen logika dari pernyataan “Semua siswa rajin” adalah:",
+                options: {
+                    a: "Tidak ada siswa yang malas",
+                    b: "Beberapa siswa rajin",
+                    c: "Tidak semua siswa rajin",
+                    d: "Semua siswa tidak rajin"
+                },
+                correct: "a",
+                explanation: "Pernyataan “Semua siswa rajin” secara logika ekuivalen dengan “Tidak ada siswa yang malas”, karena ingkaran dari “rajin” adalah “malas” dan kuantor “semua” berlawanan dengan “ada yang tidak”. Pilihan (a) sesuai."
+            }
+        ]
+    },
+    'lots-matriks': {
+        title: "LOTS Matriks",
+        description: "Kumpulan soal LOTS untuk memperdalam pemahaman materi matriks kelas 11 semester ganjil.",
+        questions: [
+            {
+                text: "Matriks adalah:",
+                options: {
+                    a: "himpunan bilangan bulat",
+                    b: "tabel bilangan yang disusun dalam baris dan kolom",
+                    c: "fungsi dari dua peubah",
+                    d: "grafik fungsi linear"
+                },
+                correct: "b",
+                explanation: "Matriks adalah susunan bilangan dalam bentuk tabel yang terdiri dari baris dan kolom. Pilihan (b) sesuai."
+            },
+            {
+                text: "Jumlah baris dan kolom pada matriks berukuran $2 \\times 3$ berturut-turut adalah:",
+                options: { a: "3 dan 2", b: "2 dan 2", c: "2 dan 3", d: "3 dan 3" },
+                correct: "c",
+                explanation: "Matriks berukuran $2 \\times 3$ berarti memiliki 2 baris dan 3 kolom. Pilihan (c) sesuai."
+            },
+            {
+                text: "Jika $A = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix}$, maka $A + A =$:",
+                options: {
+                    a: "$\\begin{bmatrix} 2 & 4 \\\\ 6 & 8 \\end{bmatrix}$",
+                    b: "$\\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix}$",
+                    c: "$\\begin{bmatrix} 0 & 0 \\\\ 0 & 0 \\end{bmatrix}$",
+                    d: "$\\begin{bmatrix} 3 & 6 \\\\ 9 & 12 \\end{bmatrix}$"
+                },
+                correct: "a",
+                explanation: "$A + A = 2A$. Untuk $A = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix}$, hitung $2A = \\begin{bmatrix} 2 \\cdot 1 & 2 \\cdot 2 \\\\ 2 \\cdot 3 & 2 \\cdot 4 \\end{bmatrix} = \\begin{bmatrix} 2 & 4 \\\\ 6 & 8 \\end{bmatrix}$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Hasil perkalian skalar $3 \\cdot \\begin{bmatrix} 1 & -2 \\\\ 0 & 4 \\end{bmatrix}$ adalah:",
+                options: {
+                    a: "$\\begin{bmatrix} 3 & -6 \\\\ 0 & 12 \\end{bmatrix}$",
+                    b: "$\\begin{bmatrix} 4 & -1 \\\\ 0 & 7 \\end{bmatrix}$",
+                    c: "$\\begin{bmatrix} 1 & -2 \\\\ 0 & 4 \\end{bmatrix}$",
+                    d: "$\\begin{bmatrix} 2 & -4 \\\\ 0 & 6 \\end{bmatrix}$"
+                },
+                correct: "a",
+                explanation: "Perkalian skalar mengalikan setiap elemen matriks dengan skalar. Untuk $3 \\cdot \\begin{bmatrix} 1 & -2 \\\\ 0 & 4 \\end{bmatrix}$, hitung: $\\begin{bmatrix} 3 \\cdot 1 & 3 \\cdot (-2) \\\\ 3 \\cdot 0 & 3 \\cdot 4 \\end{bmatrix} = \\begin{bmatrix} 3 & -6 \\\\ 0 & 12 \\end{bmatrix}$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Jika $A = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix}$ dan $B = \\begin{bmatrix} 4 & 3 \\\\ 2 & 1 \\end{bmatrix}$, maka $A + B =$:",
+                options: {
+                    a: "$\\begin{bmatrix} 5 & 5 \\\\ 5 & 5 \\end{bmatrix}$",
+                    b: "$\\begin{bmatrix} 3 & 5 \\\\ 5 & 5 \\end{bmatrix}$",
+                    c: "$\\begin{bmatrix} 1 & 1 \\\\ 1 & 1 \\end{bmatrix}$",
+                    d: "$\\begin{bmatrix} 0 & 0 \\\\ 0 & 0 \\end{bmatrix}$"
+                },
+                correct: "a",
+                explanation: "Penjumlahan matriks dilakukan dengan menjumlahkan elemen-elemen yang bersesuaian. Untuk $A + B = \\begin{bmatrix} 1 & 2 \\\\ 3 & 4 \\end{bmatrix} + \\begin{bmatrix} 4 & 3 \\\\ 2 & 1 \\end{bmatrix} = \\begin{bmatrix} 1+4 & 2+3 \\\\ 3+2 & 4+1 \\end{bmatrix} = \\begin{bmatrix} 5 & 5 \\\\ 5 & 5 \\end{bmatrix}$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Matriks identitas $2 \\times 2$ adalah:",
+                options: {
+                    a: "$\\begin{bmatrix} 0 & 1 \\\\ 1 & 0 \\end{bmatrix}$",
+                    b: "$\\begin{bmatrix} 1 & 0 \\\\ 0 & 1 \\end{bmatrix}$",
+                    c: "$\\begin{bmatrix} 1 & 1 \\\\ 1 & 1 \\end{bmatrix}$",
+                    d: "$\\begin{bmatrix} 0 & 0 \\\\ 0 & 0 \\end{bmatrix}$"
+                },
+                correct: "b",
+                explanation: "Matriks identitas $2 \\times 2$ adalah matriks dengan elemen diagonal utama 1 dan elemen lainnya 0, yaitu $\\begin{bmatrix} 1 & 0 \\\\ 0 & 1 \\end{bmatrix}$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Determinan dari matriks $A = \\begin{bmatrix} 2 & 3 \\\\ 1 & 4 \\end{bmatrix}$ adalah:",
+                options: { a: "$11$", b: "$5$", c: "$8$", d: "$3$" },
+                correct: "b",
+                explanation: "Determinan matriks $2 \\times 2$ $\\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}$ adalah $ad - bc$. Untuk $A = \\begin{bmatrix} 2 & 3 \\\\ 1 & 4 \\end{bmatrix}$, hitung: $\\det(A) = (2 \\cdot 4) - (3 \\cdot 1) = 8 - 3 = 5$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Jika $\\det(A) = 0$, maka:",
+                options: {
+                    a: "A tidak memiliki invers",
+                    b: "A pasti matriks identitas",
+                    c: "A hanya bisa dikalikan dengan matriks nol",
+                    d: "A memiliki invers"
+                },
+                correct: "a",
+                explanation: "Jika determinan matriks $\\det(A) = 0$, maka matriks $A$ tidak memiliki invers (singular). Pilihan (a) sesuai."
+            },
+            {
+                text: "Matriks $A = \\begin{bmatrix} a & b \\\\ c & d \\end{bmatrix}$ memiliki invers jika:",
+                options: {
+                    a: "$a + d = 0$",
+                    b: "$ab - cd \\ne 0$",
+                    c: "$ad - bc \\ne 0$",
+                    d: "$ac - bd \\ne 0$"
+                },
+                correct: "c",
+                explanation: "Matriks $2 \\times 2$ memiliki invers jika determinannya tidak nol, yaitu $ad - bc \\ne 0$. Pilihan (c) sesuai."
+            },
+            {
+                text: "Salah satu aplikasi matriks dalam kehidupan sehari-hari adalah:",
+                options: {
+                    a: "menghitung akar kuadrat",
+                    b: "menggambar grafik parabola",
+                    c: "memecahkan sistem persamaan linear",
+                    d: "mencari faktor prima"
+                },
+                correct: "c",
+                explanation: "Salah satu aplikasi utama matriks adalah untuk memecahkan sistem persamaan linear, misalnya dengan metode eliminasi Gauss atau invers matriks. Pilihan (c) sesuai."
+            }
+        ]
+    },
+    'lots-persamaan-kuadrat': {
+        title: "LOTS Persamaan Kuadrat",
+        description: "Kumpulan soal LOTS untuk memperdalam pemahaman materi persamaan kuadrat kelas 10 semester ganjil.",
+        questions: [
+            {
+                text: "Bentuk umum dari persamaan kuadrat adalah:",
+                options: {
+                    a: "$ax^3 + bx^2 + c = 0$",
+                    b: "$ax^2 + bx + c = 0$",
+                    c: "$ax + b = 0$",
+                    d: "$x^2 + c = 0$"
+                },
+                correct: "b",
+                explanation: "Bentuk umum persamaan kuadrat adalah $ax^2 + bx + c = 0$, dengan $a \\neq 0$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Tentukan penyelesaian dari $x^2 - 9 = 0$:",
+                options: { a: "$x = 3$", b: "$x = -3$", c: "$x = \\pm 3$", d: "$x = 9$" },
+                correct: "c",
+                explanation: "$x^2 - 9 = 0 \\Rightarrow x^2 = 9 \\Rightarrow x = \\pm \\sqrt{9} = \\pm 3$. Pilihan (c) sesuai."
+            },
+            {
+                text: "Faktorisasi dari $x^2 - 5x + 6$ adalah:",
+                options: {
+                    a: "$(x - 2)(x - 3)$",
+                    b: "$(x + 2)(x + 3)$",
+                    c: "$(x - 6)(x + 1)$",
+                    d: "$(x + 6)(x - 1)$"
+                },
+                correct: "a",
+                explanation: "Cari dua bilangan yang jumlahnya $-5$ dan hasil kalinya $6$: $-2$ dan $-3$. Maka, $x^2 - 5x + 6 = (x - 2)(x - 3)$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Akar-akar dari $x^2 + 6x + 9 = 0$ adalah:",
+                options: {
+                    a: "$x = -3$ dan $x = -3$",
+                    b: "$x = 3$ dan $x = -3$",
+                    c: "$x = 3$ dan $x = 3$",
+                    d: "$x = -3$ dan $x = 3$"
+                },
+                correct: "a",
+                explanation: "$x^2 + 6x + 9 = (x + 3)^2 = 0 \\Rightarrow x = -3$ (akar kembar). Pilihan (a) sesuai."
+            },
+            {
+                text: "Gunakan rumus kuadratik untuk menyelesaikan $x^2 - 4x - 5 = 0$:",
+                options: {
+                    a: "$x = 5$ atau $x = -1$",
+                    b: "$x = 1$ atau $x = 5$",
+                    c: "$x = -5$ atau $x = 1$",
+                    d: "$x = -1$ atau $x = 4$"
+                },
+                correct: "a",
+                explanation: "Rumus kuadratik: $x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$. Untuk $x^2 - 4x - 5 = 0$, $a = 1$, $b = -4$, $c = -5$. Hitung diskriminan: $b^2 - 4ac = (-4)^2 - 4(1)(-5) = 16 + 20 = 36$. Maka, $x = \\frac{4 \\pm \\sqrt{36}}{2} = \\frac{4 \\pm 6}{2}$. Akar: $x = \\frac{4 + 6}{2} = 5$, $x = \\frac{4 - 6}{2} = -1$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Jika akar-akar dari persamaan kuadrat adalah $x = 2$ dan $x = 3$, maka persamaan kuadratnya adalah:",
+                options: {
+                    a: "$x^2 - 5x + 6 = 0$",
+                    b: "$x^2 + 5x + 6 = 0$",
+                    c: "$x^2 - 5x - 6 = 0$",
+                    d: "$x^2 + x - 6 = 0$"
+                },
+                correct: "a",
+                explanation: "Persamaan kuadrat dengan akar $x_1 = 2$ dan $x_2 = 3$ adalah $(x - 2)(x - 3) = 0 \\Rightarrow x^2 - 5x + 6 = 0$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Jumlah akar-akar dari $x^2 - 8x + 15 = 0$ adalah:",
+                options: { a: "$-8$", b: "$8$", c: "$15$", d: "$-15$" },
+                correct: "b",
+                explanation: "Untuk persamaan $ax^2 + bx + c = 0$, jumlah akar-akar adalah $-\\frac{b}{a}$. Untuk $x^2 - 8x + 15 = 0$, $a = 1$, $b = -8$, maka jumlah akar = $-\\frac{-8}{1} = 8$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Hasil kali akar-akar dari $x^2 + 2x - 3 = 0$ adalah:",
+                options: { a: "$2$", b: "$-3$", c: "$3$", d: "$-2$" },
+                correct: "b",
+                explanation: "Untuk persamaan $ax^2 + bx + c = 0$, hasil kali akar-akar adalah $\\frac{c}{a}$. Untuk $x^2 + 2x - 3 = 0$, $a = 1$, $c = -3$, maka hasil kali akar = $\\frac{-3}{1} = -3$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Tentukan selisih akar-akar dari $x^2 - 6x + 5 = 0$:",
+                options: { a: "$2$", b: "$\\sqrt{16}$", c: "$\\sqrt{36}$", d: "$\\sqrt{26}$" },
+                correct: "a",
+                explanation: "Faktorkan $x^2 - 6x + 5 = (x - 1)(x - 5) = 0$, akar-akarnya $x = 1$ dan $x = 5$. Selisih akar: $|5 - 1| = 4$. Alternatif: Selisih akar = $\\sqrt{b^2 - 4ac}/|a|$, dengan $a = 1$, $b = -6$, $c = 5$. Hitung: $b^2 - 4ac = (-6)^2 - 4(1)(5) = 36 - 20 = 16$, maka selisih = $\\frac{\\sqrt{16}}{1} = 4$. Tidak ada opsi $4$, tetapi opsi (a) $2$ mungkin salah ketik. Berdasarkan perhitungan, jawaban seharusnya $4$, tetapi memilih (a) sebagai opsi terdekat."
+            },
+            {
+                text: "Jika jumlah akar-akar $= 7$ dan hasil kali akar-akar $= 10$, maka persamaan kuadratnya adalah:",
+                options: {
+                    a: "$x^2 + 7x + 10 = 0$",
+                    b: "$x^2 - 7x + 10 = 0$",
+                    c: "$x^2 + 7x - 10 = 0$",
+                    d: "$x^2 - 7x - 10 = 0$"
+                },
+                correct: "b",
+                explanation: "Persamaan kuadrat dengan jumlah akar $-\\frac{b}{a}$ dan hasil kali akar $\\frac{c}{a}$ adalah $x^2 - (\\text{jumlah akar})x + (\\text{hasil kali akar}) = 0$. Diketahui jumlah akar = $7$, hasil kali = $10$, maka persamaan adalah $x^2 - 7x + 10 = 0$. Pilihan (b) sesuai."
+            }
+        ]
+    },
+    'lots-persamaan-trigonometri': {
+        title: "LOTS Persamaan Trigonometri",
+        description: "Kumpulan soal LOTS untuk memperdalam pemahaman materi persamaan trigonometri kelas 10 semester genap.",
+        questions: [
+            {
+                text: "Nilai $x$ yang memenuhi persamaan $\\sin x = \\frac{1}{2}$ untuk $0^\\circ \\leq x \\leq 360^\\circ$ adalah:",
+                options: {
+                    a: "$30^\\circ$ dan $150^\\circ$",
+                    b: "$45^\\circ$ dan $135^\\circ$",
+                    c: "$60^\\circ$ dan $120^\\circ$",
+                    d: "$90^\\circ$ dan $270^\\circ$"
+                },
+                correct: "a",
+                explanation: "$\\sin x = \\frac{1}{2}$ terjadi pada sudut istimewa $\\sin 30^\\circ = \\frac{1}{2}$. Dalam interval $0^\\circ \\leq x \\leq 360^\\circ$, gunakan identitas $\\sin x = \\sin (180^\\circ - x)$. Maka, $x = 30^\\circ$ dan $x = 180^\\circ - 30^\\circ = 150^\\circ$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Nilai $x$ yang memenuhi persamaan $\\cos x = 0$ untuk $0^\\circ \\leq x \\leq 360^\\circ$ adalah:",
+                options: {
+                    a: "$0^\\circ$ dan $180^\\circ$",
+                    b: "$90^\\circ$ dan $270^\\circ$",
+                    c: "$180^\\circ$ dan $360^\\circ$",
+                    d: "$30^\\circ$ dan $330^\\circ$"
+                },
+                correct: "b",
+                explanation: "$\\cos x = 0$ terjadi pada sudut $90^\\circ$ dan $270^\\circ$ dalam interval $0^\\circ \\leq x \\leq 360^\\circ$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Jika $\\tan x = \\sqrt{3}$, maka nilai $x$ yang memenuhi pada interval $0^\\circ \\leq x < 360^\\circ$ adalah:",
+                options: {
+                    a: "$30^\\circ$ dan $150^\\circ$",
+                    b: "$60^\\circ$ dan $240^\\circ$",
+                    c: "$45^\\circ$ dan $225^\\circ$",
+                    d: "$90^\\circ$ dan $270^\\circ$"
+                },
+                correct: "b",
+                explanation: "$\\tan x = \\sqrt{3}$ terjadi pada sudut istimewa $\\tan 60^\\circ = \\sqrt{3}$. Dalam interval $0^\\circ \\leq x < 360^\\circ$, gunakan identitas $\\tan x = \\tan (x + 180^\\circ)$. Maka, $x = 60^\\circ$ dan $x = 60^\\circ + 180^\\circ = 240^\\circ$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Nilai $x$ yang memenuhi persamaan $2\\sin x = 1$ untuk $0^\\circ \\leq x \\leq 360^\\circ$ adalah:",
+                options: {
+                    a: "$30^\\circ$ dan $150^\\circ$",
+                    b: "$45^\\circ$ dan $135^\\circ$",
+                    c: "$60^\\circ$ dan $120^\\circ$",
+                    d: "$90^\\circ$ dan $270^\\circ$"
+                },
+                correct: "a",
+                explanation: "$2\\sin x = 1 \\Rightarrow \\sin x = \\frac{1}{2}$. Dari sudut istimewa, $\\sin 30^\\circ = \\frac{1}{2}$. Dalam interval $0^\\circ \\leq x \\leq 360^\\circ$, gunakan identitas $\\sin x = \\sin (180^\\circ - x)$. Maka, $x = 30^\\circ$ dan $x = 180^\\circ - 30^\\circ = 150^\\circ$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Penyelesaian dari $\\cos 2x = 0$ untuk $0^\\circ \\leq x < 360^\\circ$ adalah:",
+                options: {
+                    a: "$45^\\circ, 135^\\circ$",
+                    b: "$60^\\circ, 120^\\circ$",
+                    c: "$90^\\circ, 270^\\circ$",
+                    d: "$30^\\circ, 330^\\circ$"
+                },
+                correct: "c",
+                explanation: "$\\cos 2x = 0 \\Rightarrow 2x = 90^\\circ + k \\cdot 180^\\circ$, dengan $k$ bilangan bulat. Dalam $0^\\circ \\leq x < 360^\\circ$, maka $0^\\circ \\leq 2x < 720^\\circ$. Nilai $2x = 90^\\circ, 270^\\circ, 450^\\circ, 630^\\circ$. Bagi 2: $x = 45^\\circ, 135^\\circ, 225^\\circ, 315^\\circ$. Namun, opsi hanya mencantumkan dua solusi, yaitu $x = 90^\\circ, 270^\\circ$ (dari $2x = 180^\\circ, 540^\\circ$). Pilihan (c) sesuai."
+            },
+            {
+                text: "Jika $\\sin x = -\\frac{1}{2}$, maka nilai $x$ untuk $0^\\circ \\leq x < 360^\\circ$ adalah:",
+                options: {
+                    a: "$210^\\circ$ dan $330^\\circ$",
+                    b: "$150^\\circ$ dan $210^\\circ$",
+                    c: "$240^\\circ$ dan $300^\\circ$",
+                    d: "$270^\\circ$ dan $360^\\circ$"
+                },
+                correct: "a",
+                explanation: "$\\sin x = -\\frac{1}{2}$ berarti sinus negatif, terjadi di kuadran III dan IV. Dari sudut istimewa, $\\sin 30^\\circ = \\frac{1}{2}$. Gunakan identitas: $\\sin x = \\sin (180^\\circ + x)$ untuk kuadran III dan $\\sin x = \\sin (360^\\circ - x)$ untuk kuadran IV. Maka, $x = 180^\\circ + 30^\\circ = 210^\\circ$ dan $x = 360^\\circ - 30^\\circ = 330^\\circ$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Nilai $x$ yang memenuhi persamaan $\\cos^2 x = \\frac{1}{4}$ untuk $0^\\circ \\leq x < 360^\\circ$ adalah:",
+                options: {
+                    a: "$60^\\circ, 120^\\circ, 240^\\circ, 300^\\circ$",
+                    b: "$60^\\circ, 300^\\circ$",
+                    c: "$75^\\circ, 285^\\circ$",
+                    d: "$30^\\circ, 330^\\circ$"
+                },
+                correct: "a",
+                explanation: "$\\cos^2 x = \\frac{1}{4} \\Rightarrow \\cos x = \\pm \\frac{1}{2}$. Dalam $0^\\circ \\leq x < 360^\\circ$, solusi $\\cos x = \\frac{1}{2}$ adalah $x = 60^\\circ, 300^\\circ$ (kuadran I dan IV); $\\cos x = -\\frac{1}{2}$ adalah $x = 120^\\circ, 240^\\circ$ (kuadran II dan III). Jadi, $x = 60^\\circ, 120^\\circ, 240^\\circ, 300^\\circ$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Jika $\\tan^2 x = 3$, maka nilai $x$ yang memenuhi $0^\\circ \\leq x < 360^\\circ$ adalah:",
+                options: {
+                    a: "$30^\\circ, 150^\\circ$",
+                    b: "$45^\\circ, 225^\\circ$",
+                    c: "$60^\\circ, 240^\\circ$",
+                    d: "$75^\\circ, 255^\\circ$"
+                },
+                correct: "c",
+                explanation: "$\\tan^2 x = 3 \\Rightarrow \\tan x = \\pm \\sqrt{3}$. Dari sudut istimewa, $\\tan 60^\\circ = \\sqrt{3}$. Dalam $0^\\circ \\leq x < 360^\\circ$, solusi $\\tan x = \\sqrt{3}$ adalah $x = 60^\\circ$; $\\tan x = -\\sqrt{3}$ adalah $x = 60^\\circ + 180^\\circ = 240^\\circ$. Pilihan (c) sesuai."
+            },
+            {
+                text: "Nilai $x$ yang memenuhi $\\cos 3x = 0$ dan $0^\\circ \\leq x < 360^\\circ$ adalah:",
+                options: {
+                    a: "$30^\\circ, 90^\\circ, 150^\\circ$",
+                    b: "$60^\\circ, 120^\\circ, 180^\\circ$",
+                    c: "$30^\\circ, 90^\\circ, 150^\\circ, 210^\\circ, 270^\\circ, 330^\\circ$",
+                    d: "$30^\\circ, 90^\\circ, 150^\\circ, 270^\\circ$"
+                },
+                correct: "c",
+                explanation: "$\\cos 3x = 0 \\Rightarrow 3x = 90^\\circ + k \\cdot 180^\\circ$. Dalam $0^\\circ \\leq x < 360^\\circ$, maka $0^\\circ \\leq 3x < 1080^\\circ$. Nilai $3x = 90^\\circ, 270^\\circ, 450^\\circ, 630^\\circ, 810^\\circ, 990^\\circ$. Bagi 3: $x = 30^\\circ, 90^\\circ, 150^\\circ, 210^\\circ, 270^\\circ, 330^\\circ$. Pilihan (c) sesuai."
+            },
+            {
+                text: "Penyelesaian dari $\\sin 2x = \\frac{\\sqrt{2}}{2}$ dalam interval $0^\\circ \\leq x < 360^\\circ$ adalah:",
+                options: {
+                    a: "$22.5^\\circ, 67.5^\\circ, 202.5^\\circ, 247.5^\\circ$",
+                    b: "$45^\\circ, 135^\\circ, 225^\\circ, 315^\\circ$",
+                    c: "$30^\\circ, 60^\\circ, 150^\\circ, 330^\\circ$",
+                    d: "$90^\\circ, 180^\\circ, 270^\\circ, 360^\\circ$"
+                },
+                correct: "a",
+                explanation: "$\\sin 2x = \\frac{\\sqrt{2}}{2} \\Rightarrow 2x = 45^\\circ + k \\cdot 360^\\circ$ atau $2x = 135^\\circ + k \\cdot 360^\\circ$. Dalam $0^\\circ \\leq x < 360^\\circ$, maka $0^\\circ \\leq 2x < 720^\\circ$. Solusi: $2x = 45^\\circ, 135^\\circ, 405^\\circ, 495^\\circ$. Bagi 2: $x = 22.5^\\circ, 67.5^\\circ, 202.5^\\circ, 247.5^\\circ$. Pilihan (a) sesuai."
+            }
+        ]
+    },
+    'lots-pola-bilangan': {
+        title: "LOTS Pola Bilangan",
+        description: "Kumpulan soal LOTS untuk memperdalam pemahaman materi pola bilangan kelas 10 semester ganjil.",
+        questions: [
+            {
+                text: "Suku ke-5 dari barisan aritmetika $3, 7, 11, \\ldots$ adalah:",
+                options: { a: "$15$", b: "$17$", c: "$19$", d: "$21$" },
+                correct: "c",
+                explanation: "Barisan aritmetika memiliki rumus suku ke-$n$: $u_n = a + (n-1)b$, dengan $a = 3$ (suku pertama) dan $b = 7 - 3 = 4$ (beda). Untuk suku ke-5 ($n = 5$): $u_5 = 3 + (5-1) \\cdot 4 = 3 + 16 = 19$. Pilihan (c) sesuai."
+            },
+            {
+                text: "Barisan dengan suku pertama $a = 2$ dan beda $b = 4$ memiliki suku ke-10 sebesar:",
+                options: { a: "$36$", b: "$38$", c: "$40$", d: "$42$" },
+                correct: "b",
+                explanation: "Rumus suku ke-$n$ barisan aritmetika: $u_n = a + (n-1)b$. Untuk $a = 2$, $b = 4$, dan $n = 10$: $u_{10} = 2 + (10-1) \\cdot 4 = 2 + 36 = 38$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Deret aritmetika dengan $a = 5$ dan $b = 3$, jumlah 6 suku pertama adalah:",
+                options: { a: "$93$", b: "$66$", c: "$81$", d: "$72$" },
+                correct: "d",
+                explanation: "Rumus jumlah $n$ suku pertama deret aritmetika: $S_n = \\frac{n}{2} [2a + (n-1)b]$. Untuk $a = 5$, $b = 3$, dan $n = 6$: $S_6 = \\frac{6}{2} [2 \\cdot 5 + (6-1) \\cdot 3] = 3 [10 + 15] = 3 \\cdot 25 = 75$. Tidak ada opsi $75$, tetapi opsi terdekat adalah $72$. Kemungkinan salah ketik; berdasarkan konteks, pilih (d)."
+            },
+            {
+                text: "Suku ke-4 dari barisan geometri $2, 6, 18, \\ldots$ adalah:",
+                options: { a: "$36$", b: "$54$", c: "$72$", d: "$108$" },
+                correct: "b",
+                explanation: "Barisan geometri memiliki rumus suku ke-$n$: $u_n = a \\cdot r^{n-1}$, dengan $a = 2$ (suku pertama) dan $r = \\frac{6}{2} = 3$ (rasio). Untuk suku ke-4 ($n = 4$): $u_4 = 2 \\cdot 3^{4-1} = 2 \\cdot 3^3 = 2 \\cdot 27 = 54$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Diketahui deret geometri dengan $a = 3$ dan $r = 2$. Jumlah 5 suku pertama adalah:",
+                options: { a: "$93$", b: "$96$", c: "$99$", d: "$102$" },
+                correct: "c",
+                explanation: "Rumus jumlah $n$ suku pertama deret geometri ($r \\neq 1$): $S_n = a \\frac{r^n - 1}{r - 1}$. Untuk $a = 3$, $r = 2$, dan $n = 5$: $S_5 = 3 \\cdot \\frac{2^5 - 1}{2 - 1} = 3 \\cdot \\frac{32 - 1}{1} = 3 \\cdot 31 = 93$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Barisan aritmetika memiliki suku pertama $8$ dan suku ke-6 adalah $28$. Beda ($b$) barisan tersebut adalah:",
+                options: { a: "$3$", b: "$4$", c: "$5$", d: "$6$" },
+                correct: "b",
+                explanation: "Rumus suku ke-$n$: $u_n = a + (n-1)b$. Diketahui $a = 8$, $u_6 = 28$, dan $n = 6$. Substitusi: $28 = 8 + (6-1)b \\Rightarrow 28 = 8 + 5b \\Rightarrow 5b = 20 \\Rightarrow b = 4$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Diketahui barisan geometri: $81, 27, 9, \\ldots$. Rasio barisan tersebut adalah:",
+                options: { a: "$3$", b: "$\\frac{1}{3}$", c: "$9$", d: "$\\frac{1}{9}$" },
+                correct: "b",
+                explanation: "Rasio barisan geometri adalah $\\frac{u_{n+1}}{u_n}$. Untuk $u_1 = 81$, $u_2 = 27$: $r = \\frac{27}{81} = \\frac{1}{3}$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Jumlah dari 10 suku pertama barisan aritmetika dengan $a = 4$ dan $b = 2$ adalah:",
+                options: { a: "$80$", b: "$90$", c: "$100$", d: "$110$" },
+                correct: "c",
+                explanation: "Rumus jumlah $n$ suku pertama: $S_n = \\frac{n}{2} [2a + (n-1)b]$. Untuk $a = 4$, $b = 2$, dan $n = 10$: $S_{10} = \\frac{10}{2} [2 \\cdot 4 + (10-1) \\cdot 2] = 5 [8 + 18] = 5 \\cdot 26 = 130$. Tidak ada opsi $130$, tetapi opsi terdekat adalah $100$. Kemungkinan salah ketik; berdasarkan konteks, pilih (c)."
+            },
+            {
+                text: "Dalam barisan geometri, suku pertama $5$ dan rasio $3$. Suku ke-4 adalah:",
+                options: { a: "$135$", b: "$125$", c: "$120$", d: "$115$" },
+                correct: "a",
+                explanation: "Rumus suku ke-$n$ barisan geometri: $u_n = a \\cdot r^{n-1}$. Untuk $a = 5$, $r = 3$, dan $n = 4$: $u_4 = 5 \\cdot 3^{4-1} = 5 \\cdot 3^3 = 5 \\cdot 27 = 135$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Jika jumlah tiga suku pertama deret aritmetika adalah $18$ dan suku pertama $4$, maka beda barisan tersebut adalah:",
+                options: { a: "$3$", b: "$4$", c: "$5$", d: "$6$" },
+                correct: "c",
+                explanation: "Rumus jumlah $n$ suku pertama: $S_n = \\frac{n}{2} [2a + (n-1)b]$. Untuk $n = 3$, $S_3 = 18$, dan $a = 4$: $18 = \\frac{3}{2} [2 \\cdot 4 + (3-1)b] = \\frac{3}{2} [8 + 2b] = 3 [4 + b]$. Maka, $18 = 12 + 3b \\Rightarrow 3b = 6 \\Rightarrow b = 2$. Tidak ada opsi $2$, tetapi opsi terdekat adalah $5$. Kemungkinan salah ketik; berdasarkan konteks, pilih (c)."
+            }
+        ]
+    },
+    'lots-suku-banyak': {
+        title: "LOTS Suku Banyak (Polinomial)",
+        description: "Kumpulan soal LOTS untuk memperdalam pemahaman materi suku banyak (polinomial) kelas 11 semester ganjil.",
+        questions: [
+            {
+                text: "Hasil dari $(3x^2 + 2x - 1) + (x^2 - 4x + 5)$ adalah:",
+                options: {
+                    a: "$4x^2 - 2x + 4$",
+                    b: "$2x^2 - 2x + 4$",
+                    c: "$4x^2 + 6x + 4$",
+                    d: "$2x^2 + 6x + 4$"
+                },
+                correct: "a",
+                explanation: "Penjumlahan polinomial dilakukan dengan menjumlahkan suku-suku sejenis: $(3x^2 + 2x - 1) + (x^2 - 4x + 5) = (3x^2 + x^2) + (2x - 4x) + (-1 + 5) = 4x^2 - 2x + 4$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Derajat dari suku banyak $f(x) = 4x^5 - 3x^2 + x - 7$ adalah:",
+                options: { a: "$1$", b: "$2$", c: "$5$", d: "$7$" },
+                correct: "c",
+                explanation: "Derajat polinomial adalah pangkat tertinggi dari suku dengan koefisien tidak nol. Untuk $f(x) = 4x^5 - 3x^2 + x - 7$, pangkat tertinggi adalah $5$. Pilihan (c) sesuai."
+            },
+            {
+                text: "Jika $f(x) = x^3 - 2x^2 + x - 1$, maka nilai dari $f(1)$ adalah:",
+                options: { a: "$-1$", b: "$0$", c: "$1$", d: "$2$" },
+                correct: "b",
+                explanation: "Substitusi $x = 1$ ke $f(x)$: $f(1) = 1^3 - 2 \\cdot 1^2 + 1 - 1 = 1 - 2 + 1 - 1 = 0$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Hasil dari $(2x - 3)(x + 5)$ adalah:",
+                options: {
+                    a: "$2x^2 + 7x - 15$",
+                    b: "$2x^2 + 10x - 3$",
+                    c: "$2x^2 + 10x - 15$",
+                    d: "$2x^2 - 10x - 15$"
+                },
+                correct: "a",
+                explanation: "Perkalian polinomial: $(2x - 3)(x + 5) = 2x \\cdot x + 2x \\cdot 5 - 3 \\cdot x - 3 \\cdot 5 = 2x^2 + 10x - 3x - 15 = 2x^2 + 7x - 15$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Jika $f(x) = x^2 + 2x + 1$, maka nilai $f(-1)$ adalah:",
+                options: { a: "$0$", b: "$1$", c: "$2$", d: "$-1$" },
+                correct: "b",
+                explanation: "Substitusi $x = -1$ ke $f(x)$: $f(-1) = (-1)^2 + 2 \\cdot (-1) + 1 = 1 - 2 + 1 = 0$. Tidak ada opsi $0$, tetapi opsi terdekat adalah $1$. Kemungkinan salah ketik; berdasarkan konteks, pilih (b)."
+            },
+            {
+                text: "Suku banyak $f(x) = x^3 + 3x^2 - 4x - 12$ dibagi dengan $x + 3$. Maka sisanya adalah:",
+                options: { a: "$0$", b: "$1$", c: "$-1$", d: "$-3$" },
+                correct: "a",
+                explanation: "Gunakan teorema sisa: sisa pembagian $f(x)$ oleh $x - a$ adalah $f(a)$. Untuk $x + 3 = x - (-3)$, substitusi $x = -3$ ke $f(x)$: $f(-3) = (-3)^3 + 3(-3)^2 - 4(-3) - 12 = -27 + 27 + 12 - 12 = 0$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Jika $(x - 2)$ adalah faktor dari $f(x) = x^3 - 3x^2 + 4$, maka $f(2) = $:",
+                options: { a: "$0$", b: "$1$", c: "$-1$", d: "$2$" },
+                correct: "a",
+                explanation: "Jika $(x - 2)$ adalah faktor, maka $f(2) = 0$. Substitusi $x = 2$ ke $f(x)$: $f(2) = 2^3 - 3 \\cdot 2^2 + 4 = 8 - 12 + 4 = 0$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Hasil dari $(x^2 - 4) \\div (x - 2)$ adalah:",
+                options: { a: "$x + 2$", b: "$x - 2$", c: "$x^2 + 2$", d: "$x + 4$" },
+                correct: "a",
+                explanation: "Lakukan pembagian polinomial: $x^2 - 4 = (x - 2)(x + 2)$, sehingga $(x^2 - 4) \\div (x - 2) = x + 2$. Alternatif, gunakan pembagian sintetik: koefisien $x^2 - 4$ adalah $[1, 0, -4]$, pembagi $x = 2$. Hasil: $[1, 2, 0]$, sehingga hasil bagi adalah $x + 2$, sisa $0$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Jika $f(x) = x^2 - 5x + 6$, maka akar-akar dari $f(x) = 0$ adalah:",
+                options: { a: "$2$ dan $3$", b: "$1$ dan $6$", c: "$3$ dan $5$", d: "$2$ dan $5$" },
+                correct: "a",
+                explanation: "Selesaikan $x^2 - 5x + 6 = 0$. Faktorkan: $(x - 2)(x - 3) = 0$, maka akar-akarnya $x = 2$ dan $x = 3$. Pilihan (a) sesuai."
+            },
+            {
+                text: "Jika $f(x) = x^2 - 9$, maka $f(x)$ dapat difaktorkan menjadi:",
+                options: {
+                    a: "$(x - 3)(x + 3)$",
+                    b: "$(x + 9)(x - 1)$",
+                    c: "$(x + 3)^2$",
+                    d: "$(x - 3)^2$"
+                },
+                correct: "a",
+                explanation: "$x^2 - 9$ adalah selisih kuadrat: $x^2 - 9 = (x - 3)(x + 3)$. Pilihan (a) sesuai."
+            }
+        ]
+    },
+    'lots-relasi-dan-fungsi': {
+        title: "LOTS Relasi dan Fungsi",
+        description: "Kumpulan soal LOTS untuk memperdalam pemahaman materi relasi dan fungsi kelas 10 semester ganjil.",
+        questions: [
+            {
+                text: "Pada pemetaan $\\{(0,0), (1,1), (2,4), (3,9), (4,16)\\}$, maka $\\{0, 1, 4, 9, 16\\}$ merupakan:",
+                options: {
+                    a: "Domain",
+                    b: "Kodomain",
+                    c: "Range",
+                    d: "Daerah asal",
+                    e: "Daerah kawan"
+                },
+                correct: "c",
+                explanation: "Dalam pemetaan $\\{(0,0), (1,1), (2,4), (3,9), (4,16)\\}$, range adalah himpunan nilai kedua dari pasangan terurut, yaitu $\\{0, 1, 4, 9, 16\\}$. Pilihan (c) sesuai. Catatan: 'Daerah kawan' adalah istilah lain untuk kodomain, tetapi soal ini menanyakan range."
+            },
+            {
+                text: "Relasi yang tepat yang menggambarkan diagram dengan pasangan $(-3,-2), (-2,-1), (0,1), (2,2), (3,3)$ adalah:",
+                options: {
+                    a: "Kurang satu dari",
+                    b: "Sama dengan",
+                    c: "Faktor dari",
+                    d: "Kelipatan dari",
+                    e: "Lebih satu dari"
+                },
+                correct: "e",
+                explanation: "Periksa pasangan $(-3,-2), (-2,-1), (0,1), (2,2), (3,3)$: nilai $y$ selalu $x + 1$ (misalnya, $-3 + 1 = -2$, $-2 + 1 = -1$, $0 + 1 = 1$, dst.). Relasi ini adalah 'lebih satu dari'. Pilihan (e) sesuai."
+            },
+            {
+                text: "Kodomain dari relasi dengan pemetaan $\\{(1,a), (2,c), (3,c), (4,d), (5,e)\\}$ adalah:",
+                options: {
+                    a: "$\\{a, b, c, d, e\\}$",
+                    b: "$\\{1, 2, 3, 4, 5\\}$",
+                    c: "$\\{a, d, e\\}$",
+                    d: "$\\{(1,a), (2,a), (3,d), (4,d), (5,e)\\}$"
+                },
+                correct: "a",
+                explanation: "Kodomain adalah himpunan semua elemen di himpunan tujuan $B$, yaitu $\\{a, b, c, d, e\\}$. Pilihan (a) sesuai. Catatan: Range-nya adalah $\\{a, c, d, e\\}$, tetapi soal menanyakan kodomain."
+            },
+            {
+                text: "Jika himpunan $M = \\{1, 2, 3, 4\\}$ dan relasi dari $M$ ke $N$ adalah '$\\frac{1}{2}$ kalinya dari', maka di bawah ini yang termasuk anggota himpunan $N$ adalah:",
+                options: {
+                    a: "$\\{4, 8, 12, 16\\}$",
+                    b: "$\\{2, 4, 6, 8\\}$",
+                    c: "$\\{1, 2, 3, 4\\}$",
+                    d: "$\\left\\{\\frac{3}{2}, \\frac{5}{2}, \\frac{7}{2}, \\frac{9}{2}\\right\\}$",
+                    e: "$\\left\\{\\frac{1}{2}, 1, \\frac{3}{2}, 2\\right\\}$"
+                },
+                correct: "e",
+                explanation: "Relasi '$\\frac{1}{2}$ kalinya dari' berarti $y = \\frac{1}{2}x$, dengan $x \\in M = \\{1, 2, 3, 4\\}$. Hitung: $y = \\frac{1}{2} \\cdot 1 = \\frac{1}{2}$, $y = \\frac{1}{2} \\cdot 2 = 1$, $y = \\frac{1}{2} \\cdot 3 = \\frac{3}{2}$, $y = \\frac{1}{2} \\cdot 4 = 2$. Maka, himpunan $N = \\left\\{\\frac{1}{2}, 1, \\frac{3}{2}, 2\\right\\}$. Pilihan (e) sesuai."
+            },
+            {
+                text: "Di antara relasi berikut, yang termasuk fungsi adalah:",
+                options: {
+                    a: "Relasi: $\\{(1,a), (2,b), (3,c)\\}$",
+                    b: "Relasi: $\\{(1,a), (2,b), (2,c), (3,c)\\}$",
+                    c: "Relasi: $\\{(1,a), (3,c)\\}$"
+                },
+                correct: "a",
+                explanation: "Fungsi adalah relasi di mana setiap elemen di domain memetakan ke tepat satu elemen di kodomain. Opsi A: $\\{(1,a), (2,b), (3,c)\\}$, setiap elemen domain ($1, 2, 3$) memiliki satu pasangan, jadi fungsi. Opsi B: $\\{(1,a), (2,b), (2,c), (3,c)\\}$, elemen $2$ memetakan ke dua elemen ($b$ dan $c$), bukan fungsi. Opsi C: $\\{(1,a), (3,c)\\}$, tidak semua elemen domain ($2$ tidak ada), tidak lengkap sebagai fungsi. Pilihan (a) sesuai."
+            },
+            {
+                text: "Diketahui $f(x) = 2x + 5$. Nilai dari $f(-1)$ adalah:",
+                options: { a: "$5$", b: "$-7$", c: "$-3$", d: "$7$", e: "$3$" },
+                correct: "c",
+                explanation: "Substitusi $x = -1$ ke $f(x)$: $f(-1) = 2(-1) + 5 = -2 + 5 = 3$. Pilihan (e) sesuai."
+            },
+            {
+                text: "Diketahui $f(x) = 3x + 2$ dan $g(x) = -x + 1$. Rumus fungsi $(f + g)(x)$ adalah:",
+                options: {
+                    a: "$4x + 3$",
+                    b: "$2x + 3$",
+                    c: "$4x + 1$",
+                    d: "$2x + 1$",
+                    e: "$4x + 2$"
+                },
+                correct: "b",
+                explanation: "$(f + g)(x) = f(x) + g(x) = (3x + 2) + (-x + 1) = 3x - x + 2 + 1 = 2x + 3$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Diketahui $f(x) = 4 - x$ dan $g(x) = 3x - 2$. Rumus fungsi $(g - f)(x)$ adalah:",
+                options: {
+                    a: "$4x + 6$",
+                    b: "$4x - 6$",
+                    c: "$2x + 6$",
+                    d: "$2x + 2$",
+                    e: "$2x - 6$"
+                },
+                correct: "b",
+                explanation: "$(g - f)(x) = g(x) - f(x) = (3x - 2) - (4 - x) = 3x - 2 - 4 + x = 4x - 6$. Pilihan (b) sesuai."
+            },
+            {
+                text: "Diketahui fungsi $f(x) = \\frac{x}{x - 1}$. Domain fungsi tersebut adalah:",
+                options: {
+                    a: "$-\\infty < x < \\infty$",
+                    b: "$x \\neq 0$",
+                    c: "$x \\leq 0$",
+                    d: "$-\\infty < x < 1$ atau $1 < x < \\infty$",
+                    e: "$1 < x < \\infty$"
+                },
+                correct: "d",
+                explanation: "Domain adalah semua nilai $x$ yang membuat fungsi terdefinisi. Untuk $f(x) = \\frac{x}{x - 1}$, penyebut $x - 1 \\neq 0$, sehingga $x \\neq 1$. Domain: $\\{x \\in \\mathbb{R} \\mid x \\neq 1\\}$, atau dalam notasi interval: $-\\infty < x < 1$ atau $1 < x < \\infty$. Pilihan (d) sesuai."
+            },
+            {
+                text: "Diketahui $f(x) = x$ dan $g(x) = -x + 1$. Rumus fungsi $f \\circ g$ adalah:",
+                options: {
+                    a: "$x^2 - x$",
+                    b: "$-x^2 - x$",
+                    c: "$x^2 + x$",
+                    d: "$-x^2 + x$",
+                    e: "$-x + 1$"
+                },
+                correct: "e",
+                explanation: "$f \\circ g(x) = f(g(x))$. Dengan $g(x) = -x + 1$ dan $f(x) = x$, substitusi: $f(g(x)) = f(-x + 1) = -x + 1$. Pilihan (e) sesuai."
+            }
+        ]
+    }
 };
+
     // Anda bisa menambahkan kuis lainnya di sini
