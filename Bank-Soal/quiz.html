@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quiz Bank Soal UMT</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
     <script>
       MathJax = {
@@ -69,10 +70,10 @@
             margin-top: 20px;
             border-radius: 8px;
             overflow: hidden;
-            display: none; /* Disembunyikan secara default */
+            display: none;
         }
         .explanation-container.show {
-            display: block; /* Kelas untuk menampilkan kembali */
+            display: block;
         }
         .explanation-text {
             background: rgba(255, 255, 255, 0.05);
@@ -99,14 +100,27 @@
 
         /* --- TOMBOL KONTROL & HASIL --- */
         .controls { display: flex; justify-content: space-between; margin-top: 30px; }
-        .btn { padding: 12px 25px; border: none; border-radius: 25px; font-size: 1rem; font-weight: 600; cursor: pointer; }
+        .btn { padding: 12px 25px; border: none; border-radius: 25px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s; }
         .btn-primary { background: var(--primary-purple); color: white; }
         .btn:disabled { opacity: 0.5; cursor: not-allowed; }
         .result-summary { display: none; text-align: center; }
-        .result-summary.show { display: block; }
+        .result-summary.show { display: block; animation: fadeIn 0.5s; }
         
         /* --- GAYA MODAL PENAWARAN (PAYWALL) --- */
         .modal-overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:10001;display:flex;justify-content:center;align-items:center;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}.modal-overlay.active{opacity:1;visibility:visible}.modal-content{background:var(--bg-content);border-radius:20px;width:90%;max-width:900px;box-shadow:0 10px 40px var(--shadow-color);position:relative;padding:30px;text-align:center;transform:scale(.95);transition:transform .3s}.modal-overlay.active .modal-content{transform:scale(1)}.modal-content h2{font-size:1.5rem;margin-bottom:25px}.close-modal{position:absolute;top:15px;right:20px;font-size:28px;color:var(--text-muted);cursor:pointer;transition:color .2s}.close-modal:hover{color:var(--text-primary)}.pricing-container{display:flex;flex-wrap:wrap;justify-content:center;gap:15px;overflow-y:auto;max-height:60vh;padding:10px}.pricing-card{background-color:var(--bg-element);border:1px solid var(--border-color);border-radius:12px;padding:20px;width:220px;text-align:center;display:flex;flex-direction:column}.pricing-card.best-value{border:2px solid #FBC02D;background:radial-gradient(circle,#3a331c,var(--bg-element));position:relative;padding-top:50px}.best-value-banner{position:absolute;top:0;left:0;right:0;padding:5px;background-color:#FBC02D;color:#121212;font-size:14px;font-weight:700;border-top-left-radius:10px;border-top-right-radius:10px}.pricing-card .card-title{font-size:1rem;font-weight:600;margin-bottom:10px}.pricing-card .card-price{font-size:1.8rem;font-weight:700;margin:0}.pricing-card .original-price{text-decoration:line-through;color:var(--text-muted);font-size:.9rem;height:20px}.pricing-card .savings-badge{display:inline-block;padding:4px 8px;border-radius:6px;font-size:.8rem;font-weight:600;background-color:#2E7D32;color:#fff}.pricing-card.best-value .savings-badge{background-color:#FBC02D;color:#121212}.pricing-card .per-day-cost{font-size:.8rem;color:var(--text-muted);margin:8px 0 15px 0}.pricing-card .cta-button{width:100%;padding:10px;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;border:1px solid var(--text-muted);background:0 0;color:var(--text-primary);margin-top:auto;transition:background-color .2s}.pricing-card .cta-button:hover{background-color:var(--border-color)}.pricing-card.best-value .cta-button{background:#FBC02D;border:1px solid var(--text-muted);color:#121212}.pricing-card.best-value .cta-button:hover{filter:brightness(1.1)}
+        
+        /* --- GAYA HASIL ANALISIS BARU --- */
+        #overallScore { font-size: 3rem; color: var(--primary-purple); margin: 15px 0 5px 0; font-weight: 700; }
+        #overallVerdict { font-size: 1.2rem; color: var(--text-secondary); font-style: italic; margin-bottom: 30px; border-top: 1px solid var(--border-color); border-bottom: 1px solid var(--border-color); padding: 15px 0;}
+        #detailedAnalysis h4 { font-size: 1.3rem; color: var(--text-primary); border-bottom: 2px solid var(--primary-purple); padding-bottom: 10px; margin-bottom: 20px; display: inline-block; }
+        .analysis-table { width: 100%; border-collapse: collapse; margin-top: 15px; font-size: 1rem; }
+        .analysis-table th, .analysis-table td { padding: 14px 18px; border: 1px solid var(--border-color); text-align: left; vertical-align: middle; }
+        .analysis-table th { background-color: var(--bg-element); font-weight: 600; }
+        .analysis-table td:nth-child(2) { text-align: center; }
+        
+        .review-list { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+        .review-list li .btn-review { background-color: var(--bg-element); color: var(--text-secondary); border: 1px solid var(--border-color); }
+        .review-list li .btn-review:hover { background-color: var(--primary-purple); color: var(--text-primary); border-color: var(--primary-purple); }
         
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
@@ -119,11 +133,28 @@
         </div>
         <div class="quiz-content">
             <div id="questionsContainer"></div>
+
             <div class="result-summary" id="resultSummary">
-                <h2>Hasil Kuis</h2>
-                <p>Anda menjawab <span id="finalCorrect">0</span> dari <span id="finalTotal">0</span> soal dengan benar.</p>
-                <button class="btn btn-primary" id="restartBtn">Ulangi Kuis</button>
+                <h2>Hasil Kuis & Analisis Performa</h2>
+                <p>Skor Total: <span id="finalCorrect">0</span> dari <span id="finalTotal">0</span> soal benar.</p>
+                
+                <h3 id="overallScore"></h3>
+                <p id="overallVerdict"></p>
+            
+                <div id="detailedAnalysis" style="margin-top: 30px; text-align: left; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    
+                    <h4><i class="fas fa-chart-line"></i> Performa per Bagian</h4>
+                    <div id="sectionAnalysisContainer">
+                        </div>
+                    
+                    <h4 style="margin-top: 30px;"><i class="fas fa-search"></i> Tinjau Soal yang Salah</h4>
+                    <div id="reviewQuestionsContainer" style="text-align: center;">
+                        </div>
+                </div>
+            
+                <button class="btn btn-primary" id="restartBtn" style="margin-top: 30px;">Ulangi Kuis</button><button class="btn btn-primary" onclick="window.location.href = 'index.html'; " style="margin-top: 30px; margin-left: 15px;">kembali</button>
             </div>
+            
             <div class="controls" id="controls">
                 <button class="btn" id="prevBtn" disabled>Sebelumnya</button>
                 <button class="btn btn-primary" id="nextBtn">Selanjutnya</button>
@@ -136,49 +167,7 @@
             <span class="close-modal" id="closeModalBtn">×</span>
             <h2>Beli untuk melihat Analisis Dan Kajian ini selengkapnya</h2>
             <div class="pricing-container">
-                <div class="pricing-card best-value">
-                    <div class="best-value-banner">PENAWARAN TERBAIK</div>
-                    <h3 class="card-title">Lifetime Akses</h3>
-                    <p class="card-price">Rp 15.000</p>
-                    <p class="original-price">Rp 499.000</p>
-                    <span class="savings-badge">Hemat 97%</span>
-                    <p class="per-day-cost">Akses Untuk Selamanya!</p>
-                    <button class="cta-button" onclick="window.location.href = 'Form-Pendaftaran.html?paket=Lifetime';">Dapatkan Akses</button>
-                </div>                
-                <div class="pricing-card">
-                    <h3 class="card-title">1 Tahun Akses</h3>
-                    <p class="card-price">Rp 99.000</p>
-                    <p class="original-price">Rp 299.999</p>
-                    <span class="savings-badge">Hemat 67%</span>
-                    <p class="per-day-cost">Rp 271 / hari</p>
-                    <button class="cta-button" onclick="window.location.href = 'Form-Pendaftaran.html?paket=1 Tahun';">Pilih Paket</button>
                 </div>
-                <div class="pricing-card">
-                    <h3 class="card-title">6 Bulan Akses</h3>
-                    <p class="card-price">Rp 75.000</p>
-                    <p class="original-price">Rp 149.999</p>
-                    <span class="savings-badge">Hemat 50%</span>
-                    <p class="per-day-cost">Rp 417 / hari</p>
-                    <button class="cta-button" onclick="window.location.href = 'Form-Pendaftaran.html?paket=6 Bulan';">Pilih Paket</button>
-                </div>
-
-                <div class="pricing-card">
-                    <h3 class="card-title">1 Bulan Akses</h3>
-                    <p class="card-price">Rp 25.000</p>
-                    <p class="original-price">Rp 49.999</p>
-                    <span class="savings-badge">Hemat 50%</span>
-                    <p class="per-day-cost">Rp 833 / hari</p>
-                    <button class="cta-button" onclick="window.location.href = 'Form-Pendaftaran.html?paket=1 Bulan';">Pilih Paket</button>
-                </div>
-                <div class="pricing-card">
-                    <h3 class="card-title">3 Bulan Akses</h3>
-                    <p class="card-price">Rp 49.000</p>
-                    <p class="original-price">Rp 74.999</p>
-                    <span class="savings-badge">Hemat 35%</span>
-                    <p class="per-day-cost">Rp 544 / hari</p>
-                    <button class="cta-button" onclick="window.location.href = 'Form-Pendaftaran.html?paket=3 Bulan';">Pilih Paket</button>
-                </div>
-            </div>
         </div>
     </div>
 
@@ -190,15 +179,13 @@
         const quizDescriptionEl = document.getElementById('quizDescription');
         const questionsContainer = document.getElementById('questionsContainer');
         const resultSummary = document.getElementById('resultSummary');
-        const finalCorrectEl = document.getElementById('finalCorrect');
-        const finalTotalEl = document.getElementById('finalTotal');
         const prevBtn = document.getElementById('prevBtn');
         const nextBtn = document.getElementById('nextBtn');
         const restartBtn = document.getElementById('restartBtn');
         const controls = document.getElementById('controls');
         let currentQuizData, currentQuestionIndex = 0, userAnswers = [];
 
-        // --- FUNGSI UTAMA ---
+        // --- FUNGSI UTAMA & PEMUATAN KUIS (Tidak Berubah) ---
         document.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
             const quizId = params.get('quizId');
@@ -215,9 +202,7 @@
             quizTitleEl.textContent = currentQuizData.title;
             quizDescriptionEl.textContent = currentQuizData.description;
             questionsContainer.innerHTML = currentQuizData.questions.map(createQuestionHTML).join('');
-
             if (window.MathJax) { MathJax.typesetPromise(); }
-
             addOptionEventListeners();
             addExplanationEventListeners();
             showQuestion(0);
@@ -271,39 +256,112 @@
         function addExplanationEventListeners() {
             const paywallModal = document.getElementById('paywallModal');
             const closeModalBtn = document.getElementById('closeModalBtn');
-
             document.querySelectorAll('.unlock-button').forEach(button => {
-                button.addEventListener('click', function() {
-                    paywallModal.classList.add('active');
-                });
+                button.addEventListener('click', function() { paywallModal.classList.add('active'); });
             });
-
             const closeModal = () => paywallModal.classList.remove('active');
             closeModalBtn.addEventListener('click', closeModal);
-            paywallModal.addEventListener('click', (e) => {
-                if (e.target === paywallModal) {
-                    closeModal();
-                }
-            });
+            paywallModal.addEventListener('click', (e) => { if (e.target === paywallModal) closeModal(); });
         }
 
         function showQuestion(index) {
             document.querySelectorAll('.question-card').forEach(card => card.classList.remove('active'));
             const activeCard = document.querySelector(`[data-question-index="${index}"]`);
             if (activeCard) activeCard.classList.add('active');
+            
+            resultSummary.classList.remove('show');
+            questionsContainer.style.display = 'block';
+            controls.style.display = 'flex';
+            
             prevBtn.disabled = index === 0;
             nextBtn.textContent = (index === currentQuizData.questions.length - 1) ? 'Lihat Hasil' : 'Selanjutnya';
         }
 
+        // --- FUNGSI BARU UNTUK MELOMPAT KE SOAL ---
+        function jumpToQuestion(index) {
+            currentQuestionIndex = index;
+            showQuestion(index);
+        }
+        
+        // --- FUNGSI SHOWRESULTS() YANG TELAH DIMODIFIKASI TOTAL ---
         function showResults() {
             questionsContainer.style.display = 'none';
             controls.style.display = 'none';
-            resultSummary.classList.add('show');
-            let correctCount = userAnswers.filter((answer, index) => answer === currentQuizData.questions[index].correct).length;
+            
+            const finalCorrectEl = document.getElementById('finalCorrect');
+            const finalTotalEl = document.getElementById('finalTotal');
+            const overallScoreEl = document.getElementById('overallScore');
+            const overallVerdictEl = document.getElementById('overallVerdict');
+            const sectionAnalysisContainerEl = document.getElementById('sectionAnalysisContainer');
+            const reviewQuestionsContainerEl = document.getElementById('reviewQuestionsContainer');
+
+            const totalQuestions = currentQuizData.questions.length;
+            const correctCount = userAnswers.filter((answer, i) => answer === currentQuizData.questions[i].correct).length;
+            const percentage = totalQuestions > 0 ? (correctCount / totalQuestions) * 100 : 0;
+
             finalCorrectEl.textContent = correctCount;
-            finalTotalEl.textContent = currentQuizData.questions.length;
+            finalTotalEl.textContent = totalQuestions;
+            overallScoreEl.textContent = `${percentage.toFixed(0)}%`;
+
+            // --- 1. Analisis Performa per Bagian ---
+            const chunkSize = Math.ceil(totalQuestions / 3);
+            const sections = [
+                { name: 'Bagian Awal', start: 0, end: chunkSize },
+                { name: 'Bagian Tengah', start: chunkSize, end: 2 * chunkSize },
+                { name: 'Bagian Akhir', start: 2 * chunkSize, end: totalQuestions }
+            ];
+            
+            let sectionTableHTML = `<table class="analysis-table">
+                <thead><tr><th>Bagian Kuis</th><th>Skor</th></tr></thead>
+                <tbody>`;
+
+            sections.forEach(section => {
+                if (section.start >= totalQuestions) return;
+                let correctInSection = 0;
+                const totalInSection = Math.min(section.end, totalQuestions) - section.start;
+
+                for (let i = section.start; i < Math.min(section.end, totalQuestions); i++) {
+                    if (userAnswers[i] === currentQuizData.questions[i].correct) {
+                        correctInSection++;
+                    }
+                }
+                sectionTableHTML += `<tr><td>${section.name}</td><td>${correctInSection} / ${totalInSection}</td></tr>`;
+            });
+            sectionTableHTML += `</tbody></table>`;
+            sectionAnalysisContainerEl.innerHTML = sectionTableHTML;
+
+            // --- 2. Daftar Soal untuk Ditinjau ---
+            const wrongAnswerIndices = [];
+            userAnswers.forEach((answer, index) => {
+                if (answer !== null && answer !== currentQuizData.questions[index].correct) {
+                    wrongAnswerIndices.push(index);
+                }
+            });
+
+            if (wrongAnswerIndices.length > 0) {
+                let reviewHTML = `<p>Klik nomor soal untuk melihat kembali jawaban Anda.</p><ul class="review-list">`;
+                wrongAnswerIndices.forEach(index => {
+                    reviewHTML += `<li><button class="btn btn-review" onclick="jumpToQuestion(${index})">Soal ${index + 1}</button></li>`;
+                });
+                reviewHTML += `</ul>`;
+                reviewQuestionsContainerEl.innerHTML = reviewHTML;
+            } else {
+                reviewQuestionsContainerEl.innerHTML = `<p style="color: var(--correct-color);">Selamat! Tidak ada jawaban yang salah.</p>`;
+            }
+            
+            // --- Logika Teks Verdict Sederhana ---
+            if (percentage >= 85) {
+                overallVerdictEl.textContent = "Luar Biasa! Pemahaman Anda sudah sangat solid.";
+            } else if (percentage >= 60) {
+                overallVerdictEl.textContent = "Kerja Bagus! Tingkatkan lagi dengan meninjau soal yang salah.";
+            } else {
+                overallVerdictEl.textContent = "Jangan menyerah. Gunakan fitur tinjauan untuk belajar dari kesalahan.";
+            }
+
+            resultSummary.classList.add('show');
         }
 
+        // --- Event Listeners (Tidak Berubah) ---
         nextBtn.addEventListener('click', () => {
             if (currentQuestionIndex < currentQuizData.questions.length - 1) {
                 currentQuestionIndex++;
@@ -325,5 +383,4 @@
         });
     </script>
 </body>
-
 </html>
