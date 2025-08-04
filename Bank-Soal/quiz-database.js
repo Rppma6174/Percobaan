@@ -1133,8 +1133,8 @@ const allQuizData = {
         ]
     },
     'tka-matematika-ipa-4': {
-        title: "TKA Matematika IPA 4 (Kode Soal: RTO-TPJ9JE5)",
-        description: "Kumpulan soal TKA Matematika IPA 4 untuk jenjang SMA/MA.",
+        title: "TKA Matematika IPA #4",
+        description: "Kumpulan soal TKA Matematika IPA untuk jenjang SMA/MA.",
         questions: [
             {
                 text: "Dua lingkaran \\( L_1 \\) dan \\( L_2 \\) berpusat pada sumbu-\\( X \\) dengan radius \\( R_1 = 2 \\) dan \\( R_2 = 4 \\). Suatu garis singgung dalam dari kedua lingkaran menyinggung \\( L_1 \\) di \\( F \\) dan \\( L_2 \\) di \\( G \\). Garis singgung tersebut memotong sumbu-\\( X \\) di \\( Q \\), sehingga luas \\( \\triangle AFQ = 5 \\) satuan luas, dengan \\( A \\) adalah pusat \\( L_1 \\). Panjang \\( FG \\) adalah ...",
@@ -1229,8 +1229,8 @@ const allQuizData = {
         ]
     },
     'tka-matematika-ipa-5': {
-        title: "TKA Matematika IPA 5 (Kode Soal: RTO-GYCDW6E)",
-        description: "Kumpulan soal TKA Matematika IPA 5 untuk jenjang SMA/MA.",
+        title: "TKA Matematika IPA #5 ",
+        description: "Kumpulan soal TKA Matematika IPA untuk jenjang SMA/MA.",
         questions: [
             {
                 text: "Jika \\( A \\), \\( B \\) memenuhi sistem: \\( \\begin{cases} A + B = 4 \\ AB = 3 \\end{cases} \\). Maka nilai \\( A^3 + B^3 = \\dots \\)",
@@ -4408,5 +4408,6 @@ const allQuizData = {
 };
 
     // Anda bisa menambahkan kuis lainnya di sini
+
 
 
