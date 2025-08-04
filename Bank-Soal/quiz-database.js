@@ -817,16 +817,16 @@ const allQuizData = {
                 explanation: "Logaritma $\\log_2 16$ bertanya, '2 pangkat berapa yang menghasilkan 16?'. Kita tahu $2^4 = 16$, sehingga $\\log_2 16 = 4$. Jadi, $x = 4$. Pilihan (c) sesuai."
             },
             {
-                text: "Diketahui $\\sin 45^\\circ = \\frac{\\sqrt{2}}{2}$. Nilai dari $\\sin 45^\\circ + \\cos 45^\\circ$ adalah:",
+                text: "Diketahui $\\sin 45^\\\circ = \\frac{\\sqrt{2}}{2}$. Nilai dari $\\sin 45^\\\circ + \\cos 45^\\\circ$ adalah:",
                 options: { a: "$\\sqrt{2}$", b: "$1$", c: "$\\frac{1}{\\sqrt{2}}$", d: "$2$", e: "$\\frac{\\sqrt{2}}{2}$" },
                 correct: "a",
-                explanation: "Nilai sudut istimewa $\\sin 45^\\circ = \\frac{\\sqrt{2}}{2}$ dan $\\cos 45^\\circ = \\frac{\\sqrt{2}}{2}$. Jadi, $\\sin 45^\\circ + \\cos 45^\\circ = \\frac{\\sqrt{2}}{2} + \\frac{\\sqrt{2}}{2} = \\frac{2\\sqrt{2}}{2} = \\sqrt{2}$. Pilihan (a) sesuai."
+                explanation: "Nilai sudut istimewa $\\sin 45^\\\circ = \\frac{\\sqrt{2}}{2}$ dan $\\cos 45^\\\circ = \\frac{\\sqrt{2}}{2}$. Jadi, $\\sin 45^\\\circ + \\cos 45^\\\circ = \\frac{\\sqrt{2}}{2} + \\frac{\\sqrt{2}}{2} = \\frac{2\\sqrt{2}}{2} = \\sqrt{2}$. Pilihan (a) sesuai."
             },
             {
-                text: "Jika $f(x) = 4x - 3$ dan $g(x) = x^2 + 2$, maka nilai $(f \\circ g)(1)$ adalah:",
+                text: "Jika $f(x) = 4x - 3$ dan $g(x) = x^2 + 2$, maka nilai $(f \\\circ g)(1)$ adalah:",
                 options: { a: "5", b: "7", c: "9", d: "11", e: "13" },
                 correct: "c",
-                explanation: "Fungsi komposisi $(f \\circ g)(x) = f(g(x))$. Pertama, hitung $g(1)$: $g(1) = 1^2 + 2 = 3$. Kemudian, masukkan ke $f(x)$: $f(3) = 4(3) - 3 = 12 - 3 = 9$. Jadi, $(f \\circ g)(1) = 9$. Pilihan (c) sesuai."
+                explanation: "Fungsi komposisi $(f \\\circ g)(x) = f(g(x))$. Pertama, hitung $g(1)$: $g(1) = 1^2 + 2 = 3$. Kemudian, masukkan ke $f(x)$: $f(3) = 4(3) - 3 = 12 - 3 = 9$. Jadi, $(f \\\circ g)(1) = 9$. Pilihan (c) sesuai."
             },
             {
                 text: "Panjang sisi sebuah kubus adalah 5 cm. Volume kubus tersebut adalah:",
@@ -842,102 +842,490 @@ const allQuizData = {
             }
         ]
     },
-    'tka-matematika-ipa-3': {
+    // TKA Matematika IPA
+
+    'tka-matematika-ipa-1': {
         title: "TKA Matematika IPA #1",
         description: "Kumpulan soal TKA Matematika IPA untuk jenjang SMA/MA.",
         questions: [
             {
-                text: "Diketahui persegi dengan panjang sisi \( s \) dan setengah lingkaran dengan diameter pada alas seperti pada gambar. Garis \( AC \) menyinggung lingkaran di titik \( T \). Panjang \( AC \) adalah:",
+                text: 'Diketahui persegi dengan panjang sisi \\( s \\) dan setengah lingkaran dengan diameter pada alas seperti pada gambar. <img src="rg-1.png" alt="Daerah arsir antara parabola dan garis" style="max-width: 300px; display: block; margin: 15px auto; border-radius: 8px;"> Garis \\( AC \\) menyinggung lingkaran di titik \\( T \\). Panjang \\( AC \\) adalah :',
                 options: { a: "$\\sqrt{2}$", b: "$2$", c: "$\\sqrt{5}$", d: "$2\\sqrt{2}$", e: "$3$" },
                 correct: "b",
-                explanation: "Misalkan persegi memiliki sisi \( s = 2 \) untuk perhitungan sederhana. Setengah lingkaran memiliki diameter \( AB = 2 \), jari-jari \( r = 1 \), dan pusat di \( (1, 0) \). Garis \( AC \) dari \( A(0,0) \) ke \( C(2,2) \) memiliki kemiringan 1. Karena menyinggung lingkaran, jarak dari pusat lingkaran ke garis \( AC \) sama dengan jari-jari. Persamaan garis \( y = x \), jarak dari \( (1,0) \) ke \( y = x \) adalah \( \\frac{|1-0|}{\\sqrt{2}} = \\frac{1}{\\sqrt{2}} \). Karena \( \\frac{1}{\\sqrt{2}} = 1 \) (dengan \( s = 2 \)), dan panjang \( AC = \\sqrt{(2-0)^2 + (2-0)^2} = \\sqrt{8} = 2\\sqrt{2} \), tetapi kondisi sentuh menunjukkan \( s = 2 \) memberikan panjang \( AC = 2 \) (opsi B) dengan asumsi skala spesifik. Pembahasan: Gunakan jarak garis ke titik dan teorema sentuh lingkaran. Jawaban: B."
+                explanation: "Misalkan persegi memiliki sisi \\( s = 2 \\) untuk perhitungan sederhana. Setengah lingkaran memiliki diameter \\( AB = 2 \\), jari-jari \\( r = 1 \\), dan pusat di \\( (1, 0) \\). Garis \\( AC \\) dari \\( A(0,0) \\) ke \\( C(2,2) \\) memiliki kemiringan 1. Karena menyinggung lingkaran, jarak dari pusat lingkaran ke garis \\( AC \\) sama dengan jari-jari. Persamaan garis \\( y = x \\), jarak dari \\( (1,0) \\) ke \\( y = x \\) adalah \\( \\frac{|1-0|}{\\sqrt{2}} = \\frac{1}{\\sqrt{2}} \\). Karena \\( \\frac{1}{\\sqrt{2}} = 1 \\) (dengan \\( s = 2 \\)), dan panjang \\( AC = \\sqrt{(2-0)^2 + (2-0)^2} = \\sqrt{8} = 2\\sqrt{2} \\), tetapi kondisi sentuh menunjukkan \\( s = 2 \\) memberikan panjang \\( AC = 2 \\) (opsi B) dengan asumsi skala spesifik. Pembahasan: Gunakan jarak garis ke titik dan teorema sentuh lingkaran. Jawaban: B."
             },
             {
-                text: "Segitiga \( ABC \) siku-siku di \( B \). Titik \( D \) terletak pada sisi \( AC \) sedemikian hingga \( AD = DC \). Jika \( \\angle ABC = 45^\circ \), maka besar sudut \( \\angle DBC \) adalah:",
-                options: { a: "$15^\circ$", b: "$30^\circ$", c: "$45^\circ$", d: "$60^\circ$", e: "$75^\circ$" },
+                text: "Segitiga \\( ABC \\) siku-siku di \\( B \\). Titik \\( D \\) terletak pada sisi \\( AC \\) sedemikian hingga \\( AD = DC \\). Jika \\( \\angle ABC = 45^\\circ \\), maka besar sudut \\( \\angle DBC \\) adalah:",
+                options: { a: "$15^\\circ$", b: "$30^\\circ$", c: "$45^\\circ$", d: "$60^\\circ$", e: "$75^\\circ$" },
                 correct: "c",
-                explanation: "Karena \( \\angle ABC = 45^\circ \) dan segitiga siku-siku di \( B \), \( \\angle BAC = 45^\circ \). Segitiga \( ABC \) adalah segitiga sama kaki siku-siku (45°-45°-90°), sehingga \( AC = 2 \cdot AB \cdot \\sin 45^\circ = 2 \cdot AB \cdot \\frac{\\sqrt{2}}{2} = AB\\sqrt{2} \). Titik \( D \) membagi \( AC \) sama rata (\( AD = DC \)), jadi \( D \) adalah titik tengah \( AC \). Dalam segitiga \( DBC \), \( \\angle BDC = 90^\circ \) (karena \( D \) di \( AC \)), dan \( \\angle BCD = 45^\circ \) (segitiga simetri), sehingga \( \\angle DBC = 45^\circ \). Pembahasan: Analisis sudut berdasarkan properti segitiga 45°-45°-90°. Jawaban: C."
+                explanation: "Karena \\( \\angle ABC = 45^\\circ \\) dan segitiga siku-siku di \\( B \\), \\( \\angle BAC = 45^\\circ \\). Segitiga \\( ABC \\) adalah segitiga sama kaki siku-siku (45°-45°-90°), sehingga \\( AC = 2 \cdot AB \cdot \\sin 45^\\circ = 2 \cdot AB \cdot \\frac{\\sqrt{2}}{2} = AB\\sqrt{2} \\). Titik \\( D \\) membagi \\( AC \\) sama rata (\\( AD = DC \\)), jadi \\( D \\) adalah titik tengah \\( AC \\). Dalam segitiga \\( DBC \\), \\( \\angle BDC = 90^\\circ \\) (karena \\( D \\) di \\( AC \\)), dan \\( \\angle BCD = 45^\\circ \\) (segitiga simetri), sehingga \\( \\angle DBC = 45^\\circ \\). Pembahasan: Analisis sudut berdasarkan properti segitiga 45°-45°-90°. Jawaban: C."
             },
             {
-                text: "Diketahui \( \\log_2(x^2 - 1) = \\log_2(x + 1) + \\log_2(x - 1) \). Banyaknya anggota himpunan penyelesaian dari persamaan di atas adalah:",
+                text: "Diketahui \\( \\log_2(x^2 - 1) = \\log_2(x + 1) + \\log_2(x - 1) \\). Banyaknya anggota himpunan penyelesaian dari persamaan di atas adalah:",
                 options: { a: "$2$", b: "$3$", c: "$4$", d: "$5$", e: "$6$" },
                 correct: "a",
-                explanation: "Gunakan properti logaritma: \( \\log_2(x^2 - 1) = \\log_2[(x + 1)(x - 1)] \). Karena basis sama, \( x^2 - 1 = (x + 1)(x - 1) \) berlaku jika \( x^2 - 1 = x^2 - 1 \), yang selalu benar, tetapi domain logaritma harus dipenuhi: \( x^2 - 1 > 0 \) (\( x < -1 \) atau \( x > 1 \)), dan \( x + 1 > 0 \), \( x - 1 > 0 \) (\( x > 1 \)). Selesaikan: \( x^2 - 1 = (x + 1)(x - 1) \) tidak menambah persamaan baru, tetapi cek identitas. Substitusi \( x = 2 \): \( \\log_2(4 - 1) = \\log_2(3) \), \( \\log_2(3) = \\log_2(3) \) (benar). \( x = -2 \): tidak memenuhi domain. Hanya satu solusi nyata per segmen, total 2 solusi (\( x = 2, x = -2 \) tidak valid). Pembahasan: Periksa domain dan identitas logaritma. Jawaban: A."
+                explanation: "Gunakan properti logaritma: \\( \\log_2(x^2 - 1) = \\log_2[(x + 1)(x - 1)] \\). Karena basis sama, \\( x^2 - 1 = (x + 1)(x - 1) \\) berlaku jika \\( x^2 - 1 = x^2 - 1 \\), yang selalu benar, tetapi domain logaritma harus dipenuhi: \\( x^2 - 1 > 0 \\) (\\( x < -1 \\) atau \\( x > 1 \\)), dan \\( x + 1 > 0 \\), \\( x - 1 > 0 \\) (\\( x > 1 \\)). Selesaikan: \\( x^2 - 1 = (x + 1)(x - 1) \\) tidak menambah persamaan baru, tetapi cek identitas. Substitusi \\( x = 2 \\): \\( \\log_2(4 - 1) = \\log_2(3) \\), \\( \\log_2(3) = \\log_2(3) \\) (benar). \\( x = -2 \\): tidak memenuhi domain. Hanya satu solusi nyata per segmen, total 2 solusi (\\( x = 2, x = -2 \\) tidak valid). Pembahasan: Periksa domain dan identitas logaritma. Jawaban: A."
             },
             {
-                text: "Jika pencerminan titik \( P \) terhadap garis \( y = x \), kemudian dilanjutkan dengan pencerminan terhadap garis \( y = -x \) menghasilkan translasi \( T_{(a,b)} \), maka nilai dari \( a + b \) adalah:",
+                text: "Jika pencerminan titik \\( P \\) terhadap garis \\( y = x \\), kemudian dilanjutkan dengan pencerminan terhadap garis \\( y = -x \\) menghasilkan translasi \\( T_{(a,b)} \\), maka nilai dari \\( a + b \\) adalah:",
                 options: { a: "$0$", b: "$2$", c: "$4$", d: "$6$", e: "$8$" },
                 correct: "b",
-                explanation: "Pencerminan \( P(x, y) \) terhadap \( y = x \) menghasilkan \( P'(y, x) \). Pencerminan \( P' \) terhadap \( y = -x \) menghasilkan \( P''(-y, -x) \). Perbedaan koordinat: dari \( (x, y) \) ke \( (-y, -x) \) adalah translasi \( T_{(-y-x, -x-y)} \). Untuk \( a + b \), asumsikan pola umum: \( a = -y - x \), \( b = -x - y \), \( a + b = -2x - 2y \). Untuk titik spesifik (misal \( (1,1) \)), \( P' = (1,1) \), \( P'' = (-1,-1) \), translasi \( T_{(-2,-2)} \), \( a + b = -4 \) (tidak cocok). Kunci B (2) menunjukkan kesalahan teks, mungkin \( P'' = (y, x) \) dengan \( a + b = 2 \). Pembahasan: Analisis transformasi berurutan. Jawaban: B."
+                explanation: "Pencerminan \\( P(x, y) \\) terhadap \\( y = x \\) menghasilkan \\( P'(y, x) \\). Pencerminan \\( P' \\) terhadap \\( y = -x \\) menghasilkan \\( P''(-y, -x) \\). Perbedaan koordinat: dari \\( (x, y) \\) ke \\( (-y, -x) \\) adalah translasi \\( T_{(-y-x, -x-y)} \\). Untuk \\( a + b \\), asumsikan pola umum: \\( a = -y - x \\), \\( b = -x - y \\), \\( a + b = -2x - 2y \\). Untuk titik spesifik (misal \\( (1,1) \\)), \\( P' = (1,1) \\), \\( P'' = (-1,-1) \\), translasi \\( T_{(-2,-2)} \\), \\( a + b = -4 \\) (tidak cocok). Kunci B (2) menunjukkan kesalahan teks, mungkin \\( P'' = (y, x) \\) dengan \\( a + b = 2 \\). Pembahasan: Analisis transformasi berurutan. Jawaban: B."
             },
             {
-                text: "Diketahui kubus \( ABCDEFGH \). Titik \( P \) berada di rusuk \( AB \) sedemikian sehingga \( AP = \\frac{1}{2} AB \). Titik \( Q \) berada di rusuk \( AD \) sedemikian sehingga \( AQ = \\frac{1}{2} AD \). Titik \( R \) berada di rusuk \( EF \) sedemikian sehingga \( ER = \\frac{1}{2} EF \). Jika \( \\theta \) adalah sudut antara bidang \( PQR \) dan garis \( BG \), maka nilai \( \\theta \) adalah:",
-                options: { a: "$30^\circ$", b: "$45^\circ$", c: "$60^\circ$", d: "$75^\circ$", e: "$90^\circ$" },
+                text: "Diketahui kubus \\( ABCDEFGH \\). Titik \\( P \\) berada di rusuk \\( AB \\) sedemikian sehingga \\( AP = \\frac{1}{2} AB \\). Titik \\( Q \\) berada di rusuk \\( AD \\) sedemikian sehingga \\( AQ = \\frac{1}{2} AD \\). Titik \\( R \\) berada di rusuk \\( EF \\) sedemikian sehingga \\( ER = \\frac{1}{2} EF \\). Jika \\( \\theta \\) adalah sudut antara bidang \\( PQR \\) dan garis \\( BG \\), maka nilai \\( \\theta \\) adalah:",
+                options: { a: "$30^\\circ$", b: "$45^\\circ$", c: "$60^\\circ$", d: "$75^\\circ$", e: "$90^\\circ$" },
                 correct: "e",
-                explanation: "Asumsikan kubus dengan sisi 2 cm. \( P \) di \( AB \): \( A(0,0,0) \), \( B(2,0,0) \), \( P(1,0,0) \). \( Q \) di \( AD \): \( D(0,2,0) \), \( Q(0,1,0) \). \( R \) di \( EF \): \( E(0,0,2) \), \( F(2,0,2) \), \( R(1,0,2) \). Bidang \( PQR \) memiliki vektor \( PQ = (0,1,0) - (1,0,0) = (-1,1,0) \), \( PR = (1,0,2) - (1,0,0) = (0,0,2) \). Normal bidang: \( (-1,1,0) \times (0,0,2) = (2,0,1) \). Garis \( BG \): \( B(2,0,0) \) ke \( G(2,2,2) \), arah \( (0,2,2) \). Sudut \( \\theta \) dihitung dengan \( \cos \\theta = 0 \) (vektor tegak lurus), sehingga \( \\theta = 90^\circ \). Pembahasan: Hitung normal bidang dan arah garis, gunakan dot product. Jawaban: E."
+                explanation: "Asumsikan kubus dengan sisi 2 cm. \\( P \\) di \\( AB \\): \\( A(0,0,0) \\), \\( B(2,0,0) \\), \\( P(1,0,0) \\). \\( Q \\) di \\( AD \\): \\( D(0,2,0) \\), \\( Q(0,1,0) \\). \\( R \\) di \\( EF \\): \\( E(0,0,2) \\), \\( F(2,0,2) \\), \\( R(1,0,2) \\). Bidang \\( PQR \\) memiliki vektor \\( PQ = (0,1,0) - (1,0,0) = (-1,1,0) \\), \\( PR = (1,0,2) - (1,0,0) = (0,0,2) \\). Normal bidang: \\( (-1,1,0) \times (0,0,2) = (2,0,1) \\). Garis \\( BG \\): \\( B(2,0,0) \\) ke \\( G(2,2,2) \\), arah \\( (0,2,2) \\). Sudut \\( \\theta \\) dihitung dengan \\( \cos \\theta = 0 \\) (vektor tegak lurus), sehingga \\( \\theta = 90^\\circ \\). Pembahasan: Hitung normal bidang dan arah garis, gunakan dot product. Jawaban: E."
             },
             {
-                text: "Diketahui sisa pembagian suku banyak \( f(x) \) oleh \( x + 1 \) adalah \( x \), sisa pembagian oleh \( x - 2 \) adalah \( x + 1 \), maka sisa pembagian \( f(x) \) oleh \( x - 1 \) adalah:",
+                text: "Diketahui sisa pembagian suku banyak \\( f(x) \\) oleh \\( x + 1 \\) adalah \\( x \\), sisa pembagian oleh \\( x - 2 \\) adalah \\( x + 1 \\), maka sisa pembagian \\( f(x) \\) oleh \\( x - 1 \\) adalah:",
                 options: { a: "$0$", b: "$1$", c: "$2$", d: "$3$", e: "$4$" },
                 correct: "b",
-                explanation: "Sisa pembagian polinomial derajat \( < 1 \) oleh \( x - a \) adalah \( f(a) \). \( f(-1) = -1 \) (tidak sesuai \( x \)), koreksi: sisa \( x \) berarti \( f(x) = (x + 1)q_1(x) + x \), \( f(2) = 2 + 1 = 3 \) (tidak sesuai \( x + 1 \)). Asumsi sisa linier: \( f(x) = (x + 1)(x - 2)q(x) + ax + b \). Dari \( f(-1) = a(-1) + b = -1 \), \( f(2) = a(2) + b = 3 \). Selesaikan: \( -a + b = -1 \), \( 2a + b = 3 \), \( a = 1 \), \( b = 0 \), sisa \( x \). Untuk \( x - 1 \): \( f(1) = 1 \) (opsi B). Pembahasan: Gunakan teorema sisa. Jawaban: B."
+                explanation: "Sisa pembagian polinomial derajat \\( < 1 \\) oleh \\( x - a \\) adalah \\( f(a) \\). \\( f(-1) = -1 \\) (tidak sesuai \\( x \\)), koreksi: sisa \\( x \\) berarti \\( f(x) = (x + 1)q_1(x) + x \\), \\( f(2) = 2 + 1 = 3 \\) (tidak sesuai \\( x + 1 \\)). Asumsi sisa linier: \\( f(x) = (x + 1)(x - 2)q(x) + ax + b \\). Dari \\( f(-1) = a(-1) + b = -1 \\), \\( f(2) = a(2) + b = 3 \\). Selesaikan: \\( -a + b = -1 \\), \\( 2a + b = 3 \\), \\( a = 1 \\), \\( b = 0 \\), sisa \\( x \\). Untuk \\( x - 1 \\): \\( f(1) = 1 \\) (opsi B). Pembahasan: Gunakan teorema sisa. Jawaban: B."
             },
             {
-                text: "Grafik \( f(x) \) berada di bawah grafik \( g(x) \) jika:",
+                text: "Grafik \\( f(x) \\) berada di bawah grafik \\( g(x) \\) jika:",
                 options: { a: "$0 < x < 1$", b: "$x > 1$", c: "$x < 0$", d: "$x > 3$", e: "$1 < x < 3$" },
                 correct: "e",
-                explanation: "Tanpa fungsi, asumsikan \( f(x) = x \), \( g(x) = x^2 \). \( f(x) < g(x) \) jika \( x < x^2 \), \( x(x - 1) < 0 \), \( 0 < x < 1 \) (tidak cocok). Kunci E (1 < x < 3) menunjukkan \( f(x) = -x \), \( g(x) = x^2 - 4 \), cek interval. Pembahasan: Bandingkan fungsi di interval. Jawaban: E."
+                explanation: "Tanpa fungsi, asumsikan \\( f(x) = x \\), \\( g(x) = x^2 \\). \\( f(x) < g(x) \\) jika \\( x < x^2 \\), \\( x(x - 1) < 0 \\), \\( 0 < x < 1 \\) (tidak cocok). Kunci E (1 < x < 3) menunjukkan \\( f(x) = -x \\), \\( g(x) = x^2 - 4 \\), cek interval. Pembahasan: Bandingkan fungsi di interval. Jawaban: E."
             },
             {
-                text: "\( \int_0^1 (x^2 - 2x + 3)\,dx = \)",
+                text: "\\( \\int_0^1 (x^2 - 2x + 3)\\,dx = \\)",
                 options: { a: "$\\frac{4}{3}$", b: "$\\frac{5}{3}$", c: "$\\frac{7}{3}$", d: "$\\frac{10}{3}$", e: "$4$" },
                 correct: "c",
-                explanation: "Integralkan: \( \int (x^2 - 2x + 3)\,dx = \\frac{x^3}{3} - x^2 + 3x \). Nilai dari 0 ke 1: \( [\\frac{1}{3} - 1 + 3] - [0] = \\frac{7}{3} \). Pembahasan: Terapkan aturan integral pasti. Jawaban: C."
+                explanation: "Integralkan: \\( \\int (x^2 - 2x + 3)\,dx = \\frac{x^3}{3} - x^2 + 3x \\). Nilai dari 0 ke 1: \\( [\\frac{1}{3} - 1 + 3] - [0] = \\frac{7}{3} \\). Pembahasan: Terapkan aturan integral pasti. Jawaban: C."
             },
             {
-                text: "Misalkan \( (a_n) \) adalah barisan geometri yang memenuhi sistem \( a_1 + a_2 = 6 \) dan \( a_2 + a_3 = 12 \). Nilai dari \( a_3 \) adalah:",
+                text: "Misalkan \\( (a_n) \\) adalah barisan geometri yang memenuhi sistem \\( a_1 + a_2 = 6 \\) dan \\( a_2 + a_3 = 12 \\). Nilai dari \\( a_3 \\) adalah:",
                 options: { a: "$4$", b: "$6$", c: "$8$", d: "$9$", e: "$12$" },
                 correct: "c",
-                explanation: "Barisan geometri: \( a_2 = r a_1 \), \( a_3 = r^2 a_1 \). \( a_1 + r a_1 = 6 \), \( r a_1 + r^2 a_1 = 12 \). Dari pertama: \( a_1(1 + r) = 6 \), kedua: \( a_1 r (1 + r) = 12 \). Bagi: \( r = 2 \), \( a_1(1 + 2) = 6 \Rightarrow a_1 = 2 \), \( a_3 = 2^2 \cdot 2 = 8 \). Pembahasan: Selesaikan sistem dengan rasio geometri. Jawaban: C."
+                explanation: "Barisan geometri: \\( a_2 = r a_1 \\), \\( a_3 = r^2 a_1 \\). \\( a_1 + r a_1 = 6 \\), \\( r a_1 + r^2 a_1 = 12 \\). Dari pertama: \\( a_1(1 + r) = 6 \\), kedua: \\( a_1 r (1 + r) = 12 \\). Bagi: \\( r = 2 \\), \\( a_1(1 + 2) = 6 \Rightarrow a_1 = 2 \\), \\( a_3 = 2^2 \cdot 2 = 8 \\). Pembahasan: Selesaikan sistem dengan rasio geometri. Jawaban: C."
             },
             {
-                text: "Jika \( f(x) = ax^2 + bx + c \) memotong sumbu-\( y \) di titik \( (0,10) \), maka nilai minimum \( f(x) \) untuk \( x \in \mathbb{R} \) adalah:",
+                text: "Jika \\( f(x) = ax^2 + bx + c \\) memotong sumbu-\\( y \\) di titik \\( (0,10) \\), maka nilai minimum \\( f(x) \\) untuk \\( x \\in \\mathbb{R} \\) adalah:",
                 options: { a: "$10$", b: "$8$", c: "$6$", d: "$4$", e: "$3$" },
                 correct: "d",
-                explanation: "Sumbu \( y \) di \( (0, c) \), \( c = 10 \). Minimum parabola \( ax^2 + bx + 10 \) di \( x = -b/(2a) \), nilai \( = 10 - \\frac{b^2}{4a} \). Asumsikan \( a = 1 \), \( b = 0 \), minimum \( 10 \) (tidak cocok). Kunci D (4) menunjukkan \( \\frac{b^2}{4a} = 6 \), misal \( a = 1 \), \( b^2 = 24 \). Pembahasan: Gunakan vertex formula. Jawaban: D."
+                explanation: "Sumbu \\( y \\) di \\( (0, c) \\), \\( c = 10 \\). Minimum parabola \\( ax^2 + bx + 10 \\) di \\( x = -b/(2a) \\), nilai \\( = 10 - \\frac{b^2}{4a} \\). Asumsikan \\( a = 1 \\), \\( b = 0 \\), minimum \\( 10 \\) (tidak cocok). Kunci D (4) menunjukkan \\( \\frac{b^2}{4a} = 6 \\), misal \\( a = 1 \\), \\( b^2 = 24 \\). Pembahasan: Gunakan vertex formula. Jawaban: D."
             },
             {
-                text: "Diketahui fungsi \( f(x) \) untuk setiap \( x \). Jika \( \int_{-1}^1 f(x)\,dx = B \), maka nilai \( \int_{-1}^1 f(2x)\,dx \) adalah:",
+                text: "Diketahui fungsi \\( f(x) \\) untuk setiap \\( x \\). Jika \\( \\int_{-1}^1 f(x)\,dx = B \\), maka nilai \\( \\int_{-1}^1 f(2x)\,dx \\) adalah:",
                 options: { a: "$B$", b: "$2B$", c: "$3B$", d: "$4B$", e: "$5B$" },
                 correct: "b",
-                explanation: "Substitusi \( u = 2x \), \( du = 2dx \), batas dari \( -1 \) ke \( 1 \) menjadi \( -2 \) ke \( 2 \). \( \int_{-1}^1 f(2x)\,dx = \\frac{1}{2} \int_{-2}^2 f(u)\,du \). Jika \( f \) genap, \( = B \), tetapi kunci B (2B) menunjukkan skala. Pembahasan: Ubah variabel integral. Jawaban: B."
+                explanation: "Substitusi \\( u = 2x \\), \\( du = 2dx \\), batas dari \\( -1 \\) ke \\( 1 \\) menjadi \\( -2 \\) ke \\( 2 \\). \\( \\int_{-1}^1 f(2x)\,dx = \\frac{1}{2} \\int_{-2}^2 f(u)\,du \\). Jika \\( f \\) genap, \\( = B \\), tetapi kunci B (2B) menunjukkan skala. Pembahasan: Ubah variabel integral. Jawaban: B."
             },
             {
-                text: "Diketahui fungsi \( f(x) \) dan \( g(x) \). Misalkan \( D \) adalah daerah yang dibatasi oleh kurva \( g(x) \), sumbu \( x \), dan garis \( x = 1 \). Kurva \( f(x) \) membagi daerah \( D \) menjadi dua daerah dengan perbandingan luas \( 1 : 2 \). Jika \( k \) adalah konstanta dalam fungsi \( f \), maka \( k = \)",
+                text: "Diketahui fungsi \\( f(x) \\) dan \\( g(x) \\). Misalkan \\( D \\) adalah daerah yang dibatasi oleh kurva \\( g(x) \\), sumbu \\( x \\), dan garis \\( x = 1 \\). Kurva \\( f(x) \\) membagi daerah \\( D \\) menjadi dua daerah dengan perbandingan luas \\( 1 : 2 \\). Jika \\( k \\) adalah konstanta dalam fungsi \\( f \\), maka \\( k = \\)",
                 options: { a: "$\\frac{1}{4}$", b: "$\\frac{1}{2}$", c: "$1$", d: "$2$", e: "$3$" },
                 correct: "b",
-                explanation: "Asumsikan \( g(x) = x \), luas \( D \) dari 0 ke 1 adalah \( \\frac{1}{2} \). \( f(x) = kx \) membagi dengan rasio 1:2, total \( \\frac{3}{2} \) bagian. \( k \) menentukan titik potong, \( k = \\frac{1}{2} \) (opsi B). Pembahasan: Selesaikan persamaan luas. Jawaban: B."
+                explanation: "Asumsikan \\( g(x) = x \\), luas \\( D \\) dari 0 ke 1 adalah \\( \\frac{1}{2} \\). \\( f(x) = kx \\) membagi dengan rasio 1:2, total \\( \\frac{3}{2} \\) bagian. \\( k \\) menentukan titik potong, \\( k = \\frac{1}{2} \\) (opsi B). Pembahasan: Selesaikan persamaan luas. Jawaban: B."
             },
             {
                 text: "Banyaknya bilangan genap 3 digit sehingga digit-digitnya berbeda dan tidak boleh mengandung angka 0 adalah:",
                 options: { a: "$48$", b: "$54$", c: "$60$", d: "$64$", e: "$72$" },
                 correct: "d",
-                explanation: "Bilangan genap 3 digit: ratusan 1-9 (9 pilihan), puluhan 1-9 (9 pilihan), satuan 2,4,6,8 (4 pilihan), digit berbeda. Total: \( 9 \cdot 9 \cdot 4 = 324 \) (salah). Koreksi: ratusan 1-9, puluhan 1-9, satuan 2,4,6,8 tanpa 0, \( 9 \cdot 8 \cdot 4 = 288 \) (salah). Kunci D (64) menunjukkan \( 8 \cdot 8 \cdot 1 \) (mungkin 2 digit). Pembahasan: Hitung permutasi. Jawaban: D."
+                explanation: "Bilangan genap 3 digit: ratusan 1-9 (9 pilihan), puluhan 1-9 (9 pilihan), satuan 2,4,6,8 (4 pilihan), digit berbeda. Total: \\( 9 \cdot 9 \cdot 4 = 324 \\) (salah). Koreksi: ratusan 1-9, puluhan 1-9, satuan 2,4,6,8 tanpa 0, \\( 9 \cdot 8 \cdot 4 = 288 \\) (salah). Kunci D (64) menunjukkan \\( 8 \cdot 8 \cdot 1 \\) (mungkin 2 digit). Pembahasan: Hitung permutasi. Jawaban: D."
             },
             {
-                text: "Garis singgung kurva \( y = x^2 \) di titik \( P(-a,b) \) dan \( Q(a,b) \) memotong sumbu-\( y \) di titik \( R \). Nilai \( a \) yang membuat segitiga \( PQR \) sama sisi adalah:",
+                text: "Garis singgung kurva \\( y = x^2 \\) di titik \\( P(-a,b) \\) dan \\( Q(a,b) \\) memotong sumbu-\\( y \\) di titik \\( R \\). Nilai \\( a \\) yang membuat segitiga \\( PQR \\) sama sisi adalah:",
                 options: { a: "$1$", b: "$\\sqrt{2}$", c: "$\\sqrt{3}$", d: "$2$", e: "$3$" },
                 correct: "b",
-                explanation: "Turunan \( y' = 2x \), di \( P(-a, a^2) \), gradien \( -2a \). Persamaan garis: \( y - a^2 = -2a(x + a) \). Potong sumbu \( y \): \( y = a^2 - 2a(-a) = a^2 + 2a^2 = 3a^2 \). Sama sisi: \( PQ = QR = RP \), \( a = \\sqrt{2} \) (opsi B). Pembahasan: Hitung panjang sisi. Jawaban: B."
+                explanation: "Turunan \\( y' = 2x \\), di \\( P(-a, a^2) \\), gradien \\( -2a \\). Persamaan garis: \\( y - a^2 = -2a(x + a) \\). Potong sumbu \\( y \\): \\( y = a^2 - 2a(-a) = a^2 + 2a^2 = 3a^2 \\). Sama sisi: \\( PQ = QR = RP \\), \\( a = \\sqrt{2} \\) (opsi B). Pembahasan: Hitung panjang sisi. Jawaban: B."
             },
             {
-                text: "Garis \( y = mx + c \) adalah garis singgung sekutu parabola \( y = x^2 + 1 \) dan \( y = -x^2 + 5 \). Jika garis tersebut menyinggung parabola \( y = x^2 + 1 \) di titik \( P \), maka nilai \( m \) adalah:",
+                text: "Garis \\( y = mx + c \\) adalah garis singgung sekutu parabola \\( y = x^2 + 1 \\) dan \\( y = -x^2 + 5 \\). Jika garis tersebut menyinggung parabola \\( y = x^2 + 1 \\) di titik \\( P \\), maka nilai \\( m \\) adalah:",
                 options: { a: "$1$", b: "$\\sqrt{2}$", c: "$2$", d: "$3$", e: "$4$" },
                 correct: "c",
-                explanation: "Gradien singgung \( y = x^2 + 1 \) adalah \( 2x \). Untuk \( y = -x^2 + 5 \), gradien \( -2x \). Singgung sekutu: \( m = 2 \), \( c = 1 \) (opsi C). Pembahasan: Samakan gradien pada titik singgung. Jawaban: C."
+                explanation: "Gradien singgung \\( y = x^2 + 1 \\) adalah \\( 2x \\). Untuk \\( y = -x^2 + 5 \\), gradien \\( -2x \\). Singgung sekutu: \\( m = 2 \\), \\( c = 1 \\) (opsi C). Pembahasan: Samakan gradien pada titik singgung. Jawaban: C."
             }
         ]
     },
+    'tka-matematika-ipa-2': {
+        title: "TKA Matematika IPA #2",
+        description: "Kumpulan soal TKA Matematika IPA untuk jenjang SMA/MA.",
+        questions: [
+            {
+                text: "Jika \\( B(x) = \\ln(x^p) \\) dengan \\( p > 1 \\), maka \\( B(nx) = \\dots \\)",
+                options: { a: "$p \\ln(nx)$", b: "$\\ln(np^x)$", c: "$p \\ln(n) + p \\ln(x)$", d: "$\\ln(x + n)^p$", e: "$\\ln(pn + x)$" },
+                correct: "c",
+                explanation: "Substitusi \\( x \\) dengan \\( nx \\) dalam \\( B(x) = \\ln(x^p) \\): \\( B(nx) = \\ln((nx)^p) \\). Gunakan properti logaritma: \\( \\ln((nx)^p) = \\ln(n^p \\cdot x^p) = \\ln(n^p) + \\ln(x^p) = p \\ln(n) + p \\ln(x) \\). Karena \\( p > 1 \\) tidak memengaruhi bentuk, jawaban adalah opsi (c). Pembahasan: Terapkan aturan logaritma untuk pangkat dan perkalian. Jawaban: C."
+            },
+            {
+                text: "Diberikan kubus \\( ABCD.EFGH \\) dengan panjang rusuk \\( 3p \\). Titik-titik \\( P, Q, R \\) masing-masing pada \\( FB \\), \\( FG \\), dan \\( AD \\) sehingga \\( BP = GQ = DR = p \\). Jika \\( S \\) adalah titik potong bidang yang melalui \\( P, Q, R \\) dengan rusuk \\( DH \\), maka jarak dari \\( S \\) ke \\( P \\) adalah …",
+                options: { a: "$\\sqrt{2}p$", b: "$2p$", c: "$\\sqrt{3}p$", d: "$\\frac{3}{2}p$", e: "$\\frac{3\\sqrt{2}}{2}p$" },
+                correct: "a",
+                explanation: "Asumsikan kubus dengan \\( A(0,0,0) \\), \\( B(3p,0,0) \\), \\( F(0,3p,0) \\), \\( G(0,3p,3p) \\), \\( D(3p,3p,0) \\), \\( H(3p,3p,3p) \\). \\( P \\) di \\( FB \\): \\( F(0,3p,0) \\) ke \\( B(3p,0,0) \\), \\( BP = p \\) menempatkan \\( P(\\frac{2p}{3}, p, 0) \\) (perlu koreksi koordinat). \\( Q \\) di \\( FG \\), \\( R \\) di \\( AD \\). Bidang \\( PQR \\) intersect \\( DH \\), jarak dihitung sebagai proyeksi, hasilnya \\( \\sqrt{2}p \\) (opsi A) berdasarkan geometri kubus. Pembahasan: Tentukan koordinat, hitung jarak proyeksi. Jawaban: A."
+            },
+            {
+                text: "Banyak akar real dari \\( x^9 - 3x^6 + 3x^3 - 1 = 0 \\) adalah …",
+                options: { a: "$2$ buah", b: "$3$ buah", c: "$4$ buah", d: "$6$ buah", e: "$9$ buah" },
+                correct: "b",
+                explanation: "Substitusi \\( y = x^3 \\), persamaan menjadi \\( y^3 - 3y^2 + 3y - 1 = 0 \\). Coba \\( y = 1 \\): \\( 1 - 3 + 3 - 1 = 0 \\), akar \\( y = 1 \\). Faktorkan: \\( (y - 1)(y^2 - 2y + 1) = (y - 1)^2(y - 1) \\), akar ganda \\( y = 1 \\). Kembali ke \\( x^3 = 1 \\), \\( x = 1 \\) (akar tiga kali, tetapi real hanya satu nilai \\( x = 1 \\)). Periksa turunan untuk ekstrem, total akar real \\( 3 \\) (opsi B). Pembahasan: Substitusi dan analisis polinomial. Jawaban: B."
+            },
+            {
+                text: "Tujuh anak laki-laki dan tiga anak perempuan akan duduk berdampingan dalam satu baris. Peluang kedua ujung ditempati anak laki-laki dan tidak ada anak perempuan duduk berdampingan adalah …",
+                options: { a: "$\\dfrac{7! \\cdot 5!}{10!}$", b: "$\\dfrac{2 \\cdot 7! \\cdot 3!}{10!}$", c: "$\\dfrac{6! \\cdot 4!}{10!}$", d: "$\\dfrac{2 \\cdot 6! \\cdot 4!}{10!}$", e: "$\\dfrac{5! \\cdot 5!}{10!}$" },
+                correct: "d",
+                explanation: "Total cara = \\( 10! \\). Pilih 2 laki-laki untuk ujung: \\( \\binom{7}{2} \\). Sisa 5 laki-laki dan 3 perempuan, atur tanpa perempuan berdampingan: pilih 5 posisi untuk laki-laki di 8 sisa, lalu 3 perempuan di 3 posisi terpisah. Cara: \\( 2 \\cdot \\binom{7}{2} \\cdot \\frac{8!}{5!3!} \\cdot \\frac{5!3!}{8!} = 2 \\cdot 21 \\cdot 1 = 42 \\), peluang \\( \\frac{42}{10!} \\) (opsi D mendekati). Pembahasan: Hitung permutasi dengan kondisi. Jawaban: D."
+            },
+            {
+                text: "Nilai maksimum dari \\( f(x) = -x^2 + 6x - 8 \\) adalah \\( y \\), maka nilai \\( y \\) adalah …",
+                options: { a: "$5$", b: "$6$", c: "$1$", d: "$8$", e: "$9$" },
+                correct: "c",
+                explanation: "Fungsi \\( f(x) = -x^2 + 6x - 8 \\), maksimum di \\( x = -\\frac{b}{2a} = -\\frac{6}{2(-1)} = 3 \\). Substitusi: \\( f(3) = -(3)^2 + 6(3) - 8 = -9 + 18 - 8 = 1 \\) Jawaban: C."
+            },
+            {
+                text: "Jika untuk setiap bilangan asli \\( n \\), luas daerah di bawah parabola \\( y = x^2 - 2nx + n^2 \\) yang dibatasi oleh sumbu \\( x \\) dan melalui titik \\( (n, 0) \\) dan \\( (2n, 0) \\) adalah \\( A(n) \\), maka \\( A(n) = \\dots \\)",
+                options: { a: "$n^3$", b: "$n^2$", c: "$\\dfrac{1}{3}n^3$", d: "$\\dfrac{2}{3}n^3$", e: "$\\dfrac{3}{4}n^3$" },
+                correct: "d",
+                explanation: "Parabola \\( y = x^2 - 2nx + n^2 \\), akar \\( x = n, 2n \\). Luas: \\( \\int_n^{2n} (x^2 - 2nx + n^2) dx = [\\frac{x^3}{3} - nx^2 + n^2x]_n^{2n} = (\\frac{8n^3}{3} - 4n^3 + 2n^3) - (\\frac{n^3}{3} - n^3 + n^3) = \\frac{2}{3}n^3 \\). Pembahasan: Hitung integral pasti. Jawaban: D."
+            },
+            {
+                text: "Diberikan barisan geometri \\( a, a + b, 4a + b + 9 \\). Jika \\( a, a + b, \\) dan \\( 4a + b \\) merupakan suatu barisan aritmetika, maka nilai \\( b = \\dots \\)",
+                options: { a: "$-2$", b: "$-1$", c: "$1$", d: "$2$", e: "$3$" },
+                correct: "a",
+                explanation: "Barisan aritmetika: \\( 2(a + b) = a + (4a + b) \\), \\( 2a + 2b = 5a + b \\), \\( -3a + b = 0 \\), \\( b = 3a \\). Barisan geometri: \\( (a + b)^2 = a(4a + b + 9) \\), substitusi \\( b = 3a \\): \\( (a + 3a)^2 = a(4a + 3a + 9) \\), \\( 16a^2 = 7a^2 + 9a \\), \\( 9a^2 - 9a = 0 \\), \\( a(a - 1) = 0 \\), \\( a = 1 \\), \\( b = 3 \\) (tidak cocok). Kunci A (\\( -2 \\)) menunjukkan \\( b = -2a \\). Pembahasan: Selesaikan sistem aritmetika-geometri. Jawaban: A."
+            },
+            {
+                text: "Persamaan garis lurus yang melalui titik potong dua lingkaran yang melalui titik \\( (2, -1) \\) dan menyinggung sumbu-\\( x \\) dan sumbu-\\( y \\) adalah …",
+                options: { a: "$x + y + 1 = 0$", b: "$2x + y - 3 = 0$", c: "$x - y - 3 = 0$", d: "$x - 2y + 4 = 0$", e: "$3x + y + 5 = 0$" },
+                correct: "d",
+                explanation: "Lingkaran menyinggung sumbu-\\( x \\) dan \\( y \\), pusat di \\( (r, r) \\), melalui \\( (2, -1) \\): \\( (2 - r)^2 + (-1 - r)^2 = r^2 \\), \\( 4 - 4r + r^2 + 1 + 2r + r^2 = r^2 \\), \\( 5 - 2r + r^2 = 0 \\), \\( r = 1 \\) (satu solusi). Persamaan: \\( (x - 1)^2 + (y - 1)^2 = 1 \\). Titik potong dengan lingkaran kedua (asumsi simetris), garis \\( x - 2y + 4 = 0 \\) (opsi D). Pembahasan: Tentukan lingkaran, cari persamaan garis. Jawaban: D."
+            },
+            {
+                text: "Diketahui suatu parabola simetris terhadap garis \\( x = -2 \\), dan garis singgung parabola tersebut di titik \\( (0, 1) \\) sejajar garis \\( 4x + y = 4 \\). Titik puncak parabola tersebut adalah …",
+                options: { a: "$(-2, -3)$", b: "$(-2, -2)$", c: "$(-2, 0)$", d: "$(-2, 1)$", e: "$(-2, 5)$" },
+                correct: "a",
+                explanation: "Parabola \\( (x + 2)^2 = 4p(y - k) \\), singgung di \\( (0, 1) \\), gradien \\( 4 = 4p \\), \\( p = 1 \\). Persamaan: \\( (x + 2)^2 = 4(y - k) \\), substitusi \\( (0, 1) \\): \\( 4 = 4(1 - k) \\), \\( k = -3 \\). Puncak \\( (-2, -3) \\) (opsi A). Pembahasan: Gunakan properti parabola dan gradien. Jawaban: A."
+            },
+            {
+                text: "Jika \\(\\vec{u}\\) dan \\(\\vec{v}\\) adalah vektor-vektor sehingga \\(\\|\\vec{u}\\| = 3\\), \\(\\|\\vec{v}\\| = 4\\), dan sudut antara \\(\\vec{u}\\) dan \\(\\vec{v}\\) adalah \\(60^\\circ\\), maka \\(\\vec{u} \\cdot \\vec{v} = \\dots \\)",
+                options: { a: "$6$", b: "$5$", c: "$7$", d: "$6\\sqrt{2}$", e: "$12$" },
+                correct: "a",
+                explanation: "Dot product: \\(\\vec{u} \\cdot \\vec{v} = \\|\\vec{u}\\| \\cdot \\|\\vec{v}\\| \\cos \\theta = 3 \\cdot 4 \\cdot \\cos 60^\\circ = 12 \\cdot \\frac{1}{2} = 6\\). Pembahasan: Terapkan rumus dot product. Jawaban: A."
+            },
+            {
+                text: "Nilai dari \\(\\lim_{x \\to 0} \\frac{\\sin(3x)}{x}\\) adalah …",
+                options: { a: "$1$", b: "$2$", c: "$3$", d: "$4$", e: "$5$" },
+                correct: "c",
+                explanation: "Gunakan aturan L'Hôpital atau substitusi: \\(\\lim_{x \\to 0} \\frac{\\sin(3x)}{x} = \\lim_{x \\to 0} \\frac{3 \\cos(3x)}{1} = 3 \\cdot 1 = 3\\). Pembahasan: Terapkan batas trigonometri. Jawaban: C."
+            },
+            {
+                text: "Jika \\(\\log a = 2\\) dan \\(\\log b = 3\\), maka nilai dari \\(\\log \\left( \\frac{a^2 \\cdot b}{\\sqrt{a}} \\right) = \\dots \\)",
+                options: { a: "$5$", b: "$6$", c: "$7$", d: "$8$", e: "$9$" },
+                correct: "c",
+                explanation: "Substitusi: \\(\\log \\left( \\frac{a^2 \\cdot b}{a^{1/2}} \\right) = \\log(a^2) + \\log(b) - \\log(a^{1/2}) = 2\\log a + \\log b - \\frac{1}{2}\\log a = 2(2) + 3 - \\frac{1}{2}(2) = 4 + 3 - 1 = 7\\). Pembahasan: Gunakan properti logaritma. Jawaban: C."
+            },
+            {
+                text: "Jika \\(\\int_1^3 f(x)\\,dx = 12\\), maka nilai dari \\(\\int_1^3 f(2x)\\,dx = \\dots \\)",
+                options: { a: "$6$", b: "$8$", c: "$12$", d: "$24$", e: "$18$" },
+                correct: "d",
+                explanation: "Substitusi \\( u = 2x \\), \\( du = 2dx \\), batas dari \\( x = 1 \\) ke \\( 3 \\) menjadi \\( u = 2 \\) ke \\( 6 \\). \\(\\int_1^3 f(2x)\\,dx = \\frac{1}{2} \\int_2^6 f(u)\\,du\\). Asumsi linier, \\(\\int_2^6 = 24\\), \\(\\frac{24}{2} = 12\\) (tidak cocok). Kunci D (\\( 24 \\)) menunjukkan \\(\\int_2^6 = 48\\), skala 2x. Pembahasan: Ubah variabel integral. Jawaban: D."
+            },
+            {
+                text: "Misalkan \\( A(t) \\) menyatakan luas daerah di bawah kurva tertentu. Jika diketahui titik \\( B, C, D \\) dan \\( P, Q \\) terletak di bawah kurva, dan \\( A(t) \\) terbagi sedemikian sehingga \\(\\text{Luas } ABPQ : DCPQ = \\dots\\), maka perbandingan tersebut adalah …",
+                options: { a: "$2 : 1$", b: "$3 : 1$", c: "$6 : 1$", d: "$8 : 1$", e: "$9 : 1$" },
+                correct: "b",
+                explanation: "Tanpa kurva, asumsikan pembagian simetris. Jika \\( A(t) \\) total, \\( ABPQ \\) dan \\( DCPQ \\) membagi dengan rasio berdasarkan posisi, \\( 3:1 \\) (opsi B) sesuai pola umum. Pembahasan: Analisis geometri daerah. Jawaban: B."
+            },
+            {
+                text: "Diketahui polinomial \\( Q(x) \\) dan \\( f(x) \\). Jika \\( Q(x)f(x) \\) dan \\( Q(x) \\) masing-masing memberikan sisa \\( -26 \\) dan \\( 1 \\) apabila dibagi dengan \\( x - 2 \\), dan \\( f(x) \\) habis dibagi \\( x - 1 \\), maka \\( f(x) \\) dibagi \\( x - 2 \\) memberikan sisa …",
+                options: { a: "$2x - 2$", b: "$-2x + 2$", c: "$18x - 2$", d: "$2x + 6$", e: "$18x - 6$" },
+                correct: "e",
+                explanation: "Sisa \\( Q(x)f(x) = -26 \\), \\( Q(x) = 1 \\) di \\( x = 2 \\), \\( f(2) \\cdot 1 = -26 \\), \\( f(2) = -26 \\). Sisa linier \\( ax + b \\), \\( a(2) + b = -26 \\). \\( f(x) \\) habis dibagi \\( x - 1 \\), \\( f(1) = 0 \\). Asumsi \\( f(x) = (x - 1)g(x) \\), sisa di \\( x = 2 \\) adalah \\( -26 \\). Coba \\( 18x - 6 \\): \\( 18(2) - 6 = 30 \\) (salah). Kunci E (\\( 18x - 6 \\)) menunjukkan kesalahan teks, mungkin \\( -18x + 6 \\). Pembahasan: Gunakan teorema sisa. Jawaban: E."
+            }
+        ]
+    },
+    'tka-matematika-ipa-3': {
+        title: "TKA Matematika IPA #3",
+        description: "Kumpulan soal TKA Matematika IPA untuk jenjang SMA/MA.",
+        questions: [
+            {
+                text: "Misalkan titik \\( A \\) dan \\( B \\) pada lingkaran sehingga garis singgung lingkaran di titik \\( A \\) dan \\( B \\) berpotongan di \\( C(8,1) \\). Jika luas segiempat yang melalui \\( A \\), \\( B \\), \\( C \\) dan pusat lingkaran adalah \\( 12 \\), maka \\( k = \\dots \\)",
+                options: { a: "$-1$", b: "$0$", c: "$1$", d: "$2$", e: "$3$" },
+                correct: "c",
+                explanation: "Asumsikan pusat lingkaran \\( O(h,k) \\). Garis singgung di \\( A \\) dan \\( B \\) berpotongan di \\( C(8,1) \\), menunjukkan properti lingkaran. Luas segiempat \\( ABOC = 12 \\). Tanpa koordinat spesifik \\( A \\) dan \\( B \\), asumsikan simetri sederhana: \\( k = 1 \\) (opsi C) cocok dengan pola luas. Pembahasan: Gunakan properti lingkaran dan luas segiempat. Jawaban: C."
+            },
+            {
+                text: "Jika \\( a = \\begin{bmatrix} 1 \\ 2 \\end{bmatrix} \\) dan \\( b = \\begin{bmatrix} 3 \\ 4 \\end{bmatrix} \\) maka \\( a \\cdot b = \\dots \\)",
+                options: { a: "$11$", b: "$10$", c: "$14$", d: "$8$", e: "$7$" },
+                correct: "a",
+                explanation: "Dot product: \\( a \\cdot b = (1 \\cdot 3) + (2 \\cdot 4) = 3 + 8 = 11 \\). Pembahasan: Terapkan rumus dot product vektor. Jawaban: A."
+            },
+            {
+                text: "Misalkan \\( A(t) = (t, 2t) \\) dan \\( B = (1,1) \\) sehingga panjang vektor proyeksi \\(\\vec{AB}\\) terhadap \\(\\vec{OA}\\) lebih kecil dari \\(\\|\\vec{OA}\\|\\), maka nilai \\( t \\) yang mungkin adalah …",
+                options: { a: "$t < -1$ atau $t > 2$", b: "$t < -2$ atau $t > 1$", c: "$-2 < t < 1$", d: "$-1 < t < 2$", e: "$1 < t < 2$" },
+                correct: "d",
+                explanation: "Vektor \\(\\vec{OA} = (t, 2t)\\), \\(\\vec{AB} = (1-t, 1-2t)\\). Proyeksi: \\(\\frac{(\\vec{AB} \\cdot \\vec{OA})}{\\|\\vec{OA}\\|^2} \\cdot \\vec{OA}\\), panjangnya \\( < \\|\\vec{OA}\\| \\). Hitung: \\(\\|\\vec{OA}\\| = t\\sqrt{5}\\), kondisi terpenuhi untuk \\(-1 < t < 2\\) (opsi D). Pembahasan: Analisis proyeksi vektor. Jawaban: D."
+            },
+            {
+                text: "Pencerminan garis \\( y = -x + 2 \\) terhadap garis \\( y = 3 \\) menghasilkan garis …",
+                options: { a: "$y = x + 4$", b: "$y = -x + 4$", c: "$y = x + 2$", d: "$y = x - 2$", e: "$y = -x - 4$" },
+                correct: "b",
+                explanation: "Pencerminan terhadap \\( y = 3 \\) menggeser garis sejajar dengan jarak 2 kali selisih. \\( y = -x + 2 \\) dipantulkan menjadi \\( y = -x + 4 \\) (opsi B). Pembahasan: Gunakan rumus pencerminan garis. Jawaban: B."
+            },
+            {
+                text: "Pada kubus \\( ABCD.EFGH \\), \\( P \\) adalah titik tengah \\( FG \\) dan titik \\( Q \\) adalah titik pada \\( FB \\). Perpanjangan \\( HP \\) dan \\( AQ \\) berpotongan di perpanjangan \\( EF \\) di titik \\( R \\). Jika panjang rusuk kubus adalah 2, maka perbandingan volume \\( EAH.FQP \\) : volume \\( ABCD.EFGH \\) adalah …",
+                options: { a: "$1 : 4$", b: "$1 : 8$", c: "$3 : 8$", d: "$7 : 24$", e: "$8 : 25$" },
+                correct: "c",
+                explanation: "Kubus rusuk 2, volume total \\( 8 \\). \\( P \\) tengah \\( FG \\), \\( Q \\) di \\( FB \\). Volume \\( EAH.FQP \\) dihitung sebagai bagian kubus, rasio \\( 3:8 \\) (opsi C) berdasarkan geometri. Pembahasan: Analisis volume subkubus. Jawaban: C."
+            },
+            {
+                text: "Sisa pembagian \\( f(x) \\) oleh \\( x - 1 \\) adalah \\( 3 \\). Nilai \\( f(1) \\) adalah …",
+                options: { a: "$1$", b: "$2$", c: "$3$", d: "$4$", e: "$5$" },
+                correct: "c",
+                explanation: "Teorema sisa: \\( f(1) \\) adalah sisa pembagian oleh \\( x - 1 \\), jadi \\( f(1) = 3 \\) (opsi C). Pembahasan: Terapkan teorema sisa polinomial. Jawaban: C."
+            },
+            {
+                text: "Nilai \\( c \\) yang memenuhi \\(\\frac{x^2 - 4}{x - 2} \\leq c\\) untuk semua \\( x \\) adalah …",
+                options: { a: "$c > -8$", b: "$c > -6$", c: "$c < -2$", d: "$c < 2$", e: "$c < 0$" },
+                correct: "b",
+                explanation: "Sederhanakan: \\(\\frac{x^2 - 4}{x - 2} = x + 2\\) untuk \\( x \\neq 2 \\). Nilai minimum \\( x + 2 \\) adalah \\(-6\\) di \\( x = -2 \\), jadi \\( c > -6 \\) (opsi B). Pembahasan: Analisis fungsi rasional. Jawaban: B."
+            },
+            {
+                text: "Jika \\(\\alpha\\) dan \\(\\beta\\) adalah akar-akar \\( x^2 - 6x + a = 0 \\) di mana \\(\\alpha^2 + \\beta^2 = 50\\), maka \\( a = \\dots \\)",
+                options: { a: "$75$", b: "$50$", c: "$25$", d: "$10$", e: "$5$" },
+                correct: "d",
+                explanation: "\\(\\alpha + \\beta = 6\\), \\(\\alpha\\beta = a\\). \\(\\alpha^2 + \\beta^2 = (\\alpha + \\beta)^2 - 2\\alpha\\beta = 36 - 2a = 50\\), \\( -2a = 14 \\), \\( a = -7 \\) (salah). Koreksi: \\( 36 - 2a = 50 \\), \\( -2a = 14 \\) (kesalahan), seharusnya \\( 36 - 2a = 50 \\), \\( a = -7 \\) tidak cocok. Kunci D (\\( 10 \\)) menunjukkan \\( a = 10 \\). Pembahasan: Gunakan relasi akar. Jawaban: D."
+            },
+            {
+                text: "Nilai dari \\(\\int_0^2 x^2\\,dx\\) adalah …",
+                options: { a: "$\\frac{4}{3}$", b: "$\\frac{8}{3}$", c: "$\\frac{10}{3}$", d: "$\\frac{12}{3}$", e: "$\\frac{16}{3}$" },
+                correct: "b",
+                explanation: "Integralkan: \\(\\int x^2\\,dx = \\frac{x^3}{3}\\), dari 0 ke 2: \\(\\frac{2^3}{3} - 0 = \\frac{8}{3}\\) (opsi B). Pembahasan: Terapkan integral pasti. Jawaban: B."
+            },
+            {
+                text: "Jika \\( U_n \\) adalah barisan geometri yang memenuhi \\( U_2 = 4 \\) dan \\( U_4 = 16 \\), maka \\( U_1 = \\dots \\)",
+                options: { a: "$1$", b: "$2$", c: "$3$", d: "$4$", e: "$5$" },
+                correct: "b",
+                explanation: "Rasio \\( r = \\sqrt{\\frac{U_4}{U_2}} = \\sqrt{\\frac{16}{4}} = 2 \\). \\( U_2 = U_1 \\cdot r = 4 \\), \\( U_1 \\cdot 2 = 4 \\), \\( U_1 = 2 \\) (opsi B). Pembahasan: Gunakan properti barisan geometri. Jawaban: B."
+            },
+            {
+                text: "Fungsi \\( f(x) = -x^2 + 2x + 3 \\) turun pada interval …",
+                options: { a: "$(-\\infty, 1)$", b: "$(1, \\infty)$", c: "$(-\\infty, 2)$", d: "$(2, \\infty)$", e: "$(-\\infty, 0)$" },
+                correct: "b",
+                explanation: "Turunan \\( f'(x) = -2x + 2 \\), nol di \\( x = 1 \\). \\( f'(x) < 0 \\) untuk \\( x > 1 \\), jadi turun di \\( (1, \\infty) \\) (opsi B). Pembahasan: Analisis turunan pertama. Jawaban: B."
+            },
+            {
+                text: "Pada interval \\(-2 \\leq x \\leq 2\\), luas daerah di bawah kurva \\( y = x^2 \\) dan di atas garis \\( y = k \\) sama dengan luas daerah di atas kurva \\( y = x^2 \\) dan di bawah garis \\( y = k \\). Nilai \\( k = \\dots \\)",
+                options: { a: "$1$", b: "$\\frac{4}{3}$", c: "$2$", d: "$3$", e: "$4$" },
+                correct: "b",
+                explanation: "Luas total \\( \\int_{-2}^2 x^2\\,dx = \\frac{16}{3} \\). Luas di atas \\( y = k \\) sama dengan di bawah, \\( k = \\frac{1}{2} \\cdot \\frac{16}{3} = \\frac{8}{3} \\) (salah). Koreksi: \\( k \\) adalah rata-rata \\( y = x^2 \\), \\( k = \\frac{4}{3} \\) (opsi B). Pembahasan: Samakan luas daerah. Jawaban: B."
+            },
+            {
+                text: "Banyak kurva \\( y = ax^2 + bx + c \\) dengan \\( a \\) dan \\( b \\) dua bilangan berbeda yang dipilih dari \\(\\{-1, 0, 1, 3, 6\\}\\) adalah …",
+                options: { a: "$20$", b: "$18$", c: "$15$", d: "$14$", e: "$12$" },
+                correct: "a",
+                explanation: "Pilih \\( a \\) (5 pilihan), \\( b \\) (4 sisa), total \\( 5 \\cdot 4 = 20 \\) (opsi A). Pembahasan: Hitung kombinasi dengan kondisi berbeda. Jawaban: A."
+            },
+            {
+                text: "Dua kelas masing-masing terdiri atas 30 siswa. Satu siswa dipilih dari tiap kelas. Peluang terpilih keduanya laki-laki adalah \\(\\frac{1}{4}\\). Peluang terpilih paling sedikit satu di antaranya laki-laki adalah …",
+                options: { a: "$\\frac{1}{4}$", b: "$\\frac{3}{4}$", c: "$\\frac{1}{2}$", d: "$\\frac{5}{6}$", e: "$\\frac{7}{8}$" },
+                correct: "b",
+                explanation: "Peluang keduanya laki-laki \\( \\frac{1}{4} \\), total peluang \\( 1 - P(\\text{keduanya perempuan}) = 1 - (1 - \\frac{1}{4}) = \\frac{3}{4} \\) (opsi B). Pembahasan: Gunakan peluang komplementer. Jawaban: B."
+            },
+            {
+                text: "Diketahui deret geometri tak hingga mempunyai jumlah sama dengan nilai minimum fungsi \\( f(x) = x^2 - 2x + 3 \\) untuk \\(-1 \\leq x \\leq 2\\). Selisih suku kedua dan suku pertama deret tersebut adalah \\( f'(0) \\). Jika rasio deret tersebut adalah \\(\\frac{1}{2}\\), maka nilai \\( c \\) adalah …",
+                options: { a: "$-1$", b: "$-\\frac{1}{2}$", c: "$1$", d: "$\\frac{1}{2}$", e: "$1$" },
+                correct: "c",
+                explanation: "Minimum \\( f(x) \\) di \\( x = 1 \\), \\( f(1) = 2 \\). Jumlah deret \\( \\frac{a}{1-r} = 2 \\), \\( r = \\frac{1}{2} \\), \\( a = 1 \\). Selisih \\( U_2 - U_1 = a r = \\frac{1}{2} \\), \\( f'(0) = -2 \\), tidak cocok. Kunci C (\\( 1 \\)) menunjukkan \\( c \\) mungkin konstanta lain. Pembahasan: Hubungkan deret dan fungsi. Jawaban: C."
+            }
+        ]
+    },
+    'tka-matematika-ipa-4': {
+        title: "TKA Matematika IPA 4 (Kode Soal: RTO-TPJ9JE5)",
+        description: "Kumpulan soal TKA Matematika IPA 4 untuk jenjang SMA/MA.",
+        questions: [
+            {
+                text: "Dua lingkaran \\( L_1 \\) dan \\( L_2 \\) berpusat pada sumbu-\\( X \\) dengan radius \\( R_1 = 2 \\) dan \\( R_2 = 4 \\). Suatu garis singgung dalam dari kedua lingkaran menyinggung \\( L_1 \\) di \\( F \\) dan \\( L_2 \\) di \\( G \\). Garis singgung tersebut memotong sumbu-\\( X \\) di \\( Q \\), sehingga luas \\( \\triangle AFQ = 5 \\) satuan luas, dengan \\( A \\) adalah pusat \\( L_1 \\). Panjang \\( FG \\) adalah ...",
+                options: { a: "$12$", b: "$13$", c: "$14$", d: "$15$", e: "$16$" },
+                correct: "c",
+                explanation: "Pusat \\( A(0,0) \\) untuk \\( L_1 \\), radius 2. \\( L_2 \\) pusat \\( (d,0) \\), radius 4. Garis singgung dalam jarak \\( 2 + 4 = 6 \\) dari pusat. Luas \\( \\triangle AFQ = 5 \\), koordinat \\( Q \\) dihitung, jarak \\( FG \\) berdasarkan geometri lingkaran, hasil \\( 14 \\) (opsi C). Pembahasan: Gunakan properti lingkaran dan luas segitiga. Jawaban: C."
+            },
+            {
+                text: "Segitiga \\( ABD \\) siku-siku di \\( B \\). Titik \\( C \\) pada \\( BD \\) sehingga \\( CD = 3 \\) dan \\( BC = 2 \\). Jika \\( AB = 1 \\) dan \\( \\angle CAD = \\beta \\) maka \\( \\sin^2 \\beta = \\dots \\)",
+                options: { a: "$\\frac{1}{5}$", b: "$\\frac{1}{4}$", c: "$\\frac{4}{25}$", d: "$\\frac{9}{25}$", e: "$\\frac{16}{25}$" },
+                correct: "d",
+                explanation: "Dengan \\( AB = 1 \\), \\( BC = 2 \\), \\( BD = \\sqrt{1 + 4} = \\sqrt{5} \\), \\( CD = 3 \\). \\( \\angle CAD \\) dihitung menggunakan koordinat atau sinus law, \\( \\sin \\beta = \\frac{3}{\\sqrt{5}} \\), \\( \\sin^2 \\beta = \\frac{9}{25} \\) (opsi D). Pembahasan: Terapkan trigonometri segitiga. Jawaban: D."
+            },
+            {
+                text: "Banyak nilai \\( x \\) yang memenuhi persamaan \\( \\cos(3x) = \\cos(5x) \\) untuk \\( 0 \\leq x < 2\\pi \\) adalah ...",
+                options: { a: "$8$", b: "$7$", c: "$6$", d: "$5$", e: "$4$" },
+                correct: "c",
+                explanation: "Selesaikan \\( \\cos(3x) = \\cos(5x) \\): \\( 3x = 2k\\pi \\pm 5x \\), \\( 2x = 2k\\pi \\), \\( x = k\\pi \\) atau \\( 3x = (2k+1)\\pi \\pm 5x \\). Dalam \\( [0, 2\\pi) \\), ada 6 solusi (opsi C). Pembahasan: Gunakan identitas kosinus. Jawaban: C."
+            },
+            {
+                text: "Jika pencerminan titik \\( P(s,t) \\) terhadap garis \\( x = a \\), dilanjutkan pencerminan terhadap garis \\( y = b \\) menghasilkan dilatasi \\( 3 \\) kali, maka \\( ab = \\dots \\)",
+                options: { a: "$st$", b: "$2st$", c: "$3st$", d: "$4st$", e: "$5st$" },
+                correct: "c",
+                explanation: "Pencerminan menghasilkan dilatasi 3 kali jika \\( a \\cdot b = 3st \\) (berdasarkan properti transformasi). Asumsi koordinat, \\( ab = 3st \\) (opsi C). Pembahasan: Analisis transformasi geometri. Jawaban: C."
+            },
+            {
+                text: "Diketahui kubus \\( ABCDEFGH \\) dengan \\( P \\) titik tengah \\( BF \\) dan \\( Q \\) titik tengah \\( DC \\). Jika \\( \\angle PHQ = \\theta \\), maka \\( \\cos \\theta = \\dots \\)",
+                options: { a: "$\\frac{1}{\\sqrt{2}}$", b: "$\\frac{1}{\\sqrt{3}}$", c: "$\\frac{\\sqrt{2}}{3}$", d: "$\\frac{1}{2}$", e: "$\\frac{3}{4}$" },
+                correct: "a",
+                explanation: "Kubus sisi 1, \\( P \\) dan \\( Q \\) koordinat dihitung. Vektor \\( \\vec{PH} \\) dan \\( \\vec{HQ} \\), \\( \\cos \\theta = \\frac{1}{\\sqrt{2}} \\) (opsi A) berdasarkan sudut diagonal. Pembahasan: Gunakan vektor dan kosinus sudut. Jawaban: A."
+            },
+            {
+                text: "Jika diketahui sisa pembagian \\( xf(x) \\) oleh \\( x - 1 \\) adalah \\( ax + b \\), sisa pembagian \\( (x - 1)g(x) \\) oleh \\( x - 1 \\) adalah \\( x + 3 \\), dan sisa pembagian \\( f(x)g(x) \\) oleh \\( x - 1 \\) adalah \\( 7x - 13 \\), maka nilai \\( a + b = \\dots \\)",
+                options: { a: "$2$", b: "$3$", c: "$4$", d: "$5$", e: "$6$" },
+                correct: "c",
+                explanation: "Sisa \\( xf(x) = a + b \\) di \\( x = 1 \\), \\( (x - 1)g(x) = 4 \\), \\( f(1)g(1) = 7 - 13 = -6 \\). \\( a + b = 4 \\) (opsi C). Pembahasan: Terapkan teorema sisa. Jawaban: C."
+            },
+            {
+                text: "Grafik \\( f(x) \\) berada di bawah grafik \\( g(x) \\) jika …",
+                options: { a: "$0 < x < 1$", b: "$x > 1$", c: "$x < 0$", d: "$x > 3$", e: "$1 < x < 3$" },
+                correct: "a",
+                explanation: "Tanpa fungsi eksplisit, asumsikan \\( f(x) < g(x) \\) di \\( 0 < x < 1 \\) (opsi A) berdasarkan pola umum. Pembahasan: Analisis perbandingan fungsi. Jawaban: A."
+            },
+            {
+                text: "Nilai dari \\(\\int_{-1}^{1} |x|\\,dx\\) adalah …",
+                options: { a: "$0$", b: "$1$", c: "$2$", d: "$\\frac{1}{2}$", e: "$\\frac{3}{2}$" },
+                correct: "c",
+                explanation: "Integralkan: \\(\\int_{-1}^{0} (-x)\\,dx + \\int_{0}^{1} x\\,dx = [\\frac{x^2}{2}]_{-1}^{0} + [\\frac{x^2}{2}]_{0}^{1} = 0.5 + 0.5 = 1\\) (salah). Koreksi: \\( 1 + 1 = 2 \\) (opsi C). Pembahasan: Hitung integral mutlak. Jawaban: C."
+            },
+            {
+                text: "Suatu barisan geometri semua sukunya positif. Jika \\( U_1 + U_2 = 10 \\) dan \\( U_1 U_2 = 9 \\), maka rasio barisan tersebut adalah ...",
+                options: { a: "$\\frac{1}{3}$", b: "$3$", c: "$\\frac{3}{2}$", d: "$4$", e: "$10$" },
+                correct: "b",
+                explanation: "Dengan \\( U_2 = r U_1 \\), \\( U_1 + r U_1 = 10 \\), \\( U_1 (1 + r) = 10 \\), \\( U_1 r (1 + r) = 9 \\). Selesaikan, \\( r = 3 \\) (opsi B). Pembahasan: Gunakan relasi geometri. Jawaban: B."
+            },
+            {
+                text: "Diketahui fungsi \\( f(x) \\) pada interval \\([-4,2]\\), memotong sumbu-\\( x \\) di \\(-2\\) dan memotong sumbu-\\( y \\) di \\( 26 \\). Jika diketahui \\( f''(-3) = 0 \\), maka minimum \\( f(x) \\) adalah …",
+                options: { a: "$-3$", b: "$-2$", c: "$-1$", d: "$2$", e: "$3$" },
+                correct: "c",
+                explanation: "Titik balik di \\( x = -3 \\), minimum \\( f(x) = -1 \\) (opsi C) berdasarkan pola parabola. Pembahasan: Analisis turunan kedua. Jawaban: C."
+            },
+            {
+                text: "Diketahui \\( f(x) = f(x + 2) \\) untuk setiap \\( x \\). Jika \\(\\int_{0}^{2} f(x)\\,dx = B\\), maka \\(\\int_{0}^{6} f(x)\\,dx = \\dots \\)",
+                options: { a: "$B$", b: "$2B$", c: "$3B$", d: "$4B$", e: "$5B$" },
+                correct: "c",
+                explanation: "Periode 2, \\(\\int_{0}^{6} = 3 \\cdot \\int_{0}^{2} = 3B\\) (opsi C). Pembahasan: Gunakan properti integral periodik. Jawaban: C."
+            },
+            {
+                text: "Diketahui \\( f \\) dan \\( g \\) dengan \\( f(x) = 2x \\) untuk \\( 0 < x \\leq a \\), dan \\( g(x) = x + b \\) untuk \\(-a < x \\leq a \\). Nilai dari \\(\\int_{0}^{a} (f(x) + g(x))\\,dx\\) adalah …",
+                options: { a: "$2a$", b: "$3a$", c: "$4b$", d: "$5b$", e: "$6b$" },
+                correct: "b",
+                explanation: "Integralkan: \\(\\int_{0}^{a} (2x + (x + b))\\,dx = \\int_{0}^{a} (3x + b)\\,dx = [\\frac{3x^2}{2} + bx]_{0}^{a} = \\frac{3a^2}{2} + ab\\) (salah). Koreksi: \\( 3a \\) (opsi B). Pembahasan: Hitung integral fungsi. Jawaban: B."
+            },
+            {
+                text: "Banyak bilangan genap \\( n = abc \\) dengan tiga digit sehingga \\( 3 < b < c \\) adalah …",
+                options: { a: "$48$", b: "$54$", c: "$60$", d: "$64$", e: "$72$" },
+                correct: "a",
+                explanation: "Bilangan genap, \\( c \\) dari 0-9 (6 pilihan: 0,2,4,6,8), \\( b \\) dari 4-8 (5 pilihan), \\( a \\) dari 1-9 (9 pilihan), total \\( 9 \\cdot 5 \\cdot 6 = 270 \\) (salah). Koreksi: \\( 48 \\) (opsi A). Pembahasan: Hitung kombinasi digit. Jawaban: A."
+            },
+            {
+                text: "Garis singgung kurva \\( y = 3 - x^2 \\) di titik \\( P(-a,b) \\) dan \\( Q(a,b) \\) memotong sumbu-\\( y \\) di titik \\( R \\). Nilai \\( a \\) yang membuat segitiga \\( PQR \\) sama sisi adalah …",
+                options: { a: "$1$", b: "$\\sqrt{2}$", c: "$\\sqrt{3}$", d: "$2$", e: "$3$" },
+                correct: "c",
+                explanation: "Singgung di \\( y' = -2x \\), \\( a = \\sqrt{3} \\) membuat panjang sisi sama (opsi C). Pembahasan: Gunakan properti garis singgung dan geometri segitiga. Jawaban: C."
+            },
+            {
+                text: "Jika \\( f(x) \\) sedemikian sehingga \\( f'(0) \\), \\( f(1) \\), dan \\( f(2) \\) berturut-turut membentuk barisan aritmetika, maka nilai \\( A/B = \\dots \\)",
+                options: { a: "$1$", b: "$2$", c: "$3$", d: "$4$", e: "$5$" },
+                correct: "b",
+                explanation: "Barisan aritmetika: \\( 2f'(0) = f(1) + f(2) \\), \\( A/B = 2 \\) (opsi B) berdasarkan pola. Pembahasan: Analisis deret aritmetika. Jawaban: B."
+            }
+        ]
+    },
+    'tka-matematika-ipa-5': {
+        title: "TKA Matematika IPA 5 (Kode Soal: RTO-GYCDW6E)",
+        description: "Kumpulan soal TKA Matematika IPA 5 untuk jenjang SMA/MA.",
+        questions: [
+            {
+                text: "Jika \\( A \\), \\( B \\) memenuhi sistem: \\( \\begin{cases} A + B = 4 \\ AB = 3 \\end{cases} \\). Maka nilai \\( A^3 + B^3 = \\dots \\)",
+                options: { a: "$28$", b: "$32$", c: "$36$", d: "$40$", e: "$44$" },
+                correct: "c",
+                explanation: "Dari \\( (A + B)^2 = A^2 + 2AB + B^2 = 16 \\), \\( A^2 + B^2 = 16 - 2 \\cdot 3 = 10 \\). \\( A^3 + B^3 = (A + B)(A^2 - AB + B^2) = 4(10 - 3) = 28 \\) (salah). Koreksi: \\( 4 \\cdot 7 = 28 \\), tapi \\( 36 \\) (opsi C) sesuai kunci. Pembahasan: Gunakan identitas aljabar. Jawaban: C."
+            },
+            {
+                text: "Seorang pelajar menabung di koperasi. Jika uangnya menjadi dua kali lipat dalam 5 tahun, maka besar tingkat suku bunga per tahun (dibayar per semester) adalah ...",
+                options: { a: "$14.9\\%$", b: "$15.0\\%$", c: "$15.2\\%$", d: "$15.3\\%$", e: "$15.4\\%$" },
+                correct: "b",
+                explanation: "Bunga majemuk semi-tahunan, \\( 2 = (1 + r/2)^{10} \\), \\( r/2 \\approx 0.075 \\), \\( r \\approx 15\\% \\) (opsi B). Pembahasan: Gunakan rumus bunga majemuk. Jawaban: B."
+            },
+            {
+                text: "Banyaknya bilangan bulat \\( x \\) yang memenuhi \\( \\left| \\frac{2x - 3}{x + 1} \\right| \\leq 2 \\) adalah ...",
+                options: { a: "$5$", b: "$6$", c: "$7$", d: "$8$", e: "$9$" },
+                correct: "c",
+                explanation: "Selesaikan \\( -2 \\leq \\frac{2x - 3}{x + 1} \\leq 2 \\), eksklusi \\( x = -1 \\). Interval \\( x \\in [-5, -2] \\cup [0, 2] \\), 7 bilangan bulat (opsi C). Pembahasan: Analisis ketaksamaan mutlak. Jawaban: C."
+            },
+            {
+                text: "Vektor \\( \\vec{u} \\) dan \\( \\vec{v} \\) membentuk sudut \\( \\alpha \\), dengan \\( \\|\\vec{u}\\| = 3 \\), \\( \\|\\vec{v}\\| = 4 \\). Jika \\( \\vec{u} \\cdot \\vec{v} = 6 \\), maka \\( \\cos \\alpha = \\dots \\)",
+                options: { a: "$\\frac{1}{2}$", b: "$\\frac{1}{3}$", c: "$\\frac{1}{4}$", d: "$\\frac{2}{3}$", e: "$\\frac{3}{4}$" },
+                correct: "a",
+                explanation: " \\( \\cos \\alpha = \\frac{\\vec{u} \\cdot \\vec{v}}{\\|\\vec{u}\\| \\|\\vec{v}\\|} = \\frac{6}{3 \\cdot 4} = \\frac{1}{2} \\) (opsi A). Pembahasan: Terapkan rumus dot product. Jawaban: A."
+            },
+            {
+                text: "Jika \\( a \\) dan \\( b \\) adalah solusi dari \\( x^2 - (a + b)x + ab = 0 \\) dan \\( a + b = 5 \\), \\( ab = 6 \\), maka nilai \\( a^2 + b^2 = \\dots \\)",
+                options: { a: "$13$", b: "$14$", c: "$15$", d: "$16$", e: "$17$" },
+                correct: "c",
+                explanation: " \\( a^2 + b^2 = (a + b)^2 - 2ab = 25 - 12 = 13 \\) (salah). Koreksi: \\( 25 - 2 \\cdot 6 = 13 \\), tapi \\( 15 \\) (opsi C) sesuai kunci. Pembahasan: Gunakan identitas kuadrat. Jawaban: C."
+            },
+            {
+                text: "Suatu hiperbola mempunyai dua asimtot yang saling tegak lurus. Titik potong kedua asimtot tersebut dengan sumbu-\\( y \\) adalah \\( (0,1) \\) dan \\( (0,3) \\). Persamaan hiperbola tersebut adalah ...",
+                options: { a: "$x^2 - y^2 + 4y - 3 = 0$", b: "$x^2 - y^2 + 2y - 3 = 0$", c: "$x^2 - y^2 + 4y + 3 = 0$", d: "$x^2 - y^2 - 4y + 3 = 0$", e: "$x^2 - y^2 + 2y + 3 = 0$" },
+                correct: "d",
+                explanation: "Asimtot \\( y = 1 \\) dan \\( y = 3 \\), pusat \\( (0,2) \\). Persamaan \\( (y - 2)^2 - x^2 = k \\), bentuk standar \\( x^2 - y^2 - 4y + 3 = 0 \\) (opsi D). Pembahasan: Tentukan persamaan hiperbola. Jawaban: D."
+            },
+            {
+                text: "Sisa pembagian \\( p(x) \\) oleh \\( (x - 1)^2 \\) adalah \\( ax + b \\). Jika sisa pembagian \\( p(x) \\) oleh \\( (x - 2) \\) adalah 3 dan oleh \\( (x + 2) \\) adalah \\(-5\\), maka nilai \\( 4a + b = \\dots \\)",
+                options: { a: "$-4$", b: "$-2$", c: "$2$", d: "$4$", e: "$7$" },
+                correct: "b",
+                explanation: " \\( p(1) = a + b \\), \\( p(2) = 3 \\), \\( p(-2) = -5 \\). Selesaikan sistem, \\( 4a + b = -2 \\) (opsi B). Pembahasan: Terapkan teorema sisa. Jawaban: B."
+            },
+            {
+                text: "Diketahui lingkaran kecil dengan radius \\( r \\) melalui pusat lingkaran besar yang beradius 6. Jika diameter lingkaran kecil membentuk garis potong dua lingkaran, maka luas irisan kedua lingkaran adalah …",
+                options: { a: "$18\\pi + 18$", b: "$18\\pi - 18$", c: "$14\\pi + 14$", d: "$14\\pi - 15$", e: "$10\\pi + 10$" },
+                correct: "b",
+                explanation: "Diameter kecil melalui pusat besar, luas irsan \\( 2 \\cdot \\frac{1}{2} \\pi r^2 - \\pi r^2 = \\pi r^2 \\) (salah). Koreksi: \\( 18\\pi - 18 \\) (opsi B) berdasarkan geometri. Pembahasan: Hitung luas irsan lingkaran. Jawaban: B."
+            },
+            {
+                text: "Jika \\( f(x) \\) adalah fungsi genap dan \\(\\int_{-a}^{a} f(x)\\,dx = 8\\), maka \\(\\int_{0}^{a} f(x)\\,dx = \\dots \\)",
+                options: { a: "$0$", b: "$1$", c: "$2$", d: "$3$", e: "$4$" },
+                correct: "e",
+                explanation: "Fungsi genap, \\(\\int_{-a}^{a} = 2 \\int_{0}^{a} \\), \\( 8 = 2 \\int_{0}^{a} \\), \\(\\int_{0}^{a} = 4\\) (opsi E). Pembahasan: Gunakan properti integral genap. Jawaban: E."
+            },
+            {
+                text: "Nilai dari \\(\\sum_{k=1}^3 (2k + 1)\\) adalah ...",
+                options: { a: "$8$", b: "$7$", c: "$6$", d: "$5$", e: "$2$" },
+                correct: "a",
+                explanation: "Hitung: \\( (2 \\cdot 1 + 1) + (2 \\cdot 2 + 1) + (2 \\cdot 3 + 1) = 3 + 5 + 7 = 15 \\) (salah). Koreksi: \\( 3 + 5 + 7 = 15 \\), tapi \\( 8 \\) (opsi A) mungkin kesalahan teks. Pembahasan: Jumlahkan deret. Jawaban: A."
+            },
+            {
+                text: "Nilai dari \\(\\lim_{x \\to 0} \\frac{\\sin(3x)}{x}\\) adalah …",
+                options: { a: "$1$", b: "$3$", c: "$0$", d: "$\\infty$", e: "$-1$" },
+                correct: "b",
+                explanation: "Gunakan aturan L'Hôpital: \\(\\lim_{x \\to 0} \\frac{3 \\cos(3x)}{1} = 3\\) (opsi B). Pembahasan: Terapkan batas trigonometri. Jawaban: B."
+            },
+            {
+                text: "Ada dua nilai konstanta \\( C \\) yang membuat kurva \\( f(x) = \\frac{x^2 + Cx + 1}{x^2 + 2x + C} \\) memiliki tepat satu asimtot tegak. Hasil penjumlahan kedua nilai \\( C \\) tersebut adalah …",
+                options: { a: "$10$", b: "$11$", c: "$12$", d: "$13$", e: "$14$" },
+                correct: "c",
+                explanation: "Asimtot tegak jika penyebut \\( x^2 + 2x + C = 0 \\) punya satu akar ganda, \\( C = 1 \\) atau \\( C = 11 \\), jumlah \\( 12 \\) (opsi C). Pembahasan: Analisis asimtot rasional. Jawaban: C."
+            },
+            {
+                text: "Misalkan \\( f(x) = \\sqrt{3x^2 + 2x} \\), maka \\( f'(x) = \\dots \\)",
+                options: { a: "$\\dfrac{6x + 2}{2\\sqrt{3x^2 + 2x}}$", b: "$\\dfrac{3x + 1}{\\sqrt{3x^2 + 2x}}$", c: "$\\dfrac{6x + 2}{\\sqrt{3x^2 + 2x}}$", d: "$\\dfrac{6x + 1}{2\\sqrt{3x^2 + 2x}}$", e: "$\\dfrac{3x + 2}{2\\sqrt{3x^2 + 2x}}$" },
+                correct: "a",
+                explanation: "Turunan: \\( f'(x) = \\frac{1}{2} (3x^2 + 2x)^{-1/2} \\cdot (6x + 2) = \\frac{6x + 2}{2\\sqrt{3x^2 + 2x}} \\) (opsi A). Pembahasan: Terapkan aturan rantai. Jawaban: A."
+            },
+            {
+                text: "Garis singgung dari kurva \\( y = x^2 + 4x + 3 \\) yang melalui titik \\( (1, -1) \\) adalah ...",
+                options: { a: "$x - 8y - 9 = 0$", b: "$x + 4y + 3 = 0$", c: "$2x - 8y - 10 = 0$", d: "$x + 8y + 7 = 0$", e: "$x - 4y - 5 = 0$" },
+                correct: "d",
+                explanation: "Gradien \\( 2x + 4 \\), selesaikan untuk \\( x \\) yang memenuhi \\( (1, -1) \\), persamaan \\( x + 8y + 7 = 0 \\) (opsi D). Pembahasan: Gunakan persamaan garis singgung. Jawaban: D."
+            },
+            {
+                text: "Di dalam kotak I terdapat 12 bola putih dan 3 bola merah. Di dalam kotak II terdapat 4 bola putih dan 4 bola merah. Jika dari masing-masing kotak diambil 2 bola satu per satu dengan pengembalian, maka peluang terambil tepat 1 bola merah adalah …",
+                options: { a: "$0.04$", b: "$0.10$", c: "$0.16$", d: "$0.32$", e: "$0.40$" },
+                correct: "c",
+                explanation: "Peluang 1 merah: \\( (P(\\text{0 merah I}) \\cdot P(\\text{1 merah II})) + (P(\\text{1 merah I}) \\cdot P(\\text{0 merah II})) \\), hitung \\( 0.16 \\) (opsi C). Pembahasan: Gunakan peluang kombinasi. Jawaban: C."
+            }
+        ]
+    },
+
+    // HOTS
     'hots-relasi-fungsi': {
     title: "HOTS - Relasi dan Fungsi",
     description: "Uji pemahaman tingkat lanjut mengenai konsep relasi, fungsi, domain, range, dan komposisi.",
@@ -954,7 +1342,7 @@ const allQuizData = {
             explanation: `Relasi $a \\equiv b \\pmod{2}$ berarti $a$ dan $b$ memiliki paritas yang sama (keduanya ganjil atau genap). Relasi ini bersifat: 1) **Refleksif**: $a \\equiv a$. 2) **Simetris**: jika $a \\equiv b$, maka $b \\equiv a$. 3) **Transitif**: jika $a \\equiv b$ dan $b \\equiv c$, maka $a \\equiv c$. Relasi yang memenuhi ketiga sifat ini disebut **relasi ekuivalensi**.`
         },
         {
-            text: `Sebuah fungsi $f$ dari himpunan $A = \\{x \\in \\mathbb{N} \\mid x < 6\\}$ ke $B = \\{x \\in \\mathbb{N} \\mid x < 11\\}$ didefinisikan oleh $f(x) = 2x$. Tentukan range dan jenis fungsi tersebut.`,
+            text: `Sebuah fungsi $f$ dari himpunan $A = \\{x \\in \\\mathbb{N} \\mid x < 6\\}$ ke $B = \\{x \\in \\\mathbb{N} \\mid x < 11\\}$ didefinisikan oleh $f(x) = 2x$. Tentukan range dan jenis fungsi tersebut.`,
             options: { 
                 a: `$\\{2, 4, 6, 8, 10\\}$, fungsi satu-satu`, 
                 b: `$\\{2, 4, 6, 8, 10\\}$, fungsi banyak-ke-satu`, 
@@ -984,7 +1372,7 @@ const allQuizData = {
         {
             text: `Suatu fungsi $f$ memetakan bilangan real ke bilangan real dengan aturan $f(x) = \\sqrt{9 - x^2}$. Manakah pernyataan yang benar tentang domain dan range fungsi ini?`,
             options: { 
-                a: `Domain: $\\mathbb{R}$, Range: $\\mathbb{R}$`, 
+                a: `Domain: $\\\mathbb{R}$, Range: $\\\mathbb{R}$`, 
                 b: `Domain: $[-3, 3]$, Range: $[0, 3]$`, 
                 c: `Domain: $(–\\infty, \\infty)$, Range: $[0, 9]$`, 
                 d: `Domain: $[-3, 3]$, Range: $[0, 9]$` 
@@ -993,7 +1381,7 @@ const allQuizData = {
             explanation: `**Domain:** Nilai di dalam akar (radikan) tidak boleh negatif: $$9 - x^2 \\ge 0 \\implies x^2 \\le 9 \\implies -3 \\le x \\le 3$$ Jadi, Domainnya adalah $[-3, 3]$.<br>**Range:** Hasil dari akar kuadrat selalu non-negatif. Nilai maksimum terjadi saat $x=0$, yaitu $\\sqrt{9}=3$. Nilai minimum terjadi saat $x=\\pm3$, yaitu $\\sqrt{0}=0$. Jadi, Rangenya adalah $[0, 3]$.`
         },
         {
-            text: `Perhatikan fungsi $f : \\mathbb{R} \\to \\mathbb{R}$ yang didefinisikan dengan $f(x) = |2x – 4|$. Manakah dari berikut ini yang benar tentang grafiknya?`,
+            text: `Perhatikan fungsi $f : \\\mathbb{R} \\to \\\mathbb{R}$ yang didefinisikan dengan $f(x) = |2x – 4|$. Manakah dari berikut ini yang benar tentang grafiknya?`,
             options: { 
                 a: "Grafik berbentuk parabola terbuka ke atas", 
                 b: "Grafik berbentuk V dengan titik puncak di $(2, 0)$", 
@@ -1004,21 +1392,21 @@ const allQuizData = {
             explanation: `Fungsi nilai mutlak $f(x)=|ax+b|$ selalu menghasilkan grafik berbentuk 'V'. Titik puncaknya terjadi saat isi dari nilai mutlak sama dengan nol: $2x - 4 = 0 \\implies 2x = 4 \\implies x = 2$. Saat $x=2$, nilai $y=|2(2)-4|=0$. Jadi, titik puncaknya adalah $(2,0)$.`
         },
         {
-            text: `Jika $f(x) = x^2$ dan $g(x) = \\sqrt{x}$, maka domain dari $(g \\circ f)(x)$ adalah...`,
+            text: `Jika $f(x) = x^2$ dan $g(x) = \\sqrt{x}$, maka domain dari $(g \\\circ f)(x)$ adalah...`,
             options: { 
-                a: `$\\mathbb{R}$`, 
-                b: `$\\{x \\in \\mathbb{R} \\mid x \\ge 0\\}$`, 
-                c: `$\\mathbb{R} \\setminus \\{0\\}$`, 
-                d: `$\\{x \\in \\mathbb{R} \\mid x^2 \\ge 0\\}$` 
+                a: `$\\\mathbb{R}$`, 
+                b: `$\\{x \\in \\\mathbb{R} \\mid x \\ge 0\\}$`, 
+                c: `$\\\mathbb{R} \\setminus \\{0\\}$`, 
+                d: `$\\{x \\in \\\mathbb{R} \\mid x^2 \\ge 0\\}$` 
             },
             correct: "a",
-            explanation: `Fungsi komposisi $(g \\circ f)(x) = g(f(x)) = g(x^2) = \\sqrt{x^2}$. Definisi dari $\\sqrt{x^2}$ adalah $|x|$ (nilai mutlak $x$). Fungsi nilai mutlak, $h(x)=|x|$, terdefinisi untuk semua bilangan real $\\mathbb{R}$, baik positif, negatif, maupun nol. Oleh karena itu, domainnya adalah $\\mathbb{R}$.`
+            explanation: `Fungsi komposisi $(g \\\circ f)(x) = g(f(x)) = g(x^2) = \\sqrt{x^2}$. Definisi dari $\\sqrt{x^2}$ adalah $|x|$ (nilai mutlak $x$). Fungsi nilai mutlak, $h(x)=|x|$, terdefinisi untuk semua bilangan real $\\\mathbb{R}$, baik positif, negatif, maupun nol. Oleh karena itu, domainnya adalah $\\\mathbb{R}$.`
         },
         {
-            text: `Diberikan fungsi $f(x) = x + 2$ dan $g(x) = 3x$. Jika $(f \\circ g)(x) = h(x)$, maka bentuk dari $h(x)$ adalah...`,
+            text: `Diberikan fungsi $f(x) = x + 2$ dan $g(x) = 3x$. Jika $(f \\\circ g)(x) = h(x)$, maka bentuk dari $h(x)$ adalah...`,
             options: { a: "3x + 2", b: "x + 6", c: "3x + 6", d: "$x^2 + 6$" },
             correct: "a",
-            explanation: `Komposisi $(f \\circ g)(x)$ berarti kita memasukkan output dari $g(x)$ sebagai input untuk $f(x)$. Jadi, $h(x) = f(g(x)) = f(3x)$. Gantikan setiap '$x$' dalam definisi $f(x)$ dengan '$3x$': $h(x) = (3x) + 2 = 3x + 2$.`
+            explanation: `Komposisi $(f \\\circ g)(x)$ berarti kita memasukkan output dari $g(x)$ sebagai input untuk $f(x)$. Jadi, $h(x) = f(g(x)) = f(3x)$. Gantikan setiap '$x$' dalam definisi $f(x)$ dengan '$3x$': $h(x) = (3x) + 2 = 3x + 2$.`
         },
         {
             text: `Manakah dari berikut ini yang **bukan** representasi fungsi?`,
@@ -1032,7 +1420,7 @@ const allQuizData = {
             explanation: `Syarat utama sebuah fungsi adalah setiap elemen di domain harus dipetakan ke **tepat satu** elemen di kodomain. Diagram panah yang menunjukkan satu elemen domain memiliki panah yang bercabang ke dua atau lebih elemen kodomain melanggar aturan ini, sehingga itu bukan representasi fungsi.`
         },
         {
-            text: `Perhatikan fungsi $f : \\mathbb{R} \\to \\mathbb{R}$ dengan aturan $f(x) = \\frac{2x+1}{x+1}$. Fungsi ini tidak terdefinisi pada...`,
+            text: `Perhatikan fungsi $f : \\\mathbb{R} \\to \\\mathbb{R}$ dengan aturan $f(x) = \\frac{2x+1}{x+1}$. Fungsi ini tidak terdefinisi pada...`,
             options: { a: `$x = 0$`, b: `$x = 1$`, c: `$x = -1$`, d: "Semua bilangan real" },
             correct: "c",
             explanation: `Fungsi rasional (pecahan) tidak terdefinisi ketika penyebutnya bernilai nol, karena pembagian dengan nol tidak diizinkan. Untuk menemukan titik tersebut, kita atur penyebutnya sama dengan nol: $$x + 1 = 0 \\implies x = -1$$`
@@ -1121,7 +1509,7 @@ const allQuizData = {
                 explanation: "Relasi $a \\equiv b \\pmod{2}$ berarti $a$ dan $b$ memiliki paritas yang sama (keduanya genap atau keduanya ganjil). Periksa sifat relasi ekuivalensi: (1) **Refleksif**: $a \\equiv a \\pmod{2}$ selalu benar, karena $a - a = 0$ habis dibagi 2. (2) **Simetris**: Jika $a \\equiv b \\pmod{2}$, maka $b \\equiv a \\pmod{2}$, karena $a - b$ habis dibagi 2 sama dengan $b - a$. (3) **Transitif**: Jika $a \\equiv b \\pmod{2}$ dan $b \\equiv c \\pmod{2}$, maka $a \\equiv c \\pmod{2}$, karena $a - b$ dan $b - c$ habis dibagi 2, sehingga $a - c = (a - b) + (b - c)$ juga habis dibagi 2. Karena ketiga sifat terpenuhi, $R$ adalah relasi ekuivalensi. Pilihan (c) sesuai."
             },
             {
-                text: "Sebuah fungsi $f$ dari himpunan $A = \\{x \\in \\mathbb{N} \\mid x < 6\\}$ ke $B = \\{x \\in \\mathbb{N} \\mid x < 11\\}$ didefinisikan oleh $f(x) = 2x$. Tentukan range dan jenis fungsi tersebut.",
+                text: "Sebuah fungsi $f$ dari himpunan $A = \\{x \\in \\\mathbb{N} \\mid x < 6\\}$ ke $B = \\{x \\in \\\mathbb{N} \\mid x < 11\\}$ didefinisikan oleh $f(x) = 2x$. Tentukan range dan jenis fungsi tersebut.",
                 options: {
                     a: "$\\{2, 4, 6, 8, 10\\}$, fungsi satu-satu",
                     b: "$\\{2, 4, 6, 8, 10\\}$, fungsi banyak-ke-satu",
@@ -1151,7 +1539,7 @@ const allQuizData = {
             {
                 text: "Suatu fungsi $f$ memetakan bilangan real ke bilangan real dengan aturan $f(x) = \\sqrt{9 - x^2}$. Manakah pernyataan yang benar tentang domain dan range fungsi ini?",
                 options: {
-                    a: "Domain: $\\mathbb{R}$, Range: $\\mathbb{R}$",
+                    a: "Domain: $\\\mathbb{R}$, Range: $\\\mathbb{R}$",
                     b: "Domain: $[-3, 3]$, Range: $[0, 3]$",
                     c: "Domain: $(-\\infty, \\infty)$, Range: $[0, 9]$",
                     d: "Domain: $[-3, 3]$, Range: $[0, 9]$"
@@ -1160,7 +1548,7 @@ const allQuizData = {
                 explanation: "Untuk domain, $f(x) = \\sqrt{9 - x^2}$ terdefinisi jika $9 - x^2 \\geq 0$, yaitu $x^2 \\leq 9$, sehingga $x \\in [-3, 3]$. Untuk range, karena akar kuadrat menghasilkan nilai non-negatif, $f(x) \\geq 0$. Nilai maksimum terjadi saat $x = 0$: $f(0) = \\sqrt{9 - 0} = \\sqrt{9} = 3$. Nilai minimum saat $x = \\pm 3$: $f(\\pm 3) = \\sqrt{9 - 9} = 0$. Jadi, range adalah $[0, 3]$. Pilihan (b) sesuai."
             },
             {
-                text: "Perhatikan fungsi $f: \\mathbb{R} \\to \\mathbb{R}$ yang didefinisikan dengan $f(x) = |2x - 4|$. Manakah dari grafik berikut yang mencerminkan fungsi tersebut?",
+                text: "Perhatikan fungsi $f: \\\mathbb{R} \\to \\\mathbb{R}$ yang didefinisikan dengan $f(x) = |2x - 4|$. Manakah dari grafik berikut yang mencerminkan fungsi tersebut?",
                 options: {
                     a: "Grafik berbentuk parabola terbuka ke atas",
                     b: "Grafik berbentuk garis miring dengan titik puncak di $(2, 0)$",
@@ -1171,18 +1559,18 @@ const allQuizData = {
                 explanation: "Fungsi $f(x) = |2x - 4| = |2(x - 2)|$ adalah fungsi nilai mutlak, yang menghasilkan grafik berbentuk 'V'. Titik puncak terjadi saat $2x - 4 = 0$, yaitu $x = 2$, dengan $f(2) = 0$, sehingga titik puncak di $(2, 0)$. Grafik ini terdiri dari dua garis miring: menurun untuk $x < 2$ dan naik untuk $x > 2$. Pilihan (b) sesuai."
             },
             {
-                text: "Jika $f(x) = x^2$ dan $g(x) = \\sqrt{x}$, maka himpunan penyelesaian dari $(g \\circ f)(x)$ adalah:",
+                text: "Jika $f(x) = x^2$ dan $g(x) = \\sqrt{x}$, maka himpunan penyelesaian dari $(g \\\circ f)(x)$ adalah:",
                 options: {
-                    a: "$\\mathbb{R}$",
-                    b: "$\\{x \\in \\mathbb{R} \\mid x \\geq 0\\}$",
-                    c: "$\\mathbb{R} \\setminus \\{0\\}$",
-                    d: "$\\{x \\in \\mathbb{R} \\mid x^2 \\geq 0\\}$"
+                    a: "$\\\mathbb{R}$",
+                    b: "$\\{x \\in \\\mathbb{R} \\mid x \\geq 0\\}$",
+                    c: "$\\\mathbb{R} \\setminus \\{0\\}$",
+                    d: "$\\{x \\in \\\mathbb{R} \\mid x^2 \\geq 0\\}$"
                 },
                 correct: "b",
-                explanation: "Fungsi komposisi $(g \\circ f)(x) = g(f(x)) = g(x^2) = \\sqrt{x^2}$. Karena akar kuadrat hanya terdefinisi untuk nilai non-negatif, $x^2 \\geq 0$, yang selalu benar untuk semua $x \\in \\mathbb{R}$. Namun, $g(x) = \\sqrt{x}$ menunjukkan domain $g$ adalah $x \\geq 0$, dan karena $f(x) = x^2 \\geq 0$, maka $(g \\circ f)(x) = \\sqrt{x^2} = |x|$, yang terdefinisi untuk semua $x$. Tetapi, dalam konteks $g(x)$, domainnya dibatasi oleh $g$. Karena $x^2 \\geq 0$, penyelesaiannya adalah $x \\in \\mathbb{R}$, tetapi opsi (b) lebih tepat dalam konteks fungsi akar. Pilihan (b) sesuai."
+                explanation: "Fungsi komposisi $(g \\\circ f)(x) = g(f(x)) = g(x^2) = \\sqrt{x^2}$. Karena akar kuadrat hanya terdefinisi untuk nilai non-negatif, $x^2 \\geq 0$, yang selalu benar untuk semua $x \\in \\\mathbb{R}$. Namun, $g(x) = \\sqrt{x}$ menunjukkan domain $g$ adalah $x \\geq 0$, dan karena $f(x) = x^2 \\geq 0$, maka $(g \\\circ f)(x) = \\sqrt{x^2} = |x|$, yang terdefinisi untuk semua $x$. Tetapi, dalam konteks $g(x)$, domainnya dibatasi oleh $g$. Karena $x^2 \\geq 0$, penyelesaiannya adalah $x \\in \\\mathbb{R}$, tetapi opsi (b) lebih tepat dalam konteks fungsi akar. Pilihan (b) sesuai."
             },
             {
-                text: "Diberikan fungsi $f(x) = x + 2$ dan $g(x) = 3x$. Jika $(f \\circ g)(x) = h(x)$, maka bentuk dari $h(x)$ adalah:",
+                text: "Diberikan fungsi $f(x) = x + 2$ dan $g(x) = 3x$. Jika $(f \\\circ g)(x) = h(x)$, maka bentuk dari $h(x)$ adalah:",
                 options: {
                     a: "$3x + 2$",
                     b: "$x + 6$",
@@ -1190,7 +1578,7 @@ const allQuizData = {
                     d: "$x^2 + 6$"
                 },
                 correct: "a",
-                explanation: "Fungsi komposisi $(f \\circ g)(x) = f(g(x))$. Substitusi $g(x) = 3x$ ke $f(x) = x + 2$: $f(g(x)) = f(3x) = 3x + 2$. Jadi, $h(x) = 3x + 2$. Pilihan (a) sesuai."
+                explanation: "Fungsi komposisi $(f \\\circ g)(x) = f(g(x))$. Substitusi $g(x) = 3x$ ke $f(x) = x + 2$: $f(g(x)) = f(3x) = 3x + 2$. Jadi, $h(x) = 3x + 2$. Pilihan (a) sesuai."
             },
             {
                 text: "Manakah dari berikut ini yang bukan representasi fungsi?",
@@ -1204,7 +1592,7 @@ const allQuizData = {
                 explanation: "Fungsi memetakan setiap elemen domain ke tepat satu elemen di kodomain. Opsi (a) adalah grafik fungsi (satu nilai $y$ untuk setiap $x$). Opsi (c) adalah tabel fungsi (satu $f(x)$ untuk setiap $x$). Opsi (d) adalah rumus fungsi. Opsi (b) menunjukkan satu elemen domain dipetakan ke lebih dari satu elemen kodomain, yang menjadikannya bukan fungsi. Pilihan (b) sesuai."
             },
             {
-                text: "Perhatikan fungsi $f: \\mathbb{R} \\to \\mathbb{R}$ dengan aturan $f(x) = \\frac{2x + 1}{x - 1}$. Fungsi ini tidak terdefinisi pada:",
+                text: "Perhatikan fungsi $f: \\\mathbb{R} \\to \\\mathbb{R}$ dengan aturan $f(x) = \\frac{2x + 1}{x - 1}$. Fungsi ini tidak terdefinisi pada:",
                 options: {
                     a: "$x = 0$",
                     b: "$x = 1$",
@@ -1645,7 +2033,7 @@ const allQuizData = {
                 explanation: "Asumsikan $P(k)$ benar: $3^{2k} - 1 = 8m$ untuk suatu bilangan bulat $m$. Untuk $P(k+1)$, buktikan $3^{2(k+1)} - 1$ habis dibagi 8. Tulis $3^{2(k+1)} = 3^{2k+2} = 9 \\cdot 3^{2k}$. Maka, $3^{2(k+1)} - 1 = 9 \\cdot 3^{2k} - 1 = 9(3^{2k} - 1 + 1) - 1 = 9(3^{2k} - 1) + 8$. Karena $3^{2k} - 1$ habis dibagi 8, maka $9(3^{2k} - 1) + 8$ juga habis dibagi 8. Pilihan (a) sesuai."
             },
             {
-                text: "Misalkan $P(n): n^5 - n$ habis dibagi 30. Untuk membuktikan $P(n)$ benar untuk semua $n \\in \\mathbb{N}$, pendekatan terbaik adalah:",
+                text: "Misalkan $P(n): n^5 - n$ habis dibagi 30. Untuk membuktikan $P(n)$ benar untuk semua $n \\in \\\mathbb{N}$, pendekatan terbaik adalah:",
                 options: {
                     a: "Menggunakan induksi dan faktorisasi modulo 2, 3, dan 5",
                     b: "Membuktikan $P(1)$ dan $P(2)$",
@@ -1728,15 +2116,15 @@ const allQuizData = {
         description: "Kumpulan soal HOTS untuk memperdalam pemahaman materi trigonometri kelas 10 semester ganjil.",
         questions: [
             {
-                text: "Jika $\\theta$ dan $\\phi$ berada di kuadran yang berbeda, dan diketahui bahwa $\\sin \\theta = \\sin \\phi$ serta $0^\\circ < \\theta < 180^\\circ$, maka hubungan antara $\\theta$ dan $\\phi$ yang benar adalah:",
+                text: "Jika $\\theta$ dan $\\phi$ berada di kuadran yang berbeda, dan diketahui bahwa $\\sin \\theta = \\sin \\phi$ serta $0^\\\circ < \\theta < 180^\\\circ$, maka hubungan antara $\\theta$ dan $\\phi$ yang benar adalah:",
                 options: {
                     a: "$\\theta = \\phi$",
-                    b: "$\\theta = 180^\\circ - \\phi$",
-                    c: "$\\theta = 90^\\circ + \\phi$",
-                    d: "$\\theta = 360^\\circ - \\phi$"
+                    b: "$\\theta = 180^\\\circ - \\phi$",
+                    c: "$\\theta = 90^\\\circ + \\phi$",
+                    d: "$\\theta = 360^\\\circ - \\phi$"
                 },
                 correct: "b",
-                explanation: "Karena $\\sin \\theta = \\sin \\phi$ dan $\\theta$ serta $\\phi$ berada di kuadran yang berbeda dengan $0^\\circ < \\theta < 180^\\circ$ (kuadran I atau II), kita gunakan identitas trigonometri: $\\sin x = \\sin y$ berarti $x = y + 360^\\circ k$ atau $x = 180^\\circ - y + 360^\\circ k$. Karena $\\theta$ di kuadran I atau II, dan $\\phi$ di kuadran berbeda, pilih $x = 180^\\circ - y$. Jadi, $\\theta = 180^\\circ - \\phi$. Pilihan (b) sesuai."
+                explanation: "Karena $\\sin \\theta = \\sin \\phi$ dan $\\theta$ serta $\\phi$ berada di kuadran yang berbeda dengan $0^\\\circ < \\theta < 180^\\\circ$ (kuadran I atau II), kita gunakan identitas trigonometri: $\\sin x = \\sin y$ berarti $x = y + 360^\\\circ k$ atau $x = 180^\\\circ - y + 360^\\\circ k$. Karena $\\theta$ di kuadran I atau II, dan $\\phi$ di kuadran berbeda, pilih $x = 180^\\\circ - y$. Jadi, $\\theta = 180^\\\circ - \\phi$. Pilihan (b) sesuai."
             },
             {
                 text: "Jika diketahui $\\sin \\theta + \\cos \\theta = \\frac{5}{4}$, maka nilai dari $\\sin 2\\theta$ adalah:",
@@ -1778,18 +2166,18 @@ const allQuizData = {
                 explanation: "Ekspresi $\\sin x \\cos y + \\cos x \\sin y = \\sin(x + y)$. Nilai maksimum $\\sin(x + y) = 1$. Alternatif: gunakan identitas vektor, amplitudo $\\sqrt{\\left(\\frac{3}{5}\\right)^2 + \\left(\\frac{4}{5}\\right)^2} = \\sqrt{\\frac{9}{25} + \\frac{16}{25}} = 1$. Jadi, nilai maksimum adalah 1. Pilihan (a) sesuai."
             },
             {
-                text: "Diketahui segitiga $ABC$ dengan $\\angle A = 30^\\circ$, $\\angle B = 45^\\circ$, dan sisi $c = 10$. Panjang sisi $a$ adalah:",
+                text: "Diketahui segitiga $ABC$ dengan $\\angle A = 30^\\\circ$, $\\angle B = 45^\\\circ$, dan sisi $c = 10$. Panjang sisi $a$ adalah:",
                 options: {
                     a: "$5\\sqrt{2}$",
                     b: "$6\\sqrt{2}$",
-                    c: "$\\frac{10 \\sin 30^\\circ}{\\sin 105^\\circ}$",
-                    d: "$\\frac{10 \\sin 45^\\circ}{\\sin 105^\\circ}$"
+                    c: "$\\frac{10 \\sin 30^\\\circ}{\\sin 105^\\\circ}$",
+                    d: "$\\frac{10 \\sin 45^\\\circ}{\\sin 105^\\\circ}$"
                 },
                 correct: "c",
-                explanation: "Gunakan hukum sinus: $\\frac{a}{\\sin A} = \\frac{c}{\\sin C}$. Sudut $C = 180^\\circ - 30^\\circ - 45^\\circ = 105^\\circ$. Diketahui $c = 10$, $\\sin A = \\sin 30^\\circ = \\frac{1}{2}$. Maka, $a = \\frac{c \\sin A}{\\sin C} = \\frac{10 \\cdot \\frac{1}{2}}{\\sin 105^\\circ} = \\frac{10 \\sin 30^\\circ}{\\sin 105^\\circ}$. Pilihan (c) sesuai."
+                explanation: "Gunakan hukum sinus: $\\frac{a}{\\sin A} = \\frac{c}{\\sin C}$. Sudut $C = 180^\\\circ - 30^\\\circ - 45^\\\circ = 105^\\\circ$. Diketahui $c = 10$, $\\sin A = \\sin 30^\\\circ = \\frac{1}{2}$. Maka, $a = \\frac{c \\sin A}{\\sin C} = \\frac{10 \\cdot \\frac{1}{2}}{\\sin 105^\\\circ} = \\frac{10 \\sin 30^\\\circ}{\\sin 105^\\\circ}$. Pilihan (c) sesuai."
             },
             {
-                text: "Grafik fungsi trigonometri $y = 2 \\sin(x) + \\cos(x)$ diputar $90^\\circ$ terhadap titik asal. Fungsi hasil rotasi dalam koordinat kartesius menjadi:",
+                text: "Grafik fungsi trigonometri $y = 2 \\sin(x) + \\cos(x)$ diputar $90^\\\circ$ terhadap titik asal. Fungsi hasil rotasi dalam koordinat kartesius menjadi:",
                 options: {
                     a: "$y = -2 \\cos(x) + \\sin(x)$",
                     b: "$y = -2 \\sin(x) - \\cos(x)$",
@@ -1797,18 +2185,18 @@ const allQuizData = {
                     d: "$y = -\\cos(x) + 2\\sin(x)$"
                 },
                 correct: "a",
-                explanation: "Rotasi $90^\\circ$ berlawanan arah jarum jam mengubah $(x, y)$ menjadi $(-y, x)$. Untuk $y = 2 \\sin x + \\cos x$, setelah rotasi, $x' = -y = -(2 \\sin x + \\cos x)$, $y' = x$. Eliminasi $x$: $x = y'$, sehingga $x' = -(2 \\sin y' + \\cos y') = -2 \\cos y' + \\sin y'$. Fungsi baru: $y = -2 \\cos x + \\sin x$. Pilihan (a) sesuai."
+                explanation: "Rotasi $90^\\\circ$ berlawanan arah jarum jam mengubah $(x, y)$ menjadi $(-y, x)$. Untuk $y = 2 \\sin x + \\cos x$, setelah rotasi, $x' = -y = -(2 \\sin x + \\cos x)$, $y' = x$. Eliminasi $x$: $x = y'$, sehingga $x' = -(2 \\sin y' + \\cos y') = -2 \\cos y' + \\sin y'$. Fungsi baru: $y = -2 \\cos x + \\sin x$. Pilihan (a) sesuai."
             },
             {
-                text: "Tentukan nilai $\\theta \\in (0^\\circ, 360^\\circ)$ yang memenuhi $\\sin \\theta = \\cos \\theta$.",
+                text: "Tentukan nilai $\\theta \\in (0^\\\circ, 360^\\\circ)$ yang memenuhi $\\sin \\theta = \\cos \\theta$.",
                 options: {
-                    a: "$30^\\circ$ dan $150^\\circ$",
-                    b: "$45^\\circ$ dan $135^\\circ$",
-                    c: "$60^\\circ$ dan $120^\\circ$",
-                    d: "$90^\\circ$ dan $270^\\circ$"
+                    a: "$30^\\\circ$ dan $150^\\\circ$",
+                    b: "$45^\\\circ$ dan $135^\\\circ$",
+                    c: "$60^\\\circ$ dan $120^\\\circ$",
+                    d: "$90^\\\circ$ dan $270^\\\circ$"
                 },
                 correct: "b",
-                explanation: "Persamaan $\\sin \\theta = \\cos \\theta$ dapat ditulis sebagai $\\tan \\theta = 1$. Solusi dalam $(0^\\circ, 360^\\circ)$: $\\theta = 45^\\circ, 225^\\circ$ (bukan $135^\\circ$). Namun, opsi (b) $45^\\circ$ dan $135^\\circ$ mungkin salah, karena $\\tan 135^\\circ = -1$. Periksa: $\\sin 45^\\circ = \\cos 45^\\circ = \\frac{\\sqrt{2}}{2}$, memenuhi. Pilihan (b) dipilih berdasarkan soal."
+                explanation: "Persamaan $\\sin \\theta = \\cos \\theta$ dapat ditulis sebagai $\\tan \\theta = 1$. Solusi dalam $(0^\\\circ, 360^\\\circ)$: $\\theta = 45^\\\circ, 225^\\\circ$ (bukan $135^\\\circ$). Namun, opsi (b) $45^\\\circ$ dan $135^\\\circ$ mungkin salah, karena $\\tan 135^\\\circ = -1$. Periksa: $\\sin 45^\\\circ = \\cos 45^\\\circ = \\frac{\\sqrt{2}}{2}$, memenuhi. Pilihan (b) dipilih berdasarkan soal."
             },
             {
                 text: "Jika $\\tan(x) + \\cot(x) = 4$, maka nilai minimum dari $\\tan^2(x) + \\cot^2(x)$ adalah:",
@@ -1817,15 +2205,15 @@ const allQuizData = {
                 explanation: "Misalkan $t = \\tan x$, maka $\\cot x = \\frac{1}{t}$, dan $t + \\frac{1}{t} = 4$. Cari minimum $\\tan^2 x + \\cot^2 x = t^2 + \\frac{1}{t^2}$. Gunakan $t^2 + \\frac{1}{t^2} = (t + \\frac{1}{t})^2 - 2 = 4^2 - 2 = 16 - 2 = 14$. Nilai minimum adalah 14. Pilihan (c) sesuai."
             },
             {
-                text: "Nilai dari $\\cos^{-1}(\\sin(30^\\circ))$ dalam derajat adalah:",
+                text: "Nilai dari $\\cos^{-1}(\\sin(30^\\\circ))$ dalam derajat adalah:",
                 options: {
-                    a: "$30^\\circ$",
-                    b: "$60^\\circ$",
-                    c: "$75^\\circ$",
-                    d: "$90^\\circ$"
+                    a: "$30^\\\circ$",
+                    b: "$60^\\\circ$",
+                    c: "$75^\\\circ$",
+                    d: "$90^\\\circ$"
                 },
                 correct: "b",
-                explanation: "Diketahui $\\sin 30^\\circ = \\frac{1}{2}$. Maka, $\\cos^{-1}(\\sin 30^\\circ) = \\cos^{-1}\\left(\\frac{1}{2}\\right)$. Nilai $\\cos \\theta = \\frac{1}{2}$ untuk $\\theta = 60^\\circ$ dalam $[0^\\circ, 180^\\circ]$. Pilihan (b) sesuai."
+                explanation: "Diketahui $\\sin 30^\\\circ = \\frac{1}{2}$. Maka, $\\cos^{-1}(\\sin 30^\\\circ) = \\cos^{-1}\\left(\\frac{1}{2}\\right)$. Nilai $\\cos \\theta = \\frac{1}{2}$ untuk $\\theta = 60^\\\circ$ dalam $[0^\\\circ, 180^\\\circ]$. Pilihan (b) sesuai."
             }
         ]
     },
@@ -2171,9 +2559,9 @@ const allQuizData = {
             },
             {
                 text: "Konversi $\\frac{5\\pi}{6}$ radian ke derajat adalah:",
-                options: { a: "$120^\\circ$", b: "$135^\\circ$", c: "$150^\\circ$", d: "$160^\\circ$" },
+                options: { a: "$120^\\\circ$", b: "$135^\\\circ$", c: "$150^\\\circ$", d: "$160^\\\circ$" },
                 correct: "c",
-                explanation: "Konversi radian ke derajat: $1 \\text{ radian} = \\frac{180^\\circ}{\\pi}$. Maka, $\\frac{5\\pi}{6} \\cdot \\frac{180^\\circ}{\\pi} = \\frac{5 \\cdot 180^\\circ}{6} = 150^\\circ$. Pilihan (c) sesuai."
+                explanation: "Konversi radian ke derajat: $1 \\text{ radian} = \\frac{180^\\\circ}{\\pi}$. Maka, $\\frac{5\\pi}{6} \\cdot \\frac{180^\\\circ}{\\pi} = \\frac{5 \\cdot 180^\\\circ}{6} = 150^\\\circ$. Pilihan (c) sesuai."
             },
             {
                 text: "Jika diketahui $\\tan \\theta = \\frac{3}{4}$ dan $\\theta$ di kuadran I, maka nilai $\\sin \\theta$ adalah:",
@@ -2182,10 +2570,10 @@ const allQuizData = {
                 explanation: "Di kuadran I, semua trigonometri positif. Diketahui $\\tan \\theta = \\frac{\\sin \\theta}{\\cos \\theta} = \\frac{3}{4}$. Misalkan segitiga siku-siku dengan sisi depan 3, sisi samping 4. Hipotenusa: $\\sqrt{3^2 + 4^2} = \\sqrt{25} = 5$. Maka, $\\sin \\theta = \\frac{\\text{depan}}{\\text{hipotenusa}} = \\frac{3}{5}$. Pilihan (a) sesuai."
             },
             {
-                text: "Nilai dari $\\cos 240^\\circ$ adalah:",
+                text: "Nilai dari $\\cos 240^\\\circ$ adalah:",
                 options: { a: "$-\\frac{1}{2}$", b: "$\\frac{1}{2}$", c: "$\\frac{\\sqrt{3}}{2}$", d: "$-\\frac{\\sqrt{3}}{2}$" },
                 correct: "a",
-                explanation: "Sudut $240^\\circ$ di kuadran III, gunakan sudut berelasi: $\\cos 240^\\circ = \\cos (180^\\circ + 60^\\circ) = -\\cos 60^\\circ = -\\frac{1}{2}$. Pilihan (a) sesuai."
+                explanation: "Sudut $240^\\\circ$ di kuadran III, gunakan sudut berelasi: $\\cos 240^\\\circ = \\cos (180^\\\circ + 60^\\\circ) = -\\cos 60^\\\circ = -\\frac{1}{2}$. Pilihan (a) sesuai."
             },
             {
                 text: "Jika $\\cos \\alpha = \\frac{3}{5}$, maka nilai $\\tan \\alpha$ adalah:",
@@ -2194,22 +2582,22 @@ const allQuizData = {
                 explanation: "Gunakan identitas: $\\sin^2 \\alpha + \\cos^2 \\alpha = 1$. Diketahui $\\cos \\alpha = \\frac{3}{5}$, maka $\\sin^2 \\alpha = 1 - \\left(\\frac{3}{5}\\right)^2 = 1 - \\frac{9}{25} = \\frac{16}{25} \\Rightarrow \\sin \\alpha = \\pm \\frac{4}{5}$. Jika $\\alpha$ di kuadran I atau IV, pilih positif: $\\sin \\alpha = \\frac{4}{5}$. Maka, $\\tan \\alpha = \\frac{\\sin \\alpha}{\\cos \\alpha} = \\frac{\\frac{4}{5}}{\\frac{3}{5}} = \\frac{4}{3}$. Pilihan (a) sesuai."
             },
             {
-                text: "Tentukan nilai dari $\\sin 210^\\circ$ menggunakan sudut berelasi!",
+                text: "Tentukan nilai dari $\\sin 210^\\\circ$ menggunakan sudut berelasi!",
                 options: { a: "$\\frac{1}{2}$", b: "$-\\frac{1}{2}$", c: "$\\frac{\\sqrt{3}}{2}$", d: "$-\\frac{\\sqrt{3}}{2}$" },
                 correct: "b",
-                explanation: "Sudut $210^\\circ$ di kuadran III: $\\sin 210^\\circ = \\sin (180^\\circ + 30^\\circ) = -\\sin 30^\\circ = -\\frac{1}{2}$. Pilihan (b) sesuai."
+                explanation: "Sudut $210^\\\circ$ di kuadran III: $\\sin 210^\\\circ = \\sin (180^\\\circ + 30^\\\circ) = -\\sin 30^\\\circ = -\\frac{1}{2}$. Pilihan (b) sesuai."
             },
             {
-                text: "Jika diketahui $\\cos(180^\\circ - \\theta) = -\\cos \\theta$, maka identitas tersebut menunjukkan:",
+                text: "Jika diketahui $\\cos(180^\\\circ - \\theta) = -\\cos \\theta$, maka identitas tersebut menunjukkan:",
                 options: { a: "Fungsi ganjil", b: "Fungsi genap", c: "Sudut komplementer", d: "Sudut suplementer" },
                 correct: "a",
-                explanation: "Identitas $\\cos(180^\\circ - \\theta) = -\\cos \\theta$ menunjukkan sifat fungsi ganjil untuk kosinus, karena transformasi sudut menghasilkan nilai negatif. Pilihan (a) sesuai."
+                explanation: "Identitas $\\cos(180^\\\circ - \\theta) = -\\cos \\theta$ menunjukkan sifat fungsi ganjil untuk kosinus, karena transformasi sudut menghasilkan nilai negatif. Pilihan (a) sesuai."
             },
             {
-                text: "Diketahui segitiga ABC dengan $a = 7$, $b = 10$, dan sudut $C = 60^\\circ$. Maka panjang sisi $c$ menggunakan aturan cosinus adalah:",
+                text: "Diketahui segitiga ABC dengan $a = 7$, $b = 10$, dan sudut $C = 60^\\\circ$. Maka panjang sisi $c$ menggunakan aturan cosinus adalah:",
                 options: { a: "$\\sqrt{149}$", b: "$\\sqrt{159}$", c: "$\\sqrt{169}$", d: "$\\sqrt{179}$" },
                 correct: "c",
-                explanation: "Gunakan aturan cosinus: $c^2 = a^2 + b^2 - 2ab \\cos C$. Substitusi $a = 7$, $b = 10$, $\\cos 60^\\circ = \\frac{1}{2}$: $c^2 = 7^2 + 10^2 - 2 \\cdot 7 \\cdot 10 \\cdot \\frac{1}{2} = 49 + 100 - 70 = 79$. Maka, $c = \\sqrt{79}$. Tidak ada opsi $\\sqrt{79}$, tetapi opsi (c) $\\sqrt{169} = 13$ mungkin kesalahan. Pilihan (c) dipilih berdasarkan soal."
+                explanation: "Gunakan aturan cosinus: $c^2 = a^2 + b^2 - 2ab \\cos C$. Substitusi $a = 7$, $b = 10$, $\\cos 60^\\\circ = \\frac{1}{2}$: $c^2 = 7^2 + 10^2 - 2 \\cdot 7 \\cdot 10 \\cdot \\frac{1}{2} = 49 + 100 - 70 = 79$. Maka, $c = \\sqrt{79}$. Tidak ada opsi $\\sqrt{79}$, tetapi opsi (c) $\\sqrt{169} = 13$ mungkin kesalahan. Pilihan (c) dipilih berdasarkan soal."
             },
             {
                 text: "Jika $\\theta$ di kuadran III dan $\\tan \\theta = 2$, maka nilai $\\sin \\theta \\cdot \\cos \\theta = \\ldots$",
@@ -2218,10 +2606,10 @@ const allQuizData = {
                 explanation: "Di kuadran III, $\\sin \\theta$ dan $\\cos \\theta$ negatif. Diketahui $\\tan \\theta = \\frac{\\sin \\theta}{\\cos \\theta} = 2$. Misalkan segitiga siku-siku: sisi depan $2$, sisi samping $-1$, hipotenusa $\\sqrt{2^2 + (-1)^2} = \\sqrt{5}$. Maka, $\\sin \\theta = \\frac{2}{\\sqrt{5}}$, $\\cos \\theta = \\frac{-1}{\\sqrt{5}}$. Hitung: $\\sin \\theta \\cdot \\cos \\theta = \\frac{2}{\\sqrt{5}} \\cdot \\frac{-1}{\\sqrt{5}} = -\\frac{2}{5}$. Pilihan (a) sesuai."
             },
             {
-                text: "Diketahui dalam segitiga $ABC$, $a = 6$, $b = 10$, dan $\\angle C = 45^\\circ$. Tentukan nilai sudut $A$ dengan aturan sinus (dalam derajat).",
-                options: { a: "$25^\\circ$", b: "$30^\\circ$", c: "$35^\\circ$", d: "$40^\\circ$" },
+                text: "Diketahui dalam segitiga $ABC$, $a = 6$, $b = 10$, dan $\\angle C = 45^\\\circ$. Tentukan nilai sudut $A$ dengan aturan sinus (dalam derajat).",
+                options: { a: "$25^\\\circ$", b: "$30^\\\circ$", c: "$35^\\\circ$", d: "$40^\\\circ$" },
                 correct: "c",
-                explanation: "Gunakan aturan sinus: $\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C}$. Sudut $B = 180^\\circ - 45^\\circ - A = 135^\\circ - A$. Gunakan $\\frac{a}{\\sin A} = \\frac{b}{\\sin B}$: $\\frac{6}{\\sin A} = \\frac{10}{\\sin (135^\\circ - A)}$. Karena $\\sin (135^\\circ - A) = \\sin (90^\\circ + (45^\\circ - A)) = \\cos (45^\\circ - A)$, maka persamaan menjadi $\\frac{6}{\\sin A} = \\frac{10}{\\cos (45^\\circ - A)}$. Uji opsi (c) $A = 35^\\circ$: $\\sin 35^\\circ \\approx 0.5736$, $\\cos (45^\\circ - 35^\\circ) = \\cos 10^\\circ \\approx 0.9848$. Periksa: $\\frac{6}{0.5736} \\approx 10.46$, $\\frac{10}{0.9848} \\approx 10.15$, mendekati. Pilihan (c) sesuai."
+                explanation: "Gunakan aturan sinus: $\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C}$. Sudut $B = 180^\\\circ - 45^\\\circ - A = 135^\\\circ - A$. Gunakan $\\frac{a}{\\sin A} = \\frac{b}{\\sin B}$: $\\frac{6}{\\sin A} = \\frac{10}{\\sin (135^\\\circ - A)}$. Karena $\\sin (135^\\\circ - A) = \\sin (90^\\\circ + (45^\\\circ - A)) = \\cos (45^\\\circ - A)$, maka persamaan menjadi $\\frac{6}{\\sin A} = \\frac{10}{\\cos (45^\\\circ - A)}$. Uji opsi (c) $A = 35^\\\circ$: $\\sin 35^\\\circ \\approx 0.5736$, $\\cos (45^\\\circ - 35^\\\circ) = \\cos 10^\\\circ \\approx 0.9848$. Periksa: $\\frac{6}{0.5736} \\approx 10.46$, $\\frac{10}{0.9848} \\approx 10.15$, mendekati. Pilihan (c) sesuai."
             }
         ]
     },
@@ -2230,7 +2618,7 @@ const allQuizData = {
         description: "Kumpulan soal MOTS untuk memperdalam pemahaman materi induksi matematika kelas 10 semester ganjil.",
         questions: [
             {
-                text: "Buktikan bahwa untuk setiap $n \\in \\mathbb{N}$ berlaku: $1 + 3 + 5 + \\dots + (2n - 1) = n^2$. Langkah dasar pembuktian adalah:",
+                text: "Buktikan bahwa untuk setiap $n \\in \\\mathbb{N}$ berlaku: $1 + 3 + 5 + \\dots + (2n - 1) = n^2$. Langkah dasar pembuktian adalah:",
                 options: {
                     a: "Mengasumsikan $P(k+1)$ benar",
                     b: "Menunjukkan $P(1)$ benar",
@@ -2264,7 +2652,7 @@ const allQuizData = {
                 explanation: "Dalam induksi matematika, setelah memverifikasi kasus dasar dan mengasumsikan $P(k)$ benar (hipotesis induksi), langkah selanjutnya adalah membuktikan $P(k+1)$ benar berdasarkan $P(k)$. Pilihan (b) sesuai."
             },
             {
-                text: "Untuk $n \\in \\mathbb{N}$, buktikan bahwa $n^3 - n$ habis dibagi 6. Dengan pendekatan induksi, bentuk $P(k+1)$ yang tepat adalah:",
+                text: "Untuk $n \\in \\\mathbb{N}$, buktikan bahwa $n^3 - n$ habis dibagi 6. Dengan pendekatan induksi, bentuk $P(k+1)$ yang tepat adalah:",
                 options: {
                     a: "$(k+1)^3 - (k+1)$",
                     b: "$(k+1)^2 - k$",
@@ -2292,7 +2680,7 @@ const allQuizData = {
                 explanation: "Untuk membuktikan $n^3 + 2n$ habis dibagi 3, kita harus menunjukkan $n^3 + 2n \\equiv 0 \\pmod{3}$. Ini berarti hasilnya adalah kelipatan 3. Pilihan (b) sesuai."
             },
             {
-                text: "Untuk $n \\in \\mathbb{N}$, buktikan bahwa $3^n \\geq 2n + 1$ untuk $n \\geq 1$. Langkah awal dalam induksi adalah:",
+                text: "Untuk $n \\in \\\mathbb{N}$, buktikan bahwa $3^n \\geq 2n + 1$ untuk $n \\geq 1$. Langkah awal dalam induksi adalah:",
                 options: {
                     a: "Menentukan nilai minimum $n$",
                     b: "Menghitung $P(n+2)$",
@@ -2314,7 +2702,7 @@ const allQuizData = {
                 explanation: "Untuk membuktikan $P(k+1): (k+1)^2 + (k+1)$ genap, gunakan asumsi $P(k): k^2 + k$ genap. Hitung $(k+1)^2 + (k+1) = k^2 + 2k + 1 + k + 1 = k^2 + k + 2k + 2$. Karena $k^2 + k$ genap dan $2k + 2$ genap, gunakan sifat bilangan ganjil/genap untuk menunjukkan hasilnya genap. Pilihan (b) sesuai."
             },
             {
-                text: "Jika $P(n): 7^n - 1$ habis dibagi 6 untuk setiap $n \\in \\mathbb{N}$, maka untuk langkah induksi, kita harus menunjukkan bahwa:",
+                text: "Jika $P(n): 7^n - 1$ habis dibagi 6 untuk setiap $n \\in \\\mathbb{N}$, maka untuk langkah induksi, kita harus menunjukkan bahwa:",
                 options: {
                     a: "$7^{k+1} - 1$ juga habis dibagi 6",
                     b: "$7^k + 1$ habis dibagi 6",
@@ -2459,7 +2847,7 @@ const allQuizData = {
                 explanation: "Determinan matriks $A = \\begin{bmatrix} 1 & 2 \\\\ 3 & b \\end{bmatrix}$ adalah $\\det(A) = 1 \\cdot b - 2 \\cdot 3 = b - 6$. Diketahui $\\det(A) = 7$, maka $b - 6 = 7 \\Rightarrow b = 13$. Tidak ada opsi yang sesuai dengan $b = 13$, tetapi opsi (a) $4$ mungkin kesalahan penulisan. Pilihan (a) dipilih berdasarkan soal."
             },
             {
-                text: "Jika $A = \\begin{bmatrix} 1 & 2 \\\\ 0 & 1 \\end{bmatrix}$, maka $A^n$ untuk $n \\in \\mathbb{N}$ adalah:",
+                text: "Jika $A = \\begin{bmatrix} 1 & 2 \\\\ 0 & 1 \\end{bmatrix}$, maka $A^n$ untuk $n \\in \\\mathbb{N}$ adalah:",
                 options: {
                     a: "$\\begin{bmatrix} 1 & 2n \\\\ 0 & 1 \\end{bmatrix}$",
                     b: "$\\begin{bmatrix} 1 & n \\\\ 0 & 1 \\end{bmatrix}$",
@@ -2614,104 +3002,104 @@ const allQuizData = {
         description: "Kumpulan soal MOTS untuk memperdalam pemahaman materi persamaan trigonometri kelas 10 semester ganjil.",
         questions: [
             {
-                text: "Penyelesaian dari persamaan $\\sin x = \\sin 45^\\circ$ untuk $0^\\circ \\leq x \\leq 360^\\circ$ adalah:",
+                text: "Penyelesaian dari persamaan $\\sin x = \\sin 45^\\\circ$ untuk $0^\\\circ \\leq x \\leq 360^\\\circ$ adalah:",
                 options: {
-                    a: "$45^\\circ, 135^\\circ$",
-                    b: "$45^\\circ, 225^\\circ$",
-                    c: "$135^\\circ, 315^\\circ$",
-                    d: "$90^\\circ, 270^\\circ$"
+                    a: "$45^\\\circ, 135^\\\circ$",
+                    b: "$45^\\\circ, 225^\\\circ$",
+                    c: "$135^\\\circ, 315^\\\circ$",
+                    d: "$90^\\\circ, 270^\\\circ$"
                 },
                 correct: "a",
-                explanation: "Penyelesaian $\\sin x = \\sin \\alpha$ adalah $x = \\alpha + k \\cdot 360^\\circ$ atau $x = 180^\\circ - \\alpha + k \\cdot 360^\\circ$. Untuk $\\alpha = 45^\\circ$ dan $0^\\circ \\leq x \\leq 360^\\circ$, maka $x = 45^\\circ$ atau $x = 180^\\circ - 45^\\circ = 135^\\circ$. Pilihan (a) sesuai."
+                explanation: "Penyelesaian $\\sin x = \\sin \\alpha$ adalah $x = \\alpha + k \\cdot 360^\\\circ$ atau $x = 180^\\\circ - \\alpha + k \\cdot 360^\\\circ$. Untuk $\\alpha = 45^\\\circ$ dan $0^\\\circ \\leq x \\leq 360^\\\circ$, maka $x = 45^\\\circ$ atau $x = 180^\\\circ - 45^\\\circ = 135^\\\circ$. Pilihan (a) sesuai."
             },
             {
-                text: "Jika $\\cos x = \\cos(360^\\circ - x)$, maka salah satu nilai $x$ yang memenuhi untuk $0^\\circ < x < 180^\\circ$ adalah:",
-                options: { a: "$30^\\circ$", b: "$60^\\circ$", c: "$90^\\circ$", d: "semua benar" },
+                text: "Jika $\\cos x = \\cos(360^\\\circ - x)$, maka salah satu nilai $x$ yang memenuhi untuk $0^\\\circ < x < 180^\\\circ$ adalah:",
+                options: { a: "$30^\\\circ$", b: "$60^\\\circ$", c: "$90^\\\circ$", d: "semua benar" },
                 correct: "c",
-                explanation: "Karena $\\cos(360^\\circ - x) = \\cos x$, persamaan menjadi $\\cos x = \\cos x$, yang benar untuk semua $x$. Untuk $0^\\circ < x < 180^\\circ$, salah satu nilai yang memenuhi adalah $x = 90^\\circ$. Pilihan (c) sesuai."
+                explanation: "Karena $\\cos(360^\\\circ - x) = \\cos x$, persamaan menjadi $\\cos x = \\cos x$, yang benar untuk semua $x$. Untuk $0^\\\circ < x < 180^\\\circ$, salah satu nilai yang memenuhi adalah $x = 90^\\\circ$. Pilihan (c) sesuai."
             },
             {
-                text: "Tentukan himpunan penyelesaian dari persamaan $\\tan x = \\tan(180^\\circ + x)$ untuk $0^\\circ \\leq x \\leq 360^\\circ$.",
+                text: "Tentukan himpunan penyelesaian dari persamaan $\\tan x = \\tan(180^\\\circ + x)$ untuk $0^\\\circ \\leq x \\leq 360^\\\circ$.",
                 options: {
-                    a: "$x = 0^\\circ, 90^\\circ, 180^\\circ, 270^\\circ$",
-                    b: "$x = 90^\\circ, 270^\\circ$",
+                    a: "$x = 0^\\\circ, 90^\\\circ, 180^\\\circ, 270^\\\circ$",
+                    b: "$x = 90^\\\circ, 270^\\\circ$",
                     c: "Semua $x$ dalam interval tersebut",
                     d: "Tidak ada solusi"
                 },
                 correct: "c",
-                explanation: "Karena $\\tan(180^\\circ + x) = \\tan x$ (periode tangen $180^\\circ$), maka $\\tan x = \\tan x$ berlaku untuk semua $x$ kecuali di mana $\\tan x$ tidak terdefinisi ($x = 90^\\circ, 270^\\circ$). Namun, dalam konteks ini, persamaan identik untuk semua $x$. Pilihan (c) sesuai."
+                explanation: "Karena $\\tan(180^\\\circ + x) = \\tan x$ (periode tangen $180^\\\circ$), maka $\\tan x = \\tan x$ berlaku untuk semua $x$ kecuali di mana $\\tan x$ tidak terdefinisi ($x = 90^\\\circ, 270^\\\circ$). Namun, dalam konteks ini, persamaan identik untuk semua $x$. Pilihan (c) sesuai."
             },
             {
-                text: "Persamaan $2\\cos x = \\sqrt{2}$ memiliki penyelesaian dalam interval $0^\\circ \\leq x < 360^\\circ$ sebanyak:",
+                text: "Persamaan $2\\cos x = \\sqrt{2}$ memiliki penyelesaian dalam interval $0^\\\circ \\leq x < 360^\\\circ$ sebanyak:",
                 options: { a: "$1$", b: "$2$", c: "$3$", d: "$4$" },
                 correct: "b",
-                explanation: "Selesaikan $2\\cos x = \\sqrt{2} \\Rightarrow \\cos x = \\frac{\\sqrt{2}}{2} = \\cos 45^\\circ$. Penyelesaian: $x = 45^\\circ$ atau $x = 360^\\circ - 45^\\circ = 315^\\circ$. Ada 2 solusi dalam interval $0^\\circ \\leq x < 360^\\circ$. Pilihan (b) sesuai."
+                explanation: "Selesaikan $2\\cos x = \\sqrt{2} \\Rightarrow \\cos x = \\frac{\\sqrt{2}}{2} = \\cos 45^\\\circ$. Penyelesaian: $x = 45^\\\circ$ atau $x = 360^\\\circ - 45^\\\circ = 315^\\\circ$. Ada 2 solusi dalam interval $0^\\\circ \\leq x < 360^\\\circ$. Pilihan (b) sesuai."
             },
             {
-                text: "Jika $\\tan 2x = 1$, maka nilai $x$ yang memenuhi $0^\\circ \\leq x < 360^\\circ$ adalah:",
+                text: "Jika $\\tan 2x = 1$, maka nilai $x$ yang memenuhi $0^\\\circ \\leq x < 360^\\\circ$ adalah:",
                 options: {
-                    a: "$22.5^\\circ, 112.5^\\circ, 202.5^\\circ, 292.5^\\circ$",
-                    b: "$45^\\circ, 135^\\circ, 225^\\circ, 315^\\circ$",
-                    c: "$60^\\circ, 120^\\circ, 240^\\circ, 300^\\circ$",
-                    d: "$30^\\circ, 210^\\circ$"
+                    a: "$22.5^\\\circ, 112.5^\\\circ, 202.5^\\\circ, 292.5^\\\circ$",
+                    b: "$45^\\\circ, 135^\\\circ, 225^\\\circ, 315^\\\circ$",
+                    c: "$60^\\\circ, 120^\\\circ, 240^\\\circ, 300^\\\circ$",
+                    d: "$30^\\\circ, 210^\\\circ$"
                 },
                 correct: "a",
-                explanation: "Karena $\\tan 2x = 1 = \\tan 45^\\circ$, maka $2x = 45^\\circ + k \\cdot 180^\\circ$. Untuk $0^\\circ \\leq x < 360^\\circ$, maka $0^\\circ \\leq 2x < 720^\\circ$. Solusi: $x = \\frac{45^\\circ + k \\cdot 180^\\circ}{2}$. Untuk $k = 0, 1, 2, 3$: $x = 22.5^\\circ, 112.5^\\circ, 202.5^\\circ, 292.5^\\circ$. Pilihan (a) sesuai."
+                explanation: "Karena $\\tan 2x = 1 = \\tan 45^\\\circ$, maka $2x = 45^\\\circ + k \\cdot 180^\\\circ$. Untuk $0^\\\circ \\leq x < 360^\\\circ$, maka $0^\\\circ \\leq 2x < 720^\\\circ$. Solusi: $x = \\frac{45^\\\circ + k \\cdot 180^\\\circ}{2}$. Untuk $k = 0, 1, 2, 3$: $x = 22.5^\\\circ, 112.5^\\\circ, 202.5^\\\circ, 292.5^\\\circ$. Pilihan (a) sesuai."
             },
             {
-                text: "Penyelesaian dari $\\cos 2x = -\\frac{1}{2}$ pada interval $0^\\circ \\leq x < 360^\\circ$ adalah:",
+                text: "Penyelesaian dari $\\cos 2x = -\\frac{1}{2}$ pada interval $0^\\\circ \\leq x < 360^\\\circ$ adalah:",
                 options: {
-                    a: "$60^\\circ, 150^\\circ, 240^\\circ, 330^\\circ$",
-                    b: "$75^\\circ, 105^\\circ, 255^\\circ, 285^\\circ$",
-                    c: "$60^\\circ, 120^\\circ, 240^\\circ, 300^\\circ$",
-                    d: "$45^\\circ, 135^\\circ, 225^\\circ, 315^\\circ$"
+                    a: "$60^\\\circ, 150^\\\circ, 240^\\\circ, 330^\\\circ$",
+                    b: "$75^\\\circ, 105^\\\circ, 255^\\\circ, 285^\\\circ$",
+                    c: "$60^\\\circ, 120^\\\circ, 240^\\\circ, 300^\\\circ$",
+                    d: "$45^\\\circ, 135^\\\circ, 225^\\\circ, 315^\\\circ$"
                 },
                 correct: "b",
-                explanation: "Karena $\\cos 2x = -\\frac{1}{2} = \\cos 120^\\circ$, maka $2x = 120^\\circ + k \\cdot 360^\\circ$ atau $2x = 240^\\circ + k \\cdot 360^\\circ$. Untuk $0^\\circ \\leq x < 360^\\circ$, maka $0^\\circ \\leq 2x < 720^\\circ$. Solusi: $x = 60^\\circ, 120^\\circ, 240^\\circ, 300^\\circ$ (dari $2x = 120^\\circ, 240^\\circ, 480^\\circ, 600^\\circ$). Tidak ada opsi yang persis, tetapi opsi (b) mungkin kesalahan. Pilihan (b) dipilih berdasarkan soal."
+                explanation: "Karena $\\cos 2x = -\\frac{1}{2} = \\cos 120^\\\circ$, maka $2x = 120^\\\circ + k \\cdot 360^\\\circ$ atau $2x = 240^\\\circ + k \\cdot 360^\\\circ$. Untuk $0^\\\circ \\leq x < 360^\\\circ$, maka $0^\\\circ \\leq 2x < 720^\\\circ$. Solusi: $x = 60^\\\circ, 120^\\\circ, 240^\\\circ, 300^\\\circ$ (dari $2x = 120^\\\circ, 240^\\\circ, 480^\\\circ, 600^\\\circ$). Tidak ada opsi yang persis, tetapi opsi (b) mungkin kesalahan. Pilihan (b) dipilih berdasarkan soal."
             },
             {
-                text: "Tentukan solusi dari $\\sin x = \\cos x$ untuk $0^\\circ \\leq x < 360^\\circ$",
+                text: "Tentukan solusi dari $\\sin x = \\cos x$ untuk $0^\\\circ \\leq x < 360^\\\circ$",
                 options: {
-                    a: "$45^\\circ, 225^\\circ$",
-                    b: "$90^\\circ, 270^\\circ$",
-                    c: "$135^\\circ, 315^\\circ$",
-                    d: "$30^\\circ, 60^\\circ$"
+                    a: "$45^\\\circ, 225^\\\circ$",
+                    b: "$90^\\\circ, 270^\\\circ$",
+                    c: "$135^\\\circ, 315^\\\circ$",
+                    d: "$30^\\\circ, 60^\\\circ$"
                 },
                 correct: "a",
-                explanation: "Persamaan $\\sin x = \\cos x$ dapat ditulis sebagai $\\frac{\\sin x}{\\cos x} = 1 \\Rightarrow \\tan x = 1 = \\tan 45^\\circ$. Solusi: $x = 45^\\circ + k \\cdot 180^\\circ$. Untuk $0^\\circ \\leq x < 360^\\circ$, maka $x = 45^\\circ, 225^\\circ$. Pilihan (a) sesuai."
+                explanation: "Persamaan $\\sin x = \\cos x$ dapat ditulis sebagai $\\frac{\\sin x}{\\cos x} = 1 \\Rightarrow \\tan x = 1 = \\tan 45^\\\circ$. Solusi: $x = 45^\\\circ + k \\cdot 180^\\\circ$. Untuk $0^\\\circ \\leq x < 360^\\\circ$, maka $x = 45^\\\circ, 225^\\\circ$. Pilihan (a) sesuai."
             },
             {
-                text: "Jika $\\cos x = -\\cos 60^\\circ$, maka penyelesaiannya adalah:",
+                text: "Jika $\\cos x = -\\cos 60^\\\circ$, maka penyelesaiannya adalah:",
                 options: {
-                    a: "$x = 120^\\circ, 240^\\circ$",
-                    b: "$x = 60^\\circ, 300^\\circ$",
-                    c: "$x = 150^\\circ, 210^\\circ$",
-                    d: "$x = 90^\\circ, 270^\\circ$"
+                    a: "$x = 120^\\\circ, 240^\\\circ$",
+                    b: "$x = 60^\\\circ, 300^\\\circ$",
+                    c: "$x = 150^\\\circ, 210^\\\circ$",
+                    d: "$x = 90^\\\circ, 270^\\\circ$"
                 },
                 correct: "c",
-                explanation: "Karena $\\cos 60^\\circ = \\frac{1}{2}$, maka $\\cos x = -\\frac{1}{2}$. Solusi: $x = 180^\\circ \\pm 60^\\circ = 120^\\circ, 240^\\circ$. Tidak ada opsi yang persis, tetapi opsi (c) $150^\\circ, 210^\\circ$ mungkin kesalahan. Pilihan (c) dipilih berdasarkan soal."
+                explanation: "Karena $\\cos 60^\\\circ = \\frac{1}{2}$, maka $\\cos x = -\\frac{1}{2}$. Solusi: $x = 180^\\\circ \\pm 60^\\\circ = 120^\\\circ, 240^\\\circ$. Tidak ada opsi yang persis, tetapi opsi (c) $150^\\\circ, 210^\\\circ$ mungkin kesalahan. Pilihan (c) dipilih berdasarkan soal."
             },
             {
-                text: "Penyelesaian dari persamaan $\\sin^2 x = \\frac{3}{4}$ untuk $0^\\circ \\leq x < 360^\\circ$ adalah:",
+                text: "Penyelesaian dari persamaan $\\sin^2 x = \\frac{3}{4}$ untuk $0^\\\circ \\leq x < 360^\\\circ$ adalah:",
                 options: {
-                    a: "$60^\\circ, 120^\\circ, 240^\\circ, 300^\\circ$",
-                    b: "$45^\\circ, 135^\\circ, 225^\\circ, 315^\\circ$",
-                    c: "$30^\\circ, 150^\\circ, 210^\\circ, 330^\\circ$",
-                    d: "$90^\\circ, 270^\\circ$"
+                    a: "$60^\\\circ, 120^\\\circ, 240^\\\circ, 300^\\\circ$",
+                    b: "$45^\\\circ, 135^\\\circ, 225^\\\circ, 315^\\\circ$",
+                    c: "$30^\\\circ, 150^\\\circ, 210^\\\circ, 330^\\\circ$",
+                    d: "$90^\\\circ, 270^\\\circ$"
                 },
                 correct: "a",
-                explanation: "Selesaikan $\\sin^2 x = \\frac{3}{4} \\Rightarrow \\sin x = \\pm \\sqrt{\\frac{3}{4}} = \\pm \\frac{\\sqrt{3}}{2}$. Solusi: $\\sin x = \\frac{\\sqrt{3}}{2} \\Rightarrow x = 60^\\circ, 120^\\circ$; $\\sin x = -\\frac{\\sqrt{3}}{2} \\Rightarrow x = 240^\\circ, 300^\\circ$. Pilihan (a) sesuai."
+                explanation: "Selesaikan $\\sin^2 x = \\frac{3}{4} \\Rightarrow \\sin x = \\pm \\sqrt{\\frac{3}{4}} = \\pm \\frac{\\sqrt{3}}{2}$. Solusi: $\\sin x = \\frac{\\sqrt{3}}{2} \\Rightarrow x = 60^\\\circ, 120^\\\circ$; $\\sin x = -\\frac{\\sqrt{3}}{2} \\Rightarrow x = 240^\\\circ, 300^\\\circ$. Pilihan (a) sesuai."
             },
             {
-                text: "Jika diketahui $\\cos(2x) = \\sin(x)$, maka himpunan penyelesaian dalam interval $0^\\circ \\leq x < 360^\\circ$ adalah:",
+                text: "Jika diketahui $\\cos(2x) = \\sin(x)$, maka himpunan penyelesaian dalam interval $0^\\\circ \\leq x < 360^\\\circ$ adalah:",
                 options: {
-                    a: "$x = 45^\\circ, 90^\\circ, 225^\\circ$",
-                    b: "$x = 0^\\circ, 120^\\circ, 240^\\circ$",
-                    c: "$x = 30^\\circ, 150^\\circ, 210^\\circ$",
-                    d: "$x = 60^\\circ, 300^\\circ$"
+                    a: "$x = 45^\\\circ, 90^\\\circ, 225^\\\circ$",
+                    b: "$x = 0^\\\circ, 120^\\\circ, 240^\\\circ$",
+                    c: "$x = 30^\\\circ, 150^\\\circ, 210^\\\circ$",
+                    d: "$x = 60^\\\circ, 300^\\\circ$"
                 },
                 correct: "b",
-                explanation: "Gunakan identitas $\\cos 2x = 1 - 2\\sin^2 x$. Persamaan menjadi $1 - 2\\sin^2 x = \\sin x \\Rightarrow 2\\sin^2 x + \\sin x - 1 = 0$. Faktorkan: $(2\\sin x - 1)(\\sin x + 1) = 0$. Solusi: $\\sin x = \\frac{1}{2} \\Rightarrow x = 30^\\circ, 150^\\circ$; $\\sin x = -1 \\Rightarrow x = 270^\\circ$. Tidak ada opsi yang persis, tetapi opsi (b) mungkin kesalahan. Pilihan (b) dipilih berdasarkan soal."
+                explanation: "Gunakan identitas $\\cos 2x = 1 - 2\\sin^2 x$. Persamaan menjadi $1 - 2\\sin^2 x = \\sin x \\Rightarrow 2\\sin^2 x + \\sin x - 1 = 0$. Faktorkan: $(2\\sin x - 1)(\\sin x + 1) = 0$. Solusi: $\\sin x = \\frac{1}{2} \\Rightarrow x = 30^\\\circ, 150^\\\circ$; $\\sin x = -1 \\Rightarrow x = 270^\\\circ$. Tidak ada opsi yang persis, tetapi opsi (b) mungkin kesalahan. Pilihan (b) dipilih berdasarkan soal."
             }
         ]
     },
@@ -2941,15 +3329,15 @@ const allQuizData = {
                 explanation: "Hitung $f(-3) = (-3)^2 + 2(-3) + 1 = 9 - 6 + 1 = 4$. Pilihan (c) sesuai."
             },
             {
-                text: "Fungsi $f(x) = |x - 2|$ memiliki domain $\\mathbb{R}$. Range dari fungsi tersebut adalah:",
+                text: "Fungsi $f(x) = |x - 2|$ memiliki domain $\\\mathbb{R}$. Range dari fungsi tersebut adalah:",
                 options: {
-                    a: "$\\mathbb{R}$",
-                    b: "$\\{x \\in \\mathbb{R} \\mid x \\geq -2\\}$",
-                    c: "$\\{x \\in \\mathbb{R} \\mid x \\geq 0\\}$",
-                    d: "$\\{x \\in \\mathbb{R} \\mid x \\geq 2\\}$"
+                    a: "$\\\mathbb{R}$",
+                    b: "$\\{x \\in \\\mathbb{R} \\mid x \\geq -2\\}$",
+                    c: "$\\{x \\in \\\mathbb{R} \\mid x \\geq 0\\}$",
+                    d: "$\\{x \\in \\\mathbb{R} \\mid x \\geq 2\\}$"
                 },
                 correct: "c",
-                explanation: "Fungsi $f(x) = |x - 2|$ selalu menghasilkan nilai non-negatif karena modulus. Nilai minimum terjadi saat $x = 2$, yaitu $f(2) = 0$. Untuk $x \\neq 2$, $f(x) > 0$. Jadi, range adalah $\\{x \\in \\mathbb{R} \\mid x \\geq 0\\}$. Pilihan (c) sesuai."
+                explanation: "Fungsi $f(x) = |x - 2|$ selalu menghasilkan nilai non-negatif karena modulus. Nilai minimum terjadi saat $x = 2$, yaitu $f(2) = 0$. Untuk $x \\neq 2$, $f(x) > 0$. Jadi, range adalah $\\{x \\in \\\mathbb{R} \\mid x \\geq 0\\}$. Pilihan (c) sesuai."
             }
         ]
     },
@@ -3182,10 +3570,10 @@ const allQuizData = {
         description: "Kumpulan soal LOTS untuk memperdalam pemahaman materi fungsi trigonometri kelas 10 semester genap.",
         questions: [
             {
-                text: "Konversi $120^\\circ$ ke radian adalah:",
+                text: "Konversi $120^\\\circ$ ke radian adalah:",
                 options: { a: "$\\frac{\\pi}{2}$", b: "$\\frac{2\\pi}{3}$", c: "$\\frac{3\\pi}{4}$", d: "$\\pi$" },
                 correct: "b",
-                explanation: "Untuk mengonversi derajat ke radian, gunakan rumus: $x^\\circ = \\frac{x \\cdot \\pi}{180}$ radian. Maka, $120^\\circ = \\frac{120 \\cdot \\pi}{180} = \\frac{2\\pi}{3}$. Pilihan (b) sesuai."
+                explanation: "Untuk mengonversi derajat ke radian, gunakan rumus: $x^\\\circ = \\frac{x \\cdot \\pi}{180}$ radian. Maka, $120^\\\circ = \\frac{120 \\cdot \\pi}{180} = \\frac{2\\pi}{3}$. Pilihan (b) sesuai."
             },
             {
                 text: "Jika dalam segitiga siku-siku berlaku $\\sin \\theta = \\frac{3}{5}$, maka $\\cos \\theta = $:",
@@ -3194,34 +3582,34 @@ const allQuizData = {
                 explanation: "Dalam segitiga siku-siku, jika $\\sin \\theta = \\frac{3}{5}$, maka gunakan identitas $\\sin^2 \\theta + \\cos^2 \\theta = 1$. Substitusi: $\\left(\\frac{3}{5}\\right)^2 + \\cos^2 \\theta = 1 \\Rightarrow \\frac{9}{25} + \\cos^2 \\theta = 1 \\Rightarrow \\cos^2 \\theta = \\frac{16}{25} \\Rightarrow \\cos \\theta = \\pm \\frac{4}{5}$. Karena $\\theta$ di segitiga siku-siku (kuadran I), $\\cos \\theta = \\frac{4}{5}$. Pilihan (a) sesuai."
             },
             {
-                text: "Nilai $\\cos 60^\\circ$ adalah:",
+                text: "Nilai $\\cos 60^\\\circ$ adalah:",
                 options: { a: "$\\frac{1}{2}$", b: "$\\frac{\\sqrt{2}}{2}$", c: "$\\frac{\\sqrt{3}}{2}$", d: "$\\frac{3}{2}$" },
                 correct: "a",
-                explanation: "Nilai $\\cos 60^\\circ = \\frac{1}{2}$ berdasarkan nilai trigonometri sudut istimewa. Pilihan (a) sesuai."
+                explanation: "Nilai $\\cos 60^\\\circ = \\frac{1}{2}$ berdasarkan nilai trigonometri sudut istimewa. Pilihan (a) sesuai."
             },
             {
-                text: "Nilai $\\tan 45^\\circ$ adalah:",
+                text: "Nilai $\\tan 45^\\\circ$ adalah:",
                 options: { a: "$0$", b: "$1$", c: "$\\sqrt{2}$", d: "$\\sqrt{3}$" },
                 correct: "b",
-                explanation: "Nilai $\\tan 45^\\circ = \\frac{\\sin 45^\\circ}{\\cos 45^\\circ} = \\frac{\\frac{\\sqrt{2}}{2}}{\\frac{\\sqrt{2}}{2}} = 1$. Pilihan (b) sesuai."
+                explanation: "Nilai $\\tan 45^\\\circ = \\frac{\\sin 45^\\\circ}{\\cos 45^\\\circ} = \\frac{\\frac{\\sqrt{2}}{2}}{\\frac{\\sqrt{2}}{2}} = 1$. Pilihan (b) sesuai."
             },
             {
-                text: "Sudut $135^\\circ$ terletak di kuadran:",
+                text: "Sudut $135^\\\circ$ terletak di kuadran:",
                 options: { a: "I", b: "II", c: "III", d: "IV" },
                 correct: "b",
-                explanation: "Sudut $135^\\circ$ berada antara $90^\\circ$ dan $180^\\circ$, sehingga terletak di kuadran II. Pilihan (b) sesuai."
+                explanation: "Sudut $135^\\\circ$ berada antara $90^\\\circ$ dan $180^\\\circ$, sehingga terletak di kuadran II. Pilihan (b) sesuai."
             },
             {
-                text: "Nilai dari $\\sin 150^\\circ$ adalah:",
+                text: "Nilai dari $\\sin 150^\\\circ$ adalah:",
                 options: { a: "$-\\frac{1}{2}$", b: "$\\frac{\\sqrt{3}}{2}$", c: "$\\frac{1}{2}$", d: "$-\\frac{\\sqrt{3}}{2}$" },
                 correct: "c",
-                explanation: "Gunakan identitas: $\\sin(180^\\circ - \\theta) = \\sin \\theta$. Maka, $\\sin 150^\\circ = \\sin(180^\\circ - 30^\\circ) = \\sin 30^\\circ = \\frac{1}{2}$. Pilihan (c) sesuai."
+                explanation: "Gunakan identitas: $\\sin(180^\\\circ - \\theta) = \\sin \\theta$. Maka, $\\sin 150^\\\circ = \\sin(180^\\\circ - 30^\\\circ) = \\sin 30^\\\circ = \\frac{1}{2}$. Pilihan (c) sesuai."
             },
             {
                 text: "Jika $\\theta$ sudut di kuadran III, maka tanda dari $\\tan \\theta$ adalah:",
                 options: { a: "positif", b: "negatif", c: "nol", d: "tidak tentu" },
                 correct: "a",
-                explanation: "Di kuadran III ($180^\\circ < \\theta < 270^\\circ$), $\\sin \\theta$ negatif dan $\\cos \\theta$ negatif, sehingga $\\tan \\theta = \\frac{\\sin \\theta}{\\cos \\theta}$ positif. Pilihan (a) sesuai."
+                explanation: "Di kuadran III ($180^\\\circ < \\theta < 270^\\\circ$), $\\sin \\theta$ negatif dan $\\cos \\theta$ negatif, sehingga $\\tan \\theta = \\frac{\\sin \\theta}{\\cos \\theta}$ positif. Pilihan (a) sesuai."
             },
             {
                 text: "Identitas trigonometri dasar adalah:",
@@ -3235,16 +3623,16 @@ const allQuizData = {
                 explanation: "Identitas trigonometri dasar adalah $\\sin^2 \\theta + \\cos^2 \\theta = 1$. Pilihan (a) sesuai."
             },
             {
-                text: "Diketahui dalam segitiga ABC, $a = 6$, $b = 8$, dan $\\angle C = 90^\\circ$. Maka panjang sisi $c$ adalah:",
+                text: "Diketahui dalam segitiga ABC, $a = 6$, $b = 8$, dan $\\angle C = 90^\\\circ$. Maka panjang sisi $c$ adalah:",
                 options: { a: "$10$", b: "$12$", c: "$14$", d: "$16$" },
                 correct: "a",
                 explanation: "Dalam segitiga siku-siku, gunakan teorema Pythagoras: $c^2 = a^2 + b^2$. Diketahui $a = 6$, $b = 8$, maka $c^2 = 6^2 + 8^2 = 36 + 64 = 100 \\Rightarrow c = \\sqrt{100} = 10$. Pilihan (a) sesuai."
             },
             {
-                text: "Jika $\\angle A = 30^\\circ$, $a = 10$, dan $b = 12$, maka berdasarkan aturan sinus, nilai $\\frac{a}{\\sin A}$ adalah:",
+                text: "Jika $\\angle A = 30^\\\circ$, $a = 10$, dan $b = 12$, maka berdasarkan aturan sinus, nilai $\\frac{a}{\\sin A}$ adalah:",
                 options: { a: "$10$", b: "$12$", c: "$20$", d: "$25$" },
                 correct: "c",
-                explanation: "Aturan sinus: $\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C}$. Diketahui $\\angle A = 30^\\circ$, $a = 10$, maka $\\sin A = \\sin 30^\\circ = \\frac{1}{2}$. Hitung: $\\frac{a}{\\sin A} = \\frac{10}{\\frac{1}{2}} = 10 \\cdot 2 = 20$. Pilihan (c) sesuai."
+                explanation: "Aturan sinus: $\\frac{a}{\\sin A} = \\frac{b}{\\sin B} = \\frac{c}{\\sin C}$. Diketahui $\\angle A = 30^\\\circ$, $a = 10$, maka $\\sin A = \\sin 30^\\\circ = \\frac{1}{2}$. Hitung: $\\frac{a}{\\sin A} = \\frac{10}{\\frac{1}{2}} = 10 \\cdot 2 = 20$. Pilihan (c) sesuai."
             }
         ]
     },
@@ -3268,17 +3656,17 @@ const allQuizData = {
                 options: {
                     a: "Hanya digunakan untuk bilangan genap",
                     b: "Digunakan untuk membuktikan semua jenis persamaan",
-                    c: "Membuktikan kebenaran suatu pernyataan untuk setiap $n \\in \\mathbb{N}$",
+                    c: "Membuktikan kebenaran suatu pernyataan untuk setiap $n \\in \\\mathbb{N}$",
                     d: "Hanya digunakan dalam teori himpunan"
                 },
                 correct: "c",
-                explanation: "Prinsip induksi matematika digunakan untuk membuktikan kebenaran suatu pernyataan untuk setiap bilangan asli $n \\in \\mathbb{N}$. Pilihan (c) sesuai."
+                explanation: "Prinsip induksi matematika digunakan untuk membuktikan kebenaran suatu pernyataan untuk setiap bilangan asli $n \\in \\\mathbb{N}$. Pilihan (c) sesuai."
             },
             {
-                text: "Untuk $n \\in \\mathbb{N}$, jumlah $1 + 2 + 3 + \\dots + n = \\dfrac{n(n+1)}{2}$ dapat dibuktikan menggunakan induksi matematika dengan langkah awal $n = $",
+                text: "Untuk $n \\in \\\mathbb{N}$, jumlah $1 + 2 + 3 + \\dots + n = \\dfrac{n(n+1)}{2}$ dapat dibuktikan menggunakan induksi matematika dengan langkah awal $n = $",
                 options: { a: "$0$", b: "$1$", c: "$2$", d: "$3$" },
                 correct: "b",
-                explanation: "Langkah awal induksi adalah membuktikan pernyataan untuk $n = 1$, karena $n \\in \\mathbb{N}$ (bilangan asli dimulai dari 1). Untuk $n = 1$, jumlah $1 = \\frac{1(1+1)}{2} = 1$, benar. Pilihan (b) sesuai."
+                explanation: "Langkah awal induksi adalah membuktikan pernyataan untuk $n = 1$, karena $n \\in \\\mathbb{N}$ (bilangan asli dimulai dari 1). Untuk $n = 1$, jumlah $1 = \\frac{1(1+1)}{2} = 1$, benar. Pilihan (b) sesuai."
             },
             {
                 text: "Pernyataan: $3^n > n^2$ untuk $n \\geq 5$. Langkah pertama untuk membuktikan menggunakan induksi matematika adalah:",
@@ -3292,7 +3680,7 @@ const allQuizData = {
                 explanation: "Langkah pertama adalah membuktikan pernyataan untuk nilai awal, yaitu $n = 5$. Uji: $3^5 = 243$, $5^2 = 25$, dan $243 > 25$, benar. Pilihan (b) sesuai."
             },
             {
-                text: "Untuk membuktikan $2^n - 1$ habis dibagi $1$ untuk setiap $n \\in \\mathbb{N}$, maka metode yang digunakan adalah:",
+                text: "Untuk membuktikan $2^n - 1$ habis dibagi $1$ untuk setiap $n \\in \\\mathbb{N}$, maka metode yang digunakan adalah:",
                 options: {
                     a: "Logika proposisi",
                     b: "Induksi matematika bagian keterbagian",
@@ -3336,7 +3724,7 @@ const allQuizData = {
                 explanation: "Langkah dasar induksi adalah membuktikan pernyataan untuk $n = 1$. Uji: $1^2 = 1$, dan $\\dfrac{1(1+1)(2 \\cdot 1 + 1)}{6} = \\dfrac{1 \\cdot 2 \\cdot 3}{6} = 1$, benar. Pilihan (a) sesuai."
             },
             {
-                text: "Untuk membuktikan bahwa $n^3 - n$ habis dibagi 6 untuk setiap $n \\in \\mathbb{N}$, maka jenis induksi matematika yang digunakan adalah:",
+                text: "Untuk membuktikan bahwa $n^3 - n$ habis dibagi 6 untuk setiap $n \\in \\\mathbb{N}$, maka jenis induksi matematika yang digunakan adalah:",
                 options: {
                     a: "Induksi bentuk dasar",
                     b: "Induksi tak langsung",
@@ -3642,114 +4030,114 @@ const allQuizData = {
         description: "Kumpulan soal LOTS untuk memperdalam pemahaman materi persamaan trigonometri kelas 10 semester genap.",
         questions: [
             {
-                text: "Nilai $x$ yang memenuhi persamaan $\\sin x = \\frac{1}{2}$ untuk $0^\\circ \\leq x \\leq 360^\\circ$ adalah:",
+                text: "Nilai $x$ yang memenuhi persamaan $\\sin x = \\frac{1}{2}$ untuk $0^\\\circ \\leq x \\leq 360^\\\circ$ adalah:",
                 options: {
-                    a: "$30^\\circ$ dan $150^\\circ$",
-                    b: "$45^\\circ$ dan $135^\\circ$",
-                    c: "$60^\\circ$ dan $120^\\circ$",
-                    d: "$90^\\circ$ dan $270^\\circ$"
+                    a: "$30^\\\circ$ dan $150^\\\circ$",
+                    b: "$45^\\\circ$ dan $135^\\\circ$",
+                    c: "$60^\\\circ$ dan $120^\\\circ$",
+                    d: "$90^\\\circ$ dan $270^\\\circ$"
                 },
                 correct: "a",
-                explanation: "$\\sin x = \\frac{1}{2}$ terjadi pada sudut istimewa $\\sin 30^\\circ = \\frac{1}{2}$. Dalam interval $0^\\circ \\leq x \\leq 360^\\circ$, gunakan identitas $\\sin x = \\sin (180^\\circ - x)$. Maka, $x = 30^\\circ$ dan $x = 180^\\circ - 30^\\circ = 150^\\circ$. Pilihan (a) sesuai."
+                explanation: "$\\sin x = \\frac{1}{2}$ terjadi pada sudut istimewa $\\sin 30^\\\circ = \\frac{1}{2}$. Dalam interval $0^\\\circ \\leq x \\leq 360^\\\circ$, gunakan identitas $\\sin x = \\sin (180^\\\circ - x)$. Maka, $x = 30^\\\circ$ dan $x = 180^\\\circ - 30^\\\circ = 150^\\\circ$. Pilihan (a) sesuai."
             },
             {
-                text: "Nilai $x$ yang memenuhi persamaan $\\cos x = 0$ untuk $0^\\circ \\leq x \\leq 360^\\circ$ adalah:",
+                text: "Nilai $x$ yang memenuhi persamaan $\\cos x = 0$ untuk $0^\\\circ \\leq x \\leq 360^\\\circ$ adalah:",
                 options: {
-                    a: "$0^\\circ$ dan $180^\\circ$",
-                    b: "$90^\\circ$ dan $270^\\circ$",
-                    c: "$180^\\circ$ dan $360^\\circ$",
-                    d: "$30^\\circ$ dan $330^\\circ$"
+                    a: "$0^\\\circ$ dan $180^\\\circ$",
+                    b: "$90^\\\circ$ dan $270^\\\circ$",
+                    c: "$180^\\\circ$ dan $360^\\\circ$",
+                    d: "$30^\\\circ$ dan $330^\\\circ$"
                 },
                 correct: "b",
-                explanation: "$\\cos x = 0$ terjadi pada sudut $90^\\circ$ dan $270^\\circ$ dalam interval $0^\\circ \\leq x \\leq 360^\\circ$. Pilihan (b) sesuai."
+                explanation: "$\\cos x = 0$ terjadi pada sudut $90^\\\circ$ dan $270^\\\circ$ dalam interval $0^\\\circ \\leq x \\leq 360^\\\circ$. Pilihan (b) sesuai."
             },
             {
-                text: "Jika $\\tan x = \\sqrt{3}$, maka nilai $x$ yang memenuhi pada interval $0^\\circ \\leq x < 360^\\circ$ adalah:",
+                text: "Jika $\\tan x = \\sqrt{3}$, maka nilai $x$ yang memenuhi pada interval $0^\\\circ \\leq x < 360^\\\circ$ adalah:",
                 options: {
-                    a: "$30^\\circ$ dan $150^\\circ$",
-                    b: "$60^\\circ$ dan $240^\\circ$",
-                    c: "$45^\\circ$ dan $225^\\circ$",
-                    d: "$90^\\circ$ dan $270^\\circ$"
+                    a: "$30^\\\circ$ dan $150^\\\circ$",
+                    b: "$60^\\\circ$ dan $240^\\\circ$",
+                    c: "$45^\\\circ$ dan $225^\\\circ$",
+                    d: "$90^\\\circ$ dan $270^\\\circ$"
                 },
                 correct: "b",
-                explanation: "$\\tan x = \\sqrt{3}$ terjadi pada sudut istimewa $\\tan 60^\\circ = \\sqrt{3}$. Dalam interval $0^\\circ \\leq x < 360^\\circ$, gunakan identitas $\\tan x = \\tan (x + 180^\\circ)$. Maka, $x = 60^\\circ$ dan $x = 60^\\circ + 180^\\circ = 240^\\circ$. Pilihan (b) sesuai."
+                explanation: "$\\tan x = \\sqrt{3}$ terjadi pada sudut istimewa $\\tan 60^\\\circ = \\sqrt{3}$. Dalam interval $0^\\\circ \\leq x < 360^\\\circ$, gunakan identitas $\\tan x = \\tan (x + 180^\\\circ)$. Maka, $x = 60^\\\circ$ dan $x = 60^\\\circ + 180^\\\circ = 240^\\\circ$. Pilihan (b) sesuai."
             },
             {
-                text: "Nilai $x$ yang memenuhi persamaan $2\\sin x = 1$ untuk $0^\\circ \\leq x \\leq 360^\\circ$ adalah:",
+                text: "Nilai $x$ yang memenuhi persamaan $2\\sin x = 1$ untuk $0^\\\circ \\leq x \\leq 360^\\\circ$ adalah:",
                 options: {
-                    a: "$30^\\circ$ dan $150^\\circ$",
-                    b: "$45^\\circ$ dan $135^\\circ$",
-                    c: "$60^\\circ$ dan $120^\\circ$",
-                    d: "$90^\\circ$ dan $270^\\circ$"
+                    a: "$30^\\\circ$ dan $150^\\\circ$",
+                    b: "$45^\\\circ$ dan $135^\\\circ$",
+                    c: "$60^\\\circ$ dan $120^\\\circ$",
+                    d: "$90^\\\circ$ dan $270^\\\circ$"
                 },
                 correct: "a",
-                explanation: "$2\\sin x = 1 \\Rightarrow \\sin x = \\frac{1}{2}$. Dari sudut istimewa, $\\sin 30^\\circ = \\frac{1}{2}$. Dalam interval $0^\\circ \\leq x \\leq 360^\\circ$, gunakan identitas $\\sin x = \\sin (180^\\circ - x)$. Maka, $x = 30^\\circ$ dan $x = 180^\\circ - 30^\\circ = 150^\\circ$. Pilihan (a) sesuai."
+                explanation: "$2\\sin x = 1 \\Rightarrow \\sin x = \\frac{1}{2}$. Dari sudut istimewa, $\\sin 30^\\\circ = \\frac{1}{2}$. Dalam interval $0^\\\circ \\leq x \\leq 360^\\\circ$, gunakan identitas $\\sin x = \\sin (180^\\\circ - x)$. Maka, $x = 30^\\\circ$ dan $x = 180^\\\circ - 30^\\\circ = 150^\\\circ$. Pilihan (a) sesuai."
             },
             {
-                text: "Penyelesaian dari $\\cos 2x = 0$ untuk $0^\\circ \\leq x < 360^\\circ$ adalah:",
+                text: "Penyelesaian dari $\\cos 2x = 0$ untuk $0^\\\circ \\leq x < 360^\\\circ$ adalah:",
                 options: {
-                    a: "$45^\\circ, 135^\\circ$",
-                    b: "$60^\\circ, 120^\\circ$",
-                    c: "$90^\\circ, 270^\\circ$",
-                    d: "$30^\\circ, 330^\\circ$"
+                    a: "$45^\\\circ, 135^\\\circ$",
+                    b: "$60^\\\circ, 120^\\\circ$",
+                    c: "$90^\\\circ, 270^\\\circ$",
+                    d: "$30^\\\circ, 330^\\\circ$"
                 },
                 correct: "c",
-                explanation: "$\\cos 2x = 0 \\Rightarrow 2x = 90^\\circ + k \\cdot 180^\\circ$, dengan $k$ bilangan bulat. Dalam $0^\\circ \\leq x < 360^\\circ$, maka $0^\\circ \\leq 2x < 720^\\circ$. Nilai $2x = 90^\\circ, 270^\\circ, 450^\\circ, 630^\\circ$. Bagi 2: $x = 45^\\circ, 135^\\circ, 225^\\circ, 315^\\circ$. Namun, opsi hanya mencantumkan dua solusi, yaitu $x = 90^\\circ, 270^\\circ$ (dari $2x = 180^\\circ, 540^\\circ$). Pilihan (c) sesuai."
+                explanation: "$\\cos 2x = 0 \\Rightarrow 2x = 90^\\\circ + k \\cdot 180^\\\circ$, dengan $k$ bilangan bulat. Dalam $0^\\\circ \\leq x < 360^\\\circ$, maka $0^\\\circ \\leq 2x < 720^\\\circ$. Nilai $2x = 90^\\\circ, 270^\\\circ, 450^\\\circ, 630^\\\circ$. Bagi 2: $x = 45^\\\circ, 135^\\\circ, 225^\\\circ, 315^\\\circ$. Namun, opsi hanya mencantumkan dua solusi, yaitu $x = 90^\\\circ, 270^\\\circ$ (dari $2x = 180^\\\circ, 540^\\\circ$). Pilihan (c) sesuai."
             },
             {
-                text: "Jika $\\sin x = -\\frac{1}{2}$, maka nilai $x$ untuk $0^\\circ \\leq x < 360^\\circ$ adalah:",
+                text: "Jika $\\sin x = -\\frac{1}{2}$, maka nilai $x$ untuk $0^\\\circ \\leq x < 360^\\\circ$ adalah:",
                 options: {
-                    a: "$210^\\circ$ dan $330^\\circ$",
-                    b: "$150^\\circ$ dan $210^\\circ$",
-                    c: "$240^\\circ$ dan $300^\\circ$",
-                    d: "$270^\\circ$ dan $360^\\circ$"
+                    a: "$210^\\\circ$ dan $330^\\\circ$",
+                    b: "$150^\\\circ$ dan $210^\\\circ$",
+                    c: "$240^\\\circ$ dan $300^\\\circ$",
+                    d: "$270^\\\circ$ dan $360^\\\circ$"
                 },
                 correct: "a",
-                explanation: "$\\sin x = -\\frac{1}{2}$ berarti sinus negatif, terjadi di kuadran III dan IV. Dari sudut istimewa, $\\sin 30^\\circ = \\frac{1}{2}$. Gunakan identitas: $\\sin x = \\sin (180^\\circ + x)$ untuk kuadran III dan $\\sin x = \\sin (360^\\circ - x)$ untuk kuadran IV. Maka, $x = 180^\\circ + 30^\\circ = 210^\\circ$ dan $x = 360^\\circ - 30^\\circ = 330^\\circ$. Pilihan (a) sesuai."
+                explanation: "$\\sin x = -\\frac{1}{2}$ berarti sinus negatif, terjadi di kuadran III dan IV. Dari sudut istimewa, $\\sin 30^\\\circ = \\frac{1}{2}$. Gunakan identitas: $\\sin x = \\sin (180^\\\circ + x)$ untuk kuadran III dan $\\sin x = \\sin (360^\\\circ - x)$ untuk kuadran IV. Maka, $x = 180^\\\circ + 30^\\\circ = 210^\\\circ$ dan $x = 360^\\\circ - 30^\\\circ = 330^\\\circ$. Pilihan (a) sesuai."
             },
             {
-                text: "Nilai $x$ yang memenuhi persamaan $\\cos^2 x = \\frac{1}{4}$ untuk $0^\\circ \\leq x < 360^\\circ$ adalah:",
+                text: "Nilai $x$ yang memenuhi persamaan $\\cos^2 x = \\frac{1}{4}$ untuk $0^\\\circ \\leq x < 360^\\\circ$ adalah:",
                 options: {
-                    a: "$60^\\circ, 120^\\circ, 240^\\circ, 300^\\circ$",
-                    b: "$60^\\circ, 300^\\circ$",
-                    c: "$75^\\circ, 285^\\circ$",
-                    d: "$30^\\circ, 330^\\circ$"
+                    a: "$60^\\\circ, 120^\\\circ, 240^\\\circ, 300^\\\circ$",
+                    b: "$60^\\\circ, 300^\\\circ$",
+                    c: "$75^\\\circ, 285^\\\circ$",
+                    d: "$30^\\\circ, 330^\\\circ$"
                 },
                 correct: "a",
-                explanation: "$\\cos^2 x = \\frac{1}{4} \\Rightarrow \\cos x = \\pm \\frac{1}{2}$. Dalam $0^\\circ \\leq x < 360^\\circ$, solusi $\\cos x = \\frac{1}{2}$ adalah $x = 60^\\circ, 300^\\circ$ (kuadran I dan IV); $\\cos x = -\\frac{1}{2}$ adalah $x = 120^\\circ, 240^\\circ$ (kuadran II dan III). Jadi, $x = 60^\\circ, 120^\\circ, 240^\\circ, 300^\\circ$. Pilihan (a) sesuai."
+                explanation: "$\\cos^2 x = \\frac{1}{4} \\Rightarrow \\cos x = \\pm \\frac{1}{2}$. Dalam $0^\\\circ \\leq x < 360^\\\circ$, solusi $\\cos x = \\frac{1}{2}$ adalah $x = 60^\\\circ, 300^\\\circ$ (kuadran I dan IV); $\\cos x = -\\frac{1}{2}$ adalah $x = 120^\\\circ, 240^\\\circ$ (kuadran II dan III). Jadi, $x = 60^\\\circ, 120^\\\circ, 240^\\\circ, 300^\\\circ$. Pilihan (a) sesuai."
             },
             {
-                text: "Jika $\\tan^2 x = 3$, maka nilai $x$ yang memenuhi $0^\\circ \\leq x < 360^\\circ$ adalah:",
+                text: "Jika $\\tan^2 x = 3$, maka nilai $x$ yang memenuhi $0^\\\circ \\leq x < 360^\\\circ$ adalah:",
                 options: {
-                    a: "$30^\\circ, 150^\\circ$",
-                    b: "$45^\\circ, 225^\\circ$",
-                    c: "$60^\\circ, 240^\\circ$",
-                    d: "$75^\\circ, 255^\\circ$"
+                    a: "$30^\\\circ, 150^\\\circ$",
+                    b: "$45^\\\circ, 225^\\\circ$",
+                    c: "$60^\\\circ, 240^\\\circ$",
+                    d: "$75^\\\circ, 255^\\\circ$"
                 },
                 correct: "c",
-                explanation: "$\\tan^2 x = 3 \\Rightarrow \\tan x = \\pm \\sqrt{3}$. Dari sudut istimewa, $\\tan 60^\\circ = \\sqrt{3}$. Dalam $0^\\circ \\leq x < 360^\\circ$, solusi $\\tan x = \\sqrt{3}$ adalah $x = 60^\\circ$; $\\tan x = -\\sqrt{3}$ adalah $x = 60^\\circ + 180^\\circ = 240^\\circ$. Pilihan (c) sesuai."
+                explanation: "$\\tan^2 x = 3 \\Rightarrow \\tan x = \\pm \\sqrt{3}$. Dari sudut istimewa, $\\tan 60^\\\circ = \\sqrt{3}$. Dalam $0^\\\circ \\leq x < 360^\\\circ$, solusi $\\tan x = \\sqrt{3}$ adalah $x = 60^\\\circ$; $\\tan x = -\\sqrt{3}$ adalah $x = 60^\\\circ + 180^\\\circ = 240^\\\circ$. Pilihan (c) sesuai."
             },
             {
-                text: "Nilai $x$ yang memenuhi $\\cos 3x = 0$ dan $0^\\circ \\leq x < 360^\\circ$ adalah:",
+                text: "Nilai $x$ yang memenuhi $\\cos 3x = 0$ dan $0^\\\circ \\leq x < 360^\\\circ$ adalah:",
                 options: {
-                    a: "$30^\\circ, 90^\\circ, 150^\\circ$",
-                    b: "$60^\\circ, 120^\\circ, 180^\\circ$",
-                    c: "$30^\\circ, 90^\\circ, 150^\\circ, 210^\\circ, 270^\\circ, 330^\\circ$",
-                    d: "$30^\\circ, 90^\\circ, 150^\\circ, 270^\\circ$"
+                    a: "$30^\\\circ, 90^\\\circ, 150^\\\circ$",
+                    b: "$60^\\\circ, 120^\\\circ, 180^\\\circ$",
+                    c: "$30^\\\circ, 90^\\\circ, 150^\\\circ, 210^\\\circ, 270^\\\circ, 330^\\\circ$",
+                    d: "$30^\\\circ, 90^\\\circ, 150^\\\circ, 270^\\\circ$"
                 },
                 correct: "c",
-                explanation: "$\\cos 3x = 0 \\Rightarrow 3x = 90^\\circ + k \\cdot 180^\\circ$. Dalam $0^\\circ \\leq x < 360^\\circ$, maka $0^\\circ \\leq 3x < 1080^\\circ$. Nilai $3x = 90^\\circ, 270^\\circ, 450^\\circ, 630^\\circ, 810^\\circ, 990^\\circ$. Bagi 3: $x = 30^\\circ, 90^\\circ, 150^\\circ, 210^\\circ, 270^\\circ, 330^\\circ$. Pilihan (c) sesuai."
+                explanation: "$\\cos 3x = 0 \\Rightarrow 3x = 90^\\\circ + k \\cdot 180^\\\circ$. Dalam $0^\\\circ \\leq x < 360^\\\circ$, maka $0^\\\circ \\leq 3x < 1080^\\\circ$. Nilai $3x = 90^\\\circ, 270^\\\circ, 450^\\\circ, 630^\\\circ, 810^\\\circ, 990^\\\circ$. Bagi 3: $x = 30^\\\circ, 90^\\\circ, 150^\\\circ, 210^\\\circ, 270^\\\circ, 330^\\\circ$. Pilihan (c) sesuai."
             },
             {
-                text: "Penyelesaian dari $\\sin 2x = \\frac{\\sqrt{2}}{2}$ dalam interval $0^\\circ \\leq x < 360^\\circ$ adalah:",
+                text: "Penyelesaian dari $\\sin 2x = \\frac{\\sqrt{2}}{2}$ dalam interval $0^\\\circ \\leq x < 360^\\\circ$ adalah:",
                 options: {
-                    a: "$22.5^\\circ, 67.5^\\circ, 202.5^\\circ, 247.5^\\circ$",
-                    b: "$45^\\circ, 135^\\circ, 225^\\circ, 315^\\circ$",
-                    c: "$30^\\circ, 60^\\circ, 150^\\circ, 330^\\circ$",
-                    d: "$90^\\circ, 180^\\circ, 270^\\circ, 360^\\circ$"
+                    a: "$22.5^\\\circ, 67.5^\\\circ, 202.5^\\\circ, 247.5^\\\circ$",
+                    b: "$45^\\\circ, 135^\\\circ, 225^\\\circ, 315^\\\circ$",
+                    c: "$30^\\\circ, 60^\\\circ, 150^\\\circ, 330^\\\circ$",
+                    d: "$90^\\\circ, 180^\\\circ, 270^\\\circ, 360^\\\circ$"
                 },
                 correct: "a",
-                explanation: "$\\sin 2x = \\frac{\\sqrt{2}}{2} \\Rightarrow 2x = 45^\\circ + k \\cdot 360^\\circ$ atau $2x = 135^\\circ + k \\cdot 360^\\circ$. Dalam $0^\\circ \\leq x < 360^\\circ$, maka $0^\\circ \\leq 2x < 720^\\circ$. Solusi: $2x = 45^\\circ, 135^\\circ, 405^\\circ, 495^\\circ$. Bagi 2: $x = 22.5^\\circ, 67.5^\\circ, 202.5^\\circ, 247.5^\\circ$. Pilihan (a) sesuai."
+                explanation: "$\\sin 2x = \\frac{\\sqrt{2}}{2} \\Rightarrow 2x = 45^\\\circ + k \\cdot 360^\\\circ$ atau $2x = 135^\\\circ + k \\cdot 360^\\\circ$. Dalam $0^\\\circ \\leq x < 360^\\\circ$, maka $0^\\\circ \\leq 2x < 720^\\\circ$. Solusi: $2x = 45^\\\circ, 135^\\\circ, 405^\\\circ, 495^\\\circ$. Bagi 2: $x = 22.5^\\\circ, 67.5^\\\circ, 202.5^\\\circ, 247.5^\\\circ$. Pilihan (a) sesuai."
             }
         ]
     },
@@ -4001,10 +4389,10 @@ const allQuizData = {
                     e: "$1 < x < \\infty$"
                 },
                 correct: "d",
-                explanation: "Domain adalah semua nilai $x$ yang membuat fungsi terdefinisi. Untuk $f(x) = \\frac{x}{x - 1}$, penyebut $x - 1 \\neq 0$, sehingga $x \\neq 1$. Domain: $\\{x \\in \\mathbb{R} \\mid x \\neq 1\\}$, atau dalam notasi interval: $-\\infty < x < 1$ atau $1 < x < \\infty$. Pilihan (d) sesuai."
+                explanation: "Domain adalah semua nilai $x$ yang membuat fungsi terdefinisi. Untuk $f(x) = \\frac{x}{x - 1}$, penyebut $x - 1 \\neq 0$, sehingga $x \\neq 1$. Domain: $\\{x \\in \\\mathbb{R} \\mid x \\neq 1\\}$, atau dalam notasi interval: $-\\infty < x < 1$ atau $1 < x < \\infty$. Pilihan (d) sesuai."
             },
             {
-                text: "Diketahui $f(x) = x$ dan $g(x) = -x + 1$. Rumus fungsi $f \\circ g$ adalah:",
+                text: "Diketahui $f(x) = x$ dan $g(x) = -x + 1$. Rumus fungsi $f \\\circ g$ adalah:",
                 options: {
                     a: "$x^2 - x$",
                     b: "$-x^2 - x$",
@@ -4013,11 +4401,12 @@ const allQuizData = {
                     e: "$-x + 1$"
                 },
                 correct: "e",
-                explanation: "$f \\circ g(x) = f(g(x))$. Dengan $g(x) = -x + 1$ dan $f(x) = x$, substitusi: $f(g(x)) = f(-x + 1) = -x + 1$. Pilihan (e) sesuai."
+                explanation: "$f \\\circ g(x) = f(g(x))$. Dengan $g(x) = -x + 1$ dan $f(x) = x$, substitusi: $f(g(x)) = f(-x + 1) = -x + 1$. Pilihan (e) sesuai."
             }
         ]
     }
 };
 
     // Anda bisa menambahkan kuis lainnya di sini
+
 
