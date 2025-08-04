@@ -1352,7 +1352,7 @@ body.sidebar-open {
                 id: 'limit-fungsi',
                 title: 'Limit Fungsi',
                 creator: 'Tim UMT',
-                tags: ['baru', 'premium'],
+                tags: ['baru', 'gratis'],
                 isPremium: false,
                 link: 'Kelas Limit/',
                 image: 'limit-fungsi.png'
@@ -1361,7 +1361,7 @@ body.sidebar-open {
                 id: 'trigonometri',
                 title: 'Trigonometri',
                 creator: 'Tim UMT',
-                tags: ['premium'],
+                tags: ['gratis'],
                 isPremium: false,
                 link: 'Kelas Trigonometri/',
                 image: 'trigonometri.png'
@@ -1370,7 +1370,7 @@ body.sidebar-open {
                 id: 'bentuk-akar',
                 title: 'Bentuk Akar',
                 creator: 'Tim UMT',
-                tags: ['baru', 'premium'],
+                tags: ['baru', 'gratis'],
                 isPremium: false,
                 link: 'Kelas Bentuk Akar/',
                 image: 'bentuk-akar.png'
@@ -1424,7 +1424,7 @@ body.sidebar-open {
         
         function handleVideoClick(video) {
             // Langsung redirect ke halaman video tanpa pengecekan login
-            window.open(video.link); // Ganti "_top' dengan '_self' jika ingin membuka di tab yang sama`.href = `${video.link}`;
+            window.location.href = `${video.link}`; // Ganti "_top' dengan '_self' jika ingin membuka di tab yang sama`.href = `${video.link}`;
         }
         
         function filterVideos(filter) {
@@ -1478,4 +1478,3 @@ body.sidebar-open {
     </script>
 </body>
 </html>
-
