@@ -849,7 +849,7 @@ const allQuizData = {
         description: "Kumpulan soal TKA Matematika IPA untuk jenjang SMA/MA.",
         questions: [
             {
-                text: 'Diketahui persegi dengan panjang sisi \\( s \\) dan setengah lingkaran dengan diameter pada alas seperti pada gambar. <img src="rg-1.png" alt="Daerah arsir antara parabola dan garis" style="max-width: 300px; display: block; margin: 15px auto; border-radius: 8px;"> Garis \\( AC \\) menyinggung lingkaran di titik \\( T \\). Panjang \\( AC \\) adalah :',
+                text: 'Diketahui persegi dengan panjang sisi \\( s \\) dan setengah lingkaran dengan diameter pada alas seperti pada gambar. <img src="rg-1.png" alt="Daerah arsir antara parabola dan garis" style="max-width: 300px; display: block; margin: 15px auto; border-radius: 8px;"> Garis \\( EC \\) menyinggung lingkaran di titik \\( F \\). Panjang \\( EC \\) adalah :',
                 options: { a: "$\\sqrt{2}$", b: "$2$", c: "$\\sqrt{5}$", d: "$2\\sqrt{2}$", e: "$3$" },
                 correct: "b",
                 explanation: "Misalkan persegi memiliki sisi \\( s = 2 \\) untuk perhitungan sederhana. Setengah lingkaran memiliki diameter \\( AB = 2 \\), jari-jari \\( r = 1 \\), dan pusat di \\( (1, 0) \\). Garis \\( AC \\) dari \\( A(0,0) \\) ke \\( C(2,2) \\) memiliki kemiringan 1. Karena menyinggung lingkaran, jarak dari pusat lingkaran ke garis \\( AC \\) sama dengan jari-jari. Persamaan garis \\( y = x \\), jarak dari \\( (1,0) \\) ke \\( y = x \\) adalah \\( \\frac{|1-0|}{\\sqrt{2}} = \\frac{1}{\\sqrt{2}} \\). Karena \\( \\frac{1}{\\sqrt{2}} = 1 \\) (dengan \\( s = 2 \\)), dan panjang \\( AC = \\sqrt{(2-0)^2 + (2-0)^2} = \\sqrt{8} = 2\\sqrt{2} \\), tetapi kondisi sentuh menunjukkan \\( s = 2 \\) memberikan panjang \\( AC = 2 \\) (opsi B) dengan asumsi skala spesifik. Pembahasan: Gunakan jarak garis ke titik dan teorema sentuh lingkaran. Jawaban: B."
@@ -4408,6 +4408,7 @@ const allQuizData = {
 };
 
     // Anda bisa menambahkan kuis lainnya di sini
+
 
 
 
