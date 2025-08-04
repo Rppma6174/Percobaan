@@ -742,9 +742,11 @@
         <div class="filter-container" id="filterContainer">
             <button class="filter-btn active" data-category="all">Semua</button>
             <button class="filter-btn" data-category="pas">PAS</button>
+            <button class="filter-btn" data-category="tka-matematika">TKA Matematika</button>
             <button class="filter-btn" data-category="hots">HOTS</button>
             <button class="filter-btn" data-category="mots">MOTS</button>
             <button class="filter-btn" data-category="lots">LOTS</button>
+            
         </div>
 
         <div class="cards-grid" id="cardsGrid"></div>
@@ -774,8 +776,10 @@
         }
     // Mockup allQuizData jika file quiz-database.js tidak ada
     const allQuizData = {
+        // TKA Matematika
+        'tka-matematika-ipa-1': {}, 'tka-matematika-ipa-2': {}, 'tka-matematika-ipa-3': {}, 'tka-matematika-ipa-4': {}, 'tka-matematika-ipa-5': {}, 'tka-matematika-ipa-6': {}, 'tka-matematika-ipa-7': {}, // Tambahkan data untuk TKA Matematika IPA
         // PAS, PTS, UAS, UTS
-        'pas-matematika-1': {}, 'pas-matematika-2': {}, 'pas-matematika-3': {},'pas-matematika-4': {}, 
+        'pas-matematika-1': {}, 'pas-matematika-2': {}, 'pas-matematika-3': {},'pas-matematika-4': {},
         // HOTS
         'hots-relasi-fungsi': {}, 'hots-eksponen': {}, 'hots-polinomial': {}, 'hots-matriks': {}, 'hots-persamaan-kuadrat': {},'hots-pola-bilangan': {},'hots-logika-matematika': {}, 'hots-induksi-matematika': {}, 'hots-fungsi-trigonometri': {}, 'hots-fungsi-kuadrat': {}, 'hots-akar-pangkat': {},
         // MOTS
@@ -786,12 +790,23 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         const allCardsData = [
+            // TKA Matematika
+
+            {id: 'tka-matematika-ipa-1', title: "TKA Matematika IPA - Tryout #1", author: "Tim UMT", category: "tka-matematika", questionCount: 15},
+            {id: 'tka-matematika-ipa-2', title: "TKA Matematika IPA - Tryout #2", author: "Tim UMT", category: "tka-matematika", questionCount: 15},
+            {id: 'tka-matematika-ipa-3', title: "TKA Matematika IPA - Tryout #3", author: "Tim UMT", category: "tka-matematika", questionCount: 15},
+            {id: 'tka-matematika-ipa-4', title: "TKA Matematika IPA - Tryout #4", author: "Tim UMT", category: "tka-matematika", questionCount: 15},
+            {id: 'tka-matematika-ipa-5', title: "TKA Matematika IPA - Tryout #5", author: "Tim UMT", category: "tka-matematika", questionCount: 15},
+            {id: 'tka-matematika-ipa-6', title: "TKA Matematika IPA - Tryout #6", author: "Tim UMT", category: "tka-matematika", questionCount: 15},
+            {id: 'tka-matematika-ipa-7', title: "TKA Matematika IPA - Tryout #7", author: "Tim UMT", category: "tka-matematika", questionCount: 15},
+
             // PAS, PTS, UAS, UTS
 
             { id: 'pas-matematika-1', title: "Penilaian Akhir Semester (PAS) #1", author: "Tim UMT", category: "pas", questionCount: 40},
             { id: 'pas-matematika-2', title: "Penilaian Akhir Semester (PAS) #2", author: "Tim UMT", category: "pas", questionCount: 40},
             { id: 'pas-matematika-3', title: "Penilaian Akhir Semester (PAS) #3", author: "Tim UMT", category: "pas", questionCount: 40},
-            { id: 'pas-matematika-4', title: "Penilaian Akhir Semester (PAS) #4", author: "Tim UMT", category: "pas", questionCount: 40},
+            { id: 'pas-matematika-4', title: "Penilaian Akhir Semester (PAS) #4", author: "Tim UMT", category: "pas", questionCount: 15},
+            
 
             // HOTS
 
