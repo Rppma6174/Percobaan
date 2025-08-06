@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tryout Challenge S1: Rayakan Sistem Baru! - UMTacademy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="icon" type="image/png" href="UMT-Logo.png">
+    <style>
+        :root {
+            --primary-purple: #6A0DAD;
+            --secondary-purple: #7D2ED1;
+            --dark-bg: #141414;
+            --card-bg: #1c1c1c;
+            --text-primary: #ffffff;
+            --text-secondary: #ccc;
+            --border-color: #333;
+            --success-color: #10B981;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+        .page-header {
+            display: flex; justify-content: center; align-items: center;
+            padding: 20px 0; border-bottom: 1px solid var(--border-color); margin-bottom: 40px;
+        }
+        .logo-link { display: flex; align-items: center; text-decoration: none; }
+        .logo-image { width: 50px; height: 50px; margin-right: 15px; border-radius: 10px; }
+        .logo-text { font-size: 24px; font-weight: 700; color: var(--text-primary); }
+        .article-header { text-align: center; margin-bottom: 30px; }
+        .article-title { font-size: 2.8rem; font-weight: 700; line-height: 1.3; margin-bottom: 15px; color: var(--text-primary); }
+        .article-meta { color: var(--text-secondary); font-size: 1rem; }
+        .article-banner {
+            width: 100%; height: auto; max-height: 400px; object-fit: cover;
+            border-radius: 16px; margin-bottom: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .article-content { font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary); }
+        .article-content h3 {
+            font-size: 1.5rem; color: var(--primary-purple); margin-top: 40px; margin-bottom: 20px;
+            padding-bottom: 10px; border-bottom: 2px solid var(--border-color);
+        }
+        .article-content p { margin-bottom: 20px; }
+        .article-content ul { list-style-position: inside; padding-left: 10px; margin-bottom: 20px; }
+        .article-content li { margin-bottom: 10px; }
+        .article-content strong { color: var(--text-primary); font-weight: 600; }
+        .important-note {
+            background-color: rgba(106, 13, 173, 0.1);
+            border-left: 5px solid var(--primary-purple);
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+        .important-note p { margin-bottom: 0; }
+        
+        .cta-button-container { text-align: center; margin-top: 40px; }
+        .cta-button {
+            display: inline-block; background: var(--success-color); color: white;
+            padding: 16px 40px; font-size: 1.2rem; font-weight: 700;
+            text-decoration: none; border-radius: 12px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.3);
+        }
+        .cta-button:hover { background-color: #059669; transform: translateY(-3px); }
+        .back-button-container { text-align: center; margin-top: 20px; }
+        .back-button {
+            color: var(--text-secondary); text-decoration: none; font-size: 0.9rem;
+        }
+        .back-button:hover { text-decoration: underline; }
+
+        .suggestions-section { margin-top: 80px; padding-top: 40px; border-top: 1px solid var(--border-color); }
+        .suggestions-title { text-align: center; font-size: 2rem; font-weight: 700; margin-bottom: 40px; }
+        .news-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .news-card {
+            background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px;
+            overflow: hidden; display: flex; flex-direction: column; text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .news-card:hover { transform: translateY(-8px); box-shadow: 0 12px 40px rgba(106, 13, 173, 0.2); }
+        .card-image img { width: 100%; height: 180px; object-fit: cover; }
+        .card-content { padding: 20px; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-category {
+            background: var(--primary-purple); color: white; font-size: 12px; font-weight: 600;
+            padding: 5px 12px; border-radius: 20px; align-self: flex-start; margin-bottom: 15px;
+        }
+        .card-title { font-size: 1.2rem; font-weight: 600; color: var(--text-primary); margin-bottom: 10px; line-height: 1.4; }
+        .card-excerpt { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; flex-grow: 1; }
+        .card-meta { display: flex; align-items: center; font-size: 0.8rem; color: #888; margin-top: 15px; }
+        .card-meta i { margin-right: 8px; color: var(--primary-purple); }
+
+        .page-footer { text-align: center; padding: 30px 0; margin-top: 50px; color: var(--text-secondary); }
+/* === CSS UNTUK TOMBOL KEMBALI === */
+.back-button-container {
+    text-align: center; /* Membuat link di dalamnya menjadi center */
+    margin-top: 20px;   /* Memberi jarak dari tombol hijau di atasnya */
+}
+
+.back-button {
+    color: var(--text-secondary); /* Menggunakan warna abu-abu yang tidak terlalu mencolok */
+    text-decoration: none;        /* Menghilangkan garis bawah default */
+    font-size: 0.9rem;            /* Membuat ukurannya sedikit lebih kecil */
+    transition: color 0.3s ease;  /* Animasi halus saat hover */
+}
+
+.back-button:hover {
+    color: var(--text-primary);   /* Warna menjadi lebih terang (putih) saat disentuh mouse */
+    text-decoration: underline;   /* Menambahkan garis bawah sebagai penanda interaksi */
+}
+        /* ===== RESET & BASE STYLES ===== */
+        * { 
+            box-sizing: border-box; 
+        }
+
+        body {
+            background-color: #141414; 
+            font-family: 'Poppins', sans-serif; 
+            color: white;
+            margin: 0; 
+            padding: 0; 
+            line-height: 1.6;
+            padding-top: var(--header-height);
+        }
+
+        body.sidebar-open { 
+            overflow: hidden; 
+        }
+
+        html { 
+            scroll-behavior: smooth; 
+        }
+
+        /* ===== MAIN HEADER ===== */
+        .main-header {
+            background-color: #1c1c1c; 
+            padding: 0 20px;
+            height: var(--header-height);
+            position: fixed;
+            top: 0; 
+            left: 0; 
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid #333;
+            display: flex;
+            align-items: center;
+        }
+
+        .header-container {
+            width: 100%;
+            max-width: 1200px; 
+            margin: 0 auto; 
+            display: flex;
+            justify-content: space-between; 
+            align-items: center;
+        }
+
+        .header-logo {
+            display: flex; 
+            align-items: center; 
+            text-decoration: none;
+            color: white; 
+            font-weight: 600; 
+            font-size: 20px;
+        }
+
+        .header-logo img { 
+            height: 40px; 
+            margin-right: 10px; 
+        }
+
+        /* ===== HAMBURGER MENU ===== */
+        .hamburger-menu {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 5px;
+            flex-direction: column;
+            gap: 4px;
+            z-index: 1200;
+            transition: all 0.3s ease;
+        }
+
+        .hamburger-menu .bar {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Animasi hamburger saat aktif */
+        .hamburger-menu.active .bar:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        .hamburger-menu.active .bar:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger-menu.active .bar:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+
+        /* ===== NAVIGASI DESKTOP ===== */
+        .main-nav { 
+            display: flex; 
+        }
+
+        .nav-links {
+            list-style: none; 
+            margin: 0; 
+            padding: 0;
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+        }
+
+        .nav-links li a {
+            color: #ccc; 
+            text-decoration: none; 
+            font-size: 14px;
+            font-weight: 500; 
+            padding: 8px 12px; 
+            border-radius: 6px;
+            white-space: nowrap; 
+            transition: all 0.2s ease;
+        }
+
+        .nav-links li a:hover { 
+            background-color: rgba(255, 255, 255, 0.1); 
+            color: white; 
+        }
+
+        /* ===== SIDEBAR NAVIGATION ===== */
+        .sidebar-nav {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 500px; 
+            height: 100%;
+            background-color: #1a1a1a; 
+            box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+            padding-top: 60px; 
+            transform: translateX(-100%);
+            transition: transform 0.4s ease-in-out; 
+            z-index: 1100; 
+            overflow-y: auto;
+            display: none; /* Sembunyikan di desktop */
+        }
+
+        .sidebar-nav.active { 
+            transform: translateX(0); 
+        }
+
+        .sidebar-nav .nav-links { 
+            flex-direction: column; 
+            align-items: stretch; 
+            gap: 0; 
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar-nav .nav-links li a { 
+            display: flex; 
+            gap: 15px; 
+            padding: 15px 30px; 
+            font-size: 16px; 
+            border-radius: 0;
+            color: #ccc;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .sidebar-nav .nav-links li a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .sidebar-nav .nav-group-title {
+            padding: 20px 30px 10px; 
+            font-size: 12px; 
+            font-weight: 600;
+            color: #888; 
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+        }
+
+        .sidebar-nav .nav-group-title:not(:first-child){ 
+            border-top: 1px solid #333; 
+            margin-top: 10px; 
+        }
+
+        .sidebar-nav .sidebar-close-btn {
+            position: absolute; 
+            top: 15px; 
+            right: 20px; 
+            background: none; 
+            border: none;
+            color: #aaa; 
+            font-size: 36px; 
+            font-weight: 300; 
+            line-height: 1;
+            cursor: pointer; 
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .sidebar-nav .sidebar-close-btn:hover { 
+            color: white; 
+            transform: rotate(90deg); 
+        }
+
+        /* ===== SIDEBAR OVERLAY ===== */
+        .sidebar-overlay {
+            position: fixed; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); 
+            z-index: 1050;
+            opacity: 0; 
+            visibility: hidden; 
+            transition: opacity 0.4s, visibility 0.4s;
+        }
+
+        .sidebar-overlay.active { 
+            opacity: 1; 
+            visibility: visible; 
+        }
+
+        /* ===== EMOJI ICONS ===== */
+        .emoji-icon {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
+        /* ===== MEDIA QUERIES ===== */
+        /* Tablet dan Mobile */
+        @media screen and (max-width: 1024px) {
+            .main-nav { 
+                display: none; 
+            } /* Sembunyikan nav desktop */
+            
+            .hamburger-menu { 
+                display: flex; 
+            } /* Tampilkan hamburger */
+            
+            .sidebar-nav { 
+                display: block; 
+            } /* Aktifkan sidebar */
+        }
+
+        /* Mobile Medium */
+        @media screen and (max-width: 768px) {
+            .header-logo span {
+                font-size: 18px;
+            }
+            
+            .header-logo img {
+                height: 35px;
+            }
+            
+            .sidebar-nav {
+                width: 400px;
+            }
+        }
+
+        /* Mobile Small */
+        @media screen and (max-width: 480px) {
+            .sidebar-nav {
+                width: 260px;
+            }
+            
+            .header-logo span {
+                font-size: 16px;
+            }
+            
+            .header-logo img {
+                height: 30px;
+            }
+        }
+
+        /* ===== DEMO CONTENT STYLES (hapus saat implementasi) ===== */
+        .demo-content {
+            padding: 40px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .demo-content h1 {
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .demo-content p {
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .demo-section {
+            background-color: #1a1a1a;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 30px;
+        }
+
+        .demo-section h3 {
+            color: #ffffff;
+            margin-bottom: 15px;
+        }
+/* ----- ROOT VARIABLES ----- */
+:root {
+    --header-height: 70px;
+}
+
+/* ----- BODY ADJUSTMENT FOR FIXED HEADER ----- */
+body {
+    padding-top: var(--header-height);
+}
+
+body.sidebar-open { 
+    overflow: hidden; 
+}
+
+/* ----- MAIN HEADER ----- */
+.main-header {
+    background-color: #1c1c1c; 
+    padding: 0 20px;
+    height: var(--header-height);
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 1px solid #333;
+    display: flex;
+    align-items: center;
+}
+
+.header-container {
+    width: 100%;
+    max-width: 1200px; 
+    margin: 0 auto; 
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+/* ----- HEADER LOGO ----- */
+.header-logo {
+    display: flex; 
+    align-items: center; 
+    text-decoration: none;
+    color: white; 
+    font-weight: 600; 
+    font-size: 20px;
+    margin-right: 8px;
+}
+
+.header-logo img { 
+    height: 40px; 
+    margin-right: 10px; 
+}
+
+/* ----- HAMBURGER MENU ----- */
+.hamburger-menu {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    flex-direction: column;
+    gap: 4px;
+    z-index: 1200;
+    transition: all 0.3s ease;
+}
+
+.hamburger-menu .bar {
+    width: 25px;
+    height: 3px;
+    background-color: white;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Animasi hamburger saat aktif */
+.hamburger-menu.active .bar:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger-menu.active .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* ----- NAVIGASI DESKTOP (DEFAULT) ----- */
+.main-nav { 
+    display: flex; 
+    align-items: center; 
+    gap: 20px; 
+}
+
+.nav-links {
+    list-style: none; 
+    margin: 0; 
+    padding: 0;
+    display: flex; 
+    align-items: center; 
+    gap: 10px;
+}
+
+.nav-links li a {
+    color: #ccc; 
+    text-decoration: none; 
+    font-size: 14px;
+    font-weight: 500; 
+    padding: 8px 12px; 
+    border-radius: 6px;
+    white-space: nowrap; 
+    transition: all 0.2s ease;
+}
+
+.nav-links li a:hover { 
+    background-color: rgba(255, 255, 255, 0.1); 
+    color: white; 
+}
+
+/* ----- HEADER AUTH BUTTONS ----- */
+.header-auth { 
+    display: flex; 
+    gap: 10px; 
+}
+
+.auth-btn {
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-align: center;
+    white-space: nowrap;
+}
+
+.auth-btn.login {
+    color: #ccc;
+    background-color: transparent;
+    border: 1px solid #555;
+}
+
+.auth-btn.login:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-color: #888;
+}
+
+.auth-btn.register {
+    color: white;
+    background-color: #6A0DAD;
+    border: 1px solid #6A0DAD;
+}
+
+.auth-btn.register:hover {
+    background-color: #7D2ED1;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(106, 13, 173, 0.5);
+}
+
+/* ----- SIDEBAR & MOBILE NAVIGATION ----- */
+.sidebar-nav {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 500px; 
+    height: 100%;
+    background-color: #1a1a1a; 
+    box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+    padding-top: 60px; 
+    transform: translateX(-100%);
+    transition: transform 0.4s ease-in-out; 
+    z-index: 1100; 
+    overflow-y: auto;
+    display: none; /* Sembunyikan di desktop */
+}
+
+.sidebar-nav.active { 
+    transform: translateX(0); 
+}
+
+.sidebar-nav .nav-links { 
+    flex-direction: column; 
+    align-items: stretch; 
+    gap: 0; 
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-nav .nav-links li a { 
+    display: flex; 
+    gap: 15px; 
+    padding: 15px 30px; 
+    font-size: 16px; 
+    border-radius: 0;
+    color: #ccc;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.sidebar-nav .nav-links li a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.sidebar-nav .nav-group-title {
+    padding: 20px 30px 10px; 
+    font-size: 12px; 
+    font-weight: 600;
+    color: #888; 
+    text-transform: uppercase; 
+    letter-spacing: 1px;
+}
+
+.sidebar-nav .nav-group-title:not(:first-child){ 
+    border-top: 1px solid #333; 
+    margin-top: 10px; 
+}
+
+.sidebar-nav .sidebar-close-btn {
+    position: absolute; 
+    top: 15px; 
+    right: 20px; 
+    background: none; 
+    border: none;
+    color: #aaa; 
+    font-size: 36px; 
+    font-weight: 300; 
+    line-height: 1;
+    cursor: pointer; 
+    transition: color 0.3s, transform 0.3s;
+}
+
+.sidebar-nav .sidebar-close-btn:hover { 
+    color: white; 
+    transform: rotate(90deg); 
+}
+
+/* ----- SIDEBAR AUTH BUTTONS ----- */
+.sidebar-auth {
+    padding: 20px 30px;
+    border-bottom: 1px solid #333;
+    margin-bottom: 10px;
+}
+
+.sidebar-auth .auth-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-left: 0;
+}
+
+.sidebar-auth .auth-btn {
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* ----- SIDEBAR OVERLAY ----- */
+.sidebar-overlay {
+    position: fixed; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); 
+    z-index: 1050;
+    opacity: 0; 
+    visibility: hidden; 
+    transition: opacity 0.4s, visibility 0.4s;
+}
+
+.sidebar-overlay.active { 
+    opacity: 1; 
+    visibility: visible; 
+}
+
+/* ----- EMOJI ICON ----- */
+.emoji-icon {
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+/* ----- MEDIA QUERIES ----- */
+@media screen and (max-width: 1024px) {
+    .main-nav { 
+        display: none; 
+    } /* Sembunyikan nav desktop */
+    
+    .hamburger-menu { 
+        display: flex; 
+    } /* Tampilkan hamburger */
+    
+    .sidebar-nav { 
+        display: block; 
+    } /* Aktifkan sidebar */
+}
+
+/* Responsive untuk layar yang lebih kecil */
+@media screen and (max-width: 768px) {
+    .header-logo span {
+        font-size: 18px;
+    }
+    
+    .header-logo img {
+        height: 35px;
+    }
+    
+    .sidebar-nav {
+        width: 400px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .sidebar-nav {
+        width: 260px;
+    }
+    
+    .header-logo span {
+        font-size: 16px;
+    }
+    
+    .header-logo img {
+        height: 30px;
+    }
+}        
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-container">
+            <a href="../" class="header-logo">
+                <img src="UMT-Logo.png" alt="UMT Academy Logo">
+                <span>UMTacademy</span>
+            </a>
+
+            <!-- Navigasi Desktop -->
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="../Materi-Belajar/">Materi Belajar</a></li>
+                    <li><a href="../Video-Pembelajaran/">Video</a></li>
+                    <li><a href="../Bank-Soal/">Bank Soal</a></li>
+                    <li><a href="../Perpustakaan/">Perpustakaan</a></li>
+                    <li><a href="../UMT-Lab/">UMT Lab</a></li>
+                    <li><a href="../tryout/">Tryout</a></li>
+                    <li><a href="../Tanya-UMT/">TanyaUMT</a></li>
+                    <li><a href="../Forum-Belajar-UMT/">Forum</a></li>
+                    <li><a href="#">Live Class</a></li>
+                </ul>
+                <div class="header-auth">
+                    <a href="login.html" class="auth-btn login">Masuk</a>
+                    <a href="Form-Pendaftaran.html" class="auth-btn register">Daftar</a>
+                </div>
+            </nav>
+
+            <!-- Hamburger Menu untuk Mobile -->
+            <button class="hamburger-menu">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+        </div>
+    </header>
+    
+    <!-- Sidebar Navigation untuk Mobile -->
+    <nav class="sidebar-nav">
+        <button class="sidebar-close-btn">×</button>
+        <div class="sidebar-auth">
+            <div class="auth-buttons">
+                <a href="login.html" class="auth-btn login">Masuk</a>
+                <a href="Form-Pendaftaran.html" class="auth-btn register">Daftar</a>
+            </div>
+        </div>
+        <ul class="nav-links">
+            <li class="nav-group-title">Berita & Informasi UMT</li>
+            <li><a href="News/News.html"><span class="emoji-icon">📰</span>News</a></li>
+            <li class="nav-group-title">Konten Inti</li>
+            <li><a href="Materi-Belajar/"><span class="emoji-icon">📘</span>Materi Belajar</a></li>
+            <li><a href="Video-Pembelajaran/"><span class="emoji-icon">🎥</span>Video Pembelajaran</a></li>
+            <li><a href="UMT-Lab/"><span class="emoji-icon">🔬</span>UMT Lab</a></li>
+            <li><a href="Perpustakaan/"><span class="emoji-icon">📚</span>Perpustakaan</a></li>
+
+            <li class="nav-group-title">Alat Belajar</li>
+            <li><a href="Bank-Soal/"><span class="emoji-icon">📝</span>Bank Soal</a></li>
+            <li><a href="tryout/"><span class="emoji-icon">✏️</span>Tryout</a></li>
+            <li><a href="Tanya-UMT/"><span class="emoji-icon">❓</span>TanyaUMT</a></li>
+
+            <li class="nav-group-title">Komunitas & Info</li>
+            <li><a href="Forum-Belajar-UMT/"><span class="emoji-icon">💬</span>Forum Belajar</a></li>
+            <li><a href="Arsip-Live-Class/"><span class="emoji-icon">🎭</span>Arsip Live Class</a></li>
+        </ul>
+    </nav>
+    
+    <!-- Overlay untuk Sidebar -->
+    <div class="sidebar-overlay"></div>
+    <div class="container"> 
+        <main class="article-container"> 
+            <header class="article-header"> 
+                <h1 class="article-title">Pembaruan Kebijakan Keamanan: Sistem Perangkat Terdaftar untuk Akun Pro</h1> 
+                <p class="article-meta"> 
+                    <i class="fas fa-calendar-alt"></i> Diterbitkan pada 7 Agustus 2025
+                    <span class="meta-tag">Khusus Anggota Pro</span>
+                </p> 
+            </header> 
+
+            <img src="https://placehold.co/800x400/6A0DAD/FFFFFF?text=Info+Penting" alt="Ilustrasi keamanan akun dan perangkat" class="article-banner"> 
+
+            <div class="article-content"> 
+                <p> 
+                    Halo UMT-ers Pro!
+                </p>
+                <p>
+                    Demi meningkatkan keamanan, kenyamanan, dan eksklusivitas akun Anda, kami memberlakukan sebuah kebijakan baru yang penting untuk diketahui: <strong>Sistem Perangkat Terdaftar (Device-Locking)</strong>.
+                </p>
+
+                <h3>INFO PENTING – PERANGKAT TERDAFTAR</h3>
+                <p>
+                    Mulai hari ini, akun Pro Anda akan secara otomatis terhubung dengan perangkat yang pertama kali Anda gunakan untuk login. Berikut adalah rinciannya:
+                </p>
+                <ul>
+                    <li><strong>Satu Akun, Satu Perangkat Aktif:</strong> Akun Anda kini hanya dapat diakses melalui satu perangkat yang sudah terdaftar tersebut (misalnya, hanya di HP atau hanya di laptop Anda).</li>
+                    <li><strong>Ingin Ganti Perangkat?:</strong> Tentu saja bisa! Jika Anda ingin beralih dari HP ke laptop atau sebaliknya, silakan hubungi Admin. Kami akan membantu Anda mengubah perangkat terdaftar. Perlu diingat, ini adalah proses *peralihan*, sehingga tetap hanya ada satu perangkat yang aktif dalam satu waktu.</li>
+                    <li><strong>Akses Multi-Perangkat:</strong> Jika Anda membutuhkan fleksibilitas untuk mengakses akun dari lebih dari satu perangkat secara bersamaan (contoh: di HP dan laptop sekaligus), kami menyediakan opsi peningkatan paket dengan biaya tambahan.</li>
+                </ul>
+                <p>
+                    Kebijakan ini kami terapkan untuk mencegah penyalahgunaan akun dan memastikan bahwa layanan premium UMTacademy dapat Anda nikmati secara maksimal dan aman. Kami sangat menghargai pengertian Anda.
+                </p>
+
+                <h3>Butuh Bantuan atau Ada Pertanyaan?</h3>
+                <p>
+                    Jangan ragu untuk bertanya jika ada hal yang kurang jelas mengenai kebijakan ini. Tim kami siap membantu Anda. Silakan klik tombol di bawah untuk langsung terhubung dengan Admin melalui WhatsApp.
+                </p>
+
+                <div class="cta-button-container"> 
+                    <a href="https://wa.me/6281234567890" target="_blank" class="cta-button"> 
+                        <i class="fab fa-whatsapp"></i> Hubungi Admin di WhatsApp
+                    </a> 
+                </div> 
+            </div> 
+        </main> 
+    </div> 
+
+    <footer class="page-footer"> 
+        <p>&copy; 2025 UMTacademy. Semua Hak Cipta Dilindungi.</p> 
+    </footer> 
+</body> 
+</html>
