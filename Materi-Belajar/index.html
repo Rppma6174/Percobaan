@@ -2300,6 +2300,21 @@ body.sidebar-open {
             </div>
     </footer>
     <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const loginLink = document.getElementById('login-link-header');
+        if (loginLink) {
+            // Mengambil path folder saat ini
+            let currentPath = window.location.pathname;
+
+            // Jika path berakhir dengan 'index.html', hapus bagian tersebut
+            if (currentPath.endsWith('index.html')) {
+                currentPath = currentPath.substring(0, currentPath.lastIndexOf('/') + 1);
+            }
+
+            // Tambahkan parameter redirect ke link login
+            loginLink.href = `../Login/?redirect=${encodeURIComponent(currentPath)}`;
+        }
+    });
         const hamburgerMenu = document.querySelector('.hamburger-menu');
         const sidebarNav = document.querySelector('.sidebar-nav');
         const sidebarOverlay = document.querySelector('.sidebar-overlay');
@@ -2535,3 +2550,4 @@ dropdown.querySelector('.dropdown-menu').addEventListener('click', (e) => {
 </body>
 
 </html>
+
