@@ -17,189 +17,106 @@
             --text-secondary: #ccc;
             --border-color: #333;
             --success-color: #10B981;
+            --header-height: 70px;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--dark-bg);
-            color: var(--text-primary);
-            min-height: 100vh;
-            position: relative;
-            overflow-x: hidden;
-        }
-
-        /* Animasi Latar Belakang */
-        .bg-animation {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none;
-        }
-        .particle {
-            position: absolute; background: rgba(106, 13, 173, 0.1); border-radius: 50%; animation: float 15s infinite linear;
-        }
-        .particle:nth-child(1) { width: 80px; height: 80px; top: 10%; left: 10%; animation-delay: 0s; }
-        .particle:nth-child(2) { width: 60px; height: 60px; top: 70%; left: 80%; animation-delay: 2s; }
-        .particle:nth-child(3) { width: 100px; height: 100px; top: 40%; left: 5%; animation-delay: 4s; }
-        .particle:nth-child(4) { width: 40px; height: 40px; top: 20%; left: 90%; animation-delay: 6s; }
-        .particle:nth-child(5) { width: 120px; height: 120px; top: 80%; left: 20%; animation-delay: 8s; }
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.3; }
-            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.7; }
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 40px 0;
-        }
-
-        /* Header Halaman */
-        .page-header {
-            text-align: center;
-            margin-bottom: 40px;
-            animation: slideInDown 0.8s ease-out;
-        }
-         .logo-container { display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
-        .logo-image { width: 60px; height: 60px; border-radius: 12px; margin-right: 15px; box-shadow: 0 4px 15px rgba(106, 13, 173, 0.3); object-fit: cover; }
-        .logo-text { font-size: 28px; font-weight: 700; color: var(--text-primary); text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); }
-
-        .page-header h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
-        .page-header p {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-        }
-
-        /* Fitur Pencarian */
-        .search-container {
-            margin-bottom: 40px;
+        /* [... Kode CSS Body, Header, Sidebar, dll. tetap sama ...] */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Poppins', sans-serif; background: var(--dark-bg); color: var(--text-primary); padding-top: var(--header-height); }
+        .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 40px 0; }
+        .page-header { text-align: center; margin-bottom: 20px; }
+        .page-header h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; }
+        .page-header p { font-size: 1.1rem; color: var(--text-secondary); }
+        
+        /* === BAGIAN BARU: FILTER KATEGORI === */
+        .category-filters {
             display: flex;
             justify-content: center;
-            animation: slideInUp 0.8s ease-out;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 30px;
         }
-        .search-wrapper {
-            position: relative;
-            width: 100%;
-            max-width: 600px;
-        }
-        #searchInput {
-            width: 100%;
-            padding: 16px 20px 16px 50px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            color: var(--text-primary);
-            font-size: 16px;
-            font-family: inherit;
-            transition: all 0.3s ease;
-            outline: none;
-        }
-        #searchInput:focus {
-            border-color: var(--primary-purple);
-            box-shadow: 0 0 0 4px rgba(106, 13, 173, 0.2);
-        }
-        .search-wrapper i {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
+        .filter-btn {
+            background-color: var(--card-bg);
             color: var(--text-secondary);
-            font-size: 18px;
+            border: 1px solid var(--border-color);
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-family: 'Poppins', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        .filter-btn:hover {
+            background-color: var(--secondary-purple);
+            color: var(--text-primary);
+            border-color: var(--secondary-purple);
+        }
+        .filter-btn.active {
+            background-color: var(--primary-purple);
+            color: var(--text-primary);
+            border-color: var(--primary-purple);
+            box-shadow: 0 0 15px rgba(106, 13, 173, 0.4);
         }
 
-        /* Grid untuk Kartu Berita */
+        /* === BAGIAN BARU: PINNED ARTICLE === */
+        .news-card.pinned {
+            border-left: 4px solid var(--secondary-purple);
+            order: -1; /* Trik CSS agar selalu di atas dalam grid */
+        }
+        .pinned-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background-color: var(--success-color);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        /* Penyesuaian Kartu Berita */
         .news-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 2rem;
         }
-
-        /* Desain Kartu Berita */
         .news-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 16px;
             overflow: hidden;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-            display: flex; /* Tag <a> defaultnya inline, jadi kita harus set ini ke flex */
+            display: flex;
             flex-direction: column;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            animation: zoomIn 0.5s ease-out;
-            text-decoration: none; /* Menghilangkan garis bawah dari link */
+            text-decoration: none;
+            position: relative; /* Diperlukan untuk badge pinned */
         }
         .news-card:hover {
             transform: translateY(-8px);
             box-shadow: 0 12px 40px rgba(106, 13, 173, 0.2);
         }
-        .card-image img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-bottom: 1px solid var(--border-color);
-        }
-        .card-content {
-            padding: 25px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-        .card-category {
-            background: var(--primary-purple);
-            color: white;
-            font-size: 12px;
-            font-weight: 600;
-            padding: 5px 12px;
-            border-radius: 20px;
-            align-self: flex-start;
-            margin-bottom: 15px;
-        }
-        .card-title {
-            font-size: 1.4rem;
-            font-weight: 600;
-            color: var(--text-primary); /* Pastikan warna tetap */
-            margin-bottom: 10px;
-            line-height: 1.4;
-        }
-        .card-excerpt {
-            font-size: 1rem;
-            color: var(--text-secondary); /* Pastikan warna tetap */
-            line-height: 1.6;
-            margin-bottom: 20px;
-            flex-grow: 1;
-        }
-        .card-meta {
-            display: flex;
-            align-items: center;
-            font-size: 0.9rem;
-            color: #888;
-            margin-top: auto;
-        }
-        .card-meta i {
-            margin-right: 8px;
-            color: var(--primary-purple);
-        }
+        /* [... Sisa CSS untuk card-image, card-content, dll. tetap sama ...] */
+         .card-image img { width: 100%; height: 200px; object-fit: cover; }
+        .card-content { padding: 25px; display: flex; flex-direction: column; flex-grow: 1; }
+        .card-category { background: var(--primary-purple); color: white; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 20px; align-self: flex-start; margin-bottom: 15px; }
+        .card-title { font-size: 1.4rem; font-weight: 600; color: var(--text-primary); margin-bottom: 10px; line-height: 1.4; }
+        .card-excerpt { font-size: 1rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; flex-grow: 1; }
+        .card-meta { display: flex; align-items: center; font-size: 0.9rem; color: #888; margin-top: auto; }
+        .card-meta i { margin-right: 8px; color: var(--primary-purple); }
 
-        /* Animasi */
-        @keyframes slideInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes slideInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes zoomIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-        
-        /* Footer */
-        .page-footer {
-            text-align: center;
-            padding: 30px 0;
-            margin-top: 50px;
-            border-top: 1px solid var(--border-color);
-            color: var(--text-secondary);
-        }
+        .search-container { margin-bottom: 30px; display: flex; justify-content: center; }
+        .search-wrapper { position: relative; width: 100%; max-width: 600px; }
+        #searchInput { width: 100%; padding: 16px 20px 16px 50px; background: rgba(255, 255, 255, 0.05); border: 2px solid var(--border-color); border-radius: 12px; color: var(--text-primary); font-size: 16px; outline: none; transition: all 0.3s ease; }
+        #searchInput:focus { border-color: var(--primary-purple); box-shadow: 0 0 0 4px rgba(106, 13, 173, 0.2); }
+        .search-wrapper i { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--text-secondary); }
+
+        .page-footer { text-align: center; padding: 30px 0; margin-top: 50px; border-top: 1px solid var(--border-color); color: var(--text-secondary); }
         /* ===== RESET & BASE STYLES ===== */
         * { 
             box-sizing: border-box; 
@@ -909,55 +826,32 @@ body.sidebar-open {
             <h1>Berita & Informasi</h1>
             <p>Tetap update dengan pengumuman, jadwal, dan tips terbaru dari kami.</p>
         </header>
+        
+        <section class="category-filters">
+            <button class="filter-btn active" data-category="all">Semua</button>
+            <button class="filter-btn" data-category="kompetisi">Kompetisi</button>
+            <button class="filter-btn" data-category="kebijakan">Kebijakan</button>
+            <button class="filter-btn" data-category="tips">Tips & Trik</button>
+            <button class="filter-btn" data-category="pengumuman">Pengumuman</button>
+        </section>
 
         <section class="search-container">
             <div class="search-wrapper">
                 <i class="fas fa-search"></i>
-                <input type="text" id="searchInput" placeholder="Cari artikel berdasarkan judul atau kategori...">
+                <input type="text" id="searchInput" placeholder="Cari artikel...">
             </div>
         </section>
 
         <main class="news-grid">
-            <a href="Tryout Challenge UMT/" class="news-card">
-                <div class="card-image">
-                    <img src="tryout.png" alt="Gambar Ilustrasi Pengumuman">
+            <a href="Pembaruan Kebijakan Keamanan Sistem Perangkat Terdaftar untuk Akun Pro/" class="news-card pinned" data-category="kebijakan">
+                 <div class="pinned-badge">
+                    <i class="fas fa-thumbtack"></i> PENTING
                 </div>
-                <div class="card-content">
-                    <span class="card-category">Pengumuman</span>
-                    <h2 class="card-title">Jadwal Tryout Challange UMT - Season 1 Telah Dirilis!</h2>
-                    <p class="card-excerpt">
-                        Persiapkan dirimu! Jadwal lengkap untuk Tryout Challange UMT - Season 1 kini telah tersedia. Cek tanggal penting dan jangan sampai ketinggalan.
-                    </p>
-                    <div class="card-meta">
-                        <i class="fas fa-calendar-alt"></i>
-                        <span>Diterbitkan pada 1 Agustus 2025</span>
-                    </div>
-                </div>
-            </a>
-
-            <a href="Informasi Lebih Lanjut Terkait Tryout Challenge UMT - Season 1/" class="news-card">
-                <div class="card-image">
-                    <img src="tryout.png" alt="Gambar Ilustrasi Event">
-                </div>
-                <div class="card-content">
-                    <span class="card-category">Pengunguman</span>
-                    <h2 class="card-title">Info Lebih Lanjut Terkait UMT Tryout Challenge - Season 1</h2>
-                    <p class="card-excerpt">
-                        Temukan semua yang perlu kamu tahu! Cek jadwal lengkap, rincian hadiah total Rp200.000, kisi-kisi materi HOTS, dan aturan keamanan tryout terbaru kami. Klik untuk baca selengkapnya!
-                    </p>
-                    <div class="card-meta">
-                        <i class="fas fa-calendar-alt"></i>
-                        <span>Diterbitkan pada 5 Agustus 2025</span>
-                    </div>
-                </div>
-            </a>
-
-            <a href="kebijakan-perangkat-terdaftar.html" class="news-card">
                 <div class="card-image">
                     <img src="https://placehold.co/600x400/6A0DAD/FFFFFF?text=Info+Penting" alt="Ilustrasi Kebijakan Baru">
                 </div>
                 <div class="card-content">
-                    <span class="card-category">Pembaruan Kebijakan</span>
+                    <span class="card-category">Kebijakan</span>
                     <h2 class="card-title">Info Penting: Akun Pro Kini Terhubung ke Satu Perangkat Terdaftar</h2>
                     <p class="card-excerpt">
                         Untuk meningkatkan keamanan, akun Pro Anda kini terkunci pada 1 perangkat. Klik untuk mempelajari cara kerja sistem baru ini dan cara mengganti perangkat Anda.
@@ -967,8 +861,42 @@ body.sidebar-open {
                         <span>Diterbitkan pada 7 Agustus 2025</span>
                     </div>
                 </div>
-            </a>            
+            </a>
             
+            <a href="Informasi Lebih Lanjut Terkait Tryout Challenge UMT - Season 1/" class="news-card" data-category="kompetisi">
+                <div class="card-image">
+                    <img src="tryout.png" alt="Gambar Ilustrasi Event">
+                </div>
+                <div class="card-content">
+                    <span class="card-category">Kompetisi</span>
+                    <h2 class="card-title">Info Lengkap UMT Tryout Challenge - Season 1</h2>
+                    <p class="card-excerpt">
+                        Temukan semua yang perlu kamu tahu! Cek jadwal, rincian hadiah, kisi-kisi materi HOTS, dan aturan keamanan tryout terbaru kami. Klik untuk baca selengkapnya!
+                    </p>
+                    <div class="card-meta">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Diterbitkan pada 5 Agustus 2025</span>
+                    </div>
+                </div>
+            </a>
+
+            <a href="Tryout Challenge UMT/" class="news-card" data-category="pengumuman">
+                <div class="card-image">
+                    <img src="tryout.png" alt="Gambar Ilustrasi Pengumuman">
+                </div>
+                <div class="card-content">
+                    <span class="card-category">Pengumuman</span>
+                    <h2 class="card-title">Jadwal Tryout Challenge UMT - Season 1 Telah Dirilis!</h2>
+                    <p class="card-excerpt">
+                        Persiapkan dirimu! Jadwal lengkap untuk Tryout Challenge UMT - Season 1 kini telah tersedia. Cek tanggal penting dan jangan sampai ketinggalan.
+                    </p>
+                    <div class="card-meta">
+                        <i class="fas fa-calendar-alt"></i>
+                        <span>Diterbitkan pada 1 Agustus 2025</span>
+                    </div>
+                </div>
+            </a>
+
         </main>
     </div>
 
@@ -977,54 +905,46 @@ body.sidebar-open {
     </footer>
 
     <script>
-        // Hamburger menu toggle
-        const hamburger = document.querySelector('.hamburger-menu');
-        const sidebarNav = document.querySelector('.sidebar-nav');
-        const sidebarOverlay = document.querySelector('.sidebar-overlay');
-        const sidebarCloseBtn = document.querySelector('.sidebar-close-btn');
-
-        hamburger.addEventListener('click', () => {
-            sidebarNav.classList.toggle('active');
-            sidebarOverlay.classList.toggle('active');
-            document.body.classList.toggle('sidebar-open');
-        });
-
-        sidebarCloseBtn.addEventListener('click', () => {
-            sidebarNav.classList.remove('active');
-            sidebarOverlay.classList.remove('active');
-            document.body.classList.remove('sidebar-open');
-        });
-
-        sidebarOverlay.addEventListener('click', () => {
-            sidebarNav.classList.remove('active');
-            sidebarOverlay.classList.remove('active');
-            document.body.classList.remove('sidebar-open');
-        });
         document.addEventListener('DOMContentLoaded', function() {
             const searchInput = document.getElementById('searchInput');
-            // Selector .news-card sekarang akan memilih tag <a>, jadi JS tetap berfungsi!
+            const filterButtons = document.querySelectorAll('.filter-btn');
             const newsCards = document.querySelectorAll('.news-card');
 
-            searchInput.addEventListener('input', function() {
+            function filterAndSearch() {
                 const searchTerm = searchInput.value.toLowerCase().trim();
+                const activeCategory = document.querySelector('.filter-btn.active').dataset.category;
 
                 newsCards.forEach(card => {
-                    const title = card.querySelector('.card-title').textContent.toLowerCase();
-                    const category = card.querySelector('.card-category').textContent.toLowerCase();
-                    const excerpt = card.querySelector('.card-excerpt').textContent.toLowerCase();
+                    const cardCategory = card.dataset.category;
+                    const cardText = card.textContent.toLowerCase();
 
-                    // Mengubah style.display ke 'flex' karena .news-card menggunakan display: flex
-                    if (title.includes(searchTerm) || category.includes(searchTerm) || excerpt.includes(searchTerm)) {
+                    const categoryMatch = (activeCategory === 'all' || cardCategory === activeCategory);
+                    const searchMatch = cardText.includes(searchTerm);
+                    
+                    // Kartu akan tampil jika kategori dan teks pencarian cocok
+                    if (categoryMatch && searchMatch) {
                         card.style.display = 'flex';
                     } else {
                         card.style.display = 'none';
                     }
                 });
+            }
+
+            // Event listener untuk tombol filter
+            filterButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Hapus class active dari tombol lain
+                    filterButtons.forEach(btn => btn.classList.remove('active'));
+                    // Tambahkan class active ke tombol yang di-klik
+                    button.classList.add('active');
+                    // Panggil fungsi filter
+                    filterAndSearch();
+                });
             });
+
+            // Event listener untuk input pencarian
+            searchInput.addEventListener('input', filterAndSearch);
         });
     </script>
 </body>
-
 </html>
-
-
