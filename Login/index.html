@@ -374,138 +374,131 @@ button[type="submit"]:disabled {
                 </button>
 
                 <div class="form-options">
-                    <a href="reset-sandi.html" class="forgot-password">Lupa password?</a>
+                    <a href="../Reset Sandi/" class="forgot-password">Lupa password?</a>
                 </div>
 
                 <div id="error-message"></div>
 
                 <div class="register-link">
-                    Belum punya akun? <a href="Form-Pendaftaran.html">Daftar sekarang</a>
+                    Belum punya akun? <a href="../Buat Akun/">Daftar sekarang</a>
                 </div>
             </div>
         </form>
     </div>
 
-<script>
-    const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyP3jpWgs6ikQcA-9MsInRZYbLFQsshjxgo22twwXrzpACSPV9BREogrKUd-60crXV_mg/exec';
-    let redirectUrl = null; // Variabel untuk menyimpan URL kembali
-
-    // Fungsi yang berjalan saat halaman dimuat
-    document.addEventListener('DOMContentLoaded', function() {
-        // Baca parameter 'redirect' dari URL
-        const params = new URLSearchParams(window.location.search);
-        redirectUrl = params.get('redirect');
-
-        const closeButton = document.querySelector('.close-btn');
-
-        // Jika ada parameter redirect, ubah link tombol 'Close'
-        if (redirectUrl && closeButton) {
-            closeButton.href = decodeURIComponent(redirectUrl);
-        }
-        // Jika tidak, tombol 'Close' akan menggunakan href="../" dari HTML.
+    <script>
+        const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyP3jpWgs6ikQcA-9MsInRZYbLFQsshjxgo22twwXrzpACSPV9BREogrKUd-60crXV_mg/exec';
 
         // Cek jika pengguna sudah login, langsung arahkan
-        // Hapus blok 'if' ini jika Anda ingin pengguna yang sudah login tetap bisa melihat halaman login
         if (sessionStorage.getItem('sessionToken')) {
-            // Arahkan ke area member dengan path yang benar
-            window.location.href = '../Pro_Member_Akses/'; 
+            window.location.href = 'Pro_Member_Akses/';
         }
-    });
 
-    function getDeviceFingerprint() {
-        const userAgent = navigator.userAgent;
-        const language = navigator.language;
-        const resolution = `${screen.width}x${screen.height}`;
-        return `${userAgent}|${language}|${resolution}`;
-    }
+        function getDeviceFingerprint() {
+            const userAgent = navigator.userAgent;
+            const language = navigator.language;
+            const resolution = `${screen.width}x${screen.height}`;
+            return `${userAgent}|${language}|${resolution}`;
+        }
 
-    async function handleLoginAttempt(event) {
-        event.preventDefault();
-        const loginButton = document.getElementById('login-button');
-        const errorMessage = document.getElementById('error-message');
-        const btnText = document.getElementById('btnText');
-        const loading = document.getElementById('loading');
+        async function handleLoginAttempt(event) {
+            event.preventDefault();
+            const loginButton = document.getElementById('login-button');
+            const errorMessage = document.getElementById('error-message');
+            const btnText = document.getElementById('btnText');
+            const loading = document.getElementById('loading');
+            
+            // Show loading state
+            btnText.style.display = 'none';
+            loading.style.display = 'block';
+            loginButton.disabled = true;
+            errorMessage.textContent = '';
+            errorMessage.style.display = 'none';
+            
+            const fingerprint = getDeviceFingerprint();
 
-        // Tampilkan status loading
-        btnText.style.display = 'none';
-        loading.style.display = 'block';
-        loginButton.disabled = true;
-        errorMessage.style.display = 'none';
-
-        const fingerprint = getDeviceFingerprint();
-
-        try {
-            const response = await fetch(WEB_APP_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                body: JSON.stringify({
-                    action: 'login',
-                    email: document.getElementById('email').value,
-                    password: document.getElementById('password').value,
-                    fingerprint: fingerprint
-                })
-            });
-            const result = await response.json();
-            if (result.status === 'success') {
-                // Simpan sesi
-                sessionStorage.setItem('sessionToken', result.token);
-                sessionStorage.setItem('sessionEmail', result.email);
-
-                // **MODIFIKASI UTAMA**: Arahkan kembali dengan cerdas
-                if (redirectUrl) {
-                    // Jika ada redirect, kembali ke sana
-                    window.location.href = decodeURIComponent(redirectUrl);
+            try {
+                const response = await fetch(WEB_APP_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                    body: JSON.stringify({
+                        action: 'login',
+                        email: document.getElementById('email').value,
+                        password: document.getElementById('password').value,
+                        fingerprint: fingerprint
+                    })
+                });
+                const result = await response.json();
+                if (result.status === 'success') {
+                    // **PENTING: Simpan tiket sesi di browser**
+                    sessionStorage.setItem('sessionToken', result.token);
+                    sessionStorage.setItem('sessionEmail', result.email);
+                    
+                    // **PENTING: Arahkan ke halaman rahasia**
+                    window.location.href = 'Pro_Member_Akses/';
                 } else {
-                    // Jika tidak, pergi ke halaman member default
-                    window.location.href = '../';
+                    throw new Error(result.message || 'Terjadi kesalahan.');
                 }
-            } else {
-                throw new Error(result.message || 'Terjadi kesalahan.');
+            } catch (error) {
+                errorMessage.textContent = error.message;
+                errorMessage.style.display = 'block';
+            } finally {
+                btnText.style.display = 'block';
+                loading.style.display = 'none';
+                loginButton.disabled = false;
             }
-        } catch (error) {
-            errorMessage.textContent = error.message;
-            errorMessage.style.display = 'block';
-        } finally {
-            // Kembalikan tombol ke keadaan semula
-            btnText.style.display = 'block';
-            loading.style.display = 'none';
-            loginButton.disabled = false;
         }
-    }
 
-    // --- Sisa kode Anda untuk efek visual (ripple, focus, dll.) tetap sama ---
-    // --- dan bisa diletakkan di sini ---
-
-    function createRipple(event) {
-        const button = event.currentTarget;
-        const circle = document.createElement("span");
-        const diameter = Math.max(button.clientWidth, button.clientHeight);
-        const radius = diameter / 2;
-        circle.style.width = circle.style.height = `${diameter}px`;
-        circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
-        circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
-        circle.classList.add("ripple");
-        const ripple = button.getElementsByClassName("ripple")[0];
-        if (ripple) { ripple.remove(); }
-        button.appendChild(circle);
-    }
-
-    document.getElementById('login-button').addEventListener('click', createRipple);
-
-    const formInputs = document.querySelectorAll('input[type="email"], input[type="password"]');
-    formInputs.forEach(input => {
-        input.addEventListener('focus', function() { this.parentNode.style.transform = 'scale(1.02)'; });
-        input.addEventListener('blur', function() { this.parentNode.style.transform = 'scale(1)'; });
-    });
-
-    window.addEventListener('load', function() { document.getElementById('email').focus(); });
-
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' && (document.activeElement.tagName === 'INPUT')) {
-            e.preventDefault();
-            document.getElementById('login-form').dispatchEvent(new Event('submit', { cancelable: true }));
+        // Add ripple effect to button
+        function createRipple(event) {
+            const button = event.currentTarget;
+            const circle = document.createElement("span");
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+            
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
+            circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
+            circle.classList.add("ripple");
+            
+            const ripple = button.getElementsByClassName("ripple")[0];
+            if (ripple) {
+                ripple.remove();
+            }
+            
+            button.appendChild(circle);
         }
-    });
-</script>
+
+        // Apply ripple effect to login button
+        document.getElementById('login-button').addEventListener('click', createRipple);
+
+        // Add floating animation to form inputs
+        const formInputs = document.querySelectorAll('input[type="email"], input[type="password"]');
+        formInputs.forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentNode.style.transform = 'scale(1.02)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentNode.style.transform = 'scale(1)';
+            });
+        });
+
+        // Auto-focus first input on page load
+        window.addEventListener('load', function() {
+            document.getElementById('email').focus();
+        });
+
+        // Keyboard navigation enhancement
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                const activeElement = document.activeElement;
+                if (activeElement.classList.contains('form-input') || activeElement.tagName === 'INPUT') {
+                    e.preventDefault();
+                    document.getElementById('login-form').dispatchEvent(new Event('submit'));
+                }
+            }
+        });
+    </script>
 </body>
 </html>
