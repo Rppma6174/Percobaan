@@ -391,7 +391,7 @@ button[type="submit"]:disabled {
 
         // Cek jika pengguna sudah login, langsung arahkan
         if (sessionStorage.getItem('sessionToken')) {
-            window.location.href = 'Pro_Member_Akses/';
+            window.location.href = '../Pro_Member_Akses/';
         }
 
         function getDeviceFingerprint() {
@@ -435,7 +435,7 @@ button[type="submit"]:disabled {
                     sessionStorage.setItem('sessionEmail', result.email);
                     
                     // **PENTING: Arahkan ke halaman rahasia**
-                    window.location.href = 'Pro_Member_Akses/';
+                    window.location.href = '../Pro_Member_Akses/';
                 } else {
                     throw new Error(result.message || 'Terjadi kesalahan.');
                 }
@@ -502,3 +502,4 @@ button[type="submit"]:disabled {
     </script>
 </body>
 </html>
+
