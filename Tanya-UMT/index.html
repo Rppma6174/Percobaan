@@ -6,198 +6,152 @@
     <title>Tanya UMT - UMTacademy</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="UMT-Logo - Copy (5).png">
     <style>
-        /* SELURUH CSS ANDA TETAP SAMA, TIDAK ADA PERUBAHAN */
         :root {
-            --primary-blue: #6A0DAD;
-            --primary-blue-hover: #7D2ED1;
-            --success-green: #10B981;
-            --bg-dark: #141414;
-            --bg-card: #1c1c1c;
-            --bg-input: rgba(255, 255, 255, 0.05);
-            --text-primary: #F1F5F9;
-            --text-secondary: #94A3B8;
-            --border-color: rgba(255, 255, 255, 0.1);
-            --shadow:  0 20px 40px rgba(0, 0, 0, 0.4),
-                       0 0 80px rgba(106, 13, 173, 0.1);
-            --radius: 16px;
+            --primary-blue: #6A0DAD; --success-green: #10B981; --bg-dark: #141414;
+            --bg-card: #1c1c1c; --bg-input: rgba(255, 255, 255, 0.05); --text-primary: #F1F5F9;
+            --text-secondary: #94A3B8; --border-color: rgba(255, 255, 255, 0.1); --radius: 16px;
         }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Poppins', sans-serif;
-            background: #141414;
-            min-height: 100vh;
-            color: var(--text-primary);
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 3rem 1rem;
-        }
+        body { font-family: 'Poppins', sans-serif; background: var(--bg-dark); color: var(--text-primary); }
+        .container { max-width: 800px; margin: 3rem auto; padding: 1rem; }
         .hero { text-align: center; margin-bottom: 3rem; }
-        .hero h1 { font-size: 3rem; font-weight: 800; color: white; margin-bottom: 1rem; }
-        .hero p { font-size: 1.2rem; color: var(--text-secondary); max-width: 600px; margin: 0 auto; line-height: 1.6; }
-        .form-card {
-            background: var(--bg-card);
-            border-radius: var(--radius);
-            padding: 2.5rem;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border-color);
-        }
-        .form-title { font-size: 1.5rem; font-weight: 700; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
-        .form-subtitle { color: var(--text-secondary); margin-bottom: 2rem; }
+        .hero h1 { font-size: 3rem; } .hero p { font-size: 1.2rem; color: var(--text-secondary); }
+        .form-card { background: var(--bg-card); border-radius: var(--radius); padding: 2.5rem; border: 1px solid var(--border-color); }
         .form-group { margin-bottom: 1.5rem; }
         .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        label { display: block; font-weight: 500; margin-bottom: 0.5rem; font-size: 0.9rem; }
+        label { display: block; font-weight: 500; margin-bottom: 0.5rem; }
         .input-wrapper { position: relative; }
-        .input-icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-secondary); font-size: 1.1rem; }
-        input, textarea {
-            width: 100%;
-            padding: 1rem 1rem 1rem 2.5rem;
-            background: var(--bg-input);
-            border: 2px solid var(--border-color);
-            border-radius: 12px;
-            color: var(--text-primary);
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--primary-blue);
-            box-shadow: 0 0 0 3px rgba(106, 13, 173, 0.2);
-        }
-        textarea { resize: vertical; min-height: 120px; padding-top: 1rem; }
-        .textarea-wrapper .input-icon { top: 1rem; transform: none; }
-        .submit-btn {
-            width: 100%;
-            padding: 1rem 2rem;
-            background: var(--primary-blue);
-            color: white; border: none; border-radius: 12px;
-            font-size: 1.1rem; font-weight: 600; cursor: pointer;
-            transition: all 0.3s ease;
-        }
+        .input-icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-secondary); }
+        input, textarea { width: 100%; padding: 1rem 1rem 1rem 2.5rem; background: var(--bg-input); border: 2px solid var(--border-color); border-radius: 12px; color: var(--text-primary); font-size: 1rem; }
+        textarea { resize: vertical; min-height: 120px; }
+        .file-input-label { display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: var(--bg-input); border: 2px dashed var(--border-color); border-radius: 12px; cursor: pointer; transition: all 0.3s ease; color: var(--text-secondary); }
+        .file-input-label:hover { border-color: var(--primary-blue); }
+        .file-input input[type=file] { display: none; }
+        .file-selected { border-color: var(--success-green) !important; color: var(--success-green) !important; }
+        .submit-btn { width: 100%; padding: 1rem; background: var(--primary-blue); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; }
         .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-        .loader {
-            display: none;
-            margin: 1rem auto 0;
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(255,255,255,0.2);
-            border-top: 4px solid var(--primary-blue);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @media (max-width: 768px) {
-            .form-row { grid-template-columns: 1fr; }
-            .hero h1 { font-size: 2.5rem; }
-            .form-card { padding: 2rem; }
-        }
+        .loader { display: none; margin: 1rem auto 0; width: 40px; height: 40px; border: 4px solid #444; border-top: 4px solid var(--primary-blue); border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @media (max-width: 768px) { .form-row { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
-
     <div class="container">
         <div class="hero">
             <h1>Tanya UMT</h1>
-            <p>Punya pertanyaan tentang matematika? Tim ahli kami siap membantu Anda dengan jawaban yang akurat dan mudah dipahami.</p>
+            <p>Punya pertanyaan? Lampirkan file jika perlu, dan tim kami akan segera membantu Anda.</p>
         </div>
-
         <div class="form-card">
-            <h2 class="form-title">
-                <i class="fas fa-question-circle"></i>
-                Kirim Pertanyaan Anda
-            </h2>
-            <p class="form-subtitle">Isi formulir di bawah ini dan tim kami akan merespon pertanyaan Anda sesegera mungkin.</p>
-
             <form id="umtForm">
                 <div class="form-row">
-                    <div class="form-group">
-                        <label for="name">Nama Lengkap</label>
-                        <div class="input-wrapper">
-                            <i class="fas fa-user input-icon"></i>
-                            <input type="text" id="name" placeholder="Masukkan nama lengkap Anda" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <div class="input-wrapper">
-                            <i class="fas fa-envelope input-icon"></i>
-                            <input type="email" id="email" placeholder="contoh@email.com" required>
-                        </div>
-                    </div>
+                    <div class="form-group"><label for="name">Nama Lengkap</label><div class="input-wrapper"><i class="fas fa-user input-icon"></i><input type="text" id="name" required></div></div>
+                    <div class="form-group"><label for="email">Email</label><div class="input-wrapper"><i class="fas fa-envelope input-icon"></i><input type="email" id="email" required></div></div>
                 </div>
-
+                <div class="form-group"><label for="whatsapp">Nomor WhatsApp</label><div class="input-wrapper"><i class="fab fa-whatsapp input-icon"></i><input type="tel" id="whatsapp" required></div></div>
+                <div class="form-group"><label for="question">Pertanyaan</label><div class="input-wrapper"><i class="fas fa-comment-alt input-icon"></i><textarea id="question" required></textarea></div></div>
+                
                 <div class="form-group">
-                    <label for="question">Pertanyaan</label>
-                    <div class="input-wrapper textarea-wrapper">
-                        <i class="fas fa-comment-alt input-icon"></i>
-                        <textarea id="question" placeholder="Tulis pertanyaan Anda dengan detail..." required></textarea>
+                    <label>Lampiran (Opsional, Maks 5MB)</label>
+                    <div class="file-input">
+                        <input type="file" id="fileInput" accept="image/*,application/pdf">
+                        <label for="fileInput" class="file-input-label" id="fileLabel">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <span id="fileName">Pilih file atau drag & drop</span>
+                        </label>
                     </div>
                 </div>
 
-                <button type="submit" class="submit-btn" id="submitBtn">
-                    <i class="fas fa-paper-plane"></i>
-                    Kirim Pertanyaan
-                </button>
-
+                <button type="submit" class="submit-btn" id="submitBtn">Kirim Pertanyaan</button>
                 <div class="loader" id="loader"></div>
             </form>
         </div>
     </div>
-
     <script>
-        // ↓↓↓ PASTE URL APLIKASI WEB ANDA DARI GOOGLE APPS SCRIPT DI SINI ↓↓↓
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwSLnnj5e6dC5mX1uffocanrU7_Ku1GO2ZLB4yyqdeTdwQ1X0nGMITc-bgAGSjinsT3Kg/exec"; 
+        // ↓↓↓ PASTE URL APLIKASI WEB ANDA DI SINI ↓↓↓
+        const SCRIPT_URL = "URL_APLIKASI_WEB_ANDA";
 
-        const form = document.getElementById("umtForm");
-        const submitBtn = document.getElementById("submitBtn");
-        const loader = document.getElementById("loader");
+        const form = document.getElementById('umtForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const loader = document.getElementById('loader');
+        const fileInput = document.getElementById('fileInput');
+        const fileLabel = document.getElementById('fileLabel');
+        const fileNameSpan = document.getElementById('fileName');
+        const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault(); 
-            
+        fileInput.addEventListener('change', () => {
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                if (file.size > MAX_FILE_SIZE) {
+                    alert('Ukuran file terlalu besar! Maksimal 5MB.');
+                    fileInput.value = ''; // Reset input
+                    return;
+                }
+                fileNameSpan.textContent = file.name;
+                fileLabel.classList.add('file-selected');
+            } else {
+                fileNameSpan.textContent = 'Pilih file atau drag & drop';
+                fileLabel.classList.remove('file-selected');
+            }
+        });
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
             submitBtn.disabled = true;
-            loader.style.display = "block";
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Mohon Tunggu...';
+            loader.style.display = 'block';
 
-            const formData = {
-                nama: document.getElementById("name").value.trim(),
-                email: document.getElementById("email").value.trim(),
-                pertanyaan: document.getElementById("question").value.trim()
-            };
-            
-            try {
-                const response = await fetch(SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'cors',
-                    body: JSON.stringify(formData),
-                });
+            const file = fileInput.files[0];
+            const fr = new FileReader();
 
-                const result = await response.json();
-
-                if (result.status === "success") {
-                    // Jika berhasil, arahkan pengguna ke halaman pembahasan dengan ID unik
-                    window.location.href = `pembahasan.html?id=${result.id}`;
-                } else {
-                    // Jika gagal (misal: kuota penuh), tampilkan pesan error
-                    alert(result.message || "Terjadi kesalahan.");
-                    submitBtn.disabled = false;
-                    loader.style.display = "none";
-                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Kirim Pertanyaan';
+            const processSubmit = (fileData) => {
+                const formData = {
+                    nama: document.getElementById('name').value,
+                    email: document.getElementById('email').value,
+                    whatsapp: document.getElementById('whatsapp').value,
+                    pertanyaan: document.getElementById('question').value,
+                };
+                
+                if (fileData) {
+                    formData.fileName = fileData.fileName;
+                    formData.mimeType = fileData.mimeType;
+                    formData.contents = fileData.contents;
                 }
 
-            } catch (error) {
-                console.error("Error:", error);
-                alert("Terjadi kesalahan. Tidak dapat terhubung ke server UMT.");
-                submitBtn.disabled = false;
-                loader.style.display = "none";
-                submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Kirim Pertanyaan';
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    body: JSON.stringify(formData)
+                })
+                .then(res => res.json())
+                .then(data => {
+                    if(data.status === 'success'){
+                        window.location.href = `pembahasan.html?id=${data.id}`;
+                    } else {
+                        alert(data.message || 'Terjadi kesalahan.');
+                        submitBtn.disabled = false;
+                        loader.style.display = 'none';
+                    }
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert('Tidak dapat terhubung ke server.');
+                    submitBtn.disabled = false;
+                    loader.style.display = 'none';
+                });
+            };
+
+            if (file) {
+                fr.readAsDataURL(file);
+                fr.onload = () => {
+                    const fileData = {
+                        fileName: file.name,
+                        mimeType: file.type,
+                        contents: fr.result.split(',')[1]
+                    };
+                    processSubmit(fileData);
+};
+            } else {
+                processSubmit(null);
             }
         });
     </script>
 </body>
-
 </html>
-
