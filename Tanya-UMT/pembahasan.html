@@ -132,85 +132,102 @@
             </a>
         </div>
     </div>
-
     <script>
-        // --- TIDAK ADA PERUBAHAN PADA SCRIPT INI ---
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyW2XRCt0db0jxrHrmheFNpBDOpvyIfBYPl1h9lsd2844GkyeIMdmnIA39DyEzl3mVHug/exec"; // JANGAN LUPA ISI URL ANDA
+    // ↓↓↓ PASTE URL APLIKASI WEB ANDA DI SINI ↓↓↓
+    const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyW2XRCt0db0jxrHrmheFNpBDOpvyIfBYPl1h9lsd2844GkyeIMdmnIA39DyEzl3mVHug/exec"; // JANGAN LUPA ISI URL ANDA
 
-        const loadingState = document.getElementById('loadingState');
-        const feedbackState = document.getElementById('feedbackState');
-        const jawabanState = document.getElementById('jawabanState');
-        const jawabanLink = document.getElementById('jawabanLink');
-        const stars = document.querySelectorAll('.rating-stars .fa-star');
-        const feedbackComment = document.getElementById('feedbackComment');
-        const submitFeedbackBtn = document.getElementById('submitFeedbackBtn');
-        let pollingInterval;
-        let answerUrl = '';
-        let currentRating = 0;
-        const params = new URLSearchParams(window.location.search);
-        const uniqueId = params.get('id');
-        document.addEventListener('DOMContentLoaded', () => {
-            if (!uniqueId) {
-                loadingState.innerHTML = '<h2>Error: ID Pertanyaan tidak valid.</h2><p>Pastikan Anda menggunakan link yang benar.</p>';
-                return;
+    const loadingState = document.getElementById('loadingState');
+    const feedbackState = document.getElementById('feedbackState');
+    const jawabanState = document.getElementById('jawabanState');
+    const jawabanLink = document.getElementById('jawabanLink');
+    const stars = document.querySelectorAll('.rating-stars .fa-star');
+    const feedbackComment = document.getElementById('feedbackComment');
+    const submitFeedbackBtn = document.getElementById('submitFeedbackBtn');
+    
+    let pollingInterval;
+    let answerUrl = '';
+    let currentRating = 0;
+    const params = new URLSearchParams(window.location.search);
+    const uniqueId = params.get('id');
+
+    document.addEventListener('DOMContentLoaded', () => {
+        if (!uniqueId) {
+            loadingState.innerHTML = '<h2>Error: ID Pertanyaan tidak valid.</h2><p>Pastikan Anda menggunakan link yang benar.</p>';
+            return;
+        }
+        startPolling(uniqueId);
+    });
+
+    function startPolling(id) {
+        pollingInterval = setInterval(() => checkStatus(id), 15000);
+        checkStatus(id);
+    }
+
+    async function checkStatus(id) {
+        try {
+            const response = await fetch(`${SCRIPT_URL}?id=${id}`);
+            const result = await response.json();
+            if (result.status === "Selesai") {
+                clearInterval(pollingInterval);
+                answerUrl = result.urlJawaban;
+                showFeedbackGate();
             }
-            startPolling(uniqueId);
-        });
-        function startPolling(id) {
-            pollingInterval = setInterval(() => checkStatus(id), 15000);
-            checkStatus(id);
-        }
-        async function checkStatus(id) {
-            try {
-                const response = await fetch(`${SCRIPT_URL}?id=${id}`);
-                const result = await response.json();
-                if (result.status === "Selesai") {
-                    clearInterval(pollingInterval);
-                    answerUrl = result.urlJawaban;
-                    showFeedbackGate();
-                }
-            } catch (error) { console.error("Polling error:", error); }
-        }
-        function showFeedbackGate() {
-            loadingState.style.display = 'none';
-            feedbackState.style.display = 'block';
-        }
-        stars.forEach(star => {
-            star.addEventListener('click', () => {
-                currentRating = star.getAttribute('data-value');
-                submitFeedbackBtn.disabled = false;
-                stars.forEach(s => {
-                    s.classList.remove('selected');
-                    if (s.getAttribute('data-value') <= currentRating) s.classList.add('selected');
-                });
+        } catch (error) { console.error("Polling error:", error); }
+    }
+
+    function showFeedbackGate() {
+        loadingState.style.display = 'none';
+        feedbackState.style.display = 'block';
+    }
+
+    stars.forEach(star => {
+        star.addEventListener('click', () => {
+            currentRating = star.getAttribute('data-value');
+            submitFeedbackBtn.disabled = false;
+            stars.forEach(s => {
+                s.classList.remove('selected');
+                if (s.getAttribute('data-value') <= currentRating) s.classList.add('selected');
             });
         });
-        submitFeedbackBtn.addEventListener('click', async () => {
-            submitFeedbackBtn.disabled = true;
-            submitFeedbackBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
-            const feedbackData = {
-                action: 'submitFeedback',
-                id: uniqueId,
-                rating: currentRating,
-                komentar: feedbackComment.value.trim()
-            };
-            try {
-                await fetch(SCRIPT_URL, {
-                    method: 'POST', mode: 'cors', headers: {'Content-Type': 'text/plain;charset=utf-8'},
-                    body: JSON.stringify(feedbackData)
-                });
-                showAnswer();
-            } catch (error) {
-                console.error("Feedback submission error:", error);
-                alert("Gagal mengirim feedback. Menampilkan jawaban...");
-                showAnswer();
-            }
-        });
-        function showAnswer() {
-            feedbackState.style.display = 'none';
-            jawabanState.style.display = 'block';
-            jawabanLink.href = answerUrl;
+    });
+
+    submitFeedbackBtn.addEventListener('click', async () => {
+        // --- VALIDASI KOMENTAR WAJIB DIISI ---
+        const komentarValue = feedbackComment.value.trim();
+        if (komentarValue === '') {
+            alert('Mohon isi ulasan Anda sebelum melanjutkan.');
+            return; // Hentikan proses jika komentar kosong
         }
+        // --- AKHIR DARI VALIDASI ---
+
+        submitFeedbackBtn.disabled = true;
+        submitFeedbackBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
+        const feedbackData = {
+            action: 'submitFeedback',
+            id: uniqueId,
+            rating: currentRating,
+            komentar: komentarValue // Menggunakan nilai yang sudah divalidasi
+        };
+
+        try {
+            await fetch(SCRIPT_URL, {
+                method: 'POST', mode: 'cors', headers: {'Content-Type': 'text/plain;charset=utf-8'},
+                body: JSON.stringify(feedbackData)
+            });
+            showAnswer();
+        } catch (error) {
+            console.error("Feedback submission error:", error);
+            alert("Gagal mengirim feedback. Menampilkan jawaban...");
+            showAnswer();
+        }
+    });
+
+    function showAnswer() {
+        feedbackState.style.display = 'none';
+        jawabanState.style.display = 'block';
+        jawabanLink.href = answerUrl;
+    }
     </script>
 </body>
 </html>
