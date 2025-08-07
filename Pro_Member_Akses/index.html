@@ -299,22 +299,36 @@
 // BAGIAN 0: KONFIGURASI DAN DATA MASTER (GLOBAL)
 // =================================================================================
 const allContentData = {
-    materi: [
-        { 
-            id: 'materi_1', 
+    materi: {
+        "Kelas 7 SMP": [
+            { 
+            id: 'materi_7_1', 
             title: 'Materi Aljabar', 
-            type: 'PDF Document', // Ganti deskripsi agar lebih jelas
-            filePath: 'materi-files/aljabar.pdf', // Path ke file HTML
-            fileType: 'pdf' // Tipe file
-        },
-        { 
-             id: 'materi_2', 
-            title: 'Materi Aljabar Lanjutan', 
-            type: 'PDF Document', // Ganti deskripsi agar lebih jelas
-            filePath: 'materi-files/aljabar1.pdf', // Path ke file HTML
-            fileType: 'pdf' // Tipe file
-        }
-    ],
+            type: 'PDF Document', 
+            filePath: 'materi-files/aljabar.html', 
+            fileType: 'pdf' 
+            },
+        ],
+        "Kelas 8 SMP": [
+            { 
+            id: 'materi_8_1', 
+            title: 'Teorema Pythagoras', 
+            type: 'PDF Document', 
+            filePath: 'materi-files/k8-pythagoras.pdf', 
+            fileType: 'pdf' 
+            }
+        ],
+        "Kelas 10 SMA": [
+            { 
+            id: 'materi_10_1', 
+            title: 'Eksponen & Logaritma', 
+            type: 'PDF Document', 
+            filePath: 'materi-files/k10-eksponen.pdf', 
+            fileType: 'pdf' 
+            },
+        ]
+        // Anda bisa tambahkan "Kelas 9 SMP", "Kelas 11 SMA", dst. di sini
+    },
     video: [
         { id: 'video_1', title: 'Video Pembahasan Vektor', type: 'Video' }
     ],
@@ -831,31 +845,61 @@ function renderDashboardPage() {
 }
 
 function renderMateriPage() {
-    // 1. Buat daftar kartu materi dari data
-    const materiCardsHTML = allContentData.materi.map(item => `
-        <div id="card-${item.id}" class="card-item p-4 rounded-lg flex flex-col" onclick="showMateriContent('${item.id}')">
-            <h3 class="font-bold text-lg mb-1">${item.title}</h3>
-            <p class="text-sm text-gray-400">${item.type}</p>
-        </div>
-    `).join('');
+    // 1. Buat HTML untuk setiap grup Accordion secara dinamis
+    let accordionHTML = '';
+    const materiData = allContentData.materi;
 
-    // 2. Buat kerangka HTML utama untuk halaman materi
+    // Iterasi setiap jenjang kelas (e.g., "Kelas 7 SMP", "Kelas 8 SMP")
+    for (const gradeKey in materiData) {
+        const items = materiData[gradeKey]; // Array materi untuk kelas tsb.
+
+        // Buat daftar item (<li>) untuk setiap materi di dalam grup
+        const itemsHTML = items.map(item => `
+            <li id="card-${item.id}" 
+                class="card-item-list block p-3 rounded-md hover:bg-gray-700 cursor-pointer" 
+                onclick="showMateriContent('${item.id}', '${gradeKey}')">
+                <span class="font-semibold">${item.title}</span>
+                <span class="block text-xs text-gray-400">${item.type}</span>
+            </li>
+        `).join('');
+
+        // Rangkai menjadi satu blok accordion untuk satu jenjang kelas
+        accordionHTML += `
+            <div class="accordion-item border-b border-gray-700">
+                <h2>
+                    <button type="button" class="accordion-button flex items-center justify-between w-full p-4 font-semibold text-left text-cyan-300">
+                        <span>${gradeKey}</span>
+                        <i class="accordion-icon fa-solid fa-chevron-down shrink-0 transition-transform duration-200"></i>
+                    </button>
+                </h2>
+                <div class="accordion-content hidden p-2">
+                    <ul class="space-y-2">
+                        ${itemsHTML}
+                    </ul>
+                </div>
+            </div>
+        `;
+    }
+
+    // 2. Buat kerangka utama halaman dengan layout responsif
     const materiPageHTML = `
         <div class="panel">
-            <h2 class="text-2xl font-bold text-cyan-400">Materi Belajar</h2>
-            <p class="text-sm text-gray-400 mb-6">Pilih materi di samping untuk mulai belajar.</p>
+            <h2 class="text-2xl font-bold text-cyan-400">Pustaka Materi</h2>
+            <p class="text-sm text-gray-400 mb-6">Pilih jenjang kelas untuk melihat daftar materi yang tersedia.</p>
             
             <div class="flex flex-col md:flex-row gap-6">
                 
-                <div class="md:w-1/3 lg:w-1/4 space-y-3 pr-2 overflow-y-auto max-h-[70vh]">
-                    ${materiCardsHTML}
+                <div id="materi-list-container" class="w-full md:w-1/3 lg:w-1/4">
+                    <div class="border border-gray-700 rounded-lg bg-gray-900/50">
+                        ${accordionHTML}
+                    </div>
                 </div>
 
-                <div id="materi-viewer-container" class="md:w-2/3 lg:w-3/4 bg-gray-900/50 p-6 rounded-lg border border-gray-700 min-h-[300px] flex items-center justify-center">
-                    <div id="materi-viewer-content" class="w-full h-full">
+                <div id="materi-viewer-container" class="w-full md:w-2/3 lg:w-3/4 hidden md:flex flex-col">
+                    <div id="materi-viewer-content" class="bg-gray-900/50 p-6 rounded-lg border border-gray-700 h-full flex items-center justify-center">
                         <div class="text-center text-gray-500">
-                            <i class="fa-solid fa-arrow-left fa-2x mb-4"></i>
-                            <p>Silakan pilih materi dari daftar di sebelah kiri untuk menampilkannya di sini.</p>
+                            <i class="fa-solid fa-file-lines fa-2x mb-4"></i>
+                            <p>Konten akan ditampilkan di sini.</p>
                         </div>
                     </div>
                 </div>
@@ -865,49 +909,79 @@ function renderMateriPage() {
     `;
 
     appContent.innerHTML = materiPageHTML;
+
+    // 3. Tambahkan event listener untuk semua tombol accordion
+    document.querySelectorAll('.accordion-button').forEach(button => {
+        button.addEventListener('click', () => {
+            const content = button.parentElement.nextElementSibling;
+            const icon = button.querySelector('.accordion-icon');
+            
+            content.classList.toggle('hidden');
+            icon.classList.toggle('rotate-180');
+        });
+    });
 }
 
-function showMateriContent(itemId) {
-    const materiItem = allContentData.materi.find(item => item.id === itemId);
+function showMateriContent(itemId, gradeKey) {
+    // Cari materi di dalam grup kelas yang sesuai
+    const materiItem = allContentData.materi[gradeKey].find(item => item.id === itemId);
     if (!materiItem) {
         showToast("Materi tidak ditemukan!", "error");
         return;
     }
 
+    // --- LOGIKA UNTUK MOBILE ---
+    // Sembunyikan daftar materi dan tampilkan viewer
+    document.getElementById('materi-list-container').classList.add('md:block', 'hidden');
+    document.getElementById('materi-viewer-container').classList.remove('hidden');
+    document.getElementById('materi-viewer-container').classList.add('flex');
+
     // Tandai kartu yang aktif secara visual
-    document.querySelectorAll('[id^="card-"]').forEach(card => card.classList.remove('active', 'bg-cyan-900/50'));
-    document.getElementById(`card-${itemId}`).classList.add('active', 'bg-cyan-900/50');
+    document.querySelectorAll('.card-item-list').forEach(card => card.classList.remove('active', 'bg-cyan-800'));
+    document.getElementById(`card-${itemId}`).classList.add('active', 'bg-cyan-800');
     
     const viewer = document.getElementById('materi-viewer-content');
-    viewer.innerHTML = `<p class="text-center text-gray-400">Memuat konten...</p>`; // Tampilkan pesan loading
+    viewer.innerHTML = `<p class="text-center text-gray-400">Memuat konten...</p>`; // Pesan loading
+
+    let contentHTML = '';
+
+    // Tombol kembali KHUSUS untuk mobile
+    const backButton = `<button onclick="goBackToList()" class="md:hidden mb-4 bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2"><i class="fa-solid fa-chevron-left"></i> Kembali ke Daftar</button>`;
 
     if (materiItem.fileType === 'html') {
-        // Jika file adalah HTML, fetch dan tampilkan isinya
         fetch(materiItem.filePath)
             .then(response => {
                 if (!response.ok) throw new Error('File tidak ditemukan.');
                 return response.text();
             })
             .then(htmlContent => {
-                viewer.innerHTML = htmlContent;
+                viewer.innerHTML = backButton + htmlContent; // Tambahkan tombol kembali
             })
             .catch(error => {
-                viewer.innerHTML = `<p class="text-center text-red-500">Gagal memuat konten. Pastikan file ${materiItem.filePath} ada.</p>`;
-                console.error("Error fetching material:", error);
+                viewer.innerHTML = backButton + `<p class="text-center text-red-500">Gagal memuat konten.</p>`;
             });
-
     } else if (materiItem.fileType === 'pdf') {
-        // Jika file adalah PDF, gunakan tag <embed> atau <iframe> agar bisa ditampilkan
-        viewer.innerHTML = `
-            <embed src="${materiItem.filePath}" type="application/pdf" width="100%" height="600px" />
+        contentHTML = `
+            ${backButton}
+            <embed src="${materiItem.filePath}" type="application/pdf" class="w-full h-[70vh] md:h-full" />
             <div class="text-center mt-2">
-                <p class="text-sm text-gray-400">Jika PDF tidak muncul, Anda bisa <a href="${materiItem.filePath}" target="_blank" class="text-cyan-400 hover:underline">membukanya di tab baru</a>.</p>
+                <p class="text-sm text-gray-400">Jika PDF tidak muncul, <a href="${materiItem.filePath}" target="_blank" class="text-cyan-400 hover:underline">buka di tab baru</a>.</p>
             </div>
         `;
+        viewer.innerHTML = contentHTML;
     }
 
-    // Panggil fungsi markAsCompleted agar progres tetap tercatat
     markAsCompleted(itemId); 
+}
+
+/**
+ * Fungsi ini khusus untuk mobile, untuk kembali ke daftar materi
+ * dari tampilan konten.
+ */
+function goBackToList() {
+    document.getElementById('materi-list-container').classList.remove('hidden');
+    document.getElementById('materi-viewer-container').classList.add('hidden');
+    document.getElementById('materi-viewer-container').classList.remove('flex');
 }
 
 function renderVideoPage() {
