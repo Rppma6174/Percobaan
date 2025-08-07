@@ -4,70 +4,180 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tanya UMT - UMTacademy</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="icon" type="image/png" href="UMT-Logo.png">
     <style>
         :root {
-            --primary-blue: #6A0DAD; --success-green: #10B981; --bg-dark: #141414;
-            --bg-card: #1c1c1c; --bg-input: rgba(255, 255, 255, 0.05); --text-primary: #F1F5F9;
-            --text-secondary: #94A3B8; --border-color: rgba(255, 255, 255, 0.1); --radius: 16px;
+            --primary-purple: #6A0DAD;
+            --secondary-purple: #7D2ED1;
+            --success-green: #10B981;
+            --error-red: #f44336;
+            --dark-bg: #141414;
+            --card-bg: #1c1c1c;
+            --text-primary: #ffffff;
+            --text-secondary: #ccc;
         }
-        body { font-family: 'Poppins', sans-serif; background: var(--bg-dark); color: var(--text-primary); }
-        .container { max-width: 800px; margin: 3rem auto; padding: 1rem; }
-        .hero { text-align: center; margin-bottom: 3rem; }
-        .hero h1 { font-size: 3rem; } .hero p { font-size: 1.2rem; color: var(--text-secondary); }
-        .form-card { background: var(--bg-card); border-radius: var(--radius); padding: 2.5rem; border: 1px solid var(--border-color); }
-        .form-group { margin-bottom: 1.5rem; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        label { display: block; font-weight: 500; margin-bottom: 0.5rem; }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark-bg);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+        #tanya-umt-container {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 50px 40px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 80px rgba(106, 13, 173, 0.1);
+            position: relative;
+            z-index: 1;
+            animation: slideInUp 0.8s ease-out;
+        }
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .form-header { text-align: center; margin-bottom: 30px; }
+        .form-header h1 { font-size: 28px; font-weight: 700; color: var(--text-primary); }
+        .form-header p { color: var(--text-secondary); font-size: 15px; margin-top: 8px; }
+        .form-group { margin-bottom: 25px; text-align: left; }
+        .form-label { display: block; color: var(--text-secondary); font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        input[type="text"], input[type="email"], input[type="tel"], textarea {
+            width: 100%;
+            padding: 16px 20px 16px 45px; /* Padding untuk ikon */
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            color: var(--text-primary);
+            font-size: 16px;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+        input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, textarea:focus {
+            border-color: var(--primary-purple);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 4px rgba(106, 13, 173, 0.1);
+        }
         .input-wrapper { position: relative; }
-        .input-icon { position: absolute; left: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-secondary); }
-        input, textarea { width: 100%; padding: 1rem 1rem 1rem 2.5rem; background: var(--bg-input); border: 2px solid var(--border-color); border-radius: 12px; color: var(--text-primary); font-size: 1rem; }
-        textarea { resize: vertical; min-height: 120px; }
-        .file-input-label { display: flex; align-items: center; gap: 0.75rem; padding: 1rem; background: var(--bg-input); border: 2px dashed var(--border-color); border-radius: 12px; cursor: pointer; transition: all 0.3s ease; color: var(--text-secondary); }
-        .file-input-label:hover { border-color: var(--primary-blue); }
-        .file-input input[type=file] { display: none; }
-        .file-selected { border-color: var(--success-green) !important; color: var(--success-green) !important; }
-        .submit-btn { width: 100%; padding: 1rem; background: var(--primary-blue); color: white; border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; }
-        .submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
-        .loader { display: none; margin: 1rem auto 0; width: 40px; height: 40px; border: 4px solid #444; border-top: 4px solid var(--primary-blue); border-radius: 50%; animation: spin 1s linear infinite; }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        @media (max-width: 768px) { .form-row { grid-template-columns: 1fr; } }
+        .input-wrapper .input-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            pointer-events: none;
+        }
+        textarea { padding: 16px 20px; resize: vertical; min-height: 120px; }
+        input[type="file"] { display: none; }
+        .file-upload-label {
+            display: flex; align-items: center; justify-content: center;
+            width: 100%; padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 12px; color: var(--text-secondary);
+            cursor: pointer; transition: all 0.3s ease;
+        }
+        .file-upload-label:hover {
+            border-color: var(--primary-purple); color: var(--text-primary);
+            background: rgba(106, 13, 173, 0.1);
+        }
+        .file-upload-label.file-selected {
+            border-color: var(--success-green); color: var(--success-green);
+            background: rgba(16, 185, 129, 0.1);
+        }
+        .file-upload-label i { margin-right: 10px; }
+        button[type="submit"] {
+            width: 100%; padding: 16px;
+            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            border: none; border-radius: 12px; color: var(--text-primary);
+            font-size: 16px; font-weight: 600; font-family: inherit;
+            cursor: pointer; transition: all 0.3s ease;
+        }
+        button[type="submit"]:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(106, 13, 173, 0.4);
+        }
+        button[type="submit"]:disabled {
+            opacity: 0.5; cursor: not-allowed;
+            transform: none; box-shadow: none;
+        }
+        .loader {
+            display: none; margin: 1rem auto; width: 30px; height: 30px;
+            border: 3px solid rgba(255,255,255,0.2); border-top: 3px solid var(--text-primary);
+            border-radius: 50%; animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        @media (max-width: 540px) {
+            #tanya-umt-container { padding: 40px 25px; }
+            .form-row { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="hero">
-            <h1>Tanya UMT</h1>
-            <p>Punya pertanyaan? Lampirkan file jika perlu, dan tim kami akan segera membantu Anda.</p>
-        </div>
-        <div class="form-card">
-            <form id="umtForm">
-                <div class="form-row">
-                    <div class="form-group"><label for="name">Nama Lengkap</label><div class="input-wrapper"><i class="fas fa-user input-icon"></i><input type="text" id="name" required></div></div>
-                    <div class="form-group"><label for="email">Email</label><div class="input-wrapper"><i class="fas fa-envelope input-icon"></i><input type="email" id="email" required></div></div>
-                </div>
-                <div class="form-group"><label for="whatsapp">Nomor WhatsApp</label><div class="input-wrapper"><i class="fab fa-whatsapp input-icon"></i><input type="tel" id="whatsapp" required></div></div>
-                <div class="form-group"><label for="question">Pertanyaan</label><div class="input-wrapper"><i class="fas fa-comment-alt input-icon"></i><textarea id="question" required></textarea></div></div>
-                
+    <div id="tanya-umt-container">
+        <form id="umtForm">
+            <div class="form-header">
+                <h1>Kirim Pertanyaan Anda</h1>
+                <p>Isi formulir di bawah, lampirkan file jika perlu.</p>
+            </div>
+
+            <div class="form-row">
                 <div class="form-group">
-                    <label>Lampiran (Opsional, Maks 5MB)</label>
-                    <div class="file-input">
-                        <input type="file" id="fileInput" accept="image/*,application/pdf">
-                        <label for="fileInput" class="file-input-label" id="fileLabel">
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <span id="fileName">Pilih file atau drag & drop</span>
-                        </label>
+                    <label for="name" class="form-label">Nama Lengkap</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user input-icon"></i>
+                        <input type="text" id="name" placeholder="Nama Anda" required>
                     </div>
                 </div>
+                <div class="form-group">
+                    <label for="email" class="form-label">Email</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope input-icon"></i>
+                        <input type="email" id="email" placeholder="Email Anda" required>
+                    </div>
+                </div>
+            </div>
 
-                <button type="submit" class="submit-btn" id="submitBtn">Kirim Pertanyaan</button>
-                <div class="loader" id="loader"></div>
-            </form>
-        </div>
+            <div class="form-group">
+                <label for="whatsapp" class="form-label">Nomor WhatsApp</label>
+                <div class="input-wrapper">
+                    <i class="fab fa-whatsapp input-icon"></i>
+                    <input type="tel" id="whatsapp" placeholder="08..." required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="question" class="form-label">Pertanyaan</label>
+                <textarea id="question" placeholder="Tulis pertanyaan Anda dengan detail di sini..." required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Lampiran (Opsional, Maks 5MB)</label>
+                <input type="file" id="fileInput" accept="image/*,application/pdf">
+                <label for="fileInput" class="file-upload-label" id="fileLabel">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <span id="fileName">Pilih File (Gambar/PDF)</span>
+                </label>
+            </div>
+
+            <button type="submit" id="submitBtn">Kirim Pertanyaan</button>
+            <div class="loader" id="loader"></div>
+        </form>
     </div>
+
     <script>
-        // ↓↓↓ PASTE URL APLIKASI WEB ANDA DI SINI ↓↓↓
+        // ↓↓↓ PASTE URL APLIKASI WEB ANDA DARI GOOGLE APPS SCRIPT DI SINI ↓↓↓
         const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyzCwVdMzxXd1RkKRcunkDByqvkEpPhcly6WrFkAEAb-sM77vtvA_382Y90Cy2Nl0F6Ww/exec";
 
         const form = document.getElementById('umtForm');
@@ -83,13 +193,15 @@
                 const file = fileInput.files[0];
                 if (file.size > MAX_FILE_SIZE) {
                     alert('Ukuran file terlalu besar! Maksimal 5MB.');
-                    fileInput.value = ''; // Reset input
+                    fileInput.value = '';
+                    fileNameSpan.textContent = 'Pilih File (Gambar/PDF)';
+                    fileLabel.classList.remove('file-selected');
                     return;
                 }
                 fileNameSpan.textContent = file.name;
                 fileLabel.classList.add('file-selected');
             } else {
-                fileNameSpan.textContent = 'Pilih file atau drag & drop';
+                fileNameSpan.textContent = 'Pilih File (Gambar/PDF)';
                 fileLabel.classList.remove('file-selected');
             }
         });
@@ -98,11 +210,14 @@
             e.preventDefault();
             submitBtn.disabled = true;
             loader.style.display = 'block';
+            const originalButtonText = submitBtn.textContent;
+            submitBtn.textContent = 'Mengirim...';
 
             const file = fileInput.files[0];
             const fr = new FileReader();
 
             const processSubmit = (fileData) => {
+                // Kumpulkan semua data teks dari form
                 const formData = {
                     nama: document.getElementById('name').value,
                     email: document.getElementById('email').value,
@@ -110,12 +225,14 @@
                     pertanyaan: document.getElementById('question').value,
                 };
                 
+                // Jika ada file, tambahkan data file ke objek
                 if (fileData) {
                     formData.fileName = fileData.fileName;
                     formData.mimeType = fileData.mimeType;
                     formData.contents = fileData.contents;
                 }
 
+                // Kirim objek gabungan ke Apps Script
                 fetch(SCRIPT_URL, {
                     method: 'POST',
                     body: JSON.stringify(formData)
@@ -125,29 +242,34 @@
                     if(data.status === 'success'){
                         window.location.href = `pembahasan.html?id=${data.id}`;
                     } else {
-                        alert(data.message || 'Terjadi kesalahan.');
+                        alert(data.message || 'Terjadi kesalahan saat mengirim.');
                         submitBtn.disabled = false;
                         loader.style.display = 'none';
+                        submitBtn.textContent = originalButtonText;
                     }
                 })
                 .catch(err => {
                     console.error(err);
-                    alert('Tidak dapat terhubung ke server.');
+                    alert('Tidak dapat terhubung ke server. Periksa koneksi Anda.');
                     submitBtn.disabled = false;
                     loader.style.display = 'none';
+                    submitBtn.textContent = originalButtonText;
                 });
             };
 
+            // Jika ada file yang dipilih, baca filenya dulu
             if (file) {
                 fr.readAsDataURL(file);
                 fr.onload = () => {
+                    // Ekstrak data base64 dari hasil bacaan
                     const fileData = {
                         fileName: file.name,
                         mimeType: file.type,
-                        contents: fr.result.split(',')[1]
+                        contents: fr.result.split(',')[1] // Ambil hanya bagian base64
                     };
-                    processSubmit(fileData);
-};
+                    processSubmit(fileData); // Kirim data setelah file selesai dibaca
+                };
+            // Jika tidak ada file, langsung kirim data teksnya saja
             } else {
                 processSubmit(null);
             }
@@ -155,4 +277,3 @@
     </script>
 </body>
 </html>
-
