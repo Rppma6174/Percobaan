@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Status Pembahasan - Tanya UMT</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #6A0DAD; --success-green: #10B981; --bg-dark: #141414;
+            --bg-card: #1c1c1c; --text-primary: #F1F5F9; --text-secondary: #94A3B8;
+            --border-color: rgba(255, 255, 255, 0.1); --radius: 16px;
+        }
+        body {
+            font-family: 'Poppins', sans-serif; background: var(--bg-dark); color: var(--text-primary);
+            display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 1rem;
+        }
+        .status-container {
+            max-width: 600px; width: 100%; background: var(--bg-card); border-radius: var(--radius);
+            padding: 2rem 2.5rem; border: 1px solid var(--border-color); text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        h2 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+        p { color: var(--text-secondary); line-height: 1.6; }
+        #loadingState .loader {
+            width: 50px; height: 50px; border: 5px solid rgba(255, 255, 255, 0.2);
+            border-top: 5px solid var(--primary-blue); border-radius: 50%;
+            animation: spin 1.5s linear infinite; margin: 1.5rem auto;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        #feedbackState, #jawabanState { display: none; }
+        .rating-stars { font-size: 2.5rem; color: #444; margin: 1.5rem 0; cursor: pointer; }
+        .rating-stars .fa-star { transition: color 0.2s, transform 0.2s; }
+        .rating-stars .fa-star:hover { transform: scale(1.1); }
+        .rating-stars .fa-star.selected { color: #FFD700; }
+        #feedbackComment {
+            width: 100%; min-height: 80px; resize: vertical; padding: 1rem;
+            background: rgba(255, 255, 255, 0.05); border: 2px solid var(--border-color);
+            border-radius: 12px; color: var(--text-primary); font-size: 1rem; margin-top: 1rem;
+        }
+        .submit-btn {
+            width: 100%; padding: 1rem; background: var(--primary-blue); color: white;
+            border: none; border-radius: 12px; font-size: 1.1rem; font-weight: 600;
+            cursor: pointer; transition: all 0.3s ease; margin-top: 1rem;
+        }
+        .submit-btn:disabled { background: #555; cursor: not-allowed; }
+        .jawaban-link { display: inline-block; background: var(--success-green); text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <div class="status-container">
+        <div id="loadingState">
+            <div class="loader"></div>
+            <h2>Pembahasan Sedang Dibuat</h2>
+            <p>Tim kami sedang bekerja keras. Halaman ini akan diperbarui secara otomatis saat jawaban Anda siap. Link halaman ini juga telah dikirim ke email Anda.</p>
+        </div>
+
+        <div id="feedbackState">
+            <h2>🎉 Jawaban Anda Sudah Siap!</h2>
+            <p>Sebelum melanjutkan, mohon berikan ulasan singkat mengenai pengalaman Anda. Masukan Anda sangat berarti bagi kami.</p>
+            <div class="rating-stars">
+                <i class="fas fa-star" data-value="1"></i><i class="fas fa-star" data-value="2"></i><i class="fas fa-star" data-value="3"></i><i class="fas fa-star" data-value="4"></i><i class="fas fa-star" data-value="5"></i>
+            </div>
+            <textarea id="feedbackComment" placeholder="Tulis komentar Anda di sini (opsional)..."></textarea>
+            <button class="submit-btn" id="submitFeedbackBtn" disabled>Kirim Ulasan & Lihat Jawaban</button>
+        </div>
+
+        <div id="jawabanState">
+             <h2>Terima Kasih Atas Ulasan Anda!</h2>
+             <p>Semoga pembahasan dari kami bermanfaat.</p>
+             <a href="#" id="jawabanLink" class="submit-btn jawaban-link" target="_blank">
+                <i class="fas fa-download"></i> Buka Pembahasan PDF
+             </a>
+        </div>
+    </div>
+
+    <script>
+        // ↓↓↓ PASTE URL APLIKASI WEB ANDA DI SINI ↓↓↓
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwSLnnj5e6dC5mX1uffocanrU7_Ku1GO2ZLB4yyqdeTdwQ1X0nGMITc-bgAGSjinsT3Kg/exec";
+
+        const loadingState = document.getElementById('loadingState');
+        const feedbackState = document.getElementById('feedbackState');
+        const jawabanState = document.getElementById('jawabanState');
+        const jawabanLink = document.getElementById('jawabanLink');
+        const stars = document.querySelectorAll('.rating-stars .fa-star');
+        const feedbackComment = document.getElementById('feedbackComment');
+        const submitFeedbackBtn = document.getElementById('submitFeedbackBtn');
+
+        let pollingInterval;
+        let answerUrl = '';
+        let currentRating = 0;
+        const params = new URLSearchParams(window.location.search);
+        const uniqueId = params.get('id');
+
+        document.addEventListener('DOMContentLoaded', () => {
+            if (!uniqueId) {
+                loadingState.innerHTML = '<h2>Error: ID Pertanyaan tidak valid.</h2><p>Pastikan Anda menggunakan link yang benar.</p>';
+                return;
+            }
+            startPolling(uniqueId);
+        });
+
+        function startPolling(id) {
+            pollingInterval = setInterval(() => checkStatus(id), 15000);
+            checkStatus(id);
+        }
+
+        async function checkStatus(id) {
+            try {
+                const response = await fetch(`${SCRIPT_URL}?id=${id}`);
+                const result = await response.json();
+                if (result.status === "Selesai") {
+                    clearInterval(pollingInterval);
+                    answerUrl = result.urlJawaban;
+                    showFeedbackGate();
+                }
+            } catch (error) { console.error("Polling error:", error); }
+        }
+
+        function showFeedbackGate() {
+            loadingState.style.display = 'none';
+            feedbackState.style.display = 'block';
+        }
+
+        stars.forEach(star => {
+            star.addEventListener('click', () => {
+                currentRating = star.getAttribute('data-value');
+                submitFeedbackBtn.disabled = false;
+                stars.forEach(s => {
+                    s.classList.remove('selected');
+                    if (s.getAttribute('data-value') <= currentRating) s.classList.add('selected');
+                });
+            });
+        });
+
+        submitFeedbackBtn.addEventListener('click', async () => {
+            submitFeedbackBtn.disabled = true;
+            submitFeedbackBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
+            const feedbackData = {
+                action: 'submitFeedback',
+                id: uniqueId,
+                rating: currentRating,
+                komentar: feedbackComment.value.trim()
+            };
+
+            try {
+                await fetch(SCRIPT_URL, {
+                    method: 'POST', mode: 'cors', headers: {'Content-Type': 'text/plain;charset=utf-8'},
+                    body: JSON.stringify(feedbackData)
+                });
+                showAnswer();
+            } catch (error) {
+                console.error("Feedback submission error:", error);
+                alert("Gagal mengirim feedback. Menampilkan jawaban...");
+                showAnswer();
+            }
+        });
+
+        function showAnswer() {
+            feedbackState.style.display = 'none';
+            jawabanState.style.display = 'block';
+            jawabanLink.href = answerUrl;
+        }
+    </script>
+</body>
+</html>
