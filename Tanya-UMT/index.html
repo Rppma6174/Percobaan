@@ -7,121 +7,140 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="icon" type="image/png" href="UMT-Logo.png">
-    <style>
-        :root {
-            --primary-purple: #6A0DAD;
-            --secondary-purple: #7D2ED1;
-            --success-green: #10B981;
-            --error-red: #f44336;
-            --dark-bg: #141414;
-            --card-bg: #1c1c1c;
-            --text-primary: #ffffff;
-            --text-secondary: #ccc;
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+<style>
+    :root {
+        --primary-purple: #6A0DAD;
+        --secondary-purple: #7D2ED1;
+        --success-green: #10B981;
+        --error-red: #f44336;
+        --dark-bg: #141414;
+        --card-bg: #1c1c1c;
+        --text-primary: #ffffff;
+        --text-secondary: #ccc;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+        font-family: 'Poppins', sans-serif;
+        background: var(--dark-bg);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        position: relative;
+        overflow-x: hidden;
+        transition: padding 0.3s ease; /* Transisi untuk padding */
+    }
+    #tanya-umt-container {
+        background: var(--card-bg);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 24px;
+        padding: 50px 40px;
+        width: 100%; /* Dibuat 100% agar fleksibel */
+        max-width: 600px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 80px rgba(106, 13, 173, 0.1);
+        position: relative;
+        z-index: 1;
+        animation: slideInUp 0.8s ease-out;
+        transition: padding 0.3s ease; /* Transisi untuk padding */
+    }
+    @keyframes slideInUp {
+        from { opacity: 0; transform: translateY(50px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    .form-header { text-align: center; margin-bottom: 30px; }
+    .form-header h1 { font-size: 28px; font-weight: 700; color: var(--text-primary); transition: font-size 0.3s ease; }
+    .form-header p { color: var(--text-secondary); font-size: 15px; margin-top: 8px; }
+    .form-group { margin-bottom: 25px; text-align: left; }
+    .form-label { display: block; color: var(--text-secondary); font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    input[type="text"], input[type="email"], input[type="tel"], textarea {
+        width: 100%;
+        padding: 16px 20px 16px 45px; /* Padding untuk ikon */
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        color: var(--text-primary);
+        font-size: 16px;
+        font-family: inherit;
+        transition: all 0.3s ease;
+        outline: none;
+    }
+    input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, textarea:focus {
+        border-color: var(--primary-purple);
+        background: rgba(255, 255, 255, 0.08);
+        box-shadow: 0 0 0 4px rgba(106, 13, 173, 0.1);
+    }
+    .input-wrapper { position: relative; }
+    .input-wrapper .input-icon {
+        position: absolute;
+        left: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--text-secondary);
+        pointer-events: none;
+    }
+    textarea { padding: 16px 20px; resize: vertical; min-height: 120px; }
+    input[type="file"] { display: none; }
+    .file-upload-label {
+        display: flex; align-items: center; justify-content: center;
+        width: 100%; padding: 16px 20px;
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px dashed rgba(255, 255, 255, 0.2);
+        border-radius: 12px; color: var(--text-secondary);
+        cursor: pointer; transition: all 0.3s ease;
+    }
+    .file-upload-label:hover {
+        border-color: var(--primary-purple); color: var(--text-primary);
+        background: rgba(106, 13, 173, 0.1);
+    }
+    .file-upload-label.file-selected {
+        border-color: var(--success-green); color: var(--success-green);
+        background: rgba(16, 185, 129, 0.1);
+    }
+    .file-upload-label i { margin-right: 10px; }
+    button[type="submit"] {
+        width: 100%; padding: 16px;
+        background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+        border: none; border-radius: 12px; color: var(--text-primary);
+        font-size: 16px; font-weight: 600; font-family: inherit;
+        cursor: pointer; transition: all 0.3s ease;
+    }
+    button[type="submit"]:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 25px rgba(106, 13, 173, 0.4);
+    }
+    button[type="submit"]:disabled {
+        opacity: 0.5; cursor: not-allowed;
+        transform: none; box-shadow: none;
+    }
+    .loader {
+        display: none; margin: 1rem auto; width: 30px; height: 30px;
+        border: 3px solid rgba(255,255,255,0.2); border-top: 3px solid var(--text-primary);
+        border-radius: 50%; animation: spin 1s linear infinite;
+    }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+    /* --- PERBAIKAN TAMPILAN MOBILE --- */
+    @media (max-width: 640px) {
         body {
-            font-family: 'Poppins', sans-serif;
-            background: var(--dark-bg);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 2rem;
-            position: relative;
-            overflow-x: hidden;
+            padding: 1rem; /* Mengurangi padding luar di layar kecil */
+            align-items: flex-start; /* Form mulai dari atas di mobile */
+            padding-top: 3rem;
         }
         #tanya-umt-container {
-            background: var(--card-bg);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            padding: 50px 40px;
-            width: 90%;
-            max-width: 600px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 80px rgba(106, 13, 173, 0.1);
-            position: relative;
-            z-index: 1;
-            animation: slideInUp 0.8s ease-out;
+            padding: 40px 25px; /* Mengurangi padding di dalam kartu */
+            width: 100%; /* Kartu memenuhi lebar layar */
         }
-        @keyframes slideInUp {
-            from { opacity: 0; transform: translateY(50px); }
-            to { opacity: 1; transform: translateY(0); }
+        .form-header h1 {
+            font-size: 24px; /* Mengecilkan judul */
         }
-        .form-header { text-align: center; margin-bottom: 30px; }
-        .form-header h1 { font-size: 28px; font-weight: 700; color: var(--text-primary); }
-        .form-header p { color: var(--text-secondary); font-size: 15px; margin-top: 8px; }
-        .form-group { margin-bottom: 25px; text-align: left; }
-        .form-label { display: block; color: var(--text-secondary); font-size: 14px; font-weight: 500; margin-bottom: 8px; }
-        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        input[type="text"], input[type="email"], input[type="tel"], textarea {
-            width: 100%;
-            padding: 16px 20px 16px 45px; /* Padding untuk ikon */
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            color: var(--text-primary);
-            font-size: 16px;
-            font-family: inherit;
-            transition: all 0.3s ease;
-            outline: none;
+        .form-row {
+            grid-template-columns: 1fr; /* Kolom Nama & Email menjadi vertikal */
+            gap: 0; /* Menghilangkan jarak antar kolom yang sudah vertikal */
         }
-        input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, textarea:focus {
-            border-color: var(--primary-purple);
-            background: rgba(255, 255, 255, 0.08);
-            box-shadow: 0 0 0 4px rgba(106, 13, 173, 0.1);
-        }
-        .input-wrapper { position: relative; }
-        .input-wrapper .input-icon {
-            position: absolute;
-            left: 18px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-secondary);
-            pointer-events: none;
-        }
-        textarea { padding: 16px 20px; resize: vertical; min-height: 120px; }
-        input[type="file"] { display: none; }
-        .file-upload-label {
-            display: flex; align-items: center; justify-content: center;
-            width: 100%; padding: 16px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 2px dashed rgba(255, 255, 255, 0.2);
-            border-radius: 12px; color: var(--text-secondary);
-            cursor: pointer; transition: all 0.3s ease;
-        }
-        .file-upload-label:hover {
-            border-color: var(--primary-purple); color: var(--text-primary);
-            background: rgba(106, 13, 173, 0.1);
-        }
-        .file-upload-label.file-selected {
-            border-color: var(--success-green); color: var(--success-green);
-            background: rgba(16, 185, 129, 0.1);
-        }
-        .file-upload-label i { margin-right: 10px; }
-        button[type="submit"] {
-            width: 100%; padding: 16px;
-            background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
-            border: none; border-radius: 12px; color: var(--text-primary);
-            font-size: 16px; font-weight: 600; font-family: inherit;
-            cursor: pointer; transition: all 0.3s ease;
-        }
-        button[type="submit"]:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(106, 13, 173, 0.4);
-        }
-        button[type="submit"]:disabled {
-            opacity: 0.5; cursor: not-allowed;
-            transform: none; box-shadow: none;
-        }
-        .loader {
-            display: none; margin: 1rem auto; width: 30px; height: 30px;
-            border: 3px solid rgba(255,255,255,0.2); border-top: 3px solid var(--text-primary);
-            border-radius: 50%; animation: spin 1s linear infinite;
-        }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        @media (max-width: 540px) {
-            #tanya-umt-container { padding: 40px 25px; }
-            .form-row { grid-template-columns: 1fr; }
-        }
+    }
+</style>
     </style>
 </head>
 <body>
@@ -277,4 +296,5 @@
     </script>
 </body>
 </html>
+
 
