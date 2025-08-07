@@ -7,905 +7,276 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="icon" type="image/png" href="UMT-Logo.png">
-<style>
-    :root {
-        --primary-purple: #6A0DAD;
-        --secondary-purple: #7D2ED1;
-        --success-green: #10B981;
-        --error-red: #f44336;
-        --dark-bg: #141414;
-        --card-bg: #1c1c1c;
-        --text-primary: #ffffff;
-        --text-secondary: #ccc;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-        font-family: 'Poppins', sans-serif;
-        background: var(--dark-bg);
-        min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 2rem;
-        position: relative;
-        overflow-x: hidden;
-        transition: padding 0.3s ease; /* Transisi untuk padding */
-    }
-    #tanya-umt-container {
-        background: var(--card-bg);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 24px;
-        padding: 50px 40px;
-        width: 100%; /* Dibuat 100% agar fleksibel */
-        max-width: 600px;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 80px rgba(106, 13, 173, 0.1);
-        position: relative;
-        z-index: 1;
-        animation: slideInUp 0.8s ease-out;
-        transition: padding 0.3s ease; /* Transisi untuk padding */
-    }
-    @keyframes slideInUp {
-        from { opacity: 0; transform: translateY(50px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
-    .form-header { text-align: center; margin-bottom: 30px; }
-    .form-header h1 { font-size: 28px; font-weight: 700; color: var(--text-primary); transition: font-size 0.3s ease; }
-    .form-header p { color: var(--text-secondary); font-size: 15px; margin-top: 8px; }
-    .form-group { margin-bottom: 25px; text-align: left; }
-    .form-label { display: block; color: var(--text-secondary); font-size: 14px; font-weight: 500; margin-bottom: 8px; }
-    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    input[type="text"], input[type="email"], input[type="tel"], textarea {
-        width: 100%;
-        padding: 16px 20px 16px 45px; /* Padding untuk ikon */
-        background: rgba(255, 255, 255, 0.05);
-        border: 2px solid rgba(255, 255, 255, 0.1);
-        border-radius: 12px;
-        color: var(--text-primary);
-        font-size: 16px;
-        font-family: inherit;
-        transition: all 0.3s ease;
-        outline: none;
-    }
-    input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, textarea:focus {
-        border-color: var(--primary-purple);
-        background: rgba(255, 255, 255, 0.08);
-        box-shadow: 0 0 0 4px rgba(106, 13, 173, 0.1);
-    }
-    .input-wrapper { position: relative; }
-    .input-wrapper .input-icon {
-        position: absolute;
-        left: 18px;
-        top: 50%;
-        transform: translateY(-50%);
-        color: var(--text-secondary);
-        pointer-events: none;
-    }
-    textarea { padding: 16px 20px; resize: vertical; min-height: 120px; }
-    input[type="file"] { display: none; }
-    .file-upload-label {
-        display: flex; align-items: center; justify-content: center;
-        width: 100%; padding: 16px 20px;
-        background: rgba(255, 255, 255, 0.05);
-        border: 2px dashed rgba(255, 255, 255, 0.2);
-        border-radius: 12px; color: var(--text-secondary);
-        cursor: pointer; transition: all 0.3s ease;
-    }
-    .file-upload-label:hover {
-        border-color: var(--primary-purple); color: var(--text-primary);
-        background: rgba(106, 13, 173, 0.1);
-    }
-    .file-upload-label.file-selected {
-        border-color: var(--success-green); color: var(--success-green);
-        background: rgba(16, 185, 129, 0.1);
-    }
-    .file-upload-label i { margin-right: 10px; }
-    button[type="submit"] {
-        width: 100%; padding: 16px;
-        background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
-        border: none; border-radius: 12px; color: var(--text-primary);
-        font-size: 16px; font-weight: 600; font-family: inherit;
-        cursor: pointer; transition: all 0.3s ease;
-    }
-    button[type="submit"]:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 10px 25px rgba(106, 13, 173, 0.4);
-    }
-    button[type="submit"]:disabled {
-        opacity: 0.5; cursor: not-allowed;
-        transform: none; box-shadow: none;
-    }
-    .loader {
-        display: none; margin: 1rem auto; width: 30px; height: 30px;
-        border: 3px solid rgba(255,255,255,0.2); border-top: 3px solid var(--text-primary);
-        border-radius: 50%; animation: spin 1s linear infinite;
-    }
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-    /* --- PERBAIKAN TAMPILAN MOBILE --- */
-    @media (max-width: 640px) {
+    <style>
+        /* --- VARIABEL WARNA & RESET DASAR --- */
+        :root {
+            --primary-purple: #6A0DAD;
+            --secondary-purple: #7D2ED1;
+            --success-green: #10B981;
+            --error-red: #f44336;
+            --dark-bg: #141414;
+            --card-bg: #1c1c1c;
+            --text-primary: #ffffff;
+            --text-secondary: #ccc;
+            --header-height: 70px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            padding: 1rem; /* Mengurangi padding luar di layar kecil */
-            align-items: flex-start; /* Form mulai dari atas di mobile */
-            padding-top: 3rem;
+            font-family: 'Poppins', sans-serif;
+            background: var(--dark-bg);
+            color: var(--text-primary);
+            padding-top: var(--header-height); /* Jarak untuk header */
         }
-        #tanya-umt-container {
-            padding: 40px 25px; /* Mengurangi padding di dalam kartu */
-            width: 100%; /* Kartu memenuhi lebar layar */
-        }
-        .form-header h1 {
-            font-size: 24px; /* Mengecilkan judul */
-        }
-        .form-row {
-            grid-template-columns: 1fr; /* Kolom Nama & Email menjadi vertikal */
-            gap: 0; /* Menghilangkan jarak antar kolom yang sudah vertikal */
-        }
-    }
-        /* ===== RESET & BASE STYLES ===== */
-        * { 
-            box-sizing: border-box; 
-        }
+        body.sidebar-open { overflow: hidden; }
 
-        body {
-            background-color: #141414; 
-            font-family: 'Poppins', sans-serif; 
-            color: white;
-            margin: 0; 
-            padding: 0; 
-            line-height: 1.6;
-            padding-top: var(--header-height);
-        }
-
-        body.sidebar-open { 
-            overflow: hidden; 
-        }
-
-        html { 
-            scroll-behavior: smooth; 
-        }
-
-        /* ===== MAIN HEADER ===== */
+        /* --- HEADER & NAVIGASI --- */
         .main-header {
-            background-color: #1c1c1c; 
+            background-color: #1c1c1c;
             padding: 0 20px;
             height: var(--header-height);
             position: fixed;
-            top: 0; 
-            left: 0; 
-            width: 100%;
+            top: 0; left: 0; width: 100%;
             z-index: 1000;
             border-bottom: 1px solid #333;
             display: flex;
             align-items: center;
         }
-
         .header-container {
-            width: 100%;
-            max-width: 1200px; 
-            margin: 0 auto; 
+            width: 100%; max-width: 1200px;
+            margin: 0 auto;
             display: flex;
-            justify-content: space-between; 
+            justify-content: space-between;
             align-items: center;
         }
-
         .header-logo {
-            display: flex; 
-            align-items: center; 
-            text-decoration: none;
-            color: white; 
-            font-weight: 600; 
-            font-size: 20px;
+            display: flex; align-items: center; text-decoration: none;
+            color: white; font-weight: 600; font-size: 20px;
         }
-
-        .header-logo img { 
-            height: 40px; 
-            margin-right: 10px; 
-        }
-
-        /* ===== HAMBURGER MENU ===== */
-        .hamburger-menu {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 5px;
-            flex-direction: column;
-            gap: 4px;
-            z-index: 1200;
-            transition: all 0.3s ease;
-        }
-
-        .hamburger-menu .bar {
-            width: 25px;
-            height: 3px;
-            background-color: white;
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-
-        /* Animasi hamburger saat aktif */
-        .hamburger-menu.active .bar:nth-child(1) {
-            transform: rotate(45deg) translate(6px, 6px);
-        }
-
-        .hamburger-menu.active .bar:nth-child(2) {
-            opacity: 0;
-        }
-
-        .hamburger-menu.active .bar:nth-child(3) {
-            transform: rotate(-45deg) translate(6px, -6px);
-        }
-
-        /* ===== NAVIGASI DESKTOP ===== */
-        .main-nav { 
-            display: flex; 
-        }
-
-        .nav-links {
-            list-style: none; 
-            margin: 0; 
-            padding: 0;
-            display: flex; 
-            align-items: center; 
-            gap: 10px;
-        }
-
+        .header-logo img { height: 40px; margin-right: 10px; }
+        .main-nav { display: flex; }
+        .nav-links { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: 10px; }
         .nav-links li a {
-            color: #ccc; 
-            text-decoration: none; 
-            font-size: 14px;
-            font-weight: 500; 
-            padding: 8px 12px; 
-            border-radius: 6px;
-            white-space: nowrap; 
-            transition: all 0.2s ease;
+            color: #ccc; text-decoration: none; font-size: 14px;
+            font-weight: 500; padding: 8px 12px; border-radius: 6px;
+            white-space: nowrap; transition: all 0.2s ease;
         }
+        .nav-links li a:hover { background-color: rgba(255, 255, 255, 0.1); color: white; }
+        .header-auth { display: flex; gap: 10px; margin-left: 10px; }
+        .auth-btn { padding: 8px 18px; border-radius: 8px; font-size: 14px; font-weight: 600; text-decoration: none; transition: all 0.3s ease; text-align: center; }
+        .auth-btn.login { color: #ccc; background-color: transparent; border: 1px solid #555; }
+        .auth-btn.login:hover { background-color: rgba(255, 255, 255, 0.1); color: white; }
+        .auth-btn.register { color: white; background-color: var(--primary-purple); border: 1px solid var(--primary-purple); }
+        .auth-btn.register:hover { background-color: var(--secondary-purple); }
 
-        .nav-links li a:hover { 
-            background-color: rgba(255, 255, 255, 0.1); 
-            color: white; 
+        /* --- KONTEN UTAMA --- */
+        .main-content {
+            min-height: calc(100vh - var(--header-height));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
         }
+        #tanya-umt-container {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 50px 40px;
+            width: 100%;
+            max-width: 600px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 80px rgba(106, 13, 173, 0.1);
+            animation: slideInUp 0.8s ease-out;
+        }
+        @keyframes slideInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+        
+        /* --- FORM TANYA UMT --- */
+        .form-header { text-align: center; margin-bottom: 30px; }
+        .form-header h1 { font-size: 28px; font-weight: 700; color: var(--text-primary); }
+        .form-header p { color: var(--text-secondary); font-size: 15px; margin-top: 8px; }
+        .form-group { margin-bottom: 25px; text-align: left; }
+        .form-label { display: block; color: var(--text-secondary); font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        input[type="text"], input[type="email"], input[type="tel"], textarea {
+            width: 100%; padding: 16px 20px 16px 45px;
+            background: rgba(255, 255, 255, 0.05); border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px; color: var(--text-primary); font-size: 16px;
+            font-family: inherit; transition: all 0.3s ease; outline: none;
+        }
+        input[type="text"]:focus, input[type="email"]:focus, input[type="tel"]:focus, textarea:focus {
+            border-color: var(--primary-purple); background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 4px rgba(106, 13, 173, 0.1);
+        }
+        .input-wrapper { position: relative; }
+        .input-wrapper .input-icon {
+            position: absolute; left: 18px; top: 50%;
+            transform: translateY(-50%); color: var(--text-secondary); pointer-events: none;
+        }
+        textarea { padding: 16px 20px; resize: vertical; min-height: 120px; }
+        input[type="file"] { display: none; }
+        .file-upload-label {
+            display: flex; align-items: center; justify-content: center;
+            width: 100%; padding: 16px 20px; background: rgba(255, 255, 255, 0.05);
+            border: 2px dashed rgba(255, 255, 255, 0.2); border-radius: 12px;
+            color: var(--text-secondary); cursor: pointer; transition: all 0.3s ease;
+        }
+        .file-upload-label:hover { border-color: var(--primary-purple); color: var(--text-primary); background: rgba(106, 13, 173, 0.1); }
+        .file-upload-label.file-selected { border-color: var(--success-green); color: var(--success-green); background: rgba(16, 185, 129, 0.1); }
+        .file-upload-label i { margin-right: 10px; }
+        button[type="submit"] {
+            width: 100%; padding: 16px; background: linear-gradient(135deg, var(--primary-purple) 0%, var(--secondary-purple) 100%);
+            border: none; border-radius: 12px; color: var(--text-primary);
+            font-size: 16px; font-weight: 600; font-family: inherit;
+            cursor: pointer; transition: all 0.3s ease;
+        }
+        button[type="submit"]:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(106, 13, 173, 0.4); }
+        button[type="submit"]:disabled { opacity: 0.5; cursor: not-allowed; transform: none; box-shadow: none; }
+        .loader {
+            display: none; margin: 1rem auto; width: 30px; height: 30px;
+            border: 3px solid rgba(255,255,255,0.2); border-top: 3px solid var(--text-primary);
+            border-radius: 50%; animation: spin 1s linear infinite;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* ===== SIDEBAR NAVIGATION ===== */
+        /* --- SIDEBAR & RESPONSIVE --- */
+        .hamburger-menu { display: none; background: none; border: none; cursor: pointer; padding: 5px; flex-direction: column; gap: 4px; z-index: 1200; }
+        .hamburger-menu .bar { width: 25px; height: 3px; background-color: white; border-radius: 2px; transition: all 0.3s ease; }
+        .hamburger-menu.active .bar:nth-child(1) { transform: rotate(45deg) translate(6px, 6px); }
+        .hamburger-menu.active .bar:nth-child(2) { opacity: 0; }
+        .hamburger-menu.active .bar:nth-child(3) { transform: rotate(-45deg) translate(6px, -6px); }
+
         .sidebar-nav {
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 500px; 
-            height: 100%;
-            background-color: #1a1a1a; 
-            box-shadow: 2px 0 15px rgba(0,0,0,0.5);
-            padding-top: 60px; 
-            transform: translateX(-100%);
-            transition: transform 0.4s ease-in-out; 
-            z-index: 1100; 
-            overflow-y: auto;
-            display: none; /* Sembunyikan di desktop */
+            position: fixed; top: 0; left: 0; width: 280px; height: 100%;
+            background-color: #1a1a1a; box-shadow: 2px 0 15px rgba(0,0,0,0.5);
+            padding-top: var(--header-height); transform: translateX(-100%);
+            transition: transform 0.4s ease-in-out; z-index: 1100;
         }
-
-        .sidebar-nav.active { 
-            transform: translateX(0); 
-        }
-
-        .sidebar-nav .nav-links { 
-            flex-direction: column; 
-            align-items: stretch; 
-            gap: 0; 
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .sidebar-nav .nav-links li a { 
-            display: flex; 
-            gap: 15px; 
-            padding: 15px 30px; 
-            font-size: 16px; 
-            border-radius: 0;
-            color: #ccc;
-            text-decoration: none;
-            transition: all 0.2s ease;
-        }
-
-        .sidebar-nav .nav-links li a:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-        }
-
-        .sidebar-nav .nav-group-title {
-            padding: 20px 30px 10px; 
-            font-size: 12px; 
-            font-weight: 600;
-            color: #888; 
-            text-transform: uppercase; 
-            letter-spacing: 1px;
-        }
-
-        .sidebar-nav .nav-group-title:not(:first-child){ 
-            border-top: 1px solid #333; 
-            margin-top: 10px; 
-        }
-
-        .sidebar-nav .sidebar-close-btn {
-            position: absolute; 
-            top: 15px; 
-            right: 20px; 
-            background: none; 
-            border: none;
-            color: #aaa; 
-            font-size: 36px; 
-            font-weight: 300; 
-            line-height: 1;
-            cursor: pointer; 
-            transition: color 0.3s, transform 0.3s;
-        }
-
-        .sidebar-nav .sidebar-close-btn:hover { 
-            color: white; 
-            transform: rotate(90deg); 
-        }
-
-        /* ===== SIDEBAR OVERLAY ===== */
+        .sidebar-nav.active { transform: translateX(0); }
+        .sidebar-nav .nav-links { flex-direction: column; align-items: stretch; gap: 0; }
+        .sidebar-nav .nav-links li a { display: flex; gap: 15px; padding: 15px 30px; font-size: 16px; border-radius: 0; }
         .sidebar-overlay {
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.6); 
-            z-index: 1050;
-            opacity: 0; 
-            visibility: hidden; 
-            transition: opacity 0.4s, visibility 0.4s;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.6); z-index: 1050;
+            opacity: 0; visibility: hidden; transition: opacity 0.4s, visibility 0.4s;
         }
+        .sidebar-overlay.active { opacity: 1; visibility: visible; }
 
-        .sidebar-overlay.active { 
-            opacity: 1; 
-            visibility: visible; 
+        @media (max-width: 1024px) {
+            .main-nav { display: none; }
+            .hamburger-menu { display: flex; }
         }
-
-        /* ===== EMOJI ICONS ===== */
-        .emoji-icon {
-            font-size: 18px;
-            margin-right: 10px;
+        
+        @media (max-width: 640px) {
+            .main-content { padding: 1.5rem; }
+            #tanya-umt-container { padding: 40px 25px; }
+            .form-header h1 { font-size: 24px; }
+            .form-row { grid-template-columns: 1fr; gap: 0; }
         }
-
-        /* ===== MEDIA QUERIES ===== */
-        /* Tablet dan Mobile */
-        @media screen and (max-width: 1024px) {
-            .main-nav { 
-                display: none; 
-            } /* Sembunyikan nav desktop */
-            
-            .hamburger-menu { 
-                display: flex; 
-            } /* Tampilkan hamburger */
-            
-            .sidebar-nav { 
-                display: block; 
-            } /* Aktifkan sidebar */
-        }
-
-        /* Mobile Medium */
-        @media screen and (max-width: 768px) {
-            .header-logo span {
-                font-size: 18px;
-            }
-            
-            .header-logo img {
-                height: 35px;
-            }
-            
-            .sidebar-nav {
-                width: 400px;
-            }
-        }
-
-        /* Mobile Small */
-        @media screen and (max-width: 480px) {
-            .sidebar-nav {
-                width: 260px;
-            }
-            
-            .header-logo span {
-                font-size: 16px;
-            }
-            
-            .header-logo img {
-                height: 30px;
-            }
-        }
-
-        /* ===== DEMO CONTENT STYLES (hapus saat implementasi) ===== */
-        .demo-content {
-            padding: 40px 20px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .demo-content h1 {
-            color: #ffffff;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .demo-content p {
-            color: #ccc;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        .demo-section {
-            background-color: #1a1a1a;
-            padding: 30px;
-            border-radius: 12px;
-            margin-bottom: 30px;
-        }
-
-        .demo-section h3 {
-            color: #ffffff;
-            margin-bottom: 15px;
-        }
-/* ----- ROOT VARIABLES ----- */
-:root {
-    --header-height: 70px;
-}
-
-/* ----- BODY ADJUSTMENT FOR FIXED HEADER ----- */
-body {
-    padding-top: var(--header-height);
-}
-
-body.sidebar-open { 
-    overflow: hidden; 
-}
-
-/* ----- MAIN HEADER ----- */
-.main-header {
-    background-color: #1c1c1c; 
-    padding: 0 20px;
-    height: var(--header-height);
-    position: fixed;
-    top: 0; 
-    left: 0; 
-    width: 100%;
-    z-index: 1000;
-    border-bottom: 1px solid #333;
-    display: flex;
-    align-items: center;
-}
-
-.header-container {
-    width: 100%;
-    max-width: 1200px; 
-    margin: 0 auto; 
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-}
-
-/* ----- HEADER LOGO ----- */
-.header-logo {
-    display: flex; 
-    align-items: center; 
-    text-decoration: none;
-    color: white; 
-    font-weight: 600; 
-    font-size: 20px;
-    margin-right: 8px;
-}
-
-.header-logo img { 
-    height: 40px; 
-    margin-right: 10px; 
-}
-
-/* ----- HAMBURGER MENU ----- */
-.hamburger-menu {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 5px;
-    flex-direction: column;
-    gap: 4px;
-    z-index: 1200;
-    transition: all 0.3s ease;
-}
-
-.hamburger-menu .bar {
-    width: 25px;
-    height: 3px;
-    background-color: white;
-    border-radius: 2px;
-    transition: all 0.3s ease;
-}
-
-/* Animasi hamburger saat aktif */
-.hamburger-menu.active .bar:nth-child(1) {
-    transform: rotate(45deg) translate(6px, 6px);
-}
-
-.hamburger-menu.active .bar:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger-menu.active .bar:nth-child(3) {
-    transform: rotate(-45deg) translate(6px, -6px);
-}
-
-/* ----- NAVIGASI DESKTOP (DEFAULT) ----- */
-.main-nav { 
-    display: flex; 
-    align-items: center; 
-    gap: 20px; 
-}
-
-.nav-links {
-    list-style: none; 
-    margin: 0; 
-    padding: 0;
-    display: flex; 
-    align-items: center; 
-    gap: 10px;
-}
-
-.nav-links li a {
-    color: #ccc; 
-    text-decoration: none; 
-    font-size: 14px;
-    font-weight: 500; 
-    padding: 8px 12px; 
-    border-radius: 6px;
-    white-space: nowrap; 
-    transition: all 0.2s ease;
-}
-
-.nav-links li a:hover { 
-    background-color: rgba(255, 255, 255, 0.1); 
-    color: white; 
-}
-
-/* ----- HEADER AUTH BUTTONS ----- */
-.header-auth { 
-    display: flex; 
-    gap: 10px; 
-}
-
-.auth-btn {
-    padding: 8px 18px;
-    border-radius: 8px;
-    font-size: 14px;
-    font-weight: 600;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    text-align: center;
-    white-space: nowrap;
-}
-
-.auth-btn.login {
-    color: #ccc;
-    background-color: transparent;
-    border: 1px solid #555;
-}
-
-.auth-btn.login:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-    border-color: #888;
-}
-
-.auth-btn.register {
-    color: white;
-    background-color: #6A0DAD;
-    border: 1px solid #6A0DAD;
-}
-
-.auth-btn.register:hover {
-    background-color: #7D2ED1;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 10px rgba(106, 13, 173, 0.5);
-}
-
-/* ----- SIDEBAR & MOBILE NAVIGATION ----- */
-.sidebar-nav {
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 500px; 
-    height: 100%;
-    background-color: #1a1a1a; 
-    box-shadow: 2px 0 15px rgba(0,0,0,0.5);
-    padding-top: 60px; 
-    transform: translateX(-100%);
-    transition: transform 0.4s ease-in-out; 
-    z-index: 1100; 
-    overflow-y: auto;
-    display: none; /* Sembunyikan di desktop */
-}
-
-.sidebar-nav.active { 
-    transform: translateX(0); 
-}
-
-.sidebar-nav .nav-links { 
-    flex-direction: column; 
-    align-items: stretch; 
-    gap: 0; 
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.sidebar-nav .nav-links li a { 
-    display: flex; 
-    gap: 15px; 
-    padding: 15px 30px; 
-    font-size: 16px; 
-    border-radius: 0;
-    color: #ccc;
-    text-decoration: none;
-    transition: all 0.2s ease;
-}
-
-.sidebar-nav .nav-links li a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: white;
-}
-
-.sidebar-nav .nav-group-title {
-    padding: 20px 30px 10px; 
-    font-size: 12px; 
-    font-weight: 600;
-    color: #888; 
-    text-transform: uppercase; 
-    letter-spacing: 1px;
-}
-
-.sidebar-nav .nav-group-title:not(:first-child){ 
-    border-top: 1px solid #333; 
-    margin-top: 10px; 
-}
-
-.sidebar-nav .sidebar-close-btn {
-    position: absolute; 
-    top: 15px; 
-    right: 20px; 
-    background: none; 
-    border: none;
-    color: #aaa; 
-    font-size: 36px; 
-    font-weight: 300; 
-    line-height: 1;
-    cursor: pointer; 
-    transition: color 0.3s, transform 0.3s;
-}
-
-.sidebar-nav .sidebar-close-btn:hover { 
-    color: white; 
-    transform: rotate(90deg); 
-}
-
-/* ----- SIDEBAR AUTH BUTTONS ----- */
-.sidebar-auth {
-    padding: 20px 30px;
-    border-bottom: 1px solid #333;
-    margin-bottom: 10px;
-}
-
-.sidebar-auth .auth-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-    margin-left: 0;
-}
-
-.sidebar-auth .auth-btn {
-    width: 100%;
-    padding: 12px 20px;
-    font-size: 16px;
-    text-align: center;
-}
-
-/* ----- SIDEBAR OVERLAY ----- */
-.sidebar-overlay {
-    position: fixed; 
-    top: 0; 
-    left: 0; 
-    width: 100%; 
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.6); 
-    z-index: 1050;
-    opacity: 0; 
-    visibility: hidden; 
-    transition: opacity 0.4s, visibility 0.4s;
-}
-
-.sidebar-overlay.active { 
-    opacity: 1; 
-    visibility: visible; 
-}
-
-/* ----- EMOJI ICON ----- */
-.emoji-icon {
-    font-size: 18px;
-    margin-right: 10px;
-}
-
-/* ----- MEDIA QUERIES ----- */
-@media screen and (max-width: 1024px) {
-    .main-nav { 
-        display: none; 
-    } /* Sembunyikan nav desktop */
-    
-    .hamburger-menu { 
-        display: flex; 
-    } /* Tampilkan hamburger */
-    
-    .sidebar-nav { 
-        display: block; 
-    } /* Aktifkan sidebar */
-}
-
-/* Responsive untuk layar yang lebih kecil */
-@media screen and (max-width: 768px) {
-    .header-logo span {
-        font-size: 18px;
-    }
-    
-    .header-logo img {
-        height: 35px;
-    }
-    
-    .sidebar-nav {
-        width: 400px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .sidebar-nav {
-        width: 260px;
-    }
-    
-    .header-logo span {
-        font-size: 16px;
-    }
-    
-    .header-logo img {
-        height: 30px;
-    }
-}
-@media (max-width: 640px) {
-    #tanya-umt-container {
-        padding: 40px 25px;
-        width: 100%;
-        margin-top: 20px; 
-    }
-}        
     </style>
 </head>
 <body>
+
     <header class="main-header">
         <div class="header-container">
             <a href="../" class="header-logo">
                 <img src="UMT-Logo.png" alt="UMT Academy Logo">
                 <span>UMTacademy</span>
             </a>
-
-            <!-- Navigasi Desktop -->
             <nav class="main-nav">
                 <ul class="nav-links">
-                    <li><a href="../Materi-Belajar/">Materi Belajar</a></li>
-                    <li><a href="../Video-Pembelajaran/">Video</a></li>
-                    <li><a href="../Bank-Soal/">Bank Soal</a></li>
-                    <li><a href="../Perpustakaan/">Perpustakaan</a></li>
-                    <li><a href="../UMT-Lab/">UMT Lab</a></li>
-                    <li><a href="../tryout/">Tryout</a></li>
-                    <li><a href="../Tanya-UMT/">TanyaUMT</a></li>
-                    <li><a href="../Forum-Belajar-UMT/">Forum</a></li>
-                    <li><a href="../Arsip-Live-Class">Live Class</a></li>
-                </ul>
-                <div class="header-auth">
-                    <a href="../Login/" class="auth-btn login">Masuk</a>
-                    <a href="../Buat Akun/" class="auth-btn register">Daftar</a>
+                    <li><a href="#">Materi Belajar</a></li>
+                    <li><a href="#">Video</a></li>
+                    <li><a href="#">TanyaUMT</a></li>
+                    </ul>
+                 <div class="header-auth">
+                    <a href="#" class="auth-btn login">Masuk</a>
+                    <a href="#" class="auth-btn register">Daftar</a>
                 </div>
             </nav>
-
-            <!-- Hamburger Menu untuk Mobile -->
             <button class="hamburger-menu">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+                <span class="bar"></span><span class="bar"></span><span class="bar"></span>
             </button>
         </div>
     </header>
     
-    <!-- Sidebar Navigation untuk Mobile -->
     <nav class="sidebar-nav">
-        <button class="sidebar-close-btn">×</button>
-        <div class="sidebar-auth">
-            <div class="auth-buttons">
-                <a href="../Login/" class="auth-btn login">Masuk</a>
-                <a href="../Buat Akun/" class="auth-btn register">Daftar</a>
-            </div>
-        </div>
         <ul class="nav-links">
-            <li class="nav-group-title">Berita & Informasi UMT</li>
-            <li><a href="../News/"><span class="emoji-icon">📰</span>News</a></li>
-            <li class="nav-group-title">Konten Inti</li>
-            <li><a href="../Materi-Belajar/"><span class="emoji-icon">📘</span>Materi Belajar</a></li>
-            <li><a href="../Video-Pembelajaran/"><span class="emoji-icon">🎥</span>Video Pembelajaran</a></li>
-            <li><a href="../UMT-Lab/"><span class="emoji-icon">🔬</span>UMT Lab</a></li>
-            <li><a href="../Perpustakaan/"><span class="emoji-icon">📚</span>Perpustakaan</a></li>
-
-            <li class="nav-group-title">Alat Belajar</li>
-            <li><a href="../Bank-Soal/"><span class="emoji-icon">📝</span>Bank Soal</a></li>
-            <li><a href="../tryout/"><span class="emoji-icon">✏️</span>Tryout</a></li>
-            <li><a href="../Tanya-UMT/"><span class="emoji-icon">❓</span>TanyaUMT</a></li>
-
-            <li class="nav-group-title">Komunitas & Info</li>
-            <li><a href="../Forum-Belajar-UMT/"><span class="emoji-icon">💬</span>Forum Belajar</a></li>
-            <li><a href="../Arsip-Live-Class/"><span class="emoji-icon">🎭</span>Arsip Live Class</a></li>
+             <li><a href="#">Materi Belajar</a></li>
+             <li><a href="#">Video</a></li>
+             <li><a href="#">TanyaUMT</a></li>
         </ul>
     </nav>
-    
-    <!-- Overlay untuk Sidebar -->
     <div class="sidebar-overlay"></div>
 
-    <div id="tanya-umt-container">
-        <form id="umtForm">
-            <div class="form-header">
-                <h1>Kirim Pertanyaan Anda</h1>
-                <p>Isi formulir di bawah, lampirkan file jika perlu.</p>
-            </div>
-
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="name" class="form-label">Nama Lengkap</label>
-                    <div class="input-wrapper">
-                        <i class="fas fa-user input-icon"></i>
-                        <input type="text" id="name" placeholder="Nama Anda" required>
+    <main class="main-content">
+        <div id="tanya-umt-container">
+            <form id="umtForm">
+                <div class="form-header">
+                    <h1>Kirim Pertanyaan Anda</h1>
+                    <p>Isi formulir di bawah, lampirkan file jika perlu.</p>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name" class="form-label">Nama Lengkap</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user input-icon"></i>
+                            <input type="text" id="name" placeholder="Nama Anda" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email" class="form-label">Email</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-envelope input-icon"></i>
+                            <input type="email" id="email" placeholder="Email Anda" required>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="email" class="form-label">Email</label>
+                    <label for="whatsapp" class="form-label">Nomor WhatsApp</label>
                     <div class="input-wrapper">
-                        <i class="fas fa-envelope input-icon"></i>
-                        <input type="email" id="email" placeholder="Email Anda" required>
+                        <i class="fab fa-whatsapp input-icon"></i>
+                        <input type="tel" id="whatsapp" placeholder="08..." required>
                     </div>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label for="whatsapp" class="form-label">Nomor WhatsApp</label>
-                <div class="input-wrapper">
-                    <i class="fab fa-whatsapp input-icon"></i>
-                    <input type="tel" id="whatsapp" placeholder="08..." required>
+                <div class="form-group">
+                    <label for="question" class="form-label">Pertanyaan</label>
+                    <textarea id="question" placeholder="Tulis pertanyaan Anda dengan detail di sini..." required></textarea>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label for="question" class="form-label">Pertanyaan</label>
-                <textarea id="question" placeholder="Tulis pertanyaan Anda dengan detail di sini..." required></textarea>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Lampiran (Opsional, Maks 5MB)</label>
-                <input type="file" id="fileInput" accept="image/*,application/pdf">
-                <label for="fileInput" class="file-upload-label" id="fileLabel">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <span id="fileName">Pilih File (Gambar/PDF)</span>
-                </label>
-            </div>
-
-            <button type="submit" id="submitBtn">Kirim Pertanyaan</button>
-            <div class="loader" id="loader"></div>
-        </form>
-    </div>
+                <div class="form-group">
+                    <label class="form-label">Lampiran (Opsional, Maks 5MB)</label>
+                    <input type="file" id="fileInput" accept="image/*,application/pdf">
+                    <label for="fileInput" class="file-upload-label" id="fileLabel">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <span id="fileName">Pilih File (Gambar/PDF)</span>
+                    </label>
+                </div>
+                <button type="submit" id="submitBtn">Kirim Pertanyaan</button>
+                <div class="loader" id="loader"></div>
+            </form>
+        </div>
+    </main>
 
     <script>
         // ↓↓↓ PASTE URL APLIKASI WEB ANDA DARI GOOGLE APPS SCRIPT DI SINI ↓↓↓
-        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyjZUskS1IZJwczbll9k9NwuuEKDfcaNwrDpvHRlTANr0XqdItelJXAOmdHjiOFT35tUA/exec";
+        const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyW2XRCt0db0jxrHrmheFNpBDOpvyIfBYPl1h9lsd2844GkyeIMdmnIA39DyEzl3mVHug/exec";
 
+        // --- Logika untuk Sidebar/Navigasi ---
+        const hamburgerMenu = document.querySelector('.hamburger-menu');
+        const sidebarNav = document.querySelector('.sidebar-nav');
+        const sidebarOverlay = document.querySelector('.sidebar-overlay');
+        
+        function toggleSidebar() {
+            hamburgerMenu.classList.toggle('active');
+            sidebarNav.classList.toggle('active');
+            sidebarOverlay.classList.toggle('active');
+            document.body.classList.toggle('sidebar-open');
+        }
+
+        if (hamburgerMenu && sidebarNav && sidebarOverlay) {
+            hamburgerMenu.addEventListener('click', toggleSidebar);
+            sidebarOverlay.addEventListener('click', toggleSidebar);
+        }
+
+        // --- Logika untuk Form Tanya UMT ---
         const form = document.getElementById('umtForm');
         const submitBtn = document.getElementById('submitBtn');
         const loader = document.getElementById('loader');
@@ -913,25 +284,6 @@ body.sidebar-open {
         const fileLabel = document.getElementById('fileLabel');
         const fileNameSpan = document.getElementById('fileName');
         const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
-        const hamburgerMenu = document.querySelector('.hamburger-menu');
-        const sidebarNav = document.querySelector('.sidebar-nav');
-        const sidebarOverlay = document.querySelector('.sidebar-overlay');
-        const sidebarCloseBtn = document.querySelector('.sidebar-close-btn');
-        const body = document.body;
-
-        function toggleSidebar() {
-    sidebarNav.classList.toggle('active');
-    sidebarOverlay.classList.toggle('active');
-    // Ganti 'body' dengan 'document.documentElement'
-    document.documentElement.classList.toggle('sidebar-open'); 
-}
-
-        // Pastikan semua elemen ada sebelum menambahkan listener
-        if (hamburgerMenu && sidebarNav && sidebarOverlay && sidebarCloseBtn) {
-            hamburgerMenu.addEventListener('click', toggleSidebar);
-            sidebarOverlay.addEventListener('click', toggleSidebar);
-            sidebarCloseBtn.addEventListener('click', toggleSidebar);
-        }
 
         fileInput.addEventListener('change', () => {
             if (fileInput.files.length > 0) {
@@ -962,7 +314,6 @@ body.sidebar-open {
             const fr = new FileReader();
 
             const processSubmit = (fileData) => {
-                // Kumpulkan semua data teks dari form
                 const formData = {
                     nama: document.getElementById('name').value,
                     email: document.getElementById('email').value,
@@ -970,14 +321,12 @@ body.sidebar-open {
                     pertanyaan: document.getElementById('question').value,
                 };
                 
-                // Jika ada file, tambahkan data file ke objek
                 if (fileData) {
                     formData.fileName = fileData.fileName;
                     formData.mimeType = fileData.mimeType;
                     formData.contents = fileData.contents;
                 }
 
-                // Kirim objek gabungan ke Apps Script
                 fetch(SCRIPT_URL, {
                     method: 'POST',
                     body: JSON.stringify(formData)
@@ -1002,19 +351,16 @@ body.sidebar-open {
                 });
             };
 
-            // Jika ada file yang dipilih, baca filenya dulu
             if (file) {
                 fr.readAsDataURL(file);
                 fr.onload = () => {
-                    // Ekstrak data base64 dari hasil bacaan
                     const fileData = {
                         fileName: file.name,
                         mimeType: file.type,
-                        contents: fr.result.split(',')[1] // Ambil hanya bagian base64
+                        contents: fr.result.split(',')[1]
                     };
-                    processSubmit(fileData); // Kirim data setelah file selesai dibaca
+                    processSubmit(fileData);
                 };
-            // Jika tidak ada file, langsung kirim data teksnya saja
             } else {
                 processSubmit(null);
             }
@@ -1022,8 +368,3 @@ body.sidebar-open {
     </script>
 </body>
 </html>
-
-
-
-
-
