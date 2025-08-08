@@ -125,7 +125,7 @@
     </div>
 
     <script src="/Pro_Member_Akses/data.js"></script>
-    <script src="/Pro_Member_Akses/pdfjs/build/pdf.js"></script>
+    <script src="/Pro_Member_Akses/pdfjs/build/pdf.mjs"></script>
 
     <script>
         // --- PENJAGA KEAMANAN ---
@@ -144,7 +144,7 @@
         const ctx = canvas.getContext('2d');
         
         // --- MENGATUR PDF.JS ---
-        pdfjsLib.GlobalWorkerOptions.workerSrc = '/Pro_Member_Akses/pdfjs/build/pdf.worker.js';
+        pdfjsLib.GlobalWorkerOptions.workerSrc = '/Pro_Member_Akses/pdfjs/build/pdf.worker.mjs';
 
         // --- VARIABEL STATE UNTUK VIEWER ---
         let pdfDoc = null;
