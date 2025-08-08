@@ -893,46 +893,62 @@ function setupBankSoalFilter() {
         }, 5000);
     }
     
-    function showConfirmationModal(options) {
-        const { title, message, confirmText = 'Konfirmasi', cancelText = 'Batal', confirmAction, cancelAction, showCancelButton = true, confirmButtonClass = 'modal-btn-confirm' } = options;
-        const modalContainer = document.getElementById('modal-container');
-        modalContainer.innerHTML = `
-            <div class="modal-overlay" id="modal-overlay">
-                <div class="modal-box">
-                    <h3 class="modal-title">${title}</h3>
-                    <p class="modal-content">${message}</p>
-                    <div class="modal-buttons">
-                        ${showCancelButton ? `<button id="modal-cancel-btn" class="modal-btn modal-btn-cancel">${cancelText}</button>` : ''}
-                        <button id="modal-confirm-btn" class="modal-btn ${confirmButtonClass}">${confirmText}</button>
-                    </div>
+function showConfirmationModal(options) {
+    const {
+        title,
+        message,
+        confirmText = 'Konfirmasi',
+        cancelText = 'Batal',
+        confirmAction,
+        cancelAction,
+        showCancelButton = true,
+        confirmButtonClass = 'modal-btn-confirm',
+        customModalClass = '' // <-- Pastikan baris ini ada
+    } = options;
+
+    const modalContainer = document.getElementById('modal-container');
+    
+    // Pastikan class kustom ditambahkan dengan benar di sini
+    const modalHTML = `
+        <div class="modal-overlay" id="modal-overlay">
+            <div class="modal-box ${customModalClass}"> 
+                <h3 class="modal-title">${title}</h3>
+                <div class="modal-content">${message}</div>
+                <div class="modal-buttons">
+                    ${showCancelButton ? `<button id="modal-cancel-btn" class="modal-btn modal-btn-cancel">${cancelText}</button>` : ''}
+                    <button id="modal-confirm-btn" class="modal-btn ${confirmButtonClass}">${confirmText}</button>
                 </div>
-            </div>`;
-        modalContainer.style.display = 'block';
-    
-        const closeModal = () => {
-            modalContainer.style.display = 'none';
-            modalContainer.innerHTML = '';
-        };
-    
-        document.getElementById('modal-confirm-btn').addEventListener('click', () => {
-            if (typeof confirmAction === 'function') confirmAction();
+            </div>
+        </div>
+    `;
+
+    modalContainer.innerHTML = modalHTML;
+    modalContainer.style.display = 'block';
+
+    const closeModal = () => {
+        modalContainer.style.display = 'none';
+        modalContainer.innerHTML = '';
+    };
+
+    document.getElementById('modal-confirm-btn').addEventListener('click', () => {
+        if (typeof confirmAction === 'function') confirmAction();
+        closeModal();
+    });
+
+    if (showCancelButton) {
+        const cancelBtn = document.getElementById('modal-cancel-btn');
+        cancelBtn.addEventListener('click', () => {
+            if (typeof cancelAction === 'function') cancelAction();
             closeModal();
         });
-    
-        if (showCancelButton) {
-            const cancelBtn = document.getElementById('modal-cancel-btn');
-            cancelBtn.addEventListener('click', () => {
+        document.getElementById('modal-overlay').addEventListener('click', (event) => {
+             if (event.target === event.currentTarget) {
                 if (typeof cancelAction === 'function') cancelAction();
                 closeModal();
-            });
-            document.getElementById('modal-overlay').addEventListener('click', (event) => {
-                 if (event.target === event.currentTarget) {
-                    if (typeof cancelAction === 'function') cancelAction();
-                    closeModal();
-                 }
-            });
-        }
+             }
+        });
     }
+}
     
     // =================================================================================
     // BAGIAN 7: INISIALISASI APLIKASI
