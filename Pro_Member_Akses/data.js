@@ -5,13 +5,6 @@ const allContentData = {
     materi: {
         "Kelas 7 SMP": [
             { 
-            id: 'materi_7_1', 
-            title: 'Materi Aljabar', 
-            type: 'PDF Document', 
-            filePath: 'materi-files/aljabar.pdf', 
-            fileType: 'pdf' 
-            },
-            { 
             id: 'materi_7_2', 
             title: 'Materi Pembagian', 
             type: 'PDF Document', 
