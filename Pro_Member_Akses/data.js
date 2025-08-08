@@ -43,7 +43,7 @@ const allContentData = {
         { 
             id: 'vid_1', 
             title: 'Konsep Dasar Logaritma',
-            videoId: '8_nL53iPFP0',
+            videoId: '-pETqV252Zc?si=7Hd75Gl-r1zPjYfF',
             category: 'Aljabar' // <-- Kategori baru
         },
         { 
