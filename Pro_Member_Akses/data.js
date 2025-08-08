@@ -40,7 +40,30 @@ const allContentData = {
         // Anda bisa tambahkan "Kelas 9 SMP", "Kelas 11 SMA", dst. di sini
     },
     video: [
-        { id: 'video_1', title: 'Video Pembahasan Vektor', type: 'Video' }
+        { 
+            id: 'vid_1', 
+            title: 'Konsep Dasar Logaritma',
+            videoId: '8_nL53iPFP0',
+            category: 'Aljabar' // <-- Kategori baru
+        },
+        { 
+            id: 'vid_2', 
+            title: 'Pembahasan Soal Vektor',
+            videoId: 'b9g3m1xG2nA',
+            category: 'Geometri' // <-- Kategori baru
+        },
+        { 
+            id: 'vid_3', 
+            title: 'Trigonometri untuk Pemula',
+            videoId: 's29LLeAGacA',
+            category: 'Trigonometri' // <-- Kategori baru
+        },
+        { 
+            id: 'vid_4', 
+            title: 'Pembuktian Rumus Luas Lingkaran',
+            videoId: 'c43I-4p_i5w',
+            category: 'Geometri' // <-- Kategori baru
+        },
     ],
     bankSoal: [
         {
