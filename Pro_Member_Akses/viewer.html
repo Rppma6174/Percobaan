@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UMT Pro - Materi Viewer</title>
+    <link rel="icon" type="image/png" href="UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* Gaya dasar agar konsisten dengan halaman utama */
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: sans-serif;
+            margin: 0;
+            overflow: hidden; /* Mencegah scroll di body */
+        }
+        /* Layout Utama */
+        .viewer-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        /* Toolbar di bagian atas */
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--bg-panel);
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            flex-shrink: 0;
+        }
+        .toolbar-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .toolbar-title {
+            font-size: 1rem;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .toolbar-button {
+            background: none;
+            border: 1px solid transparent;
+            color: var(--text-primary);
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+        .toolbar-button:hover:not(:disabled) {
+            background-color: var(--border-color);
+        }
+        .toolbar-button:disabled {
+            color: var(--text-secondary);
+            cursor: not-allowed;
+        }
+        #page-info {
+            font-size: 0.9rem;
+        }
+        /* Area untuk menampilkan PDF */
+        .pdf-viewer {
+            flex-grow: 1;
+            overflow: auto; /* Memungkinkan scroll jika halaman PDF panjang */
+            text-align: center;
+            padding: 1rem;
+        }
+        #pdf-canvas {
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        /* Loading & Error State */
+        .status-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="viewer-container">
+        <div class="toolbar">
+            <div class="toolbar-section">
+                <a href="index.html" class="toolbar-button" title="Kembali ke Daftar Materi">
+                    <i class="fa-solid fa-arrow-left"></i>
+                </a>
+                <h1 id="materi-title" class="toolbar-title">Memuat materi...</h1>
+            </div>
+            <div class="toolbar-section">
+                <button id="prev-page" class="toolbar-button" title="Halaman Sebelumnya">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+                <span id="page-info">
+                    Halaman <span id="page-num">0</span> dari <span id="page-count">0</span>
+                </span>
+                <button id="next-page" class="toolbar-button" title="Halaman Selanjutnya">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+            <div class="toolbar-section">
+                <button id="zoom-out" class="toolbar-button" title="Perkecil">
+                    <i class="fa-solid fa-search-minus"></i>
+                </button>
+                <button id="zoom-in" class="toolbar-button" title="Perbesar">
+                    <i class="fa-solid fa-search-plus"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="pdf-viewer" class="pdf-viewer">
+            <canvas id="pdf-canvas"></canvas>
+            <div id="status-message" class="status-message">Memuat PDF, mohon tunggu...</div>
+        </div>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="pdfjs/build/pdf.js"></script>
+
+    <script>
+        // --- PENJAGA KEAMANAN ---
+        // Pengecekan sesi login. Jika tidak ada, tendang ke halaman login.
+        const token = sessionStorage.getItem('sessionToken');
+        if (!token) {
+            window.location.href = '../Login/'; // Sesuaikan dengan URL halaman login Anda
+        }
+
+        // --- MENGAMBIL ELEMEN DARI HALAMAN ---
+        const materiTitleEl = document.getElementById('materi-title');
+        const pageNumEl = document.getElementById('page-num');
+        const pageCountEl = document.getElementById('page-count');
+        const statusMessageEl = document.getElementById('status-message');
+        const canvas = document.getElementById('pdf-canvas');
+        const ctx = canvas.getContext('2d');
+        
+        // --- MENGATUR PDF.JS ---
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'pdfjs/build/pdf.worker.js';
+
+        // --- VARIABEL STATE UNTUK VIEWER ---
+        let pdfDoc = null;
+        let pageNum = 1;
+        let pageIsRendering = false;
+        let pageNumIsPending = null;
+        let scale = 1.5;
+
+        // --- FUNGSI UTAMA ---
+
+        // Fungsi untuk merender halaman PDF ke canvas
+        const renderPage = async (num) => {
+            pageIsRendering = true;
+            statusMessageEl.style.display = 'block';
+
+            // Mengambil halaman dari dokumen PDF
+            const page = await pdfDoc.getPage(num);
+            
+            // Mengatur skala dan viewport
+            const viewport = page.getViewport({ scale });
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
+
+            const renderContext = {
+                canvasContext: ctx,
+                viewport,
+            };
+
+            await page.render(renderContext).promise;
+            
+            pageIsRendering = false;
+            statusMessageEl.style.display = 'none';
+
+            // Jika ada permintaan render halaman lain saat sedang merender,
+            // render halaman yang diminta tersebut.
+            if (pageNumIsPending !== null) {
+                renderPage(pageNumIsPending);
+                pageNumIsPending = null;
+            }
+
+            // Update info halaman
+            pageNumEl.textContent = num;
+        };
+
+        // Fungsi untuk antrian render
+        const queueRenderPage = (num) => {
+            if (pageIsRendering) {
+                pageNumIsPending = num;
+            } else {
+                renderPage(num);
+            }
+        };
+
+        // Fungsi untuk tombol navigasi
+        const onPrevPage = () => {
+            if (pageNum <= 1) return;
+            pageNum--;
+            queueRenderPage(pageNum);
+        };
+
+        const onNextPage = () => {
+            if (pageNum >= pdfDoc.numPages) return;
+            pageNum++;
+            queueRenderPage(pageNum);
+        };
+        
+        const onZoomIn = () => {
+            if (scale >= 3.0) return;
+            scale += 0.25;
+            queueRenderPage(pageNum);
+        };
+        
+        const onZoomOut = () => {
+            if (scale <= 0.5) return;
+            scale -= 0.25;
+            queueRenderPage(pageNum);
+        };
+
+        // --- LOGIKA SAAT HALAMAN DIBUKA ---
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Ambil ID materi dari URL (misal: viewer.html?id=materi_7_2)
+            const urlParams = new URLSearchParams(window.location.search);
+            const materiId = urlParams.get('id');
+
+            if (!materiId) {
+                materiTitleEl.textContent = 'Error: Materi tidak ditemukan.';
+                statusMessageEl.textContent = 'ID Materi tidak ada di URL.';
+                return;
+            }
+
+            // Cari materi di allContentData
+            let materiItem = null;
+            for (const grade in allContentData.materi) {
+                const found = allContentData.materi[grade].find(item => item.id === materiId);
+                if (found) {
+                    materiItem = found;
+                    break;
+                }
+            }
+            
+            if (!materiItem) {
+                materiTitleEl.textContent = 'Error: Materi tidak ditemukan.';
+                statusMessageEl.textContent = `Materi dengan ID "${materiId}" tidak ditemukan.`;
+                return;
+            }
+
+            // Update judul halaman
+            materiTitleEl.textContent = materiItem.title;
+
+            // Muat dokumen PDF
+            try {
+                pdfDoc = await pdfjsLib.getDocument(materiItem.filePath).promise;
+                pageCountEl.textContent = pdfDoc.numPages;
+                renderPage(pageNum);
+            } catch (err) {
+                console.error("Error saat memuat PDF:", err);
+                statusMessageEl.textContent = `Gagal memuat file PDF. Pastikan path file benar: ${materiItem.filePath}`;
+            }
+
+            // Pasang event listener ke tombol-tombol
+            document.getElementById('prev-page').addEventListener('click', onPrevPage);
+            document.getElementById('next-page').addEventListener('click', onNextPage);
+            document.getElementById('zoom-in').addEventListener('click', onZoomIn);
+            document.getElementById('zoom-out').addEventListener('click', onZoomOut);
+        });
+
+    </script>
+</body>
+</html>
