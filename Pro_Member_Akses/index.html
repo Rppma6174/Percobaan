@@ -418,72 +418,62 @@ function setupMateriSearch() {
     });
 }
     
-function showMateriContent(itemId, gradeKey) {
-    const materiDalamGrade = allContentData.materi[gradeKey];
-    const currentIndex = materiDalamGrade.findIndex(item => item.id === itemId);
+function showConfirmationModal(options) {
+    const {
+        title,
+        message,
+        confirmText = 'Konfirmasi',
+        cancelText = 'Batal',
+        confirmAction,
+        cancelAction,
+        showCancelButton = true,
+        confirmButtonClass = 'modal-btn-confirm',
+        customModalClass = ''
+    } = options;
+
+    const modalContainer = document.getElementById('modal-container');
     
-    if (currentIndex === -1) {
-        showToast("Materi tidak ditemukan!", "error");
-        return;
-    }
-
-    const materiItem = materiDalamGrade[currentIndex];
-    const viewerContent = document.getElementById('materi-viewer-content');
-    
-    document.getElementById('materi-list-container').classList.add('hidden', 'md:block');
-    document.getElementById('materi-viewer-container').classList.remove('hidden');
-
-    viewerContent.classList.remove('flex', 'items-center', 'justify-center');
-    viewerContent.innerHTML = `<p class="text-center text-gray-400 p-4">Memuat konten...</p>`;
-    
-    document.querySelectorAll('.card-item-list').forEach(card => card.classList.remove('bg-cyan-800'));
-    document.getElementById(`card-${itemId}`).classList.add('bg-cyan-800');
-
-    // --- [LOGIKA BARU] Membuat Tombol Navigasi ---
-    const hasPrev = currentIndex > 0;
-    const hasNext = currentIndex < materiDalamGrade.length - 1;
-    
-    const prevItemId = hasPrev ? `'${materiDalamGrade[currentIndex - 1].id}', '${gradeKey}'` : '';
-    const nextItemId = hasNext ? `'${materiDalamGrade[currentIndex + 1].id}', '${gradeKey}'` : '';
-
-    const backButton = `<button onclick="goBackToList()" class="md:hidden mb-4 bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2"><i class="fa-solid fa-chevron-left"></i> Kembali</button>`;
-
-    // Tombol navigasi untuk desktop
-    const desktopNavButtons = `
-        <div class="hidden md:flex justify-between items-center mb-4">
-            <button onclick="showMateriContent(${prevItemId})" class="nav-btn bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2" ${!hasPrev ? 'disabled' : ''}>
-                <i class="fa-solid fa-chevron-left"></i> Sebelumnya
-            </button>
-            <h3 class="text-lg font-bold text-center text-cyan-400">${materiItem.title}</h3>
-            <button onclick="showMateriContent(${nextItemId})" class="nav-btn bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2" ${!hasNext ? 'disabled' : ''}>
-                Selanjutnya <i class="fa-solid fa-chevron-right"></i>
-            </button>
-        </div>
-    `;
-
-    // Judul untuk mobile
-    const mobileHeader = `
-        <div class="md:hidden mb-2">
-            <h3 class="text-lg font-bold text-center text-cyan-400">${materiItem.title}</h3>
-        </div>
-    `;
-    
-    let contentHTML = '';
-    if (materiItem.fileType === 'pdf') {
-        contentHTML = `
-            <div class="p-2 md:p-0 w-full h-full flex flex-col">
-                ${backButton}
-                ${desktopNavButtons}
-                ${mobileHeader}
-                <embed src="${materiItem.filePath}" type="application/pdf" class="w-full flex-1 rounded" />
-                <div class="text-center mt-2 text-xs text-gray-400">
-                    Gagal memuat? <a href="${materiItem.filePath}" target="_blank" class="text-cyan-400 hover:underline">Buka di tab baru</a>.
+    const modalHTML = `
+        <div class="modal-overlay" id="modal-overlay">
+            <div class="modal-box ${customModalClass}"> 
+                <h3 class="modal-title">${title}</h3>
+                
+                <div class="modal-content">${message}</div>
+                
+                <div class="modal-buttons">
+                    ${showCancelButton ? `<button id="modal-cancel-btn" class="modal-btn modal-btn-cancel">${cancelText}</button>` : ''}
+                    <button id="modal-confirm-btn" class="modal-btn ${confirmButtonClass}">${confirmText}</button>
                 </div>
-            </div>`;
-        viewerContent.innerHTML = contentHTML;
-    }
+            </div>
+        </div>
+    `;
 
-    markAsCompleted(itemId, { showToast: true });
+    modalContainer.innerHTML = modalHTML;
+    modalContainer.style.display = 'block';
+
+    const closeModal = () => {
+        modalContainer.style.display = 'none';
+        modalContainer.innerHTML = '';
+    };
+
+    document.getElementById('modal-confirm-btn').addEventListener('click', () => {
+        if (typeof confirmAction === 'function') confirmAction();
+        closeModal();
+    });
+
+    if (showCancelButton) {
+        const cancelBtn = document.getElementById('modal-cancel-btn');
+        cancelBtn.addEventListener('click', () => {
+            if (typeof cancelAction === 'function') cancelAction();
+            closeModal();
+        });
+        document.getElementById('modal-overlay').addEventListener('click', (event) => {
+             if (event.target === event.currentTarget) {
+                if (typeof cancelAction === 'function') cancelAction();
+                closeModal();
+             }
+        });
+    }
 }
     
     function goBackToList() {
