@@ -146,35 +146,50 @@
     // --- FUNGSI UTAMA ---
 
     // [LOGIKA BARU] Fungsi untuk merender SEMUA halaman PDF
-    const renderAllPages = async () => {
-        statusMessageEl.textContent = `Memuat ${pdfDoc.numPages} halaman...`;
-        statusMessageEl.style.display = 'block';
-        viewerEl.innerHTML = ''; // Kosongkan viewer sebelum render baru
+const renderAllPages = async () => {
+    statusMessageEl.textContent = `Memuat ${pdfDoc.numPages} halaman...`;
+    statusMessageEl.style.display = 'block';
+    viewerEl.innerHTML = ''; // Kosongkan viewer sebelum render baru
 
-        const pagePromises = [];
-        for (let num = 1; num <= pdfDoc.numPages; num++) {
-            // Buat promise untuk merender setiap halaman
-            const promise = pdfDoc.getPage(num).then(page => {
-                const viewport = page.getViewport({ scale });
-                const canvas = document.createElement('canvas');
-                const ctx = canvas.getContext('2d');
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;
-                canvas.style.marginBottom = '1rem'; // Beri jarak antar halaman
+    const pagePromises = [];
+    for (let num = 1; num <= pdfDoc.numPages; num++) {
+        const promise = pdfDoc.getPage(num).then(page => {
+            // [BARU] Deteksi kepadatan piksel layar untuk render kualitas tinggi
+            const devicePixelRatio = window.devicePixelRatio || 1;
 
-                const renderContext = { canvasContext: ctx, viewport };
-                // Tambahkan canvas ke halaman dulu
-                viewerEl.appendChild(canvas);
-                // Kembalikan promise render
-                return page.render(renderContext).promise;
-            });
-            pagePromises.push(promise);
-        }
+            // [DIUBAH] Gunakan devicePixelRatio untuk membuat viewport resolusi tinggi
+            const viewport = page.getViewport({ scale: scale * devicePixelRatio });
+            
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Atur ukuran piksel canvas sebenarnya
+            canvas.height = viewport.height;
+            canvas.width = viewport.width;
 
-        // Tunggu semua halaman selesai dirender
-        await Promise.all(pagePromises);
-        statusMessageEl.style.display = 'none';
-    };
+            // [BARU] Atur ukuran tampilan canvas menggunakan CSS agar pas di layar
+            canvas.style.width = `${viewport.width / devicePixelRatio}px`;
+            canvas.style.height = `${viewport.height / devicePixelRatio}px`;
+            
+            canvas.style.marginBottom = '1rem';
+
+            const renderContext = { 
+                canvasContext: ctx, 
+                viewport,
+                // [BARU] Aktifkan rendering teks yang lebih tajam
+                renderInteractiveForms: true,
+                enableXfa: true,
+            };
+            
+            viewerEl.appendChild(canvas);
+            return page.render(renderContext).promise;
+        });
+        pagePromises.push(promise);
+    }
+
+    await Promise.all(pagePromises);
+    statusMessageEl.style.display = 'none';
+};
 
     // [LOGIKA BARU] Fungsi untuk zoom
     const onZoom = (newScale) => {
