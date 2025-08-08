@@ -491,9 +491,76 @@ function showMateriContent(itemId, gradeKey) {
         document.getElementById('materi-viewer-container').classList.add('hidden');
     }
     
-    function renderVideoPage() {
-        appContent.innerHTML = `<div class="panel">Halaman Video masih dalam pengembangan.</div>`;
-    }
+function renderVideoPage() {
+    // [BARU] Mengambil kategori unik dari data video secara dinamis
+    const categories = ['Semua', ...new Set(allContentData.video.map(item => item.category))];
+
+    // [BARU] Membuat tombol-tombol filter dari kategori yang ada
+    const filterButtonsHTML = categories.map(category => `
+        <button class="filter-btn text-sm py-2 px-4 rounded-full bg-gray-700 hover:bg-cyan-600 transition-colors" data-filter="${category}">
+            ${category}
+        </button>
+    `).join('');
+
+    // [DIUBAH] Membuat kartu video dengan menambahkan atribut data-category
+    const videoHTML = allContentData.video.map(item => `
+        <div class="video-card card-item p-4 rounded-lg flex flex-col" data-category="${item.category}" onclick="playVideoInModal('${item.videoId}', '${item.title}')">
+            <img src="https://img.youtube.com/vi/${item.videoId}/mqdefault.jpg" alt="${item.title}" class="rounded-md mb-3">
+            <h3 class="font-bold text-base mb-2 flex-grow">${item.title}</h3>
+            <div class="text-xs font-mono text-cyan-300 flex items-center gap-2">
+                <i class="fa-brands fa-youtube text-red-500"></i> YouTube Video
+            </div>
+        </div>
+    `).join('');
+
+    appContent.innerHTML = `
+        <div class="panel">
+            <h2 class="text-2xl font-bold text-cyan-400">Video Pembelajaran</h2>
+            <p class="text-sm text-gray-400 mb-6">Pilih kategori atau tonton video pilihan untuk pemahaman lebih dalam.</p>
+            
+            <div class="mb-8 flex flex-wrap gap-2" id="video-filter-container">
+                ${filterButtonsHTML}
+            </div>
+
+            <div id="video-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                ${videoHTML}
+            </div>
+        </div>
+    `;
+
+    // [BARU] Panggil fungsi untuk mengaktifkan logika filter
+    setupVideoFilter();
+}
+
+function setupVideoFilter() {
+    const filterContainer = document.getElementById('video-filter-container');
+    const videoCards = document.querySelectorAll('.video-card');
+    if (!filterContainer) return;
+
+    // Set tombol 'Semua' sebagai aktif secara default
+    filterContainer.querySelector('[data-filter="Semua"]').classList.add('bg-cyan-600');
+
+    filterContainer.addEventListener('click', (e) => {
+        if (!e.target.matches('.filter-btn')) return;
+
+        const selectedFilter = e.target.dataset.filter;
+
+        // Atur tampilan tombol aktif
+        document.querySelectorAll('#video-filter-container .filter-btn').forEach(btn => {
+            btn.classList.remove('bg-cyan-600');
+        });
+        e.target.classList.add('bg-cyan-600');
+
+        // Proses filter untuk setiap kartu video
+        videoCards.forEach(card => {
+            if (selectedFilter === 'Semua' || card.dataset.category === selectedFilter) {
+                card.style.display = 'flex'; // Gunakan flex karena kartu kita adalah flex column
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    });
+}
     
 function renderBankSoalPage() {
     const categories = ['Semua', ...new Set(allContentData.bankSoal.map(quiz => quiz.category || 'Lainnya'))];
