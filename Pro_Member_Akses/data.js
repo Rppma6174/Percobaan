@@ -55,21 +55,39 @@ const allContentData = {
         },
         { 
             id: 'vid_2', 
-            title: 'Pembahasan Soal Vektor',
-            videoId: 'b9g3m1xG2nA',
-            category: 'Geometri' // <-- Kategori baru
+            title: 'Definisi Nilai Mutlak',
+            videoId: 'zwth9824dhU',
+            category: 'Nilai Mutlak' // <-- Kategori baru
         },
         { 
             id: 'vid_3', 
-            title: 'Trigonometri untuk Pemula',
-            videoId: 's29LLeAGacA',
-            category: 'Trigonometri' // <-- Kategori baru
+            title: 'Representasi Geometri Dari Nilai Mutlak',
+            videoId: 'MxhGHR0zuuo',
+            category: 'Nilai Mutlak' // <-- Kategori baru
         },
         { 
             id: 'vid_4', 
-            title: 'Pembuktian Rumus Luas Lingkaran',
-            videoId: 'c43I-4p_i5w',
-            category: 'Geometri' // <-- Kategori baru
+            title: 'Sifat - Sifat Dasar Nilai Mutlak - Part 1',
+            videoId: 'CVrjAQdhFFg',
+            category: 'Nilai Mutlak' // <-- Kategori baru
+        },
+        { 
+            id: 'vid_5', 
+            title: 'Sifat - Sifat Dasar Nilai Mutlak Dalam Operasi Aljabar - Part 2',
+            videoId: 'CyXvsFFBcio',
+            category: 'Nilai Mutlak' // <-- Kategori baru
+        },
+        { 
+            id: 'vid_6', 
+            title: 'Pembuktian Aturan Cosinus',
+            videoId: 'KM-yxsUaXj0',
+            category: 'Trigonometri' // <-- Kategori baru
+        },
+        { 
+            id: 'vid_7', 
+            title: 'Pembuktian Sifat Penjumlahan Sinus Dua Sudut',
+            videoId: 'sJaOX0vTqGk',
+            category: 'Trigonometri' // <-- Kategori baru
         },
     ],
     bankSoal: [
