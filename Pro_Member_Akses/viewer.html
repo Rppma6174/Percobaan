@@ -127,7 +127,9 @@
     <script src="/Pro_Member_Akses/data.js"></script>
     <script src="/Pro_Member_Akses/pdfjs/build/pdf.mjs"></script>
 
-    <script>
+    <script type="module">
+
+    import * as pdfjsLib from '/Pro_Member_Akses/pdfjs/build/pdf.mjs';
         // --- PENJAGA KEAMANAN ---
         // Pengecekan sesi login. Jika tidak ada, tendang ke halaman login.
         const token = sessionStorage.getItem('sessionToken');
