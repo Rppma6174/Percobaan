@@ -8,14 +8,14 @@ const allContentData = {
             id: 'materi_7_1', 
             title: 'Materi Pembagian', 
             type: 'PDF Document', 
-            filePath: 'materi-files/fungsi.pdf', 
+            filePath: 'materi-files/k7-pembagian.pdf', 
             fileType: 'pdf' 
             },
             { 
             id: 'materi_7_2', 
             title: 'Materi Aljabar', 
             type: 'PDF Document', 
-            filePath: 'materi-files/aljabar.pdf', 
+            filePath: 'materi-files/k7-aljabar.pdf', 
             fileType: 'pdf' 
             },
             { 
