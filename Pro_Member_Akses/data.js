@@ -5,7 +5,7 @@ const allContentData = {
     materi: {
         "Kelas 7 SMP": [
             { 
-            id: 'materi_7_2', 
+            id: 'materi_7_1', 
             title: 'Materi Pembagian', 
             type: 'PDF Document', 
             filePath: 'materi-files/fungsi.pdf', 
