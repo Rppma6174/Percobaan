@@ -42,7 +42,7 @@ const allContentData = {
     video: [
         { 
             id: 'vid_1', 
-            title: 'Konsep Dasar Logaritma',
+            title: 'Esensi Nilai Mutlak',
             videoId: '-pETqV252Zc?si=7Hd75Gl-r1zPjYfF',
             category: 'Aljabar' // <-- Kategori baru
         },
