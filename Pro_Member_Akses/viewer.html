@@ -95,17 +95,12 @@
                 <a href="index.html" class="toolbar-button" title="Kembali ke Daftar Materi">
                     <i class="fa-solid fa-arrow-left"></i>
                 </a>
-                <h1 id="materi-title" class="toolbar-title">Memuat materi...</h1>
-            </div>
-            <div class="toolbar-section">
-                <button id="prev-page" class="toolbar-button" title="Halaman Sebelumnya">
-                    <i class="fa-solid fa-chevron-left"></i>
+                <button id="prev-materi" class="toolbar-button" title="Materi Sebelumnya">
+                    <i class="fa-solid fa-angles-left"></i>
                 </button>
-                <span id="page-info">
-                    Halaman <span id="page-num">0</span> dari <span id="page-count">0</span>
-                </span>
-                <button id="next-page" class="toolbar-button" title="Halaman Selanjutnya">
-                    <i class="fa-solid fa-chevron-right"></i>
+                <h1 id="materi-title" class="toolbar-title">Memuat materi...</h1>
+                <button id="next-materi" class="toolbar-button" title="Materi Selanjutnya">
+                    <i class="fa-solid fa-angles-right"></i>
                 </button>
             </div>
             <div class="toolbar-section">
@@ -127,152 +122,127 @@
     <script src="/Pro_Member_Akses/data.js"></script>
     <script src="/Pro_Member_Akses/pdfjs/build/pdf.mjs"></script>
 
-    <script type="module">
-
+<script type="module">
     import * as pdfjsLib from '/Pro_Member_Akses/pdfjs/build/pdf.mjs';
-        // --- PENJAGA KEAMANAN ---
-        // Pengecekan sesi login. Jika tidak ada, tendang ke halaman login.
-        const token = sessionStorage.getItem('sessionToken');
-        if (!token) {
-            window.location.href = '../Login/'; // Sesuaikan dengan URL halaman login Anda
+
+    // --- PENJAGA KEAMANAN ---
+    const token = sessionStorage.getItem('sessionToken');
+    if (!token) {
+        window.location.href = '../Login/';
+    }
+
+    // --- MENGAMBIL ELEMEN DARI HALAMAN ---
+    const materiTitleEl = document.getElementById('materi-title');
+    const statusMessageEl = document.getElementById('status-message');
+    const viewerEl = document.getElementById('pdf-viewer');
+    
+    // --- MENGATUR PDF.JS ---
+    pdfjsLib.GlobalWorkerOptions.workerSrc = '/Pro_Member_Akses/pdfjs/build/pdf.worker.mjs';
+
+    // --- VARIABEL STATE UNTUK VIEWER ---
+    let pdfDoc = null;
+    let scale = 1.5;
+
+    // --- FUNGSI UTAMA ---
+
+    // [LOGIKA BARU] Fungsi untuk merender SEMUA halaman PDF
+    const renderAllPages = async () => {
+        statusMessageEl.textContent = `Memuat ${pdfDoc.numPages} halaman...`;
+        statusMessageEl.style.display = 'block';
+        viewerEl.innerHTML = ''; // Kosongkan viewer sebelum render baru
+
+        const pagePromises = [];
+        for (let num = 1; num <= pdfDoc.numPages; num++) {
+            // Buat promise untuk merender setiap halaman
+            const promise = pdfDoc.getPage(num).then(page => {
+                const viewport = page.getViewport({ scale });
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                canvas.style.marginBottom = '1rem'; // Beri jarak antar halaman
+
+                const renderContext = { canvasContext: ctx, viewport };
+                // Tambahkan canvas ke halaman dulu
+                viewerEl.appendChild(canvas);
+                // Kembalikan promise render
+                return page.render(renderContext).promise;
+            });
+            pagePromises.push(promise);
         }
 
-        // --- MENGAMBIL ELEMEN DARI HALAMAN ---
-        const materiTitleEl = document.getElementById('materi-title');
-        const pageNumEl = document.getElementById('page-num');
-        const pageCountEl = document.getElementById('page-count');
-        const statusMessageEl = document.getElementById('status-message');
-        const canvas = document.getElementById('pdf-canvas');
-        const ctx = canvas.getContext('2d');
-        
-        // --- MENGATUR PDF.JS ---
-        pdfjsLib.GlobalWorkerOptions.workerSrc = '/Pro_Member_Akses/pdfjs/build/pdf.worker.mjs';
+        // Tunggu semua halaman selesai dirender
+        await Promise.all(pagePromises);
+        statusMessageEl.style.display = 'none';
+    };
 
-        // --- VARIABEL STATE UNTUK VIEWER ---
-        let pdfDoc = null;
-        let pageNum = 1;
-        let pageIsRendering = false;
-        let pageNumIsPending = null;
-        let scale = 1.5;
+    // [LOGIKA BARU] Fungsi untuk zoom
+    const onZoom = (newScale) => {
+        if (!pdfDoc || newScale < 0.5 || newScale > 3.0) return;
+        scale = newScale;
+        renderAllPages(); // Render ulang semua halaman dengan skala baru
+    };
 
-        // --- FUNGSI UTAMA ---
+    // --- LOGIKA SAAT HALAMAN DIBUKA ---
+    document.addEventListener('DOMContentLoaded', async () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const materiId = urlParams.get('id');
 
-        // Fungsi untuk merender halaman PDF ke canvas
-        const renderPage = async (num) => {
-            pageIsRendering = true;
-            statusMessageEl.style.display = 'block';
+        if (!materiId) {
+            materiTitleEl.textContent = 'Error: Materi tidak ditemukan.';
+            statusMessageEl.textContent = 'ID Materi tidak ada di URL.';
+            return;
+        }
 
-            // Mengambil halaman dari dokumen PDF
-            const page = await pdfDoc.getPage(num);
+        let materiItem = null, prevMateri = null, nextMateri = null;
+        for (const grade in allContentData.materi) {
+            const materiList = allContentData.materi[grade];
+            const currentIndex = materiList.findIndex(item => item.id === materiId);
             
-            // Mengatur skala dan viewport
-            const viewport = page.getViewport({ scale });
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
-
-            const renderContext = {
-                canvasContext: ctx,
-                viewport,
-            };
-
-            await page.render(renderContext).promise;
-            
-            pageIsRendering = false;
-            statusMessageEl.style.display = 'none';
-
-            // Jika ada permintaan render halaman lain saat sedang merender,
-            // render halaman yang diminta tersebut.
-            if (pageNumIsPending !== null) {
-                renderPage(pageNumIsPending);
-                pageNumIsPending = null;
+            if (currentIndex !== -1) {
+                materiItem = materiList[currentIndex];
+                if (currentIndex > 0) prevMateri = materiList[currentIndex - 1];
+                if (currentIndex < materiList.length - 1) nextMateri = materiList[currentIndex + 1];
+                break;
             }
-
-            // Update info halaman
-            pageNumEl.textContent = num;
-        };
-
-        // Fungsi untuk antrian render
-        const queueRenderPage = (num) => {
-            if (pageIsRendering) {
-                pageNumIsPending = num;
-            } else {
-                renderPage(num);
-            }
-        };
-
-        // Fungsi untuk tombol navigasi
-        const onPrevPage = () => {
-            if (pageNum <= 1) return;
-            pageNum--;
-            queueRenderPage(pageNum);
-        };
-
-        const onNextPage = () => {
-            if (pageNum >= pdfDoc.numPages) return;
-            pageNum++;
-            queueRenderPage(pageNum);
-        };
+        }
         
-        const onZoomIn = () => {
-            if (scale >= 3.0) return;
-            scale += 0.25;
-            queueRenderPage(pageNum);
-        };
-        
-        const onZoomOut = () => {
-            if (scale <= 0.5) return;
-            scale -= 0.25;
-            queueRenderPage(pageNum);
-        };
+        if (!materiItem) {
+            materiTitleEl.textContent = 'Error: Materi tidak ditemukan.';
+            statusMessageEl.textContent = `Materi dengan ID "${materiId}" tidak ditemukan.`;
+            return;
+        }
 
-        // --- LOGIKA SAAT HALAMAN DIBUKA ---
-        document.addEventListener('DOMContentLoaded', async () => {
-            // Ambil ID materi dari URL (misal: viewer.html?id=materi_7_2)
-            const urlParams = new URLSearchParams(window.location.search);
-            const materiId = urlParams.get('id');
+        materiTitleEl.textContent = materiItem.title;
 
-            if (!materiId) {
-                materiTitleEl.textContent = 'Error: Materi tidak ditemukan.';
-                statusMessageEl.textContent = 'ID Materi tidak ada di URL.';
-                return;
-            }
+        try {
+            pdfDoc = await pdfjsLib.getDocument(materiItem.filePath).promise;
+            renderAllPages(); // Panggil fungsi untuk merender semua halaman
+        } catch (err) {
+            console.error("Error saat memuat PDF:", err);
+            statusMessageEl.textContent = `Gagal memuat file PDF. Pastikan path file benar.`;
+        }
 
-            // Cari materi di allContentData
-            let materiItem = null;
-            for (const grade in allContentData.materi) {
-                const found = allContentData.materi[grade].find(item => item.id === materiId);
-                if (found) {
-                    materiItem = found;
-                    break;
-                }
-            }
-            
-            if (!materiItem) {
-                materiTitleEl.textContent = 'Error: Materi tidak ditemukan.';
-                statusMessageEl.textContent = `Materi dengan ID "${materiId}" tidak ditemukan.`;
-                return;
-            }
+        // Mengatur tombol navigasi materi
+        const prevMateriBtn = document.getElementById('prev-materi');
+        const nextMateriBtn = document.getElementById('next-materi');
+        if (prevMateri) {
+            prevMateriBtn.disabled = false;
+            prevMateriBtn.addEventListener('click', () => window.location.href = `viewer.html?id=${prevMateri.id}`);
+        } else {
+            prevMateriBtn.disabled = true;
+        }
+        if (nextMateri) {
+            nextMateriBtn.disabled = false;
+            nextMateriBtn.addEventListener('click', () => window.location.href = `viewer.html?id=${nextMateri.id}`);
+        } else {
+            nextMateriBtn.disabled = true;
+        }
 
-            // Update judul halaman
-            materiTitleEl.textContent = materiItem.title;
-
-            // Muat dokumen PDF
-            try {
-                pdfDoc = await pdfjsLib.getDocument(materiItem.filePath).promise;
-                pageCountEl.textContent = pdfDoc.numPages;
-                renderPage(pageNum);
-            } catch (err) {
-                console.error("Error saat memuat PDF:", err);
-                statusMessageEl.textContent = `Gagal memuat file PDF. Pastikan path file benar: ${materiItem.filePath}`;
-            }
-
-            // Pasang event listener ke tombol-tombol
-            document.getElementById('prev-page').addEventListener('click', onPrevPage);
-            document.getElementById('next-page').addEventListener('click', onNextPage);
-            document.getElementById('zoom-in').addEventListener('click', onZoomIn);
-            document.getElementById('zoom-out').addEventListener('click', onZoomOut);
-        });
-
-    </script>
+        // Pasang event listener ke tombol zoom
+        document.getElementById('zoom-in').addEventListener('click', () => onZoom(scale + 0.25));
+        document.getElementById('zoom-out').addEventListener('click', () => onZoom(scale - 0.25));
+    });
+</script>
 </body>
 </html>
