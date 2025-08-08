@@ -22,7 +22,19 @@
         }
         body { background-color: var(--bg-main); color: var(--text-primary); font-family: 'Inter', sans-serif; }
         .font-mono { font-family: 'Fira Code', monospace; }
-        .panel { background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; padding: 1.5rem; }
+.panel {
+    background-color: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    padding: 1rem; /* Padding default untuk mobile */
+}
+
+/* Terapkan padding lebih besar hanya untuk layar desktop */
+@media (min-width: 768px) {
+    .panel {
+        padding: 1.5rem;
+    }
+}
         .bottom-nav-link.active { color: var(--accent-cyan); }
         .sidebar-link.active { background-color: #30363D; color: white; }
         .card-item { background-color: #21262D; transition: transform 0.2s; cursor: pointer; }
@@ -286,7 +298,7 @@
             </div>
         </aside>
 
-        <main id="app-content" class="flex-1 p-6 space-y-6 pb-20 md:pb-6 overflow-x-hidden"></main>
+        <main id="app-content" class="flex-1 p-4 md:p-6 space-y-6 pb-24 md:pb-6 overflow-x-hidden"></main>
     </div>
 
     <div id="toast-container" class="fixed top-5 right-5 z-[100] space-y-3 w-80"></div>
