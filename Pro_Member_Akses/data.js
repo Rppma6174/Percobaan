@@ -15,7 +15,7 @@ const allContentData = {
             id: 'materi_7_2', 
             title: 'Materi Pembagian', 
             type: 'PDF Document', 
-            filePath: 'materi-files/aljabar.pdf', 
+            filePath: 'materi-files/fungsi.pdf', 
             fileType: 'pdf' 
             },
         ],
