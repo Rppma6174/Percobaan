@@ -463,42 +463,101 @@ function setupMateriSearch() {
         appContent.innerHTML = `<div class="panel">Halaman Video masih dalam pengembangan.</div>`;
     }
     
-    function renderBankSoalPage() {
-        const groupedQuizzes = allContentData.bankSoal.reduce((acc, quiz) => {
-            const category = quiz.category || 'Lainnya';
-            if (!acc[category]) acc[category] = [];
-            acc[category].push(quiz);
-            return acc;
-        }, {});
-    
-        const categoriesHTML = Object.keys(groupedQuizzes).map(category => {
-            const quizzes = groupedQuizzes[category];
-            const cardsHTML = quizzes.map(quiz => `
-                <div class="card-item p-6 rounded-lg flex flex-col flex-shrink-0 w-72 md:w-80" onclick="startQuiz('${quiz.id}')">
-                    <h3 class="font-bold text-lg mb-2">${quiz.title}</h3>
-                    <p class="text-sm text-gray-400 mb-4">${quiz.subject}</p>
-                    <div class="mt-auto text-xs font-mono bg-gray-900/50 text-cyan-300 rounded-full px-3 py-1 self-start">
-                        ${quiz.totalQuestions} Soal
-                    </div>
+function renderBankSoalPage() {
+    const categories = ['Semua', ...new Set(allContentData.bankSoal.map(quiz => quiz.category || 'Lainnya'))];
+
+    // Membuat Tombol Filter
+    const filterButtonsHTML = categories.map(category => `
+        <button class="filter-btn text-sm py-2 px-4 rounded-full bg-gray-700 hover:bg-cyan-600 transition-colors" data-filter="${category}">
+            ${category}
+        </button>
+    `).join('');
+
+    // Membuat Kartu Soal
+    const categoriesHTML = allContentData.bankSoal.reduce((acc, quiz) => {
+        const category = quiz.category || 'Lainnya';
+        if (!acc[category]) {
+            acc[category] = [];
+        }
+        acc[category].push(quiz);
+        return acc;
+    }, {});
+
+    let quizSectionsHTML = '';
+    for (const category in categoriesHTML) {
+        const quizzes = categoriesHTML[category];
+        const cardsHTML = quizzes.map(quiz => `
+            <div class="card-item p-6 rounded-lg flex flex-col flex-shrink-0 w-72 md:w-80" onclick="startQuiz('${quiz.id}')">
+                <h3 class="font-bold text-lg mb-2">${quiz.title}</h3>
+                <p class="text-sm text-gray-400 mb-4">${quiz.subject}</p>
+                <div class="mt-auto text-xs font-mono bg-gray-900/50 text-cyan-300 rounded-full px-3 py-1 self-start">
+                    ${quiz.totalQuestions} Soal
                 </div>
-            `).join('');
-    
-            return `
-                <div class="mb-8">
-                    <h3 class="text-xl font-bold mb-4 text-cyan-300">${category}</h3>
-                    <div class="no-scrollbar flex overflow-x-auto gap-4 pb-4">${cardsHTML}</div>
+            </div>
+        `).join('');
+
+        // Menambahkan atribut data-category untuk identifikasi
+        quizSectionsHTML += `
+            <div class="quiz-category-section mb-8" data-category="${category}">
+                <h3 class="text-xl font-bold mb-4 text-cyan-300">${category}</h3>
+                <div class="no-scrollbar flex overflow-x-auto gap-4 pb-4">
+                    ${cardsHTML}
                 </div>
-            `;
-        }).join('');
-    
-        appContent.innerHTML = `
-            <div class="panel">
-                <h2 class="text-2xl font-bold mb-1 text-cyan-400">Bank Soal</h2>
-                <p class="text-sm text-gray-400 mb-6">Pilih paket soal untuk mulai berlatih.</p>
-                <div>${categoriesHTML}</div>
             </div>
         `;
     }
+    
+    // Menggabungkan semuanya
+    const bankSoalHTML = `
+        <div class="panel">
+            <h2 class="text-2xl font-bold mb-1 text-cyan-400">Bank Soal</h2>
+            <p class="text-sm text-gray-400 mb-6">Pilih paket soal untuk mulai berlatih.</p>
+            
+            <div class="mb-8 flex flex-wrap gap-2" id="filter-container">
+                ${filterButtonsHTML}
+            </div>
+
+            <div id="quiz-list-container">
+                ${quizSectionsHTML}
+            </div>
+        </div>
+    `;
+    appContent.innerHTML = bankSoalHTML;
+
+    // Panggil fungsi untuk mengaktifkan logika filter
+    setupBankSoalFilter();
+}
+
+function setupBankSoalFilter() {
+    const filterContainer = document.getElementById('filter-container');
+    const quizSections = document.querySelectorAll('.quiz-category-section');
+    if (!filterContainer) return;
+
+    // Set tombol 'Semua' sebagai aktif secara default
+    filterContainer.querySelector('[data-filter="Semua"]').classList.add('bg-cyan-600');
+
+    filterContainer.addEventListener('click', (e) => {
+        // Hanya proses jika yang diklik adalah tombol filter
+        if (!e.target.matches('.filter-btn')) return;
+
+        const selectedFilter = e.target.dataset.filter;
+
+        // Atur tampilan tombol aktif
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.classList.remove('bg-cyan-600');
+        });
+        e.target.classList.add('bg-cyan-600');
+
+        // Proses filter untuk setiap bagian soal
+        quizSections.forEach(section => {
+            if (selectedFilter === 'Semua' || section.dataset.category === selectedFilter) {
+                section.style.display = 'block';
+            } else {
+                section.style.display = 'none';
+            }
+        });
+    });
+}
     
     function renderForumPage() {
         appContent.innerHTML = `<div class="forum-container"><div class="intro"><h1>Forum Belajar UMT</h1><p>Bergabunglah dengan komunitas eksklusif UMT Academy! Tempat terbaik untuk berdiskusi, bertanya, berbagi ilmu, dan menguasai matematika bersama sesama pelajar dan fasilitator.</p></div><div class="community-links"><h2>Pilih Komunitas Pilihanmu Sekarang!</h2><div class="flex justify-center gap-4 flex-wrap"><a href="https://chat.whatsapp.com/GpyKRFFjMINBcjqGEYSXQ6" target="_blank" class="community-btn whatsapp-btn"><i class="fab fa-whatsapp"></i><span>Komunitas WhatsApp</span></a><a href="https://t.me/umt6174" target="_blank" class="community-btn telegram-btn"><i class="fab fa-telegram"></i><span>Komunitas Telegram</span></a></div><p class="subtext">Bergabunglah dengan ribuan pelajar lainnya!</p></div></div>`;
