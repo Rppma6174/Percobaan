@@ -317,7 +317,7 @@ const allContentData = {
             id: 'materi_7_1', 
             title: 'Materi Aljabar', 
             type: 'PDF Document', 
-            filePath: 'materi-files/aljabar.html', 
+            filePath: 'materi-files/aljabar.pdf', 
             fileType: 'pdf' 
             },
         ],
@@ -935,55 +935,70 @@ function renderMateriPage() {
 }
 
 function showMateriContent(itemId, gradeKey) {
-    // Cari materi di dalam grup kelas yang sesuai
     const materiItem = allContentData.materi[gradeKey].find(item => item.id === itemId);
     if (!materiItem) {
         showToast("Materi tidak ditemukan!", "error");
         return;
     }
 
-    // --- LOGIKA UNTUK MOBILE ---
-    // Sembunyikan daftar materi dan tampilkan viewer
-    document.getElementById('materi-list-container').classList.add('md:block', 'hidden');
-    document.getElementById('materi-viewer-container').classList.remove('hidden');
-    document.getElementById('materi-viewer-container').classList.add('flex');
+    const listContainer = document.getElementById('materi-list-container');
+    const viewerContainer = document.getElementById('materi-viewer-container');
+    const viewerContent = document.getElementById('materi-viewer-content');
 
-    // Tandai kartu yang aktif secara visual
+    // --- PERBAIKAN UTAMA ---
+    // 1. Logika untuk Mobile: Sembunyikan daftar, tampilkan viewer
+    listContainer.classList.add('hidden');
+    listContainer.classList.remove('md:block'); // Hapus md:block sementara
+    viewerContainer.classList.remove('hidden');
+    viewerContainer.classList.add('flex');
+
+    // 2. Hapus class untuk centering placeholder agar tidak merusak layout konten
+    viewerContent.classList.remove('flex', 'items-center', 'justify-center');
+    
+    // 3. Atur ulang padding viewer untuk mobile agar tidak menempel
+    viewerContent.classList.remove('p-4', 'md:p-6');
+    viewerContent.classList.add('p-0', 'md:p-4');
+    // --- AKHIR PERBAIKAN ---
+
     document.querySelectorAll('.card-item-list').forEach(card => card.classList.remove('active', 'bg-cyan-800'));
     document.getElementById(`card-${itemId}`).classList.add('active', 'bg-cyan-800');
     
-    const viewer = document.getElementById('materi-viewer-content');
-    viewer.innerHTML = `<p class="text-center text-gray-400">Memuat konten...</p>`; // Pesan loading
-
-    let contentHTML = '';
+    viewerContent.innerHTML = `<p class="text-center text-gray-400 p-4">Memuat konten...</p>`;
 
     // Tombol kembali KHUSUS untuk mobile
     const backButton = `<button onclick="goBackToList()" class="md:hidden mb-4 bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2"><i class="fa-solid fa-chevron-left"></i> Kembali ke Daftar</button>`;
+    
+    let finalHTML = '';
 
     if (materiItem.fileType === 'html') {
         fetch(materiItem.filePath)
-            .then(response => {
-                if (!response.ok) throw new Error('File tidak ditemukan.');
-                return response.text();
-            })
+            .then(response => response.ok ? response.text() : Promise.reject('File not found.'))
             .then(htmlContent => {
-                viewer.innerHTML = backButton + htmlContent; // Tambahkan tombol kembali
+                // Bungkus semua dalam satu div untuk padding
+                finalHTML = `<div class="p-4">${backButton}${htmlContent}</div>`;
+                viewerContent.innerHTML = finalHTML;
             })
             .catch(error => {
-                viewer.innerHTML = backButton + `<p class="text-center text-red-500">Gagal memuat konten.</p>`;
+                viewerContent.innerHTML = `<div class="p-4">${backButton}<p class="text-center text-red-500">Gagal memuat konten.</p></div>`;
             });
     } else if (materiItem.fileType === 'pdf') {
-        contentHTML = `
-            ${backButton}
-            <embed src="${materiItem.filePath}" type="application/pdf" class="w-full h-[70vh] md:h-full" />
-            <div class="text-center mt-2">
-                <p class="text-sm text-gray-400">Jika PDF tidak muncul, <a href="${materiItem.filePath}" target="_blank" class="text-cyan-400 hover:underline">buka di tab baru</a>.</p>
+        finalHTML = `
+            <div class="p-2 md:p-0 w-full h-full flex flex-col">
+                ${backButton}
+                <embed src="${materiItem.filePath}" type="application/pdf" class="w-full flex-1" />
+                <div class="text-center mt-2 text-sm text-gray-400">
+                    Jika PDF tidak muncul, <a href="${materiItem.filePath}" target="_blank" class="text-cyan-400 hover:underline">buka di tab baru</a>.
+                </div>
             </div>
         `;
-        viewer.innerHTML = contentHTML;
+        viewerContent.innerHTML = finalHTML;
     }
 
-    markAsCompleted(itemId); 
+    // Panggil markAsCompleted tanpa memicu toast jika item sudah selesai
+    const completedItems = JSON.parse(localStorage.getItem('userCompletedItems')) || [];
+    if (!completedItems.includes(itemId)) {
+        markAsCompleted(itemId);
+    }
 }
 
 /**
@@ -991,9 +1006,27 @@ function showMateriContent(itemId, gradeKey) {
  * dari tampilan konten.
  */
 function goBackToList() {
-    document.getElementById('materi-list-container').classList.remove('hidden');
-    document.getElementById('materi-viewer-container').classList.add('hidden');
-    document.getElementById('materi-viewer-container').classList.remove('flex');
+    const listContainer = document.getElementById('materi-list-container');
+    const viewerContainer = document.getElementById('materi-viewer-container');
+    const viewerContent = document.getElementById('materi-viewer-content');
+
+    // Kembalikan visibilitas seperti semula
+    listContainer.classList.remove('hidden');
+    listContainer.classList.add('md:block');
+    viewerContainer.classList.add('hidden');
+    viewerContainer.classList.remove('flex');
+
+    // --- PERBAIKAN ---
+    // Kembalikan gaya untuk placeholder
+    viewerContent.classList.add('flex', 'items-center', 'justify-center');
+    viewerContent.classList.remove('p-0', 'md:p-4');
+    viewerContent.classList.add('p-4', 'md:p-6');
+    viewerContent.innerHTML = `
+        <div class="text-center text-gray-500">
+            <i class="fa-solid fa-file-lines fa-2x mb-4"></i>
+            <p>Konten akan ditampilkan di sini.</p>
+        </div>
+    `;
 }
 
 function renderVideoPage() {
@@ -1105,7 +1138,16 @@ function initializeAppDashboardWidgets() {
     
     const COMPLETED_KEY = 'userCompletedItems';
     const completedItems = JSON.parse(localStorage.getItem(COMPLETED_KEY)) || [];
-    const totalItems = allContentData.materi.length + allContentData.video.length + allContentData.bankSoal.length;
+
+    // --- PERBAIKAN LOGIKA PERHITUNGAN ---
+    // Hitung total materi dari struktur objek yang baru
+    let totalMateri = 0;
+    for (const gradeKey in allContentData.materi) {
+        totalMateri += allContentData.materi[gradeKey].length;
+    }
+    const totalItems = totalMateri + allContentData.video.length + allContentData.bankSoal.length;
+    // --- AKHIR PERBAIKAN ---
+
     const progress = totalItems > 0 ? Math.round((completedItems.length / totalItems) * 100) : 0;
     
     document.getElementById('status-container').innerHTML = `<div><span class="text-sm">📚 Progress Keseluruhan (${completedItems.length}/${totalItems})</span><div class="w-full bg-gray-700 rounded-full h-2.5 mt-1"><div class="bg-cyan-500 h-2.5 rounded-full transition-all duration-500" style="width: ${progress}%"></div></div></div>`;
@@ -1119,7 +1161,7 @@ function initializeAppDashboardWidgets() {
     const socialContainer = document.getElementById('social-media-container');
     socialContainer.innerHTML = socialMediaUpdates.map(item => `
         <a href="${item.link}" target="_blank" class="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-800">
-            <i class="${item.icon} ${item.color} text-xl w-6 text-center"></i>
+            ${item.icon.endsWith('.png') ? `<img src="${item.icon}" class="w-6 h-6">` : `<i class="${item.icon} ${item.color} text-xl w-6 text-center"></i>`}
             <span class="text-sm text-gray-300">${item.text}</span>
         </a>
     `).join('');
