@@ -44,7 +44,7 @@ const allContentData = {
             id: 'vid_1', 
             title: 'Esensi Nilai Mutlak',
             videoId: '-pETqV252Zc?si=7Hd75Gl-r1zPjYfF',
-            category: 'Aljabar' // <-- Kategori baru
+            category: 'Nilai Mutlak' // <-- Kategori baru
         },
         { 
             id: 'vid_2', 
