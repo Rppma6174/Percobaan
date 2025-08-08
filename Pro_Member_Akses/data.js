@@ -11,6 +11,13 @@ const allContentData = {
             filePath: 'materi-files/fungsi.pdf', 
             fileType: 'pdf' 
             },
+            { 
+            id: 'materi_7_2', 
+            title: 'Materi Aljabar', 
+            type: 'PDF Document', 
+            filePath: 'materi-files/aljabar.pdf', 
+            fileType: 'pdf' 
+            },
         ],
         "Kelas 8 SMP": [
             { 
