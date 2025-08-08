@@ -295,18 +295,16 @@ function renderMateriPage() {
     const materiData = allContentData.materi;
 
     for (const gradeKey in materiData) {
-        // Kita tambahkan data-grade-key agar mudah dicari nanti
+        // [DIUBAH] onclick sekarang mengarahkan ke viewer.html
         const itemsHTML = materiData[gradeKey].map(item => `
             <li id="card-${item.id}"
                 class="card-item-list block p-3 rounded-md hover:bg-gray-700 cursor-pointer"
-                data-grade-key="${gradeKey}" 
-                onclick="showMateriContent('${item.id}', '${gradeKey}')">
+                onclick="window.location.href='viewer.html?id=${item.id}'">
                 <span class="font-semibold">${item.title}</span>
                 <span class="block text-xs text-gray-400">${item.type}</span>
             </li>
         `).join('');
 
-        // Kita tambahkan ID unik untuk setiap grup accordion
         accordionHTML += `
             <div class="accordion-item border-b border-gray-700" data-accordion-group>
                 <h2>
@@ -322,6 +320,7 @@ function renderMateriPage() {
         `;
     }
 
+    // [DIUBAH] Tampilan diubah menjadi satu kolom saja, karena viewer sudah pindah halaman.
     const materiPageHTML = `
         <div class="panel">
             <h2 class="text-2xl font-bold text-cyan-400">Pustaka Materi</h2>
@@ -334,26 +333,13 @@ function renderMateriPage() {
                 <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
             </div>
             
-            <div id="materi-layout-container" class="flex flex-col md:flex-row gap-6">
-                <div id="materi-list-container" class="w-full md:w-1/3 lg:w-1/4">
-                    <div class="border border-gray-700 rounded-lg bg-gray-900/50">
-                        ${accordionHTML}
-                    </div>
-                </div>
-                <div id="materi-viewer-container" class="w-full md:w-2/3 lg:w-3/4 hidden md:flex flex-col">
-                    <div id="materi-viewer-content" class="bg-gray-900/50 p-6 rounded-lg border border-gray-700 h-full flex items-center justify-center">
-                        <div class="text-center text-gray-500">
-                            <i class="fa-solid fa-file-lines fa-2x mb-4"></i>
-                            <p>Konten akan ditampilkan di sini.</p>
-                        </div>
-                    </div>
-                </div>
+            <div class="border border-gray-700 rounded-lg bg-gray-900/50">
+                ${accordionHTML}
             </div>
         </div>
     `;
     appContent.innerHTML = materiPageHTML;
 
-    // Tambahkan event listener untuk accordion
     document.querySelectorAll('.accordion-button').forEach(button => {
         button.addEventListener('click', () => {
             const content = button.parentElement.nextElementSibling;
@@ -363,7 +349,6 @@ function renderMateriPage() {
         });
     });
 
-    // [KODE BARU] Panggil fungsi untuk mengaktifkan logika pencarian
     setupMateriSearch();
 }
 
@@ -446,8 +431,6 @@ function showMateriContent(itemId, gradeKey) {
     const prevItemId = hasPrev ? `'${materiDalamGrade[currentIndex - 1].id}', '${gradeKey}'` : '';
     const nextItemId = hasNext ? `'${materiDalamGrade[currentIndex + 1].id}', '${gradeKey}'` : '';
 
-    const backButton = `<button onclick="goBackToList()" class="md:hidden mb-4 bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2"><i class="fa-solid fa-chevron-left"></i> Kembali</button>`;
-
     // Tombol navigasi untuk desktop
     const desktopNavButtons = `
         <div class="hidden md:flex justify-between items-center mb-4">
@@ -485,11 +468,6 @@ function showMateriContent(itemId, gradeKey) {
 
     markAsCompleted(itemId, { showToast: true });
 }
-    
-    function goBackToList() {
-        document.getElementById('materi-list-container').classList.remove('hidden');
-        document.getElementById('materi-viewer-container').classList.add('hidden');
-    }
     
 function renderVideoPage() {
     // [BARU] Mengambil kategori unik dari data video secara dinamis
