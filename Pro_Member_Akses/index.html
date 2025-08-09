@@ -262,36 +262,25 @@
     // =================================================================================
     // BAGIAN 3: FUNGSI RENDER UNTUK SETIAP HALAMAN
     // =================================================================================
-    function renderDashboardPage() {
-        appContent.innerHTML = `
-            <header class="panel flex justify-between items-center">
-                <div>
-                    <h2 id="user-greeting" class="text-xl font-bold"></h2>
-                    <p class="text-sm text-gray-400">Selamat datang di Command Center Anda.</p>
-                </div>
-            </header>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="col-span-1 lg:col-span-2 space-y-6">
-                    <div class="panel">
-                        <h4 class="font-bold text-lg mb-4">Status Anda</h4>
-                        <div id="status-container" class="space-y-4"></div>
-                    </div>
-                    <div id="last-score-widget-container"></div>
-                </div>
-                <div class="col-span-1 space-y-6">
-                    <div class="panel">
-                        <h4 class="font-bold text-lg mb-4">Pencapaian</h4>
-                        <div id="lencana-container" class="flex gap-4"></div>
-                    </div>
-                     <div class="panel">
-                        <h4 class="font-bold text-lg mb-4">Info Terbaru UMT</h4>
-                        <div id="social-media-container" class="space-y-4"></div>
-                    </div>
-                </div>
+// Ganti fungsi renderDashboardPage di index.html
+function renderDashboardPage() {
+    appContent.innerHTML = `
+        <header class="panel flex justify-between items-center">
+            ...
+        </header>
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div class="col-span-1 lg:col-span-2 space-y-6">
+                ...
+                <div id="last-score-widget-container"></div>
+                <div id="last-activity-container" class="space-y-6"></div>
             </div>
-        `;
-        initializeAppDashboardWidgets();
-    }
+            <div class="col-span-1 space-y-6">
+                ...
+            </div>
+        </div>
+    `;
+    initializeAppDashboardWidgets();
+}
     
 function renderMateriPage() {
     let accordionHTML = '';
@@ -786,6 +775,55 @@ function getTotalItemCount() {
                     </div>
                 </div>`;
         }
+            // [LOGIKA BARU] Membuat widget aktivitas terakhir
+    const lastActivityContainer = document.getElementById('last-activity-container');
+    const lastActivity = JSON.parse(localStorage.getItem('userLastActivity')) || {};
+    let activityHTML = '';
+
+    const createWidget = (config) => {
+        if (!config.data) return '';
+        return `
+            <div class="panel">
+                <h4 class="font-bold text-lg mb-3">${config.title}</h4>
+                <div class="flex items-center gap-4 p-3 rounded-lg bg-gray-900/50">
+                    <i class="${config.icon} text-cyan-400 text-2xl w-8 text-center"></i>
+                    <div class="flex-grow">
+                        <p class="text-sm font-semibold">${config.data.title}</p>
+                        <a href="${config.link}" ${config.onclick ? `onclick="${config.onclick}"` : ''} class="text-xs text-cyan-400 hover:underline cursor-pointer">
+                            ${config.actionText}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        `;
+    };
+
+    activityHTML += createWidget({
+        title: "Materi Terakhir Dibaca",
+        icon: "fa-solid fa-book-open",
+        actionText: "Lanjutkan Membaca",
+        data: lastActivity.materi,
+        link: `viewer.html?id=${lastActivity.materi?.id}`
+    });
+
+    activityHTML += createWidget({
+        title: "Video Terakhir Ditonton",
+        icon: "fa-solid fa-circle-play",
+        actionText: "Tonton Lagi",
+        data: lastActivity.video,
+        link: '#',
+        onclick: `event.preventDefault(); playVideoInModal('${lastActivity.video?.videoId}', '${lastActivity.video?.title.replace(/'/g, "\\'")}')`
+    });
+
+    activityHTML += createWidget({
+        title: "Lab Terakhir Dibaca",
+        icon: "fa-solid fa-flask-vial",
+        actionText: "Lanjutkan Membaca",
+        data: lastActivity.lab,
+        link: `viewer.html?id=${lastActivity.lab?.id}`
+    });
+
+    lastActivityContainer.innerHTML = activityHTML;
     }
     
     function resetProgress() {
