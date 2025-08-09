@@ -131,6 +131,30 @@
         window.location.href = '../Login/';
     }
 
+    // --- FUNGSI PEMBANTU (HELPER FUNCTIONS) ---
+    // [PERBAIKAN] Menambahkan fungsi yang hilang agar bisa dipanggil
+    function markAsCompleted(itemId) {
+        const key = 'userCompletedItems';
+        let completed = JSON.parse(localStorage.getItem(key)) || [];
+        if (!completed.includes(itemId)) {
+            completed.push(itemId);
+            localStorage.setItem(key, JSON.stringify(completed));
+        }
+    }
+
+    function updateLastActivity(type, item) {
+        const key = 'userLastActivity';
+        let lastActivity = JSON.parse(localStorage.getItem(key)) || {};
+        lastActivity[type] = {
+            id: item.id,
+            title: item.title,
+            filePath: item.filePath, 
+            videoId: item.videoId
+        };
+        localStorage.setItem(key, JSON.stringify(lastActivity));
+    }
+    // Akhir Perbaikan
+
     // --- MENGAMBIL ELEMEN DARI HALAMAN ---
     const materiTitleEl = document.getElementById('materi-title');
     const statusMessageEl = document.getElementById('status-message');
@@ -143,128 +167,127 @@
     let pdfDoc = null;
     let scale = 1.5;
 
-    // --- FUNGSI UTAMA ---
+    // --- FUNGSI-FUNGSI VIEWER ---
+    const renderAllPages = async () => {
+        statusMessageEl.textContent = `Memuat ${pdfDoc.numPages} halaman...`;
+        statusMessageEl.style.display = 'block';
+        viewerEl.innerHTML = ''; 
 
-    // [LOGIKA BARU] Fungsi untuk merender SEMUA halaman PDF
-const renderAllPages = async () => {
-    statusMessageEl.textContent = `Memuat ${pdfDoc.numPages} halaman...`;
-    statusMessageEl.style.display = 'block';
-    viewerEl.innerHTML = ''; // Kosongkan viewer sebelum render baru
+        const pagePromises = [];
+        for (let num = 1; num <= pdfDoc.numPages; num++) {
+            const promise = pdfDoc.getPage(num).then(page => {
+                const devicePixelRatio = window.devicePixelRatio || 1;
+                const viewport = page.getViewport({ scale: scale * devicePixelRatio });
+                
+                const canvas = document.createElement('canvas');
+                const ctx = canvas.getContext('2d');
+                
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+                canvas.style.width = `${viewport.width / devicePixelRatio}px`;
+                canvas.style.height = `${viewport.height / devicePixelRatio}px`;
+                canvas.style.marginBottom = '1rem';
 
-    const pagePromises = [];
-    for (let num = 1; num <= pdfDoc.numPages; num++) {
-        const promise = pdfDoc.getPage(num).then(page => {
-            // [BARU] Deteksi kepadatan piksel layar untuk render kualitas tinggi
-            const devicePixelRatio = window.devicePixelRatio || 1;
+                const renderContext = { canvasContext: ctx, viewport };
+                viewerEl.appendChild(canvas);
+                return page.render(renderContext).promise;
+            });
+            pagePromises.push(promise);
+        }
 
-            // [DIUBAH] Gunakan devicePixelRatio untuk membuat viewport resolusi tinggi
-            const viewport = page.getViewport({ scale: scale * devicePixelRatio });
-            
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-            
-            // Atur ukuran piksel canvas sebenarnya
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
+        await Promise.all(pagePromises);
+        statusMessageEl.style.display = 'none';
+    };
 
-            // [BARU] Atur ukuran tampilan canvas menggunakan CSS agar pas di layar
-            canvas.style.width = `${viewport.width / devicePixelRatio}px`;
-            canvas.style.height = `${viewport.height / devicePixelRatio}px`;
-            
-            canvas.style.marginBottom = '1rem';
-
-            const renderContext = { 
-                canvasContext: ctx, 
-                viewport,
-                // [BARU] Aktifkan rendering teks yang lebih tajam
-                renderInteractiveForms: true,
-                enableXfa: true,
-            };
-            
-            viewerEl.appendChild(canvas);
-            return page.render(renderContext).promise;
-        });
-        pagePromises.push(promise);
-    }
-
-    await Promise.all(pagePromises);
-    statusMessageEl.style.display = 'none';
-};
-
-    // [LOGIKA BARU] Fungsi untuk zoom
     const onZoom = (newScale) => {
         if (!pdfDoc || newScale < 0.5 || newScale > 3.0) return;
         scale = newScale;
-        renderAllPages(); // Render ulang semua halaman dengan skala baru
+        renderAllPages();
     };
 
     // --- LOGIKA SAAT HALAMAN DIBUKA ---
-document.addEventListener('DOMContentLoaded', async () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const materiId = urlParams.get('id');
+    document.addEventListener('DOMContentLoaded', async () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const contentId = urlParams.get('id');
 
-    if (!materiId) {
-        materiTitleEl.textContent = 'Error: Konten tidak ditemukan.';
-        statusMessageEl.textContent = 'ID Konten tidak ada di URL.';
-        return;
-    }
+        if (!contentId) {
+            materiTitleEl.textContent = 'Error: Konten tidak ditemukan.';
+            statusMessageEl.textContent = 'ID Konten tidak ada di URL.';
+            return;
+        }
 
-    // --- [LOGIKA BARU] Mencari konten di semua tempat (Materi & UMT Lab) ---
-    let contentItem = null;
-    let prevItem = null;
-    let nextItem = null;
-    const allContentSources = [
-        ...Object.values(allContentData.materi).flat(), // Menggabungkan semua materi jadi satu array
-        ...allContentData.umtLab // Menggabungkan dengan artikel Lab
-    ];
+        let contentItem = null;
+        let prevItem = null;
+        let nextItem = null;
 
-    // Cari konten yang sedang dibuka
-    const currentIndex = allContentSources.findIndex(item => item.id === materiId);
-
-    if (currentIndex !== -1) {
-        contentItem = allContentSources[currentIndex];
-        // Cek apakah ada konten sebelum atau sesudahnya (dalam kategori yang sama jika perlu)
-        // Untuk saat ini, kita biarkan navigasi antar-materi hanya untuk halaman Materi
-        // Dan navigasi antar-lab hanya untuk halaman Lab (akan diimplementasikan jika perlu)
-    }
-    
-    if (!contentItem) {
-        materiTitleEl.textContent = 'Error: Konten tidak ditemukan.';
-        statusMessageEl.textContent = `Konten dengan ID "${materiId}" tidak ditemukan.`;
-        return;
-    }
-
-    // [LOGIKA BARU] Melacak item yang selesai dan aktivitas terakhir
-    // Kita tentukan tipenya (materi atau lab) berdasarkan format ID
-    const type = contentItem.id.startsWith('lab_') ? 'lab' : 'materi';
-    markAsCompleted(contentItem.id); 
-    updateLastActivity(type, contentItem);
-    // Akhir Logika Baru
-
-    materiTitleEl.textContent = contentItem.title;
-
-    try {
-        pdfDoc = await pdfjsLib.getDocument(contentItem.filePath).promise;
+        // Mencari di Materi
+        for (const grade in allContentData.materi) {
+            const materiList = allContentData.materi[grade];
+            const currentIndex = materiList.findIndex(item => item.id === contentId);
+            if (currentIndex !== -1) {
+                contentItem = materiList[currentIndex];
+                if (currentIndex > 0) prevItem = materiList[currentIndex - 1];
+                if (currentIndex < materiList.length - 1) nextItem = materiList[currentIndex + 1];
+                break;
+            }
+        }
         
-        const firstPage = await pdfDoc.getPage(1);
-        const pageWidth = firstPage.getViewport({ scale: 1 }).width;
-        const containerWidth = viewerEl.clientWidth - 32; 
-        scale = containerWidth / pageWidth; 
+        // Jika tidak ketemu di Materi, cari di UMT Lab
+        if (!contentItem) {
+            const labList = allContentData.umtLab;
+            const currentIndex = labList.findIndex(item => item.id === contentId);
+            if (currentIndex !== -1) {
+                contentItem = labList[currentIndex];
+                if (currentIndex > 0) prevItem = labList[currentIndex - 1];
+                if (currentIndex < labList.length - 1) nextItem = labList[currentIndex + 1];
+            }
+        }
+        
+        if (!contentItem) {
+            materiTitleEl.textContent = 'Error: Konten tidak ditemukan.';
+            statusMessageEl.textContent = `Konten dengan ID "${contentId}" tidak ditemukan.`;
+            return;
+        }
+        
+        // Menandai progres dan aktivitas terakhir
+        const type = contentItem.id.startsWith('lab_') ? 'lab' : 'materi';
+        markAsCompleted(contentItem.id); 
+        updateLastActivity(type, contentItem);
 
-        renderAllPages();
-    } catch (err) {
-        console.error("Error saat memuat PDF:", err);
-        statusMessageEl.textContent = `Gagal memuat file PDF. Pastikan path file benar.`;
-    }
+        materiTitleEl.textContent = contentItem.title;
 
-    // Menonaktifkan tombol navigasi antar-materi/lab untuk sementara agar lebih simpel
-    document.getElementById('prev-materi').style.display = 'none';
-    document.getElementById('next-materi').style.display = 'none';
+        try {
+            pdfDoc = await pdfjsLib.getDocument(contentItem.filePath).promise;
+            const firstPage = await pdfDoc.getPage(1);
+            const pageWidth = firstPage.getViewport({ scale: 1 }).width;
+            const containerWidth = viewerEl.clientWidth - 32; 
+            scale = containerWidth / pageWidth; 
+            renderAllPages();
+        } catch (err) {
+            console.error("Error saat memuat PDF:", err);
+            statusMessageEl.textContent = `Gagal memuat file PDF. Pastikan path file benar.`;
+        }
+        
+        // Mengatur tombol navigasi antar-konten
+        const prevMateriBtn = document.getElementById('prev-materi');
+        const nextMateriBtn = document.getElementById('next-materi');
+        if (prevItem) {
+            prevMateriBtn.disabled = false;
+            prevMateriBtn.addEventListener('click', () => window.location.href = `viewer.html?id=${prevItem.id}`);
+        } else {
+            prevMateriBtn.disabled = true;
+        }
+        if (nextItem) {
+            nextMateriBtn.disabled = false;
+            nextMateriBtn.addEventListener('click', () => window.location.href = `viewer.html?id=${nextItem.id}`);
+        } else {
+            nextMateriBtn.disabled = true;
+        }
 
-    // Pasang event listener ke tombol zoom
-    document.getElementById('zoom-in').addEventListener('click', () => onZoom(scale + 0.25));
-    document.getElementById('zoom-out').addEventListener('click', () => onZoom(scale - 0.25));
-});
+        // Pasang event listener ke tombol zoom
+        document.getElementById('zoom-in').addEventListener('click', () => onZoom(scale + 0.25));
+        document.getElementById('zoom-out').addEventListener('click', () => onZoom(scale - 0.25));
+    });
 </script>
 </body>
 </html>
