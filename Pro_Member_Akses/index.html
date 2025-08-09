@@ -522,7 +522,7 @@ function playVideoInModal(videoId, title) {
         updateLastActivity('video', videoItem);
     }
     // Akhir Logika Baru
-    
+
     const videoPlayerHTML = `
         <div class="video-responsive-container">
             <iframe
@@ -814,6 +814,19 @@ function getTotalItemCount() {
             }
         }
     }
+// Tambahkan fungsi baru ini di index.html
+function updateLastActivity(type, item) {
+    const key = 'userLastActivity';
+    let lastActivity = JSON.parse(localStorage.getItem(key)) || {};
+    lastActivity[type] = {
+        id: item.id,
+        title: item.title,
+        // Menyimpan path atau videoId untuk membuat link "Lanjutkan"
+        filePath: item.filePath, 
+        videoId: item.videoId
+    };
+    localStorage.setItem(key, JSON.stringify(lastActivity));
+}
     
     // =================================================================================
     // BAGIAN 5: LOGIKA KUIS
