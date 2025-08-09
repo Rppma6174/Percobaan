@@ -515,6 +515,14 @@ function renderVideoPage() {
 
 // [FUNGSI BARU] Letakkan ini di dalam <script> Anda
 function playVideoInModal(videoId, title) {
+    // [LOGIKA BARU] Temukan item video lengkapnya untuk disimpan
+    const videoItem = allContentData.video.find(v => v.videoId === videoId);
+    if (videoItem) {
+        markAsCompleted(videoItem.id, { showToast: true });
+        updateLastActivity('video', videoItem);
+    }
+    // Akhir Logika Baru
+    
     const videoPlayerHTML = `
         <div class="video-responsive-container">
             <iframe
