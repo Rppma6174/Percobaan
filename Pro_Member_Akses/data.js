@@ -1,5 +1,6 @@
 const allContentData = {
     umtLab: [
+    // Eksplorasi Teori
     {
         id: 'lab_01',
         category: 'Eksplorasi Teori',
@@ -9,6 +10,7 @@ const allContentData = {
         summary: 'Menggali hubungan antara paradoks kuno Yunani dengan salah satu konsep fundamental dalam matematika modern.',
         filePath: 'lab-content/eksplorasi teori/paradoks-zeno.pdf'
     },
+    // Analisis dan Kajian
     {
         id: 'lab_02',
         category: 'Analisis & Kajian',
