@@ -4,11 +4,83 @@ const allContentData = {
     {
         id: 'lab_01',
         category: 'Eksplorasi Teori',
+        title: 'Aturan Pada Pertidaksamaan',
+        author: 'Tim UMT',
+        date: '08 Agustus 2025',
+        summary: 'Menggali hubungan antara paradoks kuno Yunani dengan salah satu konsep fundamental dalam matematika modern.',
+        filePath: 'lab-content/eksplorasi teori/Aturan Pada Pertidaksamaan.pdf'
+    },
+    {
+        id: 'lab_02',
+        category: 'Eksplorasi Teori',
+        title: 'Kalkulus Diferensial untuk Optimisas',
+        author: 'Tim UMT',
+        date: '08 Agustus 2025',
+        summary: 'Menggali hubungan antara paradoks kuno Yunani dengan salah satu konsep fundamental dalam matematika modern.',
+        filePath: 'lab-content/eksplorasi teori/Kalkulus Diferensial untuk Optimisas.pdf'
+    },
+    {
+        id: 'lab_03',
+        category: 'Eksplorasi Teori',
+        title: 'Menemukan Titik Maksimum Dan Minimum Tanpa Menggunakan Turunan Kedua',
+        author: 'Tim UMT',
+        date: '08 Agustus 2025',
+        summary: 'Menggali hubungan antara paradoks kuno Yunani dengan salah satu konsep fundamental dalam matematika modern.',
+        filePath: 'lab-content/eksplorasi teori/Kalkulus terkait dengan menemukan titik maksimum dan maksimum tanpa menggunakan turunan kedua.pdf'
+    },
+    {
+        id: 'lab_04',
+        category: 'Eksplorasi Teori',
+        title: 'Matriks dan Aplikasinya dalam Sistem Linear',
+        author: 'Tim UMT',
+        date: '08 Agustus 2025',
+        summary: 'Menggali hubungan antara paradoks kuno Yunani dengan salah satu konsep fundamental dalam matematika modern.',
+        filePath: 'lab-content/eksplorasi teori/Matriks dan Aplikasinya dalam Sistem Linear.pdf'
+    },
+    {
+        id: 'lab_05',
+        category: 'Eksplorasi Teori',
+        title: 'Pengaruh Nilai a Pada Grafik Fungsi Kuadrat',
+        author: 'Tim UMT',
+        date: '08 Agustus 2025',
+        summary: 'Menggali hubungan antara paradoks kuno Yunani dengan salah satu konsep fundamental dalam matematika modern.',
+        filePath: 'lab-content/eksplorasi teori/pengaruh nilai a pada grafik fungsi kuadrat.pdf'
+    },
+    {
+        id: 'lab_06',
+        category: 'Eksplorasi Teori',
         title: 'Paradoks Zeno dan Konsep Limit dalam Kalkulus',
         author: 'Tim UMT',
         date: '08 Agustus 2025',
         summary: 'Menggali hubungan antara paradoks kuno Yunani dengan salah satu konsep fundamental dalam matematika modern.',
-        filePath: 'lab-content/eksplorasi teori/paradoks-zeno.pdf'
+        filePath: 'lab-content/eksplorasi teori/Aturan Pada Pertidaksamaan.pdf'
+    },
+    {
+        id: 'lab_07',
+        category: 'Eksplorasi Teori',
+        title: 'Pengaruh Nilai Diskriminan Terhadap Grafik Fungsi Kuadrat',
+        author: 'Tim UMT',
+        date: '08 Agustus 2025',
+        summary: 'Menggali hubungan antara paradoks kuno Yunani dengan salah satu konsep fundamental dalam matematika modern.',
+        filePath: 'lab-content/eksplorasi teori/Pengaruh Nilai diskriminan terhadap grafik fungsi kuadrat.pdf'
+    },
+    {
+        id: 'lab_08',
+        category: 'Eksplorasi Teori',
+        title: 'Sistem Persamaan',
+        author: 'Tim UMT',
+        date: '08 Agustus 2025',
+        summary: 'Menggali hubungan antara paradoks kuno Yunani dengan salah satu konsep fundamental dalam matematika modern.',
+        filePath: 'lab-content/eksplorasi teori/Sistem Persamaan .pdf'
+    },
+    {
+        id: 'lab_09',
+        category: 'Eksplorasi Teori',
+        title: 'Statistika Deskriptif untuk Analisis Data',
+        author: 'Tim UMT',
+        date: '08 Agustus 2025',
+        summary: 'Menggali hubungan antara paradoks kuno Yunani dengan salah satu konsep fundamental dalam matematika modern.',
+        filePath: 'lab-content/eksplorasi teori/Statistika Deskriptif untuk Analisis Data.pdf'
     },
     // Analisis dan Kajian
     {
