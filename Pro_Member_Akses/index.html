@@ -697,7 +697,6 @@ function renderUmtLabPage() {
     const eksplorasiArticles = allContentData.umtLab.filter(p => p.category === 'Eksplorasi Teori');
 
     const createPostCard = (post) => `
-        // [DIUBAH] onclick sekarang mengarah ke viewer.html dengan ID artikel Lab
         <div class="card-item p-5 rounded-lg mb-4" onclick="window.location.href='viewer.html?id=${post.id}'">
             <h3 class="font-bold text-lg text-cyan-400 mb-2">${post.title}</h3>
             <p class="text-xs text-gray-500 mb-3">Oleh ${post.author} - ${post.date}</p>
