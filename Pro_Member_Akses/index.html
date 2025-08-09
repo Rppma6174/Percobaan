@@ -114,6 +114,9 @@
                     <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('bank_soal', this)">
                         <i class="fa-solid fa-list-check text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Bank Soal</span>
                     </a>
+                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 ..." onclick="event.preventDefault(); navigateTo('umt_lab', this)">
+                        <i class="fa-solid fa-flask-vial text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">UMT Lab</span>
+                    </a>
                     <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('video', this)">
                         <i class="fa-solid fa-video text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Video</span>
                     </a>
@@ -234,6 +237,7 @@
         'video': renderVideoPage,
         'forum': renderForumPage,
         'pengaturan': renderPengaturanPage,
+        'umt_lab': renderUmtLabPage, // <-- Tambahkan baris ini
     };
     
     function navigateTo(page, clickedElement) {
@@ -685,6 +689,37 @@ function setupBankSoalFilter() {
             </div>
         </div>`;
     }
+// Ganti seluruh fungsi renderUmtLabPage di index.html
+function renderUmtLabPage() {
+    const analisisArticles = allContentData.umtLab.filter(p => p.category === 'Analisis & Kajian');
+    const eksplorasiArticles = allContentData.umtLab.filter(p => p.category === 'Eksplorasi Teori');
+
+    const createPostCard = (post) => `
+        // [DIUBAH] onclick sekarang mengarah ke viewer.html dengan ID artikel Lab
+        <div class="card-item p-5 rounded-lg mb-4" onclick="window.location.href='viewer.html?id=${post.id}'">
+            <h3 class="font-bold text-lg text-cyan-400 mb-2">${post.title}</h3>
+            <p class="text-xs text-gray-500 mb-3">Oleh ${post.author} - ${post.date}</p>
+            <p class="text-sm text-gray-400">${post.summary}</p>
+        </div>
+    `;
+    
+    const labPageHTML = `
+        <div class="panel">
+            <h2 class="text-2xl font-bold text-cyan-400">UMT Lab</h2>
+            <p class="text-sm text-gray-400 mb-8">Ruang untuk mendalami konsep dan analisis matematika tingkat lanjut.</p>
+            <div>
+                <h3 class="text-xl font-semibold mb-4 border-b-2 border-cyan-500 pb-2">Analisis & Kajian Matematika</h3>
+                ${analisisArticles.length > 0 ? analisisArticles.map(createPostCard).join('') : '<p class="text-gray-500">Belum ada konten.</p>'}
+            </div>
+            <div class="mt-10">
+                <h3 class="text-xl font-semibold mb-4 border-b-2 border-cyan-500 pb-2">Eksplorasi Teori</h3>
+                ${eksplorasiArticles.length > 0 ? eksplorasiArticles.map(createPostCard).join('') : '<p class="text-gray-500">Belum ada konten.</p>'}
+            </div>
+        </div>
+    `;
+
+    appContent.innerHTML = labPageHTML;
+}
     
     // =================================================================================
     // BAGIAN 4: LOGIKA WIDGET DASBOR & PROGRES
