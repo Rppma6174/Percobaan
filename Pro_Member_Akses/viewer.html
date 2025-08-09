@@ -234,6 +234,13 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
 
+    // [LOGIKA BARU] Melacak item yang selesai dan aktivitas terakhir
+    // Kita tentukan tipenya (materi atau lab) berdasarkan format ID
+    const type = contentItem.id.startsWith('lab_') ? 'lab' : 'materi';
+    markAsCompleted(contentItem.id); 
+    updateLastActivity(type, contentItem);
+    // Akhir Logika Baru
+
     materiTitleEl.textContent = contentItem.title;
 
     try {
