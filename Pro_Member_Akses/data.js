@@ -2,7 +2,7 @@ const allContentData = {
     umtLab: [
     // Eksplorasi Teori
     {
-        id: 'lab_01',
+        id: 'lab_e1',
         category: 'Eksplorasi Teori',
         title: 'Aturan Pada Pertidaksamaan',
         author: 'Tim UMT',
@@ -11,7 +11,7 @@ const allContentData = {
         filePath: 'lab-content/eksplorasi teori/Aturan Pada Pertidaksamaan.pdf'
     },
     {
-        id: 'lab_02',
+        id: 'lab_e2',
         category: 'Eksplorasi Teori',
         title: 'Kalkulus Diferensial untuk Optimisas',
         author: 'Tim UMT',
@@ -20,7 +20,7 @@ const allContentData = {
         filePath: 'lab-content/eksplorasi teori/Kalkulus Diferensial untuk Optimisas.pdf'
     },
     {
-        id: 'lab_03',
+        id: 'lab_e3',
         category: 'Eksplorasi Teori',
         title: 'Menemukan Titik Maksimum Dan Minimum Tanpa Menggunakan Turunan Kedua',
         author: 'Tim UMT',
@@ -29,7 +29,7 @@ const allContentData = {
         filePath: 'lab-content/eksplorasi teori/Kalkulus terkait dengan menemukan titik maksimum dan maksimum tanpa menggunakan turunan kedua.pdf'
     },
     {
-        id: 'lab_04',
+        id: 'lab_e4',
         category: 'Eksplorasi Teori',
         title: 'Matriks dan Aplikasinya dalam Sistem Linear',
         author: 'Tim UMT',
@@ -38,7 +38,7 @@ const allContentData = {
         filePath: 'lab-content/eksplorasi teori/Matriks dan Aplikasinya dalam Sistem Linear.pdf'
     },
     {
-        id: 'lab_05',
+        id: 'lab_e5',
         category: 'Eksplorasi Teori',
         title: 'Pengaruh Nilai a Pada Grafik Fungsi Kuadrat',
         author: 'Tim UMT',
@@ -47,7 +47,7 @@ const allContentData = {
         filePath: 'lab-content/eksplorasi teori/pengaruh nilai a pada grafik fungsi kuadrat.pdf'
     },
     {
-        id: 'lab_06',
+        id: 'lab_e6',
         category: 'Eksplorasi Teori',
         title: 'Paradoks Zeno dan Konsep Limit dalam Kalkulus',
         author: 'Tim UMT',
@@ -56,7 +56,7 @@ const allContentData = {
         filePath: 'lab-content/eksplorasi teori/Aturan Pada Pertidaksamaan.pdf'
     },
     {
-        id: 'lab_07',
+        id: 'lab_e7',
         category: 'Eksplorasi Teori',
         title: 'Pengaruh Nilai Diskriminan Terhadap Grafik Fungsi Kuadrat',
         author: 'Tim UMT',
@@ -65,7 +65,7 @@ const allContentData = {
         filePath: 'lab-content/eksplorasi teori/Pengaruh Nilai diskriminan terhadap grafik fungsi kuadrat.pdf'
     },
     {
-        id: 'lab_08',
+        id: 'lab_e8',
         category: 'Eksplorasi Teori',
         title: 'Sistem Persamaan',
         author: 'Tim UMT',
@@ -74,7 +74,7 @@ const allContentData = {
         filePath: 'lab-content/eksplorasi teori/Sistem Persamaan .pdf'
     },
     {
-        id: 'lab_09',
+        id: 'lab_e9',
         category: 'Eksplorasi Teori',
         title: 'Statistika Deskriptif untuk Analisis Data',
         author: 'Tim UMT',
@@ -84,13 +84,85 @@ const allContentData = {
     },
     // Analisis dan Kajian
     {
-        id: 'lab_02',
+        id: 'lab_a1',
         category: 'Analisis & Kajian',
-        title: 'Keindahan Fraktal: Matematika di Balik Pola Alam',
+        title: 'Barisan Aritmetika untuk Perencanaan Keuangan',
         author: 'Tim UMT',
         date: '06 Agustus 2025',
         summary: 'Menjelajahi bagaimana persamaan matematika sederhana dapat menghasilkan pola-pola rumit yang tak terbatas seperti yang terlihat di alam.',
-        filePath: 'lab-content/analisis dan kajian/fraktal.pdf'
+        filePath: 'lab-content/analisis dan kajian/Barisan Aritmetika untuk Perencanaan Keuangan.pdf'
+    },
+    {
+        id: 'lab_a2',
+        category: 'Analisis & Kajian',
+        title: 'Geometri dalam Penataan Ruang dan Furniture',
+        author: 'Tim UMT',
+        date: '06 Agustus 2025',
+        summary: 'Menjelajahi bagaimana persamaan matematika sederhana dapat menghasilkan pola-pola rumit yang tak terbatas seperti yang terlihat di alam.',
+        filePath: 'lab-content/analisis dan kajian/Geometri dalam Penataan Ruang dan Furniture.pdf'
+    },
+    {
+        id: 'lab_a3',
+        category: 'Analisis & Kajian',
+        title: 'Matematika dalam Kriptografi dan Keamanan Data',
+        author: 'Tim UMT',
+        date: '06 Agustus 2025',
+        summary: 'Menjelajahi bagaimana persamaan matematika sederhana dapat menghasilkan pola-pola rumit yang tak terbatas seperti yang terlihat di alam.',
+        filePath: 'lab-content/analisis dan kajian/Matematika dalam Kriptografi dan Keamanan Data.pdf'
+    },
+    {
+        id: 'lab_a4',
+        category: 'Analisis & Kajian',
+        title: 'Model Permintaan Dan Penawaran',
+        author: 'Tim UMT',
+        date: '06 Agustus 2025',
+        summary: 'Menjelajahi bagaimana persamaan matematika sederhana dapat menghasilkan pola-pola rumit yang tak terbatas seperti yang terlihat di alam.',
+        filePath: 'lab-content/analisis dan kajian/Model Permintaan Dan Penawaran.pdf'
+    },
+    {
+        id: 'lab_a5',
+        category: 'Analisis & Kajian',
+        title: 'Penerapan Matematika dalam Menentukan Harga Optimal Produk',
+        author: 'Tim UMT',
+        date: '06 Agustus 2025',
+        summary: 'Menjelajahi bagaimana persamaan matematika sederhana dapat menghasilkan pola-pola rumit yang tak terbatas seperti yang terlihat di alam.',
+        filePath: 'lab-content/analisis dan kajian/Penerapan Matematika dalam Menentukan Harga Optimal Produk.pdf'
+    },
+    {
+        id: 'lab_a6',
+        category: 'Analisis & Kajian',
+        title: 'Trigonometri dalam Analisis Gelombang',
+        author: 'Tim UMT',
+        date: '06 Agustus 2025',
+        summary: 'Menjelajahi bagaimana persamaan matematika sederhana dapat menghasilkan pola-pola rumit yang tak terbatas seperti yang terlihat di alam.',
+        filePath: 'lab-content/analisis dan kajian/Trigonometri dalam Analisis Gelombang.pdf'
+    },
+    {
+        id: 'lab_a7',
+        category: 'Analisis & Kajian',
+        title: 'Penerapan Persen dalam Diskon Belanja dan Cashback',
+        author: 'Tim UMT',
+        date: '06 Agustus 2025',
+        summary: 'Menjelajahi bagaimana persamaan matematika sederhana dapat menghasilkan pola-pola rumit yang tak terbatas seperti yang terlihat di alam.',
+        filePath: 'lab-content/analisis dan kajian/Penerapan Persen dalam Diskon Belanja dan Cashback.pdf'
+    },
+    {
+        id: 'lab_a8',
+        category: 'Analisis & Kajian',
+        title: 'Perbandingan dan Proporsi dalam Resep Masakan dan Nutrisi',
+        author: 'Tim UMT',
+        date: '06 Agustus 2025',
+        summary: 'Menjelajahi bagaimana persamaan matematika sederhana dapat menghasilkan pola-pola rumit yang tak terbatas seperti yang terlihat di alam.',
+        filePath: 'lab-content/analisis dan kajian/Perbandingan dan Proporsi dalam Resep Masakan dan Nutrisi.pdf'
+    },
+    {
+        id: 'lab_a9',
+        category: 'Analisis & Kajian',
+        title: 'Probabilitas dalam Pengambilan Keputusan',
+        author: 'Tim UMT',
+        date: '06 Agustus 2025',
+        summary: 'Menjelajahi bagaimana persamaan matematika sederhana dapat menghasilkan pola-pola rumit yang tak terbatas seperti yang terlihat di alam.',
+        filePath: 'lab-content/analisis dan kajian/Probabilitas dalam Pengambilan Keputusan.pdf'
     }
 ],
     materi: {
