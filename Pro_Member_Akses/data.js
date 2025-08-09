@@ -1,7 +1,33 @@
-// =================================================================================
-// BAGIAN 0: KONFIGURASI DAN DATA MASTER (GLOBAL)
-// =================================================================================
 const allContentData = {
+    umtLab: [
+    {
+        id: 'lab_01',
+        category: 'Analisis & Kajian',
+        title: 'Paradoks Zeno dan Konsep Limit dalam Kalkulus',
+        author: 'Tim UMT',
+        date: '08 Agustus 2025',
+        summary: 'Menggali hubungan antara paradoks kuno Yunani dengan salah satu konsep fundamental dalam matematika modern.',
+        filePath: 'lab-content/paradoks-zeno.pdf'
+    },
+    {
+        id: 'lab_02',
+        category: 'Eksplorasi Teori',
+        title: 'Apa itu Bilangan Imajiner dan Kenapa Penting?',
+        author: 'Tim UMT',
+        date: '07 Agustus 2025',
+        summary: 'Sebuah pengantar ke dunia bilangan kompleks yang menjadi dasar bagi banyak cabang sains dan rekayasa.',
+        filePath: 'lab-content/bilangan-imajiner.pdf'
+    },
+    {
+        id: 'lab_03',
+        category: 'Analisis & Kajian',
+        title: 'Keindahan Fraktal: Matematika di Balik Pola Alam',
+        author: 'Tim UMT',
+        date: '06 Agustus 2025',
+        summary: 'Menjelajahi bagaimana persamaan matematika sederhana dapat menghasilkan pola-pola rumit yang tak terbatas seperti yang terlihat di alam.',
+        filePath: 'lab-content/fraktal.pdf'
+    }
+],
     materi: {
         "Kelas 7 SMP": [
             { 
@@ -35,6 +61,15 @@ const allContentData = {
             fileType: 'pdf' 
             }
         ],
+        "Kelas 9 SMP": [
+            { 
+            id: 'materi_8_1', 
+            title: 'Percobaan 1', 
+            type: 'PDF Document', 
+            filePath: 'materi-files/', 
+            fileType: 'pdf' 
+            }
+        ],
         "Kelas 10 SMA": [
             { 
             id: 'materi_10_1', 
@@ -43,7 +78,25 @@ const allContentData = {
             filePath: 'materi-files/k10-eksponen.pdf', 
             fileType: 'pdf' 
             },
-        ]
+        ],
+        "Kelas 11 SMA": [
+            { 
+            id: 'materi_11_1', 
+            title: 'Percobaan 2', 
+            type: 'PDF Document', 
+            filePath: 'materi-files/', 
+            fileType: 'pdf' 
+            }
+        ],
+        "Kelas 12 SMA": [
+            { 
+            id: 'materi_12_1', 
+            title: 'Percobaan 3', 
+            type: 'PDF Document', 
+            filePath: 'materi-files/', 
+            fileType: 'pdf' 
+            }
+        ],
         // Anda bisa tambahkan "Kelas 9 SMP", "Kelas 11 SMA", dst. di sini
     },
     video: [
