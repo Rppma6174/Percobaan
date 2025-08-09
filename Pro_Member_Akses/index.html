@@ -262,20 +262,33 @@
     // =================================================================================
     // BAGIAN 3: FUNGSI RENDER UNTUK SETIAP HALAMAN
     // =================================================================================
-// Ganti fungsi renderDashboardPage di index.html
+// Ganti seluruh fungsi renderDashboardPage di index.html
 function renderDashboardPage() {
     appContent.innerHTML = `
         <header class="panel flex justify-between items-center">
-            ...
+            <div>
+                <h2 id="user-greeting" class="text-xl font-bold"></h2>
+                <p class="text-sm text-gray-400">Selamat datang di Command Center Anda.</p>
+            </div>
         </header>
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
             <div class="col-span-1 lg:col-span-2 space-y-6">
-                ...
+                <div class="panel">
+                    <h4 class="font-bold text-lg mb-4">Status Anda</h4>
+                    <div id="status-container" class="space-y-4"></div>
+                </div>
                 <div id="last-score-widget-container"></div>
                 <div id="last-activity-container" class="space-y-6"></div>
             </div>
             <div class="col-span-1 space-y-6">
-                ...
+                <div class="panel">
+                    <h4 class="font-bold text-lg mb-4">Pencapaian</h4>
+                    <div id="lencana-container" class="flex gap-4"></div>
+                </div>
+                 <div class="panel">
+                    <h4 class="font-bold text-lg mb-4">Info Terbaru UMT</h4>
+                    <div id="social-media-container" class="space-y-4"></div>
+                </div>
             </div>
         </div>
     `;
