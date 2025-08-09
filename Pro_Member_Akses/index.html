@@ -697,9 +697,9 @@ function renderUmtLabPage() {
     const analisisArticles = allContentData.umtLab.filter(p => p.category === 'Analisis & Kajian');
     const eksplorasiArticles = allContentData.umtLab.filter(p => p.category === 'Eksplorasi Teori');
 
-    // [DIUBAH] mb-4 (margin-bottom) dihapus dari kartu karena sekarang diatur oleh grid gap
+    // [DIUBAH] Menambahkan class untuk lebar tetap dan mencegah kartu mengkerut
     const createPostCard = (post) => `
-        <div class="card-item p-5 rounded-lg" onclick="window.location.href='viewer.html?id=${post.id}'">
+        <div class="card-item p-5 rounded-lg flex flex-col flex-shrink-0 w-72 md:w-80" onclick="window.location.href='viewer.html?id=${post.id}'">
             <h3 class="font-bold text-lg text-cyan-400 mb-2">${post.title}</h3>
             <p class="text-xs text-gray-500 mb-3">Oleh ${post.author} - ${post.date}</p>
             <p class="text-sm text-gray-400">${post.summary}</p>
@@ -713,14 +713,14 @@ function renderUmtLabPage() {
 
             <div>
                 <h3 class="text-xl font-semibold mb-4 border-b-2 border-cyan-500 pb-2">Analisis & Kajian Matematika</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="no-scrollbar flex overflow-x-auto gap-4 pb-4">
                     ${analisisArticles.length > 0 ? analisisArticles.map(createPostCard).join('') : '<p class="text-gray-500">Belum ada konten.</p>'}
                 </div>
             </div>
 
             <div class="mt-10">
                 <h3 class="text-xl font-semibold mb-4 border-b-2 border-cyan-500 pb-2">Eksplorasi Teori</h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="no-scrollbar flex overflow-x-auto gap-4 pb-4">
                     ${eksplorasiArticles.length > 0 ? eksplorasiArticles.map(createPostCard).join('') : '<p class="text-gray-500">Belum ada konten.</p>'}
                 </div>
             </div>
@@ -728,8 +728,8 @@ function renderUmtLabPage() {
     `;
 
     appContent.innerHTML = labPageHTML;
-}    
-    // =================================================================================
+}
+// =================================================================================
     // BAGIAN 4: LOGIKA WIDGET DASBOR & PROGRES
     // =================================================================================
     function getTotalItemCount() {
