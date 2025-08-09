@@ -693,11 +693,13 @@ function setupBankSoalFilter() {
     }
 // Ganti seluruh fungsi renderUmtLabPage di index.html
 function renderUmtLabPage() {
+    // Memisahkan artikel berdasarkan kategori
     const analisisArticles = allContentData.umtLab.filter(p => p.category === 'Analisis & Kajian');
     const eksplorasiArticles = allContentData.umtLab.filter(p => p.category === 'Eksplorasi Teori');
 
+    // [DIUBAH] mb-4 (margin-bottom) dihapus dari kartu karena sekarang diatur oleh grid gap
     const createPostCard = (post) => `
-        <div class="card-item p-5 rounded-lg mb-4" onclick="window.location.href='viewer.html?id=${post.id}'">
+        <div class="card-item p-5 rounded-lg" onclick="window.location.href='viewer.html?id=${post.id}'">
             <h3 class="font-bold text-lg text-cyan-400 mb-2">${post.title}</h3>
             <p class="text-xs text-gray-500 mb-3">Oleh ${post.author} - ${post.date}</p>
             <p class="text-sm text-gray-400">${post.summary}</p>
@@ -708,20 +710,25 @@ function renderUmtLabPage() {
         <div class="panel">
             <h2 class="text-2xl font-bold text-cyan-400">UMT Lab</h2>
             <p class="text-sm text-gray-400 mb-8">Ruang untuk mendalami konsep dan analisis matematika tingkat lanjut.</p>
+
             <div>
                 <h3 class="text-xl font-semibold mb-4 border-b-2 border-cyan-500 pb-2">Analisis & Kajian Matematika</h3>
-                ${analisisArticles.length > 0 ? analisisArticles.map(createPostCard).join('') : '<p class="text-gray-500">Belum ada konten.</p>'}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    ${analisisArticles.length > 0 ? analisisArticles.map(createPostCard).join('') : '<p class="text-gray-500">Belum ada konten.</p>'}
+                </div>
             </div>
+
             <div class="mt-10">
                 <h3 class="text-xl font-semibold mb-4 border-b-2 border-cyan-500 pb-2">Eksplorasi Teori</h3>
-                ${eksplorasiArticles.length > 0 ? eksplorasiArticles.map(createPostCard).join('') : '<p class="text-gray-500">Belum ada konten.</p>'}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    ${eksplorasiArticles.length > 0 ? eksplorasiArticles.map(createPostCard).join('') : '<p class="text-gray-500">Belum ada konten.</p>'}
+                </div>
             </div>
         </div>
     `;
 
     appContent.innerHTML = labPageHTML;
-}
-    
+}    
     // =================================================================================
     // BAGIAN 4: LOGIKA WIDGET DASBOR & PROGRES
     // =================================================================================
