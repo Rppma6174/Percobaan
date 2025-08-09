@@ -2,30 +2,21 @@ const allContentData = {
     umtLab: [
     {
         id: 'lab_01',
-        category: 'Analisis & Kajian',
+        category: 'Eksplorasi Teori',
         title: 'Paradoks Zeno dan Konsep Limit dalam Kalkulus',
         author: 'Tim UMT',
         date: '08 Agustus 2025',
         summary: 'Menggali hubungan antara paradoks kuno Yunani dengan salah satu konsep fundamental dalam matematika modern.',
-        filePath: 'lab-content/paradoks-zeno.pdf'
+        filePath: 'lab-content/eksplorasi teori/paradoks-zeno.pdf'
     },
     {
         id: 'lab_02',
-        category: 'Eksplorasi Teori',
-        title: 'Apa itu Bilangan Imajiner dan Kenapa Penting?',
-        author: 'Tim UMT',
-        date: '07 Agustus 2025',
-        summary: 'Sebuah pengantar ke dunia bilangan kompleks yang menjadi dasar bagi banyak cabang sains dan rekayasa.',
-        filePath: 'lab-content/bilangan-imajiner.pdf'
-    },
-    {
-        id: 'lab_03',
         category: 'Analisis & Kajian',
         title: 'Keindahan Fraktal: Matematika di Balik Pola Alam',
         author: 'Tim UMT',
         date: '06 Agustus 2025',
         summary: 'Menjelajahi bagaimana persamaan matematika sederhana dapat menghasilkan pola-pola rumit yang tak terbatas seperti yang terlihat di alam.',
-        filePath: 'lab-content/fraktal.pdf'
+        filePath: 'lab-content/analisis dan kajian/fraktal.pdf'
     }
 ],
     materi: {
