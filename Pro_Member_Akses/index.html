@@ -732,12 +732,14 @@ function renderUmtLabPage() {
 // =================================================================================
     // BAGIAN 4: LOGIKA WIDGET DASBOR & PROGRES
     // =================================================================================
-    function getTotalItemCount() {
-        const totalMateri = Object.values(allContentData.materi).reduce((sum, grade) => sum + grade.length, 0);
-        const totalVideo = allContentData.video.length;
-        const totalBankSoal = allContentData.bankSoal.length;
-        return totalMateri + totalVideo + totalBankSoal;
-    }
+function getTotalItemCount() {
+    const totalMateri = Object.values(allContentData.materi).flat().length;
+    const totalVideo = allContentData.video.length;
+    const totalBankSoal = allContentData.bankSoal.length;
+    const totalUmtLab = allContentData.umtLab.length; // <-- Ditambahkan
+    // Video dan UMT Lab sekarang dihitung
+    return totalMateri + totalVideo + totalBankSoal + totalUmtLab;
+}
     
     function initializeAppDashboardWidgets() {
         const email = sessionStorage.getItem(CONFIG.SESSION_KEYS.EMAIL) || 'pengguna@email.com';
