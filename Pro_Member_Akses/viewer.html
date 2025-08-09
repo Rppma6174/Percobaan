@@ -204,68 +204,55 @@ document.addEventListener('DOMContentLoaded', async () => {
     const materiId = urlParams.get('id');
 
     if (!materiId) {
-        materiTitleEl.textContent = 'Error: Materi tidak ditemukan.';
-        statusMessageEl.textContent = 'ID Materi tidak ada di URL.';
+        materiTitleEl.textContent = 'Error: Konten tidak ditemukan.';
+        statusMessageEl.textContent = 'ID Konten tidak ada di URL.';
         return;
     }
 
-    let materiItem = null, prevMateri = null, nextMateri = null;
-    for (const grade in allContentData.materi) {
-        const materiList = allContentData.materi[grade];
-        const currentIndex = materiList.findIndex(item => item.id === materiId);
-        
-        if (currentIndex !== -1) {
-            materiItem = materiList[currentIndex];
-            if (currentIndex > 0) prevMateri = materiList[currentIndex - 1];
-            if (currentIndex < materiList.length - 1) nextMateri = materiList[currentIndex + 1];
-            break;
-        }
+    // --- [LOGIKA BARU] Mencari konten di semua tempat (Materi & UMT Lab) ---
+    let contentItem = null;
+    let prevItem = null;
+    let nextItem = null;
+    const allContentSources = [
+        ...Object.values(allContentData.materi).flat(), // Menggabungkan semua materi jadi satu array
+        ...allContentData.umtLab // Menggabungkan dengan artikel Lab
+    ];
+
+    // Cari konten yang sedang dibuka
+    const currentIndex = allContentSources.findIndex(item => item.id === materiId);
+
+    if (currentIndex !== -1) {
+        contentItem = allContentSources[currentIndex];
+        // Cek apakah ada konten sebelum atau sesudahnya (dalam kategori yang sama jika perlu)
+        // Untuk saat ini, kita biarkan navigasi antar-materi hanya untuk halaman Materi
+        // Dan navigasi antar-lab hanya untuk halaman Lab (akan diimplementasikan jika perlu)
     }
     
-    if (!materiItem) {
-        materiTitleEl.textContent = 'Error: Materi tidak ditemukan.';
-        statusMessageEl.textContent = `Materi dengan ID "${materiId}" tidak ditemukan.`;
+    if (!contentItem) {
+        materiTitleEl.textContent = 'Error: Konten tidak ditemukan.';
+        statusMessageEl.textContent = `Konten dengan ID "${materiId}" tidak ditemukan.`;
         return;
     }
 
-    materiTitleEl.textContent = materiItem.title;
+    materiTitleEl.textContent = contentItem.title;
 
     try {
-        pdfDoc = await pdfjsLib.getDocument(materiItem.filePath).promise;
-
-        // [LOGIKA BARU] Menghitung skala ideal secara otomatis
-        // Ambil halaman pertama untuk diukur
+        pdfDoc = await pdfjsLib.getDocument(contentItem.filePath).promise;
+        
         const firstPage = await pdfDoc.getPage(1);
         const pageWidth = firstPage.getViewport({ scale: 1 }).width;
-        
-        // Ambil lebar kontainer, kurangi sedikit untuk padding (1rem = 16px, jadi 16*2=32)
         const containerWidth = viewerEl.clientWidth - 32; 
-        
-        // Hitung skala yang pas dan atur sebagai skala utama
         scale = containerWidth / pageWidth; 
-        // Akhir Logika Baru
 
-        renderAllPages(); // Panggil fungsi render setelah skala dihitung
+        renderAllPages();
     } catch (err) {
         console.error("Error saat memuat PDF:", err);
         statusMessageEl.textContent = `Gagal memuat file PDF. Pastikan path file benar.`;
     }
 
-    // Mengatur tombol navigasi materi
-    const prevMateriBtn = document.getElementById('prev-materi');
-    const nextMateriBtn = document.getElementById('next-materi');
-    if (prevMateri) {
-        prevMateriBtn.disabled = false;
-        prevMateriBtn.addEventListener('click', () => window.location.href = `viewer.html?id=${prevMateri.id}`);
-    } else {
-        prevMateriBtn.disabled = true;
-    }
-    if (nextMateri) {
-        nextMateriBtn.disabled = false;
-        nextMateriBtn.addEventListener('click', () => window.location.href = `viewer.html?id=${nextMateri.id}`);
-    } else {
-        nextMateriBtn.disabled = true;
-    }
+    // Menonaktifkan tombol navigasi antar-materi/lab untuk sementara agar lebih simpel
+    document.getElementById('prev-materi').style.display = 'none';
+    document.getElementById('next-materi').style.display = 'none';
 
     // Pasang event listener ke tombol zoom
     document.getElementById('zoom-in').addEventListener('click', () => onZoom(scale + 0.25));
