@@ -269,6 +269,12 @@ const allContentData = {
             videoId: 'sJaOX0vTqGk',
             category: 'Trigonometri' // <-- Kategori baru
         },
+        { 
+            id: 'vid_8', 
+            title: 'Pengertian Bentuk Akar',
+            videoId: 'Nd0hy5uFwOE',
+            category: 'Bentuk Akar' // <-- Kategori baru
+        },
     ],
     bankSoal: [
         {
