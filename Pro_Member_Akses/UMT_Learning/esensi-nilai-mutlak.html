@@ -89,13 +89,15 @@
             <i class="fas fa-arrow-left"></i>
         </a>
 
-        <h1>Esensi Nilai Mutlak</h1>
+        <h1>Definisi Nilai Mutlak</h1>
         <p>
-            Nilai mutlak adalah konsep matematika yang menggambarkan <b>jarak suatu bilangan terhadap nol</b> pada garis bilangan, tanpa memperhatikan arahnya.
-            Dengan kata lain, nilai mutlak selalu bernilai <b>tidak negatif</b>.
+            Secara intuitif, nilai mutlak sering dipahami sebagai "membuat suatu bilangan menjadi positif". Walaupun tidak sepenuhnya salah, pemahaman intinya jauh lebih dalam dari itu. Konsep utama nilai mutlak adalah tentang <strong>jarak</strong>.
         </p>
         <p>
-            Secara simbol, nilai mutlak dari $x$ ditulis sebagai $\lvert x \rvert$ dan didefinisikan sebagai:
+            Nilai mutlak dari sebuah bilangan, misalnya $x$, adalah <b>jarak bilangan tersebut dari titik nol (0)</b> pada sebuah garis bilangan, tanpa mempedulikan arahnya (ke kanan atau ke kiri). Karena jarak tidak pernah bernilai negatif, maka nilai mutlak juga <b>selalu tidak negatif</b> (positif atau nol).
+        </p>
+        <p>
+            Secara formal, nilai mutlak dari $x$ disimbolkan dengan $\lvert x \rvert$ dan didefinisikan sebagai berikut:
             $$ \lvert x \rvert =
             \begin{cases}
             x, & \text{jika } x \ge 0 \\
@@ -103,28 +105,23 @@
             \end{cases} $$
         </p>
         <p>
-            Nilai mutlak merupakan <b>jembatan</b> antara konsep jarak di dunia nyata dengan konsep abstrak dalam matematika.
-            Di kehidupan sehari-hari, jarak selalu melibatkan <b>minimal dua titik acuan</b> — misalnya jarak antara dua kota, atau antara posisi kita dengan sebuah objek.
-            Matematika menerjemahkan ide ini melalui <i>garis bilangan</i> dan menggunakan nilai mutlak untuk mengukurnya.
+            Definisi ini mungkin terlihat membingungkan pada bagian kedua: "jika $x$ negatif, hasilnya adalah $-x$". Ini bukan berarti hasilnya negatif. Justru sebaliknya, jika $x$ sudah negatif (misal $x = -5$), maka $-x$ menjadi $-(-5)$, yang hasilnya adalah $5$. Ini adalah cara matematis untuk memastikan hasilnya selalu positif.
         </p>
+
         <p>
-            Jika salah satu titik acuannya adalah nol, kita menulis jaraknya sebagai $\lvert x \rvert$.
-            Namun, nilai mutlak juga dapat mengukur jarak antara dua bilangan $a$ dan $b$, yang ditulis sebagai $\lvert a - b \rvert$.
-            Bentuk ini mengabaikan urutan pengurangan, sehingga hasilnya selalu tidak negatif — persis seperti jarak di dunia nyata yang tidak pernah bernilai negatif.
-        </p>
+            Penjelasan inti : nilai mutlak adalah konsep yang lahir dari gagasan <i>jarak</i>. Jarak selalu bernilai tidak negatif. Dalam kerangka garis bilangan, titik acuan yang sering dipakai adalah nol — sehingga $|x|$ berarti "berapa jauh x dari 0". Namun definisi nilai mutlak juga umum dipakai untuk mengukur jarak antara dua bilangan: jarak antara $a$ dan $b$ ditulis $|a-b|$. Ini mengabaikan urutan karena jarak bersifat simetris: $|a-b| = |b-a|$.
+        </p>        
+        
         <p>
-            Memahami bahwa nilai mutlak adalah <i>ukuran jarak</i> membuat kita lebih mudah memahami sifat-sifatnya, serta lebih tepat saat menggunakannya untuk memecahkan persamaan atau pertidaksamaan.
-        </p>
-        <p>
-            Untuk pemahaman yang lebih mendalam dan disertai visualisasi yang jelas, tonton video berikut:
+            Untuk mendapatkan pemahaman visual yang lebih baik, silakan tonton video di bawah ini yang menjelaskan terkait dengan definisi nilai mutlak secara visual.
         </p>
 
         <div class="embed-container">
-            <iframe src="https://www.youtube.com/embed/-pETqV252Zc" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/zwth9824dhU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
 
         <h2>Uji Pemahaman Anda</h2>
-        <p>Pilih jawaban yang tepat dan baca pembahasan setelah menjawab.</p>
+        <p>Pilih jawaban yang paling tepat untuk mengukur pemahaman Anda mengenai definisi nilai mutlak.</p>
 
         <!-- Kuis -->
         <div id="quiz-container"></div>
@@ -136,51 +133,51 @@
         }
 
         const quizzes = [
-            {
-                q: "Apa arti dari $\\lvert -7 \\rvert$?",
-                options: ["-7", "7", "0", "-(-7)"],
-                correct: 1,
-                explanation: "Nilai mutlak mengabaikan tanda negatif. Jadi $\\lvert -7 \\rvert = 7$."
-            },
-            {
-                q: "Manakah yang benar mengenai nilai mutlak?",
-                options: [
-                    "Selalu positif",
-                    "Selalu nol",
-                    "Selalu tidak negatif",
-                    "Selalu negatif"
-                ],
-                correct: 2,
-                explanation: "Nilai mutlak tidak pernah negatif, tetapi bisa nol. Jadi jawabannya adalah 'Selalu tidak negatif'."
-            },
-            {
-                q: "Jika $\\lvert x \\rvert = 5$, maka nilai $x$ adalah...",
-                options: [
-                    "Hanya 5",
-                    "Hanya -5",
-                    "5 atau -5",
-                    "Tidak ada jawaban"
-                ],
-                correct: 2,
-                explanation: "$\\lvert x \\rvert = 5$ berarti jarak x dari nol adalah 5 satuan, jadi x bisa 5 atau -5 karena dalam konsep dunia nyata kalau kita terapkan dalam garis bilangan jarak dari 0 ke 5 atau 5 ke 0 itu adalah 5 satuan begitu juga dengan jarak dari -5 ke 0 atau 0 ke -5 itu juga 5 satuan dan arti dari tanpa memeperhatikan arah itu sendiri maksud nya adalah kita akan mencari suatu nilai jarak yang berjarak 5 satuan dari acuan 0 tersebut dalam segala kemungkinan yang mungkin dibuat dalam garis bilangan tersebut. makanya dikatakan tanpa memperhatikan arah karena dicari segala jarak yang mungkin dari acuan 0 tersebut dengan menggunakan konsep dunia nyata dari jarak yaitu jarak suatu objek ke objek yang lain pasti tidak akan pernah bernilai negatif"
-            },
-            {
-                q: "Nilai mutlak dari suatu bilangan merepresentasikan...",
-                options: [
-                    "Jarak bilangan tersebut dari nol pada garis bilangan",
-                    "Besar bilangan tersebut tanpa memperhatikan tanda",
-                    "Keduanya benar",
-                    "Keduanya salah"
-                ],
-                correct: 2,
-                explanation: "Nilai mutlak adalah jarak bilangan dari nol pada garis bilangan, yang selalu positif, sehingga kedua pernyataan benar."
-            },
-            {
-                q: "Hasil dari $\\lvert -3 + 8 \\rvert$ adalah...",
-                options: ["-5", "5", "8", "3"],
-                correct: 1,
-                explanation: "-3 + 8 = 5, dan $\\lvert 5 \\rvert = 5$. -3 + 8 = 5. Konsep nilai mutlak menyatakan bahwa kita hanya mengambil jarak bilangan itu dari nol tanpa memperhatikan arah. Jarak 5 dari nol adalah 5 satuan, sehingga $|5| = 5$. Tidak mungkin bernilai negatif karena jarak dalam definisi nilai mutlak selalu non-negatif dan juga perlu kita tahu $|-3 + 8|$ dapat ditulis sebagai $|-3 - (-8)|$. Dalam konsep nilai mutlak, ini berarti mencari <b>jarak antara titik -3 dan titik -8 pada garis bilangan</b>. Jarak tersebut adalah $5$ satuan, karena selisih antara -8 dan -3 adalah $5$, tanpa mempedulikan arah. Alternatif lain: $|-3 + 8|$ juga dapat dipandang sebagai $|8 - 3|$, yang secara makna jarak adalah $5$ satuan. Intinya, nilai mutlak selalu menggambarkan <b>Jarak</b> yang nilainya tidak pernah negatif."
-            }
+        {
+            q: "Apa definisi paling mendasar dari nilai mutlak suatu bilangan?",
+            options: [
+                "Bilangan itu sendiri tanpa tanda negatif",
+                "Jarak bilangan tersebut dari titik nol pada garis bilangan",
+                "Kebalikan dari bilangan tersebut",
+                "Selalu bernilai positif"
+            ],
+            correct: 1,
+            explanation: "Definisi inti dari nilai mutlak adalah <b>jarak</b>. Jarak dari sebuah bilangan ke titik nol (0) pada garis bilangan. Karena jarak tidak pernah negatif, maka nilai mutlak pun hasilnya selalu tidak negatif (bisa nol atau positif)."
+        },
+        {
+            q: "Berdasarkan definisi formal, jika $x < 0$, maka $\\lvert x \\rvert$ sama dengan...",
+            options: ["x", "-x", "0", "Tidak dapat ditentukan"],
+            correct: 1,
+            explanation: "Ini adalah bagian kunci dari definisi formal. Jika $x$ adalah bilangan negatif (misalnya, $x = -10$), maka $\\lvert x \\rvert$ adalah $-x$, yang berarti $-(-10) = 10$. Tanda negatif tambahan berfungsi untuk mengubah bilangan negatif tersebut menjadi positif."
+        },
+        {
+            q: "Manakah pernyataan di bawah ini yang <b>selalu benar</b> untuk sembarang bilangan real $a$?",
+            options: [
+                "$\\lvert a \\rvert > 0$",
+                "$\\lvert a \\rvert = a$",
+                "$\\lvert a \\rvert \ge 0$",
+                "$\\lvert a \\rvert \ne a$"
+            ],
+            correct: 2,
+            explanation: "Nilai mutlak tidak pernah negatif. Ia bisa positif atau nol (jika $a=0$). Oleh karena itu, pernyataan yang paling akurat adalah $\\lvert a \\rvert \ge 0$ (lebih besar atau sama dengan nol)."
+        },
+        {
+            q: "Berapakah hasil dari $\\lvert 5 - 12 \\rvert$?",
+            options: ["-7", "7", "17", "-17"],
+            correct: 1,
+            explanation: "Langkah pertama adalah menyelesaikan operasi di dalam tanda mutlak: $5 - 12 = -7$. Selanjutnya, kita mencari nilai mutlak dari hasilnya: $\\lvert -7 \\rvert$. Karena jarak -7 dari 0 adalah 7, maka jawabannya adalah 7."
+        },
+        {
+            q: "Jika $\\lvert p - q \\rvert$ merepresentasikan suatu nilai, nilai tersebut menggambarkan...",
+            options: [
+                "Hasil pengurangan p oleh q",
+                "Jumlah dari p dan q",
+                "Jarak antara titik p dan titik q pada garis bilangan",
+                "Titik tengah antara p dan q"
+            ],
+            correct: 2,
+            explanation: "Ini adalah perluasan konsep nilai mutlak. Bentuk $\\lvert a-b \\rvert$ secara geometris berarti <b>jarak antara titik a dan b</b> pada garis bilangan. Urutan tidak penting, karena $\\lvert p-q \\rvert = \\lvert q-p \\rvert$, sama seperti jarak dari kota A ke B sama dengan jarak dari B ke A."
+        }
         ];
 
         const quizContainer = document.getElementById("quiz-container");
@@ -249,11 +246,3 @@
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
