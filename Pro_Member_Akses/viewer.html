@@ -205,6 +205,36 @@
         renderAllPages();
     };
 
+// === TAMBAHKAN FUNGSI BARU INI ===
+    /**
+     * Mencari konten berdasarkan ID di semua kategori dalam allContentData.
+     * @param {string} contentId - ID dari konten yang dicari.
+     * @returns {object|null} - Mengembalikan objek berisi {contentItem, prevItem, nextItem, type} atau null jika tidak ditemukan.
+     */
+    function findContentDetails(contentId) {
+        // Loop melalui semua kategori utama: 'materi', 'umtLab', 'perpustakaan', dll.
+        for (const key in allContentData) {
+            const categoryData = allContentData[key];
+            
+            // Mengubah semua data menjadi satu array datar agar mudah dicari
+            const flatList = Array.isArray(categoryData) ? categoryData : Object.values(categoryData).flat();
+            
+            const currentIndex = flatList.findIndex(item => item.id === contentId);
+
+            // Jika item ditemukan di kategori ini
+            if (currentIndex !== -1) {
+                return {
+                    contentItem: flatList[currentIndex],
+                    prevItem: currentIndex > 0 ? flatList[currentIndex - 1] : null,
+                    nextItem: currentIndex < flatList.length - 1 ? flatList[currentIndex + 1] : null,
+                    type: key // Mengembalikan nama kategori (misal: 'perpustakaan')
+                };
+            }
+        }
+        return null; // Tidak ditemukan di kategori manapun
+    }
+// === AKHIR DARI FUNGSI BARU ===
+
     // --- LOGIKA SAAT HALAMAN DIBUKA ---
     document.addEventListener('DOMContentLoaded', async () => {
         const urlParams = new URLSearchParams(window.location.search);
@@ -215,34 +245,19 @@
             statusMessageEl.textContent = 'ID Konten tidak ada di URL.';
             return;
         }
-
-        let contentItem = null;
-        let prevItem = null;
-        let nextItem = null;
-
-        // Mencari di Materi
-        for (const grade in allContentData.materi) {
-            const materiList = allContentData.materi[grade];
-            const currentIndex = materiList.findIndex(item => item.id === contentId);
-            if (currentIndex !== -1) {
-                contentItem = materiList[currentIndex];
-                if (currentIndex > 0) prevItem = materiList[currentIndex - 1];
-                if (currentIndex < materiList.length - 1) nextItem = materiList[currentIndex + 1];
-                break;
-            }
-        }
         
-        // Jika tidak ketemu di Materi, cari di UMT Lab
-        if (!contentItem) {
-            const labList = allContentData.umtLab;
-            const currentIndex = labList.findIndex(item => item.id === contentId);
-            if (currentIndex !== -1) {
-                contentItem = labList[currentIndex];
-                if (currentIndex > 0) prevItem = labList[currentIndex - 1];
-                if (currentIndex < labList.length - 1) nextItem = labList[currentIndex + 1];
-            }
+// === TAMBAHKAN KODE BARU INI (Sebagai pengganti kode yang dihapus) ===
+        const result = findContentDetails(contentId);
+
+        if (!result) {
+            materiTitleEl.textContent = 'Error: Konten tidak ditemukan.';
+            statusMessageEl.textContent = `Konten dengan ID "${contentId}" tidak ditemukan.`;
+            return;
         }
-        
+
+        const { contentItem, prevItem, nextItem, type } = result;
+// === AKHIR DARI KODE BARU ===
+
         if (!contentItem) {
             materiTitleEl.textContent = 'Error: Konten tidak ditemukan.';
             statusMessageEl.textContent = `Konten dengan ID "${contentId}" tidak ditemukan.`;
