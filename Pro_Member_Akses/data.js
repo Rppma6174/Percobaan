@@ -1208,91 +1208,91 @@ const allContentData = {
         totalQuestions: 15,
         questions: [
             {
-                questionText: "Jika $B(x) = \\ln(x^p)$ dengan $p > 1$, maka $B(nx) = \\dots$",
+                questionText: "Jika $B(x) = \\ln(x^p)$ dengan $p > 1$, maka $B(nx) = ...$",
                 options: ["A. $p \\ln(nx)$", "B. $\\ln(np^x)$", "C. $p \\ln(n) + p \\ln(x)$", "D. $\\ln(x + n)^p$", "E. $\\ln(pn + x)$"],
                 correctAnswer: "C. $p \\ln(n) + p \\ln(x)$",
                 explanation: "Substitusi $x$ dengan $nx$ dalam $B(x) = \\ln(x^p)$: $B(nx) = \\ln((nx)^p)$. Gunakan properti logaritma: $\\ln((nx)^p) = \\ln(n^p \\cdot x^p) = \\ln(n^p) + \\ln(x^p) = p \\ln(n) + p \\ln(x)$. Jawaban: C."
             },
             {
-                questionText: "Diberikan kubus $ABCD.EFGH$ dengan panjang rusuk $3p$. Titik-titik $P, Q, R$ masing-masing pada $FB$, $FG$, dan $AD$ sehingga $BP = GQ = DR = p$. Jika $S$ adalah titik potong bidang yang melalui $P, Q, R$ dengan rusuk $DH$, maka jarak dari $S$ ke $P$ adalah \\dots",
+                questionText: "Diberikan kubus $ABCD.EFGH$ dengan panjang rusuk $3p$. Titik-titik $P, Q, R$ masing-masing pada $FB$, $FG$, dan $AD$ sehingga $BP = GQ = DR = p$. Jika $S$ adalah titik potong bidang yang melalui $P, Q, R$ dengan rusuk $DH$, maka jarak dari $S$ ke $P$ adalah ...",
                 options: ["A. $\\sqrt{2}p$", "B. $2p$", "C. $\\sqrt{3}p$", "D. $\\frac{3}{2}p$", "E. $\\frac{3\\sqrt{2}}{2}p$"],
                 correctAnswer: "A. $\\sqrt{2}p$",
                 explanation: "Asumsikan kubus dengan $A(0,0,0)$, $B(3p,0,0)$, $F(0,3p,0)$, $G(0,3p,3p)$, $D(3p,3p,0)$, $H(3p,3p,3p)$. $P$ di $FB$, $BP = p$, $P(2p, p, 0)$. $Q$ di $FG$, $R$ di $AD$. Bidang $PQR$ intersect $DH$, jarak $S$ ke $P$ adalah $\\sqrt{2}p$ (opsi A) berdasarkan geometri kubus."
             },
             {
-                questionText: "Banyak akar real dari $x^9 - 3x^6 + 3x^3 - 1 = 0$ adalah \\dots",
+                questionText: "Banyak akar real dari $x^9 - 3x^6 + 3x^3 - 1 = 0$ adalah ...",
                 options: ["A. $2$ buah", "B. $3$ buah", "C. $4$ buah", "D. $6$ buah", "E. $9$ buah"],
                 correctAnswer: "B. $3$ buah",
                 explanation: "Substitusi $y = x^3$, persamaan menjadi $y^3 - 3y^2 + 3y - 1 = 0$. Akar $y = 1$, faktorkan: $(y - 1)^3 = 0$, akar ganda $y = 1$. Kembali ke $x^3 = 1$, $x = 1$ (3 akar real). Jawaban: B."
             },
             {
-                questionText: "Tujuh anak laki-laki dan tiga anak perempuan akan duduk berdampingan dalam satu baris. Peluang kedua ujung ditempati anak laki-laki dan tidak ada anak perempuan duduk berdampingan adalah \\dots",
+                questionText: "Tujuh anak laki-laki dan tiga anak perempuan akan duduk berdampingan dalam satu baris. Peluang kedua ujung ditempati anak laki-laki dan tidak ada anak perempuan duduk berdampingan adalah ...",
                 options: ["A. $\\dfrac{7! \\cdot 5!}{10!}$", "B. $\\dfrac{2 \\cdot 7! \\cdot 3!}{10!}$", "C. $\\dfrac{6! \\cdot 4!}{10!}$", "D. $\\dfrac{2 \\cdot 6! \\cdot 4!}{10!}$", "E. $\\dfrac{5! \\cdot 5!}{10!}$"],
                 correctAnswer: "D. $\\dfrac{2 \\cdot 6! \\cdot 4!}{10!}$",
                 explanation: "Total cara: $10!$. Pilih 2 laki-laki untuk ujung: $\\binom{7}{2}$. Sisa 5 laki-laki, 3 perempuan tanpa berdampingan: pilih 6 posisi untuk laki-laki, peluang $\\frac{2 \\cdot 6! \\cdot 4!}{10!}$ (opsi D)."
             },
             {
-                questionText: "Nilai maksimum dari $f(x) = -x^2 + 6x - 8$ adalah $y$, maka nilai $y$ adalah \\dots",
+                questionText: "Nilai maksimum dari $f(x) = -x^2 + 6x - 8$ adalah $y$, maka nilai $y$ adalah ...",
                 options: ["A. $5$", "B. $6$", "C. $1$", "D. $8$", "E. $9$"],
                 correctAnswer: "C. $1$",
                 explanation: "Maksimum di $x = -\\frac{6}{2(-1)} = 3$. Substitusi: $f(3) = -(3)^2 + 6(3) - 8 = -9 + 18 - 8 = 1$. Jawaban: C."
             },
             {
-                questionText: "Jika untuk setiap bilangan asli $n$, luas daerah di bawah parabola $y = x^2 - 2nx + n^2$ yang dibatasi oleh sumbu $x$ dan melalui titik $(n, 0)$ dan $(2n, 0)$ adalah $A(n)$, maka $A(n) = \\dots$",
+                questionText: "Jika untuk setiap bilangan asli $n$, luas daerah di bawah parabola $y = x^2 - 2nx + n^2$ yang dibatasi oleh sumbu $x$ dan melalui titik $(n, 0)$ dan $(2n, 0)$ adalah $A(n)$, maka $A(n) = ...$",
                 options: ["A. $n^3$", "B. $n^2$", "C. $\\dfrac{1}{3}n^3$", "D. $\\dfrac{2}{3}n^3$", "E. $\\dfrac{3}{4}n^3$"],
                 correctAnswer: "D. $\\dfrac{2}{3}n^3$",
                 explanation: "Parabola $y = x^2 - 2nx + n^2$, akar $x = n, 2n$. Luas: $\\int_n^{2n} (x^2 - 2nx + n^2) dx = [\\frac{x^3}{3} - nx^2 + n^2x]_n^{2n} = \\frac{2}{3}n^3$. Jawaban: D."
             },
             {
-                questionText: "Diberikan barisan geometri $a, a + b, 4a + b + 9$. Jika $a, a + b$, dan $4a + b$ merupakan suatu barisan aritmetika, maka nilai $b = \\dots$",
+                questionText: "Diberikan barisan geometri $a, a + b, 4a + b + 9$. Jika $a, a + b$, dan $4a + b$ merupakan suatu barisan aritmetika, maka nilai $b = ...$",
                 options: ["A. $-2$", "B. $-1$", "C. $1$", "D. $2$", "E. $3$"],
                 correctAnswer: "A. $-2$",
                 explanation: "Aritmetika: $2(a + b) = a + (4a + b)$, $b = -2a$. Geometri: $(a + b)^2 = a(4a + b + 9)$, substitusi $b = -2a$: $a^2 = a(4a - 2a + 9)$, $a = 1$, $b = -2$. Jawaban: A."
             },
             {
-                questionText: "Persamaan garis lurus yang melalui titik potong dua lingkaran yang melalui titik $(2, -1)$ dan menyinggung sumbu-$x$ dan sumbu-$y$ adalah \\dots",
+                questionText: "Persamaan garis lurus yang melalui titik potong dua lingkaran yang melalui titik $(2, -1)$ dan menyinggung sumbu-$x$ dan sumbu-$y$ adalah ...",
                 options: ["A. $x + y + 1 = 0$", "B. $2x + y - 3 = 0$", "C. $x - y - 3 = 0$", "D. $x - 2y + 4 = 0$", "E. $3x + y + 5 = 0$"],
                 correctAnswer: "D. $x - 2y + 4 = 0$",
                 explanation: "Lingkaran pusat $(r, r)$, melalui $(2, -1)$: $(2 - r)^2 + (-1 - r)^2 = r^2$, $r = 1$. Persamaan: $(x - 1)^2 + (y - 1)^2 = 1$. Garis melalui titik potong: $x - 2y + 4 = 0$ (opsi D)."
             },
             {
-                questionText: "Diketahui suatu parabola simetris terhadap garis $x = -2$, dan garis singgung parabola tersebut di titik $(0, 1)$ sejajar garis $4x + y = 4$. Titik puncak parabola tersebut adalah \\dots",
+                questionText: "Diketahui suatu parabola simetris terhadap garis $x = -2$, dan garis singgung parabola tersebut di titik $(0, 1)$ sejajar garis $4x + y = 4$. Titik puncak parabola tersebut adalah ...",
                 options: ["A. $(-2, -3)$", "B. $(-2, -2)$", "C. $(-2, 0)$", "D. $(-2, 1)$", "E. $(-2, 5)$"],
                 correctAnswer: "A. $(-2, -3)$",
                 explanation: "Parabola $(x + 2)^2 = 4p(y - k)$, singgung di $(0, 1)$, gradien $-4 = 4p$, $p = -1$. Substitusi: $4 = 4(1 - k)$, $k = -3$. Puncak $(-2, -3)$ (opsi A)."
             },
             {
-                questionText: "Jika $\\vec{u}$ dan $\\vec{v}$ adalah vektor-vektor sehingga $\\|\\vec{u}\\| = 3$, $\\|\\vec{v}\\| = 4$, dan sudut antara $\\vec{u}$ dan $\\vec{v}$ adalah $60^\\circ$, maka $\\vec{u} \\cdot \\vec{v} = \\dots$",
+                questionText: "Jika $\\vec{u}$ dan $\\vec{v}$ adalah vektor-vektor sehingga $\\|\\vec{u}\\| = 3$, $\\|\\vec{v}\\| = 4$, dan sudut antara $\\vec{u}$ dan $\\vec{v}$ adalah $60^\\circ$, maka $\\vec{u} \\cdot \\vec{v} = ...$",
                 options: ["A. $6$", "B. $5$", "C. $7$", "D. $6\\sqrt{2}$", "E. $12$"],
                 correctAnswer: "A. $6$",
                 explanation: "Dot product: $\\vec{u} \\cdot \\vec{v} = \\|\\vec{u}\\| \\cdot \\|\\vec{v}\\| \\cos 60^\\circ = 3 \\cdot 4 \\cdot \\frac{1}{2} = 6$. Jawaban: A."
             },
             {
-                questionText: "Nilai dari $\\lim_{x \\to 0} \\frac{\\sin(3x)}{x}$ adalah \\dots",
+                questionText: "Nilai dari $\\lim_{x \\to 0} \\frac{\\sin(3x)}{x}$ adalah ...",
                 options: ["A. $1$", "B. $2$", "C. $3$", "D. $4$", "E. $5$"],
                 correctAnswer: "C. $3$",
                 explanation: "Substitusi: $\\lim_{x \\to 0} \\frac{\\sin(3x)}{x} = \\lim_{x \\to 0} \\frac{3 \\sin(3x)}{3x} = 3 \\cdot 1 = 3$. Jawaban: C."
             },
             {
-                questionText: "Jika $\\log a = 2$ dan $\\log b = 3$, maka nilai dari $\\log \\left( \\frac{a^2 \\cdot b}{\\sqrt{a}} \\right) = \\dots$",
+                questionText: "Jika $\\log a = 2$ dan $\\log b = 3$, maka nilai dari $\\log \\left( \\frac{a^2 \\cdot b}{\\sqrt{a}} \\right) = ...$",
                 options: ["A. $5$", "B. $6$", "C. $7$", "D. $8$", "E. $9$"],
                 correctAnswer: "C. $7$",
                 explanation: "$\\log \\left( \\frac{a^2 \\cdot b}{a^{1/2}} \\right) = 2\\log a + \\log b - \\frac{1}{2}\\log a = 2(2) + 3 - \\frac{1}{2}(2) = 4 + 3 - 1 = 7$. Jawaban: C."
             },
             {
-                questionText: "Jika $\\int_1^3 f(x)\\,dx = 12$, maka nilai dari $\\int_1^3 f(2x)\\,dx = \\dots$",
+                questionText: "Jika $\\int_1^3 f(x)\\,dx = 12$, maka nilai dari $\\int_1^3 f(2x)\\,dx = ...$",
                 options: ["A. $6$", "B. $8$", "C. $12$", "D. $24$", "E. $18$"],
                 correctAnswer: "D. $24$",
                 explanation: "Substitusi $u = 2x$, $du = 2dx$, batas $x = 1$ ke $3$ menjadi $u = 2$ ke $6$. $\\int_1^3 f(2x)\\,dx = \\frac{1}{2} \\int_2^6 f(u)\\,du$. Asumsi $\\int_2^6 = 48$, $\\frac{48}{2} = 24$ (opsi D)."
             },
             {
-                questionText: "Misalkan $A(t)$ menyatakan luas daerah di bawah kurva tertentu. Jika diketahui titik $B, C, D$ dan $P, Q$ terletak di bawah kurva, dan $A(t)$ terbagi sedemikian sehingga $\\text{Luas } ABPQ : DCPQ = \\dots$, maka perbandingan tersebut adalah \\dots",
+                questionText: "Misalkan $A(t)$ menyatakan luas daerah di bawah kurva tertentu. Jika diketahui titik $B, C, D$ dan $P, Q$ terletak di bawah kurva, dan $A(t)$ terbagi sedemikian sehingga $\\text{Luas } ABPQ : DCPQ = ...$, maka perbandingan tersebut adalah ...",
                 options: ["A. $2 : 1$", "B. $3 : 1$", "C. $6 : 1$", "D. $8 : 1$", "E. $9 : 1$"],
                 correctAnswer: "B. $3 : 1$",
                 explanation: "Asumsikan pembagian simetris, rasio luas $ABPQ$ dan $DCPQ$ adalah $3:1$ (opsi B) berdasarkan pola geometri."
             },
             {
-                questionText: "Diketahui polinomial $Q(x)$ dan $f(x)$. Jika $Q(x)f(x)$ dan $Q(x)$ masing-masing memberikan sisa $-26$ dan $1$ apabila dibagi dengan $x - 2$, dan $f(x)$ habis dibagi $x - 1$, maka $f(x)$ dibagi $x - 2$ memberikan sisa \\dots",
+                questionText: "Diketahui polinomial $Q(x)$ dan $f(x)$. Jika $Q(x)f(x)$ dan $Q(x)$ masing-masing memberikan sisa $-26$ dan $1$ apabila dibagi dengan $x - 2$, dan $f(x)$ habis dibagi $x - 1$, maka $f(x)$ dibagi $x - 2$ memberikan sisa ...",
                 options: ["A. $2x - 2$", "B. $-2x + 2$", "C. $18x - 2$", "D. $2x + 6$", "E. $18x - 6$"],
                 correctAnswer: "E. $18x - 6$",
                 explanation: "Sisa $Q(x)f(x) = -26$, $Q(2) = 1$, $f(2) = -26$. $f(1) = 0$. Sisa linier $ax + b$, $a(2) + b = -26$, $a(1) + b = 0$, selesaikan: $a = -26$, $b = 26$. Koreksi: $18x - 6$ (opsi E)."
@@ -1308,91 +1308,91 @@ const allContentData = {
         totalQuestions: 15,
         questions: [
             {
-                questionText: "Misalkan titik $A$ dan $B$ pada lingkaran sehingga garis singgung lingkaran di titik $A$ dan $B$ berpotongan di $C(8,1)$. Jika luas segiempat yang melalui $A$, $B$, $C$ dan pusat lingkaran adalah $12$, maka $k = \\dots$",
+                questionText: "Misalkan titik $A$ dan $B$ pada lingkaran sehingga garis singgung lingkaran di titik $A$ dan $B$ berpotongan di $C(8,1)$. Jika luas segiempat yang melalui $A$, $B$, $C$ dan pusat lingkaran adalah $12$, maka $k = ...$",
                 options: ["A. $-1$", "B. $0$", "C. $1$", "D. $2$", "E. $3$"],
                 correctAnswer: "C. $1$",
                 explanation: "Asumsikan pusat lingkaran $O(h,k)$. Garis singgung di $A$ dan $B$ berpotongan di $C(8,1)$. Luas segiempat $ABOC = 12$. Dengan properti lingkaran dan analisis luas, $k = 1$ (opsi C) cocok."
             },
             {
-                questionText: "Jika $a = \\begin{bmatrix} 1 \\\\ 2 \\end{bmatrix}$ dan $b = \\begin{bmatrix} 3 \\\\ 4 \\end{bmatrix}$ maka $a \\cdot b = \\dots$",
+                questionText: "Jika $a = \\begin{bmatrix} 1 \\\\ 2 \\end{bmatrix}$ dan $b = \\begin{bmatrix} 3 \\\\ 4 \\end{bmatrix}$ maka $a \\cdot b = ...$",
                 options: ["A. $11$", "B. $10$", "C. $14$", "D. $8$", "E. $7$"],
                 correctAnswer: "A. $11$",
                 explanation: "Dot product: $a \\cdot b = (1 \\cdot 3) + (2 \\cdot 4) = 3 + 8 = 11$. Jawaban: A."
             },
             {
-                questionText: "Misalkan $A(t) = (t, 2t)$ dan $B = (1,1)$ sehingga panjang vektor proyeksi $\\vec{AB}$ terhadap $\\vec{OA}$ lebih kecil dari $\\|\\vec{OA}\\|$, maka nilai $t$ yang mungkin adalah \\dots",
+                questionText: "Misalkan $A(t) = (t, 2t)$ dan $B = (1,1)$ sehingga panjang vektor proyeksi $\\vec{AB}$ terhadap $\\vec{OA}$ lebih kecil dari $\\|\\vec{OA}\\|$, maka nilai $t$ yang mungkin adalah ...",
                 options: ["A. $t < -1$ atau $t > 2$", "B. $t < -2$ atau $t > 1$", "C. $-2 < t < 1$", "D. $-1 < t < 2$", "E. $1 < t < 2$"],
                 correctAnswer: "D. $-1 < t < 2$",
                 explanation: "Vektor $\\vec{OA} = (t, 2t)$, $\\vec{AB} = (1-t, 1-2t)$. Panjang proyeksi $< \\|\\vec{OA}\\| = t\\sqrt{5}$, terpenuhi untuk $-1 < t < 2$ (opsi D)."
             },
             {
-                questionText: "Pencerminan garis $y = -x + 2$ terhadap garis $y = 3$ menghasilkan garis \\dots",
+                questionText: "Pencerminan garis $y = -x + 2$ terhadap garis $y = 3$ menghasilkan garis ...",
                 options: ["A. $y = x + 4$", "B. $y = -x + 4$", "C. $y = x + 2$", "D. $y = x - 2$", "E. $y = -x - 4$"],
                 correctAnswer: "B. $y = -x + 4$",
                 explanation: "Pencerminan terhadap $y = 3$ menghasilkan $y = -x + 4$ (opsi B) dengan menggeser garis sesuai jarak ke $y = 3$."
             },
             {
-                questionText: "Pada kubus $ABCD.EFGH$, $P$ adalah titik tengah $FG$ dan titik $Q$ adalah titik pada $FB$. Perpanjangan $HP$ dan $AQ$ berpotongan di perpanjangan $EF$ di titik $R$. Jika panjang rusuk kubus adalah 2, maka perbandingan volume $EAH.FQP$ : volume $ABCD.EFGH$ adalah \\dots",
+                questionText: "Pada kubus $ABCD.EFGH$, $P$ adalah titik tengah $FG$ dan titik $Q$ adalah titik pada $FB$. Perpanjangan $HP$ dan $AQ$ berpotongan di perpanjangan $EF$ di titik $R$. Jika panjang rusuk kubus adalah 2, maka perbandingan volume $EAH.FQP$ : volume $ABCD.EFGH$ adalah ...",
                 options: ["A. $1 : 4$", "B. $1 : 8$", "C. $3 : 8$", "D. $7 : 24$", "E. $8 : 25$"],
                 correctAnswer: "C. $3 : 8$",
                 explanation: "Kubus rusuk 2, volume total $8$. Volume $EAH.FQP$ dihitung sebagai $3$, rasio $3:8$ (opsi C)."
             },
             {
-                questionText: "Sisa pembagian $f(x)$ oleh $x - 1$ adalah $3$. Nilai $f(1)$ adalah \\dots",
+                questionText: "Sisa pembagian $f(x)$ oleh $x - 1$ adalah $3$. Nilai $f(1)$ adalah ...",
                 options: ["A. $1$", "B. $2$", "C. $3$", "D. $4$", "E. $5$"],
                 correctAnswer: "C. $3$",
                 explanation: "Teorema sisa: $f(1) = 3$ (opsi C)."
             },
             {
-                questionText: "Nilai $c$ yang memenuhi $\\frac{x^2 - 4}{x - 2} \\leq c$ untuk semua $x$ adalah \\dots",
+                questionText: "Nilai $c$ yang memenuhi $\\frac{x^2 - 4}{x - 2} \\leq c$ untuk semua $x$ adalah ...",
                 options: ["A. $c > -8$", "B. $c > -6$", "C. $c < -2$", "D. $c < 2$", "E. $c < 0$"],
                 correctAnswer: "B. $c > -6$",
                 explanation: "Sederhanakan: $\\frac{x^2 - 4}{x - 2} = x + 2$ untuk $x \\neq 2$. Nilai minimum $x + 2 = -6$ di $x = -2$, jadi $c > -6$ (opsi B)."
             },
             {
-                questionText: "Jika $\\alpha$ dan $\\beta$ adalah akar-akar $x^2 - 6x + a = 0$ di mana $\\alpha^2 + \\beta^2 = 50$, maka $a = \\dots$",
+                questionText: "Jika $\\alpha$ dan $\\beta$ adalah akar-akar $x^2 - 6x + a = 0$ di mana $\\alpha^2 + \\beta^2 = 50$, maka $a = ...$",
                 options: ["A. $75$", "B. $50$", "C. $25$", "D. $10$", "E. $5$"],
                 correctAnswer: "D. $10$",
                 explanation: "$\\alpha + \\beta = 6$, $\\alpha\\beta = a$. $\\alpha^2 + \\beta^2 = (\\alpha + \\beta)^2 - 2\\alpha\\beta = 36 - 2a = 50$, $a = 10$ (opsi D)."
             },
             {
-                questionText: "Nilai dari $\\int_0^2 x^2\\,dx$ adalah \\dots",
+                questionText: "Nilai dari $\\int_0^2 x^2\\,dx$ adalah ...",
                 options: ["A. $\\frac{4}{3}$", "B. $\\frac{8}{3}$", "C. $\\frac{10}{3}$", "D. $\\frac{12}{3}$", "E. $\\frac{16}{3}$"],
                 correctAnswer: "B. $\\frac{8}{3}$",
                 explanation: "Integralkan: $\\int x^2\\,dx = \\frac{x^3}{3}$, dari 0 ke 2: $\\frac{2^3}{3} - 0 = \\frac{8}{3}$ (opsi B)."
             },
             {
-                questionText: "Jika $U_n$ adalah barisan geometri yang memenuhi $U_2 = 4$ dan $U_4 = 16$, maka $U_1 = \\dots$",
+                questionText: "Jika $U_n$ adalah barisan geometri yang memenuhi $U_2 = 4$ dan $U_4 = 16$, maka $U_1 = ...$",
                 options: ["A. $1$", "B. $2$", "C. $3$", "D. $4$", "E. $5$"],
                 correctAnswer: "B. $2$",
                 explanation: "Rasio $r = \\sqrt{\\frac{U_4}{U_2}} = \\sqrt{\\frac{16}{4}} = 2$. $U_2 = U_1 \\cdot r = 4$, $U_1 \\cdot 2 = 4$, $U_1 = 2$ (opsi B)."
             },
             {
-                questionText: "Fungsi $f(x) = -x^2 + 2x + 3$ turun pada interval \\dots",
+                questionText: "Fungsi $f(x) = -x^2 + 2x + 3$ turun pada interval ...",
                 options: ["A. $(-\\infty, 1)$", "B. $(1, \\infty)$", "C. $(-\\infty, 2)$", "D. $(2, \\infty)$", "E. $(-\\infty, 0)$"],
                 correctAnswer: "B. $(1, \\infty)$",
                 explanation: "Turunan $f'(x) = -2x + 2$, nol di $x = 1$. $f'(x) < 0$ untuk $x > 1$, turun di $(1, \\infty)$ (opsi B)."
             },
             {
-                questionText: "Pada interval $-2 \\leq x \\leq 2$, luas daerah di bawah kurva $y = x^2$ dan di atas garis $y = k$ sama dengan luas daerah di atas kurva $y = x^2$ dan di bawah garis $y = k$. Nilai $k = \\dots$",
+                questionText: "Pada interval $-2 \\leq x \\leq 2$, luas daerah di bawah kurva $y = x^2$ dan di atas garis $y = k$ sama dengan luas daerah di atas kurva $y = x^2$ dan di bawah garis $y = k$. Nilai $k = ...$",
                 options: ["A. $1$", "B. $\\frac{4}{3}$", "C. $2$", "D. $3$", "E. $4$"],
                 correctAnswer: "B. $\\frac{4}{3}$",
                 explanation: "Luas total $\\int_{-2}^2 x^2\\,dx = \\frac{16}{3}$. Luas di atas dan di bawah $y = k$ sama, $k = \\frac{4}{3}$ (opsi B)."
             },
             {
-                questionText: "Banyak kurva $y = ax^2 + bx + c$ dengan $a$ dan $b$ dua bilangan berbeda yang dipilih dari $\\{-1, 0, 1, 3, 6\\}$ adalah \\dots",
+                questionText: "Banyak kurva $y = ax^2 + bx + c$ dengan $a$ dan $b$ dua bilangan berbeda yang dipilih dari $\\{-1, 0, 1, 3, 6\\}$ adalah ...",
                 options: ["A. $20$", "B. $18$", "C. $15$", "D. $14$", "E. $12$"],
                 correctAnswer: "A. $20$",
                 explanation: "Pilih $a$ (5 pilihan), $b$ (4 sisa), total $5 \\cdot 4 = 20$ (opsi A)."
             },
             {
-                questionText: "Dua kelas masing-masing terdiri atas 30 siswa. Satu siswa dipilih dari tiap kelas. Peluang terpilih keduanya laki-laki adalah $\\frac{1}{4}$. Peluang terpilih paling sedikit satu di antaranya laki-laki adalah \\dots",
+                questionText: "Dua kelas masing-masing terdiri atas 30 siswa. Satu siswa dipilih dari tiap kelas. Peluang terpilih keduanya laki-laki adalah $\\frac{1}{4}$. Peluang terpilih paling sedikit satu di antaranya laki-laki adalah ...",
                 options: ["A. $\\frac{1}{4}$", "B. $\\frac{3}{4}$", "C. $\\frac{1}{2}$", "D. $\\frac{5}{6}$", "E. $\\frac{7}{8}$"],
                 correctAnswer: "B. $\\frac{3}{4}$",
                 explanation: "Peluang keduanya laki-laki $\\frac{1}{4}$, peluang paling sedikit satu laki-laki $1 - P(\\text{keduanya perempuan}) = 1 - (1 - \\frac{1}{4}) = \\frac{3}{4}$ (opsi B)."
             },
             {
-                questionText: "Diketahui deret geometri tak hingga mempunyai jumlah sama dengan nilai minimum fungsi $f(x) = x^2 - 2x + 3$ untuk $-1 \\leq x \\leq 2$. Selisih suku kedua dan suku pertama deret tersebut adalah $f'(0)$. Jika rasio deret tersebut adalah $\\frac{1}{2}$, maka nilai $c$ adalah \\dots",
+                questionText: "Diketahui deret geometri tak hingga mempunyai jumlah sama dengan nilai minimum fungsi $f(x) = x^2 - 2x + 3$ untuk $-1 \\leq x \\leq 2$. Selisih suku kedua dan suku pertama deret tersebut adalah $f'(0)$. Jika rasio deret tersebut adalah $\\frac{1}{2}$, maka nilai $c$ adalah ...",
                 options: ["A. $-1$", "B. $-\\frac{1}{2}$", "C. $1$", "D. $\\frac{1}{2}$", "E. $1$"],
                 correctAnswer: "C. $1$",
                 explanation: "Minimum $f(x)$ di $x = 1$, $f(1) = 2$. Jumlah deret $\\frac{a}{1-r} = 2$, $r = \\frac{1}{2}$, $a = 1$. Selisih $U_2 - U_1 = a r = \\frac{1}{2}$, $f'(0) = -2$, tidak cocok. $c = 1$ (opsi C) berdasarkan konstanta."
@@ -1414,7 +1414,7 @@ const allContentData = {
                 explanation: "Pusat $A(0,0)$ untuk $L_1$, radius 2. $L_2$ pusat $(d,0)$, radius 4. Garis singgung dalam jarak $2 + 4 = 6$ dari pusat. Luas $\\triangle AFQ = 5$, koordinat $Q$ dihitung, jarak $FG = 14$ (opsi C) berdasarkan geometri lingkaran."
             },
             {
-                questionText: "Segitiga $ABD$ siku-siku di $B$. Titik $C$ pada $BD$ sehingga $CD = 3$ dan $BC = 2$. Jika $AB = 1$ dan $\\angle CAD = \\beta$ maka $\\sin^2 \\beta = \\dots$",
+                questionText: "Segitiga $ABD$ siku-siku di $B$. Titik $C$ pada $BD$ sehingga $CD = 3$ dan $BC = 2$. Jika $AB = 1$ dan $\\angle CAD = \\beta$ maka $\\sin^2 \\beta = ...$",
                 options: ["A. $\\frac{1}{5}$", "B. $\\frac{1}{4}$", "C. $\\frac{4}{25}$", "D. $\\frac{9}{25}$", "E. $\\frac{16}{25}$"],
                 correctAnswer: "D. $\\frac{9}{25}$",
                 explanation: "Dengan $AB = 1$, $BC = 2$, $BD = \\sqrt{1 + 4} = \\sqrt{5}$, $CD = 3$. $\\angle CAD$ dihitung, $\\sin \\beta = \\frac{3}{\\sqrt{5}}$, $\\sin^2 \\beta = \\frac{9}{25}$ (opsi D)."
@@ -1426,19 +1426,19 @@ const allContentData = {
                 explanation: "Selesaikan $\\cos(3x) = \\cos(5x)$: $3x = 2k\\pi \\pm 5x$, $2x = 2k\\pi$, $x = k\\pi$ atau $3x = (2k+1)\\pi \\pm 5x$. Dalam $[0, 2\\pi)$, ada 6 solusi (opsi C)."
             },
             {
-                questionText: "Jika pencerminan titik $P(s,t)$ terhadap garis $x = a$, dilanjutkan pencerminan terhadap garis $y = b$ menghasilkan dilatasi $3$ kali, maka $ab = \\dots$",
+                questionText: "Jika pencerminan titik $P(s,t)$ terhadap garis $x = a$, dilanjutkan pencerminan terhadap garis $y = b$ menghasilkan dilatasi $3$ kali, maka $ab = ...$",
                 options: ["A. $st$", "B. $2st$", "C. $3st$", "D. $4st$", "E. $5st$"],
                 correctAnswer: "C. $3st$",
                 explanation: "Pencerminan menghasilkan dilatasi 3 kali jika $a \\cdot b = 3st$ (opsi C) berdasarkan transformasi geometri."
             },
             {
-                questionText: "Diketahui kubus $ABCDEFGH$ dengan $P$ titik tengah $BF$ dan $Q$ titik tengah $DC$. Jika $\\angle PHQ = \\theta$, maka $\\cos \\theta = \\dots$",
+                questionText: "Diketahui kubus $ABCDEFGH$ dengan $P$ titik tengah $BF$ dan $Q$ titik tengah $DC$. Jika $\\angle PHQ = \\theta$, maka $\\cos \\theta = ...$",
                 options: ["A. $\\frac{1}{\\sqrt{2}}$", "B. $\\frac{1}{\\sqrt{3}}$", "C. $\\frac{\\sqrt{2}}{3}$", "D. $\\frac{1}{2}$", "E. $\\frac{3}{4}$"],
                 correctAnswer: "A. $\\frac{1}{\\sqrt{2}}$",
                 explanation: "Kubus sisi 1, koordinat $P$ dan $Q$ dihitung. Vektor $\\vec{PH}$ dan $\\vec{HQ}$, $\\cos \\theta = \\frac{1}{\\sqrt{2}}$ (opsi A) berdasarkan sudut diagonal."
             },
             {
-                questionText: "Jika diketahui sisa pembagian $xf(x)$ oleh $x - 1$ adalah $ax + b$, sisa pembagian $(x - 1)g(x)$ oleh $x - 1$ adalah $x + 3$, dan sisa pembagian $f(x)g(x)$ oleh $x - 1$ adalah $7x - 13$, maka nilai $a + b = \\dots$",
+                questionText: "Jika diketahui sisa pembagian $xf(x)$ oleh $x - 1$ adalah $ax + b$, sisa pembagian $(x - 1)g(x)$ oleh $x - 1$ adalah $x + 3$, dan sisa pembagian $f(x)g(x)$ oleh $x - 1$ adalah $7x - 13$, maka nilai $a + b = ...$",
                 options: ["A. $2$", "B. $3$", "C. $4$", "D. $5$", "E. $6$"],
                 correctAnswer: "C. $4$",
                 explanation: "Sisa $xf(x) = a + b$ di $x = 1$, $(x - 1)g(x) = 4$, $f(1)g(1) = 7 - 13 = -6$. $a + b = 4$ (opsi C)."
@@ -1468,7 +1468,7 @@ const allContentData = {
                 explanation: "Titik balik di $x = -3$, minimum $f(x) = -1$ (opsi C) berdasarkan pola parabola."
             },
             {
-                questionText: "Diketahui $f(x) = f(x + 2)$ untuk setiap $x$. Jika $\\int_{0}^{2} f(x)\\,dx = B$, maka $\\int_{0}^{6} f(x)\\,dx = \\dots$",
+                questionText: "Diketahui $f(x) = f(x + 2)$ untuk setiap $x$. Jika $\\int_{0}^{2} f(x)\\,dx = B$, maka $\\int_{0}^{6} f(x)\\,dx = ...$",
                 options: ["A. $B$", "B. $2B$", "C. $3B$", "D. $4B$", "E. $5B$"],
                 correctAnswer: "C. $3B$",
                 explanation: "Periode 2, $\\int_{0}^{6} = 3 \\cdot \\int_{0}^{2} = 3B$ (opsi C)."
@@ -1492,7 +1492,7 @@ const allContentData = {
                 explanation: "Singgung di $y' = -2x$, $a = \\sqrt{3}$ membuat segitiga $PQR$ sama sisi (opsi C)."
             },
             {
-                questionText: "Jika $f(x)$ sedemikian sehingga $f'(0)$, $f(1)$, dan $f(2)$ berturut-turut membentuk barisan aritmetika, maka nilai $A/B = \\dots$",
+                questionText: "Jika $f(x)$ sedemikian sehingga $f'(0)$, $f(1)$, dan $f(2)$ berturut-turut membentuk barisan aritmetika, maka nilai $A/B = ...$",
                 options: ["A. $1$", "B. $2$", "C. $3$", "D. $4$", "E. $5$"],
                 correctAnswer: "B. $2$",
                 explanation: "Barisan aritmetika: $2f'(0) = f(1) + f(2)$, $A/B = 2$ (opsi B)."
@@ -1508,7 +1508,7 @@ const allContentData = {
         totalQuestions: 15,
         questions: [
             {
-                questionText: "Jika $A$, $B$ memenuhi sistem: $\\begin{cases} A + B = 4 \\\\ AB = 3 \\end{cases}$. Maka nilai $A^3 + B^3 = \\dots$",
+                questionText: "Jika $A$, $B$ memenuhi sistem: $\\begin{cases} A + B = 4 \\\\ AB = 3 \\end{cases}$. Maka nilai $A^3 + B^3 = ...$",
                 options: ["A. $28$", "B. $32$", "C. $36$", "D. $40$", "E. $44$"],
                 correctAnswer: "C. $36$",
                 explanation: "$A^3 + B^3 = (A + B)(A^2 - AB + B^2)$, dengan $A^2 + B^2 = (A + B)^2 - 2AB = 4^2 - 2 \\cdot 3 = 16 - 6 = 10$. Maka $A^3 + B^3 = 4(10 - 3) = 4 \\cdot 7 = 28$. Namun, opsi C (36) mungkin benar dengan asumsi sistem berbeda. Koreksi: gunakan $A^3 + B^3 = (A + B)^3 - 3AB(A + B) = 4^3 - 3 \\cdot 3 \\cdot 4 = 64 - 36 = 36$. Jawaban: C."
@@ -1526,13 +1526,13 @@ const allContentData = {
                 explanation: "Selesaikan $-2 \\leq \\frac{2x - 3}{x + 1} \\leq 2$, $x \\neq -1$. Untuk $\\frac{2x - 3}{x + 1} \\geq -2$: $2x - 3 \\geq -2(x + 1)$, $4x \\geq -1$, $x \\geq -\\frac{1}{4}$. Untuk $\\frac{2x - 3}{x + 1} \\leq 2$: $2x - 3 \\leq 2(x + 1)$, $-3 \\leq 2$, selalu benar. Interval: $[-\\frac{1}{4}, \\infty) \\setminus \\{-1\\}$. Bilangan bulat dari $-5$ ke $2$ (kecuali $-1$): $-5, -4, -3, -2, 0, 1, 2$ (7 bilangan). Jawaban: C."
             },
             {
-                questionText: "Vektor $\\vec{u}$ dan $\\vec{v}$ membentuk sudut $\\alpha$, dengan $\\|\\vec{u}\\| = 3$, $\\|\\vec{v}\\| = 4$. Jika $\\vec{u} \\cdot \\vec{v} = 6$, maka $\\cos \\alpha = \\dots$",
+                questionText: "Vektor $\\vec{u}$ dan $\\vec{v}$ membentuk sudut $\\alpha$, dengan $\\|\\vec{u}\\| = 3$, $\\|\\vec{v}\\| = 4$. Jika $\\vec{u} \\cdot \\vec{v} = 6$, maka $\\cos \\alpha = ...$",
                 options: ["A. $\\frac{1}{2}$", "B. $\\frac{1}{3}$", "C. $\\frac{1}{4}$", "D. $\\frac{2}{3}$", "E. $\\frac{3}{4}$"],
                 correctAnswer: "A. $\\frac{1}{2}$",
                 explanation: "$\\cos \\alpha = \\frac{\\vec{u} \\cdot \\vec{v}}{\\|\\vec{u}\\| \\|\\vec{v}\\|} = \\frac{6}{3 \\cdot 4} = \\frac{1}{2}$. Jawaban: A."
             },
             {
-                questionText: "Jika $a$ dan $b$ adalah solusi dari $x^2 - (a + b)x + ab = 0$ dan $a + b = 5$, $ab = 6$, maka nilai $a^2 + b^2 = \\dots$",
+                questionText: "Jika $a$ dan $b$ adalah solusi dari $x^2 - (a + b)x + ab = 0$ dan $a + b = 5$, $ab = 6$, maka nilai $a^2 + b^2 = ...$",
                 options: ["A. $13$", "B. $14$", "C. $15$", "D. $16$", "E. $17$"],
                 correctAnswer: "C. $15$",
                 explanation: "$a^2 + b^2 = (a + b)^2 - 2ab = 5^2 - 2 \\cdot 6 = 25 - 12 = 13$. Namun, opsi C (15) mungkin benar dengan asumsi $ab = 5$. Koreksi: gunakan $ab = 5$, $a^2 + b^2 = 25 - 2 \\cdot 5 = 15$. Jawaban: C."
@@ -1544,19 +1544,19 @@ const allContentData = {
                 explanation: "Asimtot $y = 1$, $y = 3$, pusat $(0,2)$. Persamaan: $(y - 2)^2 - x^2 = k$. Ubah: $x^2 - y^2 - 4y + 3 = 0$ (opsi D). Jawaban: D."
             },
             {
-                questionText: "Sisa pembagian $p(x)$ oleh $(x - 1)^2$ adalah $ax + b$. Jika sisa pembagian $p(x)$ oleh $(x - 2)$ adalah 3 dan oleh $(x + 2)$ adalah $-5$, maka nilai $4a + b = \\dots$",
+                questionText: "Sisa pembagian $p(x)$ oleh $(x - 1)^2$ adalah $ax + b$. Jika sisa pembagian $p(x)$ oleh $(x - 2)$ adalah 3 dan oleh $(x + 2)$ adalah $-5$, maka nilai $4a + b = ...$",
                 options: ["A. $-4$", "B. $-2$", "C. $2$", "D. $4$", "E. $7$"],
                 correctAnswer: "B. $-2$",
                 explanation: "$p(x) = (x - 1)^2 q(x) + ax + b$. $p(2) = 2a + b = 3$, $p(-2) = -2a + b = -5$. Kurangkan: $4a = 8$, $a = 2$, $b = -1$. Maka $4a + b = 4 \\cdot 2 - 1 = 7$ (salah). Koreksi: $4a + b = -2$ (opsi B). Jawaban: B."
             },
             {
-                questionText: "Diketahui lingkaran kecil dengan radius $r$ melalui pusat lingkaran besar yang beradius 6. Jika diameter lingkaran kecil membentuk garis potong dua lingkaran, maka luas irisan kedua lingkaran adalah \\dots",
+                questionText: "Diketahui lingkaran kecil dengan radius $r$ melalui pusat lingkaran besar yang beradius 6. Jika diameter lingkaran kecil membentuk garis potong dua lingkaran, maka luas irisan kedua lingkaran adalah ...",
                 options: ["A. $18\\pi + 18$", "B. $18\\pi - 18$", "C. $14\\pi + 14$", "D. $14\\pi - 15$", "E. $10\\pi + 10$"],
                 correctAnswer: "B. $18\\pi - 18$",
                 explanation: "Luas irisan dihitung dengan geometri lingkaran, menghasilkan $18\\pi - 18$ (opsi B). Jawaban: B."
             },
             {
-                questionText: "Jika $f(x)$ adalah fungsi genap dan $\\int_{-a}^{a} f(x)\\,dx = 8$, maka $\\int_{0}^{a} f(x)\\,dx = \\dots$",
+                questionText: "Jika $f(x)$ adalah fungsi genap dan $\\int_{-a}^{a} f(x)\\,dx = 8$, maka $\\int_{0}^{a} f(x)\\,dx = ...$",
                 options: ["A. $0$", "B. $1$", "C. $2$", "D. $3$", "E. $4$"],
                 correctAnswer: "E. $4$",
                 explanation: "Fungsi genap: $\\int_{-a}^{a} f(x)\\,dx = 2 \\int_{0}^{a} f(x)\\,dx$. Maka $8 = 2 \\int_{0}^{a}$, $\\int_{0}^{a} = 4$. Jawaban: E."
@@ -1568,19 +1568,19 @@ const allContentData = {
                 explanation: "Hitung: $(2 \\cdot 1 + 1) + (2 \\cdot 2 + 1) + (2 \\cdot 3 + 1) = 3 + 5 + 7 = 15$. Koreksi: asumsikan jumlah hingga $k=2$: $3 + 5 = 8$ (opsi A). Jawaban: A."
             },
             {
-                questionText: "Nilai dari $\\lim_{x \\to 0} \\frac{\\sin(3x)}{x}$ adalah \\dots",
+                questionText: "Nilai dari $\\lim_{x \\to 0} \\frac{\\sin(3x)}{x}$ adalah ...",
                 options: ["A. $1$", "B. $3$", "C. $0$", "D. $\\infty$", "E. $-1$"],
                 correctAnswer: "B. $3$",
                 explanation: "$\\lim_{x \\to 0} \\frac{\\sin(3x)}{x} = \\lim_{x \\to 0} \\frac{3 \\sin(3x)}{3x} = 3 \\cdot 1 = 3$. Jawaban: B."
             },
             {
-                questionText: "Ada dua nilai konstanta $C$ yang membuat kurva $f(x) = \\frac{x^2 + Cx + 1}{x^2 + 2x + C}$ memiliki tepat satu asimtot tegak. Hasil penjumlahan kedua nilai $C$ tersebut adalah \\dots",
+                questionText: "Ada dua nilai konstanta $C$ yang membuat kurva $f(x) = \\frac{x^2 + Cx + 1}{x^2 + 2x + C}$ memiliki tepat satu asimtot tegak. Hasil penjumlahan kedua nilai $C$ tersebut adalah ...",
                 options: ["A. $10$", "B. $11$", "C. $12$", "D. $13$", "E. $14$"],
                 correctAnswer: "C. $12$",
                 explanation: "Asimtot tegak: $x^2 + 2x + C = 0$ memiliki satu akar ganda, diskriminan nol: $4 - 4C = 0$, $C = 1$. Atau $C = 11$ dari analisis asimtot. Jumlah: $1 + 11 = 12$. Jawaban: C."
             },
             {
-                questionText: "Misalkan $f(x) = \\sqrt{3x^2 + 2x}$, maka $f'(x) = \\dots$",
+                questionText: "Misalkan $f(x) = \\sqrt{3x^2 + 2x}$, maka $f'(x) = ...$",
                 options: ["A. $\\dfrac{6x + 2}{2\\sqrt{3x^2 + 2x}}$", "B. $\\dfrac{3x + 1}{\\sqrt{3x^2 + 2x}}$", "C. $\\dfrac{6x + 2}{\\sqrt{3x^2 + 2x}}$", "D. $\\dfrac{6x + 1}{2\\sqrt{3x^2 + 2x}}$", "E. $\\dfrac{3x + 2}{2\\sqrt{3x^2 + 2x}}$"],
                 correctAnswer: "A. $\\dfrac{6x + 2}{2\\sqrt{3x^2 + 2x}}$",
                 explanation: "$f'(x) = \\frac{1}{2} (3x^2 + 2x)^{-1/2} \\cdot (6x + 2) = \\frac{6x + 2}{2\\sqrt{3x^2 + 2x}}$. Jawaban: A."
@@ -1592,7 +1592,7 @@ const allContentData = {
                 explanation: "Turunan: $y' = 2x + 4$. Persamaan garis singgung di $(x_0, y_0)$: $y - y_0 = (2x_0 + 4)(x - x_0)$. Cek $(1, -1)$: $y_0 = x_0^2 + 4x_0 + 3$. Substitusi $(1, -1)$: $-1 = x_0^2 + 4x_0 + 3$, $x_0^2 + 4x_0 + 4 = 0$, $(x_0 + 2)^2 = 0$, $x_0 = -2$. Gradien di $x_0 = -2$: $2(-2) + 4 = 0$. Namun, cek titik singgung: $(-2, 3)$, gradien $0$, tidak melalui $(1, -1)$. Koreksi: cari garis singgung melalui $(1, -1)$, gradien $m = 8$, persamaan $x + 8y + 7 = 0$. Jawaban: D."
             },
             {
-                questionText: "Di dalam kotak I terdapat 12 bola putih dan 3 bola merah. Di dalam kotak II terdapat 4 bola putih dan 4 bola merah. Jika dari masing-masing kotak diambil 2 bola satu per satu dengan pengembalian, maka peluang terambil tepat 1 bola merah adalah \\dots",
+                questionText: "Di dalam kotak I terdapat 12 bola putih dan 3 bola merah. Di dalam kotak II terdapat 4 bola putih dan 4 bola merah. Jika dari masing-masing kotak diambil 2 bola satu per satu dengan pengembalian, maka peluang terambil tepat 1 bola merah adalah ...",
                 options: ["A. $0.04$", "B. $0.10$", "C. $0.16$", "D. $0.32$", "E. $0.40$"],
                 correctAnswer: "C. $0.16$",
                 explanation: "Kotak I: $P(\\text{merah}) = \\frac{3}{15} = 0.2$, $P(\\text{putih}) = 0.8$. Kotak II: $P(\\text{merah}) = \\frac{4}{8} = 0.5$, $P(\\text{putih}) = 0.5$. Peluang 1 merah: $(P(\\text{0 merah I}) \\cdot P(\\text{1 merah II})) + (P(\\text{1 merah I}) \\cdot P(\\text{0 merah II})) = (0.8^2 \\cdot 2 \\cdot 0.5 \\cdot 0.5) + (2 \\cdot 0.2 \\cdot 0.8 \\cdot 0.5^2) = 0.16$. Jawaban: C."
@@ -2226,7 +2226,7 @@ const allContentData = {
         totalQuestions: 10,
         questions: [
             {
-                questionText: "Dalam pembuktian induksi untuk pernyataan $P(n): 1^3 + 2^3 + \\dots + n^3 = \\left[\\dfrac{n(n+1)}{2}\\right]^2$, langkah kritis dalam transisi $P(k) \\rightarrow P(k+1)$ adalah:",
+                questionText: "Dalam pembuktian induksi untuk pernyataan $P(n): 1^3 + 2^3 + ... + n^3 = \\left[\\dfrac{n(n+1)}{2}\\right]^2$, langkah kritis dalam transisi $P(k) \\rightarrow P(k+1)$ adalah:",
                 options: [
                     "A. Menambahkan $(k+1)^3$ ke kedua sisi dan menyusun ulang",
                     "B. Menyelesaikan turunan dari $P(k+1)$",
@@ -2234,7 +2234,7 @@ const allContentData = {
                     "D. Membagi kedua sisi dengan $(k+1)$"
                 ],
                 correctAnswer: "A. Menambahkan $(k+1)^3$ ke kedua sisi dan menyusun ulang",
-                explanation: "Asumsikan $P(k)$ benar: $1^3 + 2^3 + \\dots + k^3 = \\left[\\dfrac{k(k+1)}{2}\\right]^2$. Untuk $P(k+1)$, buktikan $1^3 + 2^3 + \\dots + k^3 + (k+1)^3 = \\left[\\dfrac{(k+1)(k+2)}{2}\\right]^2$. Tambahkan $(k+1)^3$ ke $P(k)$: $\\left[\\dfrac{k(k+1)}{2}\\right]^2 + (k+1)^3$. Susun ulang: $(k+1)^2 \\left[ \\dfrac{k^2}{4} + (k+1) \\right] = (k+1)^2 \\dfrac{k^2 + 4k + 4}{4} = \\left[\\dfrac{(k+1)(k+2)}{2}\\right]^2$. Jawaban: A."
+                explanation: "Asumsikan $P(k)$ benar: $1^3 + 2^3 + ... + k^3 = \\left[\\dfrac{k(k+1)}{2}\\right]^2$. Untuk $P(k+1)$, buktikan $1^3 + 2^3 + ... + k^3 + (k+1)^3 = \\left[\\dfrac{(k+1)(k+2)}{2}\\right]^2$. Tambahkan $(k+1)^3$ ke $P(k)$: $\\left[\\dfrac{k(k+1)}{2}\\right]^2 + (k+1)^3$. Susun ulang: $(k+1)^2 \\left[ \\dfrac{k^2}{4} + (k+1) \\right] = (k+1)^2 \\dfrac{k^2 + 4k + 4}{4} = \\left[\\dfrac{(k+1)(k+2)}{2}\\right]^2$. Jawaban: A."
             },
             {
                 questionText: "Pernyataan: $n! > 2^n$ untuk $n \\geq 5$. Jika $P(k)$ benar, maka untuk membuktikan $P(k+1)$, kita harus menunjukkan bahwa:",
@@ -2270,7 +2270,7 @@ const allContentData = {
                 explanation: "Buktikan $n^5 - n$ habis dibagi $30 = 2 \\cdot 3 \\cdot 5$. Gunakan induksi: untuk $n=1$, $1^5 - 1 = 0$, habis dibagi 30. Asumsikan $P(k)$ benar, lalu buktikan $P(k+1)$. Alternatif: faktorisasi $n^5 - n = n(n^4 - 1) = n(n^2 - 1)(n^2 + 1)$. Cek modulo 2: $n^5 - n \\equiv 0$. Modulo 3: $n^5 \\equiv n$, sehingga $n^5 - n \\equiv 0$. Modulo 5: $n^5 \\equiv n$, sehingga $n^5 - n \\equiv 0$. Karena habis dibagi 2, 3, dan 5, maka habis dibagi 30. Jawaban: A."
             },
             {
-                questionText: "Diberikan bahwa $1^2 + 2^2 + \\dots + n^2 = \\dfrac{n(n+1)(2n+1)}{6}$. Jika ingin membuktikan $P(n+1)$ benar, maka kita harus menyusun:",
+                questionText: "Diberikan bahwa $1^2 + 2^2 + ... + n^2 = \\dfrac{n(n+1)(2n+1)}{6}$. Jika ingin membuktikan $P(n+1)$ benar, maka kita harus menyusun:",
                 options: [
                     "A. $\\dfrac{n(n+1)(2n+1)}{6} + (n+1)^2$",
                     "B. $\\dfrac{(n+1)(n+2)(2n+3)}{6}$",
@@ -2278,7 +2278,7 @@ const allContentData = {
                     "D. $\\dfrac{n^2(n+1)}{2}$"
                 ],
                 correctAnswer: "A. $\\dfrac{n(n+1)(2n+1)}{6} + (n+1)^2$",
-                explanation: "Asumsikan $P(n)$ benar: $1^2 + 2^2 + \\dots + n^2 = \\dfrac{n(n+1)(2n+1)}{6}$. Untuk $P(n+1)$, buktikan $1^2 + 2^2 + \\dots + n^2 + (n+1)^2 = \\dfrac{(n+1)(n+2)(2n+3)}{6}$. Ambil sisi kiri: $\\dfrac{n(n+1)(2n+1)}{6} + (n+1)^2$. Susun ulang: $(n+1) \\left[ \\dfrac{n(2n+1)}{6} + (n+1) \\right] = \\dfrac{(n+1)(n+2)(2n+3)}{6}$. Jawaban: A."
+                explanation: "Asumsikan $P(n)$ benar: $1^2 + 2^2 + ... + n^2 = \\dfrac{n(n+1)(2n+1)}{6}$. Untuk $P(n+1)$, buktikan $1^2 + 2^2 + ... + n^2 + (n+1)^2 = \\dfrac{(n+1)(n+2)(2n+3)}{6}$. Ambil sisi kiri: $\\dfrac{n(n+1)(2n+1)}{6} + (n+1)^2$. Susun ulang: $(n+1) \\left[ \\dfrac{n(2n+1)}{6} + (n+1) \\right] = \\dfrac{(n+1)(n+2)(2n+3)}{6}$. Jawaban: A."
             },
             {
                 questionText: "Dalam membuktikan bahwa $11^n + 12$ habis dibagi 11, pendekatan induksi matematika mengharuskan kita menyusun bentuk $P(k+1)$ sebagai:",
@@ -3057,7 +3057,7 @@ const allContentData = {
         "totalQuestions": 10,
         "questions": [
             {
-                "questionText": "Buktikan bahwa untuk setiap $n \\in \\mathbb{N}$ berlaku: $1 + 3 + 5 + \\dots + (2n - 1) = n^2$. Langkah dasar pembuktian adalah:",
+                "questionText": "Buktikan bahwa untuk setiap $n \\in \\mathbb{N}$ berlaku: $1 + 3 + 5 + ... + (2n - 1) = n^2$. Langkah dasar pembuktian adalah:",
                 "options": [
                     "A. Mengasumsikan $P(k+1)$ benar",
                     "B. Menunjukkan $P(1)$ benar",
@@ -3068,7 +3068,7 @@ const allContentData = {
                 "explanation": "Langkah dasar dalam pembuktian induksi matematika adalah memverifikasi kasus dasar, yaitu $P(1)$. Untuk $n=1$, jumlah suku ganjil adalah $2(1)-1 = 1$, dan $1^2 = 1$, sehingga $P(1)$ benar. Pilihan B sesuai."
             },
             {
-                "questionText": "Misalkan $P(n): 2 + 4 + 6 + \\dots + 2n = n(n + 1)$. Nilai $P(3)$ adalah:",
+                "questionText": "Misalkan $P(n): 2 + 4 + 6 + ... + 2n = n(n + 1)$. Nilai $P(3)$ adalah:",
                 "options": [
                     "A. $12$",
                     "B. $18$",
@@ -3079,7 +3079,7 @@ const allContentData = {
                 "explanation": "Substitusi $n=3$ ke $P(n)$: $2 + 4 + 6 = 3(3+1) = 3 \\cdot 4 = 12$. Pilihan A sesuai."
             },
             {
-                "questionText": "Misalkan $P(n): 1^2 + 2^2 + \\dots + n^2 = \\dfrac{n(n+1)(2n+1)}{6}$. Tentukan nilai $P(4)$.",
+                "questionText": "Misalkan $P(n): 1^2 + 2^2 + ... + n^2 = \\dfrac{n(n+1)(2n+1)}{6}$. Tentukan nilai $P(4)$.",
                 "options": [
                     "A. $30$",
                     "B. $60$",
@@ -3112,7 +3112,7 @@ const allContentData = {
                 "explanation": "Pernyataan $P(n)$: $n^3 - n$ habis dibagi 6. Untuk $P(k+1)$, substitusi $n = k+1$: $(k+1)^3 - (k+1)$. Ini adalah ekspresi yang harus dibuktikan habis dibagi 6. Pilihan A sesuai."
             },
             {
-                "questionText": "Diketahui bahwa $1 + 2 + 4 + 8 + \\dots + 2^{n-1} = 2^n - 1$. Untuk $n=6$, hasil penjumlahan tersebut adalah:",
+                "questionText": "Diketahui bahwa $1 + 2 + 4 + 8 + ... + 2^{n-1} = 2^n - 1$. Untuk $n=6$, hasil penjumlahan tersebut adalah:",
                 "options": [
                     "A. $32$",
                     "B. $63$",
@@ -4400,7 +4400,7 @@ const allContentData = {
                 "explanation": "Prinsip induksi matematika digunakan untuk membuktikan kebenaran suatu pernyataan untuk setiap bilangan asli $n \\in \\mathbb{N}$. Pilihan C sesuai."
             },
             {
-                "questionText": "Untuk $n \\in \\mathbb{N}$, jumlah $1 + 2 + 3 + \\dots + n = \\dfrac{n(n+1)}{2}$ dapat dibuktikan menggunakan induksi matematika dengan langkah awal $n = $",
+                "questionText": "Untuk $n \\in \\mathbb{N}$, jumlah $1 + 2 + 3 + ... + n = \\dfrac{n(n+1)}{2}$ dapat dibuktikan menggunakan induksi matematika dengan langkah awal $n = $",
                 "options": [
                     "A. $0$",
                     "B. $1$",
@@ -4455,7 +4455,7 @@ const allContentData = {
                 "explanation": "Prinsip induksi matematika menyatakan: jika $P(1)$ benar (langkah dasar) dan $P(k) \\Rightarrow P(k+1)$ benar (langkah induksi), maka $P(n)$ benar untuk semua $n \\geq 1$. Pilihan C sesuai."
             },
             {
-                "questionText": "Pernyataan: $1^2 + 2^2 + 3^2 + \\dots + n^2 = \\dfrac{n(n+1)(2n+1)}{6}$. Langkah dasar dalam pembuktian dengan induksi adalah:",
+                "questionText": "Pernyataan: $1^2 + 2^2 + 3^2 + ... + n^2 = \\dfrac{n(n+1)(2n+1)}{6}$. Langkah dasar dalam pembuktian dengan induksi adalah:",
                 "options": [
                     "A. Membuktikan untuk $n = 1$",
                     "B. Membuktikan untuk $n = 2$",
