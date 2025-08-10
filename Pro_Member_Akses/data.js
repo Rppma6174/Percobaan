@@ -175,6 +175,27 @@ const allContentData = {
             filePath: 'UMT_Learning/esensi-nilai-mutlak.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_definisi_nilai_mutlak', 
+            title: 'Definisi Nilai Mutlak', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/definisi-nilai-mutlak.html', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'materi_representasi_geometri_nilai_mutlak', 
+            title: 'Representasi Geometri Dari Nilai Mutlak', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/representasi-geometri-dari-nilai-mutlak.html', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'materi_sifat_dasar_nilai_mutlak', 
+            title: 'Sifat - Sifat Dasar Nilai Mutlak', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/sifat_dasar_nilai_mutlak.html', 
+            fileType: 'html' 
+            },
         ],
         "Bentuk Akar": [
             { 
