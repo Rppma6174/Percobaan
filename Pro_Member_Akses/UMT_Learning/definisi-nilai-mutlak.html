@@ -231,81 +231,79 @@
         <div id="quiz-container"></div>
     </div>
 
-    <script>
-        if (!sessionStorage.getItem('sessionToken')) {
-            window.location.href = '../../Login/';
+<script>
+    // Data untuk Kuis
+    const quizzes = [
+        {
+            q: "Apa definisi paling mendasar dari nilai mutlak suatu bilangan?",
+            options: [
+                "Bilangan itu sendiri tanpa tanda negatif",
+                "Jarak bilangan tersebut dari titik nol pada garis bilangan",
+                "Kebalikan dari bilangan tersebut",
+                "Selalu bernilai positif"
+            ],
+            correct: 1,
+            explanation: "Definisi inti dari nilai mutlak adalah <b>jarak</b>. Jarak dari sebuah bilangan ke titik nol (0) pada garis bilangan. Karena jarak tidak pernah negatif, maka nilai mutlak pun hasilnya selalu tidak negatif (bisa nol atau positif)."
+        },
+        {
+            q: "Berdasarkan definisi formal, jika $x < 0$, maka $\\lvert x \\rvert$ sama dengan...",
+            options: ["x", "-x", "0", "Tidak dapat ditentukan"],
+            correct: 1,
+            explanation: "Ini adalah bagian kunci dari definisi formal. Jika $x$ adalah bilangan negatif (misalnya, $x = -10$), maka $\\lvert x \\rvert$ adalah $-x$, yang berarti $-(-10) = 10$. Tanda negatif tambahan berfungsi untuk mengubah bilangan negatif tersebut menjadi positif."
+        },
+        {
+            q: "Manakah pernyataan di bawah ini yang <b>selalu benar</b> untuk sembarang bilangan real $a$?",
+            options: [
+                "$\\lvert a \\rvert > 0$",
+                "$\\lvert a \\rvert = a$",
+                "$\\lvert a \\rvert \ge 0$",
+                "$\\lvert a \\rvert \ne a$"
+            ],
+            correct: 2,
+            explanation: "Nilai mutlak tidak pernah negatif. Ia bisa positif atau nol (jika $a=0$). Oleh karena itu, pernyataan yang paling akurat adalah $\\lvert a \\rvert \ge 0$ (lebih besar atau sama dengan nol)."
+        },
+        {
+            q: "Berapakah hasil dari $\\lvert 5 - 12 \\rvert$?",
+            options: ["-7", "7", "17", "-17"],
+            correct: 1,
+            explanation: "Langkah pertama adalah menyelesaikan operasi di dalam tanda mutlak: $5 - 12 = -7$. Selanjutnya, kita mencari nilai mutlak dari hasilnya: $\\lvert -7 \\rvert$. Karena jarak -7 dari 0 adalah 7, maka jawabannya adalah 7."
+        },
+        {
+            q: "Jika $\\lvert p - q \\rvert$ merepresentasikan suatu nilai, nilai tersebut menggambarkan...",
+            options: [
+                "Hasil pengurangan p oleh q",
+                "Jumlah dari p dan q",
+                "Jarak antara titik p dan titik q pada garis bilangan",
+                "Titik tengah antara p dan q"
+            ],
+            correct: 2,
+            explanation: "Ini adalah perluasan konsep nilai mutlak. Bentuk $\\lvert a-b \\rvert$ secara geometris berarti <b>jarak antara titik a dan b</b> pada garis bilangan. Urutan tidak penting, karena $\\lvert p-q \\rvert = \\lvert q-p \\rvert$, sama seperti jarak dari kota A ke B sama dengan jarak dari B ke A."
         }
-        // Data untuk Kuis
-        const quizzes = [
-            {
-                q: "Apa definisi paling mendasar dari nilai mutlak suatu bilangan?",
-                options: [
-                    "Bilangan itu sendiri tanpa tanda negatif",
-                    "Jarak bilangan tersebut dari titik nol pada garis bilangan",
-                    "Kebalikan dari bilangan tersebut",
-                    "Selalu bernilai positif"
-                ],
-                correct: 1,
-                explanation: "Definisi inti dari nilai mutlak adalah <b>jarak</b>. Jarak dari sebuah bilangan ke titik nol (0) pada garis bilangan. Karena jarak tidak pernah negatif, maka nilai mutlak pun hasilnya selalu tidak negatif (bisa nol atau positif)."
-            },
-            {
-                q: "Berdasarkan definisi formal, jika $x < 0$, maka $\\lvert x \\rvert$ sama dengan...",
-                options: ["x", "-x", "0", "Tidak dapat ditentukan"],
-                correct: 1,
-                explanation: "Ini adalah bagian kunci dari definisi formal. Jika $x$ adalah bilangan negatif (misalnya, $x = -10$), maka $\\lvert x \\rvert$ adalah $-x$, yang berarti $-(-10) = 10$. Tanda negatif tambahan berfungsi untuk mengubah bilangan negatif tersebut menjadi positif."
-            },
-            {
-                q: "Manakah pernyataan di bawah ini yang <b>selalu benar</b> untuk sembarang bilangan real $a$?",
-                options: [
-                    "$\\lvert a \\rvert > 0$",
-                    "$\\lvert a \\rvert = a$",
-                    "$\\lvert a \\rvert \ge 0$",
-                    "$\\lvert a \\rvert \ne a$"
-                ],
-                correct: 2,
-                explanation: "Nilai mutlak tidak pernah negatif. Ia bisa positif atau nol (jika $a=0$). Oleh karena itu, pernyataan yang paling akurat adalah $\\lvert a \\rvert \ge 0$ (lebih besar atau sama dengan nol)."
-            },
-            {
-                q: "Berapakah hasil dari $\\lvert 5 - 12 \\rvert$?",
-                options: ["-7", "7", "17", "-17"],
-                correct: 1,
-                explanation: "Langkah pertama adalah menyelesaikan operasi di dalam tanda mutlak: $5 - 12 = -7$. Selanjutnya, kita mencari nilai mutlak dari hasilnya: $\\lvert -7 \\rvert$. Karena jarak -7 dari 0 adalah 7, maka jawabannya adalah 7."
-            },
-            {
-                q: "Jika $\\lvert p - q \\rvert$ merepresentasikan suatu nilai, nilai tersebut menggambarkan...",
-                options: [
-                    "Hasil pengurangan p oleh q",
-                    "Jumlah dari p dan q",
-                    "Jarak antara titik p dan titik q pada garis bilangan",
-                    "Titik tengah antara p dan q"
-                ],
-                correct: 2,
-                explanation: "Ini adalah perluasan konsep nilai mutlak. Bentuk $\\lvert a-b \\rvert$ secara geometris berarti <b>jarak antara titik a dan b</b> pada garis bilangan. Urutan tidak penting, karena $\\lvert p-q \\rvert = \\lvert q-p \\rvert$, sama seperti jarak dari kota A ke B sama dengan jarak dari B ke A."
-            }
-        ];
+    ];
 
-        // --- Logika untuk Membangun dan Mengoperasikan Kuis ---
+    // --- Logika untuk Membangun dan Mengoperasikan Kuis ---
 
+    // Fungsi untuk membangun HTML kuis
+    function buildQuiz() {
         const quizContainer = document.getElementById("quiz-container");
+        if (!quizContainer) return; // Keluar jika kontainer tidak ditemukan
+
+        quizContainer.innerHTML = ''; // Kosongkan kontainer sebelum mengisi
 
         quizzes.forEach((quiz, index) => {
             const quizEl = document.createElement("div");
             quizEl.className = "quiz-accordion";
             
-            // Render MathJax pada pertanyaan dan pilihan
-            const renderedQuestion = quiz.q;
-            const renderedOptions = quiz.options.map(opt => opt);
-
             quizEl.innerHTML = `
-                <button class="quiz-accordion-button">
+                <button class="quiz-accordion-button" aria-expanded="false" aria-controls="quiz-content-${index}">
                     <span>Soal Latihan ${index + 1}</span>
-                    <i class="fas fa-chevron-down"></i>
+                    <i class="fas fa-chevron-down" aria-hidden="true"></i>
                 </button>
-                <div class="quiz-accordion-content hidden">
-                    <p class="question-text">${renderedQuestion}</p>
+                <div id="quiz-content-${index}" class="quiz-accordion-content hidden">
+                    <p class="question-text">${quiz.q}</p>
                     <div class="options-container">
-                        ${renderedOptions.map((opt, i) => 
-                            `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                        ${quiz.options.map((opt, i) => 
+                            `<div class="quiz-option" role="button" data-correct="${i === quiz.correct}">${opt}</div>`
                         ).join("")}
                     </div>
                     <div class="quiz-explanation hidden">
@@ -317,56 +315,74 @@
         });
         
         // Render MathJax setelah semua elemen ditambahkan
-        MathJax.typesetPromise();
-
-    // render kuis
-    const root = document.getElementById('quizRoot');
-    quizzes.forEach((item, idx) => {
-      const card = document.createElement('div'); card.className='card';
-      card.innerHTML = `
-        <div class="qhead" data-idx="${idx}">
-          <div class="qtitle">Soal ${idx+1}</div>
-          <div><i class="fas fa-chevron-down"></i></div>
-        </div>
-        <div class="qbody">
-          <div class="question">${item.q}</div>
-          <div class="opts">
-            ${item.options.map((o,i)=>`<div class="opt" data-correct="${i===item.correct}">${o}</div>`).join('')}
-          </div>
-          <div class="explain"><strong>Pembahasan:</strong><br>${item.explanation.replace(/\n/g,'<br>')}</div>
-        </div>
-      `;
-      root.appendChild(card);
-    });
-
-    // interactions
-    document.querySelectorAll('.qhead').forEach(h=>{
-      h.addEventListener('click', ()=> {
-        const body = h.nextElementSibling;
-        // close others
-        document.querySelectorAll('.qbody').forEach(b=>{ if(b!==body) b.style.display='none'; });
-        body.style.display = body.style.display==='block' ? 'none' : 'block';
-      });
-    });
-
-    document.addEventListener('click', function(e){
-      if(e.target.classList.contains('opt')){
-        const opt = e.target;
-        const optsContainer = opt.parentElement;
-        if(optsContainer.classList.contains('answered')) return;
-        optsContainer.classList.add('answered');
-        const explain = optsContainer.parentElement.querySelector('.explain');
-        explain.style.display = 'block';
-
-        if(opt.getAttribute('data-correct') === 'true'){
-          opt.classList.add('correct');
-        } else {
-          opt.classList.add('wrong');
-          const corr = optsContainer.querySelector('[data-correct="true"]');
-          if(corr) corr.classList.add('correct');
+        if (window.MathJax) {
+            MathJax.typesetPromise();
         }
-      }
-    }, false);
-    </script>
+        
+        // Pasang event listener setelah kuis dibangun
+        attachEventListeners();
+    }
+
+    // Fungsi untuk memasang event listener
+    function attachEventListeners() {
+        const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+        accordionButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+                // Tutup semua akordion lain
+                accordionButtons.forEach(otherButton => {
+                    if (otherButton !== button) {
+                        otherButton.setAttribute('aria-expanded', 'false');
+                        otherButton.nextElementSibling.classList.add('hidden');
+                        otherButton.querySelector('.fas').style.transform = 'rotate(0deg)';
+                    }
+                });
+
+                // Buka/tutup akordion yang diklik
+                if (!isExpanded) {
+                    button.setAttribute('aria-expanded', 'true');
+                    content.classList.remove('hidden');
+                    button.querySelector('.fas').style.transform = 'rotate(180deg)';
+                } else {
+                    button.setAttribute('aria-expanded', 'false');
+                    content.classList.add('hidden');
+                    button.querySelector('.fas').style.transform = 'rotate(0deg)';
+                }
+            });
+        });
+
+        const quizOptions = document.querySelectorAll('.quiz-option');
+        quizOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const optionsContainer = option.parentElement;
+                if (optionsContainer.classList.contains('answered')) return;
+                optionsContainer.classList.add('answered');
+
+                const explanation = optionsContainer.nextElementSibling;
+                explanation.classList.remove('hidden');
+
+                if (option.dataset.correct === 'true') {
+                    option.classList.add('correct');
+                } else {
+                    option.classList.add('wrong');
+                    const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                    if (correctOption) {
+                        correctOption.classList.add('correct');
+                    }
+                }
+            });
+        });
+    }
+
+    // Pastikan skrip berjalan setelah seluruh halaman dimuat
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', buildQuiz);
+    } else {
+        // Halaman sudah dimuat, jalankan langsung
+        buildQuiz();
+    }
+</script>
 </body>
 </html>
