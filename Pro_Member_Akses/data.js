@@ -169,57 +169,39 @@ const allContentData = {
     materi: {
         "Nilai Mutlak": [
             { 
-            id: 'materi_7_1', 
-            title: 'Materi Pembagian', 
+            id: 'materi_esensi_nilai_mutlak', 
+            title: 'Esensi Nilai Mutlak', 
             type: 'HTML Document', 
-            filePath: 'UMT_Learning/limit-fungsi.html', 
+            filePath: 'UMT_Learning/esensi-nilai-mutlak.html', 
             fileType: 'html' 
             },
         ],
-        "Kelas 8 SMP": [
+        "Bentuk Akar": [
             { 
             id: 'materi_8_1', 
             title: 'Teorema Pythagoras', 
             type: 'PDF Document', 
-            filePath: 'materi-files/k8-pythagoras.pdf', 
+            filePath: '#', 
             fileType: 'pdf' 
             }
         ],
-        "Kelas 9 SMP": [
+        "Trigonometri": [
             { 
             id: 'materi_8_1', 
             title: 'Percobaan 1', 
             type: 'PDF Document', 
-            filePath: 'materi-files/', 
+            filePath: '#', 
             fileType: 'pdf' 
             }
         ],
-        "Kelas 10 SMA": [
+        "Limit Fungsi": [
             { 
             id: 'materi_10_1', 
             title: 'Eksponen & Logaritma', 
             type: 'PDF Document', 
-            filePath: 'materi-files/k10-eksponen.pdf', 
+            filePath: '#', 
             fileType: 'pdf' 
             },
-        ],
-        "Kelas 11 SMA": [
-            { 
-            id: 'materi_11_1', 
-            title: 'Percobaan 2', 
-            type: 'PDF Document', 
-            filePath: 'materi-files/', 
-            fileType: 'pdf' 
-            }
-        ],
-        "Kelas 12 SMA": [
-            { 
-            id: 'materi_12_1', 
-            title: 'Percobaan 3', 
-            type: 'PDF Document', 
-            filePath: 'materi-files/', 
-            fileType: 'pdf' 
-            }
         ],
         // Anda bisa tambahkan "Kelas 9 SMP", "Kelas 11 SMA", dst. di sini
     },
