@@ -1203,6 +1203,7 @@ const allContentData = {
     {
         id: "tka-matematika-ipa-2",
         title: "TKA Matematika IPA #2",
+        category: "TKA Matematika IPA",
         description: "Kumpulan soal TKA Matematika IPA untuk jenjang SMA/MA.",
         subject: "Matematika",
         totalQuestions: 15,
