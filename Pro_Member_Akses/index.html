@@ -394,16 +394,17 @@ function renderDashboardPage() {
     initializeAppDashboardWidgets();
 }
     
+// GANTI KESELURUHAN FUNGSI renderMateriPage DENGAN INI
 function renderMateriPage() {
     let accordionHTML = '';
     const materiData = allContentData.materi;
 
     for (const gradeKey in materiData) {
-        // [DIUBAH] onclick sekarang mengarahkan ke viewer.html
+        // --- BAGIAN TERPENTING ADA DI BARIS ONCLICK DI BAWAH INI ---
         const itemsHTML = materiData[gradeKey].map(item => `
             <li id="card-${item.id}"
                 class="card-item-list block p-3 rounded-md hover:bg-gray-700 cursor-pointer"
-                onclick="window.location.href='viewer.html?id=${item.id}'">
+                onclick="window.location.href='${item.filePath}'"> 
                 <span class="font-semibold">${item.title}</span>
                 <span class="block text-xs text-gray-400">${item.type}</span>
             </li>
@@ -424,19 +425,14 @@ function renderMateriPage() {
         `;
     }
 
-    // [DIUBAH] Tampilan diubah menjadi satu kolom saja, karena viewer sudah pindah halaman.
     const materiPageHTML = `
         <div class="panel">
             <h2 class="text-2xl font-bold text-cyan-400">Pustaka Materi</h2>
             <p class="text-sm text-gray-400 mb-6">Cari atau pilih jenjang kelas untuk melihat daftar materi.</p>
-
             <div class="relative mb-6">
-                <input type="text" id="materi-search-input"
-                       class="w-full bg-gray-900/80 border border-gray-600 rounded-lg py-2 pl-10 pr-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-cyan-500 focus:outline-none"
-                       placeholder="Ketik untuk mencari materi...">
+                <input type="text" id="materi-search-input" class="w-full bg-gray-900/80 border border-gray-600 rounded-lg py-2 pl-10 pr-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-cyan-500 focus:outline-none" placeholder="Ketik untuk mencari materi...">
                 <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
             </div>
-            
             <div class="border border-gray-700 rounded-lg bg-gray-900/50">
                 ${accordionHTML}
             </div>
@@ -444,6 +440,7 @@ function renderMateriPage() {
     `;
     appContent.innerHTML = materiPageHTML;
 
+    // Logika untuk membuka-tutup accordion
     document.querySelectorAll('.accordion-button').forEach(button => {
         button.addEventListener('click', () => {
             const content = button.parentElement.nextElementSibling;
