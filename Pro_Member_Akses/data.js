@@ -172,23 +172,9 @@ const allContentData = {
             id: 'materi_7_1', 
             title: 'Materi Pembagian', 
             type: 'PDF Document', 
-            filePath: 'materi-files/k7-pembagian.pdf', 
-            fileType: 'pdf' 
+            filePath: 'UMT_Learning/limit-fungsi.html', 
+            fileType: 'html' 
             },
-            { 
-            id: 'materi_7_2', 
-            title: 'Materi Aljabar', 
-            type: 'PDF Document', 
-            filePath: 'materi-files/k7-aljabar.pdf', 
-            fileType: 'pdf' 
-            },
-            { 
-            id: 'materi_7_3', 
-            title: 'Materi Fungsi', 
-            type: 'PDF Document', 
-            filePath: 'materi-files/aljabar.pdf', 
-            fileType: 'pdf' 
-            }
         ],
         "Kelas 8 SMP": [
             { 
