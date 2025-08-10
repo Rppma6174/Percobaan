@@ -779,6 +779,13 @@ function renderUmtLabPage() {
     `;
 
     appContent.innerHTML = labPageHTML;
+
+// === TAMBAHKAN BARIS INI ===
+    // Meminta MathJax untuk mencari dan merender ulang
+    // semua tulisan LaTeX di konten yang baru saja ditampilkan.
+    if (window.MathJax) {
+        MathJax.typeset();
+    }
 }
 
 // === [TAMBAHKAN FUNGSI BARU INI] ===
