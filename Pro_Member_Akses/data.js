@@ -167,7 +167,7 @@ const allContentData = {
     }
 ],
     materi: {
-        "Kelas 7 SMP": [
+        "Nilai Mutlak": [
             { 
             id: 'materi_7_1', 
             title: 'Materi Pembagian', 
