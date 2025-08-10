@@ -148,6 +148,9 @@
                     <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('materi', this)">
                         <i class="fa-solid fa-book text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Materi</span>
                     </a>
+                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('perpustakaan', this)">
+                        <i class="fa-solid fa-book-atlas text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Perpustakaan</span>
+                    </a>
                     <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('bank_soal', this)">
                         <i class="fa-solid fa-list-check text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Bank Soal</span>
                     </a>
@@ -272,11 +275,12 @@
     const pageRenderers = {
         'dashboard': renderDashboardPage,
         'materi': renderMateriPage,
+        'perpustakaan': renderPerpustakaanPage, // <-- Tambahkan baris ini
         'bank_soal': renderBankSoalPage,
         'video': renderVideoPage,
         'forum': renderForumPage,
         'pengaturan': renderPengaturanPage,
-        'umt_lab': renderUmtLabPage, // <-- Tambahkan baris ini
+        'umt_lab': renderUmtLabPage,
     };
     
     function navigateTo(page, clickedElement) {
@@ -776,6 +780,36 @@ function renderUmtLabPage() {
 
     appContent.innerHTML = labPageHTML;
 }
+
+// === [TAMBAHKAN FUNGSI BARU INI] ===
+function renderPerpustakaanPage() {
+    // Membuat kartu untuk setiap item di data perpustakaan
+    const libraryHTML = allContentData.perpustakaan.map(item => `
+        <div class="card-item p-5 rounded-lg flex flex-col" onclick="window.location.href='viewer.html?id=${item.id}'">
+            <h3 class="font-bold text-lg text-cyan-400 mb-2">${item.title}</h3>
+            <p class="text-xs text-gray-500 mb-3">Oleh ${item.author}</p>
+            <p class="text-sm text-gray-400 flex-grow">${item.summary}</p>
+             <div class="mt-4 text-xs font-mono bg-gray-900/50 text-cyan-300 rounded-full px-3 py-1 self-start">
+                E-Book
+            </div>
+        </div>
+    `).join('');
+
+    const pageHTML = `
+        <div class="panel">
+            <h2 class="text-2xl font-bold text-cyan-400">Perpustakaan Digital</h2>
+            <p class="text-sm text-gray-400 mb-8">Koleksi buku digital dan referensi untuk pendalaman materi.</p>
+
+            <div id="library-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                ${libraryHTML.length > 0 ? libraryHTML : '<p class="text-gray-500 col-span-full">Belum ada buku di perpustakaan.</p>'}
+            </div>
+        </div>
+    `;
+
+    appContent.innerHTML = pageHTML;
+}
+// === [AKHIR DARI FUNGSI BARU] ===
+
 // =================================================================================
     // BAGIAN 4: LOGIKA WIDGET DASBOR & PROGRES
     // =================================================================================
