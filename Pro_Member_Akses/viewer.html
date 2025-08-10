@@ -265,7 +265,6 @@
         }
         
         // Menandai progres dan aktivitas terakhir
-        const type = contentItem.id.startsWith('lab_') ? 'lab' : 'materi';
         markAsCompleted(contentItem.id); 
         updateLastActivity(type, contentItem);
 
