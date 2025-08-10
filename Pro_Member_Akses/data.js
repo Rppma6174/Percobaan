@@ -39,15 +39,6 @@ const allContentData = {
         filePath: 'lab-content/eksplorasi teori/Kalkulus terkait dengan menemukan titik maksimum dan maksimum tanpa menggunakan turunan kedua.pdf'
     },
     {
-        id: 'lab_e4',
-        category: 'Eksplorasi Teori',
-        title: 'Matriks dan Aplikasinya dalam Sistem Linear',
-        author: 'Tim UMT',
-        date: '08 Agustus 2025',
-        summary: 'Menggali hubungan antara paradoks kuno Yunani dengan salah satu konsep fundamental dalam matematika modern.',
-        filePath: 'lab-content/eksplorasi teori/Matriks dan Aplikasinya dalam Sistem Linear.pdf'
-    },
-    {
         id: 'lab_e5',
         category: 'Eksplorasi Teori',
         title: 'Pengaruh Nilai a Pada Grafik Fungsi Kuadrat',
