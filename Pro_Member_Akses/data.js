@@ -275,6 +275,12 @@ const allContentData = {
             videoId: 'Nd0hy5uFwOE',
             category: 'Bentuk Akar' // <-- Kategori baru
         },
+        { 
+            id: 'vid_8', 
+            title: 'Esensi Limit Fungsi',
+            videoId: 'mcY7-GYIpHA',
+            category: 'Limit Fungsi' // <-- Kategori baru
+        },
     ],
     bankSoal: [
         {
