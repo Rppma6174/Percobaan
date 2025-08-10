@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Judul Materi Anda</title>
     <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     
     <script>
       MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
@@ -15,6 +16,7 @@
         :root {
             --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
             --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
         }
         body {
             background-color: var(--bg-main);
@@ -28,29 +30,45 @@
         h1, h2 { color: var(--accent-cyan); }
         h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
         h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
-        p { margin-bottom: 1rem; }
+        .hidden { display: none; }
 
-        /* [BARU] Style untuk video dan kuis yang responsif */
+        /* Style Video Responsif */
         .embed-container {
-            position: relative;
-            overflow: hidden;
-            width: 100%;
-            padding-top: 56.25%; /* Aspect Ratio 16:9 */
-            border-radius: 0.5rem;
-            border: 1px solid var(--border-color);
+            position: relative; overflow: hidden; width: 100%;
+            padding-top: 56.25%; border-radius: 0.5rem; border: 1px solid var(--border-color);
         }
-        .embed-container iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+        .embed-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+        /* [BARU] Style untuk Kuis Akordeon */
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
         }
-        .quiz-container {
-            width: 100%;
-            height: 600px; /* Atur tinggi default untuk kuis */
-            border-radius: 0.5rem;
-            overflow: hidden; /* Sembunyikan scrollbar iframe jika memungkinkan */
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem;
+            padding: 0.75rem; margin-bottom: 0.5rem; cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .options-container.answered .quiz-option:hover { border-color: var(--border-color); }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1);
+            font-weight: bold;
+        }
+        .quiz-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1);
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
         }
     </style>
 </head>
@@ -59,43 +77,112 @@
         <a href="../index.html" class="back-link">&larr; Kembali ke Daftar</a>
 
         <h1>Judul Materi Anda di Sini</h1>
-        <p>
-            Mulai tulis pengantar materi Anda di sini. Jelaskan konsep dasar yang akan dibahas.
-            Misalnya, kita akan membahas tentang konsep limit dalam kalkulus, yaitu $ \lim_{x \to c} f(x) = L $.
-        </p>
+        <p>Mulai tulis pengantar materi Anda di sini. Jelaskan konsep dasar yang akan dibahas. Anda bisa menggunakan LaTeX seperti ini: $\lim_{x \to c} f(x) = L$.</p>
 
         <h2>Pahami Lebih Lanjut</h2>
-        <p>Untuk pemahaman yang lebih mendalam, silakan tonton video penjelasan berikut:</p>
+        <p>Tonton video penjelasan berikut untuk pemahaman yang lebih mendalam:</p>
         <div class="embed-container">
-            <iframe 
-                src="https://www.youtube.com/embed/KODE_VIDEO_YOUTUBE" 
-                title="YouTube video player" 
-                frameborder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
+            <iframe src="https://www.youtube.com/embed/KODE_VIDEO_YOUTUBE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
 
         <h2>Uji Pemahaman Anda</h2>
-        <p>Setelah menonton video, kerjakan kuis singkat di bawah ini untuk menguji pemahaman Anda.</p>
-        <div class="quiz-container">
-            <iframe 
-                class="embed-container"
-                src="../index.html?embed_quiz=tka-matematika-ipa-1">
-            </iframe>
+        <p>Buka setiap kuis di bawah ini dan pilih jawaban yang menurut Anda benar.</p>
+
+        <div class="quiz-accordion">
+            <button class="quiz-accordion-button">
+                <span>Kuis 1</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="quiz-accordion-content hidden">
+                <p class="question-text">Apa hasil dari $\int 2x \, dx$? (Tulis pertanyaan Anda di sini)</p>
+                <div class="options-container">
+                    <div class="quiz-option">A. $2x^2 + C$</div>
+                    <div class="quiz-option" data-correct="true">B. $x^2 + C$</div>
+                    <div class="quiz-option">C. $x + C$</div>
+                    <div class="quiz-option">D. $2x + C$</div>
+                </div>
+                <div class="quiz-explanation hidden">
+                    <b>Pembahasan:</b> Menggunakan aturan integral pangkat, $\int ax^n \, dx = \frac{a}{n+1}x^{n+1} + C$. Jadi, $\int 2x^1 \, dx = \frac{2}{1+1}x^{1+1} + C = x^2 + C$.
+                </div>
+            </div>
+        </div>
+
+        <div class="quiz-accordion">
+            <button class="quiz-accordion-button">
+                <span>Kuis 2</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="quiz-accordion-content hidden">
+                <p class="question-text">Ini adalah contoh pertanyaan kedua. Manakah yang merupakan bilangan prima?</p>
+                <div class="options-container">
+                    <div class="quiz-option">A. 4</div>
+                    <div class="quiz-option">B. 9</div>
+                    <div class="quiz-option" data-correct="true">C. 7</div>
+                    <div class="quiz-option">D. 1</div>
+                </div>
+                <div class="quiz-explanation hidden">
+                    <b>Pembahasan:</b> Bilangan prima adalah bilangan yang hanya bisa dibagi oleh 1 dan dirinya sendiri. Dari pilihan di atas, hanya 7 yang memenuhi syarat tersebut.
+                </div>
+            </div>
         </div>
         
-    </div>
-    <script>
-        // Skrip ini berjalan paling awal untuk memeriksa status login
-        const token = sessionStorage.getItem('sessionToken');
+        </div>
 
-        // Jika tidak ada token (pengguna belum login)
-        if (!token) {
-            // Arahkan paksa kembali ke halaman Login
-            // Pastikan path '../Login/' ini sudah benar sesuai struktur folder Anda
+    <script>
+        // Logika keamanan untuk memastikan hanya user ter-login yang bisa akses
+        if (!sessionStorage.getItem('sessionToken')) {
             window.location.href = '../Login/';
         }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Logika untuk Akordeon
+            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    // Bonus: Tutup akordeon lain yang sedang terbuka
+                    accordionButtons.forEach(otherButton => {
+                        if (otherButton !== button) {
+                            otherButton.classList.remove('active');
+                            otherButton.nextElementSibling.classList.add('hidden');
+                        }
+                    });
+                    
+                    button.classList.toggle('active');
+                    content.classList.toggle('hidden');
+                });
+            });
+
+            // Logika untuk Pilihan Jawaban Kuis
+            const quizOptions = document.querySelectorAll('.quiz-option');
+            quizOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    
+                    // Jangan lakukan apa-apa jika sudah dijawab
+                    if (optionsContainer.classList.contains('answered')) return;
+
+                    // Tandai bahwa pertanyaan ini sudah dijawab
+                    optionsContainer.classList.add('answered');
+
+                    // Tampilkan pembahasan
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden');
+
+                    // Cek apakah jawaban benar atau salah
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('wrong');
+                        // Tampilkan juga jawaban yang benar
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) {
+                            correctOption.classList.add('correct');
+                        }
+                    }
+                });
+            });
+        });
     </script>
 </body>
 </html>
