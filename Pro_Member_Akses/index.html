@@ -964,12 +964,13 @@ function showAnswerAndExplanation(isRestoringState = false) {
 
         // Tandai jawaban yang benar
         if (optionText === question.correctAnswer) {
-            optionEl.classList.remove('quiz-option'); // Hapus style default
-            optionEl.classList.add('correct-answer'); // Tambah style benar
+            optionEl.classList.remove('quiz-option');
+            optionEl.classList.add('correct-answer');
         }
 
+        // PERBAIKAN TYPO DI SINI
         // Jika user memilih opsi ini dan salah, tandai sebagai jawaban salah
-        if (!isRestrollingState && optionText === selectedAnswer && selectedAnswer !== question.correctAnswer) {
+        if (!isRestoringState && optionText === selectedAnswer && selectedAnswer !== question.correctAnswer) {
             optionEl.classList.remove('quiz-option');
             optionEl.classList.add('wrong-answer');
         }
