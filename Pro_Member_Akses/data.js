@@ -26,7 +26,7 @@ const allContentData = {
         title: 'Kalkulus Diferensial untuk Optimisasi',
         author: 'Tim UMT',
         date: '08 Agustus 2025',
-        summary: 'Dokumen ini menguraikan penggunaan kalkulus diferensial untuk menyelesaikan masalah optimisasi (mencari nilai maksimum atau minimum) prosesnya meliputi pemodelan masalah ke dalam sebuah fungsi mencari titik stasioner dengan membuat turunan pertama sama dengan nol ($f'(x) = 0$) dan menggunakan uji turunan kedua untuk memastikan apakah titik tersebut adalah maksimum ($f''(x) < 0$) atau minimum ($f''(x) > 0$)',
+        summary: "Dokumen ini menguraikan penggunaan kalkulus diferensial untuk menyelesaikan masalah optimisasi (mencari nilai maksimum atau minimum) prosesnya meliputi pemodelan masalah ke dalam sebuah fungsi mencari titik stasioner dengan membuat turunan pertama sama dengan nol ($f'(x) = 0$) dan menggunakan uji turunan kedua untuk memastikan apakah titik tersebut adalah maksimum ($f''(x) < 0$) atau minimum ($f''(x) > 0$)",
         filePath: 'lab-content/eksplorasi teori/Kalkulus Diferensial untuk Optimisas.pdf'
     },
     {
