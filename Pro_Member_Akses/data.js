@@ -1,4 +1,14 @@
 const allContentData = {
+    perpustakaan: [
+        {
+            id: 'perpustakaan-001',
+            title: 'Pengantar Kalkulus',
+            author: 'Tim UMT',
+            summary: 'Buku teks fundamental yang mencakup limit, turunan, dan integral.',
+            filePath: 'Perpustakaan/Pengantar Kalkulus.pdf' // Ganti dengan path PDF Anda
+        }
+    ]
+
     umtLab: [
     // Eksplorasi Teori
     {
