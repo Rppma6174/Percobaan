@@ -7,7 +7,7 @@ const allContentData = {
             summary: 'Buku teks fundamental yang mencakup limit, turunan, dan integral.',
             filePath: 'Perpustakaan/Pengantar Kalkulus.pdf' // Ganti dengan path PDF Anda
         }
-    ]
+    ],
 
     umtLab: [
     // Eksplorasi Teori
