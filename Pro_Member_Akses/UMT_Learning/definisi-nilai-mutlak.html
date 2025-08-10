@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Definisi Nilai Mutlak - Belajar Matematika</title>
-    <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/OOjs_UI_icon_mathematics-ltr.svg/120px-OOjs_UI_icon_mathematics-ltr.svg.png">
+    <title>Esensi Nilai Mutlak - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     
     <script>
@@ -13,39 +13,18 @@
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 
     <style>
-        /* --- Variabel Warna (Skema Gelap) --- */
         :root {
-            --bg-main: #0D1117; 
-            --bg-panel: #161B22; 
-            --border-color: #30363D;
-            --text-primary: #C9D1D9; 
-            --text-secondary: #8B949E; 
-            --accent-cyan: #2F81F7;
-            --accent-green: #39D353; 
-            --accent-red: #F85149;
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
         }
-
-        /* --- Dasar Body --- */
         body {
             background-color: var(--bg-main);
             color: var(--text-primary);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            line-height: 1.7;
-            margin: 0;
-            padding: 0;
+            line-height: 1.6;
         }
-
-        /* --- Kontainer Utama --- */
-        .container { 
-            max-width: 800px; 
-            margin: 2rem auto; 
-            padding: 1rem 2rem; 
-            background-color: var(--bg-panel); 
-            border: 1px solid var(--border-color); 
-            border-radius: 0.75rem; 
-        }
-
-        /* --- Tombol Kembali (Sticky) --- */
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
         .back-link {
             position: fixed;
             bottom: 2rem;
@@ -64,133 +43,49 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.3);
             transition: transform 0.2s ease;
         }
-        .back-link:hover { 
-            transform: scale(1.1); 
-        }
-
-        /* --- Judul --- */
-        h1, h2 { 
-            color: var(--accent-cyan); 
-        }
-        h1 { 
-            font-size: 2rem; 
-            border-bottom: 1px solid var(--border-color); 
-            padding-bottom: 0.5rem; 
-            margin-bottom: 1.5rem; 
-        }
-        h2 { 
-            font-size: 1.5rem; 
-            margin-top: 2.5rem; 
-            margin-bottom: 1rem; 
-            border-left: 4px solid var(--accent-cyan); 
-            padding-left: 1rem; 
-        }
-
-        p {
-            margin-bottom: 1.25rem;
-            color: var(--text-primary);
-        }
-
-        b, strong {
-            color: var(--accent-green);
-        }
-
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
         .hidden { display: none; }
 
-        /* --- Video Responsif --- */
+        /* Video Responsif */
         .embed-container {
-            position: relative; 
-            overflow: hidden; 
-            width: 100%;
-            padding-top: 56.25%; /* Aspect Ratio 16:9 */
-            border-radius: 0.5rem; 
-            border: 1px solid var(--border-color);
-            margin-top: 1.5rem;
+            position: relative; overflow: hidden; width: 100%;
+            padding-top: 56.25%; border-radius: 0.5rem; border: 1px solid var(--border-color);
         }
-        .embed-container iframe { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-        }
+        .embed-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-        /* --- Kuis Akordion --- */
-        .quiz-accordion { 
-            border: 1px solid var(--border-color); 
-            border-radius: 0.5rem; 
-            margin-bottom: 1rem; 
-            overflow: hidden; 
-        }
+        /* Quiz Accordion */
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
         .quiz-accordion-button {
-            background-color: var(--bg-panel); 
-            color: var(--text-primary);
-            width: 100%; 
-            padding: 1rem; 
-            text-align: left; 
-            font-size: 1.1rem; 
-            font-weight: 600;
-            border: none; 
-            cursor: pointer; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            border-bottom: 1px solid var(--border-color);
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
         }
-        .quiz-accordion-button:hover { 
-            background-color: #2a3038; 
-        }
-        .quiz-accordion-button .fas { 
-            transition: transform 0.3s ease; 
-        }
-        .quiz-accordion-button.active .fas { 
-            transform: rotate(180deg); 
-        }
-        .quiz-accordion-content { 
-            padding: 1rem; 
-        }
-        .question-text { 
-            font-weight: 500; 
-            margin-bottom: 1.5rem; 
-            font-size: 1.1em;
-        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
         .quiz-option {
-            border: 2px solid var(--border-color); 
-            border-radius: 0.5rem;
-            padding: 0.75rem; 
-            margin-bottom: 0.5rem; 
-            cursor: pointer;
+            border: 2px solid var(--border-color); border-radius: 0.5rem;
+            padding: 0.75rem; margin-bottom: 0.5rem; cursor: pointer;
             transition: all 0.2s ease;
         }
-        .options-container.answered .quiz-option:not(.correct):not(.wrong) { 
-            opacity: 0.6; 
-            cursor: not-allowed; 
-        }
-        .quiz-option:hover:not(.answered *) { 
-            border-color: var(--accent-cyan); 
-            background-color: rgba(47, 129, 247, 0.05);
-        }
-        .quiz-option.correct { 
-            border-color: var(--accent-green); 
-            background-color: rgba(57, 211, 83, 0.1); 
-            font-weight: bold; 
-        }
-        .quiz-option.wrong { 
-            border-color: var(--accent-red); 
-            background-color: rgba(248, 81, 73, 0.1); 
-        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
         .quiz-explanation {
-            margin-top: 1.5rem; 
-            padding: 1rem; 
-            border-left: 4px solid var(--accent-cyan);
-            background-color: rgba(47, 129, 247, 0.1); 
-            border-radius: 0 0.5rem 0.5rem 0;
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <a href="#" class="back-link" title="Kembali">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
             <i class="fas fa-arrow-left"></i>
         </a>
 
@@ -228,12 +123,16 @@
         <h2>Uji Pemahaman Anda</h2>
         <p>Pilih jawaban yang paling tepat untuk mengukur pemahaman Anda mengenai definisi nilai mutlak.</p>
 
+        <!-- Kuis -->
         <div id="quiz-container"></div>
     </div>
 
-<script>
-    // Data untuk Kuis
-    const quizzes = [
+    <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+
+        const quizzes = [
         {
             q: "Apa definisi paling mendasar dari nilai mutlak suatu bilangan?",
             options: [
@@ -279,31 +178,23 @@
             correct: 2,
             explanation: "Ini adalah perluasan konsep nilai mutlak. Bentuk $\\lvert a-b \\rvert$ secara geometris berarti <b>jarak antara titik a dan b</b> pada garis bilangan. Urutan tidak penting, karena $\\lvert p-q \\rvert = \\lvert q-p \\rvert$, sama seperti jarak dari kota A ke B sama dengan jarak dari B ke A."
         }
-    ];
+        ];
 
-    // --- Logika untuk Membangun dan Mengoperasikan Kuis ---
-
-    // Fungsi untuk membangun HTML kuis
-    function buildQuiz() {
         const quizContainer = document.getElementById("quiz-container");
-        if (!quizContainer) return; // Keluar jika kontainer tidak ditemukan
-
-        quizContainer.innerHTML = ''; // Kosongkan kontainer sebelum mengisi
 
         quizzes.forEach((quiz, index) => {
             const quizEl = document.createElement("div");
             quizEl.className = "quiz-accordion";
-            
             quizEl.innerHTML = `
-                <button class="quiz-accordion-button" aria-expanded="false" aria-controls="quiz-content-${index}">
-                    <span>Soal Latihan ${index + 1}</span>
-                    <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                <button class="quiz-accordion-button">
+                    <span>Kuis ${index + 1}</span>
+                    <i class="fas fa-chevron-down"></i>
                 </button>
-                <div id="quiz-content-${index}" class="quiz-accordion-content hidden">
+                <div class="quiz-accordion-content hidden">
                     <p class="question-text">${quiz.q}</p>
                     <div class="options-container">
                         ${quiz.options.map((opt, i) => 
-                            `<div class="quiz-option" role="button" data-correct="${i === quiz.correct}">${opt}</div>`
+                            `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
                         ).join("")}
                     </div>
                     <div class="quiz-explanation hidden">
@@ -313,76 +204,45 @@
             `;
             quizContainer.appendChild(quizEl);
         });
-        
-        // Render MathJax setelah semua elemen ditambahkan
-        if (window.MathJax) {
-            MathJax.typesetPromise();
-        }
-        
-        // Pasang event listener setelah kuis dibangun
-        attachEventListeners();
-    }
 
-    // Fungsi untuk memasang event listener
-    function attachEventListeners() {
-        const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
-        accordionButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                const content = button.nextElementSibling;
-                const isExpanded = button.getAttribute('aria-expanded') === 'true';
+        document.addEventListener('DOMContentLoaded', () => {
+            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    accordionButtons.forEach(otherButton => {
+                        if (otherButton !== button) {
+                            otherButton.classList.remove('active');
+                            otherButton.nextElementSibling.classList.add('hidden');
+                        }
+                    });
+                    button.classList.toggle('active');
+                    content.classList.toggle('hidden');
+                });
+            });
 
-                // Tutup semua akordion lain
-                accordionButtons.forEach(otherButton => {
-                    if (otherButton !== button) {
-                        otherButton.setAttribute('aria-expanded', 'false');
-                        otherButton.nextElementSibling.classList.add('hidden');
-                        otherButton.querySelector('.fas').style.transform = 'rotate(0deg)';
+            const quizOptions = document.querySelectorAll('.quiz-option');
+            quizOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden');
+
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('wrong');
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) {
+                            correctOption.classList.add('correct');
+                        }
                     }
                 });
-
-                // Buka/tutup akordion yang diklik
-                if (!isExpanded) {
-                    button.setAttribute('aria-expanded', 'true');
-                    content.classList.remove('hidden');
-                    button.querySelector('.fas').style.transform = 'rotate(180deg)';
-                } else {
-                    button.setAttribute('aria-expanded', 'false');
-                    content.classList.add('hidden');
-                    button.querySelector('.fas').style.transform = 'rotate(0deg)';
-                }
             });
         });
-
-        const quizOptions = document.querySelectorAll('.quiz-option');
-        quizOptions.forEach(option => {
-            option.addEventListener('click', () => {
-                const optionsContainer = option.parentElement;
-                if (optionsContainer.classList.contains('answered')) return;
-                optionsContainer.classList.add('answered');
-
-                const explanation = optionsContainer.nextElementSibling;
-                explanation.classList.remove('hidden');
-
-                if (option.dataset.correct === 'true') {
-                    option.classList.add('correct');
-                } else {
-                    option.classList.add('wrong');
-                    const correctOption = optionsContainer.querySelector('[data-correct="true"]');
-                    if (correctOption) {
-                        correctOption.classList.add('correct');
-                    }
-                }
-            });
-        });
-    }
-
-    // Pastikan skrip berjalan setelah seluruh halaman dimuat
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', buildQuiz);
-    } else {
-        // Halaman sudah dimuat, jalankan langsung
-        buildQuiz();
-    }
-</script>
+    </script>
 </body>
 </html>
