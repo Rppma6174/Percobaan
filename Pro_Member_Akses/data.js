@@ -17,16 +17,16 @@ const allContentData = {
         title: 'Aturan Pada Pertidaksamaan',
         author: 'Tim UMT',
         date: '08 Agustus 2025',
-        summary: 'Menggali hubungan antara paradoks kuno Yunani dengan salah satu konsep fundamental dalam matematika modern.',
+        summary: 'Pertidaksamaan yang berbeda dari persamaan fokus utamanya adalah pada operasi kuadrat jika kedua ruas $positif$ tanda pertidaksamaan tetap sama setelah dikuadratkan jika kedua ruas $negatif$ tanda pertidaksamaan harus dibalik setelah dikuadratkan jika ruas kiri dan kanan memiliki tanda yang berbeda tidak ada kesimpulan umum yang bisa ditarik',
         filePath: 'lab-content/eksplorasi teori/Aturan Pada Pertidaksamaan.pdf'
     },
     {
         id: 'lab_e2',
         category: 'Eksplorasi Teori',
-        title: 'Kalkulus Diferensial untuk Optimisas',
+        title: 'Kalkulus Diferensial untuk Optimisasi',
         author: 'Tim UMT',
         date: '08 Agustus 2025',
-        summary: 'Menggali hubungan antara paradoks kuno Yunani dengan salah satu konsep fundamental dalam matematika modern.',
+        summary: 'Dokumen ini menguraikan penggunaan kalkulus diferensial untuk menyelesaikan masalah optimisasi (mencari nilai maksimum atau minimum) prosesnya meliputi pemodelan masalah ke dalam sebuah fungsi mencari titik stasioner dengan membuat turunan pertama sama dengan nol ($f'(x) = 0$) dan menggunakan uji turunan kedua untuk memastikan apakah titik tersebut adalah maksimum ($f''(x) < 0$) atau minimum ($f''(x) > 0$)',
         filePath: 'lab-content/eksplorasi teori/Kalkulus Diferensial untuk Optimisas.pdf'
     },
     {
@@ -35,7 +35,7 @@ const allContentData = {
         title: 'Menemukan Titik Maksimum Dan Minimum Tanpa Menggunakan Turunan Kedua',
         author: 'Tim UMT',
         date: '08 Agustus 2025',
-        summary: 'Menggali hubungan antara paradoks kuno Yunani dengan salah satu konsep fundamental dalam matematika modern.',
+        summary: 'Dokumen ini membahas metode alternatif dalam kalkulus untuk menemukan titik maksimum dan minimum suatu fungsi hanya dengan menggunakan turunan pertama. Caranya adalah dengan menguji tanda (positif atau negatif) dari turunan pertama pada interval di antara titik-titik kritis. Tanda ini menunjukkan apakah fungsi sedang naik atau turun, yang kemudian dapat digunakan untuk mengklasifikasikan setiap titik kritis sebagai maksimum atau minimum lokal.',
         filePath: 'lab-content/eksplorasi teori/Kalkulus terkait dengan menemukan titik maksimum dan maksimum tanpa menggunakan turunan kedua.pdf'
     },
     {
@@ -53,17 +53,17 @@ const allContentData = {
         title: 'Pengaruh Nilai a Pada Grafik Fungsi Kuadrat',
         author: 'Tim UMT',
         date: '08 Agustus 2025',
-        summary: 'Menggali hubungan antara paradoks kuno Yunani dengan salah satu konsep fundamental dalam matematika modern.',
+        summary: 'Dokumen ini menjelaskan bagaimana nilai koefisien $a$ dalam fungsi kuadrat $f(x) = a x^2 + b x + c$ menentukan arah kurva parabola. Melalui pembuktian matematis, ditunjukkan bahwa jika $a > 0$, parabola akan terbuka ke atas dan memiliki titik minimum. Sebaliknya, jika $a < 0$, parabola akan terbuka ke bawah dan memiliki titik maksimum.',
         filePath: 'lab-content/eksplorasi teori/pengaruh nilai a pada grafik fungsi kuadrat.pdf'
     },
     {
         id: 'lab_e6',
         category: 'Eksplorasi Teori',
-        title: 'Paradoks Zeno dan Konsep Limit dalam Kalkulus',
+        title: 'Matriks dan Aplikasinya dalam Sistem Linear',
         author: 'Tim UMT',
         date: '08 Agustus 2025',
-        summary: 'Menggali hubungan antara paradoks kuno Yunani dengan salah satu konsep fundamental dalam matematika modern.',
-        filePath: 'lab-content/eksplorasi teori/Aturan Pada Pertidaksamaan.pdf'
+        summary: 'Dokumen ini menjelaskan bagaimana matriks digunakan sebagai bahasa yang efisien untuk merepresentasikan dan menyelesaikan sistem persamaan linear sebuah sistem dapat diubah ke dalam bentuk matriks $AX = B$ dan diselesaikan menggunakan metode seperti Eliminasi Gauss atau dengan mencari matriks invers di mana solusinya adalah $X = A^{-1} B$',
+        filePath: 'lab-content/eksplorasi teori/Matriks dan Aplikasinya dalam Sistem Linear.pdf'
     },
     {
         id: 'lab_e7',
@@ -71,16 +71,16 @@ const allContentData = {
         title: 'Pengaruh Nilai Diskriminan Terhadap Grafik Fungsi Kuadrat',
         author: 'Tim UMT',
         date: '08 Agustus 2025',
-        summary: 'Menggali hubungan antara paradoks kuno Yunani dengan salah satu konsep fundamental dalam matematika modern.',
+        summary: 'Kajian ini berfokus pada peran diskriminan $D$ yaitu $D = b^2 - 4ac$ dalam menentukan hubungan grafik fungsi kuadrat dengan sumbu x berdasarkan rumus ABC dijelaskan bahwa jika $D > 0$ grafik memotong sumbu x di dua titik berbeda jika $D = 0$ grafik menyinggung sumbu x di satu titik jika $D < 0$ grafik tidak memotong sumbu x sama sekali',
         filePath: 'lab-content/eksplorasi teori/Pengaruh Nilai diskriminan terhadap grafik fungsi kuadrat.pdf'
     },
     {
         id: 'lab_e8',
         category: 'Eksplorasi Teori',
-        title: 'Sistem Persamaan',
+        title: 'Sistem Persamaan Linear',
         author: 'Tim UMT',
         date: '08 Agustus 2025',
-        summary: 'Menggali hubungan antara paradoks kuno Yunani dengan salah satu konsep fundamental dalam matematika modern.',
+        summary: 'Dokumen ini menjelaskan logika fundamental di balik penyelesaian sistem persamaan linear ditekankan bahwa metode seperti eliminasi dan substitusi dapat dilakukan karena adanya asumsi penting bahwa variabel seperti $x$ dan $y$ memiliki nilai yang sama di setiap persamaan dalam sistem tersebut asumsi inilah yang memungkinkan kita untuk mengoperasikan persamaan secara sah untuk menemukan solusi tunggal',
         filePath: 'lab-content/eksplorasi teori/Sistem Persamaan .pdf'
     },
     {
@@ -89,7 +89,7 @@ const allContentData = {
         title: 'Statistika Deskriptif untuk Analisis Data',
         author: 'Tim UMT',
         date: '08 Agustus 2025',
-        summary: 'Menggali hubungan antara paradoks kuno Yunani dengan salah satu konsep fundamental dalam matematika modern.',
+        summary: 'Kajian ini membahas statistika deskriptif sebagai alat untuk meringkas dan memahami data konsep utamanya meliputi ukuran pemusatan data: rata-rata (mean), median, dan modus ukuran penyebaran data: simpangan baku untuk mengukur seberapa bervariasi data tersebut visualisasi: penggunaan histogram dan boxplot untuk mengidentifikasi pola distribusi dan outlier (pencilan) secara visual',
         filePath: 'lab-content/eksplorasi teori/Statistika Deskriptif untuk Analisis Data.pdf'
     },
     // Analisis dan Kajian
