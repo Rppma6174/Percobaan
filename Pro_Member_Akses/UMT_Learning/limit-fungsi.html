@@ -25,8 +25,31 @@
             line-height: 1.6;
         }
         .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
-        .back-link { display: inline-block; margin-bottom: 2rem; color: var(--accent-cyan); text-decoration: none; font-weight: 600; }
-        .back-link:hover { text-decoration: underline; }
+.back-link {
+    position: fixed; /* Membuat posisi tetap di layar */
+    bottom: 2rem;    /* Jarak 2rem dari bawah */
+    right: 2rem;     /* Jarak 2rem dari kanan */
+    z-index: 1000;   /* Memastikan tombol selalu di atas konten lain */
+    
+    background-color: var(--accent-cyan);
+    color: white;
+    width: 50px;       /* Membuat bentuk lingkaran */
+    height: 50px;      /* Membuat bentuk lingkaran */
+    border-radius: 50%; /* Membuat bentuk lingkaran */
+    
+    display: flex; /* Untuk menengahkan ikon */
+    align-items: center;
+    justify-content: center;
+    
+    font-size: 1.2rem;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.2s ease;
+}
+.back-link:hover {
+    transform: scale(1.1); /* Sedikit membesar saat disentuh mouse */
+}
+
         h1, h2 { color: var(--accent-cyan); }
         h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
         h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
@@ -74,7 +97,9 @@
 </head>
 <body>
     <div class="container">
-        <a href="../index.html" class="back-link">&larr; Kembali ke Daftar</a>
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
 
         <h1>Judul Materi Anda di Sini</h1>
         <p>Mulai tulis pengantar materi Anda di sini. Jelaskan konsep dasar yang akan dibahas. Anda bisa menggunakan LaTeX seperti ini: $\lim_{x \to c} f(x) = L$.</p>
