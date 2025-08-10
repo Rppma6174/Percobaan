@@ -171,7 +171,7 @@ const allContentData = {
             { 
             id: 'materi_7_1', 
             title: 'Materi Pembagian', 
-            type: 'PDF Document', 
+            type: 'HTML Document', 
             filePath: 'UMT_Learning/limit-fungsi.html', 
             fileType: 'html' 
             },
