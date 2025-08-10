@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Representasi Geometri Dari Nilai Mutlak - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            background-color: var(--accent-cyan);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+
+        /* Video Responsif */
+        .embed-container {
+            position: relative; overflow: hidden; width: 100%;
+            padding-top: 56.25%; border-radius: 0.5rem; border: 1px solid var(--border-color);
+        }
+        .embed-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+        /* Quiz Accordion */
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem;
+            padding: 0.75rem; margin-bottom: 0.5rem; cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Representasi Geometri Dari Nilai Mutlak</h1>
+<p>
+    Setelah memahami bahwa nilai mutlak adalah konsep tentang <strong>jarak</strong>, kita bisa memvisualisasikannya pada garis bilangan. Representasi geometri ini adalah kunci untuk mengubah soal-soal yang tampak abstrak menjadi lebih intuitif dan mudah dipecahkan.
+</p>
+<p>
+    Ada dua bentuk utama representasi geometri nilai mutlak:
+</p>
+
+<h3 style="color: #2F81F7; margin-top: 2rem;">1. Jarak dari Titik Nol:  $|x|$</h3>
+<p>
+    Bentuk paling dasar, $|x|$, secara geometris berarti <b>"jarak dari bilangan $x$ ke titik nol (0)"</b>.
+    Misalnya, $|4|$ adalah jarak dari titik 4 ke 0, yaitu 4 satuan. Sama halnya, $|-4|$ adalah jarak dari titik -4 ke 0, yang juga 4 satuan. Garis bilangan menunjukkan mengapa keduanya memiliki hasil yang sama.
+    
+</p>
+
+<h3 style="color: #2F81F7; margin-top: 2rem;">2. Jarak Antara Dua Titik: $|a - b|$</h3>
+<p>
+    Ini adalah interpretasi yang paling kuat. Bentuk $|a - b|$ secara geometris berarti <b>"jarak antara titik $a$ dan titik $b$"</b> pada garis bilangan.
+</p>
+<p>
+    Sebagai contoh, mari kita lihat $|9 - 4|$. Secara aritmatika, hasilnya adalah $|5| = 5$. Secara geometris, ini adalah jarak antara titik 9 dan titik 4, yang memang 5 satuan.
+</p>
+<p>
+    Perhatikan bahwa urutan tidak menjadi masalah. Jarak antara 9 dan 4 sama dengan jarak antara 4 dan 9. Inilah sebabnya mengapa $|9 - 4|$ sama dengan $|4 - 9|$. Keduanya menghasilkan 5, karena jarak tidak memiliki arah negatif.
+</p>
+<p>
+    Memahami ini sangat membantu. Ketika Anda melihat ekspresi seperti $|x - 2|$, Anda bisa langsung membacanya sebagai "jarak antara suatu titik $x$ dengan titik 2". Demikian pula, $|x + 5|$ dapat ditulis ulang sebagai $|x - (-5)|$, yang berarti "jarak antara suatu titik $x$ dengan titik -5".
+</p>
+<p>
+    Untuk visualisasi yang lebih jelas tentang bagaimana konsep jarak ini digunakan dalam memecahkan masalah, tonton video berikut.
+</p>
+
+<div class="embed-container">
+    <iframe src="https://www.youtube.com/embed/MxhGHR0zuuo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Pilih jawaban yang paling tepat berdasarkan interpretasi geometri nilai mutlak.</p>
+
+        <!-- Kuis -->
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+
+        const quizzes = [
+    {
+        q: "Secara geometris, ekspresi $|-6|$ merepresentasikan...",
+        options: [
+            "Titik -6 pada garis bilangan",
+            "Jarak antara 6 dan -6",
+            "Jarak antara titik -6 dan titik 0",
+            "Arah dari 0 ke -6"
+        ],
+        correct: 2,
+        explanation: "Bentuk nilai mutlak $|x|$ selalu diartikan sebagai <b>jarak dari titik x ke titik acuan, yaitu nol</b>. Jadi, $|-6|$ adalah ukuran jarak antara titik -6 dan titik 0 pada garis bilangan."
+    },
+    {
+        q: "Ekspresi $|x - 8|$ paling tepat diartikan sebagai...",
+        options: [
+            "Nilai x dikurangi 8",
+            "Jarak antara titik x dan titik 8",
+            "Jarak antara titik x dan titik -8",
+            "Jawaban bisa positif atau negatif"
+        ],
+        correct: 1,
+        explanation: "Bentuk $|a - b|$ secara geometris adalah representasi dari <b>jarak antara dua titik, yaitu a dan b</b>. Maka, $|x - 8|$ adalah jarak antara titik x dan titik 8."
+    },
+    {
+        q: "Manakah ekspresi nilai mutlak yang merepresentasikan 'jarak antara titik 3 dan titik -10'?",
+        options: [
+            "|3 + 10|",
+            "|3 - 10|",
+            "|10 + 3|",
+            "|-10 - 3|"
+        ],
+        correct: 1,
+        explanation: "Jarak antara titik a dan b adalah $|a - b|$. Jadi, jarak antara 3 dan -10 adalah $|3 - (-10)| = |3 + 10|$ atau $|-10 - 3|$. Opsi yang paling sesuai dan umum adalah $|3 - (-10)|$ yang menjadi $|3+10|$, atau $|-10-3|$. Karena $|3 - 10|$ juga menghasilkan nilai yang sama (yaitu |-7|=7), dan $|-10 - 3|$ juga menghasilkan |-13|=13, maka jawaban yang tepat adalah |3 - 10| karena merepresentasikan selisih antara kedua titik tersebut. Jaraknya adalah 13, yang didapat dari $|3 - (-10)| = |13| = 13$ atau $|-10 - 3| = |-13| = 13$."
+    },
+    {
+        q: "Persamaan $|x + 1| = 7$ jika diterjemahkan secara geometris berarti 'carilah titik x yang...'",
+        options: [
+            "berjarak 1 dari titik 7",
+            "berjarak 7 dari titik 1",
+            "berjarak 7 dari titik -1",
+            "berjarak -1 dari titik 7"
+        ],
+        correct: 2,
+        explanation: "Pertama, ubah bentuknya menjadi bentuk standar jarak: $|x + 1|$ menjadi $|x - (-1)|$. Dengan demikian, persamaan $|x - (-1)| = 7$ dapat dibaca sebagai: <b>'Jarak antara titik x dan titik -1 adalah 7 satuan'</b>."
+    },
+    {
+        q: "Dengan menggunakan konsep jarak, nilai dari $|-4 - 5|$ adalah...",
+        options: [
+            "1",
+            "-9",
+            "-1",
+            "9"
+        ],
+        correct: 3,
+        explanation: "Ekspresi $|-4 - 5|$ berarti 'berapa jarak antara titik -4 dan titik 5 pada garis bilangan?'. Dari -4 ke 0 adalah 4 satuan, dan dari 0 ke 5 adalah 5 satuan. Jadi, total jaraknya adalah 4 + 5 = 9 satuan."
+    }
+        ];
+
+        const quizContainer = document.getElementById("quiz-container");
+
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div");
+            quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `
+                <button class="quiz-accordion-button">
+                    <span>Kuis ${index + 1}</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="quiz-accordion-content hidden">
+                    <p class="question-text">${quiz.q}</p>
+                    <div class="options-container">
+                        ${quiz.options.map((opt, i) => 
+                            `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                        ).join("")}
+                    </div>
+                    <div class="quiz-explanation hidden">
+                        <b>Pembahasan:</b> ${quiz.explanation}
+                    </div>
+                </div>
+            `;
+            quizContainer.appendChild(quizEl);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    accordionButtons.forEach(otherButton => {
+                        if (otherButton !== button) {
+                            otherButton.classList.remove('active');
+                            otherButton.nextElementSibling.classList.add('hidden');
+                        }
+                    });
+                    button.classList.toggle('active');
+                    content.classList.toggle('hidden');
+                });
+            });
+
+            const quizOptions = document.querySelectorAll('.quiz-option');
+            quizOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden');
+
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('wrong');
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) {
+                            correctOption.classList.add('correct');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
