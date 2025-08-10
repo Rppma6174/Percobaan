@@ -316,50 +316,54 @@
         // Render MathJax setelah semua elemen ditambahkan
         MathJax.typesetPromise();
 
-        // Event Listener untuk Akordion dan Opsi Jawaban
-        document.addEventListener('DOMContentLoaded', () => {
-            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
-            accordionButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const content = button.nextElementSibling;
-                    const isActive = button.classList.contains('active');
+    // render kuis
+    const root = document.getElementById('quizRoot');
+    quizzes.forEach((item, idx) => {
+      const card = document.createElement('div'); card.className='card';
+      card.innerHTML = `
+        <div class="qhead" data-idx="${idx}">
+          <div class="qtitle">Soal ${idx+1}</div>
+          <div><i class="fas fa-chevron-down"></i></div>
+        </div>
+        <div class="qbody">
+          <div class="question">${item.q}</div>
+          <div class="opts">
+            ${item.options.map((o,i)=>`<div class="opt" data-correct="${i===item.correct}">${o}</div>`).join('')}
+          </div>
+          <div class="explain"><strong>Pembahasan:</strong><br>${item.explanation.replace(/\n/g,'<br>')}</div>
+        </div>
+      `;
+      root.appendChild(card);
+    });
 
-                    // Tutup semua akordion lain
-                    accordionButtons.forEach(otherButton => {
-                        otherButton.classList.remove('active');
-                        otherButton.nextElementSibling.classList.add('hidden');
-                    });
+    // interactions
+    document.querySelectorAll('.qhead').forEach(h=>{
+      h.addEventListener('click', ()=> {
+        const body = h.nextElementSibling;
+        // close others
+        document.querySelectorAll('.qbody').forEach(b=>{ if(b!==body) b.style.display='none'; });
+        body.style.display = body.style.display==='block' ? 'none' : 'block';
+      });
+    });
 
-                    // Buka/tutup akordion yang diklik
-                    if (!isActive) {
-                        button.classList.add('active');
-                        content.classList.remove('hidden');
-                    }
-                });
-            });
+    document.addEventListener('click', function(e){
+      if(e.target.classList.contains('opt')){
+        const opt = e.target;
+        const optsContainer = opt.parentElement;
+        if(optsContainer.classList.contains('answered')) return;
+        optsContainer.classList.add('answered');
+        const explain = optsContainer.parentElement.querySelector('.explain');
+        explain.style.display = 'block';
 
-            const quizOptions = document.querySelectorAll('.quiz-option');
-            quizOptions.forEach(option => {
-                option.addEventListener('click', () => {
-                    const optionsContainer = option.parentElement;
-                    if (optionsContainer.classList.contains('answered')) return; // Jangan lakukan apa-apa jika sudah dijawab
-                    optionsContainer.classList.add('answered');
-
-                    const explanation = optionsContainer.nextElementSibling;
-                    explanation.classList.remove('hidden');
-
-                    if (option.dataset.correct === 'true') {
-                        option.classList.add('correct');
-                    } else {
-                        option.classList.add('wrong');
-                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
-                        if (correctOption) {
-                            correctOption.classList.add('correct');
-                        }
-                    }
-                });
-            });
-        });
+        if(opt.getAttribute('data-correct') === 'true'){
+          opt.classList.add('correct');
+        } else {
+          opt.classList.add('wrong');
+          const corr = optsContainer.querySelector('[data-correct="true"]');
+          if(corr) corr.classList.add('correct');
+        }
+      }
+    }, false);
     </script>
 </body>
 </html>
