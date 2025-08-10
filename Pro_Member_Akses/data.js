@@ -4,7 +4,7 @@ const allContentData = {
             id: 'perpustakaan-001',
             title: 'Pengantar Kalkulus',
             author: 'Tim UMT',
-            summary: 'Buku teks fundamental yang mencakup limit, turunan, dan integral.',
+            summary: 'Ebook "Pengantar Kalkulus" ini menyajikan fondasi esensial untuk memahami kalkulus secara konseptual. Materi mencakup pembahasan mendasar mulai dari sistem bilangan real , pertidaksamaan , dan nilai mutlak. Fokus utama buku ini adalah pada konsep fungsi , termasuk jenis-jenisnya , operasi , komposisi, dan invers. Topik diakhiri dengan ulasan lengkap mengenai fungsi trigonometri dan inversnya.',
             filePath: 'Perpustakaan/Pengantar Kalkulus.pdf' // Ganti dengan path PDF Anda
         }
     ],
