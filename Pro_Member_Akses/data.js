@@ -199,29 +199,29 @@ const allContentData = {
         ],
         "Bentuk Akar": [
             { 
-            id: 'materi_8_1', 
-            title: 'Teorema Pythagoras', 
-            type: 'PDF Document', 
+            id: 'materi_bentuk_akar', 
+            title: 'Pengertian Bentuk Akar', 
+            type: 'HTML Document', 
             filePath: '#', 
-            fileType: 'pdf' 
+            fileType: 'html' 
             }
         ],
         "Trigonometri": [
             { 
-            id: 'materi_8_1', 
-            title: 'Percobaan 1', 
-            type: 'PDF Document', 
+            id: 'materi_esensi_trigonometri', 
+            title: 'Esensi Trigonometri', 
+            type: 'HTML Document', 
             filePath: '#', 
-            fileType: 'pdf' 
+            fileType: 'html' 
             }
         ],
         "Limit Fungsi": [
             { 
-            id: 'materi_10_1', 
-            title: 'Eksponen & Logaritma', 
-            type: 'PDF Document', 
+            id: 'materi_esensi_limit', 
+            title: 'Esensi Limit Fungsi', 
+            type: 'HTML Document', 
             filePath: '#', 
-            fileType: 'pdf' 
+            fileType: 'html' 
             },
         ],
         // Anda bisa tambahkan "Kelas 9 SMP", "Kelas 11 SMA", dst. di sini
