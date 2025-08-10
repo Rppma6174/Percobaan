@@ -49,6 +49,64 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .nav-btn:disabled { background-color: #30363D; color: #8B949E; cursor: not-allowed; }
 
+/* === [TAMBAHKAN CSS INI] === */
+.dropdown-container {
+    position: relative;
+    width: 100%;
+    max-width: 320px; /* Lebar maksimum dropdown */
+    user-select: none; /* Mencegah teks terseleksi saat diklik */
+}
+.dropdown-button {
+    background-color: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    padding: 0.75rem 1rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: border-color 0.2s;
+}
+.dropdown-button:hover {
+    border-color: var(--accent-cyan);
+}
+.dropdown-button span {
+    font-weight: 600;
+}
+.dropdown-button i {
+    transition: transform 0.3s ease;
+}
+.dropdown-menu {
+    display: none; /* Sembunyi secara default */
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 0;
+    width: 100%;
+    background-color: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    z-index: 10;
+    max-height: 250px;
+    overflow-y: auto;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+.dropdown-menu.open {
+    display: block; /* Tampil saat class 'open' ditambahkan */
+}
+.dropdown-button.open i {
+    transform: rotate(180deg);
+}
+.dropdown-item {
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+}
+.dropdown-item:hover {
+    background-color: var(--accent-cyan);
+    color: white;
+}
+/* === [AKHIR DARI CSS YANG DITAMBAHKAN] === */
+
         @keyframes slideInRight { from { opacity: 0; transform: translateX(100%); } to { opacity: 1; transform: translateX(0); } }
         @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; transform: translateY(-20px); } }
         .toast-in { animation: slideInRight 0.5s forwards; }
@@ -617,22 +675,35 @@ function setupVideoFilter() {
     });
 }
     
+// GANTI FUNGSI LAMA DENGAN FUNGSI BARU INI SECARA KESELURUHAN
 function renderBankSoalPage() {
     const categories = ['Semua', ...new Set(allContentData.bankSoal.map(quiz => quiz.category || 'Lainnya'))];
 
-    // Membuat Tombol Filter
-    const filterButtonsHTML = categories.map(category => `
-        <button class="filter-btn text-sm py-2 px-4 rounded-full bg-gray-700 hover:bg-cyan-600 transition-colors" data-filter="${category}">
-            ${category}
-        </button>
+    // [DIUBAH] Membuat item-item untuk menu dropdown
+    const dropdownItemsHTML = categories.map(category => `
+        <div class="dropdown-item" data-filter="${category}">${category}</div>
     `).join('');
 
-    // Membuat Kartu Soal
+    // [DIUBAH] Membuat struktur HTML untuk komponen dropdown
+    const dropdownFilterHTML = `
+        <div class="mb-8">
+            <label class="block text-sm font-medium text-gray-400 mb-2">Filter Kategori:</label>
+            <div class="dropdown-container" id="filter-dropdown">
+                <button class="dropdown-button" id="dropdown-button">
+                    <span id="dropdown-label">Semua</span>
+                    <i class="fa-solid fa-chevron-down"></i>
+                </button>
+                <div class="dropdown-menu no-scrollbar" id="dropdown-menu">
+                    ${dropdownItemsHTML}
+                </div>
+            </div>
+        </div>
+    `;
+
+    // Logika untuk membuat kartu soal (tidak ada perubahan di sini)
     const categoriesHTML = allContentData.bankSoal.reduce((acc, quiz) => {
         const category = quiz.category || 'Lainnya';
-        if (!acc[category]) {
-            acc[category] = [];
-        }
+        if (!acc[category]) acc[category] = [];
         acc[category].push(quiz);
         return acc;
     }, {});
@@ -650,7 +721,6 @@ function renderBankSoalPage() {
             </div>
         `).join('');
 
-        // Menambahkan atribut data-category untuk identifikasi
         quizSectionsHTML += `
             <div class="quiz-category-section mb-8" data-category="${category}">
                 <h3 class="text-xl font-bold mb-4 text-cyan-300">${category}</h3>
@@ -661,15 +731,13 @@ function renderBankSoalPage() {
         `;
     }
     
-    // Menggabungkan semuanya
+    // [DIUBAH] Menggabungkan semua HTML dengan struktur dropdown yang baru
     const bankSoalHTML = `
         <div class="panel">
             <h2 class="text-2xl font-bold mb-1 text-cyan-400">Bank Soal</h2>
             <p class="text-sm text-gray-400 mb-6">Pilih paket soal untuk mulai berlatih.</p>
             
-            <div class="mb-8 flex flex-wrap gap-2" id="filter-container">
-                ${filterButtonsHTML}
-            </div>
+            ${dropdownFilterHTML}
 
             <div id="quiz-list-container">
                 ${quizSectionsHTML}
@@ -678,41 +746,60 @@ function renderBankSoalPage() {
     `;
     appContent.innerHTML = bankSoalHTML;
 
-    // Panggil fungsi untuk mengaktifkan logika filter
+    // Panggil fungsi untuk mengaktifkan logika filter dropdown yang baru
     setupBankSoalFilter();
 }
 
+// === GANTI SELURUH FUNGSI LAMA DENGAN INI ===
 function setupBankSoalFilter() {
-    const filterContainer = document.getElementById('filter-container');
+    const dropdownContainer = document.getElementById('filter-dropdown');
+    if (!dropdownContainer) return;
+
+    const button = document.getElementById('dropdown-button');
+    const menu = document.getElementById('dropdown-menu');
+    const label = document.getElementById('dropdown-label');
+    const items = menu.querySelectorAll('.dropdown-item');
     const quizSections = document.querySelectorAll('.quiz-category-section');
-    if (!filterContainer) return;
 
-    // Set tombol 'Semua' sebagai aktif secara default
-    filterContainer.querySelector('[data-filter="Semua"]').classList.add('bg-cyan-600');
+    // 1. Logika untuk membuka/menutup menu
+    button.addEventListener('click', (event) => {
+        event.stopPropagation();
+        menu.classList.toggle('open');
+        button.classList.toggle('open');
+    });
 
-    filterContainer.addEventListener('click', (e) => {
-        // Hanya proses jika yang diklik adalah tombol filter
-        if (!e.target.matches('.filter-btn')) return;
+    // 2. Logika saat salah satu item filter dipilih
+    items.forEach(item => {
+        item.addEventListener('click', () => {
+            const selectedFilter = item.getAttribute('data-filter');
 
-        const selectedFilter = e.target.dataset.filter;
+            // Perbarui teks pada tombol
+            label.textContent = selectedFilter;
 
-        // Atur tampilan tombol aktif
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.classList.remove('bg-cyan-600');
-        });
-        e.target.classList.add('bg-cyan-600');
+            // Proses filter untuk setiap bagian soal
+            quizSections.forEach(section => {
+                if (selectedFilter === 'Semua' || section.dataset.category === selectedFilter) {
+                    section.style.display = 'block';
+                } else {
+                    section.style.display = 'none';
+                }
+            });
 
-        // Proses filter untuk setiap bagian soal
-        quizSections.forEach(section => {
-            if (selectedFilter === 'Semua' || section.dataset.category === selectedFilter) {
-                section.style.display = 'block';
-            } else {
-                section.style.display = 'none';
-            }
+            // Tutup menu setelah memilih
+            menu.classList.remove('open');
+            button.classList.remove('open');
         });
     });
+
+    // 3. Logika untuk menutup menu jika mengklik di luar area dropdown
+    window.addEventListener('click', (event) => {
+        if (!dropdownContainer.contains(event.target)) {
+            menu.classList.remove('open');
+            button.classList.remove('open');
+        }
+    });
 }
-    
+
     function renderForumPage() {
         appContent.innerHTML = `<div class="forum-container"><div class="intro"><h1>Forum Belajar UMT</h1><p>Bergabunglah dengan komunitas eksklusif UMT Academy! Tempat terbaik untuk berdiskusi, bertanya, berbagi ilmu, dan menguasai matematika bersama sesama pelajar dan fasilitator.</p></div><div class="community-links"><h2>Pilih Komunitas Pilihanmu Sekarang!</h2><div class="flex justify-center gap-4 flex-wrap"><a href="https://chat.whatsapp.com/GpyKRFFjMINBcjqGEYSXQ6" target="_blank" class="community-btn whatsapp-btn"><i class="fab fa-whatsapp"></i><span>Komunitas WhatsApp</span></a><a href="https://t.me/umt6174" target="_blank" class="community-btn telegram-btn"><i class="fab fa-telegram"></i><span>Komunitas Telegram</span></a></div><p class="subtext">Bergabunglah dengan ribuan pelajar lainnya!</p></div></div>`;
     }
@@ -1332,4 +1419,3 @@ function showConfirmationModal(options) {
 
 </body>
 </html>
-
