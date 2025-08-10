@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Definisi Nilai Mutlak - Belajar Matematika</title>
+    <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c2/OOjs_UI_icon_mathematics-ltr.svg/120px-OOjs_UI_icon_mathematics-ltr.svg.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        /* --- Variabel Warna (Skema Gelap) --- */
+        :root {
+            --bg-main: #0D1117; 
+            --bg-panel: #161B22; 
+            --border-color: #30363D;
+            --text-primary: #C9D1D9; 
+            --text-secondary: #8B949E; 
+            --accent-cyan: #2F81F7;
+            --accent-green: #39D353; 
+            --accent-red: #F85149;
+        }
+
+        /* --- Dasar Body --- */
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.7;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- Kontainer Utama --- */
+        .container { 
+            max-width: 800px; 
+            margin: 2rem auto; 
+            padding: 1rem 2rem; 
+            background-color: var(--bg-panel); 
+            border: 1px solid var(--border-color); 
+            border-radius: 0.75rem; 
+        }
+
+        /* --- Tombol Kembali (Sticky) --- */
+        .back-link {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            background-color: var(--accent-cyan);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { 
+            transform: scale(1.1); 
+        }
+
+        /* --- Judul --- */
+        h1, h2 { 
+            color: var(--accent-cyan); 
+        }
+        h1 { 
+            font-size: 2rem; 
+            border-bottom: 1px solid var(--border-color); 
+            padding-bottom: 0.5rem; 
+            margin-bottom: 1.5rem; 
+        }
+        h2 { 
+            font-size: 1.5rem; 
+            margin-top: 2.5rem; 
+            margin-bottom: 1rem; 
+            border-left: 4px solid var(--accent-cyan); 
+            padding-left: 1rem; 
+        }
+
+        p {
+            margin-bottom: 1.25rem;
+            color: var(--text-primary);
+        }
+
+        b, strong {
+            color: var(--accent-green);
+        }
+
+        .hidden { display: none; }
+
+        /* --- Video Responsif --- */
+        .embed-container {
+            position: relative; 
+            overflow: hidden; 
+            width: 100%;
+            padding-top: 56.25%; /* Aspect Ratio 16:9 */
+            border-radius: 0.5rem; 
+            border: 1px solid var(--border-color);
+            margin-top: 1.5rem;
+        }
+        .embed-container iframe { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+        }
+
+        /* --- Kuis Akordion --- */
+        .quiz-accordion { 
+            border: 1px solid var(--border-color); 
+            border-radius: 0.5rem; 
+            margin-bottom: 1rem; 
+            overflow: hidden; 
+        }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); 
+            color: var(--text-primary);
+            width: 100%; 
+            padding: 1rem; 
+            text-align: left; 
+            font-size: 1.1rem; 
+            font-weight: 600;
+            border: none; 
+            cursor: pointer; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .quiz-accordion-button:hover { 
+            background-color: #2a3038; 
+        }
+        .quiz-accordion-button .fas { 
+            transition: transform 0.3s ease; 
+        }
+        .quiz-accordion-button.active .fas { 
+            transform: rotate(180deg); 
+        }
+        .quiz-accordion-content { 
+            padding: 1rem; 
+        }
+        .question-text { 
+            font-weight: 500; 
+            margin-bottom: 1.5rem; 
+            font-size: 1.1em;
+        }
+        .quiz-option {
+            border: 2px solid var(--border-color); 
+            border-radius: 0.5rem;
+            padding: 0.75rem; 
+            margin-bottom: 0.5rem; 
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { 
+            opacity: 0.6; 
+            cursor: not-allowed; 
+        }
+        .quiz-option:hover:not(.answered *) { 
+            border-color: var(--accent-cyan); 
+            background-color: rgba(47, 129, 247, 0.05);
+        }
+        .quiz-option.correct { 
+            border-color: var(--accent-green); 
+            background-color: rgba(57, 211, 83, 0.1); 
+            font-weight: bold; 
+        }
+        .quiz-option.wrong { 
+            border-color: var(--accent-red); 
+            background-color: rgba(248, 81, 73, 0.1); 
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; 
+            padding: 1rem; 
+            border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); 
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="#" class="back-link" title="Kembali">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+        <h1>Definisi Nilai Mutlak</h1>
+        <p>
+            Secara intuitif, nilai mutlak sering dipahami sebagai "membuat suatu bilangan menjadi positif". Walaupun tidak sepenuhnya salah, pemahaman intinya jauh lebih dalam dari itu. Konsep utama nilai mutlak adalah tentang <strong>jarak</strong>.
+        </p>
+        <p>
+            Nilai mutlak dari sebuah bilangan, misalnya $x$, adalah <b>jarak bilangan tersebut dari titik nol (0)</b> pada sebuah garis bilangan, tanpa mempedulikan arahnya (ke kanan atau ke kiri). Karena jarak tidak pernah bernilai negatif, maka nilai mutlak juga <b>selalu tidak negatif</b> (positif atau nol).
+        </p>
+        <p>
+            Secara formal, nilai mutlak dari $x$ disimbolkan dengan $\lvert x \rvert$ dan didefinisikan sebagai berikut:
+            $$ \lvert x \rvert =
+            \begin{cases}
+            x, & \text{jika } x \ge 0 \\
+            -x, & \text{jika } x < 0
+            \end{cases} $$
+        </p>
+        <p>
+            Definisi ini mungkin terlihat membingungkan pada bagian kedua: "jika $x$ negatif, hasilnya adalah $-x$". Ini bukan berarti hasilnya negatif. Justru sebaliknya, jika $x$ sudah negatif (misal $x = -5$), maka $-x$ menjadi $-(-5)$, yang hasilnya adalah $5$. Ini adalah cara matematis untuk memastikan hasilnya selalu positif.
+        </p>
+
+        <p>
+            Penjelasan inti : nilai mutlak adalah konsep yang lahir dari gagasan <i>jarak</i>. Jarak selalu bernilai tidak negatif. Dalam kerangka garis bilangan, titik acuan yang sering dipakai adalah nol — sehingga $|x|$ berarti "berapa jauh x dari 0". Namun definisi nilai mutlak juga umum dipakai untuk mengukur jarak antara dua bilangan: jarak antara $a$ dan $b$ ditulis $|a-b|$. Ini mengabaikan urutan karena jarak bersifat simetris: $|a-b| = |b-a|$.
+        </p>        
+        
+        <p>
+            Untuk mendapatkan pemahaman visual yang lebih baik, silakan tonton video di bawah ini yang menjelaskan terkait dengan definisi nilai mutlak secara visual.
+        </p>
+
+        <div class="embed-container">
+            <iframe src="https://www.youtube.com/embed/zwth9824dhU" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+
+        <h2>Uji Pemahaman Anda</h2>
+        <p>Pilih jawaban yang paling tepat untuk mengukur pemahaman Anda mengenai definisi nilai mutlak.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Data untuk Kuis
+        const quizzes = [
+            {
+                q: "Apa definisi paling mendasar dari nilai mutlak suatu bilangan?",
+                options: [
+                    "Bilangan itu sendiri tanpa tanda negatif",
+                    "Jarak bilangan tersebut dari titik nol pada garis bilangan",
+                    "Kebalikan dari bilangan tersebut",
+                    "Selalu bernilai positif"
+                ],
+                correct: 1,
+                explanation: "Definisi inti dari nilai mutlak adalah <b>jarak</b>. Jarak dari sebuah bilangan ke titik nol (0) pada garis bilangan. Karena jarak tidak pernah negatif, maka nilai mutlak pun hasilnya selalu tidak negatif (bisa nol atau positif)."
+            },
+            {
+                q: "Berdasarkan definisi formal, jika $x < 0$, maka $\\lvert x \\rvert$ sama dengan...",
+                options: ["x", "-x", "0", "Tidak dapat ditentukan"],
+                correct: 1,
+                explanation: "Ini adalah bagian kunci dari definisi formal. Jika $x$ adalah bilangan negatif (misalnya, $x = -10$), maka $\\lvert x \\rvert$ adalah $-x$, yang berarti $-(-10) = 10$. Tanda negatif tambahan berfungsi untuk mengubah bilangan negatif tersebut menjadi positif."
+            },
+            {
+                q: "Manakah pernyataan di bawah ini yang <b>selalu benar</b> untuk sembarang bilangan real $a$?",
+                options: [
+                    "$\\lvert a \\rvert > 0$",
+                    "$\\lvert a \\rvert = a$",
+                    "$\\lvert a \\rvert \ge 0$",
+                    "$\\lvert a \\rvert \ne a$"
+                ],
+                correct: 2,
+                explanation: "Nilai mutlak tidak pernah negatif. Ia bisa positif atau nol (jika $a=0$). Oleh karena itu, pernyataan yang paling akurat adalah $\\lvert a \\rvert \ge 0$ (lebih besar atau sama dengan nol)."
+            },
+            {
+                q: "Berapakah hasil dari $\\lvert 5 - 12 \\rvert$?",
+                options: ["-7", "7", "17", "-17"],
+                correct: 1,
+                explanation: "Langkah pertama adalah menyelesaikan operasi di dalam tanda mutlak: $5 - 12 = -7$. Selanjutnya, kita mencari nilai mutlak dari hasilnya: $\\lvert -7 \\rvert$. Karena jarak -7 dari 0 adalah 7, maka jawabannya adalah 7."
+            },
+            {
+                q: "Jika $\\lvert p - q \\rvert$ merepresentasikan suatu nilai, nilai tersebut menggambarkan...",
+                options: [
+                    "Hasil pengurangan p oleh q",
+                    "Jumlah dari p dan q",
+                    "Jarak antara titik p dan titik q pada garis bilangan",
+                    "Titik tengah antara p dan q"
+                ],
+                correct: 2,
+                explanation: "Ini adalah perluasan konsep nilai mutlak. Bentuk $\\lvert a-b \\rvert$ secara geometris berarti <b>jarak antara titik a dan b</b> pada garis bilangan. Urutan tidak penting, karena $\\lvert p-q \\rvert = \\lvert q-p \\rvert$, sama seperti jarak dari kota A ke B sama dengan jarak dari B ke A."
+            }
+        ];
+
+        // --- Logika untuk Membangun dan Mengoperasikan Kuis ---
+
+        const quizContainer = document.getElementById("quiz-container");
+
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div");
+            quizEl.className = "quiz-accordion";
+            
+            // Render MathJax pada pertanyaan dan pilihan
+            const renderedQuestion = quiz.q;
+            const renderedOptions = quiz.options.map(opt => opt);
+
+            quizEl.innerHTML = `
+                <button class="quiz-accordion-button">
+                    <span>Soal Latihan ${index + 1}</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="quiz-accordion-content hidden">
+                    <p class="question-text">${renderedQuestion}</p>
+                    <div class="options-container">
+                        ${renderedOptions.map((opt, i) => 
+                            `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                        ).join("")}
+                    </div>
+                    <div class="quiz-explanation hidden">
+                        <b>Pembahasan:</b> ${quiz.explanation}
+                    </div>
+                </div>
+            `;
+            quizContainer.appendChild(quizEl);
+        });
+        
+        // Render MathJax setelah semua elemen ditambahkan
+        MathJax.typesetPromise();
+
+        // Event Listener untuk Akordion dan Opsi Jawaban
+        document.addEventListener('DOMContentLoaded', () => {
+            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const isActive = button.classList.contains('active');
+
+                    // Tutup semua akordion lain
+                    accordionButtons.forEach(otherButton => {
+                        otherButton.classList.remove('active');
+                        otherButton.nextElementSibling.classList.add('hidden');
+                    });
+
+                    // Buka/tutup akordion yang diklik
+                    if (!isActive) {
+                        button.classList.add('active');
+                        content.classList.remove('hidden');
+                    }
+                });
+            });
+
+            const quizOptions = document.querySelectorAll('.quiz-option');
+            quizOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return; // Jangan lakukan apa-apa jika sudah dijawab
+                    optionsContainer.classList.add('answered');
+
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden');
+
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('wrong');
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) {
+                            correctOption.classList.add('correct');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
