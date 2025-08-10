@@ -342,6 +342,12 @@
     };
     
     function navigateTo(page, clickedElement) {
+    // [TAMBAHKAN BARIS INI]
+    // Simpan halaman yang sedang aktif ke sessionStorage, kecuali halaman tertentu
+        if (page !== 'pengaturan') {
+            sessionStorage.setItem('lastActivePage', page);
+        }
+
         document.querySelectorAll('.sidebar-link, .bottom-nav-link').forEach(link => link.classList.remove('active'));
         if (clickedElement) {
             const targetLink = Array.from(document.querySelectorAll('.sidebar-link, .bottom-nav-link'))
@@ -1398,7 +1404,16 @@ function showConfirmationModal(options) {
         
         startSessionHeartbeat(token, email);
     
-        navigateTo('dashboard', document.querySelector('.sidebar-link'));
+        const lastActivePage = sessionStorage.getItem('lastActivePage');
+
+// Jika ada catatan halaman terakhir, buka halaman tersebut
+        if (lastActivePage) {
+            const targetLink = document.querySelector(`.sidebar-link[onclick*="'${lastActivePage}'"]`);
+            navigateTo(lastActivePage, targetLink);
+        } else {
+    // Jika tidak ada catatan, barulah buka dashboard sebagai default
+            navigateTo('dashboard', document.querySelector('.sidebar-link'));
+        }        
     
         if (!sessionStorage.getItem(CONFIG.STORAGE_KEYS.WELCOME_POPUP)) {
             showConfirmationModal({
