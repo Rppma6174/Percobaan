@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Judul Materi Anda</title>
+    <title>Esensi Nilai Mutlak - UMT Learning</title>
     <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     
@@ -25,44 +25,38 @@
             line-height: 1.6;
         }
         .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
-.back-link {
-    position: fixed; /* Membuat posisi tetap di layar */
-    bottom: 2rem;    /* Jarak 2rem dari bawah */
-    right: 2rem;     /* Jarak 2rem dari kanan */
-    z-index: 1000;   /* Memastikan tombol selalu di atas konten lain */
-    
-    background-color: var(--accent-cyan);
-    color: white;
-    width: 50px;       /* Membuat bentuk lingkaran */
-    height: 50px;      /* Membuat bentuk lingkaran */
-    border-radius: 50%; /* Membuat bentuk lingkaran */
-    
-    display: flex; /* Untuk menengahkan ikon */
-    align-items: center;
-    justify-content: center;
-    
-    font-size: 1.2rem;
-    text-decoration: none;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    transition: transform 0.2s ease;
-}
-.back-link:hover {
-    transform: scale(1.1); /* Sedikit membesar saat disentuh mouse */
-}
-
+        .back-link {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            background-color: var(--accent-cyan);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
         h1, h2 { color: var(--accent-cyan); }
         h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
         h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
         .hidden { display: none; }
 
-        /* Style Video Responsif */
+        /* Video Responsif */
         .embed-container {
             position: relative; overflow: hidden; width: 100%;
             padding-top: 56.25%; border-radius: 0.5rem; border: 1px solid var(--border-color);
         }
         .embed-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 
-        /* [BARU] Style untuk Kuis Akordeon */
+        /* Quiz Accordion */
         .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
         .quiz-accordion-button {
             background-color: var(--bg-panel); color: var(--text-primary);
@@ -80,15 +74,9 @@
             transition: all 0.2s ease;
         }
         .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
-        .options-container.answered .quiz-option:hover { border-color: var(--border-color); }
         .quiz-option:hover { border-color: var(--accent-cyan); }
-        .quiz-option.correct {
-            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1);
-            font-weight: bold;
-        }
-        .quiz-option.wrong {
-            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1);
-        }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
         .quiz-explanation {
             margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
             background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
@@ -101,105 +89,146 @@
             <i class="fas fa-arrow-left"></i>
         </a>
 
-        <h1>Judul Materi Anda di Sini</h1>
-        <p>Mulai tulis pengantar materi Anda di sini. Jelaskan konsep dasar yang akan dibahas. Anda bisa menggunakan LaTeX seperti ini: $\lim_{x \to c} f(x) = L$.</p>
+        <h1>Esensi Nilai Mutlak</h1>
+        <p>
+            Nilai mutlak adalah konsep matematika yang menggambarkan <b>jarak suatu bilangan terhadap nol</b> pada garis bilangan, tanpa memperhatikan arahnya.
+            Dengan kata lain, nilai mutlak selalu bernilai <b>tidak negatif</b>.
+        </p>
+        <p>
+            Secara simbol, nilai mutlak dari $x$ ditulis sebagai $\lvert x \rvert$ dan didefinisikan sebagai:
+            $$ \lvert x \rvert =
+            \begin{cases}
+                x, & \text{jika } x \ge 0 \\
+                -x, & \text{jika } x < 0
+            \end{cases} $$
+        </p>
+        <p>
+            Intinya, nilai mutlak berbicara tentang <i>seberapa jauh</i> sebuah bilangan dari nol, bukan tentang arahnya.
+            Memahami hal ini penting agar kita tidak salah menafsirkan hasil perhitungan, terutama saat memecahkan persamaan atau pertidaksamaan nilai mutlak.
+        </p>
+        <p>
+            Untuk pemahaman yang lebih mendalam dan disertai visualisasi yang jelas, tonton video berikut:
+        </p>
 
-        <h2>Pahami Lebih Lanjut</h2>
-        <p>Tonton video penjelasan berikut untuk pemahaman yang lebih mendalam:</p>
         <div class="embed-container">
-            <iframe src="https://www.youtube.com/embed/KODE_VIDEO_YOUTUBE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/-pETqV252Zc" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
         </div>
 
         <h2>Uji Pemahaman Anda</h2>
-        <p>Buka setiap kuis di bawah ini dan pilih jawaban yang menurut Anda benar.</p>
+        <p>Pilih jawaban yang tepat dan baca pembahasan setelah menjawab.</p>
 
-        <div class="quiz-accordion">
-            <button class="quiz-accordion-button">
-                <span>Kuis 1</span>
-                <i class="fas fa-chevron-down"></i>
-            </button>
-            <div class="quiz-accordion-content hidden">
-                <p class="question-text">Apa hasil dari $\int 2x \, dx$? (Tulis pertanyaan Anda di sini)</p>
-                <div class="options-container">
-                    <div class="quiz-option">A. $2x^2 + C$</div>
-                    <div class="quiz-option" data-correct="true">B. $x^2 + C$</div>
-                    <div class="quiz-option">C. $x + C$</div>
-                    <div class="quiz-option">D. $2x + C$</div>
-                </div>
-                <div class="quiz-explanation hidden">
-                    <b>Pembahasan:</b> Menggunakan aturan integral pangkat, $\int ax^n \, dx = \frac{a}{n+1}x^{n+1} + C$. Jadi, $\int 2x^1 \, dx = \frac{2}{1+1}x^{1+1} + C = x^2 + C$.
-                </div>
-            </div>
-        </div>
-
-        <div class="quiz-accordion">
-            <button class="quiz-accordion-button">
-                <span>Kuis 2</span>
-                <i class="fas fa-chevron-down"></i>
-            </button>
-            <div class="quiz-accordion-content hidden">
-                <p class="question-text">Ini adalah contoh pertanyaan kedua. Manakah yang merupakan bilangan prima?</p>
-                <div class="options-container">
-                    <div class="quiz-option">A. 4</div>
-                    <div class="quiz-option">B. 9</div>
-                    <div class="quiz-option" data-correct="true">C. 7</div>
-                    <div class="quiz-option">D. 1</div>
-                </div>
-                <div class="quiz-explanation hidden">
-                    <b>Pembahasan:</b> Bilangan prima adalah bilangan yang hanya bisa dibagi oleh 1 dan dirinya sendiri. Dari pilihan di atas, hanya 7 yang memenuhi syarat tersebut.
-                </div>
-            </div>
-        </div>
-        
-        </div>
+        <!-- Kuis -->
+        <div id="quiz-container"></div>
+    </div>
 
     <script>
-        // Logika keamanan untuk memastikan hanya user ter-login yang bisa akses
         if (!sessionStorage.getItem('sessionToken')) {
             window.location.href = '../Login/';
         }
 
+        const quizzes = [
+            {
+                q: "Apa arti dari $\\lvert -7 \\rvert$?",
+                options: ["-7", "7", "0", "-(-7)"],
+                correct: 1,
+                explanation: "Nilai mutlak mengabaikan tanda negatif. Jadi $\\lvert -7 \\rvert = 7$."
+            },
+            {
+                q: "Manakah yang benar mengenai nilai mutlak?",
+                options: [
+                    "Selalu positif",
+                    "Selalu nol",
+                    "Selalu tidak negatif",
+                    "Selalu negatif"
+                ],
+                correct: 2,
+                explanation: "Nilai mutlak tidak pernah negatif, tetapi bisa nol. Jadi jawabannya adalah 'Selalu tidak negatif'."
+            },
+            {
+                q: "Jika $\\lvert x \\rvert = 5$, maka nilai $x$ adalah...",
+                options: [
+                    "Hanya 5",
+                    "Hanya -5",
+                    "5 atau -5",
+                    "Tidak ada jawaban"
+                ],
+                correct: 2,
+                explanation: "$\\lvert x \\rvert = 5$ berarti jarak x dari nol adalah 5 satuan, jadi x bisa 5 atau -5."
+            },
+            {
+                q: "Pilih sifat nilai mutlak yang benar:",
+                options: [
+                    "$\\lvert a \\times b \\rvert = \\lvert a \\rvert \\times \\lvert b \\rvert$",
+                    "$\\lvert a + b \\rvert = \\lvert a \\rvert + \\lvert b \\rvert$",
+                    "$\\lvert a \\rvert - \\lvert b \\rvert = \\lvert a - b \\rvert$",
+                    "Semua salah"
+                ],
+                correct: 0,
+                explanation: "Salah satu sifat penting: $\\lvert a \\times b \\rvert = \\lvert a \\rvert \\times \\lvert b \\rvert$."
+            },
+            {
+                q: "Hasil dari $\\lvert -3 + 8 \\rvert$ adalah...",
+                options: ["-5", "5", "8", "3"],
+                correct: 1,
+                explanation: "-3 + 8 = 5, dan $\\lvert 5 \\rvert = 5$."
+            }
+        ];
+
+        const quizContainer = document.getElementById("quiz-container");
+
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div");
+            quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `
+                <button class="quiz-accordion-button">
+                    <span>Kuis ${index + 1}</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="quiz-accordion-content hidden">
+                    <p class="question-text">${quiz.q}</p>
+                    <div class="options-container">
+                        ${quiz.options.map((opt, i) => 
+                            `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                        ).join("")}
+                    </div>
+                    <div class="quiz-explanation hidden">
+                        <b>Pembahasan:</b> ${quiz.explanation}
+                    </div>
+                </div>
+            `;
+            quizContainer.appendChild(quizEl);
+        });
+
         document.addEventListener('DOMContentLoaded', () => {
-            // Logika untuk Akordeon
             const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
             accordionButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     const content = button.nextElementSibling;
-                    // Bonus: Tutup akordeon lain yang sedang terbuka
                     accordionButtons.forEach(otherButton => {
                         if (otherButton !== button) {
                             otherButton.classList.remove('active');
                             otherButton.nextElementSibling.classList.add('hidden');
                         }
                     });
-                    
                     button.classList.toggle('active');
                     content.classList.toggle('hidden');
                 });
             });
 
-            // Logika untuk Pilihan Jawaban Kuis
             const quizOptions = document.querySelectorAll('.quiz-option');
             quizOptions.forEach(option => {
                 option.addEventListener('click', () => {
                     const optionsContainer = option.parentElement;
-                    
-                    // Jangan lakukan apa-apa jika sudah dijawab
                     if (optionsContainer.classList.contains('answered')) return;
-
-                    // Tandai bahwa pertanyaan ini sudah dijawab
                     optionsContainer.classList.add('answered');
 
-                    // Tampilkan pembahasan
                     const explanation = optionsContainer.nextElementSibling;
                     explanation.classList.remove('hidden');
 
-                    // Cek apakah jawaban benar atau salah
                     if (option.dataset.correct === 'true') {
                         option.classList.add('correct');
                     } else {
                         option.classList.add('wrong');
-                        // Tampilkan juga jawaban yang benar
                         const correctOption = optionsContainer.querySelector('[data-correct="true"]');
                         if (correctOption) {
                             correctOption.classList.add('correct');
