@@ -1418,7 +1418,7 @@ function showConfirmationModal(options) {
         if (!sessionStorage.getItem(CONFIG.STORAGE_KEYS.WELCOME_POPUP)) {
             showConfirmationModal({
                 title: '🎉 Selamat Datang di UMT Pro!',
-                message: 'Mohon maaf, halaman untuk Member Pro saat ini masih dalam tahap pengembangan aktif. Untuk sekarang, kami memberikan akses penuh hanya untuk bagian halaman "Bank Soal" untuk Anda jelajahi. Terima kasih atas pengertiannya!',
+                message: 'Mohon maaf, halaman untuk Member Pro saat ini masih dalam tahap pengembangan aktif. Jadi, hanya terdapat beberapa halaman yang terisi lengkap yang dapat anda jelajahi dan sebagian masih dalam tahap pengembangan. Terima kasih atas pengertiannya!',
                 confirmText: 'Mengerti',
                 showCancelButton: false,
                 confirmAction: () => sessionStorage.setItem(CONFIG.STORAGE_KEYS.WELCOME_POPUP, 'true')
@@ -1431,5 +1431,6 @@ function showConfirmationModal(options) {
 
 </body>
 </html>
+
 
 
