@@ -817,9 +817,9 @@ function getTotalItemCount() {
     const totalMateri = Object.values(allContentData.materi).flat().length;
     const totalVideo = allContentData.video.length;
     const totalBankSoal = allContentData.bankSoal.length;
-    const totalUmtLab = allContentData.umtLab.length; // <-- Ditambahkan
-    // Video dan UMT Lab sekarang dihitung
-    return totalMateri + totalVideo + totalBankSoal + totalUmtLab;
+    const totalUmtLab = allContentData.umtLab.length;
+    const totalPerpustakaan = allContentData.perpustakaan.length; // <-- Tambahkan ini
+    return totalMateri + totalVideo + totalBankSoal + totalUmtLab + totalPerpustakaan; // <-- Perbarui return
 }
     
     function initializeAppDashboardWidgets() {
@@ -907,6 +907,16 @@ function getTotalItemCount() {
         link: `viewer.html?id=${lastActivity.lab?.id}`
     });
 
+    // === [TAMBAHKAN KODE INI TEPAT DI BAWAHNYA] ===
+    activityHTML += createWidget({
+        title: "Buku Terakhir Dibuka",
+        icon: "fa-solid fa-book-atlas",
+        actionText: "Lanjutkan Membaca",
+        data: lastActivity.perpustakaan, // 'perpustakaan' harus cocok dengan key di data.js
+        link: `viewer.html?id=${lastActivity.perpustakaan?.id}`
+    });
+// === [AKHIR DARI KODE YANG DITAMBAHKAN] ===
+
     lastActivityContainer.innerHTML = activityHTML;
     }
     
@@ -940,13 +950,20 @@ function getTotalItemCount() {
 function updateLastActivity(type, item) {
     const key = 'userLastActivity';
     let lastActivity = JSON.parse(localStorage.getItem(key)) || {};
-    lastActivity[type] = {
+
+    // Simpan data yang relevan berdasarkan tipe
+    let dataToStore = {
         id: item.id,
         title: item.title,
-        // Menyimpan path atau videoId untuk membuat link "Lanjutkan"
-        filePath: item.filePath, 
-        videoId: item.videoId
     };
+
+    if (type === 'video') {
+        dataToStore.videoId = item.videoId;
+    } else {
+        dataToStore.filePath = item.filePath;
+    }
+
+    lastActivity[type] = dataToStore;
     localStorage.setItem(key, JSON.stringify(lastActivity));
 }
     
