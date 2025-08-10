@@ -99,7 +99,7 @@ const allContentData = {
         title: 'Barisan Aritmetika untuk Perencanaan Keuangan',
         author: 'Tim UMT',
         date: '06 Agustus 2025',
-        summary: 'Menjelajahi bagaimana persamaan matematika sederhana dapat menghasilkan pola-pola rumit yang tak terbatas seperti yang terlihat di alam.',
+        summary: 'Dokumen ini menyajikan aplikasi praktis dari barisan dan deret aritmetika dalam perencanaan keuangan pribadi. Melalui studi kasus menabung dengan kenaikan jumlah yang tetap setiap bulan, dijelaskan bagaimana rumus jumlah deret aritmetika dapat digunakan untuk memproyeksikan total tabungan secara akurat. Kajian ini menunjukkan bahwa konsep matematika sederhana ini adalah alat yang efektif untuk perencanaan keuangan jangka panjang.',
         filePath: 'lab-content/analisis dan kajian/Barisan Aritmetika untuk Perencanaan Keuangan.pdf'
     },
     {
@@ -108,7 +108,7 @@ const allContentData = {
         title: 'Geometri dalam Penataan Ruang dan Furniture',
         author: 'Tim UMT',
         date: '06 Agustus 2025',
-        summary: 'Menjelajahi bagaimana persamaan matematika sederhana dapat menghasilkan pola-pola rumit yang tak terbatas seperti yang terlihat di alam.',
+        summary: 'Dokumen ini menjelaskan bagaimana konsep dasar geometri—seperti luas, volume, dan bentuk—diterapkan dalam penataan ruang dan furnitur. Melalui contoh perhitungan untuk menata ruang tamu atau lemari, kajian ini menunjukkan pentingnya pengukuran untuk efisiensi dan fungsionalitas. Penggunaan denah visual juga ditekankan sebagai alat untuk merencanakan tata letak yang optimal, membuktikan bahwa geometri adalah kunci untuk merancang ruang yang nyaman dan teratur.',
         filePath: 'lab-content/analisis dan kajian/Geometri dalam Penataan Ruang dan Furniture.pdf'
     },
     {
@@ -117,7 +117,7 @@ const allContentData = {
         title: 'Matematika dalam Kriptografi dan Keamanan Data',
         author: 'Tim UMT',
         date: '06 Agustus 2025',
-        summary: 'Menjelajahi bagaimana persamaan matematika sederhana dapat menghasilkan pola-pola rumit yang tak terbatas seperti yang terlihat di alam.',
+        summary: 'Dokumen ini membahas peran fundamental matematika dalam kriptografi dan keamanan data. Konsep-konsep seperti bilangan prima dan aritmetika modular dijelaskan sebagai dasar dari sistem enkripsi modern seperti RSA. Kajian ini mengilustrasikan bagaimana kesulitan dalam memfaktorkan bilangan besar menjadi kunci keamanan data, serta menjelaskan logika di balik kunci publik dan privat untuk melindungi informasi.',
         filePath: 'lab-content/analisis dan kajian/Matematika dalam Kriptografi dan Keamanan Data.pdf'
     },
     {
@@ -126,7 +126,7 @@ const allContentData = {
         title: 'Model Permintaan Dan Penawaran',
         author: 'Tim UMT',
         date: '06 Agustus 2025',
-        summary: 'Menjelajahi bagaimana persamaan matematika sederhana dapat menghasilkan pola-pola rumit yang tak terbatas seperti yang terlihat di alam.',
+        summary: 'Kajian ini menguraikan penerapan model matematika linear untuk menganalisis konsep dasar ekonomi: permintaan dan penawaran. Dokumen ini menjelaskan bagaimana fungsi permintaan ($Q_d=a−bP$) dan fungsi penawaran ($Q_s=c+dP$) digunakan untuk menggambarkan hubungan antara harga dan kuantitas. Dengan menyelesaikan kedua persamaan tersebut, ditunjukkan cara menentukan titik keseimbangan pasar, di mana harga dan kuantitas barang ditentukan secara optimal.',
         filePath: 'lab-content/analisis dan kajian/Model Permintaan Dan Penawaran.pdf'
     },
     {
@@ -135,7 +135,7 @@ const allContentData = {
         title: 'Penerapan Matematika dalam Menentukan Harga Optimal Produk',
         author: 'Tim UMT',
         date: '06 Agustus 2025',
-        summary: 'Menjelajahi bagaimana persamaan matematika sederhana dapat menghasilkan pola-pola rumit yang tak terbatas seperti yang terlihat di alam.',
+        summary: 'Kajian ini menunjukkan penerapan kalkulus, khususnya turunan pertama, untuk menyelesaikan masalah ekonomi nyata: menentukan harga optimal suatu produk. Melalui model fungsi keuntungan kuadrat, dokumen ini menjelaskan cara menemukan titik maksimum yang merepresentasikan harga jual ideal untuk mencapai keuntungan tertinggi , membuktikan bagaimana matematika menjadi alat pengambilan keputusan yang kuat.',
         filePath: 'lab-content/analisis dan kajian/Penerapan Matematika dalam Menentukan Harga Optimal Produk.pdf'
     },
     {
@@ -144,7 +144,7 @@ const allContentData = {
         title: 'Trigonometri dalam Analisis Gelombang',
         author: 'Tim UMT',
         date: '06 Agustus 2025',
-        summary: 'Menjelajahi bagaimana persamaan matematika sederhana dapat menghasilkan pola-pola rumit yang tak terbatas seperti yang terlihat di alam.',
+        summary: 'Kajian ini menjelaskan bagaimana fungsi trigonometri, seperti sinus dan kosinus, digunakan untuk memodelkan fenomena periodik seperti gelombang. Dengan persamaan dasar, konsep-konsep seperti amplitudo (kekuatan) dan frekuensi (nada atau warna) pada gelombang suara dan cahaya dapat dianalisis secara matematis , menunjukkan relevansi trigonometri dalam memahami ritme alam.',
         filePath: 'lab-content/analisis dan kajian/Trigonometri dalam Analisis Gelombang.pdf'
     },
     {
@@ -153,7 +153,7 @@ const allContentData = {
         title: 'Penerapan Persen dalam Diskon Belanja dan Cashback',
         author: 'Tim UMT',
         date: '06 Agustus 2025',
-        summary: 'Menjelajahi bagaimana persamaan matematika sederhana dapat menghasilkan pola-pola rumit yang tak terbatas seperti yang terlihat di alam.',
+        summary: 'Kajian ini mengulas penerapan persentase dalam konteks belanja, seperti diskon dan cashback. Dokumen ini memberikan contoh perhitungan yang jelas untuk memahami nilai sebenarnya dari sebuah promo. Topik penting yang dibahas meliputi perbedaan antara diskon langsung dan cashback , serta cara menghitung diskon bertingkat (misalnya, 20% + 10%) yang sering disalahpahami , membekali pembaca dengan logika matematis untuk keputusan finansial yang lebih cerdas.',
         filePath: 'lab-content/analisis dan kajian/Penerapan Persen dalam Diskon Belanja dan Cashback.pdf'
     },
     {
@@ -162,7 +162,7 @@ const allContentData = {
         title: 'Perbandingan dan Proporsi dalam Resep Masakan dan Nutrisi',
         author: 'Tim UMT',
         date: '06 Agustus 2025',
-        summary: 'Menjelajahi bagaimana persamaan matematika sederhana dapat menghasilkan pola-pola rumit yang tak terbatas seperti yang terlihat di alam.',
+        summary: 'Dokumen ini mengupas aplikasi matematika sederhana—perbandingan dan proporsi—dalam kehidupan sehari-hari seperti memasak dan nutrisi. Dijelaskan bagaimana cara menyesuaikan takaran resep secara akurat untuk jumlah porsi yang berbeda. Selain itu, kajian ini menunjukkan cara menghitung total kalori dan mengevaluasi keseimbangan gizi (karbohidrat, protein, lemak) dalam sebuah masakan , menjadikan matematika sebagai alat praktis untuk hidup sehat.',
         filePath: 'lab-content/analisis dan kajian/Perbandingan dan Proporsi dalam Resep Masakan dan Nutrisi.pdf'
     },
     {
@@ -171,7 +171,7 @@ const allContentData = {
         title: 'Probabilitas dalam Pengambilan Keputusan',
         author: 'Tim UMT',
         date: '06 Agustus 2025',
-        summary: 'Menjelajahi bagaimana persamaan matematika sederhana dapat menghasilkan pola-pola rumit yang tak terbatas seperti yang terlihat di alam.',
+        summary: 'Kajian ini mengeksplorasi peran probabilitas sebagai alat untuk membuat keputusan rasional di tengah ketidakpastian. Dengan menggunakan konsep nilai harapan matematis (expected value), dokumen ini menunjukkan cara menimbang peluang dan risiko secara kuantitatif. Contoh kasus bisnis digunakan untuk mengilustrasikan bagaimana probabilitas membantu memprediksi hasil rata-rata dari sebuah keputusan, menjadikannya landasan penting dalam bidang ekonomi, asuransi, dan teknik.',
         filePath: 'lab-content/analisis dan kajian/Probabilitas dalam Pengambilan Keputusan.pdf'
     }
 ],
