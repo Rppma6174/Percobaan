@@ -889,13 +889,23 @@ function updateLastActivity(type, item) {
         userAnswers = new Array(currentQuizData.questions.length).fill(null);
         renderQuizInterface();
     }
-// GANTI FUNGSI LAMA DENGAN INI
+// === [GANTI FUNGSI LAMA DENGAN INI] ===
 function renderQuizInterface() {
     const quiz = currentQuizData;
     const question = quiz.questions[currentQuestionIndex];
-    
-    // Siapkan HTML untuk opsi-opsi jawaban
-    const optionsHTML = question.options.map((opt, index) => 
+
+    // [BARU] Membuat navigasi nomor soal horizontal
+    const questionNavHTML = quiz.questions.map((_, index) => {
+        let classes = 'quiz-nav-item';
+        if (index === currentQuestionIndex) {
+            classes += ' current';
+        } else if (userAnswers[index] !== null) {
+            classes += ' answered';
+        }
+        return `<div class="${classes}" onclick="jumpToQuestion(${index})">${index + 1}</div>`;
+    }).join('');
+
+    const optionsHTML = question.options.map((opt, index) =>
         `<div id="option-${index}" class="quiz-option p-4 rounded-lg cursor-pointer transition-colors" onclick="selectAnswer('${opt.replace(/'/g, "\\'")}', this)">
             ${opt}
         </div>`
@@ -908,42 +918,45 @@ function renderQuizInterface() {
                     <h2 class="text-xl font-bold text-cyan-400">${quiz.title}</h2>
                     <p class="text-sm text-gray-400">Soal ${currentQuestionIndex + 1} dari ${quiz.questions.length}</p>
                 </div>
-                <button onclick="navigateTo('bank_soal', null)" class="text-gray-400 hover:text-white text-2xl leading-none">&times;</button>
+                <button onclick="navigateTo('bank_soal', document.querySelector('.sidebar-link[onclick*=\\'bank_soal\\']'))" class="text-gray-400 hover:text-white text-2xl leading-none">&times;</button>
             </div>
-            <hr class="border-gray-700 my-4"/>
+            
+            <div class="quiz-nav-container no-scrollbar">${questionNavHTML}</div>
 
             <div class="mb-6 min-h-[60px] text-lg text-gray-200">${question.questionText}</div>
-            
             <div id="quiz-options" class="space-y-3">${optionsHTML}</div>
-
             <div id="explanation-container" class="hidden mt-6">
-                <hr class="border-gray-700 my-5"/>
-                <div>
-                    <h4 class="font-bold text-lg text-cyan-300 mb-2">Pembahasan:</h4>
-                    <div id="explanation-text" class="text-gray-300 leading-relaxed">${question.explanation}</div>
-                </div>
+                 <hr class="border-gray-700 my-5"/>
+                 <div>
+                     <h4 class="font-bold text-lg text-cyan-300 mb-2">Pembahasan:</h4>
+                     <div id="explanation-text" class="text-gray-300 leading-relaxed">${question.explanation}</div>
+                 </div>
             </div>
             <hr class="border-gray-700 my-6"/>
-
             <div class="flex justify-between items-center">
-                <button id="prev-btn" onclick="previousQuestion()" class="nav-btn bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-6 rounded-lg">Sebelumnya</button>
-                <button id="next-btn" onclick="nextQuestion()" class="nav-btn bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-6 rounded-lg">Selanjutnya</button>
+                 <button id="prev-btn" onclick="previousQuestion()" class="nav-btn bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-6 rounded-lg">Sebelumnya</button>
+                 ${currentQuestionIndex === quiz.questions.length - 1 ? 
+                   `<button onclick="renderQuizResults()" class="nav-btn bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-6 rounded-lg">Lihat Hasil</button>` :
+                   `<button id="next-btn" onclick="nextQuestion()" class="nav-btn bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-6 rounded-lg">Selanjutnya</button>`
+                 }
             </div>
         </div>
     `;
-    
+
     appContent.innerHTML = quizHTML;
     if (window.MathJax) { MathJax.typeset(); }
 
-    // Cek apakah soal ini sudah pernah dijawab sebelumnya
     if (userAnswers[currentQuestionIndex] !== null) {
-        // Jika iya, langsung tampilkan jawaban & pembahasan tanpa bisa memilih lagi
-        showAnswerAndExplanation(true); 
+        showAnswerAndExplanation(true);
     }
 
-    // Atur status tombol navigasi
     document.getElementById('prev-btn').disabled = (currentQuestionIndex === 0);
-    document.getElementById('next-btn').disabled = (currentQuestionIndex === quiz.questions.length - 1);
+    
+    // Auto-scroll ke nomor yang aktif saat render
+    const activeNavItem = document.querySelector('.quiz-nav-item.current');
+    if (activeNavItem) {
+        activeNavItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
 }
 
 // FUNGSI BARU
@@ -986,19 +999,21 @@ function showAnswerAndExplanation(isRestoringState = false) {
     }
 }
     
-// GANTI FUNGSI LAMA DENGAN INI
 function selectAnswer(answer, element) {
-    // Cek dulu apakah sudah dijawab, jika sudah, jangan lakukan apa-apa
     if (userAnswers[currentQuestionIndex] !== null) {
         return;
     }
-
-    // Simpan jawaban pengguna
     userAnswers[currentQuestionIndex] = answer;
+
+    // Perbarui tampilan navigasi nomor soal
+    const navItem = document.querySelector(`.quiz-nav-item:nth-child(${currentQuestionIndex + 1})`);
+    if (navItem) {
+        navItem.classList.add('answered');
+    }
     
-    // Tampilkan langsung hasilnya
     showAnswerAndExplanation();
 }
+// === [AKHIR DARI PERUBAHAN] ===}
 
 // FUNGSI NAVIGASI BARU
 function nextQuestion() {
@@ -1014,7 +1029,21 @@ function previousQuestion() {
         renderQuizInterface();
     }
 }
-    
+
+// === [TAMBAHKAN FUNGSI BARU INI] ===
+function jumpToQuestion(index) {
+    // Jika soal sudah dijawab, jangan submit otomatis. Cukup pindah.
+    currentQuestionIndex = index;
+    renderQuizInterface();
+
+    // Pastikan nomor yang aktif terlihat (scroll into view)
+    const activeNavItem = document.querySelector(`.quiz-nav-item.current`);
+    if (activeNavItem) {
+        activeNavItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
+}
+// === [AKHIR DARI FUNGSI BARU] ===
+
     function submitQuiz() {
         if (userAnswers[currentQuestionIndex] === null) { showToast('Silakan pilih jawaban terlebih dahulu!', 'error'); return; }
         if (currentQuestionIndex < currentQuizData.questions.length - 1) { currentQuestionIndex++; renderQuizInterface(); } else { renderQuizResults(); }
