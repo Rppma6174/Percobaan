@@ -2400,53 +2400,61 @@ body {
         font-size: 13px;
     }
 }
-        /* === CSS UNTUK DROPDOWN 'LAINNYA' === */
+       /* === CSS UNTUK DROPDOWN 'LAINNYA' (VERSI KLIK) === */
         .nav-item-dropdown {
-            position: relative; /* Wajib agar dropdown muncul di posisi yang benar */
+            position: relative;
         }
         
+        /* Atur tampilan pemicu dropdown */
+        .dropdown-trigger {
+            cursor: pointer; /* Ubah kursor menjadi tangan saat bisa diklik */
+        }
+
         .dropdown-trigger i {
-            font-size: 12px; /* Ukuran ikon panah */
+            font-size: 12px;
             margin-left: 5px;
             transition: transform 0.3s ease;
         }
         
         .dropdown-menu {
-            display: none; /* Sembunyikan dropdown secara default */
+            display: block; /* Ubah dari 'none' ke 'block' */
             position: absolute;
-            top: 100%; /* Posisi dropdown tepat di bawah tombol 'Lainnya' */
-            right: 0; /* Rata kanan dengan tombol 'Lainnya' */
+            top: 100%;
+            right: 0;
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            min-width: 200px; /* Lebar minimum dropdown */
+            min-width: 200px;
             list-style: none;
             padding: 8px 0;
-            margin-top: 10px; /* Jarak dari navigasi */
+            margin-top: 10px;
             z-index: 1100;
             box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            
+            /* Sembunyikan dengan opacity, transform, dan visibility */
             opacity: 0;
             transform: translateY(10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            visibility: hidden; /* Penting untuk aksesibilitas dan performa */
+            transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s;
         }
 
         .dropdown-menu li a {
             padding: 12px 20px;
-            display: block; /* Agar link memenuhi lebar li */
+            display: block;
             width: 100%;
             white-space: nowrap;
             text-align: left;
         }
         
-        /* Tampilkan dropdown saat hover di atas .nav-item-dropdown */
-        .nav-item-dropdown:hover .dropdown-menu {
-            display: block;
+        /* Aturan untuk menampilkan dropdown saat .nav-item-dropdown memiliki kelas 'open' */
+        .nav-item-dropdown.open .dropdown-menu {
             opacity: 1;
             transform: translateY(0);
+            visibility: visible;
         }
 
-        /* Putar ikon panah saat hover */
-        .nav-item-dropdown:hover .dropdown-trigger i {
+        /* Putar ikon panah saat dropdown terbuka */
+        .nav-item-dropdown.open .dropdown-trigger i {
             transform: rotate(180deg);
         }
     </style>
@@ -3048,6 +3056,30 @@ Kami ingin kamu tidak hanya tahu “bagaimana cara menghitung”, tapi juga “m
 </main>
     
     <script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // === LOGIKA BARU UNTUK DROPDOWN NAVIGASI ===
+    const dropdown = document.querySelector('.nav-item-dropdown');
+    
+    // Pastikan elemen dropdown ada sebelum menambahkan listener
+    if (dropdown) {
+        const dropdownTrigger = dropdown.querySelector('.dropdown-trigger');
+
+        // 1. Buka/tutup dropdown saat tombol 'Lainnya' diklik
+        dropdownTrigger.addEventListener('click', function(event) {
+            event.preventDefault(); // Mencegah link '#' berpindah halaman
+            dropdown.classList.toggle('open');
+        });
+
+        // 2. Tutup dropdown jika pengguna mengklik di luar area dropdown
+        window.addEventListener('click', function(event) {
+            // Cek apakah yang diklik BUKAN bagian dari dropdown
+            if (!dropdown.contains(event.target)) {
+                dropdown.classList.remove('open');
+            }
+        });
+    }
+});
             document.addEventListener('DOMContentLoaded', () => {
 
         // --- GANTI PERTANYAAN & JAWABAN ANDA DI SINI ---
@@ -3196,4 +3228,5 @@ Kami ingin kamu tidak hanya tahu “bagaimana cara menghitung”, tapi juga “m
     <a href="#donasi" id="floating-donation-btn">☕ Donasi</a>
 </body>
 </html>
+
 
