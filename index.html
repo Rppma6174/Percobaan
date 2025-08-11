@@ -2265,6 +2265,141 @@ body {
         padding-top: calc(var(--header-height) + 36px); /* Disesuaikan untuk mobile */
     }
 }
+/* ===== [BARU] Donation Section ===== */
+.donation-section {
+    padding: 60px 20px;
+    background-color: var(--darker-card-bg);
+    border-radius: 15px;
+    margin-top: 60px; /* Memberi jarak dari konten di atasnya */
+    border: 1px solid var(--border-color);
+}
+
+.donation-card {
+    max-width: 800px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    text-align: left;
+}
+
+.donation-content {
+    flex: 1;
+    margin-top: 25px;
+}
+
+.donation-content h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: var(--text-primary);
+}
+
+.donation-content p {
+    font-size: 16px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+    margin-bottom: 25px;
+}
+
+.saweria-button {
+    display: inline-block;
+    background: var(--gradient-gold);
+    color: #121212;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(251, 192, 45, 0.2);
+}
+
+.saweria-button:hover {
+    filter: brightness(1.1);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(251, 192, 45, 0.3);
+}
+
+.donation-qr {
+    flex-shrink: 0;
+}
+
+.donation-qr img {
+    width: 180px;
+    height: 180px;
+    border-radius: 12px;
+    background-color: white; /* Agar QR code terlihat jelas */
+    padding: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* Penyesuaian untuk Mobile */
+@media (max-width: 768px) {
+    .donation-card {
+        flex-direction: column; /* Tumpuk konten ke bawah */
+        text-align: center; /* Teks jadi di tengah */
+        gap: 25px;
+    }
+
+    .donation-content h2 {
+        font-size: 24px;
+    }
+
+    .donation-qr img {
+        width: 160px;
+        height: 160px;
+    }
+}
+/* ===== [BARU] Floating Donation Button ===== */
+#floating-donation-btn {
+    position: fixed; /* Kunci agar tombol mengambang */
+    bottom: 175px; /* Posisinya di atas banner langganan */
+    right: 25px;
+    z-index: 998; /* Sejajar dengan banner CTA lain */
+    
+    background: var(--gradient-gold);
+    color: #121212;
+    padding: 10px 18px;
+    border-radius: 50px; /* Bentuk kapsul/pil */
+    box-shadow: 0 5px 20px rgba(251, 192, 45, 0.4);
+    
+    font-size: 14px;
+    font-weight: 700;
+    text-decoration: none;
+    
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    transform: translateY(20px);
+    opacity: 0;
+    animation: cta-fade-in 0.5s ease-out 3s forwards; /* Muncul setelah 3 detik */
+    transition: all 0.3s ease;
+}
+
+#floating-donation-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(251, 192, 45, 0.6);
+}
+
+/* Penyesuaian posisi di mobile agar tidak bertumpuk */
+@media (max-width: 768px) {
+    #floating-donation-btn {
+        bottom: 155px;
+        right: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    #floating-donation-btn {
+        bottom: 150px;
+        right: 15px;
+        padding: 8px 14px;
+        font-size: 13px;
+    }
+}
     </style>
 </head>
 <body>
@@ -2799,7 +2934,18 @@ Kami ingin kamu tidak hanya tahu “bagaimana cara menghitung”, tapi juga “m
             <button class="cta-button" onclick="window.location.href = 'Form-Pendaftaran.html?paket=3 Bulan';">Pilih Paket</button>
         </div>
 
-    </div>                
+    </div> 
+    
+    <div class="donation-card" id="donasi">
+        <div class="donation-content">
+            <h2>Dukung Pengembangan UMTacademy ❤️</h2>
+            <p>Setiap donasi yang Anda berikan sangat berarti untuk menjaga platform ini tetap berjalan, bebas iklan, dan terus berkembang. Bantu kami untuk terus menyediakan konten matematika berkualitas!</p>
+            <a href="https://saweria.co/umt6174" target="_blank" class="saweria-button">Donasi via Saweria</a>
+        </div>
+        <div class="donation-qr">
+            <img src="saweria.png" alt="QR Code Donasi Saweria">
+        </div>
+    </div>               
     </div>
 
     <footer>
@@ -2987,18 +3133,6 @@ Kami ingin kamu tidak hanya tahu “bagaimana cara menghitung”, tapi juga “m
         }
     });
     </script>
+    <a href="#donasi" id="floating-donation-btn">☕ Donasi</a>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
