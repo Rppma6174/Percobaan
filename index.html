@@ -2400,6 +2400,55 @@ body {
         font-size: 13px;
     }
 }
+        /* === CSS UNTUK DROPDOWN 'LAINNYA' === */
+        .nav-item-dropdown {
+            position: relative; /* Wajib agar dropdown muncul di posisi yang benar */
+        }
+        
+        .dropdown-trigger i {
+            font-size: 12px; /* Ukuran ikon panah */
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+        
+        .dropdown-menu {
+            display: none; /* Sembunyikan dropdown secara default */
+            position: absolute;
+            top: 100%; /* Posisi dropdown tepat di bawah tombol 'Lainnya' */
+            right: 0; /* Rata kanan dengan tombol 'Lainnya' */
+            background-color: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            min-width: 200px; /* Lebar minimum dropdown */
+            list-style: none;
+            padding: 8px 0;
+            margin-top: 10px; /* Jarak dari navigasi */
+            z-index: 1100;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .dropdown-menu li a {
+            padding: 12px 20px;
+            display: block; /* Agar link memenuhi lebar li */
+            width: 100%;
+            white-space: nowrap;
+            text-align: left;
+        }
+        
+        /* Tampilkan dropdown saat hover di atas .nav-item-dropdown */
+        .nav-item-dropdown:hover .dropdown-menu {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Putar ikon panah saat hover */
+        .nav-item-dropdown:hover .dropdown-trigger i {
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 <body>
@@ -2503,7 +2552,16 @@ body {
                     <li><a href="tryout/">Tryout</a></li>
                     <li><a href="Tanya-UMT/">TanyaUMT</a></li>
                     <li><a href="Forum-Belajar-UMT/">Forum</a></li>
-                    <li><a href="Arsip-Live-Class/">Live Class</a></li>
+                    <li class="nav-item-dropdown">
+                        <a href="#" class="dropdown-trigger">
+                            Lainnya <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="../Arsip-Live-Class/">Live Class</a></li>
+                            <li><a href="../News/">Berita & Info</a></li>
+                            <li><a href="../Kolaborasi/">Kolaborasi UMT</a></li>
+                        </ul>
+                    </li>
                 </ul>
                 <div class="header-auth">
                     <a href="Login/" class="auth-btn login">Masuk</a>
@@ -2545,7 +2603,9 @@ body {
         </div>
         <ul class="nav-links">
             <li class="nav-group-title">Berita & Informasi UMT</li>
-            <li><a href="News/"><span class="emoji-icon">📰</span>News</a></li>            
+            <li><a href="../News/"><span class="emoji-icon">📰</span>News</a></li>
+            <li class="nav-group-title">Kolaborasi UMT</li>
+            <li><a href="#"><span class="emoji-icon">🤝</span>Persiapan SNBT 2026</a></li>            
             <li class="nav-group-title">Konten Inti</li>
             <li><a href="Materi-Belajar/"><span class="emoji-icon">📘</span>Materi Belajar</a></li>
             <li><a href="Video-Pembelajaran/"><span class="emoji-icon">🎥</span>Video Pembelajaran</a></li>
@@ -3136,3 +3196,4 @@ Kami ingin kamu tidak hanya tahu “bagaimana cara menghitung”, tapi juga “m
     <a href="#donasi" id="floating-donation-btn">☕ Donasi</a>
 </body>
 </html>
+
