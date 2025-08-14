@@ -556,5 +556,251 @@ const allTryouts = {
       }
     ]
   },
+  "tryout-tka-matematika-1": {
+    title: "Tryout Matematika TKA - Part 1",
+    duration: 5400, // 25 menit * 60 detik
+    questions: [
+  {
+    "id": 1,
+    "text": "Bentuk sederhana dari \\(\\left(\\frac{5p^{-2}q^{2}}{25p^{3}q^{4}}\\right)^{-1}\\) adalah...",
+    "options": [
+      "\\(25 p^5 q^2\\)",
+      "\\(5 p^5 q^2\\)",
+      "\\(p^5 q^2\\)",
+      "\\(\\frac{1}{5 p^5 q^2}\\)",
+      "\\(\\frac{1}{25 p^5 q^2}\\)"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 2,
+    "text": "Diketahui \\(^{5}\\log{4}=m\\). Bentuk \\(^{25}\\log{20}\\) jika dinyatakan dalam m adalah...",
+    "options": [
+      "\\(m + 1\\)",
+      "\\(m + 2\\)",
+      "\\(\\frac{1}{2} m + 1\\)",
+      "\\(\\frac{1}{2} m + \\frac{1}{2}\\)",
+      "\\(\\frac{1}{2} m - \\frac{1}{2}\\)"
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "id": 3,
+    "text": "Daerah asal fungsi \\(f(x)=\\frac{\\sqrt{2x+6}}{3x+9}, x \\in \\mathbb{R}\\) adalah...",
+    "options": [
+      "\\(\\{x \\in \\mathbb{R} \\mid x \\geq -3, x \\neq 2\\}\\)",
+      "\\(\\{x \\in \\mathbb{R} \\mid x \\geq -2, x \\neq 2\\}\\)",
+      "\\(\\{x \\in \\mathbb{R} \\mid x \\geq -4, x \\neq -3\\}\\)",
+      "\\(\\{x \\in \\mathbb{R} \\mid x \\geq -3\\}\\)",
+      "\\(\\{x \\in \\mathbb{R} \\mid x > -3\\}\\)"
+    ],
+    "correctAnswer": 4
+  },
+  {
+    "id": 4,
+    "text": "Persamaan fungsi kuadrat grafik tersebut adalah...",
+    "options": [
+      "\\(y = x^2 - 8x + 15\\)",
+      "\\(y = x^2 - 8x - 15\\)",
+      "\\(y = x^2 + 8x + 15\\)",
+      "\\(y = x^2 - 2x - 15\\)",
+      "\\(y = x^2 - 2x + 15\\)"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 5,
+    "text": "Persamaan \\(2x^2+6x+p=0\\) mempunyai akar \\(x_1, x_2\\). Jika \\(x_1^2+x_2^2=8\\), nilai p adalah...",
+    "options": [
+      "2",
+      "1",
+      "0",
+      "-1",
+      "-2"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 6,
+    "text": "Jika akar-akar persamaan \\(-x^2+7x-6=0\\) adalah p dan q, persamaan kuadrat baru yang akar-akarnya (p-2) dan (q-2) adalah...",
+    "options": [
+      "\\(x^2 + 9x - 4 = 0\\)",
+      "\\(x^2 + 3x + 4 = 0\\)",
+      "\\(x^2 - 3x - 4 = 0\\)",
+      "\\(x^2 + 3x - 4 = 0\\)",
+      "\\(-x^2 + 3x + 4 = 0\\)"
+    ],
+    "correctAnswer": 4
+  },
+  {
+    "id": 7,
+    "text": "Selembar karton berbentuk persegi panjang akan dibuat kotak tanpa tutup dengan cara membuang persegi seluas \\(3 \\times 3 \\text{ cm}^2\\) di masing-masing pojoknya. Panjang alas kotak 2 cm lebih dari lebarnya dan volume kotak tersebut adalah \\(105 \\text{ cm}^3\\). Jika panjang kotak dinyatakan x dan lebar dinyatakan y, maka persamaan panjang kotak tersebut adalah...",
+    "options": [
+      "\\(x^2 + 2x - 35 = 0\\)",
+      "\\(x^2 - 2x - 35 = 0\\)",
+      "\\(x^2 - 4x + 4 = 0\\)",
+      "\\(x^2 + 4x + 4 = 0\\)",
+      "\\(x^2 - 4x - 35 = 0\\)"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 8,
+    "text": "Penyelesaian sistem persamaan linear \\(\\frac{1}{x}-\\frac{1}{y}=5\\) dan \\(\\frac{3}{x}-\\frac{1}{y}=7\\) adalah (p, q). Nilai dari 2p - 4q adalah...",
+    "options": [
+      "2",
+      "3",
+      "4",
+      "8",
+      "18"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 9,
+    "text": "Diketahui matriks A, B, C, D. Jika 2A + B^T = C · D, maka nilai a + b - c adalah...",
+    "options": [
+      "-8",
+      "-6",
+      "-4",
+      "6",
+      "8"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 10,
+    "text": "Diketahui matriks A dan B. Invers dari matriks AB adalah...",
+    "options": [
+      "\\(\\begin{pmatrix} -34 & 13 \\\\ 21 & -8 \\end{pmatrix}\\)",
+      "\\(\\begin{pmatrix} -34 & 13 \\\\ 21 & -8 \\end{pmatrix}\\)",
+      "\\(\\begin{pmatrix} -34 & -13 \\\\ -21 & -8 \\end{pmatrix}\\)",
+      "\\(\\begin{pmatrix} 8 & 13 \\\\ 21 & 34 \\end{pmatrix}\\)",
+      "\\(\\begin{pmatrix} 34 & 21 \\\\ 13 & 8 \\end{pmatrix}\\)"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 11,
+    "text": "\\(\\lim_{x \\to 3} \\frac{x^2 - x - 6}{x^2 - x - 20} = \\ldots\\)",
+    "options": [
+      "-2",
+      "-1",
+      "0",
+      "1",
+      "\\(\\infty\\)"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 12,
+    "text": "Grafik fungsi \\(y=\\frac{1}{3}x^{3}-x^{2}-3x+5\\) naik pada interval...",
+    "options": [
+      "\\(-1 < x < 3\\)",
+      "\\(-3 < x < 1\\)",
+      "\\(-2 < x < 3\\)",
+      "\\(x < -1 \\text{ atau } x > 3\\)",
+      "\\(x < -3 \\text{ atau } x > 2\\)"
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "id": 13,
+    "text": "Nilai dari \\(\\int_{1}^{2}(6x^{2}+8x)dx\\) adalah...",
+    "options": [
+      "24",
+      "26",
+      "28",
+      "30",
+      "32"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 14,
+    "text": "Diketahui segitiga ABC siku-siku di B dan \\(\\sin A = \\frac{12}{13}\\). Nilai \\(\\sin C\\) adalah...",
+    "options": [
+      "\\(\\frac{5}{12}\\)",
+      "\\(\\frac{5}{13}\\)",
+      "\\(\\frac{8}{12}\\)",
+      "\\(\\frac{7}{13}\\)",
+      "\\(\\frac{12}{13}\\)"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 15,
+    "text": "Sebuah tangga dengan panjang 3 meter bersandar pada sebuah pohon. Jika tangga itu membentuk sudut \\(60^{\\circ}\\) dengan tanah, jarak kaki tangga pada tanah hingga pohon tersebut adalah...",
+    "options": [
+      "\\(3\\sqrt{3}\\) meter",
+      "\\(3\\sqrt{2}\\) meter",
+      "3 meter",
+      "2 meter",
+      "1,5 meter"
+    ],
+    "correctAnswer": 4
+  },
+  {
+    "id": 16,
+    "text": "Diketahui kubus ABCD.EFGH dengan panjang rusuk 12 cm. Sudut antara ruas garis DF dan bidang CDHG adalah \\(\\alpha\\). Nilai \\(\\sin \\alpha\\) adalah...",
+    "options": [
+      "\\(\\frac{1}{3}\\sqrt{3}\\)",
+      "\\(\\frac{1}{2\\sqrt{2}}\\)",
+      "\\(\\frac{1}{3\\sqrt{2}}\\)",
+      "\\(\\frac{1}{5\\sqrt{2}}\\)",
+      "\\(\\frac{1}{6\\sqrt{2}}\\)"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 17,
+    "text": "Simpangan rata-rata dari data 6, 5, 7, 5, 6, 8, 7, 6, 6, 7, 4, 5 adalah...",
+    "options": [
+      "\\(\\frac{7}{3}\\)",
+      "\\(\\frac{5}{3}\\)",
+      "\\(\\frac{7}{5}\\)",
+      "\\(\\frac{5}{6}\\)",
+      "\\(\\frac{3}{5}\\)"
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "id": 18,
+    "text": "Ada sepuluh orang dalam suatu ruangan, yang belum saling mengenal. Jika mereka ingin saling berkenalan dengan berjabat tangan sekali dengan setiap orang, maka jabatan tangan yang akan terjadi sebanyak...",
+    "options": [
+      "90 kali",
+      "80 kali",
+      "60 kali",
+      "45 kali",
+      "40 kali"
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "id": 19,
+    "text": "Sebuah dadu merah dan sebuah dadu putih dilambungkan secara bersamaan sebanyak satu kali. Peluang muncul mata dadu yang berjumlah 2 atau 4 adalah...",
+    "options": [
+      "\\(\\frac{1}{9}\\)",
+      "\\(\\frac{1}{4}\\)",
+      "\\(\\frac{1}{3}\\)",
+      "\\(\\frac{3}{5}\\)",
+      "\\(\\frac{15}{16}\\)"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 20,
+    "text": "Tiga keping uang logam setimbang dilempar udin secara bersamaan sebanyak 40 kali. Frekuensi harapan kejadian muncul paling sedikit 2 angka adalah...",
+    "options": [
+      "20",
+      "15",
+      "10",
+      "8",
+      "4"
+    ],
+    "correctAnswer": 0
+  }
+    ]
+  },
   // Untuk tryout yang 'Segera Hadir', Anda tidak perlu membuat datanya di sini.
 };
