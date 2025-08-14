@@ -558,7 +558,7 @@ const allTryouts = {
   },
   "tryout-tka-matematika-1": {
     title: "Tryout Matematika TKA - Part 1",
-    duration: 5400, // 25 menit * 60 detik
+    duration: 1800, // 30 menit
     questions: [
   {
     "id": 1,
@@ -804,3 +804,4 @@ const allTryouts = {
   },
   // Untuk tryout yang 'Segera Hadir', Anda tidak perlu membuat datanya di sini.
 };
+
