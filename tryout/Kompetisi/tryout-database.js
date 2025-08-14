@@ -1254,5 +1254,231 @@ const allTryouts = {
   }
     ]
   },
+  "tryout-tka-matematika-4": {
+    title: "Tryout Matematika TKA - Part 4",
+    duration: 1800, 
+    questions: [
+  {
+    "id": 1,
+    "text": "Sebuah toko memberikan diskon 30% untuk sebuah kemeja. Jika harga kemeja setelah diskon adalah Rp140.000,00, maka harga asli kemeja tersebut adalah...",
+    "options": [
+      "Rp170.000,00",
+      "Rp182.000,00",
+      "Rp200.000,00",
+      "Rp466.000,00"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 2,
+    "text": "Nilai \\(x\\) yang memenuhi persamaan \\(^{2}\\log(x+1) = 4\\) adalah...",
+    "options": [
+      "7",
+      "8",
+      "15",
+      "16"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 3,
+    "text": "Himpunan penyelesaian dari pertidaksamaan \\(3x - 5 \\ge 10\\) adalah...",
+    "options": [
+      "\\(\\{x | x \\le 5, x \\in \\mathbb{R}\\}\\)",
+      "\\(\\{x | x \\ge 5, x \\in \\mathbb{R}\\}\\)",
+      "\\(\\{x | x \\ge \\frac{5}{3}, x \\in \\mathbb{R}\\}\\)",
+      "\\(\\{x | x \\le \\frac{5}{3}, x \\in \\mathbb{R}\\}\\)"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 4,
+    "text": "Jika \\(f(x) = x^2+1\\) dengan daerah asal (domain) \\(\\{0, 1, 2\\}\\), maka daerah hasilnya (range) adalah...",
+    "options": [
+      "\\(\\{0, 1, 2\\}\\)",
+      "\\(\\{1, 2, 3\\}\\)",
+      "\\(\\{1, 2, 5\\}\\)",
+      "\\(\\{0, 1, 4\\}\\)"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 5,
+    "text": "Nilai diskriminan (D) dari persamaan kuadrat \\(2x^2 - 3x - 5 = 0\\) adalah...",
+    "options": [
+      "-31",
+      "-49",
+      "49",
+      "31"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 6,
+    "text": "Diketahui \\(f(x) = x-4\\) dan \\(g(x) = x^2+1\\). Nilai dari \\((g \\circ f)(5)\\) adalah...",
+    "options": [
+      "2",
+      "5",
+      "22",
+      "26"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 7,
+    "text": "Rasio dari barisan geometri \\(\\frac{1}{4}, \\frac{1}{2}, 1, 2, \\dots\\) adalah...",
+    "options": [
+      "\\(\\frac{1}{2}\\)",
+      "2",
+      "4",
+      "\\(\\frac{1}{4}\\)"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 8,
+    "text": "Suku tengah dari barisan aritmetika 5, 8, 11, \\dots, 53 adalah...",
+    "options": [
+      "26",
+      "27.5",
+      "29",
+      "32"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 9,
+    "text": "Hasil dari perkalian matriks \\(\\begin{pmatrix} 2 & 1 \\\\ 0 & 3 \\end{pmatrix} \\begin{pmatrix} 1 \\\\ 4 \\end{pmatrix}\\) adalah...",
+    "options": [
+      "\\(\\begin{pmatrix} 6 \\\\ 12 \\end{pmatrix}\\)",
+      "\\(\\begin{pmatrix} 2 \\\\ 12 \\end{pmatrix}\\)",
+      "\\(\\begin{pmatrix} 6 & 4 \\end{pmatrix}\\)",
+      "Tidak dapat dikalikan"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 10,
+    "text": "Invers dari matriks \\(A = \\begin{pmatrix} 4 & 1 \\\\ 7 & 2 \\end{pmatrix}\\) adalah \\(A^{-1} = \\dots\\)",
+    "options": [
+      "\\(\\begin{pmatrix} 2 & -1 \\\\ -7 & 4 \\end{pmatrix}\\)",
+      "\\(\\begin{pmatrix} -4 & 1 \\\\ 7 & -2 \\end{pmatrix}\\)",
+      "\\(\\begin{pmatrix} 2 & 1 \\\\ 7 & 4 \\end{pmatrix}\\)",
+      "\\(\\begin{pmatrix} \\frac{1}{2} & -\\frac{1}{1} \\\\ -\\frac{1}{7} & \\frac{1}{4} \\end{pmatrix}\\)"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 11,
+    "text": "Jangkauan (range) dari data: 12, 15, 8, 23, 10, 17, 5 adalah...",
+    "options": [
+      "7",
+      "12",
+      "18",
+      "23"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 12,
+    "text": "Budi memiliki 5 kemeja dan 3 celana panjang yang berbeda warna. Banyaknya cara Budi memasangkan kemeja dan celana yang dimilikinya adalah...",
+    "options": [
+      "8",
+      "15",
+      "24",
+      "30"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 13,
+    "text": "Dalam sebuah kantong terdapat 4 bola merah dan 6 bola biru. Jika diambil satu bola secara acak, peluang terambilnya bola merah adalah...",
+    "options": [
+      "\\(\\frac{1}{4}\\)",
+      "\\(\\frac{2}{3}\\)",
+      "\\(\\frac{3}{5}\\)",
+      "\\(\\frac{2}{5}\\)"
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "id": 14,
+    "text": "Nilai dari \\(\\lim_{x \\to \\infty} \\frac{6x^2 - 5x + 1}{2x^2 + 3x}\\) adalah...",
+    "options": [
+      "0",
+      "2",
+      "3",
+      "\\(\\infty\\)"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 15,
+    "text": "Gradien garis singgung kurva \\(y = x^2 - 4x + 2\\) di titik yang berabsis \\(x=3\\) adalah...",
+    "options": [
+      "-1",
+      "2",
+      "3",
+      "-2"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 16,
+    "text": "Luas daerah yang dibatasi oleh kurva \\(y = 2x\\), sumbu-x, dan garis \\(x=3\\) adalah...",
+    "options": [
+      "6 satuan luas",
+      "9 satuan luas",
+      "12 satuan luas",
+      "18 satuan luas"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 17,
+    "text": "Jarak antara titik A(1, 2) dan B(4, 6) adalah...",
+    "options": [
+      "3",
+      "4",
+      "5",
+      "7"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 18,
+    "text": "Pada segitiga ABC, diketahui panjang sisi \\(a=8\\), \\(\\angle A = 30^\\circ\\), dan \\(\\angle B = 45^\\circ\\). Panjang sisi \\(b\\) adalah...",
+    "options": [
+      "4",
+      "\\(4\\sqrt{2}\\)",
+      "8",
+      "\\(8\\sqrt{2}\\)"
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "id": 19,
+    "text": "Jika \\(\\cos(\\theta) = -\\frac{5}{13}\\) dan \\(\\theta\\) berada di kuadran II, maka nilai \\(\\sin(\\theta)\\) adalah...",
+    "options": [
+      "\\(-\\frac{12}{13}\\)",
+      "\\(\\frac{5}{12}\\)",
+      "\\(\\frac{12}{13}\\)",
+      "\\(-\\frac{5}{12}\\)"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 20,
+    "text": "Sebuah kubus memiliki panjang rusuk 5 cm. Luas permukaan kubus tersebut adalah...",
+    "options": [
+      "25 cm\\(^2\\)",
+      "100 cm\\(^2\\)",
+      "125 cm\\(^2\\)",
+      "150 cm\\(^2\\)"
+    ],
+    "correctAnswer": 3
+  }
+    ]
+  },
   // Untuk tryout yang 'Segera Hadir', Anda tidak perlu membuat datanya di sini.
 };
