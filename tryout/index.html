@@ -2320,6 +2320,7 @@ body.sidebar-open {
         <div class="tabs" >
             <button class="tab active">Semua</button>
             <button class="tab" data-tab="UTBK">UTBK</button>
+            <button class="tab" data-tab="TKA">TKA Matematika</button>
             <button class="tab" data-tab="olimpiade">Olimpiade</button>
             <button class="tab" data-tab="cpns-kedinasan">CPNS & Kedinasan</button>
             <button class="tab" data-tab="kompetisi-umt">Kompetisi UMT</button>
@@ -2419,13 +2420,30 @@ const cardsData = [
         title: "Tryout Challange UMT - Season 1",
         author: "Tim UMT",
         category: "kompetisi-umt",
-        isComingSoon: true,
+        isComingSoon: false,
         tier: "premium",
         price: "Rp. 10.000",
         image: "📝",
         download: "#",
         kerjakan: "Kompetisi/Kompetisi/tryout.html?id=kompetisi-umt-1",
         nama: 'Tryout Challange UMT - Season 1',
+        indeks: '',
+        pembahasan: '#',
+        durasi: '90',
+        totalsoal: '50'
+    },
+    {
+        id: 1,
+        title: "Tryout Challange UMT - Season 1",
+        author: "Tim UMT",
+        category: "TKA",
+        isComingSoon: false,
+        tier: "premium",
+        price: "Rp. 10.000",
+        image: "📝",
+        download: "#",
+        kerjakan: "Kompetisi/Kompetisi/tryout.html?id=tryout-tka-matematika-1",
+        nama: 'Tryout TKA Matematika - Part 1',
         indeks: '',
         pembahasan: '#',
         durasi: '90',
@@ -2546,6 +2564,7 @@ function createCardHTML(card) {
         'olimpiade': { class: 'tag-olimpiade', text: 'Olimpiade' },
         'cpns-kedinasan': { class: 'tag-CPNS-KEDINASAN', text: 'CPNS & Kedinasan' },
         'kompetisi-umt': { class: 'tag-kompetisi-umt', text: 'Kompetisi UMT' },
+        'TKA': { class: 'tag-TKA', text: 'TKA Matematika' },
     };
 
     const tierConfig = {
@@ -3098,10 +3117,3 @@ initializeInteractiveElements();
     </script>
 </body>
 </html>
-
-            
-
-
-
-
-
