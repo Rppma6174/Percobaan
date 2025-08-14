@@ -558,7 +558,7 @@ const allTryouts = {
   },
   "tryout-tka-matematika-1": {
     title: "Tryout Matematika TKA - Part 1",
-    duration: 1800, // 25 menit * 60 detik
+    duration: 5400, // 25 menit * 60 detik
     questions: [
   {
     "id": 1,
@@ -804,7 +804,7 @@ const allTryouts = {
   },
   "tryout-tka-matematika-2": {
     title: "Tryout Matematika TKA - Part 2",
-    duration: 1800, // 25 menit * 60 detik
+    duration: 5400, // 25 menit * 60 detik
     questions: [
   {
     "id": 1,
@@ -1028,6 +1028,231 @@ const allTryouts = {
   }
     ]
   },
+  "tryout-tka-matematika-3": {
+    title: "Tryout Matematika TKA - Part 3",
+    duration: 1800, 
+    questions: [
+  {
+    "id": 1,
+    "text": "Lima tahun yang lalu, umur ayah adalah 6 kali umur Budi. Jika jumlah umur mereka sekarang adalah 52 tahun, maka umur Budi sekarang adalah...",
+    "options": [
+      "8 tahun",
+      "10 tahun",
+      "11 tahun",
+      "12 tahun"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 2,
+    "text": "Akar-akar dari persamaan kuadrat \\(x^2 - 7x + 12 = 0\\) adalah \\(p\\) dan \\(q\\). Nilai dari \\(p+q\\) adalah...",
+    "options": [
+      "-7",
+      "12",
+      "7",
+      "-12"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 3,
+    "text": "Diketahui sistem persamaan linear \\(x + 2y = 8\\) dan \\(3x - y = 3\\). Nilai dari \\(x - y\\) adalah...",
+    "options": [
+      "-1",
+      "0",
+      "1",
+      "2"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 4,
+    "text": "Diberikan fungsi \\(h(x) = \\frac{x^2 - 1}{x+1}\\). Nilai dari \\(h(5)\\) adalah...",
+    "options": [
+      "4",
+      "5",
+      "6",
+      "24"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 5,
+    "text": "Persamaan sumbu simetri dari grafik fungsi kuadrat \\(f(x) = 2x^2 + 8x - 5\\) adalah...",
+    "options": [
+      "\\(x = 4\\)",
+      "\\(x = 2\\)",
+      "\\(x = -2\\)",
+      "\\(x = -4\\)"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 6,
+    "text": "Jika \\(f(x) = 2x - 3\\), maka fungsi inversnya, \\(f^{-1}(x)\\), adalah...",
+    "options": [
+      "\\(\\frac{x+3}{2}\\)",
+      "\\(\\frac{x-3}{2}\\)",
+      "\\(2x+3\\)",
+      "\\(3-2x\\)"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 7,
+    "text": "Suku ke-6 dari barisan geometri 2, 6, 18, \\dots adalah...",
+    "options": [
+      "162",
+      "243",
+      "486",
+      "729"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 8,
+    "text": "Jumlah 10 suku pertama dari deret aritmetika \\(5 + 8 + 11 + 14 + \\dots\\) adalah...",
+    "options": [
+      "155",
+      "185",
+      "215",
+      "320"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 9,
+    "text": "Diberikan matriks \\(P = \\begin{pmatrix} 8 & 5 \\\\ 4 & 2 \\end{pmatrix}\\) dan \\(Q = \\begin{pmatrix} 3 & 1 \\\\ 3 & 0 \\end{pmatrix}\\). Matriks hasil dari \\(P - Q\\) adalah...",
+    "options": [
+      "\\(\\begin{pmatrix} 5 & 4 \\\\ 1 & 2 \\end{pmatrix}\\)",
+      "\\(\\begin{pmatrix} 11 & 6 \\\\ 7 & 2 \\end{pmatrix}\\)",
+      "\\(\\begin{pmatrix} 5 & 4 \\\\ 7 & 2 \\end{pmatrix}\\)",
+      "\\(\\begin{pmatrix} -5 & -4 \\\\ -1 & -2 \\end{pmatrix}\\)"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 10,
+    "text": "Transpose dari matriks \\(M = \\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{pmatrix}\\) adalah...",
+    "options": [
+      "\\(\\begin{pmatrix} 1 & 4 \\\\ 2 & 5 \\\\ 3 & 6 \\end{pmatrix}\\)",
+      "\\(\\begin{pmatrix} 4 & 5 & 6 \\\\ 1 & 2 & 3 \\end{pmatrix}\\)",
+      "\\(\\begin{pmatrix} 3 & 6 \\\\ 2 & 5 \\\\ 1 & 4 \\end{pmatrix}\\)",
+      "\\(\\begin{pmatrix} 6 & 3 \\\\ 5 & 2 \\\\ 4 & 1 \\end{pmatrix}\\)"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 11,
+    "text": "Median dari kumpulan data berikut: 7, 8, 4, 9, 5, 10, 6 adalah...",
+    "options": [
+      "9",
+      "8",
+      "7",
+      "6"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 12,
+    "text": "Dari 8 siswa akan dipilih 3 siswa untuk mengikuti lomba cerdas cermat. Banyak cara pemilihan yang mungkin adalah...",
+    "options": [
+      "24",
+      "56",
+      "336",
+      "512"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 13,
+    "text": "Dari satu set kartu bridge (remi), diambil sebuah kartu secara acak. Peluang terambilnya kartu King adalah...",
+    "options": [
+      "\\(\\frac{1}{52}\\)",
+      "\\(\\frac{1}{26}\\)",
+      "\\(\\frac{1}{13}\\)",
+      "\\(\\frac{1}{4}\\)"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 14,
+    "text": "Nilai dari \\(\\lim_{x \\to 4} \\frac{x^2 - 16}{x - 4}\\) adalah...",
+    "options": [
+      "0",
+      "4",
+      "8",
+      "Tidak terdefinisi"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 15,
+    "text": "Jika \\(g(x) = \\frac{1}{3}x^3 + 2x^2 - 7x + 1\\), maka turunan pertamanya, \\(g'(x)\\), adalah...",
+    "options": [
+      "\\(x^3 + 4x - 7\\)",
+      "\\(x^2 + 4x - 7\\)",
+      "\\(3x^2 + 4x - 7\\)",
+      "\\(x^2 + 2x - 7\\)"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 16,
+    "text": "Nilai dari \\(\\int_{0}^{2} (2x + 1) dx\\) adalah...",
+    "options": [
+      "4",
+      "5",
+      "6",
+      "8"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 17,
+    "text": "Sebuah tabung memiliki jari-jari alas 7 cm dan tinggi 10 cm. Volume tabung tersebut adalah... (gunakan \\(\\pi = \\frac{22}{7}\\))",
+    "options": [
+      "770 cm\\(^3\\)",
+      "1540 cm\\(^3\\)",
+      "2200 cm\\(^3\\)",
+      "440 cm\\(^3\\)"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 18,
+    "text": "Diketahui segitiga PQR dengan panjang sisi PQ = 8 cm, PR = 6 cm, dan besar sudut P = \\(30^\\circ\\). Luas segitiga PQR adalah...",
+    "options": [
+      "\\(48\\) cm\\(^2\\)",
+      "\\(24\\) cm\\(^2\\)",
+      "\\(12\\sqrt{3}\\) cm\\(^2\\)",
+      "\\(12\\) cm\\(^2\\)"
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "id": 19,
+    "text": "Nilai dari \\(5\\sin^2(x) + 5\\cos^2(x)\\) adalah...",
+    "options": [
+      "1",
+      "5",
+      "10",
+      "Bergantung pada nilai \\(x\\)"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 20,
+    "text": "Ukuran sudut \\(\\frac{2}{3}\\pi\\) radian sama dengan...",
+    "options": [
+      "\\(60^\\circ\\)",
+      "\\(90^\\circ\\)",
+      "\\(120^\\circ\\)",
+      "\\(150^\\circ\\)"
+    ],
+    "correctAnswer": 2
+  }
+    ]
+  },
   // Untuk tryout yang 'Segera Hadir', Anda tidak perlu membuat datanya di sini.
 };
-
