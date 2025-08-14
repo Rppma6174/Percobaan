@@ -558,7 +558,7 @@ const allTryouts = {
   },
   "tryout-tka-matematika-1": {
     title: "Tryout Matematika TKA - Part 1",
-    duration: 1800, // 30 menit
+    duration: 5400, // 25 menit * 60 detik
     questions: [
   {
     "id": 1,
@@ -802,6 +802,231 @@ const allTryouts = {
   }
     ]
   },
+  "tryout-tka-matematika-2": {
+    title: "Tryout Matematika TKA - Part 2",
+    duration: 5400, // 25 menit * 60 detik
+    questions: [
+  {
+    "id": 1,
+    "text": "Seorang pedagang membeli 5 kg jeruk dengan harga Rp75.000,00. Jika ia ingin mendapatkan keuntungan sebesar 20%, maka harga jual jeruk per kg adalah...",
+    "options": [
+      "Rp15.000,00",
+      "Rp18.000,00",
+      "Rp16.000,00",
+      "Rp20.000,00"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 2,
+    "text": "Jika \\(x\\) dan \\(y\\) adalah bilangan bulat positif yang memenuhi persamaan \\(2x + 3y = 13\\), maka nilai maksimum dari \\(x + y\\) adalah...",
+    "options": [
+      "4",
+      "5",
+      "6",
+      "3"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 3,
+    "text": "Penyelesaian dari pertidaksamaan \\(|x - 3| < 2\\) adalah...",
+    "options": [
+      "\\(x < 5\\)",
+      "\\(x > 1\\)",
+      "\\(1 < x < 5\\)",
+      "\\(x < 1\\) atau \\(x > 5\\)"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 4,
+    "text": "Jika fungsi \\(f(x) = 3x - 5\\), maka nilai dari \\(f(f(2))\\) adalah...",
+    "options": [
+      "-2",
+      "1",
+      "-3",
+      "-2"
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "id": 5,
+    "text": "Titik puncak dari grafik fungsi kuadrat \\(y = x^2 - 4x + 7\\) adalah...",
+    "options": [
+      "(2, 3)",
+      "(-2, 19)",
+      "(4, 7)",
+      "(2, 7)"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 6,
+    "text": "Jika \\(g(x) = x + 1\\) dan \\((f \\circ g)(x) = x^2 + 3x + 2\\), maka \\(f(x) = \\dots\\)",
+    "options": [
+      "\\(x^2 + x\\)",
+      "\\(x^2 + 5x + 6\\)",
+      "\\(x^2 + 3x + 1\\)",
+      "\\(x^2 + 2x + 1\\)"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 7,
+    "text": "Suku ke-10 dari barisan aritmetika 3, 7, 11, 15, \\dots adalah...",
+    "options": [
+      "39",
+      "43",
+      "35",
+      "40"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 8,
+    "text": "Jumlah tak hingga dari deret geometri \\(16 + 8 + 4 + 2 + \\dots\\) adalah...",
+    "options": [
+      "32",
+      "64",
+      "30",
+      "16"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 9,
+    "text": "Jika diketahui matriks \\(A = \\begin{pmatrix} 2 & 1 \\\\ 3 & 4 \\end{pmatrix}\\) dan \\(B = \\begin{pmatrix} 5 & 1 \\\\ 0 & 2 \\end{pmatrix}\\), maka matriks \\(A + 2B\\) adalah...",
+    "options": [
+      "\\(\\begin{pmatrix} 7 & 2 \\\\ 3 & 6 \\end{pmatrix}\\)",
+      "\\(\\begin{pmatrix} 12 & 3 \\\\ 3 & 8 \\end{pmatrix}\\)",
+      "\\(\\begin{pmatrix} 10 & 2 \\\\ 0 & 4 \\end{pmatrix}\\)",
+      "\\(\\begin{pmatrix} 12 & 3 \\\\ 6 & 8 \\end{pmatrix}\\)"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 10,
+    "text": "Determinan dari matriks \\(C = \\begin{pmatrix} 5 & 2 \\\\ -3 & 1 \\end{pmatrix}\\) adalah...",
+    "options": [
+      "-1",
+      "1",
+      "11",
+      "5"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 11,
+    "text": "Rata-rata nilai ulangan matematika dari 5 siswa adalah 80. Jika digabungkan dengan nilai seorang siswa baru yang mendapat nilai 92, maka rata-rata nilai mereka sekarang adalah...",
+    "options": [
+      "82",
+      "85",
+      "80",
+      "86"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 12,
+    "text": "Dari angka 1, 2, 3, 4, dan 5 akan disusun sebuah bilangan yang terdiri dari tiga angka berbeda. Banyaknya bilangan yang dapat disusun adalah...",
+    "options": [
+      "125",
+      "60",
+      "12",
+      "20"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 13,
+    "text": "Sebuah dadu dilempar sekali. Peluang muncul mata dadu bilangan prima adalah...",
+    "options": [
+      "\\(\\frac{1}{6}\\)",
+      "\\(\\frac{1}{3}\\)",
+      "\\(\\frac{1}{2}\\)",
+      "\\(\\frac{2}{3}\\)"
+    ],
+    "correctAnswer": 2
+  },
+  {
+    "id": 14,
+    "text": "Nilai dari \\(\\lim_{x \\to 2} (x^2 + 3x - 5)\\) adalah...",
+    "options": [
+      "5",
+      "0",
+      "15",
+      "Tidak terdefinisi"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 15,
+    "text": "Turunan pertama dari fungsi \\(f(x) = 4x^3 - 2x^2 + 5x - 1\\) adalah...",
+    "options": [
+      "\\(12x^2 - 4x + 5\\)",
+      "\\(4x^2 - 2x + 5\\)",
+      "\\(12x^3 - 4x^2 + 5\\)",
+      "\\(3x^2 - 2x + 5\\)"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 16,
+    "text": "Nilai dari \\(\\int (3x^2 + 4x) dx\\) adalah...",
+    "options": [
+      "\\(6x + 4 + C\\)",
+      "\\(x^3 + 2x^2 + C\\)",
+      "\\(3x^3 + 4x^2 + C\\)",
+      "\\(x^3 + 4x^2 + C\\)"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 17,
+    "text": "Sebuah tangga sepanjang 10 meter disandarkan pada dinding. Jika jarak ujung bawah tangga ke dinding adalah 6 meter, maka tinggi dinding yang dicapai oleh ujung atas tangga adalah...",
+    "options": [
+      "8 meter",
+      "4 meter",
+      "16 meter",
+      "\\(\\sqrt{136}\\) meter"
+    ],
+    "correctAnswer": 0
+  },
+  {
+    "id": 18,
+    "text": "Nilai dari \\(\\sin(30^\\circ) + \\cos(60^\\circ)\\) adalah...",
+    "options": [
+      "\\(\\frac{1}{2}\\)",
+      "1",
+      "\\(\\sqrt{3}\\)",
+      "0"
+    ],
+    "correctAnswer": 1
+  },
+  {
+    "id": 19,
+    "text": "Jika diketahui \\(\\tan(A) = \\frac{3}{4}\\) dan A adalah sudut lancip, maka nilai \\(\\cos(A)\\) adalah...",
+    "options": [
+      "\\(\\frac{3}{5}\\)",
+      "\\(\\frac{4}{3}\\)",
+      "\\(\\frac{5}{4}\\)",
+      "\\(\\frac{4}{5}\\)"
+    ],
+    "correctAnswer": 3
+  },
+  {
+    "id": 20,
+    "text": "Luas sebuah lingkaran adalah \\(49\\pi\\) cm\\(^2\\). Keliling lingkaran tersebut adalah...",
+    "options": [
+      "\\(7\\pi\\) cm",
+      "\\(14\\pi\\) cm",
+      "49 cm",
+      "\\(24.5\\pi\\) cm"
+    ],
+    "correctAnswer": 1
+  }
+    ]
+  },
   // Untuk tryout yang 'Segera Hadir', Anda tidak perlu membuat datanya di sini.
 };
-
