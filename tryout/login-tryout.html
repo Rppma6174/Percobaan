@@ -438,7 +438,7 @@ button[type="submit"]:disabled {
 
                 if (redirectUrl) {
                     // 2. Jika ADA, hapus catatannya agar tidak dipakai lagi
-                    sessionStorage.removeItem('redirectUrl');
+                    sessionStorage.removeItem('../redirectUrl');
                     // 3. Arahkan pengguna kembali ke URL tryout yang spesifik
                     window.location.href = redirectUrl;
                 } else {
@@ -491,3 +491,4 @@ button[type="submit"]:disabled {
 </script>
 </body>
 </html>
+
