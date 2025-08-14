@@ -440,7 +440,7 @@ button[type="submit"]:disabled {
                     // 2. Jika ADA, hapus catatannya agar tidak dipakai lagi
                     sessionStorage.removeItem('redirectUrl');
                     // 3. Arahkan pengguna kembali ke URL tryout yang spesifik
-                    window.location.href = ../redirectUrl;
+                    window.location.href = redirectUrl;
                 } else {
                     // 4. Jika TIDAK ADA, arahkan ke halaman daftar tryout (halaman default setelah login)
                     // PASTIKAN PATH INI BENAR SESUAI STRUKTUR FOLDER ANDA
@@ -491,5 +491,6 @@ button[type="submit"]:disabled {
 </script>
 </body>
 </html>
+
 
 
