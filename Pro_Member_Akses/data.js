@@ -4738,28 +4738,8 @@ const allContentData = {
     "category": "Olimpiade",
     "description": "Kumpulan soal latihan untuk seleksi Olimpiade Sains Nasional (OSN) Matematika tingkat sekolah (OSN-S) beserta pembahasan.",
     "subject": "Matematika",
-    "totalQuestions": 20,
+    "totalQuestions": 19,
     "questions": [
-        {
-            "questionText": "Jika $x$ dan $y$ adalah bilangan bulat positif sehingga $x^2 - y^2 = 2023$, maka nilai dari $x^2 + y^2$ adalah...",
-            "options": [
-                "A. 289185",
-                "B. 289189",
-                "C. 290185",
-                "D. 290189"
-            ],
-            "correctAnswer": "D. 290189",
-            "explanation": "Kita faktorkan persamaan $x^2 - y^2 = (x-y)(x+y) = 2023$. Karena 2023 adalah bilangan ganjil, faktor-faktornya juga harus ganjil. Faktor dari 2023 adalah $1, 7, 17, 41, ...$. Kita coba faktorisasi $2023 = 7 \\times 289 = 7 \\times 17^2$. Pasangan faktor yang mungkin adalah $(1, 2023), (7, 289), (17, 119), (49, 41)$. Karena $x, y$ positif, maka $x+y > x-y$. Kita ambil $x-y = 7$ dan $x+y = 289$. Dengan eliminasi, kita dapatkan $2x = 296 \\Rightarrow x = 148$ dan $2y = 282 \\Rightarrow y = 141$. Maka, $x^2 + y^2 = 148^2 + 141^2 = 21904 + 19881 = 41785$. Cek faktorisasi lain: $x-y=1, x+y=2023 \\implies 2x=2024, x=1012, 2y=2022, y=1011$. Maka $x^2+y^2 = 1012^2 + 1011^2 = 1024144+1022121 = 2046265$. Cek lagi faktorisasi $2023 = 7 \\times 17^2 = 7 \\times 289$. Ah, $2023 = 7 \\times 289$. Maka, $x-y=7$ dan $x+y=289$. Eliminasi: $2x=296 \\Rightarrow x=148$. $2y=282 \\Rightarrow y=141$. Jadi, $x^2+y^2 = 148^2+141^2 = 21904+19881=41785$. Hmm, ada kesalahan pada soal atau pilihan jawaban. Coba kita cek lagi faktorisasi $2023$. $2023 = 7 \\times 17^2$. Oh, $2023$ tidak habis dibagi 17. $2023 = 7 \\times 289$. $289 = 17^2$. Jadi $2023 = 7 \\times 17^2$ salah. Faktorisasi prima dari $2023$ adalah $7 \\times 289$. Benar. Oh, $289$ itu $17^2$. Jadi $2023 = 7 \\times 17^2$ benar. Oh saya salah hitung. $7 \\times 289 = 2023$ benar. Pasangan faktor: $(x-y, x+y)$ bisa $(1, 2023), (7, 289), (17, 119), (49, 41)$. Kita coba pasangan $(x-y, x+y) = (41, 49)$. $2x = 90 \\Rightarrow x=45$. $2y = 8 \\Rightarrow y=4$. Maka $x^2+y^2 = 45^2+4^2 = 2025+16=2041$. Coba pasangan $(17, 119)$. $2x=136 \\Rightarrow x=68$. $2y=102 \\Rightarrow y=51$. $x^2+y^2 = 68^2+51^2 = 4624+2601=7225$. Coba pasangan $(7, 289)$. $2x = 296 \\Rightarrow x=148$. $2y = 282 \\Rightarrow y=141$. $x^2+y^2 = 148^2+141^2 = 21904+19881 = 41785$. Coba pasangan $(1, 2023)$. $2x=2024 \\Rightarrow x=1012$. $2y=2022 \\Rightarrow y=1011$. $x^2+y^2 = 1012^2+1011^2 = 1024144+1022121=2046265$. Ada kesalahan pada pilihan jawaban. Mari kita buat soal baru dengan jawaban yang cocok. Jika $x^2-y^2=45$, maka $(x-y)(x+y)=45$. Pasangan faktor (3, 15). $x-y=3, x+y=15$. $2x=18 \\Rightarrow x=9$. $2y=12 \\Rightarrow y=6$. $x^2+y^2=81+36=117$. Mari perbaiki soal awal. Misal $x^2 - y^2 = 2024$. $(x-y)(x+y)=2024$. Karena $x, y$ bulat, $x-y$ dan $x+y$ harus paritasnya sama. Karena hasil kalinya genap, keduanya harus genap. Faktor 2024: $2, 1012$. $x-y=2, x+y=1012$. $2x=1014 \implies x=507$. $2y=1010 \implies y=505$. $x^2+y^2 = 507^2+505^2 = (506+1)^2+(506-1)^2 = 2(506^2+1^2) = 2(256036+1) = 2(256037) = 512074$. Mari kita gunakan angka yang lebih sederhana. Jika $x^2 - y^2 = 96$. $(x-y)(x+y) = 96$. Keduanya genap. Pasangan (6, 16). $x-y=6, x+y=16 \implies 2x=22, x=11$. $2y=10, y=5$. $x^2+y^2 = 121+25=146$. Kita revisi soal aslinya. Faktorisasi $2023=7 \\times 17^2$ adalah salah. $2023=7 \\times 289$. $289=17^2$ juga salah, $17^2 = 289$. Oh, $2023 = 7 \\times 289$ itu benar. $289 = 17 \times 17$. Jadi $2023$ tidak habis dibagi 17. Faktorisasi $2023 = 7 \times 17 \times 17$ salah. $2023/7=289$. $289 = 17 \times 17$. Ya, jadi $2023=7 \times 17 \times 17$. TIDAK. $2023/17 = 119$. Jadi $2023 = 17 \times 119 = 17 \times 7 \times 17 = 7 \times 17^2$. OH! Saya salah dari awal. $2023$ adalah hasil kali dari $7$ dan $17^2$? TIDAK. $2023$ itu $7 \\times 289$. Dan $289=17^2$. Ah, saya terus melakukan kesalahan yang sama. Mari kita hitung ulang $17 \\times 17 = 289$. Ya. Dan $7 \\times 289 = 2023$. Ya. Jadi faktorisasi prima $2023 = 7 \\times 17^2$ adalah BENAR. Kenapa saya ragu. Pasangan faktornya adalah $(1, 2023), (7, 289), (17, 119), (49, 41), (119, 17), (289, 7), (2023, 1)$. Kita butuh $x+y > x-y$. Pasangan yang mungkin: $(1, 2023), (7, 289), (17, 119), (41, 49)$.
-1. $x-y=1, x+y=2023 \implies x=1012, y=1011$. $x^2+y^2=1012^2+1011^2 = 2046265$.
-2. $x-y=7, x+y=289 \implies x=148, y=141$. $x^2+y^2=148^2+141^2 = 41785$.
-3. $x-y=17, x+y=119 \implies x=68, y=51$. $x^2+y^2=68^2+51^2 = 7225$.
-4. $x-y=41, x+y=49 \implies x=45, y=4$. $x^2+y^2=45^2+4^2 = 2041$.
-Tampaknya tidak ada jawaban yang cocok. Mari kita periksa kembali soalnya. Mungkin ada kesalahan ketik. $x^2-y^2=2023$. Kita gunakan $x-y=1$ dan $x+y=2023$, maka $x=1012$ dan $y=1011$. $x^2+y^2 = 1012^2 + 1011^2 = (1011.5+0.5)^2 + (1011.5-0.5)^2 = 2(1011.5^2+0.5^2)$. Ini rumit. $1012^2 + 1011^2 = (1000+12)^2 + (1000+11)^2 = (10^6+24000+144) + (10^6+22000+121) = 2 \times 10^6 + 46000 + 265 = 2046265$. Jauh dari pilihan. Mari kita asumsikan ada salah ketik di pilihan. Mari kita buat soal baru yang jawabannya ada. Misal $x^2 - y^2 = 595$. Faktorisasi $595=5 \times 7 \times 17$. Pasangan faktor $(x-y, x+y)$. Coba $(17, 35)$. $2x=52 \implies x=26$. $2y=18 \implies y=9$. $x^2+y^2 = 26^2+9^2 = 676+81=757$. Mari kita perbaiki soal awal dengan jawaban yang benar. $x-y=7, x+y=289 \implies x=148, y=141$. $x^2+y^2=41785$. Anggap saja ada salah ketik di soal. Mari kita coba $289189$. $x^2+y^2 = 289189$. Misal $x=422, y=355$. $x^2-y^2=(422-355)(422+355) = 67 \times 777 = 52059$. Bukan.
-Mari kita asumsikan soalnya adalah $x=422, y=355$, maka $x^2+y^2=422^2+355^2 = 178084+126025=304109$.
-Kita tinggalkan soal ini dan buat yang baru.
-Soal 1: Digit terakhir dari $7^{2023}$ adalah...
-Pembahasan: Kita cari pola digit terakhir dari perpangkatan 7. $7^1=7, 7^2=49 \to 9, 7^3=343 \to 3, 7^4=2401 \to 1, 7^5=\dots7$. Pola berulang setiap 4 kali (7, 9, 3, 1). Kita bagi pangkatnya dengan 4: $2023 \div 4 = 505$ sisa $3$. Jadi, digit terakhir sama dengan digit terakhir dari $7^3$, yaitu 3."
-        },
         {
             "questionText": "Sebuah kelas terdiri dari 40 siswa. 25 siswa suka matematika, 20 siswa suka fisika, dan 10 siswa suka keduanya. Berapa banyak siswa yang tidak suka keduanya?",
             "options": [
@@ -4970,7 +4950,7 @@ Pembahasan: Kita cari pola digit terakhir dari perpangkatan 7. $7^1=7, 7^2=49 \t
             "explanation": "Rotasi 90 derajat berlawanan arah jarum jam dari titik $(x,y)$ menghasilkan $(-y, x)$. Jadi, bayangan A(2,-1) adalah $A'(-(-1), 2) = A'(1, 2)$. Kemudian, pencerminan terhadap sumbu Y dari titik $(x,y)$ menghasilkan $(-x, y)$. Jadi, bayangan dari A'(1,2) adalah $A''(-1, 2)$."
         }
     ]
-    },    
+    },
     ]
 };
 
