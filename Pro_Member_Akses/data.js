@@ -4734,7 +4734,7 @@ const allContentData = {
     },
     {
     "id": "osn-matematika-sekolah-01",
-    "title": "Bank Soal OSN Matematika Tingkat Sekolah (OSN-S)",
+    "title": "OSN Matematika Tingkat Sekolah (OSN-S) - Set 1",
     "category": "Olimpiade",
     "description": "Kumpulan soal latihan untuk seleksi Olimpiade Sains Nasional (OSN) Matematika tingkat sekolah (OSN-S) beserta pembahasan.",
     "subject": "Matematika",
@@ -4953,7 +4953,7 @@ const allContentData = {
 },
     {
     "id": "osn-matematika-sekolah-02",
-    "title": "Bank Soal OSN Matematika Tingkat Sekolah (OSN-S) - Set 2",
+    "title": "OSN Matematika Tingkat Sekolah (OSN-S) - Set 2",
     "category": "Olimpiade",
     "description": "Kumpulan soal latihan variatif (Set 2) untuk seleksi Olimpiade Sains Nasional (OSN) Matematika tingkat sekolah (OSN-S) beserta pembahasan.",
     "subject": "Matematika",
