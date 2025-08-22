@@ -4968,7 +4968,7 @@ const allContentData = {
                 "D. 9"
             ],
             "correctAnswer": "D. 9",
-            "explanation" : "$$\\frac{1}{x} + \\frac{1}{y} = \\frac{1}{5} \\quad \\Longrightarrow \\quad \\frac{x+y}{xy} = \\frac{1}{5} \\quad \\Longrightarrow \\quad 5(x+y) = xy \\quad \\Longrightarrow \\quad xy - 5x - 5y = 0 \\quad \\Longrightarrow \\quad xy - 5x - 5y + 25 = 25 \\quad \\Longrightarrow \\quad (x-5)(y-5) = 25 \\quad \\Longrightarrow \\quad x - 5 = d, \\; y - 5 = \\tfrac{25}{d} \\quad \\Longrightarrow \\quad \\begin{aligned} d=1   &\\;\\Rightarrow\\; (x,y)=(6,30), \\\\ d=5   &\\;\\Rightarrow\\; (x,y)=(10,10), \\\\ d=25  &\\;\\Rightarrow\\; (x,y)=(30,6), \\\\ d=-1  &\\;\\Rightarrow\\; (x,y)=(4,-20), \\\\ d=-25 &\\;\\Rightarrow\\; (x,y)=(-20,4). \\end{aligned} \\quad \\Longrightarrow \\quad \\boxed{ \\text{Banyaknya pasangan bilangan bulat } (x,y) \\text{ yang memenuhi persamaan adalah 5.} }$$"
+            "explanation" : "$$ \\frac{1}{x} + \\frac{1}{y} = \\frac{1}{5} \\quad \\Longrightarrow \\quad \\frac{x+y}{xy} = \\frac{1}{5} $$ $$ 5(x+y) = xy $$ $$ xy - 5x - 5y = 0 $$ $$ xy - 5x - 5y + 25 = 25 $$ $$ (x-5)(y-5) = 25 $$ $$ x - 5 = d, \\quad y - 5 = \\tfrac{25}{d} $$ $$ \\begin{aligned} d=1 &\\;\\Rightarrow\\; (x,y)=(6,30), \\\\ d=5 &\\;\\Rightarrow\\; (x,y)=(10,10), \\\\ d=25 &\\;\\Rightarrow\\; (x,y)=(30,6), \\\\ d=-1 &\\;\\Rightarrow\\; (x,y)=(4,-20), \\\\ d=-25 &\\;\\Rightarrow\\; (x,y)=(-20,4). \\end{aligned} $$ $$ \\boxed{ \\text{Banyaknya pasangan bilangan bulat } (x,y) \\text{ yang memenuhi persamaan adalah 5.} } $$"
         },
         {
             "questionText": "Sebuah jam dinding menunjukkan pukul 04:40. Berapakah sudut terkecil yang dibentuk oleh jarum jam dan jarum menit?",
