@@ -4969,6 +4969,7 @@ const allContentData = {
             ],
             "correctAnswer": "D. 9",
             "explanation": "Pertama, kita lakukan manipulasi aljabar pada persamaan awal:\n$$ \\frac{x+y}{xy} = \\frac{1}{5} \\quad \\rightarrow \\quad 5x + 5y = xy $$\nSelanjutnya, pindahkan semua suku ke satu ruas untuk persiapan pemfaktoran:\n$$ xy - 5x - 5y = 0 $$\nDengan menambahkan $25$ pada kedua ruas, kita bisa melengkapkan pemfaktoran:\n$$ (x-5)(y-5) = 25 $$\nKarena $x$ dan $y$ adalah bilangan bulat, maka $(x-5)$ harus merupakan faktor bilangan bulat dari 25, yaitu $\\{ \\pm 1, \\pm 5, \\pm 25 \\}$.\n\nPenting: Dari persamaan awal $\\frac{1}{x} + \\frac{1}{y} = \\frac{1}{5}$, nilai $x$ dan $y$ tidak boleh nol. Kita periksa kondisi ini:\n$$ x = (x-5) + 5 $$\nAgar $x \\neq 0$, maka $(x-5)$ tidak boleh bernilai $-5$. Oleh karena itu, pasangan faktor $(-5, -5)$ tidak valid dan harus dikecualikan.\n\nBerikut adalah 5 pasangan faktor yang valid dan solusinya:\n• Jika $x-5=1$, maka $y-5=25 \\implies (x,y) = (6, 30)$\n• Jika $x-5=5$, maka $y-5=5 \\implies (x,y) = (10, 10)$\n• Jika $x-5=25$, maka $y-5=1 \\implies (x,y) = (30, 6)$\n• Jika $x-5=-1$, maka $y-5=-25 \\implies (x,y) = (4, -20)$\n• Jika $x-5=-25$, maka $y-5=-1 \\implies (x,y) = (-20, 4)$\n\nJadi, total ada 5 pasangan bilangan bulat $(x,y)$ yang memenuhi."
+        },
         {
             "questionText": "Sebuah jam dinding menunjukkan pukul 04:40. Berapakah sudut terkecil yang dibentuk oleh jarum jam dan jarum menit?",
             "options": [
