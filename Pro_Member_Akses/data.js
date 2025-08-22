@@ -1620,7 +1620,7 @@ const allContentData = {
                     "D. $R$ tidak memenuhi sifat apapun"
                 ],
                 correctAnswer: "C. $R$ adalah relasi ekuivalensi",
-                explanation: "Relasi $a \\equiv b \\pmod{2}$ berarti $a$ dan $b$ memiliki paritas sama (genap atau ganjil). Cek sifat: 1) **Refleksif**: $a \\equiv a \\pmod{2}$, benar. 2) **Simetris**: jika $a \\equiv b$, maka $b \\equiv a$, benar. 3) **Transitif**: jika $a \\equiv b$ dan $b \\equiv c$, maka $a \\equiv c$, benar. Karena memenuhi ketiga sifat, $R$ adalah relasi ekuivalensi. Jawaban: C."
+                explanation: "Relasi $a \\equiv b \\pmod{2}$ berarti $a$ dan $b$ memiliki paritas sama (genap atau ganjil). Cek sifat: 1) Refleksif: $a \\equiv a \\pmod{2}$, benar. 2) Simetris: jika $a \\equiv b$, maka $b \\equiv a$, benar. 3) Transitif: jika $a \\equiv b$ dan $b \\equiv c$, maka $a \\equiv c$, benar. Karena memenuhi ketiga sifat, $R$ adalah relasi ekuivalensi. Jawaban: C."
             },
             {
                 questionText: "Sebuah fungsi $f$ dari himpunan $A = \\{x \\in \\mathbb{N} \\mid x < 6\\}$ ke $B = \\{x \\in \\mathbb{N} \\mid x < 11\\}$ didefinisikan oleh $f(x) = 2x$. Tentukan range dan jenis fungsi tersebut.",
@@ -1690,7 +1690,7 @@ const allContentData = {
                 explanation: "$(f \\circ g)(x) = f(g(x)) = f(3x) = 3x + 2$. Jadi, $h(x) = 3x + 2$. Jawaban: A."
             },
             {
-                questionText: "Manakah dari berikut ini yang **bukan** representasi fungsi?",
+                questionText: "Manakah dari berikut ini yang bukan representasi fungsi?",
                 options: [
                     "A. Grafik dengan satu titik untuk setiap nilai x",
                     "B. Diagram panah yang memetakan satu elemen domain ke lebih dari satu kodomain",
@@ -4968,8 +4968,7 @@ const allContentData = {
                 "D. 9"
             ],
             "correctAnswer": "D. 9",
-            "explanation" : "$$ \\frac{1}{x} + \\frac{1}{y} = \\frac{1}{5} \\\quad \\Longrightarrow \\\quad \\frac{x+y}{xy} = \\frac{1}{5} $$ $$ 5(x+y) = xy $$ $$ xy - 5x - 5y = 0 $$ $$ xy - 5x - 5y + 25 = 25 $$ $$ (x-5)(y-5) = 25 $$ Karena $25$ memiliki faktor-faktor bilangan bulat $\\pm 1, \\pm 5, \\pm 25$, maka: $$ x - 5 = d, \\\quad y - 5 = \\tfrac{25}{d} $$ Sehingga pasangan yang diperoleh adalah: $$ \\begin{aligned} d=1 &\\\;\\Rightarrow\\\; (x,y)=(6,30), \\\\ d=5 &\\\;\\Rightarrow\\\; (x,y)=(10,10), \\\\ d=25 &\\\;\\Rightarrow\\\; (x,y)=(30,6), \\\\ d=-1 &\\\;\\Rightarrow\\\; (x,y)=(4,-20), \\\\ d=-25 &\\\;\\Rightarrow\\\; (x,y)=(-20,4). \\end{aligned} $$ $$ \\boxed{ \\text{Banyaknya pasangan bilangan bulat } (x,y) \\text{ yang memenuhi persamaan adalah 5.} } $$"
-        },
+            "explanation": "Pertama, kita lakukan manipulasi aljabar pada persamaan awal:\n$$ \\frac{x+y}{xy} = \\frac{1}{5} \\quad \\rightarrow \\quad 5x + 5y = xy $$\nSelanjutnya, pindahkan semua suku ke satu ruas untuk persiapan pemfaktoran:\n$$ xy - 5x - 5y = 0 $$\nDengan menambahkan $25$ pada kedua ruas, kita bisa melengkapkan pemfaktoran:\n$$ (x-5)(y-5) = 25 $$\nKarena $x$ dan $y$ adalah bilangan bulat, maka $(x-5)$ harus merupakan faktor bilangan bulat dari 25, yaitu $\\{ \\pm 1, \\pm 5, \\pm 25 \\}$.\n\nPenting: Dari persamaan awal $\\frac{1}{x} + \\frac{1}{y} = \\frac{1}{5}$, nilai $x$ dan $y$ tidak boleh nol. Kita periksa kondisi ini:\n$$ x = (x-5) + 5 $$\nAgar $x \\neq 0$, maka $(x-5)$ tidak boleh bernilai $-5$. Oleh karena itu, pasangan faktor $(-5, -5)$ tidak valid dan harus dikecualikan.\n\nBerikut adalah 5 pasangan faktor yang valid dan solusinya:\n• Jika $x-5=1$, maka $y-5=25 \\implies (x,y) = (6, 30)$\n• Jika $x-5=5$, maka $y-5=5 \\implies (x,y) = (10, 10)$\n• Jika $x-5=25$, maka $y-5=1 \\implies (x,y) = (30, 6)$\n• Jika $x-5=-1$, maka $y-5=-25 \\implies (x,y) = (4, -20)$\n• Jika $x-5=-25$, maka $y-5=-1 \\implies (x,y) = (-20, 4)$\n\nJadi, total ada 5 pasangan bilangan bulat $(x,y)$ yang memenuhi."
         {
             "questionText": "Sebuah jam dinding menunjukkan pukul 04:40. Berapakah sudut terkecil yang dibentuk oleh jarum jam dan jarum menit?",
             "options": [
@@ -4990,7 +4989,7 @@ const allContentData = {
                 "D. -5 atau -1"
             ],
             "correctAnswer": "B. 5 atau -7",
-            "explanation": "Substitusikan $f(x)$ ke dalam dirinya sendiri:\n$$ f(f(x)) = a(ax+b)+b = a^2x + ab + b $$\nSamakan dengan persamaan yang diketahui, $f(f(x)) = 9x+8$, maka kita dapatkan dua persamaan:\n$$ a^2 = 9 $$\n$$ ab+b = 8 \\quad \\rightarrow \\quad b(a+1) = 8 $$\nDari $a^2 = 9$, nilai $a$ yang mungkin adalah $3$ atau $-3$.\n\n**Kasus 1: Jika $a=3$**\n$$ b(3+1) = 8 \\quad \\rightarrow \\quad 4b=8 \\quad \\rightarrow \\quad b=2 $$\n$$ a+b = 3+2 = 5 $$\n\n**Kasus 2: Jika $a=-3$**\n$$ b(-3+1) = 8 \\quad \\rightarrow \\quad -2b=8 \\quad \\rightarrow \\quad b=-4 $$\n$$ a+b = -3 + (-4) = -7 $$\nJadi, nilai $a+b$ yang mungkin adalah 5 atau -7."        },
+            "explanation": "Substitusikan $f(x)$ ke dalam dirinya sendiri:\n$$ f(f(x)) = a(ax+b)+b = a^2x + ab + b $$\nSamakan dengan persamaan yang diketahui, $f(f(x)) = 9x+8$, maka kita dapatkan dua persamaan:\n$$ a^2 = 9 $$\n$$ ab+b = 8 \\quad \\rightarrow \\quad b(a+1) = 8 $$\nDari $a^2 = 9$, nilai $a$ yang mungkin adalah $3$ atau $-3$.\n\nKasus 1: Jika $a=3$ \n$$ b(3+1) = 8 \\quad \\rightarrow \\quad 4b=8 \\quad \\rightarrow \\quad b=2 $$\n$$ a+b = 3+2 = 5 $$ \n\nKasus 2: Jika $a=-3$ \n$$ b(-3+1) = 8 \\quad \\rightarrow \\quad -2b=8 \\quad \\rightarrow \\quad b=-4 $$\n$$ a+b = -3 + (-4) = -7 $$\nJadi, nilai $a+b$ yang mungkin adalah 5 atau -7."        },
         {
             "questionText": "Terdapat 5 orang pria dan 4 orang wanita. Mereka akan duduk dalam satu baris. Jika posisi duduk harus berselang-seling antara pria dan wanita, ada berapa banyak cara mereka bisa duduk?",
             "options": [
