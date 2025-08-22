@@ -4749,7 +4749,7 @@ const allContentData = {
                 "D. 20"
             ],
             "correctAnswer": "A. 5",
-            "explanation": "Gunakan prinsip inklusi-eksklusi. Total = (Suka Matematika) + (Suka Fisika) - (Suka Keduanya) + (Tidak Suka Keduanya). $40 = 25 + 20 - 10 + N$. $40 = 35 + N$. Maka $N = 40 - 35 = 5$."
+            "explanation": "$$\frac{1}{x} + \frac{1}{y} = \frac{1}{5}\quad \Longrightarrow \quad \frac{x+y}{xy} = \frac{1}{5}.$$ Kalikan silang: $$5(x+y) = xy.$$ Susun ulang:$$ xy - 5x - 5y = 0.$$ Tambahkan $25$ ke kedua sisi : $$xy - 5x - 5y + 25 = 25.$$ Faktorkan: $$(x-5)(y-5) = 25.$$ Karena $25$ memiliki faktor-faktor bilangan bulat $\pm 1, \pm 5, \pm 25$, maka: $$x - 5 = d, \quad y - 5 = \frac{25}{d}.$$ Sehingga pasangan yang diperoleh adalah: $$\begin{aligned}d=1   &\;\Rightarrow\; (x,y)=(6,30), \\d=5   &\;\Rightarrow\; (x,y)=(10,10), \\d=25  &\;\Rightarrow\; (x,y)=(30,6), \\d=-1  &\;\Rightarrow\; (x,y)=(4,-20), \\d=-25 &\;\Rightarrow\; (x,y)=(-20,4).\end{aligned}$$ Untuk $d=-5$, didapat $(x,y)=(0,0)$ yang tidak memenuhi syarat karena $\tfrac{1}{0}$ tidak terdefinisi. $$\boxed{ \text{Banyaknya pasangan bilangan bulat } (x,y) \text{ yang memenuhi persamaan adalah 5.} }$$"
         },
         {
             "questionText": "Jika $f(x) = 2x + 1$ dan $(g \\circ f)(x) = 4x^2 + 4x + 3$, maka $g(x) = ...$",
