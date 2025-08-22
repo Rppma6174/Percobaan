@@ -4985,8 +4985,8 @@ const allContentData = {
             "questionText": "Diberikan $f(x) = ax+b$. Jika $f(f(x)) = 9x+8$, maka nilai dari $a+b$ bisa jadi...",
             "options": [
                 "A. 5 atau -1",
-                "B. 5 atau 1",
-                "C. -5 atau 1",
+                "B. 5 atau -7",
+                "C. -5 atau 7",
                 "D. -5 atau -1"
             ],
             "correctAnswer": "B. 5 atau 1",
