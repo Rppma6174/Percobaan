@@ -4804,7 +4804,7 @@ const allContentData = {
                 "D. $-3x-1$"
             ],
             "correctAnswer": "A. $3x+1$",
-            "explanation": "Menurut teorema sisa, $P(1)=4$ dan $P(-1)=-2$. Misalkan sisa pembagian $P(x)$ oleh $x^2-1 = (x-1)(x+1)$ adalah $S(x)=ax+b$. Maka $S(1) = a(1)+b = a+b = P(1) = 4$. Dan $S(-1) = a(-1)+b = -a+b = P(-1) = -2$. Dari dua persamaan ini, kita eliminasi: $(a+b)-(-a+b) = 4-(-2) \\implies 2a = 6 \\implies a=3$. Substitusi kembali: $3+b=4 \\implies b=1$. Jadi, sisanya adalah $3x+1$."
+            "explanation": "Menurut teorema sisa, $P(1)=4$ dan $P(-1)=-2$. Misalkan sisa pembagian $P(x)$ oleh $x^2-1 = (x-1)(x+1)$ adalah $S(x)=ax+b$. Maka $S(1) = a(1)+b = a+b = P(1) = 4$. Dan $S(-1) = a(-1)+b = -a+b = P(-1) = -2$. Dari dua persamaan ini, kita eliminasi: $(a+b)-(-a+b) = 4-(-2) \\\implies 2a = 6 \\\implies a=3$. Substitusi kembali: $3+b=4 \\\implies b=1$. Jadi, sisanya adalah $3x+1$."
         },
         {
             "questionText": "Banyaknya faktor positif dari 2024 adalah...",
@@ -4837,7 +4837,7 @@ const allContentData = {
                 "D. 5"
             ],
             "correctAnswer": "A. 3.5",
-            "explanation": "Kita tahu $(a+b)^2 = a^2+b^2+2ab$. Maka $1^2 = 2 + 2ab \implies 1=2+2ab \implies 2ab = -1 \implies ab = -1/2$. Selanjutnya, kita kuadratkan $a^2+b^2$: $(a^2+b^2)^2 = a^4+b^4+2a^2b^2 = a^4+b^4+2(ab)^2$. Masukkan nilai yang diketahui: $2^2 = a^4+b^4+2(-1/2)^2 \implies 4 = a^4+b^4+2(1/4) \implies 4 = a^4+b^4+1/2$. Maka $a^4+b^4 = 4 - 1/2 = 3.5$."
+            "explanation": "Kita tahu $(a+b)^2 = a^2+b^2+2ab$. Maka $1^2 = 2 + 2ab \\implies 1=2+2ab \\implies 2ab = -1 \\implies ab = -1/2$. Selanjutnya, kita kuadratkan $a^2+b^2$: $(a^2+b^2)^2 = a^4+b^4+2a^2b^2 = a^4+b^4+2(ab)^2$. Masukkan nilai yang diketahui: $2^2 = a^4+b^4+2(-1/2)^2 \\implies 4 = a^4+b^4+2(1/4) \\implies 4 = a^4+b^4+1/2$. Maka $a^4+b^4 = 4 - 1/2 = 3.5$."
         },
         {
             "questionText": "Rata-rata nilai dari 20 siswa adalah 7.5. Jika seorang siswa dengan nilai 9.5 keluar dari kelompok tersebut, berapakah rata-rata nilai sekarang?",
@@ -4881,7 +4881,7 @@ const allContentData = {
                 "D. 2 atau -6"
             ],
             "correctAnswer": "C. 5 atau -3",
-            "explanation": "Dari persamaan, kita tahu $p+q = a+1$ dan $pq = a$. Kita gunakan identitas $p^2+q^2 = (p+q)^2 - 2pq$. Substitusikan nilai yang diketahui: $20 = (a+1)^2 - 2a$. $20 = (a^2+2a+1) - 2a$. $20 = a^2+1$. Maka $a^2 = 19$. Oh, hasilnya tidak bulat. Mari perbaiki soal. Misal $p^2+q^2 = 17$. Maka $17 = a^2+1 \implies a^2=16 \implies a=4$ atau $a=-4$. Ganti soal: $x^2 - (a+2)x + (a+1) = 0$. $p+q=a+2, pq=a+1$. $p^2+q^2=(a+2)^2-2(a+1) = a^2+4a+4-2a-2 = a^2+2a+2$. Jika $p^2+q^2=17$, maka $a^2+2a+2=17 \implies a^2+2a-15=0 \implies (a+5)(a-3)=0$. $a=-5$ atau $a=3$. Oke, kita pakai soal ini."
+            "explanation": "Dari persamaan, kita tahu $p+q = a+1$ dan $pq = a$. Kita gunakan identitas $p^2+q^2 = (p+q)^2 - 2pq$. Substitusikan nilai yang diketahui: $20 = (a+1)^2 - 2a$. $20 = (a^2+2a+1) - 2a$. $20 = a^2+1$. Maka $a^2 = 19$. Oh, hasilnya tidak bulat. Mari perbaiki soal. Misal $p^2+q^2 = 17$. Maka $17 = a^2+1 \\implies a^2=16 \\implies a=4$ atau $a=-4$. Ganti soal: $x^2 - (a+2)x + (a+1) = 0$. $p+q=a+2, pq=a+1$. $p^2+q^2=(a+2)^2-2(a+1) = a^2+4a+4-2a-2 = a^2+2a+2$. Jika $p^2+q^2=17$, maka $a^2+2a+2=17 \\implies a^2+2a-15=0 \\implies (a+5)(a-3)=0$. $a=-5$ atau $a=3$. Oke, kita pakai soal ini."
         },
         {
             "questionText": "Dari angka 1, 2, 3, 4, 5 akan dibentuk bilangan 3 angka berbeda. Banyaknya bilangan yang lebih dari 300 adalah...",
@@ -4914,7 +4914,7 @@ const allContentData = {
                 "D. 128"
             ],
             "correctAnswer": "C. 96",
-            "explanation": "Rumus suku ke-n barisan geometri adalah $U_n = ar^{n-1}$. Diketahui $U_1=a=3$ dan $U_4=ar^3=24$. Substitusikan $a$: $3r^3=24 \implies r^3=8 \implies r=2$. Suku keenam adalah $U_6 = ar^5 = 3 \\times 2^5 = 3 \\times 32 = 96$."
+            "explanation": "Rumus suku ke-n barisan geometri adalah $U_n = ar^{n-1}$. Diketahui $U_1=a=3$ dan $U_4=ar^3=24$. Substitusikan $a$: $3r^3=24 \\implies r^3=8 \\implies r=2$. Suku keenam adalah $U_6 = ar^5 = 3 \\times 2^5 = 3 \\times 32 = 96$."
         },
         {
             "questionText": "Dalam sebuah kotak terdapat 5 bola merah dan 3 bola putih. Jika diambil dua bola sekaligus secara acak, peluang terambilnya kedua bola berwarna sama adalah...",
@@ -4968,7 +4968,7 @@ const allContentData = {
                 "D. 9"
             ],
             "correctAnswer": "D. 9",
-            "explanation": "Pertama, kita lakukan manipulasi aljabar pada persamaan awal:\n$$ \\frac{x+y}{xy} = \\frac{1}{5} \\quad \\rightarrow \\quad 5x + 5y = xy $$\nSelanjutnya, pindahkan semua suku ke satu ruas untuk persiapan pemfaktoran:\n$$ xy - 5x - 5y = 0 $$\nDengan menambahkan $25$ pada kedua ruas, kita bisa melengkapkan pemfaktoran:\n$$ (x-5)(y-5) = 25 $$\nKarena $x$ dan $y$ adalah bilangan bulat, maka $(x-5)$ harus merupakan faktor bilangan bulat dari 25, yaitu $\\{ \\pm 1, \\pm 5, \\pm 25 \\}$.\n\nPenting: Dari persamaan awal $\\frac{1}{x} + \\frac{1}{y} = \\frac{1}{5}$, nilai $x$ dan $y$ tidak boleh nol. Kita periksa kondisi ini:\n$$ x = (x-5) + 5 $$\nAgar $x \\neq 0$, maka $(x-5)$ tidak boleh bernilai $-5$. Oleh karena itu, pasangan faktor $(-5, -5)$ tidak valid dan harus dikecualikan.\n\nBerikut adalah 5 pasangan faktor yang valid dan solusinya:\n• Jika $x-5=1$, maka $y-5=25 \\implies (x,y) = (6, 30)$\n• Jika $x-5=5$, maka $y-5=5 \\implies (x,y) = (10, 10)$\n• Jika $x-5=25$, maka $y-5=1 \\implies (x,y) = (30, 6)$\n• Jika $x-5=-1$, maka $y-5=-25 \\implies (x,y) = (4, -20)$\n• Jika $x-5=-25$, maka $y-5=-1 \\implies (x,y) = (-20, 4)$\n\nJadi, total ada 5 pasangan bilangan bulat $(x,y)$ yang memenuhi."
+            "explanation": "Pertama, kita lakukan manipulasi aljabar pada persamaan awal:\n$$ \\frac{x+y}{xy} = \\frac{1}{5} \\quad \\rightarrow \\quad 5x + 5y = xy $$\nSelanjutnya, pindahkan semua suku ke satu ruas untuk persiapan pemfaktoran:\n$$ xy - 5x - 5y = 0 $$\nDengan menambahkan $25$ pada kedua ruas, kita bisa melengkapkan pemfaktoran:\n$$ (x-5)(y-5) = 25 $$\nKarena $x$ dan $y$ adalah bilangan bulat, maka $(x-5)$ harus merupakan faktor bilangan bulat dari 25, yaitu $\\{ \\pm 1, \\pm 5, \\pm 25 \\}$.\n\nPenting: Dari persamaan awal $\\frac{1}{x} + \\frac{1}{y} = \\frac{1}{5}$, nilai $x$ dan $y$ tidak boleh nol. Kita periksa kondisi ini:\n$$ x = (x-5) + 5 $$\nAgar $x \\neq 0$, maka $(x-5)$ tidak boleh bernilai $-5$. Oleh karena itu, pasangan faktor $(-5, -5)$ tidak valid dan harus dikecualikan.\n\nBerikut adalah 5 pasangan faktor yang valid dan solusinya:\n• Jika $x-5=1$, maka $y-5=25 \\\implies (x,y) = (6, 30)$\n• Jika $x-5=5$, maka $y-5=5 \\\implies (x,y) = (10, 10)$\n• Jika $x-5=25$, maka $y-5=1 \\\implies (x,y) = (30, 6)$\n• Jika $x-5=-1$, maka $y-5=-25 \\\implies (x,y) = (4, -20)$\n• Jika $x-5=-25$, maka $y-5=-1 \\\implies (x,y) = (-20, 4)$\n\nJadi, total ada 5 pasangan bilangan bulat $(x,y)$ yang memenuhi."
         },
         {
             "questionText": "Sebuah jam dinding menunjukkan pukul 04:40. Berapakah sudut terkecil yang dibentuk oleh jarum jam dan jarum menit?",
@@ -5023,7 +5023,7 @@ const allContentData = {
                 "D. 300 cm²"
             ],
             "correctAnswer": "B. 150 cm²",
-            "explanation": "Misalkan sisi siku-sikunya adalah $a$ dan $b$. Diketahui $a+b+25 = 60$, maka $a+b=35$. Dari Pythagoras, $a^2+b^2=25^2=625$. Kita tahu $(a+b)^2=a^2+b^2+2ab$. Maka $35^2 = 625+2ab \implies 1225=625+2ab \implies 2ab = 600 \implies ab=300$. Luas segitiga adalah $\\frac{1}{2}ab = \\frac{1}{2}(300) = 150$ cm²."
+            "explanation": "Misalkan sisi siku-sikunya adalah $a$ dan $b$. Diketahui $a+b+25 = 60$, maka $a+b=35$. Dari Pythagoras, $a^2+b^2=25^2=625$. Kita tahu $(a+b)^2=a^2+b^2+2ab$. Maka $35^2 = 625+2ab \\implies 1225=625+2ab \\implies 2ab = 600 \\implies ab=300$. Luas segitiga adalah $\\frac{1}{2}ab = \\frac{1}{2}(300) = 150$ cm²."
         },
         {
             "questionText": "Berapakah sisa pembagian dari $1! + 2! + 3! + ... + 100!$ oleh 12?",
