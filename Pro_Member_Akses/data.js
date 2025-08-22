@@ -4989,9 +4989,8 @@ const allContentData = {
                 "C. -5 atau 7",
                 "D. -5 atau -1"
             ],
-            "correctAnswer": "B. 5 atau 1",
-            "explanation" : "$$ f(x) = ax + b \\quad \\Longrightarrow \\quad f(f(x)) = a(ax+b)+b = a^2x + ab + b $$ $$ f(f(x)) = 9x + 8 \\quad \\Longrightarrow \\quad a^2 = 9, \\; ab+b = 8 $$ $$ a^2 = 9 \\quad \\Longrightarrow \\quad a = 3 \\; \\text{ atau } \\; a = -3 $$ $$ \\text{Jika } a=3: \\; ab+b = b(a+1) = 8 \\quad \\Longrightarrow \\quad 4b=8 \\quad \\Longrightarrow \\quad b=2 \\quad \\Longrightarrow \\quad a+b=5 $$ $$ \\text{Jika } a=-3: \\; ab+b = b(a+1) = 8 \\quad \\Longrightarrow \\quad -2b=8 \\quad \\Longrightarrow \\quad b=-4 \\quad \\Longrightarrow \\quad a+b=-7 $$ $$ \\boxed{ \\\; a+b \\\; \\text{ bisa bernilai } 5 \\\; \\text{ atau } -7 } $$"
-        },
+            "correctAnswer": "B. 5 atau -7",
+            "explanation": "Substitusikan $f(x)$ ke dalam dirinya sendiri:\n$$ f(f(x)) = a(ax+b)+b = a^2x + ab + b $$\nSamakan dengan persamaan yang diketahui, $f(f(x)) = 9x+8$, maka kita dapatkan dua persamaan:\n$$ a^2 = 9 $$\n$$ ab+b = 8 \\quad \\rightarrow \\quad b(a+1) = 8 $$\nDari $a^2 = 9$, nilai $a$ yang mungkin adalah $3$ atau $-3$.\n\n**Kasus 1: Jika $a=3$**\n$$ b(3+1) = 8 \\quad \\rightarrow \\quad 4b=8 \\quad \\rightarrow \\quad b=2 $$\n$$ a+b = 3+2 = 5 $$\n\n**Kasus 2: Jika $a=-3$**\n$$ b(-3+1) = 8 \\quad \\rightarrow \\quad -2b=8 \\quad \\rightarrow \\quad b=-4 $$\n$$ a+b = -3 + (-4) = -7 $$\nJadi, nilai $a+b$ yang mungkin adalah 5 atau -7."        },
         {
             "questionText": "Terdapat 5 orang pria dan 4 orang wanita. Mereka akan duduk dalam satu baris. Jika posisi duduk harus berselang-seling antara pria dan wanita, ada berapa banyak cara mereka bisa duduk?",
             "options": [
