@@ -5053,9 +5053,9 @@ const allContentData = {
                 "A. 1",
                 "B. 2",
                 "C. √2023",
-                "D. 2024"
+                "D. √4047"
             ],
-            "correctAnswer": "B. 2",
+            "correctAnswer": "D. √4047",
             "explanation": "Untuk menyelesaikan soal ini, metode yang paling efisien adalah menggunakan substitusi aljabar agar tidak perlu menghitung angka yang besar.\n\n**Langkah 1: Gunakan Variabel Pengganti**\nKita misalkan salah satu angka di tengah sebagai variabel $x$:\n$$ x = 2024 $$\nDengan begitu, angka-angka lain dalam soal dapat dituliskan dalam bentuk $x$:\n•  $2025 = x + 1$\n•  $2023 = x - 1$\n•  $2022 = x - 2$\n\n**Langkah 2: Sederhanakan Ekspresi**\nMasukkan bentuk variabel ini ke dalam ekspresi di bawah akar:\n$$ \\sqrt{(x+1)(x-1) - x(x-2)} $$\nLakukan perkalian untuk setiap suku di dalam akar:\n$$ \\sqrt{(x^2 - 1) - (x^2 - 2x)} $$\nBuka kurung dan sederhanakan lebih lanjut:\n$$ \\sqrt{x^2 - 1 - x^2 + 2x} $$\n$$ \\sqrt{2x - 1} $$\n\n**Langkah 3: Hitung Nilai Akhir**\nSetelah mendapatkan bentuk sederhana, masukkan kembali nilai $x = 2024$:\n$$ \\sqrt{2(2024) - 1} $$\n$$ \\sqrt{4048 - 1} $$\n$$ \\sqrt{4047} $$\n\nJadi, nilai dari ekspresi tersebut adalah **$\\sqrt{4047}$**.\n\n**Catatan:** Dalam soal sejenis, seringkali hasilnya adalah bilangan bulat. Ada kemungkinan soal aslinya memiliki tipo. Namun, untuk soal yang tertulis, **$\\sqrt{4047}$** adalah jawaban yang benar."
         },
         {
