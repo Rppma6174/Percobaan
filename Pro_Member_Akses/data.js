@@ -4837,7 +4837,7 @@ const allContentData = {
                 "D. 5"
             ],
             "correctAnswer": "A. 3.5",
-            "explanation": "Kita tahu $(a+b)^2 = a^2+b^2+2ab$. Maka $1^2 = 2 + 2ab \\implies 1=2+2ab \\implies 2ab = -1 \\implies ab = -1/2$. Selanjutnya, kita kuadratkan $a^2+b^2$: $(a^2+b^2)^2 = a^4+b^4+2a^2b^2 = a^4+b^4+2(ab)^2$. Masukkan nilai yang diketahui: $2^2 = a^4+b^4+2(-1/2)^2 \\implies 4 = a^4+b^4+2(1/4) \\implies 4 = a^4+b^4+1/2$. Maka $a^4+b^4 = 4 - 1/2 = 3.5$."
+            "explanation": "Untuk menyelesaikan soal ini, kita akan menggunakan identitas aljabar untuk menemukan nilai yang tidak diketahui secara bertahap.\n\n**Langkah 1: Mencari Nilai dari $ab$**\nKita mulai dengan identitas kuadrat dari $(a+b)$:\n$$ (a+b)^2 = a^2 + b^2 + 2ab $$\nSubstitusikan nilai yang diketahui, yaitu $a+b=1$ dan $a^2+b^2=2$:\n$$ (1)^2 = (2) + 2ab $$\n$$ 1 = 2 + 2ab $$\nSelanjutnya, kita selesaikan untuk $ab$:\n$$ 1 - 2 = 2ab $$\n$$ -1 = 2ab $$\n$$ ab = -\\frac{1}{2} $$\n\n**Langkah 2: Mencari Nilai dari $a^4 + b^4$**\nSekarang, kita gunakan identitas kuadrat untuk $(a^2+b^2)$:\n$$ (a^2+b^2)^2 = (a^2)^2 + (b^2)^2 + 2a^2b^2 $$\n$$ (a^2+b^2)^2 = a^4 + b^4 + 2(ab)^2 $$\nKita susun ulang untuk mendapatkan $a^4+b^4$:\n$$ a^4 + b^4 = (a^2+b^2)^2 - 2(ab)^2 $$\nSubstitusikan nilai yang kita tahu, $a^2+b^2=2$ dan $ab = -\\frac{1}{2}$:\n$$ a^4 + b^4 = (2)^2 - 2(-\\frac{1}{2})^2 $$\n$$ a^4 + b^4 = 4 - 2(\\frac{1}{4}) $$\n$$ a^4 + b^4 = 4 - \\frac{1}{2} $$\n$$ a^4 + b^4 = 3.5 $$\n\nJadi, nilai akhir dari $a^4 + b^4$ adalah **3.5** atau **$\\frac{7}{2}$**."
         },
         {
             "questionText": "Rata-rata nilai dari 20 siswa adalah 7.5. Jika seorang siswa dengan nilai 9.5 keluar dari kelompok tersebut, berapakah rata-rata nilai sekarang?",
