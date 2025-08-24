@@ -6,6 +6,13 @@ const allContentData = {
             author: 'Tim UMT',
             summary: 'Ebook "Pengantar Kalkulus" ini menyajikan fondasi esensial untuk memahami kalkulus secara konseptual. Materi mencakup pembahasan mendasar mulai dari sistem bilangan real , pertidaksamaan , dan nilai mutlak. Fokus utama buku ini adalah pada konsep fungsi , termasuk jenis-jenisnya , operasi , komposisi, dan invers. Topik diakhiri dengan ulasan lengkap mengenai fungsi trigonometri dan inversnya.',
             filePath: 'Perpustakaan/Pengantar Kalkulus.pdf' // Ganti dengan path PDF Anda
+        },
+        {
+            id: 'perpustakaan-002',
+            title: 'Pertidaksamaan Aljabar',
+            author: 'Tim UMT',
+            summary: 'Ebook "Memahami Pertidaksamaan Aljabar" ini dirancang untuk membangun pemahaman konseptual dan intuitif mengenai berbagai jenis pertidaksamaan. Materi diawali dengan fondasi dasar pertidaksamaan linear satu variabel dan sistem pertidaksamaan linear dua variabel. Pembahasan berlanjut ke topik-topik yang lebih kompleks untuk tingkat SMA, meliputi pertidaksamaan kuadrat , rasional (pecahan) , nilai mutlak , eksponensial, dan logaritma. Ebook ini ditutup dengan materi lanjutan yang mencakup pertidaksamaan polinomial orde tinggi , trigonometri , serta pengenalan teorema pertidaksamaan klasik seperti AM-GM dan Cauchy-Schwarz.',
+            filePath: 'Perpustakaan/Pertidaksamaan Aljabar.pdf' // Ganti dengan path PDF Anda
         }
     ],
 
