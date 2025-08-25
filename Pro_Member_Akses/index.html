@@ -153,14 +153,27 @@
         .modal-btn-cancel { background-color: #30363D; color: var(--text-primary); }
         .modal-btn-cancel:hover { background-color: #484f58; }
         
-        .explanation-content {
+        /* === [CSS BARU UNTUK PEMBAHASAN] === */
+        /* Kontainer LUAR: Mengatur tinggi maksimal dan scroll vertikal di mobile */
+        .explanation-container-vertical {
+            max-height: 45vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 0.75rem;
+            background-color: #0d1117;
+        }
+
+        /* Kontainer DALAM: Mengatur format teks dan scroll horizontal */
+        .explanation-content-inner {
             overflow-wrap: break-word;
             word-wrap: break-word;
-            word-break: break-word;
             white-space: pre-wrap;
-            /* PERUBAHAN DI SINI: Mengunci scroll hanya ke arah horizontal */
-            overflow: auto hidden;
+            overflow-x: auto;
+            min-height: 100%; /* Memastikan inner container mengisi outer */
         }
+        /* === [AKHIR DARI CSS BARU] === */
 
         .quiz-nav-container {
             display: flex;
@@ -1065,7 +1078,11 @@ function renderQuizInterface() {
                  <hr class="border-gray-700 my-5"/>
                  <div>
                      <h4 class="font-bold text-lg text-cyan-300 mb-2">Pembahasan:</h4>
-                     <div id="explanation-text" class="text-gray-300 leading-relaxed explanation-content">${question.explanation}</div>
+                     <div class="text-gray-300 leading-relaxed">
+                        <div class="explanation-container-vertical">
+                           <div class="explanation-content-inner">${question.explanation}</div>
+                        </div>
+                     </div>
                  </div>
             </div>
             <hr class="border-gray-700 my-6"/>
@@ -1122,7 +1139,7 @@ function showAnswerAndExplanation(isRestoringState = false) {
     document.getElementById('explanation-container').classList.remove('hidden');
     
     if (window.MathJax) {
-        const explanationText = document.getElementById('explanation-text');
+        const explanationText = document.querySelector('.explanation-content-inner');
         MathJax.typesetPromise([explanationText]).catch(err => console.log('MathJax error:', err));
     }
 }
@@ -1234,7 +1251,11 @@ function jumpToQuestion(index) {
             <hr class="border-gray-700 my-5"/>
             <div>
                 <h4 class="font-bold text-lg text-cyan-300 mb-2">Pembahasan:</h4>
-                <div class="text-gray-300 leading-relaxed explanation-content">${q.explanation}</div>
+                <div class="text-gray-300 leading-relaxed">
+                   <div class="explanation-container-vertical">
+                      <div class="explanation-content-inner">${q.explanation}</div>
+                   </div>
+                </div>
             </div>
         </div>`;
         
