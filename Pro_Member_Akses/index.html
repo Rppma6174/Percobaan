@@ -154,6 +154,15 @@
         .modal-btn-danger:hover { background-color: #e4433b; }
         .modal-btn-cancel { background-color: #30363D; color: var(--text-primary); }
         .modal-btn-cancel:hover { background-color: #484f58; }
+        
+        /* === [CSS BARU UNTUK PEMBAHASAN AGAR TIDAK OVERFLOW] === */
+        .explanation-content {
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            word-break: break-word;
+            white-space: pre-wrap; /* Penting untuk menjaga format spasi dan baris baru dari data.js */
+        }
+        /* === [AKHIR DARI CSS BARU] === */
 
 /* === [TAMBAHKAN CSS INI] === */
 .quiz-nav-container {
@@ -1114,7 +1123,7 @@ function renderQuizInterface() {
                  <hr class="border-gray-700 my-5"/>
                  <div>
                      <h4 class="font-bold text-lg text-cyan-300 mb-2">Pembahasan:</h4>
-                     <div id="explanation-text" class="text-gray-300 leading-relaxed">${question.explanation}</div>
+                     <div id="explanation-text" class="text-gray-300 leading-relaxed explanation-content">${question.explanation}</div>
                  </div>
             </div>
             <hr class="border-gray-700 my-6"/>
@@ -1298,7 +1307,7 @@ function jumpToQuestion(index) {
             <hr class="border-gray-700 my-5"/>
             <div>
                 <h4 class="font-bold text-lg text-cyan-300 mb-2">Pembahasan:</h4>
-                <div class="text-gray-300 leading-relaxed">${q.explanation}</div>
+                <div class="text-gray-300 leading-relaxed explanation-content">${q.explanation}</div>
             </div>
         </div>`;
         
@@ -1431,6 +1440,3 @@ function showConfirmationModal(options) {
 
 </body>
 </html>
-
-
-
