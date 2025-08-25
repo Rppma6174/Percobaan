@@ -4966,7 +4966,7 @@ const allContentData = {
     "subject": "Matematika",
     "totalQuestions": 20,
     "questions": [
-            {
+    {
         "questionText": "Banyaknya pasangan bilangan bulat $(x, y)$ yang memenuhi persamaan $\\frac{1}{x} + \\frac{1}{y} = \\frac{1}{5}$ adalah...",
         "options": [
             "A. 4",
@@ -5030,7 +5030,7 @@ const allContentData = {
             "D. 300 cm²"
         ],
         "correctAnswer": "B. 150 cm²",
-        "explanation": "➡️ LANGKAH 1: TENTUKAN JUMLAH SISI SIKU-SIKU\nMisalkan sisi siku-sikunya adalah $a$ dan $b$.\nKeliling: $a+b+25 = 60 \\rightarrow a+b=35$.\nPythagoras: $a^2+b^2=25^2=625$.\n\n➡️ LANGKAH 2: CARI HASIL KALI SISI\nGunakan identitas $(a+b)^2 = a^2+b^2+2ab$.\n$$ (35)^2 = 625 + 2ab $$\n$$ 1225 = 625 + 2ab $$\n$$ 2ab = 1225 - 625 = 600 $$\n\n➡️ LANGKAH 3: HITUNG LUAS\nLuas segitiga adalah $\\frac{1}{2}ab$. Dari langkah 2, kita dapat $\\frac{1}{2} \\times (2ab) = \\frac{1}{2} \\times 600$, sehingga:\n$$ ab = 300 $$\n$$ \\text{Luas} = \\frac{1}{2}(300) = 150 \\text{ cm}^2 $$"
+        "explanation": "➡️ LANGKAH 1: TENTUKAN JUMLAH SISI SIKU-SIKU\nMisalkan sisi siku-sikunya adalah $a$ dan $b$.\nKeliling: $a+b+25 = 60 \\rightarrow a+b=35$.\nPythagoras: $a^2+b^2=25^2=625$.\n\n➡️ LANGKAH 2: CARI HASIL KALI SISI\nGunakan identitas $(a+b)^2 = a^2+b^2+2ab$.\n$$ (35)^2 = 625 + 2ab $$\n$$ 1225 = 625 + 2ab $$\n$$ 2ab = 1225 - 625 = 600 $$\n\n➡️ LANGKAH 3: HITUNG LUAS\nLuas segitiga adalah $\\frac{1}{2}ab$. Dari langkah 2, kita dapat $ab = 300$. Maka:\n$$ \\text{Luas} = \\frac{1}{2}(300) = 150 \\text{ cm}^2 $$"
     },
     {
         "questionText": "Berapakah sisa pembagian dari $1! + 2! + 3! + ... + 100!$ oleh 12?",
@@ -5140,7 +5140,7 @@ const allContentData = {
             "D. $x^2 + 19x - 9 = 0$"
         ],
         "correctAnswer": "A. $x^2 - 19x + 9 = 0$",
-        "explanation": "➡️ LANGKAH 1: GUNAKAN RUMUS VIETA\nDari persamaan awal: $p+q=5$ dan $pq=3$.\n\n➡️ LANGKAH 2: CARI JUMLAH DAN HASIL KALI AKAR BARU\nJumlah akar baru: $p^2+q^2=(p+q)^2-2pq = 5^2-2(3)=25-6=19$.\nHasil kali akar baru: $p^2q^2=(pq)^2=3^2=9$.\n\n➡️ LANGKAH 3: SUSUN PERSAMAAN BARU\nRumus: $x^2 - (\\text{Jumlah Akar})x + (\\text{Hasil Kali Akar}) = 0$.\n$$ x^2 - 19x + 9 = 0 $$"
+        "explanation": "➡️ LANGKAH 1: GUNAKAN RUMUS VIETA\nDari persamaan awal: $p+q=5$ dan $pq=3$.\n\n➡️ LANGKAH 2: CARI JUMLAH DAN HASIL KALI AKAR BARU\nJumlah Akar Baru:\n$$ p^2+q^2 = (p+q)^2-2pq $$\n$$ = 5^2-2(3) = 25-6 = 19 $$\n\nHasil Kali Akar Baru:\n$$ p^2q^2 = (pq)^2 = 3^2 = 9 $$\n\n➡️ LANGKAH 3: SUSUN PERSAMAAN KUADRAT BARU\nGunakan rumus umum $x^2 - (\\text{Jumlah Akar})x + (\\text{Hasil Kali Akar}) = 0$.\n$$ x^2 - (19)x + (9) = 0 $$\nSehingga, persamaan kuadrat yang baru adalah:\n$$ x^2 - 19x + 9 = 0 $$"
     },
     {
         "questionText": "Suatu fungsi didefinisikan secara rekursif $f(n) = f(n-1) + 2n - 1$ untuk $n \\ge 2$ dan $f(1)=1$. Nilai dari $f(10)$ adalah...",
@@ -5162,7 +5162,7 @@ const allContentData = {
             "D. 9√2 cm"
         ],
         "correctAnswer": "C. 9 cm",
-        "explanation": "➡️ METODE 1: PYTHAGORAS 3D\nTempatkan titik C di (0,0,0). Maka G(0,0,6), E(6,6,6), dan P(0,0,3).\nJarak EP = $\\sqrt{(6-0)^2+(6-0)^2+(6-3)^2} = \\sqrt{36+36+9} = \\sqrt{81}=9$ cm.\n\n➡️ METODE 2: SEGITIGA SIKU-SIKU\nPerhatikan segitiga EGP yang siku-siku di G.\nPanjang EG (diagonal sisi) = $6\\sqrt{2}$ cm.\nPanjang GP (setengah rusuk) = $3$ cm.\n$$ EP^2 = EG^2 + GP^2 = (6\\sqrt{2})^2 + 3^2 $$\n$$ EP^2 = 72 + 9 = 81 $$\n$$ EP = \\sqrt{81} = 9 \\text{ cm} $$"
+        "explanation": "➡️ METODE: SEGITIGA SIKU-SIKU\nKita bisa membuat segitiga siku-siku imajiner, yaitu $\\triangle EGP$ yang siku-siku di G.\n\n➡️ LANGKAH 1: CARI PANJANG SISI SEGITIGA\nPanjang EG adalah diagonal sisi kubus:\n$$ EG = \\text{rusuk} \\times \\sqrt{2} = 6\\sqrt{2} \\text{ cm} $$\nPanjang GP adalah setengah dari rusuk CG:\n$$ GP = \\frac{1}{2} \\times 6 = 3 \\text{ cm} $$\n\n➡️ LANGKAH 2: GUNAKAN PYTHAGORAS\nJarak EP adalah sisi miring dari $\\triangle EGP$.\n$$ EP^2 = EG^2 + GP^2 $$\n$$ EP^2 = (6\\sqrt{2})^2 + 3^2 = 72 + 9 = 81 $$\n$$ EP = \\sqrt{81} = 9 \\text{ cm} $$"
     },
     {
         "questionText": "Peluang Amir lulus ujian adalah 0.8 dan peluang Budi lulus ujian adalah 0.7. Peluang bahwa hanya salah satu dari mereka yang lulus ujian adalah...",
