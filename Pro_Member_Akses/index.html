@@ -206,39 +206,6 @@
             background-color: #39D35330;
             border-color: var(--accent-green);
         }
-
-        /* [BARU] Styling untuk viewer materi HTML */
-        .materi-viewer-content {
-            /* Atur agar konten HTML dari file eksternal mengikuti tema gelap */
-            background-color: transparent;
-            color: var(--text-primary);
-            line-height: 1.7;
-        }
-        .materi-viewer-content h1, .materi-viewer-content h2, .materi-viewer-content h3 {
-            color: var(--accent-cyan);
-            border-bottom: 1px solid var(--border-color);
-            padding-bottom: 0.5rem;
-            margin-top: 1.5rem;
-            margin-bottom: 1rem;
-        }
-        .materi-viewer-content a {
-            color: var(--accent-green);
-            text-decoration: underline;
-        }
-        .materi-viewer-content code {
-            background-color: var(--bg-main);
-            padding: 0.2rem 0.4rem;
-            border-radius: 0.25rem;
-            font-family: 'Fira Code', monospace;
-        }
-        .materi-viewer-content blockquote {
-            border-left: 4px solid var(--accent-cyan);
-            padding-left: 1rem;
-            margin-left: 0;
-            color: var(--text-secondary);
-            font-style: italic;
-        }
-
     </style>
 </head>
 <body class="text-white">
@@ -413,404 +380,360 @@
     // =================================================================================
     // BAGIAN 3: FUNGSI RENDER UNTUK SETIAP HALAMAN
     // =================================================================================
-function renderDashboardPage() {
-    appContent.innerHTML = `
-        <header class="panel flex justify-between items-center">
-            <div>
-                <h2 id="user-greeting" class="text-xl font-bold"></h2>
-                <p class="text-sm text-gray-400">Selamat datang di Command Center Anda.</p>
-            </div>
-        </header>
-        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            <div class="col-span-1 lg:col-span-2 space-y-6">
-                <div class="panel">
-                    <h4 class="font-bold text-lg mb-4">Status Anda</h4>
-                    <div id="status-container" class="space-y-4"></div>
+    function renderDashboardPage() {
+        appContent.innerHTML = `
+            <header class="panel flex justify-between items-center">
+                <div>
+                    <h2 id="user-greeting" class="text-xl font-bold"></h2>
+                    <p class="text-sm text-gray-400">Selamat datang di Command Center Anda.</p>
                 </div>
-                <div id="last-score-widget-container"></div>
-                <div id="last-activity-container" class="space-y-6"></div>
-            </div>
-            <div class="col-span-1 space-y-6">
-                <div class="panel">
-                    <h4 class="font-bold text-lg mb-4">Pencapaian</h4>
-                    <div id="lencana-container" class="flex gap-4"></div>
+            </header>
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="col-span-1 lg:col-span-2 space-y-6">
+                    <div class="panel">
+                        <h4 class="font-bold text-lg mb-4">Status Anda</h4>
+                        <div id="status-container" class="space-y-4"></div>
+                    </div>
+                    <div id="last-score-widget-container"></div>
+                    <div id="last-activity-container" class="space-y-6"></div>
                 </div>
-                 <div class="panel">
-                    <h4 class="font-bold text-lg mb-4">Info Terbaru UMT</h4>
-                    <div id="social-media-container" class="space-y-4"></div>
-                </div>
-            </div>
-        </div>
-    `;
-    initializeAppDashboardWidgets();
-}
-    
-// [FUNGSI DIUBAH] - Menggunakan showMateriContent untuk menampilkan materi
-function renderMateriPage() {
-    let accordionHTML = '';
-    const materiData = allContentData.materi;
-
-    for (const gradeKey in materiData) {
-        const itemsHTML = materiData[gradeKey].map(item => `
-            <li id="card-${item.id}"
-                class="card-item-list block p-3 rounded-md hover:bg-gray-700 cursor-pointer"
-                onclick="showMateriContent('${item.id}', '${gradeKey}')"> 
-                <span class="font-semibold">${item.title}</span>
-                <span class="block text-xs text-gray-400">${item.type}</span>
-            </li>
-        `).join('');
-
-        accordionHTML += `
-            <div class="accordion-item border-b border-gray-700" data-accordion-group>
-                <h2>
-                    <button type="button" class="accordion-button flex items-center justify-between w-full p-4 font-semibold text-left text-cyan-300">
-                        <span>${gradeKey}</span>
-                        <i class="accordion-icon fa-solid fa-chevron-down shrink-0 transition-transform duration-200"></i>
-                    </button>
-                </h2>
-                <div class="accordion-content hidden p-2">
-                    <ul class="space-y-2">${itemsHTML}</ul>
+                <div class="col-span-1 space-y-6">
+                    <div class="panel">
+                        <h4 class="font-bold text-lg mb-4">Pencapaian</h4>
+                        <div id="lencana-container" class="flex gap-4"></div>
+                    </div>
+                     <div class="panel">
+                        <h4 class="font-bold text-lg mb-4">Info Terbaru UMT</h4>
+                        <div id="social-media-container" class="space-y-4"></div>
+                    </div>
                 </div>
             </div>
         `;
+        initializeAppDashboardWidgets();
     }
+    
+    // [FUNGSI DIPERBAIKI] - Onclick sekarang memanggil openMateri untuk pelacakan
+    function renderMateriPage() {
+        let accordionHTML = '';
+        const materiData = allContentData.materi;
 
-    const materiPageHTML = `
-        <div class="panel">
-            <h2 class="text-2xl font-bold text-cyan-400">Materi UMT Learning</h2>
-            <p class="text-sm text-gray-400 mb-6">Cari atau pilih Materi UMT Learning yang ingin kamu pelajari.</p>
-            <div class="relative mb-6">
-                <input type="text" id="materi-search-input" class="w-full bg-gray-900/80 border border-gray-600 rounded-lg py-2 pl-10 pr-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-cyan-500 focus:outline-none" placeholder="Ketik untuk mencari materi...">
-                <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
-            </div>
-            <div class="border border-gray-700 rounded-lg bg-gray-900/50">
-                ${accordionHTML}
-            </div>
-        </div>
-    `;
-    appContent.innerHTML = materiPageHTML;
+        for (const gradeKey in materiData) {
+            const itemsHTML = materiData[gradeKey].map(item => `
+                <li id="card-${item.id}"
+                    class="card-item-list block p-3 rounded-md hover:bg-gray-700 cursor-pointer"
+                    onclick="openMateri('${item.id}', '${item.filePath}')"> 
+                    <span class="font-semibold">${item.title}</span>
+                    <span class="block text-xs text-gray-400">${item.type}</span>
+                </li>
+            `).join('');
 
-    document.querySelectorAll('.accordion-button').forEach(button => {
-        button.addEventListener('click', () => {
-            const content = button.parentElement.nextElementSibling;
-            const icon = button.querySelector('.accordion-icon');
-            content.classList.toggle('hidden');
-            icon.classList.toggle('rotate-180');
-        });
-    });
-
-    setupMateriSearch();
-}
-
-function setupMateriSearch() {
-    const searchInput = document.getElementById('materi-search-input');
-    if (!searchInput) return;
-
-    searchInput.addEventListener('input', (e) => {
-        const searchTerm = e.target.value.toLowerCase().trim();
-        const allMateriItems = document.querySelectorAll('.card-item-list');
-        const allAccordionGroups = document.querySelectorAll('[data-accordion-group]');
-
-        if (searchTerm === '') {
-            allMateriItems.forEach(item => {
-                item.style.display = 'block';
-            });
-            allAccordionGroups.forEach(group => {
-                group.style.display = 'block';
-                group.querySelector('.accordion-content').classList.add('hidden');
-                group.querySelector('.accordion-icon').classList.remove('rotate-180');
-            });
-            return;
+            accordionHTML += `
+                <div class="accordion-item border-b border-gray-700" data-accordion-group>
+                    <h2>
+                        <button type="button" class="accordion-button flex items-center justify-between w-full p-4 font-semibold text-left text-cyan-300">
+                            <span>${gradeKey}</span>
+                            <i class="accordion-icon fa-solid fa-chevron-down shrink-0 transition-transform duration-200"></i>
+                        </button>
+                    </h2>
+                    <div class="accordion-content hidden p-2">
+                        <ul class="space-y-2">${itemsHTML}</ul>
+                    </div>
+                </div>
+            `;
         }
 
-        allAccordionGroups.forEach(group => {
-            const itemsInGroup = group.querySelectorAll('.card-item-list');
-            let hasVisibleItemInGroup = false;
+        const materiPageHTML = `
+            <div class="panel">
+                <h2 class="text-2xl font-bold text-cyan-400">Materi UMT Learning</h2>
+                <p class="text-sm text-gray-400 mb-6">Cari atau pilih Materi UMT Learning yang ingin kamu pelajari.</p>
+                <div class="relative mb-6">
+                    <input type="text" id="materi-search-input" class="w-full bg-gray-900/80 border border-gray-600 rounded-lg py-2 pl-10 pr-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-cyan-500 focus:outline-none" placeholder="Ketik untuk mencari materi...">
+                    <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
+                </div>
+                <div class="border border-gray-700 rounded-lg bg-gray-900/50">
+                    ${accordionHTML}
+                </div>
+            </div>
+        `;
+        appContent.innerHTML = materiPageHTML;
 
-            itemsInGroup.forEach(item => {
-                const title = item.querySelector('.font-semibold').textContent.toLowerCase();
-                if (title.includes(searchTerm)) {
+        document.querySelectorAll('.accordion-button').forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.parentElement.nextElementSibling;
+                const icon = button.querySelector('.accordion-icon');
+                content.classList.toggle('hidden');
+                icon.classList.toggle('rotate-180');
+            });
+        });
+
+        setupMateriSearch();
+    }
+
+    // [FUNGSI BARU] - Melacak progres sebelum navigasi ke halaman HTML
+    function openMateri(itemId, filePath) {
+        if (!filePath || filePath === '#') {
+            showToast('Konten untuk materi ini belum tersedia.', 'info');
+            return; 
+        }
+
+        let materiItem = null;
+        for (const gradeKey in allContentData.materi) {
+            const foundItem = allContentData.materi[gradeKey].find(item => item.id === itemId);
+            if (foundItem) {
+                materiItem = foundItem;
+                break;
+            }
+        }
+
+        if (materiItem) {
+            updateLastActivity('materi', materiItem);
+            markAsCompleted(itemId);
+        }
+
+        window.location.href = filePath;
+    }
+
+    function setupMateriSearch() {
+        const searchInput = document.getElementById('materi-search-input');
+        if (!searchInput) return;
+
+        searchInput.addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase().trim();
+            const allMateriItems = document.querySelectorAll('.card-item-list');
+            const allAccordionGroups = document.querySelectorAll('[data-accordion-group]');
+
+            if (searchTerm === '') {
+                allMateriItems.forEach(item => {
                     item.style.display = 'block';
-                    hasVisibleItemInGroup = true;
+                });
+                allAccordionGroups.forEach(group => {
+                    group.style.display = 'block';
+                    group.querySelector('.accordion-content').classList.add('hidden');
+                    group.querySelector('.accordion-icon').classList.remove('rotate-180');
+                });
+                return;
+            }
+
+            allAccordionGroups.forEach(group => {
+                const itemsInGroup = group.querySelectorAll('.card-item-list');
+                let hasVisibleItemInGroup = false;
+
+                itemsInGroup.forEach(item => {
+                    const title = item.querySelector('.font-semibold').textContent.toLowerCase();
+                    if (title.includes(searchTerm)) {
+                        item.style.display = 'block';
+                        hasVisibleItemInGroup = true;
+                    } else {
+                        item.style.display = 'none';
+                    }
+                });
+
+                if (hasVisibleItemInGroup) {
+                    group.style.display = 'block';
+                    group.querySelector('.accordion-content').classList.remove('hidden');
+                    group.querySelector('.accordion-icon').classList.add('rotate-180');
                 } else {
-                    item.style.display = 'none';
+                    group.style.display = 'none';
                 }
             });
-
-            if (hasVisibleItemInGroup) {
-                group.style.display = 'block';
-                group.querySelector('.accordion-content').classList.remove('hidden');
-                group.querySelector('.accordion-icon').classList.add('rotate-180');
-            } else {
-                group.style.display = 'none';
-            }
         });
-    });
-}
-    
-// [FUNGSI DIUBAH TOTAL] - Untuk memuat konten HTML secara dinamis
-async function showMateriContent(itemId, gradeKey) {
-    const materiDalamGrade = allContentData.materi[gradeKey];
-    const currentIndex = materiDalamGrade.findIndex(item => item.id === itemId);
-    
-    if (currentIndex === -1) {
-        showToast("Materi tidak ditemukan!", "error");
-        return;
     }
+        
+    function renderVideoPage() {
+        const categories = ['Semua', ...new Set(allContentData.video.map(item => item.category))];
 
-    const materiItem = materiDalamGrade[currentIndex];
-
-    // Simpan progres dan aktivitas terakhir
-    updateLastActivity('materi', materiItem);
-    markAsCompleted(itemId);
-
-    const hasPrev = currentIndex > 0;
-    const hasNext = currentIndex < materiDalamGrade.length - 1;
-    
-    const prevItemParams = hasPrev ? `'${materiDalamGrade[currentIndex - 1].id}', '${gradeKey}'` : '';
-    const nextItemParams = hasNext ? `'${materiDalamGrade[currentIndex + 1].id}', '${gradeKey}'` : '';
-
-    const viewerHTML = `
-        <div class="panel">
-            <div class="flex justify-between items-center mb-4 flex-wrap gap-4">
-                <button onclick="navigateTo('materi', document.querySelector('.sidebar-link[onclick*=\\'materi\\']'))" class="nav-btn bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2">
-                    <i class="fa-solid fa-chevron-left"></i> Kembali
-                </button>
-                <h2 class="text-xl font-bold text-cyan-400 text-center flex-1">${materiItem.title}</h2>
-            </div>
-            <div id="html-content-container" class="materi-viewer-content min-h-[300px]">
-                <p class="text-center p-8">Memuat konten...</p>
-            </div>
-            <hr class="border-gray-700 my-6"/>
-            <div class="flex justify-between items-center">
-                 <button onclick="showMateriContent(${prevItemParams})" class="nav-btn bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-6 rounded-lg" ${!hasPrev ? 'disabled' : ''}>Sebelumnya</button>
-                 <button onclick="showMateriContent(${nextItemParams})" class="nav-btn bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-6 rounded-lg" ${!hasNext ? 'disabled' : ''}>Selanjutnya</button>
-            </div>
-        </div>
-    `;
-    appContent.innerHTML = viewerHTML;
-
-    const contentContainer = document.getElementById('html-content-container');
-    if (materiItem.filePath && materiItem.filePath !== '#') {
-        try {
-            const response = await fetch(materiItem.filePath);
-            if (!response.ok) throw new Error('File tidak ditemukan');
-            const htmlContent = await response.text();
-            contentContainer.innerHTML = htmlContent;
-            if (window.MathJax) {
-                MathJax.typesetPromise([contentContainer]).catch(err => console.log('MathJax error:', err));
-            }
-        } catch (error) {
-            contentContainer.innerHTML = `<p class="text-center p-8 text-red-400">Gagal memuat konten. Pastikan file di ${materiItem.filePath} ada.</p>`;
-            console.error("Gagal fetch materi:", error);
-        }
-    } else {
-        contentContainer.innerHTML = `<p class="text-center p-8 text-yellow-400">Konten untuk materi ini belum tersedia.</p>`;
-    }
-}
-    
-function renderVideoPage() {
-    const categories = ['Semua', ...new Set(allContentData.video.map(item => item.category))];
-
-    const filterButtonsHTML = categories.map(category => `
-        <button class="filter-btn text-sm py-2 px-4 rounded-full bg-gray-700 hover:bg-cyan-600 transition-colors" data-filter="${category}">
-            ${category}
-        </button>
-    `).join('');
-
-    const videoHTML = allContentData.video.map(item => `
-        <div class="video-card card-item p-4 rounded-lg flex flex-col" data-category="${item.category}" onclick="playVideoInModal('${item.videoId}', '${item.title}')">
-            <img src="https://img.youtube.com/vi/${item.videoId}/mqdefault.jpg" alt="${item.title}" class="rounded-md mb-3">
-            <h3 class="font-bold text-base mb-2 flex-grow">${item.title}</h3>
-            
-            <div class="text-xs font-mono text-cyan-300 flex items-center gap-2">
-                <img src="UMT-Logo - Copy.png" alt="UMT Logo" class="w-4 h-4 rounded-full"> <span>Premium Video</span> </div>
-            </div>
-    `).join('');
-
-    appContent.innerHTML = `
-        <div class="panel">
-            <h2 class="text-2xl font-bold text-cyan-400">Video Pembelajaran</h2>
-            <p class="text-sm text-gray-400 mb-6">Pilih kategori atau tonton video pilihan untuk pemahaman lebih dalam.</p>
-            
-            <div class="mb-8 flex flex-wrap gap-2" id="video-filter-container">
-                ${filterButtonsHTML}
-            </div>
-
-            <div id="video-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                ${videoHTML}
-            </div>
-        </div>
-    `;
-
-    setupVideoFilter();
-}
-
-function playVideoInModal(videoId, title) {
-    const videoItem = allContentData.video.find(v => v.videoId === videoId);
-    if (videoItem) {
-        markAsCompleted(videoItem.id, { showToast: true });
-        updateLastActivity('video', videoItem);
-    }
-
-    const videoPlayerHTML = `
-        <div class="video-responsive-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-            <iframe
-                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen>
-            </iframe>
-        </div>
-    `;
-
-    showConfirmationModal({
-        title: title,
-        message: videoPlayerHTML,
-        confirmText: 'Tutup',
-        showCancelButton: false,
-        confirmButtonClass: 'modal-btn-confirm mt-4 w-full justify-center',
-    });
-}
-
-function setupVideoFilter() {
-    const filterContainer = document.getElementById('video-filter-container');
-    const videoCards = document.querySelectorAll('.video-card');
-    if (!filterContainer) return;
-
-    filterContainer.querySelector('[data-filter="Semua"]').classList.add('bg-cyan-600');
-
-    filterContainer.addEventListener('click', (e) => {
-        if (!e.target.matches('.filter-btn')) return;
-
-        const selectedFilter = e.target.dataset.filter;
-
-        document.querySelectorAll('#video-filter-container .filter-btn').forEach(btn => {
-            btn.classList.remove('bg-cyan-600');
-        });
-        e.target.classList.add('bg-cyan-600');
-
-        videoCards.forEach(card => {
-            if (selectedFilter === 'Semua' || card.dataset.category === selectedFilter) {
-                card.style.display = 'flex';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-    });
-}
-    
-function renderBankSoalPage() {
-    const categories = ['Semua', ...new Set(allContentData.bankSoal.map(quiz => quiz.category || 'Lainnya'))];
-
-    const dropdownItemsHTML = categories.map(category => `
-        <div class="dropdown-item" data-filter="${category}">${category}</div>
-    `).join('');
-
-    const dropdownFilterHTML = `
-        <div class="mb-8">
-            <label class="block text-sm font-medium text-gray-400 mb-2">Filter Kategori:</label>
-            <div class="dropdown-container" id="filter-dropdown">
-                <button class="dropdown-button" id="dropdown-button">
-                    <span id="dropdown-label">Semua</span>
-                    <i class="fa-solid fa-chevron-down"></i>
-                </button>
-                <div class="dropdown-menu no-scrollbar" id="dropdown-menu">
-                    ${dropdownItemsHTML}
-                </div>
-            </div>
-        </div>
-    `;
-
-    const categoriesHTML = allContentData.bankSoal.reduce((acc, quiz) => {
-        const category = quiz.category || 'Lainnya';
-        if (!acc[category]) acc[category] = [];
-        acc[category].push(quiz);
-        return acc;
-    }, {});
-
-    let quizSectionsHTML = '';
-    for (const category in categoriesHTML) {
-        const quizzes = categoriesHTML[category];
-        const cardsHTML = quizzes.map(quiz => `
-            <div class="card-item p-6 rounded-lg flex flex-col flex-shrink-0 w-72 md:w-80" onclick="startQuiz('${quiz.id}')">
-                <h3 class="font-bold text-lg mb-2">${quiz.title}</h3>
-                <p class="text-sm text-gray-400 mb-4">${quiz.subject}</p>
-                <div class="mt-auto text-xs font-mono bg-gray-900/50 text-cyan-300 rounded-full px-3 py-1 self-start">
-                    ${quiz.totalQuestions} Soal
-                </div>
-            </div>
+        const filterButtonsHTML = categories.map(category => `
+            <button class="filter-btn text-sm py-2 px-4 rounded-full bg-gray-700 hover:bg-cyan-600 transition-colors" data-filter="${category}">
+                ${category}
+            </button>
         `).join('');
 
-        quizSectionsHTML += `
-            <div class="quiz-category-section mb-8" data-category="${category}">
-                <h3 class="text-xl font-bold mb-4 text-cyan-300">${category}</h3>
-                <div class="no-scrollbar flex overflow-x-auto gap-4 pb-4">
-                    ${cardsHTML}
+        const videoHTML = allContentData.video.map(item => `
+            <div class="video-card card-item p-4 rounded-lg flex flex-col" data-category="${item.category}" onclick="playVideoInModal('${item.videoId}', '${item.title}')">
+                <img src="https://img.youtube.com/vi/${item.videoId}/mqdefault.jpg" alt="${item.title}" class="rounded-md mb-3">
+                <h3 class="font-bold text-base mb-2 flex-grow">${item.title}</h3>
+                <div class="text-xs font-mono text-cyan-300 flex items-center gap-2">
+                    <img src="UMT-Logo - Copy.png" alt="UMT Logo" class="w-4 h-4 rounded-full"> <span>Premium Video</span> </div>
+                </div>
+        `).join('');
+
+        appContent.innerHTML = `
+            <div class="panel">
+                <h2 class="text-2xl font-bold text-cyan-400">Video Pembelajaran</h2>
+                <p class="text-sm text-gray-400 mb-6">Pilih kategori atau tonton video pilihan untuk pemahaman lebih dalam.</p>
+                <div class="mb-8 flex flex-wrap gap-2" id="video-filter-container">
+                    ${filterButtonsHTML}
+                </div>
+                <div id="video-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    ${videoHTML}
                 </div>
             </div>
         `;
+
+        setupVideoFilter();
     }
-    
-    const bankSoalHTML = `
-        <div class="panel">
-            <h2 class="text-2xl font-bold mb-1 text-cyan-400">Bank Soal</h2>
-            <p class="text-sm text-gray-400 mb-6">Pilih paket soal untuk mulai berlatih.</p>
-            
-            ${dropdownFilterHTML}
 
-            <div id="quiz-list-container">
-                ${quizSectionsHTML}
+    function playVideoInModal(videoId, title) {
+        const videoItem = allContentData.video.find(v => v.videoId === videoId);
+        if (videoItem) {
+            markAsCompleted(videoItem.id, { showToast: true });
+            updateLastActivity('video', videoItem);
+        }
+
+        const videoPlayerHTML = `
+            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                <iframe
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                    src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
             </div>
-        </div>
-    `;
-    appContent.innerHTML = bankSoalHTML;
+        `;
 
-    setupBankSoalFilter();
-}
+        showConfirmationModal({
+            title: title,
+            message: videoPlayerHTML,
+            confirmText: 'Tutup',
+            showCancelButton: false,
+            confirmButtonClass: 'modal-btn-confirm mt-4 w-full justify-center',
+        });
+    }
 
-function setupBankSoalFilter() {
-    const dropdownContainer = document.getElementById('filter-dropdown');
-    if (!dropdownContainer) return;
+    function setupVideoFilter() {
+        const filterContainer = document.getElementById('video-filter-container');
+        const videoCards = document.querySelectorAll('.video-card');
+        if (!filterContainer) return;
 
-    const button = document.getElementById('dropdown-button');
-    const menu = document.getElementById('dropdown-menu');
-    const label = document.getElementById('dropdown-label');
-    const items = menu.querySelectorAll('.dropdown-item');
-    const quizSections = document.querySelectorAll('.quiz-category-section');
+        filterContainer.querySelector('[data-filter="Semua"]').classList.add('bg-cyan-600');
 
-    button.addEventListener('click', (event) => {
-        event.stopPropagation();
-        menu.classList.toggle('open');
-        button.classList.toggle('open');
-    });
+        filterContainer.addEventListener('click', (e) => {
+            if (!e.target.matches('.filter-btn')) return;
 
-    items.forEach(item => {
-        item.addEventListener('click', () => {
-            const selectedFilter = item.getAttribute('data-filter');
-            label.textContent = selectedFilter;
+            const selectedFilter = e.target.dataset.filter;
 
-            quizSections.forEach(section => {
-                if (selectedFilter === 'Semua' || section.dataset.category === selectedFilter) {
-                    section.style.display = 'block';
+            document.querySelectorAll('#video-filter-container .filter-btn').forEach(btn => {
+                btn.classList.remove('bg-cyan-600');
+            });
+            e.target.classList.add('bg-cyan-600');
+
+            videoCards.forEach(card => {
+                if (selectedFilter === 'Semua' || card.dataset.category === selectedFilter) {
+                    card.style.display = 'flex';
                 } else {
-                    section.style.display = 'none';
+                    card.style.display = 'none';
                 }
             });
-
-            menu.classList.remove('open');
-            button.classList.remove('open');
         });
-    });
+    }
+        
+    function renderBankSoalPage() {
+        const categories = ['Semua', ...new Set(allContentData.bankSoal.map(quiz => quiz.category || 'Lainnya'))];
 
-    window.addEventListener('click', (event) => {
-        if (!dropdownContainer.contains(event.target)) {
-            menu.classList.remove('open');
-            button.classList.remove('open');
+        const dropdownItemsHTML = categories.map(category => `
+            <div class="dropdown-item" data-filter="${category}">${category}</div>
+        `).join('');
+
+        const dropdownFilterHTML = `
+            <div class="mb-8">
+                <label class="block text-sm font-medium text-gray-400 mb-2">Filter Kategori:</label>
+                <div class="dropdown-container" id="filter-dropdown">
+                    <button class="dropdown-button" id="dropdown-button">
+                        <span id="dropdown-label">Semua</span>
+                        <i class="fa-solid fa-chevron-down"></i>
+                    </button>
+                    <div class="dropdown-menu no-scrollbar" id="dropdown-menu">
+                        ${dropdownItemsHTML}
+                    </div>
+                </div>
+            </div>
+        `;
+
+        const categoriesHTML = allContentData.bankSoal.reduce((acc, quiz) => {
+            const category = quiz.category || 'Lainnya';
+            if (!acc[category]) acc[category] = [];
+            acc[category].push(quiz);
+            return acc;
+        }, {});
+
+        let quizSectionsHTML = '';
+        for (const category in categoriesHTML) {
+            const quizzes = categoriesHTML[category];
+            const cardsHTML = quizzes.map(quiz => `
+                <div class="card-item p-6 rounded-lg flex flex-col flex-shrink-0 w-72 md:w-80" onclick="startQuiz('${quiz.id}')">
+                    <h3 class="font-bold text-lg mb-2">${quiz.title}</h3>
+                    <p class="text-sm text-gray-400 mb-4">${quiz.subject}</p>
+                    <div class="mt-auto text-xs font-mono bg-gray-900/50 text-cyan-300 rounded-full px-3 py-1 self-start">
+                        ${quiz.totalQuestions} Soal
+                    </div>
+                </div>
+            `).join('');
+
+            quizSectionsHTML += `
+                <div class="quiz-category-section mb-8" data-category="${category}">
+                    <h3 class="text-xl font-bold mb-4 text-cyan-300">${category}</h3>
+                    <div class="no-scrollbar flex overflow-x-auto gap-4 pb-4">
+                        ${cardsHTML}
+                    </div>
+                </div>
+            `;
         }
-    });
-}
+        
+        const bankSoalHTML = `
+            <div class="panel">
+                <h2 class="text-2xl font-bold mb-1 text-cyan-400">Bank Soal</h2>
+                <p class="text-sm text-gray-400 mb-6">Pilih paket soal untuk mulai berlatih.</p>
+                ${dropdownFilterHTML}
+                <div id="quiz-list-container">
+                    ${quizSectionsHTML}
+                </div>
+            </div>
+        `;
+        appContent.innerHTML = bankSoalHTML;
+
+        setupBankSoalFilter();
+    }
+
+    function setupBankSoalFilter() {
+        const dropdownContainer = document.getElementById('filter-dropdown');
+        if (!dropdownContainer) return;
+
+        const button = document.getElementById('dropdown-button');
+        const menu = document.getElementById('dropdown-menu');
+        const label = document.getElementById('dropdown-label');
+        const items = menu.querySelectorAll('.dropdown-item');
+        const quizSections = document.querySelectorAll('.quiz-category-section');
+
+        button.addEventListener('click', (event) => {
+            event.stopPropagation();
+            menu.classList.toggle('open');
+            button.classList.toggle('open');
+        });
+
+        items.forEach(item => {
+            item.addEventListener('click', () => {
+                const selectedFilter = item.getAttribute('data-filter');
+                label.textContent = selectedFilter;
+                quizSections.forEach(section => {
+                    if (selectedFilter === 'Semua' || section.dataset.category === selectedFilter) {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = 'none';
+                    }
+                });
+                menu.classList.remove('open');
+                button.classList.remove('open');
+            });
+        });
+
+        window.addEventListener('click', (event) => {
+            if (!dropdownContainer.contains(event.target)) {
+                menu.classList.remove('open');
+                button.classList.remove('open');
+            }
+        });
+    }
 
     function renderForumPage() {
         appContent.innerHTML = `<div class="forum-container"><div class="intro"><h1>Forum Belajar UMT</h1><p>Bergabunglah dengan komunitas eksklusif UMT Academy! Tempat terbaik untuk berdiskusi, bertanya, berbagi ilmu, dan menguasai matematika bersama sesama pelajar dan fasilitator.</p></div><div class="community-links"><h2>Pilih Komunitas Pilihanmu Sekarang!</h2><div class="flex justify-center gap-4 flex-wrap"><a href="https://chat.whatsapp.com/GpyKRFFjMINBcjqGEYSXQ6" target="_blank" class="community-btn whatsapp-btn"><i class="fab fa-whatsapp"></i><span>Komunitas WhatsApp</span></a><a href="https://t.me/umt6174" target="_blank" class="community-btn telegram-btn"><i class="fab fa-telegram"></i><span>Komunitas Telegram</span></a></div><p class="subtext">Bergabunglah dengan ribuan pelajar lainnya!</p></div></div>`;
@@ -841,83 +764,78 @@ function setupBankSoalFilter() {
             </div>
         </div>`;
     }
-function renderUmtLabPage() {
-    const analisisArticles = allContentData.umtLab.filter(p => p.category === 'Analisis & Kajian');
-    const eksplorasiArticles = allContentData.umtLab.filter(p => p.category === 'Eksplorasi Teori');
 
-    const createPostCard = (post) => `
-        <div class="card-item p-5 rounded-lg flex flex-col flex-shrink-0 w-72 md:w-80" onclick="window.location.href='viewer.html?id=${post.id}'">
-            <h3 class="font-bold text-lg text-cyan-400 mb-2">${post.title}</h3>
-            <p class="text-xs text-gray-500 mb-3">Oleh ${post.author} - ${post.date}</p>
-            <p class="text-sm text-gray-400">${post.summary}</p>
-        </div>
-    `;
-    
-    const labPageHTML = `
-        <div class="panel">
-            <h2 class="text-2xl font-bold text-cyan-400">UMT Lab</h2>
-            <p class="text-sm text-gray-400 mb-8">Ruang untuk mendalami konsep dan analisis matematika tingkat lanjut.</p>
+    function renderUmtLabPage() {
+        const analisisArticles = allContentData.umtLab.filter(p => p.category === 'Analisis & Kajian');
+        const eksplorasiArticles = allContentData.umtLab.filter(p => p.category === 'Eksplorasi Teori');
 
-            <div>
-                <h3 class="text-xl font-semibold mb-4 border-b-2 border-cyan-500 pb-2">Analisis & Kajian Matematika</h3>
-                <div class="no-scrollbar flex overflow-x-auto gap-4 pb-4">
-                    ${analisisArticles.length > 0 ? analisisArticles.map(createPostCard).join('') : '<p class="text-gray-500">Belum ada konten.</p>'}
+        const createPostCard = (post) => `
+            <div class="card-item p-5 rounded-lg flex flex-col flex-shrink-0 w-72 md:w-80" onclick="window.location.href='viewer.html?id=${post.id}'">
+                <h3 class="font-bold text-lg text-cyan-400 mb-2">${post.title}</h3>
+                <p class="text-xs text-gray-500 mb-3">Oleh ${post.author} - ${post.date}</p>
+                <p class="text-sm text-gray-400">${post.summary}</p>
+            </div>
+        `;
+        
+        const labPageHTML = `
+            <div class="panel">
+                <h2 class="text-2xl font-bold text-cyan-400">UMT Lab</h2>
+                <p class="text-sm text-gray-400 mb-8">Ruang untuk mendalami konsep dan analisis matematika tingkat lanjut.</p>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 border-b-2 border-cyan-500 pb-2">Analisis & Kajian Matematika</h3>
+                    <div class="no-scrollbar flex overflow-x-auto gap-4 pb-4">
+                        ${analisisArticles.length > 0 ? analisisArticles.map(createPostCard).join('') : '<p class="text-gray-500">Belum ada konten.</p>'}
+                    </div>
+                </div>
+
+                <div class="mt-10">
+                    <h3 class="text-xl font-semibold mb-4 border-b-2 border-cyan-500 pb-2">Eksplorasi Teori</h3>
+                    <div class="no-scrollbar flex overflow-x-auto gap-4 pb-4">
+                        ${eksplorasiArticles.length > 0 ? eksplorasiArticles.map(createPostCard).join('') : '<p class="text-gray-500">Belum ada konten.</p>'}
+                    </div>
                 </div>
             </div>
-
-            <div class="mt-10">
-                <h3 class="text-xl font-semibold mb-4 border-b-2 border-cyan-500 pb-2">Eksplorasi Teori</h3>
-                <div class="no-scrollbar flex overflow-x-auto gap-4 pb-4">
-                    ${eksplorasiArticles.length > 0 ? eksplorasiArticles.map(createPostCard).join('') : '<p class="text-gray-500">Belum ada konten.</p>'}
-                </div>
-            </div>
-        </div>
-    `;
-
-    appContent.innerHTML = labPageHTML;
-
-    if (window.MathJax) {
-        MathJax.typeset();
+        `;
+        appContent.innerHTML = labPageHTML;
+        if (window.MathJax) { MathJax.typeset(); }
     }
-}
 
-function renderPerpustakaanPage() {
-    const libraryHTML = allContentData.perpustakaan.map(item => `
-        <div class="card-item p-5 rounded-lg flex flex-col" onclick="window.location.href='viewer.html?id=${item.id}'">
-            <h3 class="font-bold text-lg text-cyan-400 mb-2">${item.title}</h3>
-            <p class="text-xs text-gray-500 mb-3">Oleh ${item.author}</p>
-            <p class="text-sm text-gray-400 flex-grow">${item.summary}</p>
-             <div class="mt-4 text-xs font-mono bg-gray-900/50 text-cyan-300 rounded-full px-3 py-1 self-start">
-                E-Book
+    function renderPerpustakaanPage() {
+        const libraryHTML = allContentData.perpustakaan.map(item => `
+            <div class="card-item p-5 rounded-lg flex flex-col" onclick="window.location.href='viewer.html?id=${item.id}'">
+                <h3 class="font-bold text-lg text-cyan-400 mb-2">${item.title}</h3>
+                <p class="text-xs text-gray-500 mb-3">Oleh ${item.author}</p>
+                <p class="text-sm text-gray-400 flex-grow">${item.summary}</p>
+                 <div class="mt-4 text-xs font-mono bg-gray-900/50 text-cyan-300 rounded-full px-3 py-1 self-start">
+                    E-Book
+                </div>
             </div>
-        </div>
-    `).join('');
+        `).join('');
 
-    const pageHTML = `
-        <div class="panel">
-            <h2 class="text-2xl font-bold text-cyan-400">Perpustakaan Digital</h2>
-            <p class="text-sm text-gray-400 mb-8">Koleksi buku digital dan referensi untuk pendalaman materi.</p>
-
-            <div id="library-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                ${libraryHTML.length > 0 ? libraryHTML : '<p class="text-gray-500 col-span-full">Belum ada buku di perpustakaan.</p>'}
+        const pageHTML = `
+            <div class="panel">
+                <h2 class="text-2xl font-bold text-cyan-400">Perpustakaan Digital</h2>
+                <p class="text-sm text-gray-400 mb-8">Koleksi buku digital dan referensi untuk pendalaman materi.</p>
+                <div id="library-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    ${libraryHTML.length > 0 ? libraryHTML : '<p class="text-gray-500 col-span-full">Belum ada buku di perpustakaan.</p>'}
+                </div>
             </div>
-        </div>
-    `;
+        `;
+        appContent.innerHTML = pageHTML;
+    }
 
-    appContent.innerHTML = pageHTML;
-}
-
-// =================================================================================
+    // =================================================================================
     // BAGIAN 4: LOGIKA WIDGET DASBOR & PROGRES
     // =================================================================================
-function getTotalItemCount() {
-    const totalMateri = Object.values(allContentData.materi).flat().length;
-    const totalVideo = allContentData.video.length;
-    const totalBankSoal = allContentData.bankSoal.length;
-    const totalUmtLab = allContentData.umtLab.length;
-    const totalPerpustakaan = allContentData.perpustakaan.length;
-    return totalMateri + totalVideo + totalBankSoal + totalUmtLab + totalPerpustakaan;
-}
+    function getTotalItemCount() {
+        const totalMateri = Object.values(allContentData.materi).flat().length;
+        const totalVideo = allContentData.video.length;
+        const totalBankSoal = allContentData.bankSoal.length;
+        const totalUmtLab = allContentData.umtLab.length;
+        const totalPerpustakaan = allContentData.perpustakaan.length;
+        return totalMateri + totalVideo + totalBankSoal + totalUmtLab + totalPerpustakaan;
+    }
     
     function initializeAppDashboardWidgets() {
         const email = sessionStorage.getItem(CONFIG.SESSION_KEYS.EMAIL) || 'pengguna@email.com';
@@ -956,78 +874,46 @@ function getTotalItemCount() {
                     </div>
                 </div>`;
         }
-    const lastActivityContainer = document.getElementById('last-activity-container');
-    const lastActivity = JSON.parse(localStorage.getItem('userLastActivity')) || {};
-    let activityHTML = '';
+        const lastActivityContainer = document.getElementById('last-activity-container');
+        const lastActivity = JSON.parse(localStorage.getItem('userLastActivity')) || {};
+        let activityHTML = '';
 
-    const createWidget = (config) => {
-        if (!config.data) return '';
-        
-        // [PERBAIKAN] Menggunakan showMateriContent untuk materi
-        let actionOnClick = config.onclick ? `onclick="${config.onclick}"` : '';
-        if (config.type === 'materi' && config.data.id) {
-            // Kita perlu menemukan gradeKey untuk memanggil showMateriContent
-            let gradeKey = '';
-            for (const key in allContentData.materi) {
-                if (allContentData.materi[key].find(m => m.id === config.data.id)) {
-                    gradeKey = key;
-                    break;
-                }
-            }
-            if (gradeKey) {
-                 actionOnClick = `onclick="event.preventDefault(); showMateriContent('${config.data.id}', '${gradeKey}')"`;
-            }
-        }
+        const createWidget = (config) => {
+            if (!config.data) return '';
 
-        return `
-            <div class="panel">
-                <h4 class="font-bold text-lg mb-3">${config.title}</h4>
-                <div class="flex items-center gap-4 p-3 rounded-lg bg-gray-900/50">
-                    <i class="${config.icon} text-cyan-400 text-2xl w-8 text-center"></i>
-                    <div class="flex-grow">
-                        <p class="text-sm font-semibold">${config.data.title}</p>
-                        <a href="#" ${actionOnClick} class="text-xs text-cyan-400 hover:underline cursor-pointer">
-                            ${config.actionText}
-                        </a>
+            // Tautan sekarang menjadi link file asli, dan tracking dilakukan di 'openMateri'
+            let href = config.data.filePath || '#';
+            let actionOnClick = `onclick="event.preventDefault(); openMateri('${config.data.id}', '${href}')"`;
+            
+            // Khusus untuk video, tetap gunakan playVideoInModal
+            if (config.type === 'video') {
+                actionOnClick = `onclick="event.preventDefault(); playVideoInModal('${config.data.videoId}', '${config.data.title.replace(/'/g, "\\'")}')"`;
+            } else if (config.type === 'umtLab' || config.type === 'perpustakaan') {
+                href = `viewer.html?id=${config.data.id}`;
+                actionOnClick = `onclick="window.location.href='${href}'"`;
+            }
+
+            return `
+                <div class="panel">
+                    <h4 class="font-bold text-lg mb-3">${config.title}</h4>
+                    <div class="flex items-center gap-4 p-3 rounded-lg bg-gray-900/50">
+                        <i class="${config.icon} text-cyan-400 text-2xl w-8 text-center"></i>
+                        <div class="flex-grow">
+                            <p class="text-sm font-semibold">${config.data.title}</p>
+                            <a href="${href}" ${actionOnClick} class="text-xs text-cyan-400 hover:underline cursor-pointer">
+                                ${config.actionText}
+                            </a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        `;
-    };
+            `;
+        };
 
-    activityHTML += createWidget({
-        title: "Materi Terakhir Dibaca",
-        icon: "fa-solid fa-book-open",
-        actionText: "Lanjutkan Membaca",
-        data: lastActivity.materi,
-        type: 'materi' // Tambahkan tipe untuk identifikasi
-    });
-
-    activityHTML += createWidget({
-        title: "Video Terakhir Ditonton",
-        icon: "fa-solid fa-circle-play",
-        actionText: "Tonton Lagi",
-        data: lastActivity.video,
-        onclick: `event.preventDefault(); playVideoInModal('${lastActivity.video?.videoId}', '${lastActivity.video?.title.replace(/'/g, "\\'")}')`
-    });
-
-    activityHTML += createWidget({
-        title: "Lab Terakhir Dibaca",
-        icon: "fa-solid fa-flask-vial",
-        actionText: "Lanjutkan Membaca",
-        data: lastActivity.umtLab,
-        onclick: `event.preventDefault(); window.location.href='viewer.html?id=${lastActivity.umtLab?.id}'`
-    });
-
-    activityHTML += createWidget({
-        title: "Buku Terakhir Dibuka",
-        icon: "fa-solid fa-book-atlas",
-        actionText: "Lanjutkan Membaca",
-        data: lastActivity.perpustakaan,
-        onclick: `event.preventDefault(); window.location.href='viewer.html?id=${lastActivity.perpustakaan?.id}'`
-    });
-
-    lastActivityContainer.innerHTML = activityHTML;
+        activityHTML += createWidget({ title: "Materi Terakhir Dibaca", icon: "fa-solid fa-book-open", actionText: "Lanjutkan Membaca", data: lastActivity.materi, type: 'materi' });
+        activityHTML += createWidget({ title: "Video Terakhir Ditonton", icon: "fa-solid fa-circle-play", actionText: "Tonton Lagi", data: lastActivity.video, type: 'video' });
+        activityHTML += createWidget({ title: "Lab Terakhir Dibaca", icon: "fa-solid fa-flask-vial", actionText: "Lanjutkan Membaca", data: lastActivity.umtLab, type: 'umtLab'});
+        activityHTML += createWidget({ title: "Buku Terakhir Dibuka", icon: "fa-solid fa-book-atlas", actionText: "Lanjutkan Membaca", data: lastActivity.perpustakaan, type: 'perpustakaan' });
+        lastActivityContainer.innerHTML = activityHTML;
     }
     
     // [FUNGSI DIPERBAIKI] - Menambahkan penghapusan 'userLastActivity'
@@ -1040,7 +926,7 @@ function getTotalItemCount() {
             confirmAction: () => {
                 localStorage.removeItem(CONFIG.STORAGE_KEYS.COMPLETED_ITEMS);
                 localStorage.removeItem(CONFIG.STORAGE_KEYS.LAST_SCORE);
-                localStorage.removeItem('userLastActivity'); // <-- BARIS INI DIPERBAIKI
+                localStorage.removeItem('userLastActivity'); // <-- INI PERBAIKANNYA
                 showToast("Progres belajar berhasil direset.", "success");
                 navigateTo('dashboard', null);
             },
@@ -1058,24 +944,23 @@ function getTotalItemCount() {
             }
         }
     }
-function updateLastActivity(type, item) {
-    const key = 'userLastActivity';
-    let lastActivity = JSON.parse(localStorage.getItem(key)) || {};
+    function updateLastActivity(type, item) {
+        const key = 'userLastActivity';
+        let lastActivity = JSON.parse(localStorage.getItem(key)) || {};
 
-    let dataToStore = {
-        id: item.id,
-        title: item.title,
-    };
+        let dataToStore = {
+            id: item.id,
+            title: item.title,
+            filePath: item.filePath // Simpan filePath agar bisa diakses widget
+        };
 
-    if (type === 'video') {
-        dataToStore.videoId = item.videoId;
-    } else {
-        dataToStore.filePath = item.filePath;
+        if (type === 'video') {
+            dataToStore.videoId = item.videoId;
+        }
+
+        lastActivity[type] = dataToStore;
+        localStorage.setItem(key, JSON.stringify(lastActivity));
     }
-
-    lastActivity[type] = dataToStore;
-    localStorage.setItem(key, JSON.stringify(lastActivity));
-}
     
     // =================================================================================
     // BAGIAN 5: LOGIKA KUIS
@@ -1087,147 +972,147 @@ function updateLastActivity(type, item) {
         userAnswers = new Array(currentQuizData.questions.length).fill(null);
         renderQuizInterface();
     }
-function renderQuizInterface() {
-    const quiz = currentQuizData;
-    const question = quiz.questions[currentQuestionIndex];
+    function renderQuizInterface() {
+        const quiz = currentQuizData;
+        const question = quiz.questions[currentQuestionIndex];
 
-    const questionNavHTML = quiz.questions.map((_, index) => {
-        let classes = 'quiz-nav-item';
-        if (index === currentQuestionIndex) {
-            classes += ' current';
-        } else if (userAnswers[index] !== null) {
-            classes += ' answered';
-        }
-        return `<div class="${classes}" onclick="jumpToQuestion(${index})">${index + 1}</div>`;
-    }).join('');
+        const questionNavHTML = quiz.questions.map((_, index) => {
+            let classes = 'quiz-nav-item';
+            if (index === currentQuestionIndex) {
+                classes += ' current';
+            } else if (userAnswers[index] !== null) {
+                classes += ' answered';
+            }
+            return `<div class="${classes}" onclick="jumpToQuestion(${index})">${index + 1}</div>`;
+        }).join('');
 
-    const optionsHTML = question.options.map((opt, index) =>
-        `<div id="option-${index}" class="quiz-option p-4 rounded-lg cursor-pointer transition-colors" onclick="selectAnswer('${opt.replace(/'/g, "\\'")}', this)">
-            ${opt}
-        </div>`
-    ).join('');
+        const optionsHTML = question.options.map((opt, index) =>
+            `<div id="option-${index}" class="quiz-option p-4 rounded-lg cursor-pointer transition-colors" onclick="selectAnswer('${opt.replace(/'/g, "\\'")}', this)">
+                ${opt}
+            </div>`
+        ).join('');
 
-    const quizHTML = `
-        <div class="panel max-w-4xl mx-auto">
-            <div class="flex justify-between items-start mb-4">
-                <div>
-                    <h2 class="text-xl font-bold text-cyan-400">${quiz.title}</h2>
-                    <p class="text-sm text-gray-400">Soal ${currentQuestionIndex + 1} dari ${quiz.questions.length}</p>
+        const quizHTML = `
+            <div class="panel max-w-4xl mx-auto">
+                <div class="flex justify-between items-start mb-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-cyan-400">${quiz.title}</h2>
+                        <p class="text-sm text-gray-400">Soal ${currentQuestionIndex + 1} dari ${quiz.questions.length}</p>
+                    </div>
+                    <button onclick="navigateTo('bank_soal', document.querySelector('.sidebar-link[onclick*=\\'bank_soal\\']'))" class="text-gray-400 hover:text-white text-2xl leading-none">&times;</button>
                 </div>
-                <button onclick="navigateTo('bank_soal', document.querySelector('.sidebar-link[onclick*=\\'bank_soal\\']'))" class="text-gray-400 hover:text-white text-2xl leading-none">&times;</button>
-            </div>
-            
-            <div class="quiz-nav-container no-scrollbar">${questionNavHTML}</div>
+                
+                <div class="quiz-nav-container no-scrollbar">${questionNavHTML}</div>
 
-            <div class="mb-6 min-h-[60px] text-lg text-gray-200">${question.questionText}</div>
-            <div id="quiz-options" class="space-y-3">${optionsHTML}</div>
-            <div id="explanation-container" class="hidden mt-6">
-                 <hr class="border-gray-700 my-5"/>
-                 <div>
-                     <h4 class="font-bold text-lg text-cyan-300 mb-2">Pembahasan:</h4>
-                     <div class="text-gray-300 leading-relaxed">
-                        <div class="explanation-container-vertical">
-                           <div class="explanation-content-inner">${question.explanation}</div>
-                        </div>
+                <div class="mb-6 min-h-[60px] text-lg text-gray-200">${question.questionText}</div>
+                <div id="quiz-options" class="space-y-3">${optionsHTML}</div>
+                <div id="explanation-container" class="hidden mt-6">
+                     <hr class="border-gray-700 my-5"/>
+                     <div>
+                         <h4 class="font-bold text-lg text-cyan-300 mb-2">Pembahasan:</h4>
+                         <div class="text-gray-300 leading-relaxed">
+                            <div class="explanation-container-vertical">
+                               <div class="explanation-content-inner">${question.explanation}</div>
+                            </div>
+                         </div>
                      </div>
-                 </div>
+                </div>
+                <hr class="border-gray-700 my-6"/>
+                <div class="flex justify-between items-center">
+                     <button id="prev-btn" onclick="previousQuestion()" class="nav-btn bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-6 rounded-lg">Sebelumnya</button>
+                     ${currentQuestionIndex === quiz.questions.length - 1 ? 
+                       `<button onclick="renderQuizResults()" class="nav-btn bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-6 rounded-lg">Lihat Hasil</button>` :
+                       `<button id="next-btn" onclick="nextQuestion()" class="nav-btn bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-6 rounded-lg">Selanjutnya</button>`
+                     }
+                </div>
             </div>
-            <hr class="border-gray-700 my-6"/>
-            <div class="flex justify-between items-center">
-                 <button id="prev-btn" onclick="previousQuestion()" class="nav-btn bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-6 rounded-lg">Sebelumnya</button>
-                 ${currentQuestionIndex === quiz.questions.length - 1 ? 
-                   `<button onclick="renderQuizResults()" class="nav-btn bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-6 rounded-lg">Lihat Hasil</button>` :
-                   `<button id="next-btn" onclick="nextQuestion()" class="nav-btn bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-6 rounded-lg">Selanjutnya</button>`
-                 }
-            </div>
-        </div>
-    `;
+        `;
 
-    appContent.innerHTML = quizHTML;
-    if (window.MathJax) { MathJax.typeset(); }
+        appContent.innerHTML = quizHTML;
+        if (window.MathJax) { MathJax.typeset(); }
 
-    if (userAnswers[currentQuestionIndex] !== null) {
-        showAnswerAndExplanation(true);
-    }
-
-    document.getElementById('prev-btn').disabled = (currentQuestionIndex === 0);
-    
-    const activeNavItem = document.querySelector('.quiz-nav-item.current');
-    if (activeNavItem) {
-        activeNavItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    }
-}
-
-function showAnswerAndExplanation(isRestoringState = false) {
-    const quiz = currentQuizData;
-    const question = quiz.questions[currentQuestionIndex];
-    const selectedAnswer = userAnswers[currentQuestionIndex];
-    
-    const optionsContainer = document.getElementById('quiz-options');
-    const allOptions = optionsContainer.children;
-
-    optionsContainer.classList.add('pointer-events-none');
-
-    for (let i = 0; i < allOptions.length; i++) {
-        const optionEl = allOptions[i];
-        const optionText = question.options[i];
-
-        if (optionText === question.correctAnswer) {
-            optionEl.classList.remove('quiz-option');
-            optionEl.classList.add('correct-answer');
+        if (userAnswers[currentQuestionIndex] !== null) {
+            showAnswerAndExplanation(true);
         }
 
-        if (!isRestoringState && optionText === selectedAnswer && selectedAnswer !== question.correctAnswer) {
-            optionEl.classList.remove('quiz-option');
-            optionEl.classList.add('wrong-answer');
+        document.getElementById('prev-btn').disabled = (currentQuestionIndex === 0);
+        
+        const activeNavItem = document.querySelector('.quiz-nav-item.current');
+        if (activeNavItem) {
+            activeNavItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         }
     }
-    
-    document.getElementById('explanation-container').classList.remove('hidden');
-    
-    if (window.MathJax) {
-        const explanationText = document.querySelector('.explanation-content-inner');
-        MathJax.typesetPromise([explanationText]).catch(err => console.log('MathJax error:', err));
-    }
-}
-    
-function selectAnswer(answer, element) {
-    if (userAnswers[currentQuestionIndex] !== null) {
-        return;
-    }
-    userAnswers[currentQuestionIndex] = answer;
 
-    const navItem = document.querySelector(`.quiz-nav-item:nth-child(${currentQuestionIndex + 1})`);
-    if (navItem) {
-        navItem.classList.add('answered');
-    }
-    
-    showAnswerAndExplanation();
-}
+    function showAnswerAndExplanation(isRestoringState = false) {
+        const quiz = currentQuizData;
+        const question = quiz.questions[currentQuestionIndex];
+        const selectedAnswer = userAnswers[currentQuestionIndex];
+        
+        const optionsContainer = document.getElementById('quiz-options');
+        const allOptions = optionsContainer.children;
 
-function nextQuestion() {
-    if (currentQuestionIndex < currentQuizData.questions.length - 1) {
-        currentQuestionIndex++;
+        optionsContainer.classList.add('pointer-events-none');
+
+        for (let i = 0; i < allOptions.length; i++) {
+            const optionEl = allOptions[i];
+            const optionText = question.options[i];
+
+            if (optionText === question.correctAnswer) {
+                optionEl.classList.remove('quiz-option');
+                optionEl.classList.add('correct-answer');
+            }
+
+            if (!isRestoringState && optionText === selectedAnswer && selectedAnswer !== question.correctAnswer) {
+                optionEl.classList.remove('quiz-option');
+                optionEl.classList.add('wrong-answer');
+            }
+        }
+        
+        document.getElementById('explanation-container').classList.remove('hidden');
+        
+        if (window.MathJax) {
+            const explanationText = document.querySelector('.explanation-content-inner');
+            MathJax.typesetPromise([explanationText]).catch(err => console.log('MathJax error:', err));
+        }
+    }
+        
+    function selectAnswer(answer, element) {
+        if (userAnswers[currentQuestionIndex] !== null) {
+            return;
+        }
+        userAnswers[currentQuestionIndex] = answer;
+
+        const navItem = document.querySelector(`.quiz-nav-item:nth-child(${currentQuestionIndex + 1})`);
+        if (navItem) {
+            navItem.classList.add('answered');
+        }
+        
+        showAnswerAndExplanation();
+    }
+
+    function nextQuestion() {
+        if (currentQuestionIndex < currentQuizData.questions.length - 1) {
+            currentQuestionIndex++;
+            renderQuizInterface();
+        }
+    }
+
+    function previousQuestion() {
+        if (currentQuestionIndex > 0) {
+            currentQuestionIndex--;
+            renderQuizInterface();
+        }
+    }
+
+    function jumpToQuestion(index) {
+        currentQuestionIndex = index;
         renderQuizInterface();
-    }
-}
 
-function previousQuestion() {
-    if (currentQuestionIndex > 0) {
-        currentQuestionIndex--;
-        renderQuizInterface();
+        const activeNavItem = document.querySelector(`.quiz-nav-item.current`);
+        if (activeNavItem) {
+            activeNavItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
     }
-}
-
-function jumpToQuestion(index) {
-    currentQuestionIndex = index;
-    renderQuizInterface();
-
-    const activeNavItem = document.querySelector(`.quiz-nav-item.current`);
-    if (activeNavItem) {
-        activeNavItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    }
-}
 
     function submitQuiz() {
         if (userAnswers[currentQuestionIndex] === null) { showToast('Silakan pilih jawaban terlebih dahulu!', 'error'); return; }
@@ -1337,61 +1222,61 @@ function jumpToQuestion(index) {
         }, 5000);
     }
     
-function showConfirmationModal(options) {
-    const {
-        title,
-        message,
-        confirmText = 'Konfirmasi',
-        cancelText = 'Batal',
-        confirmAction,
-        cancelAction,
-        showCancelButton = true,
-        confirmButtonClass = 'modal-btn-confirm',
-        customModalClass = ''
-    } = options;
+    function showConfirmationModal(options) {
+        const {
+            title,
+            message,
+            confirmText = 'Konfirmasi',
+            cancelText = 'Batal',
+            confirmAction,
+            cancelAction,
+            showCancelButton = true,
+            confirmButtonClass = 'modal-btn-confirm',
+            customModalClass = ''
+        } = options;
 
-    const modalContainer = document.getElementById('modal-container');
-    
-    const modalHTML = `
-        <div class="modal-overlay" id="modal-overlay">
-            <div class="modal-box ${customModalClass}"> 
-                <h3 class="modal-title">${title}</h3>
-                <div class="modal-content">${message}</div>
-                <div class="modal-buttons">
-                    ${showCancelButton ? `<button id="modal-cancel-btn" class="modal-btn modal-btn-cancel">${cancelText}</button>` : ''}
-                    <button id="modal-confirm-btn" class="modal-btn ${confirmButtonClass}">${confirmText}</button>
+        const modalContainer = document.getElementById('modal-container');
+        
+        const modalHTML = `
+            <div class="modal-overlay" id="modal-overlay">
+                <div class="modal-box ${customModalClass}"> 
+                    <h3 class="modal-title">${title}</h3>
+                    <div class="modal-content">${message}</div>
+                    <div class="modal-buttons">
+                        ${showCancelButton ? `<button id="modal-cancel-btn" class="modal-btn modal-btn-cancel">${cancelText}</button>` : ''}
+                        <button id="modal-confirm-btn" class="modal-btn ${confirmButtonClass}">${confirmText}</button>
+                    </div>
                 </div>
             </div>
-        </div>
-    `;
+        `;
 
-    modalContainer.innerHTML = modalHTML;
-    modalContainer.style.display = 'block';
+        modalContainer.innerHTML = modalHTML;
+        modalContainer.style.display = 'block';
 
-    const closeModal = () => {
-        modalContainer.style.display = 'none';
-        modalContainer.innerHTML = '';
-    };
+        const closeModal = () => {
+            modalContainer.style.display = 'none';
+            modalContainer.innerHTML = '';
+        };
 
-    document.getElementById('modal-confirm-btn').addEventListener('click', () => {
-        if (typeof confirmAction === 'function') confirmAction();
-        closeModal();
-    });
-
-    if (showCancelButton) {
-        const cancelBtn = document.getElementById('modal-cancel-btn');
-        cancelBtn.addEventListener('click', () => {
-            if (typeof cancelAction === 'function') cancelAction();
+        document.getElementById('modal-confirm-btn').addEventListener('click', () => {
+            if (typeof confirmAction === 'function') confirmAction();
             closeModal();
         });
-        document.getElementById('modal-overlay').addEventListener('click', (event) => {
-             if (event.target === event.currentTarget) {
+
+        if (showCancelButton) {
+            const cancelBtn = document.getElementById('modal-cancel-btn');
+            cancelBtn.addEventListener('click', () => {
                 if (typeof cancelAction === 'function') cancelAction();
                 closeModal();
-             }
-        });
+            });
+            document.getElementById('modal-overlay').addEventListener('click', (event) => {
+                 if (event.target === event.currentTarget) {
+                    if (typeof cancelAction === 'function') cancelAction();
+                    closeModal();
+                 }
+            });
+        }
     }
-}
     
     // =================================================================================
     // BAGIAN 7: INISIALISASI APLIKASI
