@@ -153,7 +153,6 @@
         .modal-btn-cancel { background-color: #30363D; color: var(--text-primary); }
         .modal-btn-cancel:hover { background-color: #484f58; }
         
-        /* === [CSS BARU UNTUK PEMBAHASAN] === */
         /* Kontainer LUAR: Mengatur tinggi maksimal dan scroll vertikal di mobile */
         .explanation-container-vertical {
             max-height: 45vh;
@@ -164,16 +163,14 @@
             padding: 0.75rem;
             background-color: #0d1117;
         }
-
         /* Kontainer DALAM: Mengatur format teks dan scroll horizontal */
         .explanation-content-inner {
             overflow-wrap: break-word;
             word-wrap: break-word;
             white-space: pre-wrap;
             overflow-x: auto;
-            min-height: 100%; /* Memastikan inner container mengisi outer */
+            min-height: 100%;
         }
-        /* === [AKHIR DARI CSS BARU] === */
 
         .quiz-nav-container {
             display: flex;
@@ -209,6 +206,39 @@
             background-color: #39D35330;
             border-color: var(--accent-green);
         }
+
+        /* [BARU] Styling untuk viewer materi HTML */
+        .materi-viewer-content {
+            /* Atur agar konten HTML dari file eksternal mengikuti tema gelap */
+            background-color: transparent;
+            color: var(--text-primary);
+            line-height: 1.7;
+        }
+        .materi-viewer-content h1, .materi-viewer-content h2, .materi-viewer-content h3 {
+            color: var(--accent-cyan);
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 0.5rem;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .materi-viewer-content a {
+            color: var(--accent-green);
+            text-decoration: underline;
+        }
+        .materi-viewer-content code {
+            background-color: var(--bg-main);
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.25rem;
+            font-family: 'Fira Code', monospace;
+        }
+        .materi-viewer-content blockquote {
+            border-left: 4px solid var(--accent-cyan);
+            padding-left: 1rem;
+            margin-left: 0;
+            color: var(--text-secondary);
+            font-style: italic;
+        }
+
     </style>
 </head>
 <body class="text-white">
@@ -415,6 +445,7 @@ function renderDashboardPage() {
     initializeAppDashboardWidgets();
 }
     
+// [FUNGSI DIUBAH] - Menggunakan showMateriContent untuk menampilkan materi
 function renderMateriPage() {
     let accordionHTML = '';
     const materiData = allContentData.materi;
@@ -423,7 +454,7 @@ function renderMateriPage() {
         const itemsHTML = materiData[gradeKey].map(item => `
             <li id="card-${item.id}"
                 class="card-item-list block p-3 rounded-md hover:bg-gray-700 cursor-pointer"
-                onclick="window.location.href='${item.filePath}'"> 
+                onclick="showMateriContent('${item.id}', '${gradeKey}')"> 
                 <span class="font-semibold">${item.title}</span>
                 <span class="block text-xs text-gray-400">${item.type}</span>
             </li>
@@ -517,7 +548,8 @@ function setupMateriSearch() {
     });
 }
     
-function showMateriContent(itemId, gradeKey) {
+// [FUNGSI DIUBAH TOTAL] - Untuk memuat konten HTML secara dinamis
+async function showMateriContent(itemId, gradeKey) {
     const materiDalamGrade = allContentData.materi[gradeKey];
     const currentIndex = materiDalamGrade.findIndex(item => item.id === itemId);
     
@@ -527,57 +559,54 @@ function showMateriContent(itemId, gradeKey) {
     }
 
     const materiItem = materiDalamGrade[currentIndex];
-    const viewerContent = document.getElementById('materi-viewer-content');
-    
-    document.getElementById('materi-list-container').classList.add('hidden', 'md:block');
-    document.getElementById('materi-viewer-container').classList.remove('hidden');
 
-    viewerContent.classList.remove('flex', 'items-center', 'justify-center');
-    viewerContent.innerHTML = `<p class="text-center text-gray-400 p-4">Memuat konten...</p>`;
-    
-    document.querySelectorAll('.card-item-list').forEach(card => card.classList.remove('bg-cyan-800'));
-    document.getElementById(`card-${itemId}`).classList.add('bg-cyan-800');
+    // Simpan progres dan aktivitas terakhir
+    updateLastActivity('materi', materiItem);
+    markAsCompleted(itemId);
 
     const hasPrev = currentIndex > 0;
     const hasNext = currentIndex < materiDalamGrade.length - 1;
     
-    const prevItemId = hasPrev ? `'${materiDalamGrade[currentIndex - 1].id}', '${gradeKey}'` : '';
-    const nextItemId = hasNext ? `'${materiDalamGrade[currentIndex + 1].id}', '${gradeKey}'` : '';
+    const prevItemParams = hasPrev ? `'${materiDalamGrade[currentIndex - 1].id}', '${gradeKey}'` : '';
+    const nextItemParams = hasNext ? `'${materiDalamGrade[currentIndex + 1].id}', '${gradeKey}'` : '';
 
-    const desktopNavButtons = `
-        <div class="hidden md:flex justify-between items-center mb-4">
-            <button onclick="showMateriContent(${prevItemId})" class="nav-btn bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2" ${!hasPrev ? 'disabled' : ''}>
-                <i class="fa-solid fa-chevron-left"></i> Sebelumnya
-            </button>
-            <h3 class="text-lg font-bold text-center text-cyan-400">${materiItem.title}</h3>
-            <button onclick="showMateriContent(${nextItemId})" class="nav-btn bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2" ${!hasNext ? 'disabled' : ''}>
-                Selanjutnya <i class="fa-solid fa-chevron-right"></i>
-            </button>
+    const viewerHTML = `
+        <div class="panel">
+            <div class="flex justify-between items-center mb-4 flex-wrap gap-4">
+                <button onclick="navigateTo('materi', document.querySelector('.sidebar-link[onclick*=\\'materi\\']'))" class="nav-btn bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2">
+                    <i class="fa-solid fa-chevron-left"></i> Kembali
+                </button>
+                <h2 class="text-xl font-bold text-cyan-400 text-center flex-1">${materiItem.title}</h2>
+            </div>
+            <div id="html-content-container" class="materi-viewer-content min-h-[300px]">
+                <p class="text-center p-8">Memuat konten...</p>
+            </div>
+            <hr class="border-gray-700 my-6"/>
+            <div class="flex justify-between items-center">
+                 <button onclick="showMateriContent(${prevItemParams})" class="nav-btn bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-6 rounded-lg" ${!hasPrev ? 'disabled' : ''}>Sebelumnya</button>
+                 <button onclick="showMateriContent(${nextItemParams})" class="nav-btn bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-6 rounded-lg" ${!hasNext ? 'disabled' : ''}>Selanjutnya</button>
+            </div>
         </div>
     `;
+    appContent.innerHTML = viewerHTML;
 
-    const mobileHeader = `
-        <div class="md:hidden mb-2">
-            <h3 class="text-lg font-bold text-center text-cyan-400">${materiItem.title}</h3>
-        </div>
-    `;
-    
-    let contentHTML = '';
-    if (materiItem.fileType === 'pdf') {
-        contentHTML = `
-            <div class="p-2 md:p-0 w-full h-full flex flex-col">
-                ${backButton}
-                ${desktopNavButtons}
-                ${mobileHeader}
-                <embed src="${materiItem.filePath}" type="application/pdf" class="w-full flex-1 rounded" />
-                <div class="text-center mt-2 text-xs text-gray-400">
-                    Gagal memuat? <a href="${materiItem.filePath}" target="_blank" class="text-cyan-400 hover:underline">Buka di tab baru</a>.
-                </div>
-            </div>`;
-        viewerContent.innerHTML = contentHTML;
+    const contentContainer = document.getElementById('html-content-container');
+    if (materiItem.filePath && materiItem.filePath !== '#') {
+        try {
+            const response = await fetch(materiItem.filePath);
+            if (!response.ok) throw new Error('File tidak ditemukan');
+            const htmlContent = await response.text();
+            contentContainer.innerHTML = htmlContent;
+            if (window.MathJax) {
+                MathJax.typesetPromise([contentContainer]).catch(err => console.log('MathJax error:', err));
+            }
+        } catch (error) {
+            contentContainer.innerHTML = `<p class="text-center p-8 text-red-400">Gagal memuat konten. Pastikan file di ${materiItem.filePath} ada.</p>`;
+            console.error("Gagal fetch materi:", error);
+        }
+    } else {
+        contentContainer.innerHTML = `<p class="text-center p-8 text-yellow-400">Konten untuk materi ini belum tersedia.</p>`;
     }
-
-    markAsCompleted(itemId, { showToast: true });
 }
     
 function renderVideoPage() {
@@ -625,8 +654,9 @@ function playVideoInModal(videoId, title) {
     }
 
     const videoPlayerHTML = `
-        <div class="video-responsive-container">
+        <div class="video-responsive-container" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
             <iframe
+                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
                 src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -641,7 +671,6 @@ function playVideoInModal(videoId, title) {
         confirmText: 'Tutup',
         showCancelButton: false,
         confirmButtonClass: 'modal-btn-confirm mt-4 w-full justify-center',
-        customModalClass: 'video-modal-box'
     });
 }
 
@@ -933,6 +962,23 @@ function getTotalItemCount() {
 
     const createWidget = (config) => {
         if (!config.data) return '';
+        
+        // [PERBAIKAN] Menggunakan showMateriContent untuk materi
+        let actionOnClick = config.onclick ? `onclick="${config.onclick}"` : '';
+        if (config.type === 'materi' && config.data.id) {
+            // Kita perlu menemukan gradeKey untuk memanggil showMateriContent
+            let gradeKey = '';
+            for (const key in allContentData.materi) {
+                if (allContentData.materi[key].find(m => m.id === config.data.id)) {
+                    gradeKey = key;
+                    break;
+                }
+            }
+            if (gradeKey) {
+                 actionOnClick = `onclick="event.preventDefault(); showMateriContent('${config.data.id}', '${gradeKey}')"`;
+            }
+        }
+
         return `
             <div class="panel">
                 <h4 class="font-bold text-lg mb-3">${config.title}</h4>
@@ -940,7 +986,7 @@ function getTotalItemCount() {
                     <i class="${config.icon} text-cyan-400 text-2xl w-8 text-center"></i>
                     <div class="flex-grow">
                         <p class="text-sm font-semibold">${config.data.title}</p>
-                        <a href="${config.link}" ${config.onclick ? `onclick="${config.onclick}"` : ''} class="text-xs text-cyan-400 hover:underline cursor-pointer">
+                        <a href="#" ${actionOnClick} class="text-xs text-cyan-400 hover:underline cursor-pointer">
                             ${config.actionText}
                         </a>
                     </div>
@@ -954,7 +1000,7 @@ function getTotalItemCount() {
         icon: "fa-solid fa-book-open",
         actionText: "Lanjutkan Membaca",
         data: lastActivity.materi,
-        link: `viewer.html?id=${lastActivity.materi?.id}`
+        type: 'materi' // Tambahkan tipe untuk identifikasi
     });
 
     activityHTML += createWidget({
@@ -962,7 +1008,6 @@ function getTotalItemCount() {
         icon: "fa-solid fa-circle-play",
         actionText: "Tonton Lagi",
         data: lastActivity.video,
-        link: '#',
         onclick: `event.preventDefault(); playVideoInModal('${lastActivity.video?.videoId}', '${lastActivity.video?.title.replace(/'/g, "\\'")}')`
     });
 
@@ -971,7 +1016,7 @@ function getTotalItemCount() {
         icon: "fa-solid fa-flask-vial",
         actionText: "Lanjutkan Membaca",
         data: lastActivity.umtLab,
-        link: `viewer.html?id=${lastActivity.umtLab?.id}`
+        onclick: `event.preventDefault(); window.location.href='viewer.html?id=${lastActivity.umtLab?.id}'`
     });
 
     activityHTML += createWidget({
@@ -979,12 +1024,13 @@ function getTotalItemCount() {
         icon: "fa-solid fa-book-atlas",
         actionText: "Lanjutkan Membaca",
         data: lastActivity.perpustakaan,
-        link: `viewer.html?id=${lastActivity.perpustakaan?.id}`
+        onclick: `event.preventDefault(); window.location.href='viewer.html?id=${lastActivity.perpustakaan?.id}'`
     });
 
     lastActivityContainer.innerHTML = activityHTML;
     }
     
+    // [FUNGSI DIPERBAIKI] - Menambahkan penghapusan 'userLastActivity'
     function resetProgress() {
         showConfirmationModal({
             title: 'Konfirmasi Reset Progres',
@@ -994,6 +1040,7 @@ function getTotalItemCount() {
             confirmAction: () => {
                 localStorage.removeItem(CONFIG.STORAGE_KEYS.COMPLETED_ITEMS);
                 localStorage.removeItem(CONFIG.STORAGE_KEYS.LAST_SCORE);
+                localStorage.removeItem('userLastActivity'); // <-- BARIS INI DIPERBAIKI
                 showToast("Progres belajar berhasil direset.", "success");
                 navigateTo('dashboard', null);
             },
