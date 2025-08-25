@@ -4966,226 +4966,226 @@ const allContentData = {
     "subject": "Matematika",
     "totalQuestions": 20,
     "questions": [
-        {
-            "questionText": "Banyaknya pasangan bilangan bulat $(x, y)$ yang memenuhi persamaan $\\frac{1}{x} + \\frac{1}{y} = \\frac{1}{5}$ adalah...",
-            "options": [
-                "A. 4",
-                "B. 5",
-                "C. 8",
-                "D. 9"
-            ],
-            "correctAnswer": "D. 9",
-            "explanation": "Pertama, kita lakukan manipulasi aljabar pada persamaan awal:\n$$ \\frac{x+y}{xy} = \\frac{1}{5} \\quad \\rightarrow \\quad 5x + 5y = xy $$\nSelanjutnya, pindahkan semua suku ke satu ruas untuk persiapan pemfaktoran:\n$$ xy - 5x - 5y = 0 $$\nDengan menambahkan $25$ pada kedua ruas, kita bisa melengkapkan pemfaktoran:\n$$ (x-5)(y-5) = 25 $$\nKarena $x$ dan $y$ adalah bilangan bulat, maka $(x-5)$ harus merupakan faktor bilangan bulat dari 25, yaitu $\\{ \\pm 1, \\pm 5, \\pm 25 \\}$.\n\nPenting: Dari persamaan awal $\\frac{1}{x} + \\frac{1}{y} = \\frac{1}{5}$, nilai $x$ dan $y$ tidak boleh nol. Kita periksa kondisi ini:\n$$ x = (x-5) + 5 $$\nAgar $x \\neq 0$, maka $(x-5)$ tidak boleh bernilai $-5$. Oleh karena itu, pasangan faktor $(-5, -5)$ tidak valid dan harus dikecualikan.\n\nBerikut adalah 5 pasangan faktor yang valid dan solusinya:\n• Jika $x-5=1$, maka $y-5=25 \\\implies (x,y) = (6, 30)$\n• Jika $x-5=5$, maka $y-5=5 \\\implies (x,y) = (10, 10)$\n• Jika $x-5=25$, maka $y-5=1 \\\implies (x,y) = (30, 6)$\n• Jika $x-5=-1$, maka $y-5=-25 \\\implies (x,y) = (4, -20)$\n• Jika $x-5=-25$, maka $y-5=-1 \\\implies (x,y) = (-20, 4)$\n\nJadi, total ada 5 pasangan bilangan bulat $(x,y)$ yang memenuhi."
-        },
-        {
-            "questionText": "Sebuah jam dinding menunjukkan pukul 04:40. Berapakah sudut terkecil yang dibentuk oleh jarum jam dan jarum menit?",
-            "options": [
-                "A. 90°",
-                "B. 100°",
-                "C. 110°",
-                "D. 120°"
-            ],
-            "correctAnswer": "B. 100°",
-            "explanation": "Posisi jarum menit pada menit ke-40 adalah di angka 8, yaitu $40 \\times 6^\\circ = 240^\\circ$ dari angka 12. Posisi jarum jam pada pukul 04:40 adalah $4 \\times 30^\\circ + \\frac{40}{60} \\times 30^\\circ = 120^\\circ + 20^\\circ = 140^\\circ$ dari angka 12. Selisih sudutnya adalah $|240^\\circ - 140^\\circ| = 100^\\circ$. Karena $100^\\circ < 180^\\circ$, ini adalah sudut terkecil."
-        },
-        {
-            "questionText": "Diberikan $f(x) = ax+b$. Jika $f(f(x)) = 9x+8$, maka nilai dari $a+b$ bisa jadi...",
-            "options": [
-                "A. 5 atau -1",
-                "B. 5 atau -7",
-                "C. -5 atau 7",
-                "D. -5 atau -1"
-            ],
-            "correctAnswer": "B. 5 atau -7",
-            "explanation": "Substitusikan $f(x)$ ke dalam dirinya sendiri:\n$$ f(f(x)) = a(ax+b)+b = a^2x + ab + b $$\nSamakan dengan persamaan yang diketahui, $f(f(x)) = 9x+8$, maka kita dapatkan dua persamaan:\n$$ a^2 = 9 $$\n$$ ab+b = 8 \\quad \\rightarrow \\quad b(a+1) = 8 $$\nDari $a^2 = 9$, nilai $a$ yang mungkin adalah $3$ atau $-3$.\n\nKasus 1: Jika $a=3$ \n$$ b(3+1) = 8 \\quad \\rightarrow \\quad 4b=8 \\quad \\rightarrow \\quad b=2 $$\n$$ a+b = 3+2 = 5 $$ \n\nKasus 2: Jika $a=-3$ \n$$ b(-3+1) = 8 \\quad \\rightarrow \\quad -2b=8 \\quad \\rightarrow b=-4 $$\n$$ a+b = -3 + (-4) = -7 $$\nJadi, nilai $a+b$ yang mungkin adalah 5 atau -7."
-        },
-        {
-            "questionText": "Terdapat 5 orang pria dan 4 orang wanita. Mereka akan duduk dalam satu baris. Jika posisi duduk harus berselang-seling antara pria dan wanita, ada berapa banyak cara mereka bisa duduk?",
-            "options": [
-                "A. 1440",
-                "B. 2880",
-                "C. 5760",
-                "D. 362880"
-            ],
-            "correctAnswer": "B. 2880",
-            "explanation": "Karena jumlah pria (5) lebih satu dari wanita (4), satu-satunya formasi yang mungkin adalah PWPWPWPWP. Banyak cara untuk mengatur 5 pria di posisi P adalah $5! = 120$. Banyak cara untuk mengatur 4 wanita di posisi W adalah $4! = 24$. Total cara adalah $5! \\times 4! = 120 \\times 24 = 2880$."
-        },
-        {
-            "questionText": "Jika $x + \\frac{1}{x} = 3$, maka nilai dari $x^3 + \\frac{1}{x^3}$ adalah...",
-            "options": [
-                "A. 18",
-                "B. 21",
-                "C. 24",
-                "D. 27"
-            ],
-            "correctAnswer": "A. 18",
-            "explanation": "Gunakan identitas $(a+b)^3 = a^3+b^3+3ab(a+b)$. Misalkan $a=x$ dan $b=1/x$. Maka $(x+\\frac{1}{x})^3 = x^3+\\frac{1}{x^3}+3(x)(\\frac{1}{x})(x+\\frac{1}{x})$. Substitusi nilai yang diketahui: $3^3 = (x^3+\\frac{1}{x^3}) + 3(1)(3)$. Maka $27 = (x^3+\\frac{1}{x^3}) + 9$. Jadi, $x^3+\\frac{1}{x^3} = 27-9 = 18$."
-        },
-        {
-            "questionText": "Sebuah segitiga siku-siku memiliki panjang sisi miring 25 cm dan keliling 60 cm. Luas segitiga tersebut adalah...",
-            "options": [
-                "A. 120 cm²",
-                "B. 150 cm²",
-                "C. 175 cm²",
-                "D. 300 cm²"
-            ],
-            "correctAnswer": "B. 150 cm²",
-            "explanation": "Misalkan sisi siku-sikunya adalah $a$ dan $b$. Diketahui $a+b+25 = 60$, maka $a+b=35$. Dari Pythagoras, $a^2+b^2=25^2=625$. Kita tahu $(a+b)^2=a^2+b^2+2ab$. Maka $35^2 = 625+2ab \\implies 1225=625+2ab \\implies 2ab = 600 \\implies ab=300$. Luas segitiga adalah $\\frac{1}{2}ab = \\frac{1}{2}(300) = 150$ cm²."
-        },
-        {
-            "questionText": "Berapakah sisa pembagian dari $1! + 2! + 3! + ... + 100!$ oleh 12?",
-            "options": [
-                "A. 7",
-                "B. 8",
-                "C. 9",
-                "D. 10"
-            ],
-            "correctAnswer": "C. 9",
-            "explanation": "Kita perhatikan nilai faktorial: $1!=1$, $2!=2$, $3!=6$, $4!=24$. Karena $4! = 24$ habis dibagi 12, maka semua suku setelahnya ($5!, 6!, ...$) juga pasti habis dibagi 12 (karena mengandung faktor $4!$). Jadi, kita hanya perlu menghitung sisa dari jumlah suku-suku awal: $1!+2!+3! = 1+2+6 = 9$. Sisa dari 9 dibagi 12 adalah 9."
-        },
-        {
-            "questionText": "Dua buah lingkaran dengan jari-jari yang sama, yaitu 10 cm, saling bersinggungan luar. Panjang garis singgung persekutuan luarnya adalah...",
-            "options": [
-                "A. 10 cm",
-                "B. 10√2 cm",
-                "C. 20 cm",
-                "D. 20√3 cm"
-            ],
-            "correctAnswer": "C. 20 cm",
-            "explanation": "Misal pusat lingkaran P dan Q, titik singgung A dan B. Jarak PQ = $r+r = 10+10=20$. Jika kita gambar garis dari P sejajar AB ke QB, akan terbentuk persegi panjang. Jadi panjang garis singgung persekutuan luar AB sama dengan jarak antara kedua pusat PQ, yaitu 20 cm."
-        },
-        {
-            "questionText": "Nilai dari ekspresi $\\sqrt{2025 \\times 2023 - 2024 \\times 2022}$ adalah...",
-            "options": [
-                "A. 1",
-                "B. 2",
-                "C. √2023",
-                "D. √4047"
-            ],
-            "correctAnswer": "D. √4047",
-            "explanation": "Untuk menyelesaikan soal ini, metode yang paling efisien adalah menggunakan substitusi aljabar agar tidak perlu menghitung angka yang besar.\n\n**Langkah 1: Gunakan Variabel Pengganti**\nKita misalkan salah satu angka di tengah sebagai variabel $x$:\n$$ x = 2024 $$\nDengan begitu, angka-angka lain dalam soal dapat dituliskan dalam bentuk $x$:\n•  $2025 = x + 1$\n•  $2023 = x - 1$\n•  $2022 = x - 2$\n\n**Langkah 2: Sederhanakan Ekspresi**\nMasukkan bentuk variabel ini ke dalam ekspresi di bawah akar:\n$$ \\sqrt{(x+1)(x-1) - x(x-2)} $$\nLakukan perkalian untuk setiap suku di dalam akar:\n$$ \\sqrt{(x^2 - 1) - (x^2 - 2x)} $$\nBuka kurung dan sederhanakan lebih lanjut:\n$$ \\sqrt{x^2 - 1 - x^2 + 2x} $$\n$$ \\sqrt{2x - 1} $$\n\n**Langkah 3: Hitung Nilai Akhir**\nSetelah mendapatkan bentuk sederhana, masukkan kembali nilai $x = 2024$:\n$$ \\sqrt{2(2024) - 1} $$\n$$ \\sqrt{4048 - 1} $$\n$$ \\sqrt{4047} $$\n\nJadi, nilai dari ekspresi tersebut adalah **$\\sqrt{4047}$**.\n\n**Catatan:** Dalam soal sejenis, seringkali hasilnya adalah bilangan bulat. Ada kemungkinan soal aslinya memiliki tipo. Namun, untuk soal yang tertulis, **$\\sqrt{4047}$** adalah jawaban yang benar."
-        },
-        {
-            "questionText": "Sebuah pekerjaan dapat diselesaikan oleh 12 orang dalam 15 hari. Jika setelah 5 hari bekerja, pekerjaan dihentikan selama 3 hari. Berapa banyak pekerja tambahan yang dibutuhkan agar pekerjaan selesai tepat waktu?",
-            "options": [
-                "A. 6 orang",
-                "B. 8 orang",
-                "C. 10 orang",
-                "D. 12 orang"
-            ],
-            "correctAnswer": "A. 6 orang",
-            "explanation": "Total beban pekerjaan adalah $12 \\times 15 = 180$ orang-hari. Setelah 5 hari, pekerjaan yang selesai adalah $12 \\times 5 = 60$ orang-hari. Sisa pekerjaan adalah $180-60=120$ orang-hari. Waktu total adalah 15 hari. Sudah berjalan 5 hari + berhenti 3 hari = 8 hari. Sisa waktu adalah $15-8=7$ hari. Oh, hitungan tidak bulat. Mari perbaiki soal. Sisa waktu $15-(5+3) = 7$ hari. $120/7$ tidak bulat. Ganti soal: 10 orang dalam 12 hari. Beban $120$. Setelah 2 hari kerja, selesai 20. Sisa 100. Berhenti 3 hari. Sisa waktu $12-2-3=7$ hari. $100/7$ tidak bulat. Ganti soal: 12 orang dalam 10 hari. Beban 120. Setelah 4 hari, selesai 48. Sisa 72. Berhenti 2 hari. Sisa waktu $10-4-2=4$ hari. Pekerja yg dibutuhkan = $72/4=18$ orang. Tambahan: $18-12=6$ orang. Ya, ini soal yang bagus."
-        },
-        {
-            "questionText": "Koefisien dari $x^2$ pada ekspansi $(2x - 1)^4$ adalah...",
-            "options": [
-                "A. -32",
-                "B. -24",
-                "C. 24",
-                "D. 32"
-            ],
-            "correctAnswer": "C. 24",
-            "explanation": "Gunakan Teorema Binomial. Suku yang mengandung $x^2$ adalah $C(4,k) (2x)^k (-1)^{4-k}$. Agar pangkat $x$ adalah 2, maka $k=2$. Jadi sukunya adalah $C(4,2) (2x)^2 (-1)^{4-2} = \\frac{4!}{2!2!} (4x^2)(1) = 6 \\times 4x^2 = 24x^2$. Koefisiennya adalah 24."
-        },
-        {
-            "questionText": "Diketahui $\\triangle ABC$ dengan titik $D$ pada $AC$ dan $E$ pada $BC$ sehingga $DE \\parallel AB$. Jika $CD=3$, $DA=5$, dan $AB=16$, maka panjang $DE$ adalah...",
-            "options": [
-                "A. 6",
-                "B. 8",
-                "C. 9",
-                "D. 10"
-            ],
-            "correctAnswer": "A. 6",
-            "explanation": "Karena $DE \\parallel AB$, maka $\\triangle CDE$ sebangun dengan $\\triangle CAB$. Berlaku perbandingan sisi: $\\frac{DE}{AB} = \\frac{CD}{CA}$. Kita tahu $CA = CD+DA = 3+5=8$. Maka $\\frac{DE}{16} = \\frac{3}{8}$. Jadi, $DE = \\frac{3}{8} \\times 16 = 6$."
-        },
-        {
-            "questionText": "Jika $2^a = 3$, $3^b = 4$, $4^c = 5, \\dots, 25^y=26, 26^z = 27$, maka nilai dari $a \\times b \\times c \\times \\dots \\times z$ adalah...",
-            "options": [
-                "A. 3",
-                "B. $\\log_2 27$",
-                "C. 25",
-                "D. $\\log_{27} 2$"
-            ],
-            "correctAnswer": "B. $\\log_2 27$",
-            "explanation": "Ubah ke bentuk logaritma: $a=\\log_2 3$, $b=\\log_3 4$, $c=\\log_4 5$, ..., $z=\\log_{26} 27$. Jika dikalikan, akan terjadi sifat rantai: $(\\log_2 3)(\\log_3 4)...(\\log_{26} 27) = \\log_2 27$. Nilai ini juga sama dengan $3 \\log_2 3$."
-        },
-        {
-            "questionText": "Median dari data: 7, 8, 8, 3, 4, 9, 5, 10, 5, 6 adalah...",
-            "options": [
-                "A. 6",
-                "B. 6.5",
-                "C. 7",
-                "D. 7.5"
-            ],
-            "correctAnswer": "B. 6.5",
-            "explanation": "Urutkan data dari terkecil ke terbesar: 3, 4, 5, 5, 6, 7, 8, 8, 9, 10. Jumlah data adalah 10 (genap). Median adalah rata-rata dari dua data di tengah, yaitu data ke-5 dan ke-6. Median = $\\frac{6+7}{2} = 6.5$."
-        },
-        {
-            "questionText": "Ada berapa banyak bilangan 4-digit yang habis dibagi 5 dan semua digitnya berbeda?",
-            "options": [
-                "A. 900",
-                "B. 952",
-                "C. 1008",
-                "D. 1800"
-            ],
-            "correctAnswer": "B. 952",
-            "explanation": "Kita bagi 2 kasus. Kasus 1: Digit terakhir 0. Ribuan: 9 pilihan (1-9). Ratusan: 8 pilihan. Puluhan: 7 pilihan. Total: $9 \\times 8 \\times 7 \\times 1 = 504$. Kasus 2: Digit terakhir 5. Ribuan: 8 pilihan (1-9, kecuali 5). Ratusan: 8 pilihan (termasuk 0). Puluhan: 7 pilihan. Total: $8 \\times 8 \\times 7 \\times 1 = 448$. Jumlah total: $504+448=952$."
-        },
-        {
-            "questionText": "Jika akar-akar persamaan $x^2 - 5x + 3 = 0$ adalah $p$ dan $q$, maka persamaan kuadrat baru yang akar-akarnya $p^2$ dan $q^2$ adalah...",
-            "options": [
-                "A. $x^2 - 19x + 9 = 0$",
-                "B. $x^2 - 25x + 9 = 0$",
-                "C. $x^2 - 19x + 3 = 0$",
-                "D. $x^2 + 19x - 9 = 0$"
-            ],
-            "correctAnswer": "A. $x^2 - 19x + 9 = 0$",
-            "explanation": "Dari persamaan awal: $p+q=5$ dan $pq=3$. Jumlah akar baru: $p^2+q^2=(p+q)^2-2pq = 5^2-2(3)=25-6=19$. Hasil kali akar baru: $p^2q^2=(pq)^2=3^2=9$. Persamaan kuadrat baru adalah $x^2 - (\\text{jumlah akar})x + (\\text{hasil kali akar}) = 0$, yaitu $x^2 - 19x + 9 = 0$."
-        },
-        {
-            "questionText": "Suatu fungsi didefinisikan secara rekursif $f(n) = f(n-1) + 2n - 1$ untuk $n \\ge 2$ dan $f(1)=1$. Nilai dari $f(10)$ adalah...",
-            "options": [
-                "A. 81",
-                "B. 90",
-                "C. 100",
-                "D. 121"
-            ],
-            "correctAnswer": "C. 100",
-            "explanation": "Perhatikan polanya: $f(1)=1=1^2$. $f(2)=f(1)+2(2)-1=1+3=4=2^2$. $f(3)=f(2)+2(3)-1=4+5=9=3^2$. Tampak bahwa $f(n)=n^2$. Jadi $f(10)=10^2=100$."
-        },
-        {
-            "questionText": "Sebuah kubus ABCD.EFGH memiliki panjang rusuk 6 cm. Titik P adalah titik tengah rusuk CG. Jarak dari titik E ke titik P adalah...",
-            "options": [
-                "A. 6√2 cm",
-                "B. 6√3 cm",
-                "C. 9 cm",
-                "D. 9√2 cm"
-            ],
-            "correctAnswer": "C. 9 cm",
-            "explanation": "Perhatikan segitiga ECP yang siku-siku di C. Panjang PC = setengah dari CG = 3 cm. Panjang EC adalah diagonal ruang. Oh, bukan. EC adalah diagonal sisi. EC adalah diagonal ruang. Panjang EC adalah diagonal ruang, $6\\sqrt{3}$. Segitiga ECP tidak siku-siku di C. Gunakan koordinat atau Pythagoras 3D. Misal C(0,0,0), G(0,0,6), E(6,6,6). P adalah (0,0,3). Jarak EP = $\\sqrt{(6-0)^2+(6-0)^2+(6-3)^2} = \\sqrt{36+36+9} = \\sqrt{81}=9$ cm. Cara lain: perhatikan segitiga EGP siku-siku di G. EG=diagonal sisi=$6\\sqrt{2}$. GP=3. $EP^2 = EG^2+GP^2 = (6\\sqrt{2})^2+3^2 = 72+9=81$. $EP=9$."
-        },
-        {
-            "questionText": "Peluang Amir lulus ujian adalah 0.8 dan peluang Budi lulus ujian adalah 0.7. Peluang bahwa hanya salah satu dari mereka yang lulus ujian adalah...",
-            "options": [
-                "A. 0.14",
-                "B. 0.38",
-                "C. 0.56",
-                "D. 0.94"
-            ],
-            "correctAnswer": "B. 0.38",
-            "explanation": "Ada dua kemungkinan. 1) Amir lulus DAN Budi tidak lulus: $P(A \\cap B') = P(A) \\times P(B') = 0.8 \\times (1-0.7) = 0.8 \\times 0.3 = 0.24$. 2) Amir tidak lulus DAN Budi lulus: $P(A' \\cap B) = P(A') \\times P(B) = (1-0.8) \\times 0.7 = 0.2 \\times 0.7 = 0.14$. Total peluangnya adalah $0.24+0.14=0.38$."
-        },
-        {
-            "questionText": "Bilangan bulat terbesar yang kurang dari atau sama dengan $\\sum_{n=1}^{100} \\frac{1}{\\sqrt{n} + \\sqrt{n-1}}$ adalah... (Catatan: $\\sqrt{0}=0$)",
-            "options": [
-                "A. 9",
-                "B. 10",
-                "C. 99",
-                "D. 100"
-            ],
-            "correctAnswer": "B. 10",
-            "explanation": "Kita rasionalkan penyebutnya: $\\frac{1}{\\sqrt{n} + \\sqrt{n-1}} \\times \\frac{\\sqrt{n} - \\sqrt{n-1}}{\\sqrt{n} - \\sqrt{n-1}} = \\frac{\\sqrt{n}-\\sqrt{n-1}}{n-(n-1)} = \\sqrt{n}-\\sqrt{n-1}$. Ini adalah deret teleskopik. Jumlahnya adalah $(\\sqrt{1}-\\sqrt{0})+(\\sqrt{2}-\\sqrt{1})+...+(\\sqrt{100}-\\sqrt{99})$. Suku-suku tengah saling menghilangkan, menyisakan $\\sqrt{100}-\\sqrt{0} = 10-0=10$. Jadi bilangan bulat terbesar yang kurang dari atau sama dengan hasilnya adalah 10."
-        }
+            {
+        "questionText": "Banyaknya pasangan bilangan bulat $(x, y)$ yang memenuhi persamaan $\\frac{1}{x} + \\frac{1}{y} = \\frac{1}{5}$ adalah...",
+        "options": [
+            "A. 4",
+            "B. 5",
+            "C. 8",
+            "D. 9"
+        ],
+        "correctAnswer": "B. 5",
+        "explanation": "➡️ LANGKAH 1: MANIPULASI ALJABAR\nPersamaan awal kita ubah bentuknya:\n$$ \\frac{x+y}{xy} = \\frac{1}{5} \\rightarrow 5x + 5y = xy $$\n$$ xy - 5x - 5y = 0 $$\nDengan menambahkan $25$ pada kedua ruas, kita bisa melengkapkan pemfaktoran:\n$$ (x-5)(y-5) = 25 $$\n\n➡️ LANGKAH 2: ANALISIS FAKTOR DAN SYARAT\nKarena $x$ dan $y$ adalah bilangan bulat, maka $(x-5)$ harus merupakan faktor dari 25, yaitu $\\{ \\pm 1, \\pm 5, \\pm 25 \\}$.\nDari persamaan awal, nilai $x$ dan $y$ tidak boleh nol. Syarat ini berarti $x-5 \\neq -5$.\nPasangan faktor $(-5, -5)$ yang akan menghasilkan $x=0$ dan $y=0$ harus dikecualikan.\n\n➡️ LANGKAH 3: DAFTAR PASANGAN YANG MEMENUHI\nPasangan faktor yang valid adalah:\n•  $(1, 25) \\rightarrow (x,y) = (6, 30)$\n•  $(25, 1) \\rightarrow (x,y) = (30, 6)$\n•  $(5, 5) \\rightarrow (x,y) = (10, 10)$\n•  $(-1, -25) \\rightarrow (x,y) = (4, -20)$\n•  $(-25, -1) \\rightarrow (x,y) = (-20, 4)$\n\nTotal ada **5 pasangan** yang memenuhi."
+    },
+    {
+        "questionText": "Sebuah jam dinding menunjukkan pukul 04:40. Berapakah sudut terkecil yang dibentuk oleh jarum jam dan jarum menit?",
+        "options": [
+            "A. 90°",
+            "B. 100°",
+            "C. 110°",
+            "D. 120°"
+        ],
+        "correctAnswer": "B. 100°",
+        "explanation": "➡️ LANGKAH 1: POSISI JARUM MENIT\nPosisi jarum menit dihitung dari angka 12. Setiap menit bernilai $6^\\circ$.\n$$ 40 \\text{ menit} \\times 6^\\circ = 240^\\circ $$\n\n➡️ LANGKAH 2: POSISI JARUM JAM\nJarum jam juga bergerak dari posisi awalnya di angka 4. Setiap jam bernilai $30^\\circ$.\n$$ (4 \\times 30^\\circ) + (\\frac{40}{60} \\times 30^\\circ) = 120^\\circ + 20^\\circ = 140^\\circ $$\n\n➡️ LANGKAH 3: SELISIH SUDUT\nSelisih sudut antara kedua jarum adalah:\n$$ |240^\\circ - 140^\\circ| = 100^\\circ $$\nKarena $100^\\circ$ kurang dari $180^\\circ$, maka ini adalah sudut terkecil."
+    },
+    {
+        "questionText": "Diberikan $f(x) = ax+b$. Jika $f(f(x)) = 9x+8$, maka nilai dari $a+b$ bisa jadi...",
+        "options": [
+            "A. 5 atau -1",
+            "B. 5 atau -7",
+            "C. -5 atau 7",
+            "D. -5 atau -1"
+        ],
+        "correctAnswer": "B. 5 atau -7",
+        "explanation": "➡️ LANGKAH 1: SUBSTITUSI FUNGSI\n$$ f(f(x)) = a(ax+b)+b = a^2x + ab + b $$\n\n➡️ LANGKAH 2: SAMAKAN KEDUA PERSAMAAN\nDari $a^2x + ab + b = 9x+8$, kita peroleh:\n1. $a^2 = 9 \\rightarrow a = 3$ atau $a = -3$\n2. $ab+b = 8 \\rightarrow b(a+1) = 8$\n\n➡️ LANGKAH 3: HITUNG SETIAP KASUS\nKASUS UNTUK a = 3:\n$$ b(3+1) = 8 \\rightarrow 4b=8 \\rightarrow b=2 $$\nNilai $a+b = 3+2 = 5$.\n\nKASUS UNTUK a = -3:\n$$ b(-3+1) = 8 \\rightarrow -2b=8 \\rightarrow b=-4 $$\nNilai $a+b = -3 + (-4) = -7$.\n\nJadi, nilai yang mungkin adalah **5** atau **-7**."
+    },
+    {
+        "questionText": "Terdapat 5 orang pria dan 4 orang wanita. Mereka akan duduk dalam satu baris. Jika posisi duduk harus berselang-seling antara pria dan wanita, ada berapa banyak cara mereka bisa duduk?",
+        "options": [
+            "A. 1440",
+            "B. 2880",
+            "C. 5760",
+            "D. 362880"
+        ],
+        "correctAnswer": "B. 2880",
+        "explanation": "➡️ ANALISIS FORMASI\nKarena ada 5 Pria (P) dan 4 Wanita (W), satu-satunya formasi selang-seling yang mungkin adalah:\n$$ P \\; W \\; P \\; W \\; P \\; W \\; P \\; W \\; P $$\n\n➡️ HITUNG PERMUTASI\nCara mengatur 5 pria di 5 posisi P adalah $5! = 120$.\nCara mengatur 4 wanita di 4 posisi W adalah $4! = 24$.\n\n➡️ HASIL AKHIR\nTotal cara adalah perkalian keduanya:\n$$ 120 \\times 24 = 2880 $$"
+    },
+    {
+        "questionText": "Jika $x + \\frac{1}{x} = 3$, maka nilai dari $x^3 + \\frac{1}{x^3}$ adalah...",
+        "options": [
+            "A. 18",
+            "B. 21",
+            "C. 24",
+            "D. 27"
+        ],
+        "correctAnswer": "A. 18",
+        "explanation": "➡️ GUNAKAN IDENTITAS ALJABAR\nGunakan identitas $(a+b)^3 = a^3+b^3+3ab(a+b)$.\n\n➡️ SUBSTITUSI\nMisalkan $a=x$ dan $b=1/x$:\n$$ (x+\\frac{1}{x})^3 = x^3+\\frac{1}{x^3}+3(x)(\\frac{1}{x})(x+\\frac{1}{x}) $$\nMasukkan nilai yang diketahui, $x+\\frac{1}{x}=3$:\n$$ (3)^3 = (x^3+\\frac{1}{x^3}) + 3(1)(3) $$\n\n➡️ SELESAIKAN\n$$ 27 = x^3+\\frac{1}{x^3} + 9 $$\n$$ x^3+\\frac{1}{x^3} = 27 - 9 = 18 $$"
+    },
+    {
+        "questionText": "Sebuah segitiga siku-siku memiliki panjang sisi miring 25 cm dan keliling 60 cm. Luas segitiga tersebut adalah...",
+        "options": [
+            "A. 120 cm²",
+            "B. 150 cm²",
+            "C. 175 cm²",
+            "D. 300 cm²"
+        ],
+        "correctAnswer": "B. 150 cm²",
+        "explanation": "➡️ LANGKAH 1: TENTUKAN JUMLAH SISI SIKU-SIKU\nMisalkan sisi siku-sikunya adalah $a$ dan $b$.\nKeliling: $a+b+25 = 60 \\rightarrow a+b=35$.\nPythagoras: $a^2+b^2=25^2=625$.\n\n➡️ LANGKAH 2: CARI HASIL KALI SISI\nGunakan identitas $(a+b)^2 = a^2+b^2+2ab$.\n$$ (35)^2 = 625 + 2ab $$\n$$ 1225 = 625 + 2ab $$\n$$ 2ab = 1225 - 625 = 600 $$\n\n➡️ LANGKAH 3: HITUNG LUAS\nLuas segitiga adalah $\\frac{1}{2}ab$. Dari langkah 2, kita dapat $\\frac{1}{2} \\times (2ab) = \\frac{1}{2} \\times 600$, sehingga:\n$$ ab = 300 $$\n$$ \\text{Luas} = \\frac{1}{2}(300) = 150 \\text{ cm}^2 $$"
+    },
+    {
+        "questionText": "Berapakah sisa pembagian dari $1! + 2! + 3! + ... + 100!$ oleh 12?",
+        "options": [
+            "A. 7",
+            "B. 8",
+            "C. 9",
+            "D. 10"
+        ],
+        "correctAnswer": "C. 9",
+        "explanation": "➡️ ANALISIS SUKU\nKita hanya perlu memeriksa beberapa suku pertama:\n$1! = 1$\n$2! = 2$\n$3! = 6$\n$4! = 24$\n\n➡️ TENTUKAN POLA SISA\nPerhatikan bahwa $4! = 24$ habis dibagi 12. Artinya, semua suku setelahnya ($5!, 6!,$ dst.) juga pasti habis dibagi 12 karena mengandung faktor $4!$.\n\n➡️ HITUNG TOTAL SISA\nKita hanya perlu menjumlahkan sisa dari suku-suku yang tidak habis dibagi 12:\n$$ 1! + 2! + 3! = 1 + 2 + 6 = 9 $$\nSisa dari 9 dibagi 12 adalah **9**."
+    },
+    {
+        "questionText": "Dua buah lingkaran dengan jari-jari yang sama, yaitu 10 cm, saling bersinggungan luar. Panjang garis singgung persekutuan luarnya adalah...",
+        "options": [
+            "A. 10 cm",
+            "B. 10√2 cm",
+            "C. 20 cm",
+            "D. 20√3 cm"
+        ],
+        "correctAnswer": "C. 20 cm",
+        "explanation": "➡️ VISUALISASI MASALAH\nJika dua lingkaran dengan jari-jari sama ($r$) bersinggungan luar, jarak antara kedua pusatnya adalah $r+r=2r$.\n\n➡️ GUNAKAN SIFAT GEOMETRI\nUntuk kasus ini, panjang garis singgung persekutuan luar sama persis dengan jarak antara kedua pusat lingkaran.\n\n➡️ HITUNG HASIL AKHIR\nJarak antar pusat = $10 \\text{ cm} + 10 \\text{ cm} = 20 \\text{ cm}$.\nJadi, panjang garis singgungnya adalah **20 cm**."
+    },
+    {
+        "questionText": "Nilai dari ekspresi $\\sqrt{2025 \\times 2023 - 2024 \\times 2022}$ adalah...",
+        "options": [
+            "A. 1",
+            "B. 2",
+            "C. √2023",
+            "D. √4047"
+        ],
+        "correctAnswer": "D. √4047",
+        "explanation": "➡️ LANGKAH 1: GUNAKAN VARIABEL PENGGANTI\nMisalkan $x = 2024$. Maka:\n•  $2025 = x + 1$\n•  $2023 = x - 1$\n•  $2022 = x - 2$\n\n➡️ LANGKAH 2: SEDERHANAKAN EKSPRESI\nSubstitusikan ke dalam akar:\n$$ \\sqrt{(x+1)(x-1) - x(x-2)} $$\n$$ \\sqrt{(x^2 - 1) - (x^2 - 2x)} $$\n$$ \\sqrt{x^2 - 1 - x^2 + 2x} $$\n$$ \\sqrt{2x - 1} $$\n\n➡️ LANGKAH 3: HITUNG NILAI AKHIR\nMasukkan kembali nilai $x = 2024$:\n$$ \\sqrt{2(2024) - 1} = \\sqrt{4048 - 1} = \\sqrt{4047} $$\nJadi, nilai dari ekspresi tersebut adalah **$\\sqrt{4047}$**."
+    },
+    {
+        "questionText": "Sebuah pekerjaan dapat diselesaikan oleh 12 orang dalam 10 hari. Jika setelah 4 hari bekerja, pekerjaan dihentikan selama 2 hari. Berapa banyak pekerja tambahan yang dibutuhkan agar pekerjaan selesai tepat waktu?",
+        "options": [
+            "A. 6 orang",
+            "B. 8 orang",
+            "C. 10 orang",
+            "D. 12 orang"
+        ],
+        "correctAnswer": "A. 6 orang",
+        "explanation": "➡️ LANGKAH 1: HITUNG BEBAN KERJA TOTAL\nBeban kerja = $12 \\text{ orang} \\times 10 \\text{ hari} = 120$ orang-hari.\n\n➡️ LANGKAH 2: HITUNG SISA PEKERJAAN\nPekerjaan selesai = $12 \\text{ orang} \\times 4 \\text{ hari} = 48$ orang-hari.\nSisa pekerjaan = $120 - 48 = 72$ orang-hari.\n\n➡️ LANGKAH 3: HITUNG SISA WAKTU\nSisa waktu = $10 \\text{ hari} - 4 \\text{ hari kerja} - 2 \\text{ hari berhenti} = 4$ hari.\n\n➡️ LANGKAH 4: HITUNG PEKERJA TAMBAHAN\nPekerja yang dibutuhkan = $\\frac{\\text{Sisa pekerjaan}}{\\text{Sisa waktu}} = \\frac{72}{4} = 18$ orang.\nPekerja tambahan = $18 - 12 = 6$ orang."
+    },
+    {
+        "questionText": "Koefisien dari $x^2$ pada ekspansi $(2x - 1)^4$ adalah...",
+        "options": [
+            "A. -32",
+            "B. -24",
+            "C. 24",
+            "D. 32"
+        ],
+        "correctAnswer": "C. 24",
+        "explanation": "➡️ GUNAKAN TEOREMA BINOMIAL\nRumus suku ke-$(k+1)$ dari $(a+b)^n$ adalah $C(n,k) a^{n-k} b^k$.\nDalam kasus ini, $a=2x, b=-1, n=4$.\n$$ C(4,k) (2x)^{4-k} (-1)^k $$\n\n➡️ TENTUKAN SUKU YANG MENGANDUNG $x^2$\nAgar pangkat $x$ adalah 2, maka $4-k=2$, sehingga $k=2$.\n\n➡️ HITUNG KOEFISIEN\nSubstitusikan $k=2$:\n$$ C(4,2) (2x)^{4-2} (-1)^2 $$\n$$ \\frac{4!}{2!2!} (2x)^2 (1) = 6 \\cdot 4x^2 = 24x^2 $$\nJadi, koefisiennya adalah **24**."
+    },
+    {
+        "questionText": "Diketahui $\\triangle ABC$ dengan titik $D$ pada $AC$ dan $E$ pada $BC$ sehingga $DE \\parallel AB$. Jika $CD=3$, $DA=5$, dan $AB=16$, maka panjang $DE$ adalah...",
+        "options": [
+            "A. 6",
+            "B. 8",
+            "C. 9",
+            "D. 10"
+        ],
+        "correctAnswer": "A. 6",
+        "explanation": "➡️ GUNAKAN KONSEP KESEBANGUNAN\nKarena $DE \\parallel AB$, maka $\\triangle CDE$ sebangun dengan $\\triangle CAB$.\n\n➡️ BUAT PERBANDINGAN SISI\nPerbandingan sisi-sisi yang bersesuaian akan sama:\n$$ \\frac{DE}{AB} = \\frac{CD}{CA} $$\n\n➡️ HITUNG HASILNYA\nPanjang $CA = CD+DA = 3+5=8$. Masukkan semua nilai:\n$$ \\frac{DE}{16} = \\frac{3}{8} $$\n$$ DE = \\frac{3}{8} \\times 16 = 6 $$"
+    },
+    {
+        "questionText": "Jika $2^a = 3$, $3^b = 4$, $4^c = 5, \\dots, 26^z = 27$, maka nilai dari $a \\times b \\times c \\times \\dots \\times z$ adalah...",
+        "options": [
+            "A. 3",
+            "B. $\\log_2 27$",
+            "C. 25",
+            "D. $\\log_{27} 2$"
+        ],
+        "correctAnswer": "B. $\\log_2 27$",
+        "explanation": "➡️ UBAH KE BENTUK LOGARITMA\nSetiap persamaan diubah menjadi logaritma:\n$a=\\log_2 3$\n$b=\\log_3 4$\n$c=\\log_4 5$\n...\n$z=\\log_{26} 27$\n\n➡️ GUNAKAN SIFAT RANTAI LOGARITMA\nKetika semua nilai dikalikan, suku-suku tengah akan saling menghilangkan:\n$$ a \\cdot b \\cdot c \\cdot \\dots \\cdot z = (\\log_2 3)(\\log_3 4)...(\\log_{26} 27) $$\n$$ = \\log_2 27 $$"
+    },
+    {
+        "questionText": "Median dari data: 7, 8, 8, 3, 4, 9, 5, 10, 5, 6 adalah...",
+        "options": [
+            "A. 6",
+            "B. 6.5",
+            "C. 7",
+            "D. 7.5"
+        ],
+        "correctAnswer": "B. 6.5",
+        "explanation": "➡️ LANGKAH 1: URUTKAN DATA\nData diurutkan dari yang terkecil hingga terbesar:\n$3, 4, 5, 5, 6, 7, 8, 8, 9, 10$\n\n➡️ LANGKAH 2: TENTUKAN NILAI TENGAH\nJumlah data adalah 10 (genap). Median adalah rata-rata dari dua data di tengah, yaitu data ke-5 dan ke-6.\n\n➡️ LANGKAH 3: HITUNG MEDIAN\nData ke-5 adalah 6, data ke-6 adalah 7.\n$$ \\text{Median} = \\frac{6+7}{2} = 6.5 $$"
+    },
+    {
+        "questionText": "Ada berapa banyak bilangan 4-digit yang habis dibagi 5 dan semua digitnya berbeda?",
+        "options": [
+            "A. 900",
+            "B. 952",
+            "C. 1008",
+            "D. 1800"
+        ],
+        "correctAnswer": "B. 952",
+        "explanation": "➡️ ANALISIS SYARAT\nBilangan habis dibagi 5 jika digit terakhirnya 0 atau 5. Kita bagi menjadi dua kasus.\n\n➡️ KASUS 1: DIGIT TERAKHIR ADALAH 0\n• Satuan: 1 pilihan (0)\n• Ribuan: 9 pilihan (1-9)\n• Ratusan: 8 pilihan tersisa\n• Puluhan: 7 pilihan tersisa\nTotal: $9 \\times 8 \\times 7 \\times 1 = 504$.\n\n➡️ KASUS 2: DIGIT TERAKHIR ADALAH 5\n• Satuan: 1 pilihan (5)\n• Ribuan: 8 pilihan (1-9, kecuali 5)\n• Ratusan: 8 pilihan tersisa (termasuk 0)\n• Puluhan: 7 pilihan tersisa\nTotal: $8 \\times 8 \\times 7 \\times 1 = 448$.\n\n➡️ JUMLAH TOTAL\nTotal cara adalah $504 + 448 = 952$."
+    },
+    {
+        "questionText": "Jika akar-akar persamaan $x^2 - 5x + 3 = 0$ adalah $p$ dan $q$, maka persamaan kuadrat baru yang akar-akarnya $p^2$ dan $q^2$ adalah...",
+        "options": [
+            "A. $x^2 - 19x + 9 = 0$",
+            "B. $x^2 - 25x + 9 = 0$",
+            "C. $x^2 - 19x + 3 = 0$",
+            "D. $x^2 + 19x - 9 = 0$"
+        ],
+        "correctAnswer": "A. $x^2 - 19x + 9 = 0$",
+        "explanation": "➡️ LANGKAH 1: GUNAKAN RUMUS VIETA\nDari persamaan awal: $p+q=5$ dan $pq=3$.\n\n➡️ LANGKAH 2: CARI JUMLAH DAN HASIL KALI AKAR BARU\nJumlah akar baru: $p^2+q^2=(p+q)^2-2pq = 5^2-2(3)=25-6=19$.\nHasil kali akar baru: $p^2q^2=(pq)^2=3^2=9$.\n\n➡️ LANGKAH 3: SUSUN PERSAMAAN BARU\nRumus: $x^2 - (\\text{Jumlah Akar})x + (\\text{Hasil Kali Akar}) = 0$.\n$$ x^2 - 19x + 9 = 0 $$"
+    },
+    {
+        "questionText": "Suatu fungsi didefinisikan secara rekursif $f(n) = f(n-1) + 2n - 1$ untuk $n \\ge 2$ dan $f(1)=1$. Nilai dari $f(10)$ adalah...",
+        "options": [
+            "A. 81",
+            "B. 90",
+            "C. 100",
+            "D. 121"
+        ],
+        "correctAnswer": "C. 100",
+        "explanation": "➡️ CARI POLA DARI FUNGSI\nMari kita hitung beberapa suku pertama:\n$f(1) = 1 = 1^2$\n$f(2) = f(1)+2(2)-1 = 1+3 = 4 = 2^2$\n$f(3) = f(2)+2(3)-1 = 4+5 = 9 = 3^2$\n\n➡️ SIMPULKAN POLA\nTerlihat bahwa polanya adalah $f(n)=n^2$.\n\n➡️ HITUNG NILAI AKHIR\nJadi, $f(10) = 10^2 = 100$."
+    },
+    {
+        "questionText": "Sebuah kubus ABCD.EFGH memiliki panjang rusuk 6 cm. Titik P adalah titik tengah rusuk CG. Jarak dari titik E ke titik P adalah...",
+        "options": [
+            "A. 6√2 cm",
+            "B. 6√3 cm",
+            "C. 9 cm",
+            "D. 9√2 cm"
+        ],
+        "correctAnswer": "C. 9 cm",
+        "explanation": "➡️ METODE 1: PYTHAGORAS 3D\nTempatkan titik C di (0,0,0). Maka G(0,0,6), E(6,6,6), dan P(0,0,3).\nJarak EP = $\\sqrt{(6-0)^2+(6-0)^2+(6-3)^2} = \\sqrt{36+36+9} = \\sqrt{81}=9$ cm.\n\n➡️ METODE 2: SEGITIGA SIKU-SIKU\nPerhatikan segitiga EGP yang siku-siku di G.\nPanjang EG (diagonal sisi) = $6\\sqrt{2}$ cm.\nPanjang GP (setengah rusuk) = $3$ cm.\n$$ EP^2 = EG^2 + GP^2 = (6\\sqrt{2})^2 + 3^2 $$\n$$ EP^2 = 72 + 9 = 81 $$\n$$ EP = \\sqrt{81} = 9 \\text{ cm} $$"
+    },
+    {
+        "questionText": "Peluang Amir lulus ujian adalah 0.8 dan peluang Budi lulus ujian adalah 0.7. Peluang bahwa hanya salah satu dari mereka yang lulus ujian adalah...",
+        "options": [
+            "A. 0.14",
+            "B. 0.38",
+            "C. 0.56",
+            "D. 0.94"
+        ],
+        "correctAnswer": "B. 0.38",
+        "explanation": "➡️ TENTUKAN SEMUA PELUANG\n• Peluang Amir lulus, $P(A) = 0.8$, maka gagal $P(A')=0.2$.\n• Peluang Budi lulus, $P(B) = 0.7$, maka gagal $P(B')=0.3$.\n\n➡️ HITUNG DUA KEMUNGKINAN\n1. Amir lulus DAN Budi gagal:\n   $P(A \\cap B') = 0.8 \\times 0.3 = 0.24$\n2. Amir gagal DAN Budi lulus:\n   $P(A' \\cap B) = 0.2 \\times 0.7 = 0.14$\n\n➡️ JUMLAHKAN KEDUA PELUANG\nTotal peluang hanya satu yang lulus adalah:\n$$ 0.24 + 0.14 = 0.38 $$"
+    },
+    {
+        "questionText": "Bilangan bulat terbesar yang kurang dari atau sama dengan $\\sum_{n=1}^{100} \\frac{1}{\\sqrt{n} + \\sqrt{n-1}}$ adalah...",
+        "options": [
+            "A. 9",
+            "B. 10",
+            "C. 99",
+            "D. 100"
+        ],
+        "correctAnswer": "B. 10",
+        "explanation": "➡️ LANGKAH 1: RASIONALKAN PENYEBUT\n$$ \\frac{1}{\\sqrt{n} + \\sqrt{n-1}} \\times \\frac{\\sqrt{n} - \\sqrt{n-1}}{\\sqrt{n} - \\sqrt{n-1}} = \\frac{\\sqrt{n}-\\sqrt{n-1}}{n-(n-1)} = \\sqrt{n}-\\sqrt{n-1} $$\n\n➡️ LANGKAH 2: GUNAKAN KONSEP DERET TELESKOPIK\nJumlah deretnya adalah:\n$$ (\\sqrt{1}-\\sqrt{0})+(\\sqrt{2}-\\sqrt{1})+...+(\\sqrt{100}-\\sqrt{99}) $$\nSuku-suku tengah saling menghilangkan, menyisakan:\n$$ \\sqrt{100} - \\sqrt{0} = 10 - 0 = 10 $$\n\n➡️ LANGKAH 3: TENTUKAN JAWABAN\nNilai eksak dari penjumlahan tersebut adalah 10. Maka, bilangan bulat terbesar yang kurang dari atau sama dengan 10 adalah **10**."
+    }
     ]
 },
     ]
