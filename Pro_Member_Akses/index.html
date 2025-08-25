@@ -49,12 +49,11 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .nav-btn:disabled { background-color: #30363D; color: #8B949E; cursor: not-allowed; }
 
-/* === [TAMBAHKAN CSS INI] === */
 .dropdown-container {
     position: relative;
     width: 100%;
-    max-width: 320px; /* Lebar maksimum dropdown */
-    user-select: none; /* Mencegah teks terseleksi saat diklik */
+    max-width: 320px;
+    user-select: none;
 }
 .dropdown-button {
     background-color: var(--bg-panel);
@@ -78,7 +77,7 @@
     transition: transform 0.3s ease;
 }
 .dropdown-menu {
-    display: none; /* Sembunyi secara default */
+    display: none;
     position: absolute;
     top: calc(100% + 0.5rem);
     left: 0;
@@ -92,7 +91,7 @@
     box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 .dropdown-menu.open {
-    display: block; /* Tampil saat class 'open' ditambahkan */
+    display: block;
 }
 .dropdown-button.open i {
     transform: rotate(180deg);
@@ -105,7 +104,6 @@
     background-color: var(--accent-cyan);
     color: white;
 }
-/* === [AKHIR DARI CSS YANG DITAMBAHKAN] === */
 
         @keyframes slideInRight { from { opacity: 0; transform: translateX(100%); } to { opacity: 1; transform: translateX(0); } }
         @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; transform: translateY(-20px); } }
@@ -155,52 +153,49 @@
         .modal-btn-cancel { background-color: #30363D; color: var(--text-primary); }
         .modal-btn-cancel:hover { background-color: #484f58; }
         
-        /* === [CSS BARU UNTUK PEMBAHASAN AGAR TIDAK OVERFLOW] === */
         .explanation-content {
             overflow-wrap: break-word;
             word-wrap: break-word;
             word-break: break-word;
-            white-space: pre-wrap; /* Penting untuk menjaga format spasi dan baris baru dari data.js */
-            overflow-x: auto;
+            white-space: pre-wrap;
+            /* PERUBAHAN DI SINI: Mengunci scroll hanya ke arah horizontal */
+            overflow: auto hidden;
         }
-        /* === [AKHIR DARI CSS BARU] === */
 
-/* === [TAMBAHKAN CSS INI] === */
-.quiz-nav-container {
-    display: flex;
-    overflow-x: auto;
-    padding-bottom: 0.75rem; /* Memberi ruang untuk scrollbar */
-    margin-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-color);
-}
-.quiz-nav-item {
-    flex-shrink: 0;
-    width: 2.5rem;
-    height: 2.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid var(--border-color);
-    border-radius: 50%;
-    margin-right: 0.75rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-.quiz-nav-item:hover {
-    border-color: var(--accent-cyan);
-    color: var(--accent-cyan);
-}
-.quiz-nav-item.current {
-    background-color: var(--accent-cyan);
-    border-color: var(--accent-cyan);
-    color: white;
-}
-.quiz-nav-item.answered {
-    background-color: #39D35330; /* Hijau transparan */
-    border-color: var(--accent-green);
-}
-/* === [AKHIR DARI CSS YANG DITAMBAHKAN] === */
+        .quiz-nav-container {
+            display: flex;
+            overflow-x: auto;
+            padding-bottom: 0.75rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        .quiz-nav-item {
+            flex-shrink: 0;
+            width: 2.5rem;
+            height: 2.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--border-color);
+            border-radius: 50%;
+            margin-right: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .quiz-nav-item:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+        .quiz-nav-item.current {
+            background-color: var(--accent-cyan);
+            border-color: var(--accent-cyan);
+            color: white;
+        }
+        .quiz-nav-item.answered {
+            background-color: #39D35330;
+            border-color: var(--accent-green);
+        }
     </style>
 </head>
 <body class="text-white">
@@ -343,7 +338,7 @@
     const pageRenderers = {
         'dashboard': renderDashboardPage,
         'materi': renderMateriPage,
-        'perpustakaan': renderPerpustakaanPage, // <-- Tambahkan baris ini
+        'perpustakaan': renderPerpustakaanPage,
         'bank_soal': renderBankSoalPage,
         'video': renderVideoPage,
         'forum': renderForumPage,
@@ -352,8 +347,6 @@
     };
     
     function navigateTo(page, clickedElement) {
-    // [TAMBAHKAN BARIS INI]
-    // Simpan halaman yang sedang aktif ke sessionStorage, kecuali halaman tertentu
         if (page !== 'pengaturan') {
             sessionStorage.setItem('lastActivePage', page);
         }
@@ -377,7 +370,6 @@
     // =================================================================================
     // BAGIAN 3: FUNGSI RENDER UNTUK SETIAP HALAMAN
     // =================================================================================
-// Ganti seluruh fungsi renderDashboardPage di index.html
 function renderDashboardPage() {
     appContent.innerHTML = `
         <header class="panel flex justify-between items-center">
@@ -410,13 +402,11 @@ function renderDashboardPage() {
     initializeAppDashboardWidgets();
 }
     
-// GANTI KESELURUHAN FUNGSI renderMateriPage DENGAN INI
 function renderMateriPage() {
     let accordionHTML = '';
     const materiData = allContentData.materi;
 
     for (const gradeKey in materiData) {
-        // --- BAGIAN TERPENTING ADA DI BARIS ONCLICK DI BAWAH INI ---
         const itemsHTML = materiData[gradeKey].map(item => `
             <li id="card-${item.id}"
                 class="card-item-list block p-3 rounded-md hover:bg-gray-700 cursor-pointer"
@@ -456,7 +446,6 @@ function renderMateriPage() {
     `;
     appContent.innerHTML = materiPageHTML;
 
-    // Logika untuk membuka-tutup accordion
     document.querySelectorAll('.accordion-button').forEach(button => {
         button.addEventListener('click', () => {
             const content = button.parentElement.nextElementSibling;
@@ -478,21 +467,18 @@ function setupMateriSearch() {
         const allMateriItems = document.querySelectorAll('.card-item-list');
         const allAccordionGroups = document.querySelectorAll('[data-accordion-group]');
 
-        // Jika kotak pencarian kosong, kembalikan ke tampilan semula
         if (searchTerm === '') {
             allMateriItems.forEach(item => {
                 item.style.display = 'block';
             });
             allAccordionGroups.forEach(group => {
                 group.style.display = 'block';
-                // Tutup semua accordion
                 group.querySelector('.accordion-content').classList.add('hidden');
                 group.querySelector('.accordion-icon').classList.remove('rotate-180');
             });
             return;
         }
 
-        // Proses pencarian
         allAccordionGroups.forEach(group => {
             const itemsInGroup = group.querySelectorAll('.card-item-list');
             let hasVisibleItemInGroup = false;
@@ -507,10 +493,8 @@ function setupMateriSearch() {
                 }
             });
 
-            // Tampilkan atau sembunyikan seluruh grup kelas
             if (hasVisibleItemInGroup) {
                 group.style.display = 'block';
-                // Buka accordion yang relevan secara otomatis
                 group.querySelector('.accordion-content').classList.remove('hidden');
                 group.querySelector('.accordion-icon').classList.add('rotate-180');
             } else {
@@ -541,14 +525,12 @@ function showMateriContent(itemId, gradeKey) {
     document.querySelectorAll('.card-item-list').forEach(card => card.classList.remove('bg-cyan-800'));
     document.getElementById(`card-${itemId}`).classList.add('bg-cyan-800');
 
-    // --- [LOGIKA BARU] Membuat Tombol Navigasi ---
     const hasPrev = currentIndex > 0;
     const hasNext = currentIndex < materiDalamGrade.length - 1;
     
     const prevItemId = hasPrev ? `'${materiDalamGrade[currentIndex - 1].id}', '${gradeKey}'` : '';
     const nextItemId = hasNext ? `'${materiDalamGrade[currentIndex + 1].id}', '${gradeKey}'` : '';
 
-    // Tombol navigasi untuk desktop
     const desktopNavButtons = `
         <div class="hidden md:flex justify-between items-center mb-4">
             <button onclick="showMateriContent(${prevItemId})" class="nav-btn bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2" ${!hasPrev ? 'disabled' : ''}>
@@ -561,7 +543,6 @@ function showMateriContent(itemId, gradeKey) {
         </div>
     `;
 
-    // Judul untuk mobile
     const mobileHeader = `
         <div class="md:hidden mb-2">
             <h3 class="text-lg font-bold text-center text-cyan-400">${materiItem.title}</h3>
@@ -587,17 +568,14 @@ function showMateriContent(itemId, gradeKey) {
 }
     
 function renderVideoPage() {
-    // [BARU] Mengambil kategori unik dari data video secara dinamis
     const categories = ['Semua', ...new Set(allContentData.video.map(item => item.category))];
 
-    // [BARU] Membuat tombol-tombol filter dari kategori yang ada
     const filterButtonsHTML = categories.map(category => `
         <button class="filter-btn text-sm py-2 px-4 rounded-full bg-gray-700 hover:bg-cyan-600 transition-colors" data-filter="${category}">
             ${category}
         </button>
     `).join('');
 
-    // [DIUBAH] Membuat kartu video dengan menambahkan atribut data-category
     const videoHTML = allContentData.video.map(item => `
         <div class="video-card card-item p-4 rounded-lg flex flex-col" data-category="${item.category}" onclick="playVideoInModal('${item.videoId}', '${item.title}')">
             <img src="https://img.youtube.com/vi/${item.videoId}/mqdefault.jpg" alt="${item.title}" class="rounded-md mb-3">
@@ -623,19 +601,15 @@ function renderVideoPage() {
         </div>
     `;
 
-    // [BARU] Panggil fungsi untuk mengaktifkan logika filter
     setupVideoFilter();
 }
 
-// [FUNGSI BARU] Letakkan ini di dalam <script> Anda
 function playVideoInModal(videoId, title) {
-    // [LOGIKA BARU] Temukan item video lengkapnya untuk disimpan
     const videoItem = allContentData.video.find(v => v.videoId === videoId);
     if (videoItem) {
         markAsCompleted(videoItem.id, { showToast: true });
         updateLastActivity('video', videoItem);
     }
-    // Akhir Logika Baru
 
     const videoPlayerHTML = `
         <div class="video-responsive-container">
@@ -663,7 +637,6 @@ function setupVideoFilter() {
     const videoCards = document.querySelectorAll('.video-card');
     if (!filterContainer) return;
 
-    // Set tombol 'Semua' sebagai aktif secara default
     filterContainer.querySelector('[data-filter="Semua"]').classList.add('bg-cyan-600');
 
     filterContainer.addEventListener('click', (e) => {
@@ -671,16 +644,14 @@ function setupVideoFilter() {
 
         const selectedFilter = e.target.dataset.filter;
 
-        // Atur tampilan tombol aktif
         document.querySelectorAll('#video-filter-container .filter-btn').forEach(btn => {
             btn.classList.remove('bg-cyan-600');
         });
         e.target.classList.add('bg-cyan-600');
 
-        // Proses filter untuk setiap kartu video
         videoCards.forEach(card => {
             if (selectedFilter === 'Semua' || card.dataset.category === selectedFilter) {
-                card.style.display = 'flex'; // Gunakan flex karena kartu kita adalah flex column
+                card.style.display = 'flex';
             } else {
                 card.style.display = 'none';
             }
@@ -688,16 +659,13 @@ function setupVideoFilter() {
     });
 }
     
-// GANTI FUNGSI LAMA DENGAN FUNGSI BARU INI SECARA KESELURUHAN
 function renderBankSoalPage() {
     const categories = ['Semua', ...new Set(allContentData.bankSoal.map(quiz => quiz.category || 'Lainnya'))];
 
-    // [DIUBAH] Membuat item-item untuk menu dropdown
     const dropdownItemsHTML = categories.map(category => `
         <div class="dropdown-item" data-filter="${category}">${category}</div>
     `).join('');
 
-    // [DIUBAH] Membuat struktur HTML untuk komponen dropdown
     const dropdownFilterHTML = `
         <div class="mb-8">
             <label class="block text-sm font-medium text-gray-400 mb-2">Filter Kategori:</label>
@@ -713,7 +681,6 @@ function renderBankSoalPage() {
         </div>
     `;
 
-    // Logika untuk membuat kartu soal (tidak ada perubahan di sini)
     const categoriesHTML = allContentData.bankSoal.reduce((acc, quiz) => {
         const category = quiz.category || 'Lainnya';
         if (!acc[category]) acc[category] = [];
@@ -744,7 +711,6 @@ function renderBankSoalPage() {
         `;
     }
     
-    // [DIUBAH] Menggabungkan semua HTML dengan struktur dropdown yang baru
     const bankSoalHTML = `
         <div class="panel">
             <h2 class="text-2xl font-bold mb-1 text-cyan-400">Bank Soal</h2>
@@ -759,11 +725,9 @@ function renderBankSoalPage() {
     `;
     appContent.innerHTML = bankSoalHTML;
 
-    // Panggil fungsi untuk mengaktifkan logika filter dropdown yang baru
     setupBankSoalFilter();
 }
 
-// === GANTI SELURUH FUNGSI LAMA DENGAN INI ===
 function setupBankSoalFilter() {
     const dropdownContainer = document.getElementById('filter-dropdown');
     if (!dropdownContainer) return;
@@ -774,22 +738,17 @@ function setupBankSoalFilter() {
     const items = menu.querySelectorAll('.dropdown-item');
     const quizSections = document.querySelectorAll('.quiz-category-section');
 
-    // 1. Logika untuk membuka/menutup menu
     button.addEventListener('click', (event) => {
         event.stopPropagation();
         menu.classList.toggle('open');
         button.classList.toggle('open');
     });
 
-    // 2. Logika saat salah satu item filter dipilih
     items.forEach(item => {
         item.addEventListener('click', () => {
             const selectedFilter = item.getAttribute('data-filter');
-
-            // Perbarui teks pada tombol
             label.textContent = selectedFilter;
 
-            // Proses filter untuk setiap bagian soal
             quizSections.forEach(section => {
                 if (selectedFilter === 'Semua' || section.dataset.category === selectedFilter) {
                     section.style.display = 'block';
@@ -798,13 +757,11 @@ function setupBankSoalFilter() {
                 }
             });
 
-            // Tutup menu setelah memilih
             menu.classList.remove('open');
             button.classList.remove('open');
         });
     });
 
-    // 3. Logika untuk menutup menu jika mengklik di luar area dropdown
     window.addEventListener('click', (event) => {
         if (!dropdownContainer.contains(event.target)) {
             menu.classList.remove('open');
@@ -842,13 +799,10 @@ function setupBankSoalFilter() {
             </div>
         </div>`;
     }
-// Ganti seluruh fungsi renderUmtLabPage di index.html
 function renderUmtLabPage() {
-    // Memisahkan artikel berdasarkan kategori
     const analisisArticles = allContentData.umtLab.filter(p => p.category === 'Analisis & Kajian');
     const eksplorasiArticles = allContentData.umtLab.filter(p => p.category === 'Eksplorasi Teori');
 
-    // [DIUBAH] Menambahkan class untuk lebar tetap dan mencegah kartu mengkerut
     const createPostCard = (post) => `
         <div class="card-item p-5 rounded-lg flex flex-col flex-shrink-0 w-72 md:w-80" onclick="window.location.href='viewer.html?id=${post.id}'">
             <h3 class="font-bold text-lg text-cyan-400 mb-2">${post.title}</h3>
@@ -880,17 +834,12 @@ function renderUmtLabPage() {
 
     appContent.innerHTML = labPageHTML;
 
-// === TAMBAHKAN BARIS INI ===
-    // Meminta MathJax untuk mencari dan merender ulang
-    // semua tulisan LaTeX di konten yang baru saja ditampilkan.
     if (window.MathJax) {
         MathJax.typeset();
     }
 }
 
-// === [TAMBAHKAN FUNGSI BARU INI] ===
 function renderPerpustakaanPage() {
-    // Membuat kartu untuk setiap item di data perpustakaan
     const libraryHTML = allContentData.perpustakaan.map(item => `
         <div class="card-item p-5 rounded-lg flex flex-col" onclick="window.location.href='viewer.html?id=${item.id}'">
             <h3 class="font-bold text-lg text-cyan-400 mb-2">${item.title}</h3>
@@ -915,7 +864,6 @@ function renderPerpustakaanPage() {
 
     appContent.innerHTML = pageHTML;
 }
-// === [AKHIR DARI FUNGSI BARU] ===
 
 // =================================================================================
     // BAGIAN 4: LOGIKA WIDGET DASBOR & PROGRES
@@ -925,8 +873,8 @@ function getTotalItemCount() {
     const totalVideo = allContentData.video.length;
     const totalBankSoal = allContentData.bankSoal.length;
     const totalUmtLab = allContentData.umtLab.length;
-    const totalPerpustakaan = allContentData.perpustakaan.length; // <-- Tambahkan ini
-    return totalMateri + totalVideo + totalBankSoal + totalUmtLab + totalPerpustakaan; // <-- Perbarui return
+    const totalPerpustakaan = allContentData.perpustakaan.length;
+    return totalMateri + totalVideo + totalBankSoal + totalUmtLab + totalPerpustakaan;
 }
     
     function initializeAppDashboardWidgets() {
@@ -966,7 +914,6 @@ function getTotalItemCount() {
                     </div>
                 </div>`;
         }
-            // [LOGIKA BARU] Membuat widget aktivitas terakhir
     const lastActivityContainer = document.getElementById('last-activity-container');
     const lastActivity = JSON.parse(localStorage.getItem('userLastActivity')) || {};
     let activityHTML = '';
@@ -1014,15 +961,13 @@ function getTotalItemCount() {
         link: `viewer.html?id=${lastActivity.umtLab?.id}`
     });
 
-    // === [TAMBAHKAN KODE INI TEPAT DI BAWAHNYA] ===
     activityHTML += createWidget({
         title: "Buku Terakhir Dibuka",
         icon: "fa-solid fa-book-atlas",
         actionText: "Lanjutkan Membaca",
-        data: lastActivity.perpustakaan, // 'perpustakaan' harus cocok dengan key di data.js
+        data: lastActivity.perpustakaan,
         link: `viewer.html?id=${lastActivity.perpustakaan?.id}`
     });
-// === [AKHIR DARI KODE YANG DITAMBAHKAN] ===
 
     lastActivityContainer.innerHTML = activityHTML;
     }
@@ -1053,12 +998,10 @@ function getTotalItemCount() {
             }
         }
     }
-// Tambahkan fungsi baru ini di index.html
 function updateLastActivity(type, item) {
     const key = 'userLastActivity';
     let lastActivity = JSON.parse(localStorage.getItem(key)) || {};
 
-    // Simpan data yang relevan berdasarkan tipe
     let dataToStore = {
         id: item.id,
         title: item.title,
@@ -1084,12 +1027,10 @@ function updateLastActivity(type, item) {
         userAnswers = new Array(currentQuizData.questions.length).fill(null);
         renderQuizInterface();
     }
-// === [GANTI FUNGSI LAMA DENGAN INI] ===
 function renderQuizInterface() {
     const quiz = currentQuizData;
     const question = quiz.questions[currentQuestionIndex];
 
-    // [BARU] Membuat navigasi nomor soal horizontal
     const questionNavHTML = quiz.questions.map((_, index) => {
         let classes = 'quiz-nav-item';
         if (index === currentQuestionIndex) {
@@ -1147,14 +1088,12 @@ function renderQuizInterface() {
 
     document.getElementById('prev-btn').disabled = (currentQuestionIndex === 0);
     
-    // Auto-scroll ke nomor yang aktif saat render
     const activeNavItem = document.querySelector('.quiz-nav-item.current');
     if (activeNavItem) {
         activeNavItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
 }
 
-// FUNGSI BARU
 function showAnswerAndExplanation(isRestoringState = false) {
     const quiz = currentQuizData;
     const question = quiz.questions[currentQuestionIndex];
@@ -1163,31 +1102,25 @@ function showAnswerAndExplanation(isRestoringState = false) {
     const optionsContainer = document.getElementById('quiz-options');
     const allOptions = optionsContainer.children;
 
-    // Nonaktifkan semua pilihan agar tidak bisa diklik lagi
     optionsContainer.classList.add('pointer-events-none');
 
     for (let i = 0; i < allOptions.length; i++) {
         const optionEl = allOptions[i];
         const optionText = question.options[i];
 
-        // Tandai jawaban yang benar
         if (optionText === question.correctAnswer) {
             optionEl.classList.remove('quiz-option');
             optionEl.classList.add('correct-answer');
         }
 
-        // PERBAIKAN TYPO DI SINI
-        // Jika user memilih opsi ini dan salah, tandai sebagai jawaban salah
         if (!isRestoringState && optionText === selectedAnswer && selectedAnswer !== question.correctAnswer) {
             optionEl.classList.remove('quiz-option');
             optionEl.classList.add('wrong-answer');
         }
     }
     
-    // Tampilkan kontainer pembahasan
     document.getElementById('explanation-container').classList.remove('hidden');
     
-    // Render ulang MathJax jika ada di pembahasan
     if (window.MathJax) {
         const explanationText = document.getElementById('explanation-text');
         MathJax.typesetPromise([explanationText]).catch(err => console.log('MathJax error:', err));
@@ -1200,7 +1133,6 @@ function selectAnswer(answer, element) {
     }
     userAnswers[currentQuestionIndex] = answer;
 
-    // Perbarui tampilan navigasi nomor soal
     const navItem = document.querySelector(`.quiz-nav-item:nth-child(${currentQuestionIndex + 1})`);
     if (navItem) {
         navItem.classList.add('answered');
@@ -1208,9 +1140,7 @@ function selectAnswer(answer, element) {
     
     showAnswerAndExplanation();
 }
-// === [AKHIR DARI PERUBAHAN] ===}
 
-// FUNGSI NAVIGASI BARU
 function nextQuestion() {
     if (currentQuestionIndex < currentQuizData.questions.length - 1) {
         currentQuestionIndex++;
@@ -1225,19 +1155,15 @@ function previousQuestion() {
     }
 }
 
-// === [TAMBAHKAN FUNGSI BARU INI] ===
 function jumpToQuestion(index) {
-    // Jika soal sudah dijawab, jangan submit otomatis. Cukup pindah.
     currentQuestionIndex = index;
     renderQuizInterface();
 
-    // Pastikan nomor yang aktif terlihat (scroll into view)
     const activeNavItem = document.querySelector(`.quiz-nav-item.current`);
     if (activeNavItem) {
         activeNavItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
 }
-// === [AKHIR DARI FUNGSI BARU] ===
 
     function submitQuiz() {
         if (userAnswers[currentQuestionIndex] === null) { showToast('Silakan pilih jawaban terlebih dahulu!', 'error'); return; }
@@ -1353,12 +1279,11 @@ function showConfirmationModal(options) {
         cancelAction,
         showCancelButton = true,
         confirmButtonClass = 'modal-btn-confirm',
-        customModalClass = '' // <-- Pastikan baris ini ada
+        customModalClass = ''
     } = options;
 
     const modalContainer = document.getElementById('modal-container');
     
-    // Pastikan class kustom ditambahkan dengan benar di sini
     const modalHTML = `
         <div class="modal-overlay" id="modal-overlay">
             <div class="modal-box ${customModalClass}"> 
@@ -1416,12 +1341,10 @@ function showConfirmationModal(options) {
     
         const lastActivePage = sessionStorage.getItem('lastActivePage');
 
-// Jika ada catatan halaman terakhir, buka halaman tersebut
         if (lastActivePage) {
             const targetLink = document.querySelector(`.sidebar-link[onclick*="'${lastActivePage}'"]`);
             navigateTo(lastActivePage, targetLink);
         } else {
-    // Jika tidak ada catatan, barulah buka dashboard sebagai default
             navigateTo('dashboard', document.querySelector('.sidebar-link'));
         }        
     
