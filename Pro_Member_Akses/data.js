@@ -323,7 +323,7 @@ const allContentData = {
             id: 'materi_barisan_dan_deret_8', 
             title: 'Aplikasi Barisan Dan Deret', 
             type: 'HTML Document', 
-            filePath: 'UMT_Learning/Aplikasi Barisan Dan Deret.html', 
+            filePath: 'UMT_Learning/Aplikasi Barisan dan Deret.html', 
             fileType: 'html' 
             },
         ],
