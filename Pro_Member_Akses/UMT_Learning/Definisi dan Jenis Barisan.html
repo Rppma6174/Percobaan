@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Definisi dan Jenis Barisan - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Mengenal Barisan Matematika: Definisi dan Ragamnya</h1>
+<p>
+    Setelah memahami esensi barisan sebagai daftar bilangan berpola, kini saatnya kita mendalami definisi dan mengenal jenis-jenis utamanya. Memahami kategori ini akan membantu kita mengenali pola dengan lebih cepat dan menggunakan "alat" yang tepat untuk memecahkan masalah.
+</p>
+
+<h2>Definisi Formal Barisan</h2>
+<p>
+    Secara lebih formal, sebuah barisan dapat dipandang sebagai sebuah <b>fungsi</b>. Ini adalah pemahaman kunci yang sering terlewatkan.
+    <br><br>
+    Barisan adalah sebuah fungsi yang domainnya (daerah asalnya) adalah himpunan bilangan asli (1, 2, 3, ...).
+</p>
+<ul>
+    <li>Input fungsi adalah <b>posisi suku</b> (n = 1, 2, 3, ...)</li>
+    <li>Output fungsi adalah <b>nilai suku</b> di posisi tersebut ($U_n$).</li>
+</ul>
+<p>
+    <b>Contoh:</b> Barisan bilangan kuadrat: 1, 4, 9, 16, ...
+    <br>
+    Kita bisa melihatnya sebagai fungsi $f(n) = n^2$.
+    <br>$f(1)=1^2=1$, $f(2)=2^2=4$, $f(3)=3^2=9$, dan seterusnya.
+    <br>Dalam notasi barisan, kita menulisnya sebagai <b>Rumus Suku ke-n</b>: $U_n = n^2$. Rumus inilah "DNA" atau "cetak biru" dari sebuah barisan, yang memungkinkan kita menemukan suku manapun tanpa harus mendaftar semua suku sebelumnya.
+</p>
+
+<h2>Pengenalan Jenis-Jenis Barisan</h2>
+<p>
+    Meskipun ada tak terhingga banyaknya kemungkinan pola, ada beberapa jenis barisan yang sangat umum dan menjadi dasar bagi banyak konsep matematika lainnya. Berikut adalah pengenalannya.
+</p>
+<div class="important-note">
+    <b>Perkenalan Singkat:</b> Bagian ini hanya akan memperkenalkan ciri khas setiap jenis barisan. Pembahasan lengkap mengenai rumus dan sifat-sifatnya akan dibahas pada materi-materi tersendiri.
+</div>
+
+<h3>A. Barisan Aritmetika</h3>
+<ul>
+    <li><b>Ciri Khas:</b> Memiliki <b>selisih atau beda (b)</b> yang konstan antar suku yang berurutan.</li>
+    <li><b>Pola Inti:</b> Penjumlahan atau pengurangan yang tetap.</li>
+    <li><b>Contoh:</b>
+        <br><b>5, 8, 11, 14, ...</b> (Polanya adalah "ditambah 3", jadi bedanya $b=3$).
+        <br><b>20, 15, 10, 5, ...</b> (Polanya adalah "dikurang 5", jadi bedanya $b=-5$).
+    </li>
+</ul>
+
+<h3>B. Barisan Geometri</h3>
+<ul>
+    <li><b>Ciri Khas:</b> Memiliki <b>perbandingan atau rasio (r)</b> yang konstan antar suku yang berurutan.</li>
+    <li><b>Pola Inti:</b> Perkalian atau pembagian yang tetap.</li>
+    <li><b>Contoh:</b>
+        <br><b>2, 6, 18, 54, ...</b> (Polanya adalah "dikali 3", jadi rasionya $r=3$).
+        <br><b>80, 40, 20, 10, ...</b> (Polanya adalah "dibagi 2" atau "dikali $\frac{1}{2}$", jadi rasionya $r=\frac{1}{2}$).
+    </li>
+</ul>
+
+<h3>C. Barisan Lainnya (Sekilas Pandang)</h3>
+<p>
+    Selain dua jenis utama di atas, ada banyak barisan terkenal lainnya, seperti:
+</p>
+<ul>
+    <li><b>Barisan Fibonacci:</b> Suku berikutnya adalah jumlah dua suku sebelumnya. (<b>1, 1, 2, 3, 5, 8, ...</b>)</li>
+    <li><b>Barisan Kuadrat/Kubik:</b> Suku-sukunya adalah hasil pangkat dari bilangan asli. (<b>1, 4, 9, 16, ...</b> atau <b>1, 8, 27, 64, ...</b>)</li>
+</ul>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang definisi dan jenis-jenis barisan.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Secara formal, barisan matematika dapat dianggap sebagai sebuah...",
+                options: [ "Penjumlahan tak hingga", "Fungsi dengan domain bilangan asli", "Variabel acak", "Persamaan linear" ],
+                correct: 1,
+                explanation: "Barisan memetakan setiap posisi (n=1, 2, 3, ...) ke sebuah nilai suku ($U_n$), yang merupakan definisi dari sebuah fungsi dengan domain bilangan asli."
+            },
+            {
+                q: "Ciri utama dari sebuah barisan aritmetika adalah...",
+                options: [ "Memiliki rasio yang tetap", "Memiliki selisih/beda yang tetap", "Suku-sukunya selalu positif", "Suku-sukunya adalah bilangan kuadrat" ],
+                correct: 1,
+                explanation: "Barisan aritmetika didefinisikan oleh adanya selisih (beda) yang konstan antar sukunya, yang dihasilkan dari operasi penjumlahan atau pengurangan yang berulang."
+            },
+            {
+                q: "Barisan 100, 50, 25, 12.5, ... adalah contoh dari...",
+                options: [ "Barisan Aritmetika", "Barisan Geometri", "Barisan Fibonacci", "Barisan Kuadrat" ],
+                correct: 1,
+                explanation: "Setiap suku didapat dengan mengalikan suku sebelumnya dengan $\\frac{1}{2}$ (atau membaginya dengan 2). Karena polanya adalah perkalian konstan, ini adalah barisan geometri."
+            },
+            {
+                q: "Manakah di antara barisan berikut yang merupakan barisan aritmetika?",
+                options: [ "1, 4, 9, 16, ...", "1, 2, 4, 8, ...", "12, 8, 4, 0, ...", "1, 1, 2, 3, ..." ],
+                correct: 2,
+                explanation: "Pada barisan 12, 8, 4, 0, ..., selisih antar sukunya selalu konstan, yaitu -4. ($8-12=-4$, $4-8=-4$, dst). Ini adalah ciri khas barisan aritmetika."
+            },
+            {
+                q: "Rumus suku ke-n ($U_n$) dalam sebuah barisan berguna untuk...",
+                options: [
+                    "Menjumlahkan semua suku dalam barisan",
+                    "Menemukan nilai suku pada posisi ke-n tanpa mendaftar semua suku sebelumnya",
+                    "Mengetahui rasio dari barisan geometri saja",
+                    "Mengetahui apakah barisan itu hingga atau tak hingga"
+                ],
+                correct: 1,
+                explanation: "Kegunaan utama dari rumus $U_n$ adalah sebagai formula umum untuk mencari nilai suku manapun secara langsung hanya dengan mengetahui posisinya (n)."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
