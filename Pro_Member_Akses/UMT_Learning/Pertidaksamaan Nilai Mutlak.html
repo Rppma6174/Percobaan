@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pertidaksamaan Nilai Mutlak - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .graph-container {
+            background-color: var(--bg-main); border: 1px solid var(--border-color);
+            border-radius: 0.5rem; padding: 1rem; margin-top: 1rem;
+            display: flex; justify-content: center; align-items: center;
+        }
+        svg text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 12px; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Menyelesaikan Pertidaksamaan Nilai Mutlak</h1>
+<p>
+    Pertidaksamaan nilai mutlak adalah pertidaksamaan yang melibatkan bentuk nilai mutlak. Kunci untuk menyelesaikannya adalah dengan memahami dua sifat dasar yang bergantung pada tanda ketidaksamaan ($<$ atau $>$).
+</p>
+<div class="important-note">
+    <b>Sifat Fundamental:</b> Untuk $c \ge 0$:
+    <ol>
+        <li>Jika $|X| \le c$, maka solusinya adalah $-c \le X \le c$. (Terhimpit di tengah)</li>
+        <li>Jika $|X| \ge c$, maka solusinya adalah $X \le -c$ atau $X \ge c$. (Terpisah ke dua arah)</li>
+    </ol>
+</div>
+
+<h2>1. Bentuk "Kurang Dari": $|X| \le c$</h2>
+<p>
+    Bentuk ini mengartikan "jarak dari nol kurang dari atau sama dengan c". Solusinya adalah sebuah interval yang terpusat.
+    <br>
+    <b>Contoh:</b> Tentukan himpunan penyelesaian dari $|x - 2| \le 5$.
+</p>
+<p>
+    Berdasarkan sifat (1), kita dapat menulis:
+    <br>$-5 \le x - 2 \le 5$
+    <br>Untuk menyelesaikan $x$, tambahkan semua ruas dengan 2:
+    <br>$-5 + 2 \le x - 2 + 2 \le 5 + 2$
+    <br>$-3 \le x \le 8$
+    <br>
+    Jadi, Himpunan Penyelesaian (HP) adalah $\{x | -3 \le x \le 8\}$, atau dalam notasi interval $[-3, 8]$.
+</p>
+<p><b>Interpretasi Grafis:</b> Solusi ini adalah semua nilai $x$ di mana grafik $y=|x-2|$ berada <b>di bawah</b> atau <b>pada</b> garis $y=5$.</p>
+<div class="graph-container">
+    <svg width="350" height="240" viewBox="0 0 350 240">
+        <path d="M 10 210 H 340 M 175 10 V 230" stroke="#444"/>
+        <path d="M 175 60 H 340" stroke-dasharray="4 2" stroke="#2F81F7"/>
+        <text fill="#2F81F7" x="310" y="55">$y=5$</text>
+        <path d="M 195 210 L 340 65 M 195 210 L 50 65" stroke="#C9D1D9" stroke-width="2"/>
+        <path d="M 50 60 H 290" stroke="#39D353" stroke-width="3" stroke-linecap="round"/>
+        <text fill="#C9D1D9" x="270" y="90">$y=|x-2|$</text>
+        <circle cx="295" cy="60" r="3" fill="#FFF"/><text x="290" y="45" fill="#FFF">$x=8$</text>
+        <circle cx="95" cy="60" r="3" fill="#FFF"/><text x="80" y="45" fill="#FFF">$x=-3$</text>
+    </svg>
+</div>
+
+<h2>2. Bentuk "Lebih Dari": $|X| \ge c$</h2>
+<p>
+    Bentuk ini mengartikan "jarak dari nol lebih dari atau sama dengan c". Solusinya adalah dua interval yang terpisah ke arah tak hingga.
+    <br>
+    <b>Contoh:</b> Tentukan himpunan penyelesaian dari $|2x + 1| > 7$.
+</p>
+<p>
+    Berdasarkan sifat (2), kita pecah menjadi dua kasus:
+    <ul>
+        <li><b>Kasus 1:</b> $2x + 1 > 7 \implies 2x > 6 \implies x > 3$.</li>
+        <li><b>Kasus 2:</b> $2x + 1 < -7 \implies 2x < -8 \implies x < -4$.</li>
+    </ul>
+    Solusi akhirnya adalah gabungan dari kedua kasus tersebut. HP = $\{x | x < -4 \text{ atau } x > 3 \}$.
+</p>
+<p><b>Interpretasi Grafis:</b> Solusi ini adalah semua nilai $x$ di mana grafik $y=|2x+1|$ berada <b>di atas</b> garis $y=7$.</p>
+
+<h2>3. Metode Kuadrat untuk Bentuk $|f(x)| \ge |g(x)|$</h2>
+<p>
+    Jika kedua ruas adalah nilai mutlak, metode paling efisien adalah mengkuadratkan kedua ruas, karena kedua ruas dijamin non-negatif.
+    <br>
+    <b>Contoh:</b> Selesaikan pertidaksamaan $|x + 4| \ge |2x - 1|$.
+</p>
+<ol>
+    <li>Kuadratkan kedua ruas: $(x+4)^2 \ge (2x-1)^2$</li>
+    <li>Pindahkan ke satu ruas: $(x+4)^2 - (2x-1)^2 \ge 0$</li>
+    <li>Faktorkan dengan selisih kuadrat: $[(x+4)-(2x-1)][(x+4)+(2x-1)] \ge 0$</li>
+    <li>Sederhanakan: $(-x+5)(3x+3) \ge 0$</li>
+    <li>Tentukan pembuat nol: $x=5$ dan $x=-1$.</li>
+    <li>Gunakan garis bilangan untuk menguji interval. <br>
+    <svg width="250" height="60"><path d="M 10 30 H 240" stroke="#C9D1D9"/><path d="M 60 25 V 35 M 190 25 V 35" stroke="#C9D1D9"/><text x="55" y="55" fill="#FFF">-1</text><text x="185" y="55" fill="#FFF">5</text><text x="20" y="20" fill="#FFF">-</text><text x="115" y="20" fill="#39D353">+</text><text x="210" y="20" fill="#FFF">-</text></svg>
+    </li>
+</ol>
+<p>
+    Karena pertidaksamaan meminta $\ge 0$ (area positif), maka solusinya adalah $-1 \le x \le 5$.
+</p>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Pilih jawaban yang paling sesuai untuk menguji pemahaman Anda.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Script utama tidak perlu diubah
+        const quizzes = [
+            {
+                q: "Pertidaksamaan $|x-5| < 4$ setara dengan bentuk...",
+                options: [
+                    "$-4 < x-5 < 4$",
+                    "$x-5 > 4$ atau $x-5 < -4$",
+                    "$x-5 < 4$",
+                    "$x-5 > -4$"
+                ],
+                correct: 0,
+                explanation: "Ini adalah penerapan langsung dari sifat $|X| < c \\implies -c < X < c$. Dengan $X=x-5$ dan $c=4$, kita mendapatkan $-4 < x-5 < 4$."
+            },
+            {
+                q: "Himpunan penyelesaian dari $|2x - 3| \\ge 5$ adalah...",
+                options: [
+                    "$\{x | -1 \\le x \\le 4\}$",
+                    "$\{x | x \\le -1 \text{ atau } x \\ge 4\}$",
+                    "$\{x | x \\ge 4\}$",
+                    "$\{x | x \\le -1\}$"
+                ],
+                correct: 1,
+                explanation: "Menggunakan sifat $|X| \\ge c$. Kasus 1: $2x-3 \\ge 5 \\implies 2x \\ge 8 \\implies x \\ge 4$. Kasus 2: $2x-3 \\le -5 \\implies 2x \\le -2 \\implies x \\le -1$. Solusinya adalah gabungan keduanya."
+            },
+            {
+                q: "Penyelesaian dari pertidaksamaan $|x+2| > -1$ adalah...",
+                options: [
+                    "$x > -3$",
+                    "Tidak ada solusi",
+                    "Semua bilangan real",
+                    "$x < -1$"
+                ],
+                correct: 2,
+                explanation: "Nilai mutlak dari ekspresi apapun, $|x+2|$, selalu menghasilkan nilai yang non-negatif ($\\ge 0$). Setiap bilangan non-negatif sudah pasti lebih besar dari -1. Oleh karena itu, pertidaksamaan ini benar untuk semua bilangan real $x$."
+            },
+            {
+                q: "Himpunan penyelesaian dari $|3x+1| \\le |2x-6|$ adalah...",
+                options: [
+                    "$\{x | -1 \\le x \\le 7\}$",
+                    "$\{x | x \\le -7 \text{ atau } x \\ge 1\}$",
+                    "$\{x | -7 \\le x \\le 1\}$",
+                    "$\{x | x \\le -1 \text{ atau } x \\ge 7\}$"
+                ],
+                correct: 2,
+                explanation: "Kuadratkan kedua ruas: $(3x+1)^2 \\le (2x-6)^2 \\implies (3x+1)^2 - (2x-6)^2 \\le 0$. Faktorkan: $[(3x+1)-(2x-6)][(3x+1)+(2x-6)] \\le 0 \\implies (x+7)(5x-5) \\le 0$. Pembuat nol adalah $x=-7$ dan $x=1$. Uji garis bilangan menunjukkan area negatif berada di antara -7 dan 1."
+            },
+            {
+                q: "Secara grafis, solusi dari $|x| > 3$ adalah semua nilai $x$ di mana grafik $y=|x|$ berada...",
+                options: [
+                    "Di bawah garis y=3",
+                    "Di atas garis y=3",
+                    "Di antara garis y=-3 dan y=3",
+                    "Tepat pada garis y=3"
+                ],
+                correct: 1,
+                explanation: "Pertidaksamaan $|x| > 3$ berarti kita mencari nilai $x$ yang membuat nilai fungsi $y=|x|$ lebih besar dari 3. Secara visual, ini adalah bagian dari grafik 'V' yang posisinya berada di atas garis horizontal $y=3$."
+            }
+        ];
+
+        // Boilerplate script
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
