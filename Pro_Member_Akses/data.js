@@ -310,6 +310,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Fungsi Invers.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_relasi_dan_fungsi_11', 
+            title: 'Aplikasi Relasi Dan Fungsi', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Aplikasi Relasi dan Fungsi.html', 
+            fileType: 'html' 
+            },
         ],
         "Bentuk Akar": [
             { 
