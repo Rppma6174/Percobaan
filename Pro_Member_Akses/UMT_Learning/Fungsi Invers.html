@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fungsi Invers - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .diagram-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background-color: var(--bg-main);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            margin-top: 1rem;
+        }
+        .diagram-container svg text { font-size: 14px; fill: var(--text-primary); }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Fungsi Invers: Membalik Arah Pemetaan</h1>
+<p>
+    Sebuah fungsi invers, yang dinotasikan sebagai $f^{-1}(x)$, adalah fungsi yang "membalik" atau "membatalkan" aksi dari fungsi asalnya, $f(x)$. Jika fungsi $f$ membawa input $a$ ke output $b$, maka fungsi invers $f^{-1}$ akan membawa $b$ kembali ke $a$.
+</p>
+<p><b>Analogi: Memakai Sepatu</b></p>
+<ul>
+    <li><b>Fungsi Asal ($f$):</b> (1) Pakai kaus kaki, (2) Pakai sepatu.</li>
+    <li><b>Fungsi Invers ($f^{-1}$):</b> (1) Lepas sepatu, (2) Lepas kaus kaki.</li>
+</ul>
+<p>Prosesnya harus dibalik dalam urutan yang terbalik pula.</p>
+<div class="diagram-container">
+    <svg width="250" height="80">
+        <text x="10" y="45">a</text>
+        <circle cx="20" cy="40" r="5" fill="#C9D1D9"/>
+        <text x="210" y="45">b</text>
+        <circle cx="220" cy="40" r="5" fill="#C9D1D9"/>
+        
+        <path d="M 25 35 L 215 35" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="115" y="30" fill="#2F81F7">$f$</text>
+        
+        <path d="M 215 45 L 25 45" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+        <text x="110" y="65" fill="#39D353">$f^{-1}$</text>
+
+        <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#C9D1D9" /></marker></defs>
+    </svg>
+</div>
+
+<h2>Syarat Fungsi Memiliki Invers</h2>
+<p>
+    Tidak semua fungsi bisa diinverskan. Sebuah fungsi hanya memiliki invers jika ia bersifat <b>Bijektif</b> (injektif dan surjektif sekaligus). Mengapa?
+</p>
+<ul>
+    <li><b>Harus Injektif:</b> Jika tidak injektif (ada 2 input ke 1 output), saat dibalik, 1 input dari inversnya akan punya 2 output. Ini melanggar aturan fungsi.</li>
+    <li><b>Harus Surjektif:</b> Jika tidak surjektif (ada anggota kodomain yang 'jomblo'), saat dibalik, anggota tersebut akan menjadi domain dari inversnya yang tidak punya pasangan. Ini juga melanggar aturan fungsi.</li>
+</ul>
+<div class="important-note">
+    <b>Syarat Mutlak:</b> Sebuah fungsi $f$ memiliki invers ($f^{-1}$) jika dan hanya jika $f$ adalah <b>fungsi bijektif</b> (korespondensi satu-satu).
+</div>
+
+<h2>Menentukan Rumus Fungsi Invers</h2>
+<p>
+    Untuk menemukan rumus aljabar dari fungsi invers, kita bisa mengikuti langkah-langkah berikut:
+</p>
+<ol>
+    <li>Ganti notasi $f(x)$ dengan variabel $y$.</li>
+    <li>Selesaikan persamaan tersebut untuk $x$ (buat menjadi $x = \dots$). Ini adalah langkah inti dari "membalik" proses.</li>
+    <li>Setelah mendapatkan $x$ dalam bentuk $y$, ganti $x$ dengan $f^{-1}(y)$.</li>
+    <li>Ganti semua variabel $y$ dengan $x$ untuk mendapatkan notasi standar $f^{-1}(x)$.</li>
+</ol>
+
+<p><b>Contoh: Tentukan invers dari $f(x) = 2x+3$.</b></p>
+<ol>
+    <li>$y = 2x + 3$</li>
+    <li>$y - 3 = 2x \implies x = \frac{y-3}{2}$</li>
+    <li>$f^{-1}(y) = \frac{y-3}{2}$</li>
+    <li>$f^{-1}(x) = \frac{x-3}{2}$</li>
+</ol>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang konsep fungsi invers.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Apa syarat utama agar sebuah fungsi dapat memiliki invers?",
+                options: [ "Harus injektif saja", "Harus surjektif saja", "Harus bijektif (injektif dan surjektif)", "Domainnya harus bilangan real" ],
+                correct: 2,
+                explanation: "Sebuah fungsi harus bijektif agar pemetaannya dapat dibalik secara sempurna tanpa melanggar aturan fungsi (setiap input punya tepat satu output)."
+            },
+            {
+                q: "Jika sebuah fungsi $f$ memetakan $5$ ke $10$ (artinya $f(5)=10$), maka nilai dari $f^{-1}(10)$ adalah...",
+                options: [ "10", "5", "1/10", "Tidak dapat ditentukan" ],
+                correct: 1,
+                explanation: "Fungsi invers membalik pemetaan. Jika $f$ mengirim 5 ke 10, maka $f^{-1}$ harus mengirim 10 kembali ke 5."
+            },
+            {
+                q: "Tentukan invers dari fungsi $f(x) = x - 7$.",
+                options: [ "$f^{-1}(x) = 7-x$", "$f^{-1}(x) = x+7$", "$f^{-1}(x) = \\frac{x}{7}$", "$f^{-1}(x) = 7x$" ],
+                correct: 1,
+                explanation: "Langkah 1: $y = x-7$. Langkah 2: $y+7 = x$. Langkah 3 & 4: $f^{-1}(x) = x+7$. Secara intuitif, kebalikan dari 'dikurang 7' adalah 'ditambah 7'."
+            },
+            {
+                q: "Langkah aljabar utama dalam mencari rumus fungsi invers dari $y = f(x)$ adalah...",
+                options: [
+                    "Menyelesaikan persamaan untuk mendapatkan nilai $y$",
+                    "Menyelesaikan persamaan untuk mendapatkan nilai $x$ dalam bentuk $y$",
+                    "Mengganti semua variabel $x$ dengan $y$ di awal",
+                    "Menghitung turunan dari fungsi tersebut"
+                ],
+                correct: 1,
+                explanation: "Inti dari proses inversi adalah membalik hubungan input-output. Secara aljabar, ini dicapai dengan mengubah subjek rumus dari $y$ menjadi $x$."
+            },
+            {
+                q: "Jika kita melakukan komposisi fungsi dengan inversnya, seperti $(f \\circ f^{-1})(x)$, hasilnya adalah...",
+                options: [ "$0$", "$1$", "$x$", "$-x$" ],
+                correct: 2,
+                explanation: "Mengomposisikan fungsi dengan inversnya akan saling 'membatalkan' aksi satu sama lain, mengembalikan input aslinya. Hasilnya adalah fungsi identitas, yaitu $f(x)=x$."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
