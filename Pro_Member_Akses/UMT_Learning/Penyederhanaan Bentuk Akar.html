@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penyederhanaan Bentuk Akar - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Menyederhanakan Bentuk Akar: Menguraikan & Mengekstrak</h1>
+<p>
+    "Menyederhanakan" bentuk akar artinya menulis ulang bentuk akar tersebut agar bilangan di dalam tanda akar (radikan) menjadi sekecil mungkin. Proses ini bukan mengubah nilainya, tetapi hanya mengubah "penampilan"-nya agar lebih rapi dan mudah digunakan dalam operasi hitung.
+</p>
+<div class="important-note">
+    <b>Prinsip Inti:</b> Proses penyederhanaan bergantung pada satu sifat perkalian akar:
+    $$ \sqrt[n]{a \cdot b} = \sqrt[n]{a} \cdot \sqrt[n]{b} $$
+    Sifat ini memungkinkan kita untuk "memecah" sebuah radikan besar menjadi perkalian radikan-radikan yang lebih kecil, lalu "mengekstrak" (mengeluarkan) bagian yang akarnya bisa dihitung.
+</div>
+
+<h2>Langkah-langkah Penyederhanaan</h2>
+<p>
+    Tujuan kita adalah menguraikan radikan menjadi perkalian dua bilangan, di mana salah satunya adalah <b>bilangan pangkat $n$ sempurna</b> terbesar yang bisa membaginya.
+</p>
+<ol>
+    <li><b>Faktorisasi Radikan:</b> Uraikan bilangan di dalam akar menjadi perkalian dua bilangan, di mana salah satu faktornya adalah bilangan kuadrat sempurna (untuk $\sqrt{\phantom{x}}$), bilangan kubik sempurna (untuk $\sqrt[3]{\phantom{x}}$), dan seterusnya, yang terbesar.</li>
+    <li><b>Gunakan Sifat Perkalian:</b> Pisahkan bentuk akar menjadi dua akar yang dikalikan.</li>
+    <li><b>Ekstrak dan Sederhanakan:</b> Hitung nilai akar dari faktor bilangan pangkat sempurna tersebut dan biarkan sisanya tetap dalam bentuk akar.</li>
+</ol>
+<p><b>Contoh 1: Menyederhanakan $\sqrt{72}$</b></p>
+<ul>
+    <li><b>Langkah 1:</b> Kita cari faktor dari 72 yang merupakan bilangan kuadrat sempurna terbesar. Bilangan kuadrat: 4, 9, 16, 25, <b>36</b>, 49, ... Ternyata 36 adalah faktor terbesar. Maka, kita tulis $72 = 36 \times 2$.</li>
+    <li><b>Langkah 2:</b> $\sqrt{72} = \sqrt{36 \times 2} = \sqrt{36} \times \sqrt{2}$.</li>
+    <li><b>Langkah 3:</b> Karena $\sqrt{36} = 6$, maka hasilnya adalah $6 \times \sqrt{2}$ atau $6\sqrt{2}$.</li>
+</ul>
+<p><b>Contoh 2: Menyederhanakan $\sqrt[3]{54}$</b></p>
+<ul>
+    <li><b>Langkah 1:</b> Kita cari faktor dari 54 yang merupakan bilangan kubik sempurna terbesar. Bilangan kubik: 8, <b>27</b>, 64, ... Ternyata 27 adalah faktornya. Maka, $54 = 27 \times 2$.</li>
+    <li><b>Langkah 2:</b> $\sqrt[3]{54} = \sqrt[3]{27 \times 2} = \sqrt[3]{27} \times \sqrt[3]{2}$.</li>
+    <li><b>Langkah 3:</b> Karena $\sqrt[3]{27} = 3$, maka hasilnya adalah $3 \times \sqrt[3]{2}$ atau $3\sqrt[3]{2}$.</li>
+</ul>
+
+<h2>Penyederhanaan Akar dengan Variabel</h2>
+<p>
+    Prinsipnya sama persis: kita ingin "mengeluarkan" pangkat variabel dari dalam akar. Cara termudahnya adalah dengan membagi pangkat variabel dengan indeks akar.
+</p>
+<ul>
+    <li><b>Hasil bagi</b> dari pembagian tersebut menjadi pangkat variabel di <b>luar</b> akar.</li>
+    <li><b>Sisa bagi</b> dari pembagian tersebut menjadi pangkat variabel yang <b>tersisa di dalam</b> akar.</li>
+</ul>
+<p><b>Contoh: Menyederhanakan $\sqrt{x^7 y^4}$</b> (Ingat, indeksnya 2)</p>
+<ul>
+    <li><b>Untuk variabel $x^7$:</b>
+        <ul>
+            <li>Bagi pangkat dengan indeks: $7 \div 2 = 3$ sisa $1$.</li>
+            <li>Artinya, $x^3$ keluar dari akar, dan $x^1$ tetap di dalam.</li>
+        </ul>
+    </li>
+    <li><b>Untuk variabel $y^4$:</b>
+        <ul>
+            <li>Bagi pangkat dengan indeks: $4 \div 2 = 2$ sisa $0$.</li>
+            <li>Artinya, $y^2$ keluar dari akar, dan tidak ada $y$ yang tersisa di dalam.</li>
+        </ul>
+    </li>
+</ul>
+<p>
+    Dengan menggabungkan semuanya, bentuk sederhananya adalah: $x^3y^2\sqrt{x}$.
+</p>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji kemampuan Anda dalam menyederhanakan berbagai bentuk akar.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Langkah pertama yang paling efisien untuk menyederhanakan $\\sqrt{48}$ adalah memfaktorkannya menjadi...",
+                options: [
+                    "$4 \\times 12$",
+                    "$8 \\times 6$",
+                    "$16 \\times 3$",
+                    "$2 \\times 24$"
+                ],
+                correct: 2,
+                explanation: "Meskipun $4 \\times 12$ juga benar, 4 bukan faktor kuadrat sempurna TERBESAR dari 48. Faktor kuadrat sempurna terbesar adalah 16. Memilih faktor terbesar dari awal akan membuat prosesnya lebih cepat."
+            },
+            {
+                q: "Bentuk sederhana dari $\\sqrt{125}$ adalah...",
+                options: [
+                    "$5\\sqrt{5}$",
+                    "$25\\sqrt{5}$",
+                    "$5\\sqrt{25}$",
+                    "Tidak bisa disederhanakan"
+                ],
+                correct: 0,
+                explanation: "Faktor kuadrat sempurna terbesar dari 125 adalah 25. Maka, $\\sqrt{125} = \\sqrt{25 \\times 5} = \\sqrt{25} \\times \\sqrt{5} = 5\\sqrt{5}$."
+            },
+            {
+                q: "Bentuk sederhana dari $\\sqrt[3]{128}$ adalah...",
+                options: [
+                    "$2\\sqrt[3]{32}$",
+                    "$8\\sqrt[3]{2}$",
+                    "$4\\sqrt[3]{2}$",
+                    "$2\\sqrt[3]{64}$"
+                ],
+                correct: 2,
+                explanation: "Kita mencari faktor kubik sempurna terbesar dari 128. Bilangan kubik: 8, 27, 64, 125,... Faktor terbesar adalah 64. Maka, $\\sqrt[3]{128} = \\sqrt[3]{64 \\times 2} = \\sqrt[3]{64} \\times \\sqrt[3]{2} = 4\\sqrt[3]{2}$."
+            },
+            {
+                q: "Hasil penyederhanaan dari $\\sqrt{x^9}$ adalah...",
+                options: [
+                    "$x^3\\sqrt{x}$",
+                    "$x^4\\sqrt{x}$",
+                    "$x^5$",
+                    "$x\\sqrt{x^8}$"
+                ],
+                correct: 1,
+                explanation: "Untuk menyederhanakan $\\sqrt{x^9}$ (indeks 2), kita bagi pangkatnya dengan indeks: $9 \\div 2 = 4$ sisa $1$. Hasil baginya (4) menjadi pangkat di luar, dan sisanya (1) menjadi pangkat di dalam. Hasilnya $x^4\\sqrt{x^1}$ atau $x^4\\sqrt{x}$."
+            },
+            {
+                q: "Manakah di antara bentuk akar berikut yang SUDAH dalam bentuk paling sederhana?",
+                options: [
+                    "$\\sqrt{50}$",
+                    "$\\sqrt{75}$",
+                    "$\\sqrt{30}$",
+                    "$\\sqrt[3]{16}$"
+                ],
+                correct: 2,
+                explanation: "Sebuah akar dianggap sederhana jika radikannya tidak memiliki faktor kuadrat sempurna (atau kubik, dst.). <br>- $\\sqrt{50}$ punya faktor 25. <br>- $\\sqrt{75}$ punya faktor 25. <br>- $\\sqrt[3]{16}$ punya faktor 8. <br>- Faktor dari 30 (2, 3, 5, 6, 10, 15) tidak ada yang merupakan bilangan kuadrat sempurna. Jadi $\\sqrt{30}$ sudah sederhana."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
