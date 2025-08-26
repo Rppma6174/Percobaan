@@ -248,10 +248,10 @@ const allContentData = {
             fileType: 'html' 
             },
             { 
-            id: 'materi_bentuk_akar', 
-            title: 'Pengertian Bentuk Akar', 
+            id: 'materi_bentuk_akar_2', 
+            title: 'Memahami Penyederhanaan Bentuk Akar', 
             type: 'HTML Document', 
-            filePath: '#', 
+            filePath: 'UMT_Learning/Penyederhanaan Bentuk Akar.html', 
             fileType: 'html' 
             }
         ],
