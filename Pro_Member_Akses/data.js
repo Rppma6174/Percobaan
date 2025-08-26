@@ -296,6 +296,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Jenis-Jenis Fungsi.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_relasi_dan_fungsi_9', 
+            title: 'Operasi Pada Fungsi', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Operasi pada Fungsi.html', 
+            fileType: 'html' 
+            },
         ],
         "Bentuk Akar": [
             { 
