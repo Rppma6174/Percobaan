@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Relasi dan Fungsi - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .diagram-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background-color: var(--bg-main);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+        }
+        .diagram-container svg text { font-size: 12px; fill: var(--text-primary); }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Aplikasi Fungsi: Memodelkan Dunia di Sekitar Kita</h1>
+<p>
+    Fungsi bukanlah konsep yang hanya ada di buku teks. Ia adalah alat yang sangat kuat untuk mendeskripsikan hubungan sebab-akibat di dunia nyata. Proses menerjemahkan masalah sehari-hari ke dalam bahasa fungsi disebut <b>pemodelan matematika</b>. Mari kita lihat dua model fungsi yang paling umum.
+</p>
+
+<h2>1. Fungsi Linear: Model Perubahan Konstan</h2>
+<p>
+    Fungsi linear digunakan untuk situasi di mana suatu nilai berubah secara konstan terhadap nilai lainnya. Bentuk umumnya adalah $y = mx + c$.
+</p>
+<ul>
+    <li><b>$m$ (gradien):</b> Merepresentasikan <b>tingkat perubahan</b> yang tetap. Contoh: harga per buah, kecepatan konstan.</li>
+    <li><b>$c$ (intersep):</b> Merepresentasikan <b>nilai awal</b> atau biaya tetap saat inputnya nol. Contoh: biaya sewa dasar, tarif buka pintu taksi.</li>
+</ul>
+<p>Grafiknya selalu berbentuk <b>garis lurus</b>.</p>
+<p><b>Contoh: Biaya Langganan Internet</b></p>
+<p>
+    Sebuah provider internet mengenakan biaya pemasangan awal sebesar Rp100.000 dan biaya langganan bulanan Rp200.000. Buatlah model fungsi untuk total biaya ($B$) setelah $n$ bulan.
+</p>
+<ul>
+    <li><b>Analisis:</b> Biaya awal adalah $c$, dan biaya bulanan adalah tingkat perubahan $m$.</li>
+    <li><b>Model Fungsi:</b> $B(n) = 200.000n + 100.000$</li>
+    <li><b>Biaya setelah 12 bulan:</b> $B(12) = 200.000(12) + 100.000 = 2.400.000 + 100.000 = \text{Rp}2.500.000$.</li>
+</ul>
+
+<h2>2. Fungsi Kuadrat: Model Perubahan yang Berakselerasi</h2>
+<p>
+    Fungsi kuadrat digunakan untuk memodelkan situasi di mana tingkat perubahannya itu sendiri berubah. Bentuk umumnya adalah $y = ax^2 + bx + c$. Grafiknya selalu berbentuk <b>parabola</b>.
+</p>
+<ul>
+    <li>Jika $a > 0$, parabola terbuka ke atas (memiliki titik <b>minimum</b>).</li>
+    <li>Jika $a < 0$, parabola terbuka ke bawah (memiliki titik <b>maksimum</b>).</li>
+</ul>
+<p>Sifat ini sangat berguna untuk masalah optimisasi (mencari nilai maksimum atau minimum).</p>
+<div class="diagram-container">
+    <svg width="200" height="150">
+        <path d="M 10 130 Q 100 -50 190 130" stroke="#2F81F7" stroke-width="2" fill="none"/>
+        <circle cx="100" cy="130" r="4" fill="#F85149"/>
+        <text x="80" y="145" fill="#F85149">Minimum</text>
+        <text x="80" y="30" fill="#C9D1D9">$a>0$</text>
+    </svg>
+    <svg width="200" height="150">
+        <path d="M 10 20 Q 100 200 190 20" stroke="#39D353" stroke-width="2" fill="none"/>
+        <circle cx="100" cy="20" r="4" fill="#F85149"/>
+        <text x="80" y="35" fill="#F85149">Maksimum</text>
+        <text x="80" y="130" fill="#C9D1D9">$a<0$</text>
+    </svg>
+</div>
+<p><b>Contoh: Gerak Peluru</b></p>
+<p>
+    Ketinggian sebuah bola yang dilempar ke atas ($h$, dalam meter) setelah $t$ detik diberikan oleh fungsi $h(t) = -5t^2 + 40t$. Tentukan ketinggian maksimum yang dicapai bola.
+</p>
+<ul>
+    <li><b>Analisis:</b> Rumusnya adalah fungsi kuadrat dengan $a=-5$ (negatif), jadi grafiknya parabola terbuka ke bawah dan memiliki titik maksimum. Titik maksimum ini adalah puncak parabola.</li>
+    <li><b>Mencari Puncak:</b> Waktu untuk mencapai puncak terjadi pada sumbu simetri, $t = \frac{-b}{2a}$.
+        <br>$t = \frac{-40}{2(-5)} = \frac{-40}{-10} = 4$ detik.
+    </li>
+    <li><b>Menghitung Ketinggian Maksimum:</b> Masukkan waktu ($t=4$) kembali ke fungsi.
+        <br>$h(4) = -5(4)^2 + 40(4) = -5(16) + 160 = -80 + 160 = 80$ meter.
+    </li>
+</ul>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji kemampuan Anda dalam menganalisis dan menerapkan model fungsi.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Sebuah layanan penyewaan skuter listrik mengenakan biaya Rp5.000 untuk membuka kunci dan Rp2.000 per menit. Jika $C$ adalah total biaya dan $t$ adalah waktu dalam menit, model fungsi yang tepat adalah...",
+                options: [ "$C(t) = 5000t + 2000$", "$C(t) = 2000t + 5000$", "$C(t) = 7000t$", "$C(t) = (5000+2000)t$" ],
+                correct: 1,
+                explanation: "Biaya buka kunci adalah biaya awal ($c=5000$), dan biaya per menit adalah tingkat perubahan konstan ($m=2000$). Maka model fungsi linearnya adalah $C(t)=2000t+5000$."
+            },
+            {
+                q: "Dalam fungsi linear $y=mx+c$, gradien ($m$) merepresentasikan...",
+                options: [ "Nilai awal saat input nol", "Nilai maksimum fungsi", "Tingkat perubahan yang konstan", "Titik potong dengan sumbu x" ],
+                correct: 2,
+                explanation: "Gradien adalah ukuran kemiringan garis, yang dalam konteks aplikasi berarti seberapa cepat nilai $y$ berubah untuk setiap satu satuan perubahan pada $x$."
+            },
+            {
+                q: "Lintasan sebuah peluru yang ditembakkan ke atas membentuk grafik parabola yang terbuka ke bawah. Ini berarti fungsi ketinggiannya adalah fungsi...",
+                options: [ "Linear dengan gradien negatif", "Kuadrat dengan koefisien $a$ negatif", "Kuadrat dengan koefisien $a$ positif", "Eksponensial" ],
+                correct: 1,
+                explanation: "Grafik parabola selalu direpresentasikan oleh fungsi kuadrat. Parabola yang terbuka ke bawah secara spesifik memiliki koefisien $a$ (pada $ax^2$) yang bernilai negatif."
+            },
+            {
+                q: "Hubungan antara jumlah barang yang dibeli dan total harga yang harus dibayar (jika tidak ada diskon) adalah contoh dari...",
+                options: [ "Fungsi Kuadrat", "Fungsi Linear", "Fungsi Invers", "Relasi yang bukan fungsi" ],
+                correct: 1,
+                explanation: "Setiap barang tambahan akan menambah total harga dengan jumlah yang sama (harga barang tersebut). Pertambahan yang konstan ini adalah ciri khas dari fungsi linear."
+            },
+            {
+                q: "Seorang ilmuwan mengamati bahwa populasi amuba di cawan petri menjadi dua kali lipat setiap jam. Model pertumbuhan ini paling baik dideskripsikan oleh...",
+                options: [ "Fungsi Linear", "Fungsi Kuadrat", "Fungsi Eksponensial (Geometri)", "Fungsi Logaritma" ],
+                correct: 2,
+                explanation: "Kata kunci 'menjadi dua kali lipat' menunjukkan adanya faktor pengali yang konstan. Ini adalah ciri khas pertumbuhan eksponensial, yang terkait erat dengan barisan dan deret geometri."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
