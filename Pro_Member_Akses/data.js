@@ -282,6 +282,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Unsur-Unsur Fungsi.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_relasi_dan_fungsi_7', 
+            title: 'Cara Menyatakan Fungsi', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Cara Menyatakan Fungsi.html', 
+            fileType: 'html' 
+            },
         ],
         "Bentuk Akar": [
             { 
