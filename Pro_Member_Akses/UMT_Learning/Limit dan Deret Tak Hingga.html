@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Limit & Deret Tak Hingga - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Notasi Sigma, Limit, dan Deret Tak Hingga</h1>
+<p>
+    Kita telah membahas deret tak hingga dan rumusnya, namun pernahkah Anda bertanya: apa artinya "menjumlahkan" sesuatu sebanyak tak terhingga kali? Bagaimana mungkin hasilnya bisa berupa angka yang terhingga seperti pada deret geometri konvergen? Jawabannya terletak pada konsep <b>Limit</b>, sebuah jembatan antara dunia yang terhingga dan tak hingga.
+</p>
+
+<h2>Notasi Sigma ($\Sigma$): Bahasa Universal untuk Deret</h2>
+<p>
+    Sebelum membahas limit, kita perlu cara yang ringkas untuk menulis deret. Di sinilah Notasi Sigma (huruf Yunani untuk 'S', singkatan dari 'Sum' atau jumlah) berperan.
+    <br>
+    Bentuk umumnya:
+    $$ \sum_{i=m}^{n} U_i = U_m + U_{m+1} + \dots + U_n $$
+    <ul>
+        <li>$\Sigma$: Simbol sigma, berarti "jumlahkan".</li>
+        <li>$U_i$: Rumus suku ke-i (aturan barisannya).</li>
+        <li>$i$: Indeks penjumlahan (variabel yang berjalan).</li>
+        <li>$m$: Batas bawah (nilai awal $i$).</li>
+        <li>$n$: Batas atas (nilai akhir $i$).</li>
+    </ul>
+</p>
+<p><b>Contoh:</b> Deret aritmetika 3 + 7 + 11 + 15 dapat ditulis sebagai $\sum_{i=1}^{4} (4i-1)$.</p>
+<p>Untuk deret tak hingga, batas atasnya adalah simbol tak hingga ($\infty$): $\sum_{i=1}^{\infty} U_i$.</p>
+
+<h2>Limit dan Definisi Sejati dari Jumlah Deret Tak Hingga</h2>
+<p>
+    Inilah konsep intinya. Kita tidak benar-benar "selesai" menjumlahkan deret tak hingga. Sebaliknya, jumlah deret tak hingga didefinisikan sebagai <b>limit dari barisan jumlah parsialnya</b>.
+</p>
+<p>Apa itu "barisan jumlah parsial"? Mari kita bedah.</p>
+<p>Misalkan kita punya deret tak hingga: $U_1 + U_2 + U_3 + \dots$</p>
+<ul>
+    <li>Jumlah parsial pertama: $S_1 = U_1$</li>
+    <li>Jumlah parsial kedua: $S_2 = U_1 + U_2$</li>
+    <li>Jumlah parsial ketiga: $S_3 = U_1 + U_2 + U_3$</li>
+    <li>...</li>
+    <li>Jumlah parsial ke-n: $S_n = U_1 + U_2 + \dots + U_n$</li>
+</ul>
+<p>
+    Kumpulan $S_1, S_2, S_3, \dots, S_n, \dots$ ini membentuk sebuah <b>barisan baru</b> yang disebut barisan jumlah parsial.
+</p>
+<div class="important-note">
+    <b>Definisi Formal Deret Konvergen</b><br>
+    Sebuah deret tak hingga $\sum_{i=1}^{\infty} U_i$ dikatakan <b>konvergen</b> (memiliki jumlah) ke sebuah nilai $L$ jika dan hanya jika barisan jumlah parsialnya ($S_n$) memiliki limit yang menuju $L$ saat $n$ menuju tak hingga.
+    $$ S_{\infty} = \sum_{i=1}^{\infty} U_i = \lim_{n \to \infty} S_n = L $$
+    Jika limitnya tidak ada atau menuju tak hingga, deret tersebut disebut <b>divergen</b>.
+</div>
+
+<p>
+    <b>Contoh Pembuktian Rumus Deret Geometri:</b>
+    <br>
+    Mari kita lihat deret $16 + 8 + 4 + ...$ yang kita tahu jumlahnya 32.
+    <br>Rumus jumlah parsialnya ($S_n$) adalah: $S_n = \frac{16(1 - (\frac{1}{2})^n)}{1 - \frac{1}{2}} = 32(1 - (\frac{1}{2})^n) = 32 - 32(\frac{1}{2})^n$.
+    <br>Sekarang, kita ambil limitnya saat $n \to \infty$:
+    <br>$S_{\infty} = \lim_{n \to \infty} S_n = \lim_{n \to \infty} (32 - 32(\frac{1}{2})^n)$
+    <br>Saat $n$ menjadi sangat besar, suku $(\frac{1}{2})^n$ akan mendekati 0.
+    <br>$S_{\infty} = 32 - 32(0) = 32$.
+    <br>Ini adalah pembuktian formal mengapa rumus $S_{\infty} = \frac{a}{1-r}$ bekerja.
+</p>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang konsep yang menghubungkan deret dan limit.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Notasi Sigma ($\\Sigma$) digunakan dalam matematika sebagai singkatan untuk operasi...",
+                options: [ "Perkalian", "Penjumlahan", "Pengurangan", "Pembagian" ],
+                correct: 1,
+                explanation: "Sigma adalah huruf kapital Yunani untuk 'S' dan digunakan sebagai singkatan dari 'Sum' atau 'Summation', yang berarti penjumlahan."
+            },
+            {
+                q: "Deret $3+7+11+15+19$ dapat ditulis dalam notasi sigma sebagai...",
+                options: [ "$\\sum_{i=1}^{5} (4i-1)$", "$\\sum_{i=1}^{5} (3i)$", "$\\sum_{i=1}^{5} (i+2)$", "$\\sum_{i=1}^{19} (i)$" ],
+                correct: 0,
+                explanation: "Barisan ini adalah aritmetika dengan $a=3, b=4$. Rumus sukunya adalah $U_i = 3 + (i-1)4 = 3 + 4i - 4 = 4i-1$. Karena ada 5 suku, batasnya adalah dari i=1 sampai 5."
+            },
+            {
+                q: "Jumlah dari sebuah deret tak hingga didefinisikan secara formal sebagai...",
+                options: [ "Nilai dari suku terakhirnya", "Rata-rata dari semua sukunya", "Limit dari barisan jumlah parsialnya", "Nilai dari suku pertamanya" ],
+                correct: 2,
+                explanation: "Ini adalah definisi inti dari jumlah deret tak hingga. Kita tidak menjumlahkan secara harfiah, melainkan mencari nilai yang 'didekati' oleh barisan jumlah parsial ($S_n$) saat $n$ menuju tak hingga."
+            },
+            {
+                q: "Sebuah deret tak hingga disebut konvergen jika...",
+                options: [ "Rasionya sama dengan 1", "Limit dari barisan jumlah parsialnya ada dan nilainya terhingga", "Semua sukunya bernilai positif", "Beda antar sukunya selalu konstan" ],
+                correct: 1,
+                explanation: "Konvergen berarti 'menuju satu titik'. Secara matematis, ini berarti limit dari barisan jumlah parsialnya ada dan merupakan sebuah bilangan yang terhingga (bukan $\\infty$ atau $-\\infty$)."
+            },
+            {
+                q: "Diberikan deret geometri $\\sum_{n=1}^{\\infty} (\\frac{1}{3})^{n-1}$. Barisan jumlah parsialnya, $S_n$, memiliki rumus $S_n=\\frac{3}{2}(1-(\\frac{1}{3})^n)$. Nilai dari $\\lim_{n \\to \\infty} S_n$ adalah...",
+                options: [ "0", "1", "3/2", "Tak hingga" ],
+                correct: 2,
+                explanation: "Saat $n$ menuju tak hingga, suku $(\\frac{1}{3})^n$ akan menuju 0 karena basisnya adalah pecahan antara -1 dan 1. Maka, limitnya adalah $\\frac{3}{2}(1-0) = \\frac{3}{2}$."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
