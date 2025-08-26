@@ -241,6 +241,13 @@ const allContentData = {
         ],
         "Bentuk Akar": [
             { 
+            id: 'materi_bentuk_akar_1', 
+            title: 'Esensi Bentuk Akar', 
+            type: 'HTML Document', 
+            filePath: '#', 
+            fileType: 'html' 
+            },
+            { 
             id: 'materi_bentuk_akar', 
             title: 'Pengertian Bentuk Akar', 
             type: 'HTML Document', 
