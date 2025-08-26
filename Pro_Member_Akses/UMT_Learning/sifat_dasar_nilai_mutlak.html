@@ -149,132 +149,147 @@
         <div id="quiz-container"></div>
     </div>
 
-    <script>
-        if (!sessionStorage.getItem('sessionToken')) {
-            window.location.href = '../../Login/';
-        }
-
-        const quizzes = [
-    {
-        q: "Manakah dari ekspresi berikut yang setara dengan $|-4x|$?",
-        options: [
-            "-4|x|",
-            "4x",
-            "4|x|",
-            "Tidak dapat disederhanakan"
-        ],
-        correct: 2,
-        explanation: "Menggunakan sifat perkalian $|a \\cdot b| = |a| \\cdot |b|$. Maka, $|-4x| = |-4| \\cdot |x|$. Karena $|-4| = 4$, hasilnya menjadi $4|x|$."
-    },
-    {
-        q: "Bentuk sederhana dari ekspresi $\\sqrt{(-7)^2}$ adalah...",
-        options: [
-            "7",
-            "-7",
-            "49",
-            "$\\pm 7$"
-        ],
-        correct: 0,
-        explanation: "Ini adalah aplikasi langsung dari sifat $\\sqrt{x^2} = |x|$. Dalam kasus ini, $x = -7$. Maka, $\\sqrt{(-7)^2} = |-7| = 7$. Ingat, hasil dari operasi akar kuadrat tidak pernah negatif."
-    },
-    {
-        q: "Jika $y \\ne 0$, manakah ekspresi yang senilai dengan $|\\frac{3}{-y}|$?",
-        options: [
-            "\\frac{3}{y}",
-            "\\frac{-3}{|y|}",
-            "\\frac{3}{|-y|}",
-            "-\\frac{3}{y}"
-        ],
-        correct: 2,
-        explanation: "Menggunakan sifat pembagian $|\\frac{a}{b}| = \\frac{|a|}{|b|}$. Maka, $|\\frac{3}{-y}| = \\frac{|3|}{|-y|} = \\frac{3}{|-y|}$. Kita juga tahu bahwa $|-y| = |y|$, sehingga bentuk ini juga setara dengan $\\frac{3}{|y|}$."
-    },
-    {
-        q: "Diketahui $a < 0$. Bentuk sederhana dari $\\sqrt{a^2} + |3a|$ adalah...",
-        options: [
-            "4a",
-            "-2a",
-            "2a",
-            "-4a"
-        ],
-        correct: 1,
-        explanation: "Kita pecah satu per satu. Pertama, $\\sqrt{a^2} = |a|$. Kedua, $|3a| = |3| \\cdot |a| = 3|a|$. Jadi ekspresinya menjadi $|a| + 3|a| = 4|a|$. Karena diketahui $a < 0$ (negatif), maka sesuai definisi nilai mutlak, $|a| = -a$. Substitusikan ini kembali: $4(-a) = -4a$."
-    },
-    {
-        q: "Manakah pernyataan di bawah ini yang <b>TIDAK SELALU</b> benar?",
-        options: [
-            "$|x^2| = x^2$",
-            "$\\sqrt{x^2} = |x|$",
-            "$|x-y| = |y-x|$",
-            "$|x+y| = |x| + |y|$"
-        ],
-        correct: 3,
-        explanation: "Pernyataan $|x+y| = |x| + |y|$ dikenal sebagai Pertidaksamaan Segitiga, yang bentuknya adalah $|x+y| \\leq |x| + |y|$. Kesamaan (=) hanya terjadi jika x dan y memiliki tanda yang sama (keduanya positif atau keduanya negatif). Jika tandanya berbeda, maka $|x+y| < |x| + |y|$. Contoh: $|-3+5| = |2| = 2$, sedangkan $|-3|+|5| = 3+5=8$. Jadi, pernyataan ini tidak selalu benar."
+<script>
+    if (!sessionStorage.getItem('sessionToken')) {
+        window.location.href = '../../Login/';
     }
-        ];
 
-        const quizContainer = document.getElementById("quiz-container");
+    const quizzes = [
+        {
+            q: "Manakah dari ekspresi berikut yang setara dengan $|-4x|$?",
+            options: [
+                "-4|x|",
+                "4x",
+                "4|x|",
+                "Tidak dapat disederhanakan"
+            ],
+            correct: 2,
+            explanation: "Menggunakan sifat perkalian $|a \\cdot b| = |a| \\cdot |b|$. Maka, $|-4x| = |-4| \\cdot |x|$. Karena $|-4| = 4$, hasilnya menjadi $4|x|$."
+        },
+        {
+            q: "Bentuk sederhana dari ekspresi $\\sqrt{(-7)^2}$ adalah...",
+            options: [
+                "7",
+                "-7",
+                "49",
+                "$\\pm 7$"
+            ],
+            correct: 0,
+            explanation: "Ini adalah aplikasi langsung dari sifat $\\sqrt{x^2} = |x|$. Dalam kasus ini, $x = -7$. Maka, $\\sqrt{(-7)^2} = |-7| = 7$. Ingat, hasil dari operasi akar kuadrat tidak pernah negatif."
+        },
+        {
+            q: "Jika $y \\ne 0$, manakah ekspresi yang senilai dengan $|\\frac{3}{-y}|$?",
+            options: [
+                "\\frac{3}{y}",
+                "\\frac{-3}{|y|}",
+                "\\frac{3}{|-y|}",
+                "-\\frac{3}{y}"
+            ],
+            correct: 2,
+            explanation: "Menggunakan sifat pembagian $|\\frac{a}{b}| = \\frac{|a|}{|b|}$. Maka, $|\\frac{3}{-y}| = \\frac{|3|}{|-y|} = \\frac{3}{|-y|}$. Kita juga tahu bahwa $|-y| = |y|$, sehingga bentuk ini juga setara dengan $\\frac{3}{|y|}$."
+        },
+        {
+            q: "Diketahui $a < 0$. Bentuk sederhana dari $\\sqrt{a^2} + |3a|$ adalah...",
+            options: [
+                "4a",
+                "-2a",
+                "2a",
+                "-4a"
+            ],
+            correct: 1,
+            explanation: "Kita pecah satu per satu. Pertama, $\\sqrt{a^2} = |a|$. Kedua, $|3a| = |3| \\cdot |a| = 3|a|$. Jadi ekspresinya menjadi $|a| + 3|a| = 4|a|$. Karena diketahui $a < 0$ (negatif), maka sesuai definisi nilai mutlak, $|a| = -a$. Substitusikan ini kembali: $4(-a) = -4a$."
+        },
+        {
+            q: "Manakah pernyataan di bawah ini yang <b>TIDAK SELALU</b> benar?",
+            options: [
+                "$|x^2| = x^2$",
+                "$\\sqrt{x^2} = |x|$",
+                "$|x-y| = |y-x|$",
+                "$|x+y| = |x| + |y|$"
+            ],
+            correct: 3,
+            explanation: "Pernyataan $|x+y| = |x| + |y|$ dikenal sebagai Pertidaksamaan Segitiga, yang bentuknya adalah $|x+y| \\leq |x| + |y|$. Kesamaan (=) hanya terjadi jika x dan y memiliki tanda yang sama. Contoh: $|-3+5| = |2| = 2$, sedangkan $|-3|+|5| = 8$. Jadi, pernyataan ini tidak selalu benar."
+        }
+    ];
 
-        quizzes.forEach((quiz, index) => {
-            const quizEl = document.createElement("div");
-            quizEl.className = "quiz-accordion";
-            quizEl.innerHTML = `
-                <button class="quiz-accordion-button">
-                    <span>Kuis ${index + 1}</span>
-                    <i class="fas fa-chevron-down"></i>
-                </button>
-                <div class="quiz-accordion-content hidden">
-                    <p class="question-text">${quiz.q}</p>
-                    <div class="options-container">
-                        ${quiz.options.map((opt, i) => 
-                            `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
-                        ).join("")}
-                    </div>
-                    <div class="quiz-explanation hidden">
-                        <b>Pembahasan:</b> ${quiz.explanation}
-                    </div>
+    const quizContainer = document.getElementById("quiz-container");
+
+    quizzes.forEach((quiz, index) => {
+        const quizEl = document.createElement("div");
+        quizEl.className = "quiz-accordion";
+        quizEl.innerHTML = `
+            <button class="quiz-accordion-button">
+                <span>Kuis ${index + 1}</span>
+                <i class="fas fa-chevron-down"></i>
+            </button>
+            <div class="quiz-accordion-content hidden">
+                <p class="question-text">${quiz.q}</p>
+                <div class="options-container">
+                    ${quiz.options.map((opt, i) => 
+                        `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                    ).join("")}
                 </div>
-            `;
-            quizContainer.appendChild(quizEl);
-        });
+                <div class="quiz-explanation hidden">
+                    <b>Pembahasan:</b> ${quiz.explanation}
+                </div>
+            </div>
+        `;
+        quizContainer.appendChild(quizEl);
+    });
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
-            accordionButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const content = button.nextElementSibling;
-                    accordionButtons.forEach(otherButton => {
-                        if (otherButton !== button) {
-                            otherButton.classList.remove('active');
-                            otherButton.nextElementSibling.classList.add('hidden');
-                        }
-                    });
-                    button.classList.toggle('active');
-                    content.classList.toggle('hidden');
-                });
-            });
+    // Setelah elemen kuis ditambahkan, render LaTeX
+    if (window.MathJax) {
+        MathJax.typesetPromise();
+    }
 
-            const quizOptions = document.querySelectorAll('.quiz-option');
-            quizOptions.forEach(option => {
-                option.addEventListener('click', () => {
-                    const optionsContainer = option.parentElement;
-                    if (optionsContainer.classList.contains('answered')) return;
-                    optionsContainer.classList.add('answered');
-
-                    const explanation = optionsContainer.nextElementSibling;
-                    explanation.classList.remove('hidden');
-
-                    if (option.dataset.correct === 'true') {
-                        option.classList.add('correct');
-                    } else {
-                        option.classList.add('wrong');
-                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
-                        if (correctOption) {
-                            correctOption.classList.add('correct');
-                        }
+    document.addEventListener('DOMContentLoaded', () => {
+        const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+        accordionButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const content = button.nextElementSibling;
+                accordionButtons.forEach(otherButton => {
+                    if (otherButton !== button) {
+                        otherButton.classList.remove('active');
+                        otherButton.nextElementSibling.classList.add('hidden');
                     }
                 });
+                button.classList.toggle('active');
+                content.classList.toggle('hidden');
+
+                // Render ulang LaTeX ketika accordion dibuka
+                if (!content.classList.contains('hidden') && window.MathJax) {
+                    MathJax.typesetPromise([content]);
+                }
             });
         });
-    </script>
+
+        const quizOptions = document.querySelectorAll('.quiz-option');
+        quizOptions.forEach(option => {
+            option.addEventListener('click', () => {
+                const optionsContainer = option.parentElement;
+                if (optionsContainer.classList.contains('answered')) return;
+                optionsContainer.classList.add('answered');
+
+                const explanation = optionsContainer.nextElementSibling;
+                explanation.classList.remove('hidden');
+
+                if (option.dataset.correct === 'true') {
+                    option.classList.add('correct');
+                } else {
+                    option.classList.add('wrong');
+                    const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                    if (correctOption) {
+                        correctOption.classList.add('correct');
+                    }
+                }
+
+                // Render ulang LaTeX pada penjelasan
+                if (window.MathJax) {
+                    MathJax.typesetPromise([explanation]);
+                }
+            });
+        });
+    });
+</script>
 </body>
 </html>
