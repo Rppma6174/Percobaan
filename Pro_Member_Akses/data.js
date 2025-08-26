@@ -174,15 +174,6 @@ const allContentData = {
     }
 ],
     materi: {
-        "Relasi Dan Fungsi": [
-            { 
-            id: 'materi_relasi_dan_fungsi_1', 
-            title: 'Esensi Relasi', 
-            type: 'HTML Document', 
-            filePath: 'UMT_Learning/Esensi Relasi.html', 
-            fileType: 'html' 
-            }
-        ],
         "Nilai Mutlak": [
             { 
             id: 'materi_nilai_mutlak_1', 
@@ -247,6 +238,15 @@ const allContentData = {
             filePath: 'UMT_Learning/Aplikasi & Pemodelan Nilai Mutlak.html', 
             fileType: 'html' 
             },
+        ],
+         "Relasi Dan Fungsi": [
+            { 
+            id: 'materi_relasi_dan_fungsi_1', 
+            title: 'Esensi Relasi', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Esensi Relasi.html', 
+            fileType: 'html' 
+            }
         ],
         "Bentuk Akar": [
             { 
