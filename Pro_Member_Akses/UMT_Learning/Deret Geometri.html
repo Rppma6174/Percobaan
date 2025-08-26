@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deret Geometri Lengkap - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #16122; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Deret Geometri: Menjumlahkan Perkalian Berulang</h1>
+<p>
+    Setelah memahami barisan geometri sebagai daftar suku ($U_n$), sekarang kita akan membahas <b>deret geometri</b>, yaitu hasil penjumlahan suku-suku tersebut ($S_n$). Deret geometri terbagi menjadi dua kategori utama: deret hingga (jumlah sukunya terbatas) dan deret tak hingga (jumlah sukunya tak terbatas).
+</p>
+
+<h2>Deret Geometri Hingga ($S_n$)</h2>
+<p>
+    Untuk menemukan rumus jumlah $n$ suku pertama ($S_n$), kita akan menggunakan sebuah trik aljabar yang elegan.
+</p>
+<ol>
+    <li>Kita tuliskan deretnya: $S_n = a + ar + ar^2 + ... + ar^{n-1}$</li>
+    <li>Kita kalikan seluruh persamaan dengan rasio $r$: $rS_n = ar + ar^2 + ar^3 + ... + ar^{n}$</li>
+    <li>Sekarang, kurangkan persamaan kedua dari persamaan pertama ($rS_n - S_n$). Perhatikan bahwa hampir semua suku akan saling menghilangkan:
+    <br>$rS_n - S_n = (ar + ar^2 + ... + ar^n) - (a + ar + ... + ar^{n-1})$
+    <br>$S_n(r-1) = ar^n - a$
+    </li>
+    <li>Faktorkan dan selesaikan untuk $S_n$: $S_n(r-1) = a(r^n - 1)$</li>
+</ol>
+<div class="important-note">
+    <b>Rumus Deret Geometri Hingga</b>
+    <p>Ada dua bentuk rumus yang identik secara matematis, namun dipilih untuk kemudahan perhitungan:</p>
+    <ul>
+        <li>Untuk $r > 1$: $$S_n = \frac{a(r^n - 1)}{r - 1}$$</li>
+        <li>Untuk $r < 1$: $$S_n = \frac{a(1 - r^n)}{1 - r}$$</li>
+    </ul>
+</div>
+<p>
+    <b>Contoh:</b> Hitung jumlah 8 suku pertama dari deret 2 + 6 + 18 + ...
+    <br><b>Identifikasi:</b> $a=2, r=3, n=8$. Karena $r > 1$, kita gunakan rumus pertama.
+    <br><b>Gunakan Rumus:</b> $S_8 = \frac{2(3^8 - 1)}{3 - 1} = \frac{2(6561 - 1)}{2} = 6560$.
+</p>
+
+<h2>Deret Geometri Tak Hingga ($S_{\infty}$)</h2>
+<p>
+    Mungkinkah kita menjumlahkan suku-suku yang tak terhingga banyaknya? Jawabannya adalah mungkin, tetapi hanya jika suku-sukunya semakin mengecil mendekati nol. Deret seperti ini disebut <b>konvergen</b>.
+</p>
+<div class="important-note">
+    <b>Syarat Konvergen Deret Geometri Tak Hingga</b>
+    <p>Sebuah deret geometri tak hingga hanya memiliki jumlah (konvergen) jika nilai rasionya berada di antara -1 dan 1.</p>
+    $$ -1 < r < 1 \text{ atau } |r| < 1 $$
+</div>
+<p>
+    <b>Logika di Balik Rumusnya:</b>
+    <br>Lihat kembali rumus $S_n = \frac{a(1 - r^n)}{1 - r}$. Jika $|r|<1$ (misal $r=0.5$), maka saat $n$ menjadi sangat besar (tak hingga), nilai $r^n$ akan menjadi sangat kecil hingga bisa dianggap nol.
+    <br>Maka, rumus tersebut menjadi $S_{\infty} = \frac{a(1 - 0)}{1 - r}$, yang menyisakan:
+    <br><b>Rumus Deret Tak Hingga:</b> $$S_{\infty} = \frac{a}{1 - r}$$
+</p>
+<p>
+    <b>Contoh:</b> Hitung jumlah deret tak hingga 16 + 8 + 4 + 2 + ...
+    <br><b>Identifikasi:</b> $a=16$, $r = \frac{8}{16} = \frac{1}{2}$.
+    <br><b>Cek Syarat:</b> Apakah $|r|<1$? Ya, $|\frac{1}{2}| < 1$. Maka deret ini konvergen.
+    <br><b>Gunakan Rumus:</b> $S_{\infty} = \frac{16}{1 - \frac{1}{2}} = \frac{16}{\frac{1}{2}} = 16 \times 2 = 32$.
+</p>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang konsep deret geometri.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Apa syarat utama agar sebuah deret geometri tak hingga memiliki jumlah yang terhingga (konvergen)?",
+                options: [ "$r > 1$", "$r = 1$", "$-1 < r < 1$", "$r < -1$ atau $r > 1$" ],
+                correct: 2,
+                explanation: "Deret tak hingga hanya konvergen jika rasionya ($r$) membuat suku-sukunya semakin mengecil. Ini terjadi jika nilai absolut dari $r$ kurang dari 1, yaitu $-1 < r < 1$."
+            },
+            {
+                q: "Hitunglah jumlah 5 suku pertama dari deret 3 + 6 + 12 + ...",
+                options: [ "93", "96", "48", "186" ],
+                correct: 0,
+                explanation: "Ini adalah deret hingga dengan $a=3, r=2, n=5$. Menggunakan rumus $S_n = \\frac{a(r^n - 1)}{r - 1}$, kita dapatkan $S_5 = \\frac{3(2^5 - 1)}{2 - 1} = \\frac{3(32 - 1)}{1} = 3 \\times 31 = 93$."
+            },
+            {
+                q: "Jumlah dari deret geometri tak hingga 27 + 9 + 3 + ... adalah...",
+                options: [ "81", "40.5", "54", "Tak hingga" ],
+                correct: 1,
+                explanation: "Ini adalah deret tak hingga konvergen dengan $a=27$ dan $r=\\frac{9}{27}=\\frac{1}{3}$. Menggunakan rumus $S_{\\infty} = \\frac{a}{1 - r}$, kita dapatkan $S_{\\infty} = \\frac{27}{1 - \\frac{1}{3}} = \\frac{27}{\\frac{2}{3}} = 27 \\times \\frac{3}{2} = \\frac{81}{2} = 40.5$."
+            },
+            {
+                q: "Sebuah bola dijatuhkan dari ketinggian 10 meter dan selalu memantul kembali dengan ketinggian $\\frac{3}{4}$ dari ketinggian sebelumnya. Total panjang lintasan bola sampai berhenti adalah...",
+                options: [ "40 m", "30 m", "70 m", "100 m" ],
+                correct: 2,
+                explanation: "Ini adalah gabungan dua deret tak hingga. Lintasan turun: $10 + \\frac{3}{4}(10) + ...$ ($S_{turun} = \\frac{10}{1 - 3/4} = 40$ m). Lintasan naik (dimulai dari pantulan pertama): $\\frac{3}{4}(10) + ...$ ($S_{naik} = \\frac{7.5}{1 - 3/4} = 30$ m). Total lintasan = 40 + 30 = 70 m."
+            },
+            {
+                q: "Rumus deret geometri tak hingga, $S_{\\infty}=\\frac{a}{1-r}$, diturunkan dari rumus deret hingga dengan asumsi bahwa untuk $|r|<1$, nilai dari $r^n$ saat $n$ sangat besar akan...",
+                options: [ "Mendekati 1", "Mendekati 0", "Mendekati tak hingga", "Tidak berubah" ],
+                correct: 1,
+                explanation: "Logika dasarnya adalah jika Anda memangkatkan sebuah pecahan seperti $\\frac{1}{2}$ berulang kali, hasilnya akan semakin kecil dan mendekati nol. Inilah yang membuat suku $r^n$ bisa diabaikan dalam rumus saat $n$ menuju tak hingga."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
