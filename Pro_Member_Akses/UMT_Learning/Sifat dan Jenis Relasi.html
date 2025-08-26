@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sifat dan Jenis Relasi - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .diagram-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background-color: var(--bg-main);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            margin-top: 1rem;
+        }
+        .diagram-container svg text { font-size: 14px; fill: var(--text-primary); }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Sifat dan Jenis Relasi: Refleksif, Simetris, & Transitif</h1>
+<p>
+    Setelah memahami definisi dasar, kita bisa mengklasifikasikan relasi berdasarkan sifat-sifatnya. Sifat ini menggambarkan bagaimana anggota-anggota dalam sebuah himpunan berinteraksi satu sama lain melalui aturan relasi tersebut. Pembahasan ini biasanya fokus pada relasi dalam satu himpunan (dari A ke A).
+</p>
+
+<h2>1. Relasi Refleksif (Sifat Cermin)</h2>
+<p>
+    Sebuah relasi $R$ pada himpunan A disebut <b>refleksif</b> jika setiap elemen di A berhubungan dengan dirinya sendiri.
+    <br>
+    <b>Syarat Formal:</b> Untuk setiap $a \in A$, harus ada pasangan $(a, a) \in R$.
+    <br>
+    <b>Analogi:</b> Setiap orang di dalam sebuah grup "bercermin" dan menunjuk dirinya sendiri.
+</p>
+<div class="diagram-container">
+    <figure>
+        <figcaption style="text-align: center; color: var(--accent-green); margin-bottom: 10px;"><b>Contoh Refleksif</b></figcaption>
+        <svg width="150" height="150">
+            <text x="70" y="20">A</text>
+            <circle cx="75" cy="50" r="5" fill="#C9D1D9"/> <text x="85" y="55">1</text>
+            <circle cx="40" cy="100" r="5" fill="#C9D1D9"/> <text x="25" y="105">2</text>
+            <circle cx="110" cy="100" r="5" fill="#C9D1D9"/> <text x="120" y="105">3</text>
+            <path d="M 75 42 A 10 10, 0, 1, 0, 83 46 L 85 40 Z" fill="#C9D1D9"/>
+            <path d="M 40 92 A 10 10, 0, 1, 0, 48 96 L 50 90 Z" fill="#C9D1D9"/>
+            <path d="M 110 92 A 10 10, 0, 1, 0, 118 96 L 120 90 Z" fill="#C9D1D9"/>
+        </svg>
+    </figure>
+    <figure>
+        <figcaption style="text-align: center; color: var(--accent-red); margin-bottom: 10px;"><b>Bukan Refleksif</b></figcaption>
+        <svg width="150" height="150">
+            <text x="70" y="20">A</text>
+            <circle cx="75" cy="50" r="5" fill="#C9D1D9"/> <text x="85" y="55">1</text>
+            <circle cx="40" cy="100" r="5" fill="#C9D1D9"/> <text x="25" y="105">2</text>
+            <circle cx="110" cy="100" r="5" fill="#C9D1D9"/> <text x="120" y="105">3</text>
+            <path d="M 75 42 A 10 10, 0, 1, 0, 83 46 L 85 40 Z" fill="#C9D1D9"/>
+            <path d="M 110 92 A 10 10, 0, 1, 0, 118 96 L 120 90 Z" fill="#C9D1D9"/>
+            <text x="20" y="125" fill="#F85149" font-size="12">(2,2) hilang</text>
+        </svg>
+    </figure>
+</div>
+
+<h2>2. Relasi Simetris (Sifat Jalan Dua Arah)</h2>
+<p>
+    Sebuah relasi $R$ disebut <b>simetris</b> jika untuk setiap pasangan $(a,b)$ yang ada di dalam relasi, pasangan kebalikannya $(b,a)$ juga harus ada.
+    <br>
+    <b>Analogi:</b> Jika ada jalan dari kota A ke kota B, maka harus ada jalan kembali dari B ke A.
+</p>
+<div class="diagram-container">
+    <figure>
+        <figcaption style="text-align: center; color: var(--accent-green); margin-bottom: 10px;"><b>Contoh Simetris</b></figcaption>
+        <svg width="150" height="150">
+            <circle cx="75" cy="50" r="5" fill="#C9D1D9"/> <text x="85" y="55">1</text>
+            <circle cx="40" cy="100" r="5" fill="#C9D1D9"/> <text x="25" y="105">2</text>
+            <circle cx="110" cy="100" r="5" fill="#C9D1D9"/> <text x="120" y="105">3</text>
+            <path d="M 70 55 L 45 95" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 45 95 L 70 55" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+            <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#C9D1D9" /></marker></defs>
+        </svg>
+    </figure>
+    <figure>
+        <figcaption style="text-align: center; color: var(--accent-red); margin-bottom: 10px;"><b>Bukan Simetris</b></figcaption>
+        <svg width="150" height="150">
+            <circle cx="75" cy="50" r="5" fill="#C9D1D9"/> <text x="85" y="55">1</text>
+            <circle cx="40" cy="100" r="5" fill="#C9D1D9"/> <text x="25" y="105">2</text>
+            <circle cx="110" cy="100" r="5" fill="#C9D1D9"/> <text x="120" y="105">3</text>
+            <path d="M 70 55 L 45 95" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 45 95 L 105 95" stroke="#F85149" stroke-width="2" marker-end="url(#arrow_red)"/>
+            <text x="30" y="130" fill="#F85149" font-size="12">Ada (2,3) tapi</text>
+            <text x="30" y="145" fill="#F85149" font-size="12">tidak ada (3,2)</text>
+            <defs><marker id="arrow_red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#F85149" /></marker></defs>
+        </svg>
+    </figure>
+</div>
+
+
+<h2>3. Relasi Transitif (Sifat Jembatan Penghubung)</h2>
+<p>
+    Sebuah relasi $R$ disebut <b>transitif</b> jika adanya pasangan $(a,b)$ dan $(b,c)$ menjamin adanya pasangan "jalan pintas" $(a,c)$.
+    <br>
+    <b>Analogi:</b> Jika Anda bisa terbang dari Jakarta ke Singapura, dan dari Singapura ke Tokyo, maka harus ada penerbangan langsung dari Jakarta ke Tokyo.
+</p>
+<div class="diagram-container">
+    <figure>
+        <figcaption style="text-align: center; color: var(--accent-green); margin-bottom: 10px;"><b>Contoh Transitif</b></figcaption>
+        <svg width="150" height="150">
+            <circle cx="75" cy="50" r="5" fill="#C9D1D9"/> <text x="85" y="55">A</text>
+            <circle cx="40" cy="100" r="5" fill="#C9D1D9"/> <text x="25" y="105">B</text>
+            <circle cx="110" cy="100" r="5" fill="#C9D1D9"/> <text x="120" y="105">C</text>
+            <path d="M 70 55 L 45 95" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 45 100 L 105 100" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 75 55..controls (75,80) and (110,80).. L 108 95" stroke="#2F81F7" stroke-width="2" marker-end="url(#arrow_blue)" fill="none" stroke-dasharray="4 2"/>
+            <text x="80" y="80" fill="#2F81F7" font-size="12">Jalan pintas</text>
+        </svg>
+    </figure>
+    <figure>
+        <figcaption style="text-align: center; color: var(--accent-red); margin-bottom: 10px;"><b>Bukan Transitif</b></figcaption>
+        <svg width="150" height="150">
+            <circle cx="75" cy="50" r="5" fill="#C9D1D9"/> <text x="85" y="55">A</text>
+            <circle cx="40" cy="100" r="5" fill="#C9D1D9"/> <text x="25" y="105">B</text>
+            <circle cx="110" cy="100" r="5" fill="#C9D1D9"/> <text x="120" y="105">C</text>
+            <path d="M 70 55 L 45 95" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 45 100 L 105 100" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+            <text x="35" y="130" fill="#F85149" font-size="12">Jalan pintas (A,C)</text>
+            <text x="55" y="145" fill="#F85149" font-size="12">hilang!</text>
+             <defs><marker id="arrow_blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#2F81F7" /></marker></defs>
+        </svg>
+    </figure>
+</div>
+
+<div class="important-note" style="margin-top: 2rem;">
+    <b>Relasi Ekuivalen</b><br>
+    Sebuah relasi yang memenuhi ketiga sifat di atas (Refleksif, Simetris, DAN Transitif) sekaligus disebut sebagai <b>Relasi Ekuivalen</b>. Relasi ini sangat penting karena ia "memecah" sebuah himpunan menjadi kelompok-kelompok di mana semua anggota dalam satu kelompok dianggap setara. Contoh paling sempurna adalah relasi "sama dengan" (=).
+</div>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang sifat-sifat relasi.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Sebuah relasi disebut refleksif jika...",
+                options: [
+                    "Setiap elemen berpasangan dengan elemen lain yang berbeda",
+                    "Setiap elemen berpasangan dengan dirinya sendiri",
+                    "Setiap pasangan memiliki kebalikannya",
+                    "Tidak ada elemen yang berpasangan"
+                ],
+                correct: 1,
+                explanation: "Sifat refleksif (cermin) menuntut setiap anggota himpunan untuk berelasi dengan dirinya sendiri. Harus ada pasangan (a,a) untuk setiap anggota a."
+            },
+            {
+                q: "Diberikan A={a,b,c} dan relasi R={(a,b),(b,a),(c,c)}. Sifat apakah yang TIDAK dimiliki oleh relasi R?",
+                options: [ "Refleksif", "Simetris", "Transitif", "Semua sifat terpenuhi" ],
+                correct: 0,
+                explanation: "Relasi ini tidak refleksif karena pasangan (a,a) dan (b,b) tidak ada. Relasi ini simetris karena (a,b) punya pasangan (b,a), dan (c,c) adalah kebalikannya sendiri. Relasi ini juga transitif secara trivial (tidak ada kondisi (x,y) dan (y,z) yang bisa melanggarnya)."
+            },
+            {
+                q: "Relasi 'kurang dari' (<) pada himpunan bilangan asli {1, 2, 3, ...} memiliki sifat...",
+                options: [ "Simetris", "Refleksif", "Transitif", "Ekuivalen" ],
+                correct: 2,
+                explanation: "Relasi '<' adalah transitif (jika a<b dan b<c, maka a<c). Ia tidak refleksif (karena 3<3 itu salah) dan tidak simetris (karena jika 3<5, maka 5<3 itu salah)."
+            },
+            {
+                q: "Sebuah relasi disebut simetris jika pada diagram panahnya...",
+                options: [
+                    "Setiap titik memiliki panah kembali ke dirinya sendiri (loop)",
+                    "Tidak ada titik yang memiliki lebih dari satu panah keluar",
+                    "Setiap panah dari A ke B selalu memiliki panah balasan dari B ke A",
+                    "Semua titik terhubung oleh panah"
+                ],
+                correct: 2,
+                explanation: "Sifat simetris (jalan dua arah) secara visual berarti setiap hubungan harus memiliki hubungan timbal balik. Jika ada panah ke satu arah, harus ada panah ke arah sebaliknya."
+            },
+            {
+                q: "Sebuah relasi yang memenuhi sifat refleksif, simetris, dan transitif sekaligus disebut...",
+                options: [ "Relasi Fungsi", "Relasi Total", "Relasi Ekuivalen", "Relasi Parsial" ],
+                correct: 2,
+                explanation: "Gabungan ketiga sifat fundamental ini (refleksif, simetris, transitif) mendefinisikan sebuah jenis relasi yang sangat penting yang disebut Relasi Ekuivalen."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
