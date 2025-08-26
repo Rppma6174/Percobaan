@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deret Aritmetika Lengkap - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Deret Aritmetika: Menjumlahkan Suku-suku Berpola</h1>
+<p>
+    Setelah memahami barisan aritmetika sebagai daftar suku ($U_n$), kini kita beralih ke <b>deret aritmetika</b>, yaitu <b>jumlah dari suku-suku</b> barisan tersebut ($S_n$). Pertanyaan utamanya adalah: bagaimana cara menjumlahkan puluhan atau bahkan ratusan suku tanpa harus menghitungnya satu per satu?
+</p>
+
+<h2>Penurunan Rumus $S_n$ (Metode Gauss)</h2>
+<p>
+    Konon, matematikawan Carl Friedrich Gauss saat masih kecil diberi tugas oleh gurunya untuk menjumlahkan semua bilangan dari 1 sampai 100. Ia menyelesaikannya dalam sekejap dengan logika yang cemerlang, yang menjadi dasar dari rumus deret aritmetika.
+</p>
+<ol>
+    <li>Ia menulis deretnya: $S = 1 + 2 + 3 + ... + 99 + 100$.</li>
+    <li>Ia menulis ulang deret yang sama secara terbalik: $S = 100 + 99 + 98 + ... + 2 + 1$.</li>
+    <li>Ia menjumlahkan kedua baris tersebut secara vertikal:
+    <br>$2S = (1+100) + (2+99) + (3+98) + ... + (99+2) + (100+1)$
+    <br>$2S = 101 + 101 + 101 + ... + 101 + 101$
+    </li>
+    <li>Ia sadar bahwa ada 100 buah pasangan yang semuanya berjumlah 101.
+    <br>$2S = 100 \times 101$
+    </li>
+    <li>Maka, $S = \frac{100 \times 101}{2} = 5050$.</li>
+</ol>
+<p>
+    Logika ini bisa kita generalisasi. Jumlah deret ($S_n$) adalah $\frac{n}{2}$ dikalikan dengan jumlah suku pertama dan suku terakhir.
+</p>
+<div class="important-note">
+    <b>Rumus Deret Aritmetika (Bentuk 1)</b>
+    $$S_n = \frac{n}{2}(a + U_n)$$
+    Rumus ini sangat berguna jika <b>suku pertama ($a$)</b> dan <b>suku terakhir ($U_n$)</b> diketahui.
+</div>
+
+<h2>Bentuk Kedua Rumus $S_n$</h2>
+<p>
+    Bagaimana jika suku terakhir ($U_n$) tidak diketahui? Kita bisa menurunkan rumus kedua yang lebih fleksibel dengan mensubstitusikan rumus $U_n = a + (n-1)b$ ke dalam rumus di atas.
+    <br>$S_n = \frac{n}{2}(a + [a + (n-1)b])$
+    <br>Dengan menyederhanakannya, kita mendapatkan bentuk kedua:
+</p>
+<div class="important-note">
+    <b>Rumus Deret Aritmetika (Bentuk 2)</b>
+    $$S_n = \frac{n}{2}(2a + (n-1)b)$$
+    Rumus ini sangat berguna jika <b>suku pertama ($a$)</b> dan <b>beda ($b$)</b> diketahui.
+</div>
+
+<p><b>Contoh Penggunaan:</b> Hitung jumlah 20 suku pertama dari barisan 4, 7, 10, 13, ...</p>
+<ul>
+    <li><b>Identifikasi:</b> Kita tahu $a=4$, $b=3$, dan $n=20$. Suku terakhir tidak diketahui, jadi kita gunakan rumus bentuk kedua.</li>
+    <li><b>Gunakan Rumus:</b>
+        <br>$S_{20} = \frac{20}{2}(2(4) + (20-1)3)$
+        <br>$S_{20} = 10(8 + (19 \times 3))$
+        <br>$S_{20} = 10(8 + 57)$
+        <br>$S_{20} = 10(65) = 650$
+    </li>
+</ul>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang konsep deret aritmetika.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Apa perbedaan esensial antara deret aritmetika dan barisan aritmetika?",
+                options: [
+                    "Barisan adalah daftar suku, deret adalah hasil penjumlahannya",
+                    "Deret memiliki beda, barisan tidak",
+                    "Barisan untuk bilangan ganjil, deret untuk genap",
+                    "Tidak ada perbedaan"
+                ],
+                correct: 0,
+                explanation: "Ini adalah perbedaan fundamental. Barisan adalah daftar angka yang dipisahkan koma (misal: 2, 4, 6), sementara deret adalah ekspresi penjumlahannya (misal: 2 + 4 + 6)."
+            },
+            {
+                q: "Rumus $S_n = \\frac{n}{2}(a + U_n)$ paling efisien digunakan ketika kita mengetahui...",
+                options: [
+                    "Suku pertama, beda, dan banyak suku",
+                    "Suku pertama, suku terakhir, dan banyak suku",
+                    "Suku tengah dan beda",
+                    "Hanya beda dan banyak suku"
+                ],
+                correct: 1,
+                explanation: "Rumus ini secara langsung menggunakan suku pertama ($a$) dan suku terakhir ($U_n$), sehingga menjadi pilihan terbaik jika kedua nilai tersebut sudah diketahui."
+            },
+            {
+                q: "Hitunglah jumlah 10 suku pertama dari barisan aritmetika 3, 8, 13, ...",
+                options: [ "255", "230", "510", "210" ],
+                correct: 0,
+                explanation: "Di sini $a=3$, $b=5$, $n=10$. Kita gunakan rumus kedua: $S_{10} = \\frac{10}{2}(2(3) + (10-1)5) = 5(6 + 9 \\times 5) = 5(6+45) = 5(51) = 255$."
+            },
+            {
+                q: "Dalam sebuah gedung pertunjukan, baris kursi paling depan ada 10 kursi. Baris di belakangnya selalu bertambah 2 kursi. Jika ada 15 baris kursi, total semua kursi adalah...",
+                options: [ "360", "400", "390", "420" ],
+                correct: 2,
+                explanation: "Ini adalah deret aritmetika dengan $a=10$, $b=2$, dan $n=15$. $S_{15} = \\frac{15}{2}(2(10) + (15-1)2) = \\frac{15}{2}(20 + 14 \\times 2) = \\frac{15}{2}(20+28) = \\frac{15}{2}(48) = 15 \\times 24 = 390$."
+            },
+            {
+                q: "Kisah matematikawan Carl Friedrich Gauss yang menjumlahkan angka 1 sampai 100 adalah inspirasi di balik penurunan rumus...",
+                options: [
+                    "$U_n = a+(n-1)b$",
+                    "$S_n = \\frac{n}{2}(2a+(n-1)b)$",
+                    "$S_n = \\frac{n}{2}(a+U_n)$",
+                    "$b=U_n-U_{n-1}$"
+                ],
+                correct: 2,
+                explanation: "Metode Gauss yang memasangkan suku pertama dengan suku terakhir secara langsung menghasilkan rumus $S_n = \\frac{n}{2}(a+U_n)$. Rumus lainnya diturunkan dari sini."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
