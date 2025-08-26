@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformasi Grafik Nilai Mutlak - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .graph-container {
+            background-color: var(--bg-main); border: 1px solid var(--border-color);
+            border-radius: 0.5rem; padding: 1rem; margin-top: 1rem;
+            display: flex; justify-content: center; align-items: center;
+        }
+        svg text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 12px; }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Transformasi Grafik Fungsi Nilai Mutlak</h1>
+<p>
+    Grafik fungsi nilai mutlak dasar, $f(x) = |x|$, memiliki bentuk 'V' yang khas dengan titik puncak (vertex) di titik asal $(0,0)$. Dengan memodifikasi fungsi ini, kita dapat menggeser, meregangkan, memampatkan, dan membalik grafiknya. Bentuk umum dari fungsi nilai mutlak adalah:
+    $$f(x) = a|x - h| + k$$
+    Setiap parameter ($a, h, k$) memiliki peran spesifik dalam transformasi grafik.
+</p>
+
+<h2>1. Pergeseran Vertikal (Parameter $k$)</h2>
+<p>
+    Parameter $k$ mengontrol pergeseran grafik secara vertikal (naik atau turun).
+    <ul>
+        <li>Jika $k$ positif ($k > 0$), grafik $y=|x|$ digeser ke <b>atas</b> sejauh $k$ unit.</li>
+        <li>Jika $k$ negatif ($k < 0$), grafik $y=|x|$ digeser ke <b>bawah</b> sejauh $|k|$ unit.</li>
+    </ul>
+    <b>Contoh:</b> Grafik $y = |x| + 3$. Di sini, $k=3$, sehingga grafik dasar digeser 3 unit ke atas. Titik puncaknya berpindah dari $(0,0)$ ke $(0,3)$.
+</p>
+<div class="graph-container">
+    <svg width="300" height="220" viewBox="0 0 300 220">
+        <path d="M 20 110 H 280 M 150 20 V 200" stroke="#444" stroke-width="1"/>
+        <text fill="#888" x="282" y="115">x</text><text fill="#888" x="155" y="28">y</text>
+        <path d="M 150 110 L 260 0 M 150 110 L 40 0" stroke-dasharray="4 2" stroke="#8B949E" stroke-width="1.5" transform="translate(0, 10)"/>
+        <text fill="#8B949E" x="210" y="55">$y=|x|$</text>
+        <path d="M 150 80 L 260 -30 M 150 80 L 40 -30" stroke="#2F81F7" stroke-width="2" transform="translate(0, 10)"/>
+        <text fill="#2F81F7" x="170" y="35">$y=|x|+3$</text>
+        <circle cx="150" cy="80" r="3" fill="#FFF"/>
+        <text fill="#FFF" x="155" y="78">$(0,3)$</text>
+    </svg>
+</div>
+
+<h2>2. Pergeseran Horizontal (Parameter $h$)</h2>
+<p>
+    Parameter $h$ mengontrol pergeseran grafik secara horizontal (kiri atau kanan). Perhatikan tanda negatif dalam bentuk umum $|x - h|$.
+    <ul>
+        <li>Jika bentuknya $|x - h|$ (misal, $|x-4|$), $h$ bernilai positif ($h=4$), dan grafik digeser ke <b>kanan</b> sejauh $h$ unit.</li>
+        <li>Jika bentuknya $|x + h|$ (misal, $|x+2|$), ini sama dengan $|x - (-2)|$, $h$ bernilai negatif ($h=-2$), dan grafik digeser ke <b>kiri</b> sejauh $h$ unit.</li>
+    </ul>
+    <b>Contoh:</b> Grafik $y = |x - 4|$. Di sini, $h=4$, sehingga grafik dasar digeser 4 unit ke kanan. Puncaknya berpindah dari $(0,0)$ ke $(4,0)$.
+</p>
+<div class="graph-container">
+    <svg width="300" height="220" viewBox="0 0 300 220">
+        <path d="M 20 110 H 280 M 150 20 V 200" stroke="#444" stroke-width="1"/>
+        <text fill="#888" x="282" y="115">x</text><text fill="#888" x="155" y="28">y</text>
+        <path d="M 150 110 L 260 0 M 150 110 L 40 0" stroke-dasharray="4 2" stroke="#8B949E" stroke-width="1.5" transform="translate(0, 10)"/>
+        <text fill="#8B949E" x="100" y="55">$y=|x|$</text>
+        <path d="M 190 110 L 300 0 M 190 110 L 80 0" stroke="#2F81F7" stroke-width="2" transform="translate(0, 10)"/>
+        <text fill="#2F81F7" x="220" y="55">$y=|x-4|$</text>
+        <circle cx="190" cy="110" r="3" fill="#FFF"/><text fill="#FFF" x="195" y="108">$(4,0)$</text>
+    </svg>
+</div>
+
+
+<h2>3. Peregangan & Pemampatan (Parameter $a$)</h2>
+<p>
+    Parameter $a$ (tanpa memperhitungkan tandanya) menentukan "lebar" atau "sempit"nya grafik.
+    <ul>
+        <li>Jika $|a| > 1$ (misal, $a=2$ atau $a=-3$), grafik mengalami <b>peregangan vertikal</b> (terlihat lebih sempit/curam).</li>
+        <li>Jika $0 < |a| < 1$ (misal, $a=0.5$ atau $a=-1/3$), grafik mengalami <b>pemampatan vertikal</b> (terlihat lebih lebar/landai).</li>
+    </ul>
+    Tanda negatif pada $a$ memiliki fungsi lain, yaitu refleksi.
+</p>
+
+<h2>4. Refleksi (Tanda Parameter $a$)</h2>
+<p>
+    Tanda dari parameter $a$ menentukan arah bukaan grafik.
+    <ul>
+        <li>Jika $a$ positif ($a > 0$), grafik terbuka ke <b>atas</b>.</li>
+        <li>Jika $a$ negatif ($a < 0$), grafik direfleksikan terhadap sumbu-x dan terbuka ke <b>bawah</b>.</li>
+    </ul>
+    <b>Contoh:</b> Grafik $y = -2|x|$. Karena $a=-2$, grafiknya terbuka ke bawah. Karena $|-2|=2 > 1$, grafiknya juga lebih sempit daripada $y=|x|$.
+</p>
+<div class="graph-container">
+    <svg width="300" height="220" viewBox="0 0 300 220">
+        <path d="M 20 110 H 280 M 150 20 V 200" stroke="#444" stroke-width="1"/>
+        <text fill="#888" x="282" y="115">x</text><text fill="#888" x="155" y="28">y</text>
+        <path d="M 150 110 L 260 0 M 150 110 L 40 0" stroke-dasharray="4 2" stroke="#8B949E" stroke-width="1.5" transform="translate(0, 10)"/>
+        <text fill="#8B949E" x="210" y="55">$y=|x|$</text>
+        <path d="M 150 110 L 205 220 M 150 110 L 95 220" stroke="#2F81F7" stroke-width="2" transform="translate(0, -10)"/>
+        <text fill="#2F81F7" x="185" y="170">$y=-2|x|$</text>
+    </svg>
+</div>
+
+<h2>5. Menggabungkan Semua Transformasi</h2>
+<p>
+    Dengan menggabungkan $a$, $h$, dan $k$, kita bisa mendeskripsikan grafik fungsi nilai mutlak apapun. Kuncinya adalah mengidentifikasi titik puncak dan arah bukaan.
+    <br>
+    Untuk fungsi $f(x) = a|x-h|+k$:
+    <ul>
+        <li>Titik puncak (vertex) berada di <b>$(h,k)$</b>.</li>
+        <li>Grafik terbuka ke <b>atas</b> jika $a > 0$ dan ke <b>bawah</b> jika $a < 0$.</li>
+        <li>Grafik <b>lebih sempit</b> dari $y=|x|$ jika $|a| > 1$, dan <b>lebih lebar</b> jika $0 < |a| < 1$.</li>
+    </ul>
+    <b>Contoh:</b> Analisis fungsi $y = -2|x-3| + 4$.
+    <br>
+    $a=-2$, $h=3$, $k=4$.
+    <li>Titik puncak: $(h,k) = (3,4)$.</li>
+    <li>Arah: Terbuka ke bawah (karena $a$ negatif).</li>
+    <li>Bentuk: Lebih sempit (karena $|a|=2 > 1$).</li>
+</p>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Pilih jawaban yang paling sesuai untuk menguji pemahaman Anda tentang transformasi grafik.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            // Uncomment baris di bawah jika ingin mengaktifkan proteksi halaman
+            // window.location.href = '../../Login/';
+        }
+
+        const quizzes = [
+            {
+                q: "Di manakah letak titik puncak (vertex) dari grafik fungsi $f(x) = |x-5| + 2$?",
+                options: [
+                    "(5, 2)",
+                    "(-5, 2)",
+                    "(5, -2)",
+                    "(-5, -2)"
+                ],
+                correct: 0,
+                explanation: "Bentuk umum adalah $y = a|x-h|+k$, dengan puncak di $(h,k)$. Untuk $f(x)=|x-5|+2$, kita punya $h=5$ dan $k=2$. Jadi, puncaknya ada di $(5,2)$."
+            },
+            {
+                q: "Transformasi apa yang terjadi pada grafik $y=|x|$ untuk menghasilkan grafik $y=|x+3|$?",
+                options: [
+                    "Geser 3 unit ke kanan",
+                    "Geser 3 unit ke kiri",
+                    "Geser 3 unit ke atas",
+                    "Geser 3 unit ke bawah"
+                ],
+                correct: 1,
+                explanation: "Bentuknya adalah $y=|x-h|$. Jika fungsinya $y=|x+3|$, ini sama dengan $y=|x-(-3)|$. Jadi, $h=-3$, yang berarti grafik digeser 3 unit ke kiri."
+            },
+            {
+                q: "Bagaimana bentuk grafik fungsi $y = -\\frac{1}{2}|x|$ dibandingkan dengan grafik dasar $y=|x|$?",
+                options: [
+                    "Lebih sempit dan terbuka ke atas",
+                    "Lebih lebar dan terbuka ke atas",
+                    "Lebih sempit dan terbuka ke bawah",
+                    "Lebih lebar dan terbuka ke bawah"
+                ],
+                correct: 3,
+                explanation: "Tanda negatif pada $a$ ($a = -1/2$) menyebabkan grafik terbuka ke bawah (refleksi terhadap sumbu-x). Nilai $|a| = 1/2$, yang berada di antara 0 dan 1, menyebabkan grafik menjadi lebih lebar (pemampatan vertikal)."
+            },
+            {
+                q: "Fungsi nilai mutlak manakah yang memiliki puncak di $(-1, -4)$ dan terbuka ke atas?",
+                options: [
+                    "$y = |x-1|-4$",
+                    "$y = -|x+1|-4$",
+                    "$y = |x+1|-4$",
+                    "$y = |x-1|+4$"
+                ],
+                correct: 2,
+                explanation: "Puncak di $(h,k) = (-1, -4)$ berarti bentuknya harus $|x-(-1)| + (-4)$, yaitu $|x+1|-4$. Karena terbuka ke atas, koefisien $a$ harus positif (dalam hal ini, $a=1$ sudah memenuhi)."
+            },
+            {
+                q: "Grafik fungsi $y = 3|x-2|$ diperoleh dari grafik $y=|x|$ dengan cara...",
+                options: [
+                    "Geser ke kanan 2 unit, lalu dipersempit (peregangan vertikal)",
+                    "Geser ke kiri 2 unit, lalu diperlebar (pemampatan vertikal)",
+                    "Geser ke kanan 2 unit, lalu diperlebar (pemampatan vertikal)",
+                    "Geser ke kiri 2 unit, lalu dipersempit (peregangan vertikal)"
+                ],
+                correct: 0,
+                explanation: "Nilai $h=2$ berarti grafik digeser ke kanan 2 unit. Nilai $a=3$, karena $|a|>1$, grafik diregangkan secara vertikal, yang membuatnya terlihat lebih sempit atau lebih curam."
+            }
+        ];
+
+        const quizContainer = document.getElementById("quiz-container");
+
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div");
+            quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `
+                <button class="quiz-accordion-button">
+                    <span>Kuis ${index + 1}</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="quiz-accordion-content hidden">
+                    <p class="question-text">${quiz.q}</p>
+                    <div class="options-container">
+                        ${quiz.options.map((opt, i) => 
+                            `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                        ).join("")}
+                    </div>
+                    <div class="quiz-explanation hidden">
+                        <b>Pembahasan:</b> ${quiz.explanation}
+                    </div>
+                </div>
+            `;
+            quizContainer.appendChild(quizEl);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    accordionButtons.forEach(otherButton => {
+                        if (otherButton !== button) {
+                            otherButton.classList.remove('active');
+                            otherButton.nextElementSibling.classList.add('hidden');
+                        }
+                    });
+                    button.classList.toggle('active');
+                    content.classList.toggle('hidden');
+                });
+            });
+
+            const quizOptions = document.querySelectorAll('.quiz-option');
+            quizOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden');
+
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('wrong');
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) {
+                            correctOption.classList.add('correct');
+                        }
+                    }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
