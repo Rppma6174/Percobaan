@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Barisan dan Deret - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Aplikasi Barisan dan Deret: Matematika dalam Kehidupan Nyata</h1>
+<p>
+    Barisan dan deret bukanlah sekadar konsep abstrak. Keduanya adalah alat yang sangat kuat untuk memodelkan berbagai situasi di dunia nyata, mulai dari keuangan, biologi, hingga fisika. Keterampilan terpenting dalam menyelesaikan soal aplikasi adalah <b>mengidentifikasi pola</b> yang mendasarinya.
+</p>
+<div class="important-note">
+    <b>Kunci Identifikasi:</b>
+    <ul>
+        <li>Apakah masalah tersebut melibatkan pertumbuhan/penurunan dengan <b>jumlah yang tetap</b>? (Misal: bertambah 50 setiap tahun). Jika ya, ini adalah <b>ARITMETIKA</b>.</li>
+        <li>Apakah masalah tersebut melibatkan pertumbuhan/penurunan dengan <b>faktor pengali atau persentase yang tetap</b>? (Misal: tumbuh 10% setiap tahun). Jika ya, ini adalah <b>GEOMETRI</b>.</li>
+    </ul>
+</div>
+
+<h2>Aplikasi Aritmetika: Pertumbuhan Linear</h2>
+<p>
+    Deret aritmetika digunakan untuk memodelkan situasi dengan perubahan yang konstan dan stabil.
+</p>
+<p><b>Contoh: Gaji Karyawan</b></p>
+<p>
+    Seorang karyawan diterima bekerja dengan gaji awal Rp4.000.000 per bulan. Perusahaan menjanjikan kenaikan gaji sebesar Rp250.000 setiap tahun.
+    <br>a) Berapakah gaji karyawan tersebut pada tahun ke-10?
+    <br>b) Berapa total pendapatan yang ia terima selama 10 tahun pertama?
+</p>
+<ol>
+    <li><b>Analisis:</b> Kenaikan gaji adalah <b>jumlah yang tetap</b> (Rp250.000), maka ini adalah masalah Aritmetika.
+        <ul>
+            <li>$a = 4.000.000$</li>
+            <li>$b = 250.000$</li>
+        </ul>
+    </li>
+    <li><b>Jawaban (a): Gaji pada tahun ke-10 ($U_{10}$)</b>
+        <br>Kita mencari nilai pada satu titik waktu, jadi kita gunakan rumus <b>barisan</b>.
+        <br>$U_{10} = a + (10-1)b = 4.000.000 + 9(250.000) = 4.000.000 + 2.250.000 = 6.250.000$.
+        <br>Gaji pada tahun ke-10 adalah Rp6.250.000 per bulan.
+    </li>
+    <li><b>Jawaban (b): Total pendapatan selama 10 tahun ($S_{10}$)</b>
+        <br>Kita mencari jumlah total, jadi kita gunakan rumus <b>deret</b>.
+        <br>$S_{10} = \frac{10}{2}(2a + (10-1)b) = 5(2(4.000.000) + 9(250.000)) = 5(8.000.000 + 2.250.000) = 5(10.250.000) = 51.250.000$.
+        <br>Total pendapatan selama 10 tahun adalah Rp51.250.000. <i>(Catatan: diasumsikan 1 tahun = 1 gaji untuk penyederhanaan)</i>
+    </li>
+</ol>
+
+<h2>Aplikasi Geometri: Pertumbuhan Eksponensial & Peluruhan</h2>
+<p>
+    Deret geometri digunakan untuk memodelkan situasi dengan perubahan yang bersifat perkalian (proporsional).
+</p>
+<p><b>Contoh: Penyusutan Harga</b></p>
+<p>
+    Sebuah mobil dibeli dengan harga Rp400.000.000. Nilai jualnya menyusut sebesar 15% setiap tahun dari harga tahun sebelumnya. Berapakah perkiraan harga jual mobil setelah 5 tahun?
+</p>
+<ol>
+    <li><b>Analisis:</b> Penyusutan 15% berarti setiap tahun harganya menjadi $100\% - 15\% = 85\%$ dari harga sebelumnya. Ini adalah <b>faktor pengali yang tetap</b>, maka ini adalah masalah Geometri.
+        <ul>
+            <li>$a = 400.000.000$</li>
+            <li>$r = 0.85$</li>
+        </ul>
+    </li>
+    <li><b>Jawaban: Harga setelah 5 tahun ($U_6$)</b>
+        <br>Harga awal adalah $U_1$. Harga setelah 1 tahun adalah $U_2$. Maka harga setelah 5 tahun adalah $U_6$.
+        <br>$U_6 = ar^{6-1} = 400.000.000 \times (0.85)^5$
+        <br>$U_6 \approx 400.000.000 \times 0.4437$
+        <br>$U_6 \approx 177.482.150$
+        <br>Perkiraan harga mobil adalah Rp177.482.150.
+    </li>
+</ol>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji kemampuan Anda dalam menganalisis dan menyelesaikan soal aplikasi.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Seorang petani mencatat hasil panennya meningkat 100 kg setiap musim. Pada musim pertama, ia memanen 1 ton (1000 kg). Fenomena ini paling tepat dimodelkan dengan...",
+                options: [ "Barisan Geometri", "Deret Geometri", "Barisan Aritmetika", "Deret Tak Hingga" ],
+                correct: 2,
+                explanation: "Karena hasil panen meningkat dengan JUMLAH yang tetap (100 kg), maka ini adalah pola Aritmetika. Jika ditanya hasil panen pada musim tertentu, kita gunakan konsep Barisan."
+            },
+            {
+                q: "Sebuah virus membelah diri menjadi dua setiap 10 menit. Jika pada awalnya terdapat 5 virus, maka ini adalah pola...",
+                options: [ "Aritmetika dengan beda 2", "Aritmetika dengan beda 5", "Geometri dengan rasio 2", "Geometri dengan rasio 5" ],
+                correct: 2,
+                explanation: "Kata kunci 'membelah diri menjadi dua' berarti jumlahnya DIKALI dua secara berulang. Ini adalah ciri khas pola Geometri dengan rasio 2."
+            },
+            {
+                q: "Adi menabung Rp1.000.000 dengan sistem bunga tunggal 5% per tahun. Total uang Adi setelah 3 tahun adalah...",
+                options: [ "Rp1.150.000", "Rp1.157.625", "Rp1.050.000", "Rp1.155.000" ],
+                correct: 0,
+                explanation: "Bunga tunggal adalah aplikasi deret aritmetika. Bunga per tahun: 5% dari 1.000.000 = 50.000. Bunga ini tetap setiap tahun. Total bunga selama 3 tahun = 3 x 50.000 = 150.000. Total uang = Modal + Total Bunga = 1.000.000 + 150.000 = 1.150.000."
+            },
+            {
+                q: "Ani menabung Rp1.000.000 dengan sistem bunga majemuk 5% per tahun. Total uang Ani setelah 3 tahun adalah...",
+                options: [ "Rp1.150.000", "Rp1.157.625", "Rp1.050.000", "Rp1.155.000" ],
+                correct: 1,
+                explanation: "Bunga majemuk adalah aplikasi deret geometri dengan rasio $r = 1 + \text{suku bunga} = 1.05$. Total uang setelah 3 tahun adalah $U_4 = ar^3 = 1.000.000 \\times (1.05)^3 = 1.000.000 \\times 1.157625 = 1.157.625$."
+            },
+            {
+                q: "Langkah pertama dan terpenting dalam menyelesaikan soal cerita barisan dan deret adalah...",
+                options: [
+                    "Langsung memasukkan angka ke rumus yang dihafal",
+                    "Menentukan apakah polanya pertambahan (aritmetika) atau perkalian (geometri)",
+                    "Menentukan suku tengahnya terlebih dahulu",
+                    "Mencari jumlah tak hingganya"
+                ],
+                correct: 1,
+                explanation: "Kesalahan terbesar adalah salah mengidentifikasi jenis pola. Analisis awal untuk menentukan apakah masalah tersebut bersifat aritmetika atau geometri akan menentukan rumus mana yang harus digunakan dan merupakan langkah paling krusial."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
