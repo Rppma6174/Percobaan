@@ -210,6 +210,7 @@ const allContentData = {
             filePath: 'UMT_Learning/Operasi Aljabar dengan Nilai Mutlak.html', 
             fileType: 'html' 
             },
+            {
             id: 'materi_nilai_mutlak_6', 
             title: 'Transformasi Grafik Nilai Mutlak', 
             type: 'HTML Document', 
