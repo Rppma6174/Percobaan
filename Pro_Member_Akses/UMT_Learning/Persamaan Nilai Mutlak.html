@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persamaan Nilai Mutlak - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .graph-container {
+            background-color: var(--bg-main); border: 1px solid var(--border-color);
+            border-radius: 0.5rem; padding: 1rem; margin-top: 1rem;
+            display: flex; justify-content: center; align-items: center;
+        }
+        svg text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-size: 12px; }
+        .important-note {
+            background-color: rgba(248, 81, 73, 0.1); border-left: 4px solid var(--accent-red);
+            padding: 1rem; margin: 1rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Menyelesaikan Persamaan Nilai Mutlak</h1>
+<p>
+    Persamaan nilai mutlak adalah persamaan di mana variabelnya berada di dalam tanda nilai mutlak. Kunci utama untuk menyelesaikannya adalah memahami bahwa nilai mutlak menghasilkan jarak, yang berarti bisa ada dua kemungkinan kasus. Prinsip dasarnya adalah:
+    <br><br>
+    Jika $|X| = c$ dan $c \ge 0$, maka solusinya adalah $X = c$ atau $X = -c$.
+</p>
+<div class="important-note">
+    <b>Penting:</b> Jika $|X| = c$ dan $c < 0$ (negatif), maka persamaan tersebut <b>tidak memiliki solusi</b>, karena hasil dari nilai mutlak tidak pernah negatif.
+</div>
+
+<h2>1. Metode Definisi Dasar</h2>
+<p>
+    Ini adalah metode yang paling fundamental dan berlaku untuk semua jenis persamaan nilai mutlak. Kita memecah persamaan menjadi dua kasus terpisah.
+    <br>
+    <b>Contoh:</b> Selesaikan persamaan $|2x - 1| = 7$.
+    <br>
+    Karena $7 \ge 0$, kita bisa melanjutkan.
+    <ul>
+        <li><b>Kasus 1:</b> Ekspresi di dalam nilai mutlak bernilai positif atau nol.
+        <br>$2x - 1 = 7 \implies 2x = 8 \implies x = 4$.</li>
+        <li><b>Kasus 2:</b> Ekspresi di dalam nilai mutlak bernilai negatif.
+        <br>$2x - 1 = -7 \implies 2x = -6 \implies x = -3$.</li>
+    </ul>
+    Setelah memeriksa kedua solusi, kita menemukan keduanya valid. Jadi, Himpunan Penyelesaian (HP) adalah $\{-3, 4\}$.
+</p>
+
+<h2>2. Metode Mengkuadratkan Kedua Ruas</h2>
+<p>
+    Metode ini sangat efektif jika kedua ruas persamaan mengandung nilai mutlak, seperti $|f(x)| = |g(x)|$. Metode ini memanfaatkan sifat bahwa $|X|^2 = X^2$.
+    <br>
+    <b>Contoh:</b> Tentukan penyelesaian dari $|x - 3| = |2x - 1|$.
+</p>
+<ol>
+    <li>Kuadratkan kedua ruas: $(|x-3|)^2 = (|2x-1|)^2 \implies (x-3)^2 = (2x-1)^2$.</li>
+    <li>Pindahkan semua suku ke satu ruas: $(x-3)^2 - (2x-1)^2 = 0$.</li>
+    <li>Gunakan rumus selisih kuadrat $A^2 - B^2 = (A-B)(A+B)$:
+    <br>$[(x-3) - (2x-1)] \cdot [(x-3) + (2x-1)] = 0$
+    <br>$(-x-2)(3x-4) = 0$</li>
+    <li>Cari pembuat nol:
+    <br>$-x-2=0 \implies x=-2$
+    <br>$3x-4=0 \implies x = 4/3$</li>
+</ol>
+<p>
+    Himpunan Penyelesaian (HP) adalah $\{-2, 4/3\}$.
+</p>
+
+
+<h2>3. Interpretasi Grafis</h2>
+<p>
+    Menyelesaikan persamaan seperti $|f(x)| = c$ secara grafis berarti mencari titik potong antara grafik $y = |f(x)|$ dan garis horizontal $y = c$. Nilai $x$ dari titik potong tersebut adalah solusinya.
+    <br>
+    <b>Contoh:</b> Tinjau kembali $|2x - 1| = 7$.
+    <br>
+    Kita mencari perpotongan antara grafik V-shape $y=|2x-1|$ dan garis lurus $y=7$.
+</p>
+<div class="graph-container">
+    <svg width="350" height="240" viewBox="0 0 350 240">
+        <path d="M 10 220 H 340 M 175 10 V 230" stroke="#444" stroke-width="1"/>
+        <text fill="#888" x="330" y="215">x</text><text fill="#888" x="180" y="20">y</text>
+        <text fill="#888" x="178" y="225">0</text>
+        <path d="M 235 218 V 222" stroke="#666"/> <text fill="#888" x="232" y="235">4</text>
+        <path d="M 85 218 V 222" stroke="#666"/> <text fill="#888" x="80" y="235">-3</text>
+        <path d="M 172 80 H 178" stroke="#666"/> <text fill="#888" x="160" y="84">7</text>
+        <path d="M 187.5 220 L 340 10 M 187.5 220 L 10 110" stroke="#C9D1D9" stroke-width="2"/>
+        <text fill="#C9D1D9" x="270" y="100">$y=|2x-1|$</text>
+        <path d="M 10 80 H 340" stroke-dasharray="4 2" stroke="#2F81F7" stroke-width="1.5"/>
+        <text fill="#2F81F7" x="20" y="75">$y=7$</text>
+        <circle cx="235" cy="80" r="3" fill="#39D353"/>
+        <circle cx="85" cy="80" r="3" fill="#39D353"/>
+    </svg>
+</div>
+<p>
+    Grafik dengan jelas menunjukkan ada dua titik potong, yaitu saat $x=-3$ dan $x=4$, yang sesuai dengan solusi aljabar kita.
+</p>
+
+<h2>4. Persamaan dengan Variabel di Kedua Ruas (Tipe Lanjutan)</h2>
+<p>
+    Untuk bentuk $|f(x)| = g(x)$, kita harus menambahkan syarat penting: ruas kanan tidak boleh negatif, yaitu $g(x) \ge 0$. Solusi yang tidak memenuhi syarat ini harus dieliminasi.
+    <br>
+    <b>Contoh:</b> Selesaikan $|x - 1| = 3x + 5$.
+</p>
+<ol>
+    <li><b>Tentukan Syarat:</b> Ruas kanan harus non-negatif.
+    <br>$3x + 5 \ge 0 \implies 3x \ge -5 \implies x \ge -5/3$.</li>
+    <li><b>Selesaikan dengan Definisi:</b>
+        <ul>
+            <li>Kasus 1: $x - 1 = 3x + 5 \implies -2x = 6 \implies x = -3$.</li>
+            <li>Kasus 2: $x - 1 = -(3x+5) \implies x - 1 = -3x - 5 \implies 4x = -4 \implies x = -1$.</li>
+        </ul>
+    </li>
+    <li><b>Verifikasi dengan Syarat:</b>
+        <ul>
+            <li>Cek $x = -3$. Apakah $-3 \ge -5/3$? Tidak. ($ -3 = -9/3$). Maka $x=-3$ <b>bukan solusi</b>.</li>
+            <li>Cek $x = -1$. Apakah $-1 \ge -5/3$? Ya. ($ -1 = -3/3$). Maka $x=-1$ <b>adalah solusi</b>.</li>
+        </ul>
+    </li>
+</ol>
+<p>
+    Jadi, satu-satunya solusi adalah $x=-1$. HP = $\{-1\}$.
+</p>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Pilih jawaban yang paling sesuai untuk menguji pemahaman Anda tentang persamaan nilai mutlak.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            // Uncomment baris di bawah jika ingin mengaktifkan proteksi halaman
+            // window.location.href = '../../Login/';
+        }
+
+        const quizzes = [
+            {
+                q: "Himpunan penyelesaian dari $|3x + 2| = 11$ adalah...",
+                options: [
+                    "{3, -13/3}",
+                    "{-3, 13/3}",
+                    "{3}",
+                    "Tidak ada solusi"
+                ],
+                correct: 0,
+                explanation: "Menggunakan definisi dasar: <br>Kasus 1: $3x+2=11 \\implies 3x=9 \\implies x=3$. <br>Kasus 2: $3x+2=-11 \\implies 3x=-13 \\implies x=-13/3$. <br>Kedua solusi valid. Jadi, HP = {3, -13/3}."
+            },
+            {
+                q: "Penyelesaian dari persamaan $|2x - 1| = |x + 4|$ adalah...",
+                options: [
+                    "{-1/3, 5}",
+                    "{-1, 5}",
+                    "{1, -5}",
+                    "{1/3, -5}"
+                ],
+                correct: 1,
+                explanation: "Gunakan metode kuadrat. $(2x-1)^2 = (x+4)^2 \\implies (2x-1)^2 - (x+4)^2 = 0$. <br>Faktorkan: $[(2x-1)-(x+4)][(2x-1)+(x+4)]=0$. <br>Sederhanakan: $(x-5)(3x+3)=0$. <br>Maka, $x-5=0 \\implies x=5$ dan $3x+3=0 \\implies x=-1$. HP = {-1, 5}."
+            },
+            {
+                q: "Banyaknya solusi real dari persamaan $|5x - 2| = -3$ adalah...",
+                options: [
+                    "0", "1", "2", "Tak hingga"
+                ],
+                correct: 0,
+                explanation: "Nilai mutlak dari suatu ekspresi tidak pernah negatif. Oleh karena itu, tidak mungkin sama dengan -3. Persamaan ini tidak memiliki solusi real."
+            },
+            {
+                q: "Salah satu solusi dari $|x-7| = 2x-2$ adalah...",
+                options: [
+                    "-5", "1/3", "3", "9"
+                ],
+                correct: 2,
+                explanation: "Syarat: $2x-2 \\ge 0 \\implies x \\ge 1$. <br>Kasus 1: $x-7 = 2x-2 \\implies -x = 5 \\implies x = -5$. (Ditolak karena tidak memenuhi $x \\ge 1$). <br>Kasus 2: $x-7 = -(2x-2) \\implies x-7 = -2x+2 \\implies 3x = 9 \\implies x=3$. (Diterima karena $3 \\ge 1$). Jadi, satu-satunya solusi adalah 3."
+            },
+            {
+                q: "Interpretasi grafis dari penyelesaian $|x-2|=3$ adalah mencari absis (nilai x) dari titik potong antara grafik $y=|x-2|$ dan...",
+                options: [
+                    "Sumbu-x",
+                    "Garis $y=3$",
+                    "Garis $y=-3$",
+                    "Grafik $y=x$"
+                ],
+                correct: 1,
+                explanation: "Menyelesaikan $|x-2|=3$ sama dengan mencari nilai $x$ di mana fungsi $y=|x-2|$ memiliki nilai $y=3$. Ini secara visual direpresentasikan oleh perpotongan antara grafik fungsi nilai mutlak $y=|x-2|$ dan garis horizontal $y=3$."
+            }
+        ];
+
+        const quizContainer = document.getElementById("quiz-container");
+
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div");
+            quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `
+                <button class="quiz-accordion-button">
+                    <span>Kuis ${index + 1}</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="quiz-accordion-content hidden">
+                    <p class="question-text">${quiz.q}</p>
+                    <div class="options-container">
+                        ${quiz.options.map((opt, i) => 
+                            `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                        ).join("")}
+                    </div>
+                    <div class="quiz-explanation hidden">
+                        <b>Pembahasan:</b> ${quiz.explanation}
+                    </div>
+                </div>
+            `;
+            quizContainer.appendChild(quizEl);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    accordionButtons.forEach(otherButton => {
+                        if (otherButton !== button) {
+                            otherButton.classList.remove('active');
+                            otherButton.nextElementSibling.classList.add('hidden');
+                        }
+                    });
+                    button.classList.toggle('active');
+                    content.classList.toggle('hidden');
+                });
+            });
+
+            const quizOptions = document.querySelectorAll('.quiz-option');
+            quizOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden');
+
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('wrong');
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) {
+                            correctOption.classList.add('correct');
+                        }
+                    }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
