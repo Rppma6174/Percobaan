@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operasi Aljabar Nilai Mutlak - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            z-index: 1000;
+            background-color: var(--accent-cyan);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            text-decoration: none;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+
+        /* Video Responsif */
+        .embed-container {
+            position: relative; overflow: hidden; width: 100%;
+            padding-top: 56.25%; border-radius: 0.5rem; border: 1px solid var(--border-color);
+        }
+        .embed-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+        /* Quiz Accordion */
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem;
+            padding: 0.75rem; margin-bottom: 0.5rem; cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Operasi Aljabar dengan Nilai Mutlak</h1>
+<p>
+    Memahami bagaimana nilai mutlak berinteraksi dengan operasi aljabar dasar seperti penjumlahan, pengurangan, perkalian, dan pembagian adalah kunci untuk menyelesaikan persamaan dan pertidaksamaan yang lebih kompleks. Sifat-sifat ini menyediakan aturan fundamental untuk memanipulasi ekspresi aljabar.
+</p>
+
+<h2>Sifat Perkalian dan Pembagian</h2>
+<p>
+    Sifat untuk perkalian dan pembagian cukup intuitif. Nilai mutlak dapat didistribusikan ke setiap faktor dalam operasi tersebut.
+</p>
+<ul style="list-style-type: none; padding-left: 0;">
+    <li>
+        <h3 style="color: #2F81F7;">1. Perkalian: $|a \cdot b| = |a| \cdot |b|$</h3>
+        <p>Nilai mutlak dari sebuah produk sama dengan produk dari nilai mutlak masing-masing faktor.</p>
+        <p><i>Contoh:</i> $|(-4) \cdot 3| = |-12| = 12$. Di sisi lain, $|-4| \cdot |3| = 4 \cdot 3 = 12$.</p>
+    </li>
+    <li>
+        <h3 style="color: #2F81F7; margin-top: 2rem;">2. Pembagian: $|\frac{a}{b}| = \frac{|a|}{|b|}$ (dengan $b \neq 0$)</h3>
+        <p>Nilai mutlak dari sebuah hasil bagi sama dengan hasil bagi dari nilai mutlak masing-masing bilangan.</p>
+        <p><i>Contoh:</i> $|\frac{15}{-3}| = |-5| = 5$. Di sisi lain, $\frac{|15|}{|-3|} = \frac{15}{3} = 5$.</p>
+    </li>
+</ul>
+
+
+<h2>Sifat Kuadrat dan Akar Kuadrat</h2>
+<p>
+    Hubungan antara nilai mutlak, kuadrat, dan akar kuadrat adalah salah satu konsep paling penting dan sering menjadi sumber kesalahan jika tidak dipahami dengan benar.
+</p>
+<ul style="list-style-type: none; padding-left: 0;">
+    <li>
+        <h3 style="color: #2F81F7;">1. Kuadrat Nilai Mutlak: $|x|^2 = x^2$</h3>
+        <p>Mengkuadratkan nilai mutlak suatu bilangan hasilnya sama dengan mengkuadratkan bilangan itu sendiri. Ini karena proses pengkuadratan akan selalu menghasilkan bilangan non-negatif.</p>
+        <p><i>Contoh:</i> $|-5|^2 = (5)^2 = 25$, dan $(-5)^2 = 25$.</p>
+    </li>
+    <li>
+        <h3 style="color: #2F81F7; margin-top: 2rem;">2. Akar Kuadrat dari Kuadrat: $\sqrt{x^2} = |x|$</h3>
+        <p><b>Ini adalah sifat krusial.</b> Hasil dari operasi akar kuadrat (simbol $\sqrt{\phantom{x}}$) didefinisikan sebagai hasil yang non-negatif. Oleh karena itu, $\sqrt{x^2}$ tidak bisa hanya $x$, karena $x$ bisa saja negatif. Definisi yang benar adalah $|x|$.</p>
+        <p><i>Contoh Salah:</i> Jika kita anggap $\sqrt{x^2}=x$ dan $x=-4$, maka $\sqrt{(-4)^2} = \sqrt{16} = 4$. Hasilnya adalah $4$, bukan $-4$. Jadi, $\sqrt{x^2} \neq x$.
+        <br><i>Contoh Benar:</i> Dengan $x=-4$, $\sqrt{(-4)^2} = |-4| = 4$. Ini selalu benar.</p>
+    </li>
+</ul>
+
+<h2>Sifat Penjumlahan dan Pengurangan (Pertidaksamaan Segitiga)</h2>
+<p>
+    Berbeda dengan perkalian, nilai mutlak tidak dapat didistribusikan begitu saja pada operasi penjumlahan atau pengurangan. Aturan ini dikenal sebagai <b>Pertidaksamaan Segitiga</b>.
+</p>
+<ul style="list-style-type: none; padding-left: 0;">
+    <li>
+        <h3 style="color: #2F81F7;">1. Penjumlahan: $|a + b| \le |a| + |b|$</h3>
+        <p>Nilai mutlak dari suatu jumlah selalu <b>kurang dari atau sama dengan</b> jumlah dari nilai mutlak masing-masing suku.</p>
+        <p><b>Kondisi Kesamaan ($=$)</b> terjadi jika $a$ dan $b$ memiliki tanda yang sama (keduanya positif atau keduanya negatif) atau salah satunya nol.
+        <br><i>Contoh:</i> $|3+5| = |8| = 8$. Dan $|3|+|5| = 8$. Hasilnya sama.</p>
+        <p><b>Kondisi Pertidaksamaan ($<$)</b> terjadi jika $a$ dan $b$ memiliki tanda yang berlawanan.
+        <br><i>Contoh:</i> $|-7+2| = |-5| = 5$. Sedangkan $|-7|+|2| = 7+2=9$. Di sini, $5 < 9$.</p>
+    </li>
+    <li>
+        <h3 style="color: #2F81F7; margin-top: 2rem;">2. Pengurangan: $|a-b| = |b-a|$</h3>
+        <p>Sifat ini menunjukkan bahwa nilai mutlak mewakili jarak antara dua titik pada garis bilangan. Jarak dari $a$ ke $b$ sama dengan jarak dari $b$ ke $a$.
+        <br><i>Contoh:</i> $|9-4| = |5| = 5$. Dan $|4-9| = |-5| = 5$.</p>
+    </li>
+</ul>
+
+<p style="margin-top: 2rem;">
+    Video berikut memberikan penjelasan visual dan contoh-contoh tambahan mengenai sifat-sifat dasar ini untuk memperkuat pemahaman Anda.
+</p>
+<div class="embed-container">
+    <iframe src="https://www.youtube.com/embed/CVrjAQdhFFg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Pilih jawaban yang paling sesuai untuk menguji pemahaman Anda tentang sifat-sifat nilai mutlak.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            // Uncomment baris di bawah jika ingin mengaktifkan proteksi halaman
+            // window.location.href = '../../Login/';
+        }
+
+        const quizzes = [
+            {
+                q: "Manakah kondisi yang menyebabkan pertidaksamaan $|x+y| \\leq |x|+|y|$ menjadi sebuah kesamaan, yaitu $|x+y| = |x|+|y|$?",
+                options: [
+                    "x dan y memiliki tanda yang berlawanan",
+                    "x dan y memiliki tanda yang sama (atau salah satunya nol)",
+                    "Hanya jika x positif dan y negatif",
+                    "Selalu merupakan pertidaksamaan, tidak pernah sama"
+                ],
+                correct: 1,
+                explanation: "Kesamaan $|x+y| = |x|+|y|$ terjadi jika $x$ dan $y$ memiliki tanda yang sama. Secara matematis, ini terjadi saat $x \\cdot y \\geq 0$. Contoh: $|3+5| = |3|+|5| = 8$, dan $|-3-5| = |-3|+|-5|=8$. Jika tandanya berbeda, berlaku pertidaksamaan, contoh: $|-3+5|=2$ sementara $|-3|+|5|=8$."
+            },
+            {
+                q: "Jika $x < 0$, maka bentuk sederhana dari $|-5x| - \\sqrt{9x^2}$ adalah...",
+                options: [
+                    "-2x",
+                    "8x",
+                    "2x",
+                    "-8x"
+                ],
+                correct: 0,
+                explanation: "Mari kita pecah satu per satu. <br>1. $|-5x| = |-5| \\cdot |x| = 5|x|$. Karena diketahui $x < 0$, maka $|x| = -x$. Jadi, $5|x| = 5(-x) = -5x$. <br>2. $\\sqrt{9x^2} = \\sqrt{(3x)^2}$. Menggunakan sifat $\\sqrt{a^2}=|a|$, maka ini menjadi $|3x|$. Karena $x < 0$, maka $3x$ juga negatif. Jadi, $|3x| = -(3x) = -3x$. <br>3. Gabungkan hasilnya: $(-5x) - (-3x) = -5x + 3x = -2x$."
+            },
+            {
+                q: "Manakah pernyataan di bawah ini yang SELALU BENAR untuk setiap bilangan real $a$?",
+                options: [
+                    "$\\sqrt{a^2} = a$",
+                    "$|a+1| = |a| + 1$",
+                    "$|a^2| = a^2$",
+                    "$|-a| = -a$"
+                ],
+                correct: 2,
+                explanation: "Pernyataan $|a^2| = a^2$ selalu benar karena $a^2$ tidak akan pernah negatif, sehingga nilai mutlaknya adalah bilangan itu sendiri. Pilihan lain tidak selalu benar: $\\sqrt{a^2} = |a|$, bukan $a$. $|a+1| = |a|+1$ hanya benar jika $a \\geq 0$. $|-a|=-a$ hanya benar jika $a \\leq 0$."
+            },
+            {
+                q: "Bentuk lain yang setara dengan ekspresi $|x-y|$ adalah...",
+                options: [
+                    "$|x|-|y|$",
+                    "$x+y$",
+                    "$|y-x|$",
+                    "$y-x$"
+                ],
+                correct: 2,
+                explanation: "Nilai mutlak merepresentasikan jarak pada garis bilangan. Jarak dari $x$ ke $y$ sama dengan jarak dari $y$ ke $x$. Secara aljabar, $|x-y| = |-(y-x)| = |-1| \\cdot |y-x| = 1 \\cdot |y-x| = |y-x|$."
+            },
+            {
+                q: "Jika $a=-2$ dan $b=5$, manakah yang menunjukkan penerapan Pertidaksamaan Segitiga dengan benar?",
+                options: [
+                    "$|a+b|=3$ dan $|a|+|b|=7$, sehingga $|a+b| < |a|+|b|$",
+                    "$|a+b|=7$ dan $|a|+|b|=7$, sehingga $|a+b| = |a|+|b|$",
+                    "$|a+b|=3$ dan $|a|+|b|=3$, sehingga $|a+b| = |a|+|b|$",
+                    "Pertidaksamaan Segitiga tidak berlaku di sini"
+                ],
+                correct: 0,
+                explanation: "Ini adalah contoh kasus di mana tanda bilangan berbeda. Kita hitung: $|a+b| = |-2+5| = |3| = 3$. Lalu kita hitung sisi lainnya: $|a|+|b| = |-2|+|5| = 2+5 = 7$. Karena $3 < 7$, maka terbukti bahwa $|a+b| < |a|+|b|$."
+            }
+        ];
+
+        const quizContainer = document.getElementById("quiz-container");
+
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div");
+            quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `
+                <button class="quiz-accordion-button">
+                    <span>Kuis ${index + 1}</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="quiz-accordion-content hidden">
+                    <p class="question-text">${quiz.q}</p>
+                    <div class="options-container">
+                        ${quiz.options.map((opt, i) => 
+                            `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                        ).join("")}
+                    </div>
+                    <div class="quiz-explanation hidden">
+                        <b>Pembahasan:</b> ${quiz.explanation}
+                    </div>
+                </div>
+            `;
+            quizContainer.appendChild(quizEl);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+            accordionButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    accordionButtons.forEach(otherButton => {
+                        if (otherButton !== button) {
+                            otherButton.classList.remove('active');
+                            otherButton.nextElementSibling.classList.add('hidden');
+                        }
+                    });
+                    button.classList.toggle('active');
+                    content.classList.toggle('hidden');
+                });
+            });
+
+            const quizOptions = document.querySelectorAll('.quiz-option');
+            quizOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden');
+
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('wrong');
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) {
+                            correctOption.classList.add('correct');
+                        }
+                    }
+                    // Re-render MathJax for the explanation section
+                    MathJax.typesetPromise([explanation]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
