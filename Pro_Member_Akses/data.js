@@ -298,6 +298,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Aritmetika Bertingkat.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_barisan_dan_deret_5', 
+            title: 'Deret Aritmetika', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Deret Aritmetika.html', 
+            fileType: 'html' 
+            },
         ],
         "Trigonometri": [
             { 
