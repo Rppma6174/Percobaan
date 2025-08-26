@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operasi pada Fungsi - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Operasi Aljabar dan Komposisi Fungsi</h1>
+<p>
+    Sama seperti bilangan, fungsi juga bisa dioperasikan satu sama lain. Ada dua kategori utama operasi pada fungsi: operasi aljabar (penjumlahan, pengurangan, perkalian, pembagian) dan operasi komposisi, yang merupakan cara unik untuk menggabungkan dua fungsi secara berantai.
+</p>
+<p>Untuk contoh, kita akan gunakan dua fungsi berikut: $f(x) = x+2$ dan $g(x) = x^2 - 1$.</p>
+
+<h2>1. Operasi Aljabar pada Fungsi</h2>
+<p>Operasi ini dilakukan dengan menerapkan operasi hitung biasa pada rumus kedua fungsi.</p>
+<ul>
+    <li><b>Penjumlahan: $(f+g)(x) = f(x) + g(x)$</b>
+        <br>$(f+g)(x) = (x+2) + (x^2-1) = x^2+x+1$
+    </li>
+    <li><b>Pengurangan: $(f-g)(x) = f(x) - g(x)$</b>
+        <br>$(f-g)(x) = (x+2) - (x^2-1) = -x^2+x+3$
+    </li>
+    <li><b>Perkalian: $(f \cdot g)(x) = f(x) \cdot g(x)$</b>
+        <br>$(f \cdot g)(x) = (x+2)(x^2-1) = x^3+2x^2-x-2$
+    </li>
+    <li><b>Pembagian: $(\frac{f}{g})(x) = \frac{f(x)}{g(x)}$</b>
+        <br>$(\frac{f}{g})(x) = \frac{x+2}{x^2-1}$
+        <br><b>Penting:</b> Untuk pembagian, penyebut tidak boleh nol. Jadi, domain dari fungsi hasil pembagian ini adalah semua bilangan real kecuali $x$ yang membuat $g(x)=0$ (dalam hal ini $x \neq 1$ dan $x \neq -1$).
+    </li>
+</ul>
+
+<h2>2. Komposisi Fungsi</h2>
+<p>
+    Komposisi fungsi adalah operasi yang paling unik. Ini bukan operasi hitung biasa, melainkan proses "memasukkan" satu fungsi ke dalam fungsi lainnya. Output dari fungsi pertama menjadi input untuk fungsi kedua.
+</p>
+<p>
+    <b>Analogi: Lini Produksi</b>
+    <br>Bayangkan $g(x)$ adalah mesin pertama yang mengubah bahan baku $x$ menjadi komponen setengah jadi. Kemudian, komponen tersebut dimasukkan ke mesin kedua, $f(x)$, untuk menghasilkan produk akhir. Proses ini adalah komposisi.
+</p>
+<div class="important-note">
+    <b>Notasi dan Aturan Penting:</b><br>
+    Komposisi "f bundaran g" ditulis sebagai $(f \circ g)(x)$, yang artinya adalah $f(g(x))$.
+    <br><br>
+    <b>Aturan Emas:</b> Fungsi yang di sebelah <b>kanan</b> (dalam contoh ini, $g$) dikerjakan <b>terlebih dahulu</b>.
+</div>
+
+<p><b>Contoh: Mencari $(f \circ g)(x)$ dan $(g \circ f)(x)$</b></p>
+<p><b>A. Menghitung $(f \circ g)(x) = f(g(x))$</b></p>
+<ol>
+    <li>Ambil "resep" fungsi luar, yaitu $f$: $f(\text{input}) = (\text{input}) + 2$.</li>
+    <li>Masukkan seluruh fungsi $g(x)$ sebagai input: $f(g(x)) = (x^2-1) + 2$.</li>
+    <li>Sederhanakan: $f(g(x)) = x^2 + 1$.</li>
+</ol>
+
+<p><b>B. Menghitung $(g \circ f)(x) = g(f(x))$</b></p>
+<ol>
+    <li>Ambil "resep" fungsi luar, yaitu $g$: $g(\text{input}) = (\text{input})^2 - 1$.</li>
+    <li>Masukkan seluruh fungsi $f(x)$ sebagai input: $g(f(x)) = (x+2)^2 - 1$.</li>
+    <li>Sederhanakan: $g(f(x)) = (x^2+4x+4) - 1 = x^2+4x+3$.</li>
+</ol>
+<p>
+    Perhatikan bahwa $(f \circ g)(x) \neq (g \circ f)(x)$. Dalam komposisi fungsi, urutan sangat penting!
+</p>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang operasi dan komposisi fungsi.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Diberikan $f(x)=x-1$ dan $g(x)=3x$. Hasil dari $(f+g)(x)$ adalah...",
+                options: [ "$4x-1$", "$3x-1$", "$3x^2-3x$", "$2x-1$" ],
+                correct: 0,
+                explanation: "Operasi penjumlahan fungsi dilakukan dengan menjumlahkan kedua rumusnya: $(f+g)(x) = f(x) + g(x) = (x-1) + (3x) = 4x-1$."
+            },
+            {
+                q: "Diberikan $f(x)=x^2$ dan $g(x)=x+5$. Hasil dari $(f \\cdot g)(x)$ adalah...",
+                options: [ "$x^3+5x^2$", "$x^2+x+5$", "$x^2(x+5)^2$", "$(x^2+5)x$" ],
+                correct: 0,
+                explanation: "Operasi perkalian dilakukan dengan mengalikan kedua rumusnya: $(f \\cdot g)(x) = f(x) \\cdot g(x) = x^2(x+5) = x^3+5x^2$."
+            },
+            {
+                q: "Notasi operasi komposisi $(f \\circ g)(x)$ memiliki arti...",
+                options: [
+                    "$f(x)$ dikalikan dengan $g(x)$",
+                    "Fungsi $f(x)$ dimasukkan sebagai input ke dalam fungsi $g(x)$",
+                    "Fungsi $g(x)$ dimasukkan sebagai input ke dalam fungsi $f(x)$",
+                    "Fungsi $f(x)$ dijumlahkan dengan $g(x)$"
+                ],
+                correct: 2,
+                explanation: "Aturan komposisi $(f \\circ g)(x)$ adalah $f(g(x))$, yang berarti fungsi yang di kanan ($g$) dikerjakan terlebih dahulu, dan hasilnya menjadi input untuk fungsi yang di kiri ($f$)."
+            },
+            {
+                q: "Jika $f(x)=x-1$ dan $g(x)=3x$, maka nilai dari $(f \\circ g)(2)$ adalah...",
+                options: [ "5", "6", "2", "3" ],
+                correct: 0,
+                explanation: "Cara 1: Hitung $g(2)$ terlebih dahulu. $g(2) = 3(2) = 6$. Kemudian masukkan hasilnya ke $f(x)$. $f(6) = 6-1=5$. Jadi, $(f \\circ g)(2) = 5$."
+            },
+            {
+                q: "Jika $f(x)=x-1$ dan $g(x)=3x$, manakah pernyataan yang benar?",
+                options: [
+                    "$(f \\circ g)(x) = (g \\circ f)(x)$",
+                    "$(f \\circ g)(x) = 3x-1$",
+                    "$(g \\circ f)(x) = 3x-1$",
+                    "$(g \\circ f)(x) = x-3$"
+                ],
+                correct: 1,
+                explanation: "$(f \\circ g)(x) = f(g(x)) = f(3x) = (3x) - 1 = 3x-1$. Sementara itu, $(g \\circ f)(x) = g(f(x)) = g(x-1) = 3(x-1) = 3x-3$. Keduanya tidak sama."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
