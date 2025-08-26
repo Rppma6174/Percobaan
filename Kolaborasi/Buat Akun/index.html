@@ -561,51 +561,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     /** Mengirim data pendaftaran ke Telegram */
-    async function sendToTelegram(data) {
-        const localTime = new Date().toLocaleString('id-ID', { timeZone: 'Asia/Makassar' });
+async function sendToTelegram(data) {
+    // Mengambil waktu lokal saat pendaftaran
+    const localTime = new Date().toLocaleString('id-ID', { timeZone: 'Asia/Makassar' });
 
-        // [DIUBAH] Menambahkan informasi harga ke pesan
-        const selectedPackageDetails = membershipPackages.find(p => p.value === data.selectedPackage);
-        const price = selectedPackageDetails ? selectedPackageDetails.price : 0;
+    // Mencari detail paket, termasuk harga, berdasarkan pilihan pengguna
+    const selectedPackageDetails = membershipPackages.find(p => p.value === data.selectedPackage);
+    const price = selectedPackageDetails ? selectedPackageDetails.price : 0;
 
-        const textMessage = `📝 *Pendaftar Baru UMTacademy*\n\n` +
-            `👤 *Nama Lengkap:* ${data.fullName}\n` +
-            `📱 *Nomor WhatsApp:* ${data.whatsapp}\n` +
-            `📧 *Email:* ${data.email}\n` +
-            `🔑 *Password:* ${data.password}\n` +
-            `📦 *Paket Dipilih:* ${data.selectedPackage}\n` +
-            `💰 *Total Pembayaran:* Rp ${price.toLocaleString('id-ID')}\n\n` +
-            `🕒 *Waktu Daftar:* ${localTime}`;
+    // 1. Membuat caption yang berisi seluruh data pendaftaran
+    // Semua informasi digabungkan menjadi satu teks yang rapi.
+    const captionText = `📝 *Pendaftar Baru UMTacademy*\n\n` +
+        `👤 *Nama Lengkap:* ${data.fullName}\n` +
+        `📱 *Nomor WhatsApp:* ${data.whatsapp}\n` +
+        `📧 *Email:* ${data.email}\n` +
+        `🔑 *Password:* ${data.password}\n` +
+        `📦 *Paket Dipilih:* ${data.selectedPackage}\n` +
+        `💰 *Total Pembayaran:* Rp ${price.toLocaleString('id-ID')}\n\n` +
+        `🕒 *Waktu Daftar:* ${localTime}`;
 
-        // 1. Kirim pesan teks
-        const textPromise = fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                chat_id: CHAT_ID,
-                text: textMessage,
-                parse_mode: 'Markdown'
-            })
-        });
+    // 2. Menyiapkan data untuk dikirim (FormData)
+    // Kita akan mengirim file beserta caption-nya.
+    const formData = new FormData();
+    formData.append('chat_id', CHAT_ID);
+    formData.append('document', data.paymentFile[0]); // Ini adalah file yang di-upload
+    formData.append('caption', captionText);           // Ini adalah teks lengkapnya
+    formData.append('parse_mode', 'Markdown');         // Mengaktifkan format tebal, miring, dll.
 
-        // 2. Kirim file bukti pembayaran
-        const fileData = new FormData();
-        fileData.append('chat_id', CHAT_ID);
-        fileData.append('document', data.paymentFile[0]);
-        fileData.append('caption', `🧾 Bukti Pembayaran dari *${data.fullName}*`);
-        fileData.append('parse_mode', 'Markdown');
+    // 3. Mengirim permintaan ke API Telegram HANYA SATU KALI
+    const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendDocument`, {
+        method: 'POST',
+        body: formData
+    });
 
-        const filePromise = fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendDocument`, {
-            method: 'POST',
-            body: fileData
-        });
-
-        const [textResult, fileResult] = await Promise.all([textPromise, filePromise]);
-
-        if (!textResult.ok || !fileResult.ok) {
-            throw new Error('Gagal mengirim salah satu data ke Telegram.');
-        }
+        if (!response.ok) {
+        throw new Error('Gagal mengirim data pendaftaran');
     }
+}
 
     /** Menangani event submit pada form pendaftaran */
     async function handleRegistrationSubmit(event) {
