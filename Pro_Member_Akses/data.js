@@ -249,6 +249,13 @@ const allContentData = {
             },
             { 
             id: 'materi_relasi_dan_fungsi_2', 
+            title: 'Definisi Relasi', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Definisi Relasi.html', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'materi_relasi_dan_fungsi_3', 
             title: 'Sifat Dan Jenis Relasi', 
             type: 'HTML Document', 
             filePath: 'UMT_Learning/Sifat dan Jenis Relasi.html', 
