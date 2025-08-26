@@ -333,6 +333,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Barisan Rekursif.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_barisan_dan_deret_10', 
+            title: 'Barisan Fibonacci', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Barisan Fibonacci.html', 
+            fileType: 'html' 
+            },
         ],
         "Trigonometri": [
             { 
