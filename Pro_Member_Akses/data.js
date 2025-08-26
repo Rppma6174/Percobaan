@@ -217,6 +217,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Transformasi Grafik Nilai Mutlak.html', 
             fileType: 'html' 
             },
+            {
+            id: 'materi_nilai_mutlak_7', 
+            title: 'Persamaan Nilai Mutlak', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Persamaan Nilai Mutlak.html', 
+            fileType: 'html' 
+            },
         ],
         "Bentuk Akar": [
             { 
