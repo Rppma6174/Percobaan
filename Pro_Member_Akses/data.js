@@ -340,6 +340,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Barisan Fibonacci.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_barisan_dan_deret_11', 
+            title: 'Limit & Deret Tak Hingga', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Limit dan Deret Tak Hingga.html', 
+            fileType: 'html' 
+            },
         ],
         "Trigonometri": [
             { 
