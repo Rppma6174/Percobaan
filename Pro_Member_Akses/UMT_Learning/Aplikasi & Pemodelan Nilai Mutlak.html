@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi & Pemodelan Nilai Mutlak - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Aplikasi dan Pemodelan Nilai Mutlak</h1>
+<p>
+    Salah satu kegunaan terbesar dari nilai mutlak adalah untuk memodelkan situasi di dunia nyata yang melibatkan **toleransi, rentang, atau simpangan (deviasi)** dari sebuah nilai ideal. Pemodelan adalah proses menerjemahkan masalah nyata ke dalam bahasa matematika.
+</p>
+<div class="important-note">
+    <b>Ide Kunci:</b> Pertidaksamaan nilai mutlak $|x - \text{Nilai Ideal}| \le \text{Toleransi}$ adalah model matematika yang sangat umum untuk menyatakan bahwa "selisih antara nilai aktual ($x$) dengan nilai ideal tidak boleh melebihi batas toleransi yang diberikan."
+</div>
+
+<h2>1. Memodelkan Toleransi dan Margin Kesalahan</h2>
+<p>
+    Dalam industri, teknik, dan sains, hampir tidak ada pengukuran yang sempurna. Selalu ada margin kesalahan atau toleransi yang dapat diterima.
+    <br>
+    <b>Contoh: Kontrol Kualitas Piston</b>
+    <br>
+    Sebuah pabrik memproduksi piston untuk mesin mobil dengan diameter ideal <b>150 mm</b>. Piston dianggap lolos kontrol kualitas jika diameternya tidak menyimpang lebih dari <b>0.04 mm</b> dari ukuran ideal. Tentukan rentang diameter piston yang dapat diterima.
+</p>
+<ol>
+    <li><b>Identifikasi Variabel:</b>
+        <ul>
+            <li>Nilai aktual (yang diukur): $d$ (diameter piston)</li>
+            <li>Nilai ideal: $I = 150$ mm</li>
+            <li>Toleransi maksimum: $T = 0.04$ mm</li>
+        </ul>
+    </li>
+    <li><b>Buat Model Matematika:</b>
+        <br>Penyimpangan diameter dari idealnya harus kurang dari atau sama dengan toleransi.
+        <br>Model: $|d - 150| \le 0.04$
+    </li>
+    <li><b>Selesaikan Pertidaksamaan:</b>
+        <br>$-0.04 \le d - 150 \le 0.04$
+        <br>$150 - 0.04 \le d \le 150 + 0.04$
+        <br>$149.96 \le d \le 150.04$
+    </li>
+</ol>
+<p><b>Kesimpulan:</b> Diameter piston yang dapat diterima berada dalam rentang 149.96 mm hingga 150.04 mm.</p>
+
+<h2>2. Membuat Model dari Rentang yang Diketahui</h2>
+<p>
+    Terkadang, kita diberikan rentang nilai (minimum dan maksimum) dan diminta untuk membuat model nilai mutlaknya. Ini adalah proses kebalikan dari sebelumnya.
+    <br>
+    <b>Contoh: Suhu Tubuh Normal</b>
+    <br>
+    Suhu tubuh manusia yang sehat umumnya berada dalam rentang <b>36.1°C hingga 37.2°C</b>. Buatlah sebuah pertidaksamaan nilai mutlak yang merepresentasikan rentang suhu ini.
+</p>
+<ol>
+    <li><b>Cari Nilai Tengah (Ideal):</b>
+        <br>Nilai ideal adalah rata-rata dari batas atas dan bawah.
+        <br>$I = \frac{\text{Maks} + \text{Min}}{2} = \frac{37.2 + 36.1}{2} = \frac{73.3}{2} = 36.65$
+    </li>
+    <li><b>Cari Toleransi:</b>
+        <br>Toleransi adalah jarak dari nilai tengah ke salah satu batas.
+        <br>$T = \text{Maks} - I = 37.2 - 36.65 = 0.55$
+        <br>(atau $T = I - \text{Min} = 36.65 - 36.1 = 0.55$)
+    </li>
+    <li><b>Buat Modelnya:</b>
+        <br>Misalkan $t$ adalah suhu tubuh. Modelnya adalah:
+        <br>$|t - I| \le T \implies |t - 36.65| \le 0.55$
+    </li>
+</ol>
+<p><b>Kesimpulan:</b> Pertidaksamaan $|t - 36.65| \le 0.55$ secara matematis merepresentasikan rentang suhu tubuh manusia yang sehat.</p>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Terapkan konsep pemodelan nilai mutlak untuk menyelesaikan masalah berikut.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Sebuah kantong keripik kentang diiklankan memiliki berat bersih 250 gram. Proses produksi memungkinkan adanya margin kesalahan sebesar 5 gram. Jika $w$ adalah berat sebenarnya, model matematika mana yang paling tepat untuk menggambarkan berat kantong yang dapat diterima?",
+                options: [
+                    "$|w - 5| \\le 250$",
+                    "$|w - 250| \\le 5$",
+                    "$|w + 250| \\le 5$",
+                    "$|w| \\le 250$"
+                ],
+                correct: 1,
+                explanation: "Model standar untuk toleransi adalah $|x - \text{ideal}| \\le \text{toleransi}$. Di sini, nilai ideal adalah 250 gram dan toleransinya adalah 5 gram. Jadi, model yang tepat adalah $|w - 250| \\le 5$."
+            },
+            {
+                q: "Tekanan ban mobil yang direkomendasikan adalah 32 psi (pound per square inch). Tekanan dianggap aman jika tidak menyimpang lebih dari 3 psi dari rekomendasi. Rentang tekanan ban yang aman adalah...",
+                options: [
+                    "32 psi hingga 35 psi",
+                    "29 psi hingga 32 psi",
+                    "29 psi hingga 35 psi",
+                    "Kurang dari 29 psi atau lebih dari 35 psi"
+                ],
+                correct: 2,
+                explanation: "Modelnya adalah $|p - 32| \\le 3$. Saat diselesaikan, kita mendapatkan $-3 \\le p - 32 \\le 3$. Dengan menambahkan 32 ke semua ruas, kita memperoleh $29 \\le p \\le 35$. Jadi, rentang amannya adalah dari 29 psi hingga 35 psi."
+            },
+            {
+                q: "Sebuah termostat menjaga suhu ruangan antara 20°C dan 24°C. Jika $T$ adalah suhu ruangan, pertidaksamaan nilai mutlak yang merepresentasikan rentang ini adalah...",
+                options: [
+                    "$|T - 2| \\le 22$",
+                    "$|T - 20| \\le 4$",
+                    "$|T - 24| \\le 4$",
+                    "$|T - 22| \\le 2$"
+                ],
+                correct: 3,
+                explanation: "Untuk membuat model dari rentang, kita cari nilai tengah dan toleransinya. Nilai tengah (ideal) = $(24+20)/2 = 22$. Toleransi = $24 - 22 = 2$. Maka modelnya adalah $|T - 22| \\le 2$."
+            },
+            {
+                q: "Saat mengisi bensin, meteran di pom bensin memiliki toleransi pengukuran sebesar 0.02 liter. Jika Anda membeli bensin yang seharusnya 10 liter, berapa volume bensin minimum yang mungkin Anda terima?",
+                options: [
+                    "10.02 liter",
+                    "9.98 liter",
+                    "10 liter",
+                    "9.80 liter"
+                ],
+                correct: 1,
+                explanation: "Modelnya adalah $|V - 10| \\le 0.02$, di mana V adalah volume sebenarnya. Ini berarti rentangnya adalah $10-0.02 \\le V \\le 10+0.02$, atau $9.98 \\le V \\le 10.02$. Jadi, volume minimum yang mungkin diterima adalah 9.98 liter."
+            },
+            {
+                q: "Konsep utama yang dimodelkan oleh pertidaksamaan $|x - A| \\le B$ dalam konteks dunia nyata adalah...",
+                options: [
+                    "Kecepatan pertumbuhan suatu populasi",
+                    "Penyimpangan atau deviasi dari nilai standar/tengah",
+                    "Menghitung nilai yang hanya bisa positif",
+                    "Hubungan yang bersifat eksponensial"
+                ],
+                correct: 1,
+                explanation: "Ekspresi $|x - A|$ secara harfiah berarti 'jarak antara x dan A' atau 'selisih antara x dan A'. Dalam aplikasi, A biasanya adalah nilai standar, ideal, atau titik tengah, sehingga keseluruhan pertidaksamaan membatasi seberapa besar penyimpangan yang diizinkan."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
