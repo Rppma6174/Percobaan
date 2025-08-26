@@ -298,7 +298,7 @@ const allContentData = {
             },
             { 
             id: 'materi_relasi_dan_fungsi_9', 
-            title: 'Operasi Pada Fungsi', 
+            title: 'Operasi Pada Fungsi dan Komposisi Fungsi', 
             type: 'HTML Document', 
             filePath: 'UMT_Learning/Operasi pada Fungsi.html', 
             fileType: 'html' 
