@@ -268,6 +268,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Esensi Fungsi.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_relasi_dan_fungsi_5', 
+            title: 'Definisi Fungsi', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Definisi Fungsi.html', 
+            fileType: 'html' 
+            },
         ],
         "Bentuk Akar": [
             { 
