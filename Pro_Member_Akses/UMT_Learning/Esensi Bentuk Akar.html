@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esensi Bentuk Akar - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .special-note {
+            background-color: rgba(211, 159, 39, 0.1); border-left: 4px solid #d39f27;
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note, .special-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Memahami Bentuk Akar: Pangkat Rasional yang Terselubung</h1>
+<p>
+    Banyak yang menganggap "bentuk akar" sebagai sebuah operasi matematika yang baru dan terpisah. Namun, pemahaman sejatinya jauh lebih sederhana: <b>bentuk akar adalah cara lain untuk menuliskan bilangan berpangkat pecahan (rasional)</b>. Memahami hubungan ini adalah kunci untuk menguasai manipulasi aljabar yang melibatkannya.
+</p>
+
+<h2>Anatomi Bentuk Akar</h2>
+<p>
+    Mari kita bedah bagian-bagian dari sebuah bentuk akar secara umum:
+    $$ \sqrt[n]{a^m} $$
+    <ul>
+        <li><b>Simbol Akar ($\sqrt{\phantom{x}}$)</b>: Ini adalah simbol utama yang kita kenal sebagai "akar".</li>
+        <li><b>Indeks ($n$)</b>: Angka kecil yang terletak di lekukan simbol akar. Indeks menunjukkan "pangkat" dari akar tersebut. Ia menjawab pertanyaan: "Bilangan apa yang jika dipangkatkan $n$ kali akan menghasilkan radikan?"</li>
+        <li><b>Radikan ($a^m$)</b>: Seluruh bilangan atau ekspresi yang berada di dalam simbol akar. Ini adalah nilai yang ingin kita "akarkan".</li>
+    </ul>
+    Contoh: Dalam bentuk $\sqrt[3]{8}$, indeksnya adalah <b>3</b> dan radikannya adalah <b>8</b>.
+</p>
+
+<h2>Hubungan Fundamental: Akar dan Pangkat Rasional</h2>
+<p>
+    Inilah konsep intinya. Setiap bentuk akar dapat diubah menjadi bentuk pangkat, dan sebaliknya. Aturannya adalah:
+    $$ \sqrt[n]{a^m} = a^{\frac{m}{n}} $$
+    Pangkat dari radikan ($m$) menjadi <b>pembilang</b> (numerator), dan indeks akar ($n$) menjadi <b>penyebut</b> (denominator) pada pangkat pecahan tersebut.
+</p>
+<div class="important-note">
+    <b>Apa itu Bilangan Rasional?</b><br>
+    Kata "rasional" berasal dari kata "rasio", yang artinya perbandingan atau pecahan. Bilangan rasional adalah bilangan apapun yang dapat dinyatakan sebagai pecahan $\frac{p}{q}$, di mana $p$ dan $q$ adalah bilangan bulat dan $q \neq 0$. Jadi, "pangkat rasional" hanyalah istilah lain untuk "pangkat berbentuk pecahan".
+</div>
+<p>
+    Mari kita buktikan dengan contoh. Misalkan kita ingin mencari nilai dari $\sqrt[3]{8}$.
+    <ul>
+        <li><b>Dengan logika akar:</b> Kita mencari sebuah bilangan yang jika dipangkatkan 3 hasilnya 8. Jawabannya adalah 2, karena $2^3 = 8$.</li>
+        <li><b>Dengan pangkat rasional:</b> Menurut rumus, $\sqrt[3]{8} = \sqrt[3]{8^1}$ dapat ditulis sebagai $8^{\frac{1}{3}}$. Bentuk ini juga bertanya: "Bilangan apa yang jika dipangkatkan 3 hasilnya 8?" Jawabannya tetap sama, yaitu 2.</li>
+    </ul>
+    Ini menunjukkan bahwa $\sqrt[3]{8}$ dan $8^{\frac{1}{3}}$ adalah dua cara penulisan untuk konsep yang sama persis.
+</p>
+
+<h2>Cara Membaca dan Catatan Khusus</h2>
+<p>
+    Menyebut bentuk akar dengan benar membantu memperjelas maknanya.
+    <ul>
+        <li>$\sqrt[3]{27}$ dibaca: "<b>Akar pangkat tiga</b> dari dua puluh tujuh."</li>
+        <li>$\sqrt[5]{x^2}$ dibaca: "<b>Akar pangkat lima</b> dari x kuadrat."</li>
+        <li>$\sqrt{64}$ dibaca: "<b>Akar pangkat dua</b> dari enam puluh empat," atau lebih umum, "<b>Akar</b> dari enam puluh empat."</li>
+    </ul>
+</p>
+<div class="special-note">
+    <b>Catatan Khusus: Konvensi Akar Pangkat Dua (Akar Kuadrat)</b><br>
+    Untuk akar yang paling umum digunakan, yaitu akar pangkat dua, <b>indeks 2 tidak pernah ditulis</b>.
+    <br><br>
+    Sebagai contoh, kita menulis $\sqrt{16}$, bukan $\sqrt[2]{16}$.
+    <br><br>
+    Ini murni sebuah <b>konvensi</b> atau <b>kesepakatan umum</b> dalam matematika untuk efisiensi dan penyederhanaan penulisan. Jadi, ketika Anda melihat simbol akar ($\sqrt{\phantom{x}}$) tanpa ada angka indeks di atasnya, itu secara otomatis dan pasti berarti <b>akar pangkat dua</b>.
+</div>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang konsep dasar bentuk akar.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Dalam bentuk akar $\\sqrt[7]{128}$, angka 7 disebut sebagai...",
+                options: [
+                    "Radikan", "Indeks", "Pangkat", "Hasil"
+                ],
+                correct: 1,
+                explanation: "Angka kecil yang terletak di lekukan simbol akar disebut sebagai <b>indeks</b>. Angka ini menentukan jenis akar (pangkat tiga, pangkat empat, dst.). Radikan dalam contoh ini adalah 128."
+            },
+            {
+                q: "Bentuk pangkat rasional dari $\\sqrt[5]{x^2}$ adalah...",
+                options: [
+                    "$x^{\\frac{5}{2}}$", "$x^{\\frac{2}{5}}$", "$x^{10}$", "$x^{3}$"
+                ],
+                correct: 1,
+                explanation: "Sesuai aturan $\\sqrt[n]{a^m} = a^{\\frac{m}{n}}$, pangkat radikan ($m=2$) menjadi pembilang dan indeks akar ($n=5$) menjadi penyebut. Sehingga, bentuknya adalah $x^{\\frac{2}{5}}$."
+            },
+            {
+                q: "Bagaimana cara membaca bentuk $\\sqrt[4]{81}$ dengan tepat?",
+                options: [
+                    "Empat akar delapan satu", "Akar dari empat dan delapan satu", "Akar pangkat empat dari delapan puluh satu", "Delapan puluh satu akar empat"
+                ],
+                correct: 2,
+                explanation: "Cara membacanya adalah dengan menyebut jenis akarnya terlebih dahulu (sesuai indeks), lalu diikuti dengan radikannya. Jadi, 'Akar pangkat empat dari delapan puluh satu'."
+            },
+            {
+                q: "Bentuk $\\sqrt{49}$ secara konvensi matematika adalah bentuk sederhana dari...",
+                options: [
+                    "$\\sqrt[1]{49}$", "$\\sqrt[49]{2}$", "$\\sqrt[2]{49}$", "Tidak ada bentuk lainnya"
+                ],
+                correct: 2,
+                explanation: "Sesuai konvensi (kesepakatan umum) dalam matematika, simbol akar tanpa indeks secara otomatis berarti akar pangkat dua (akar kuadrat). Jadi, $\\sqrt{49}$ adalah cara penulisan yang lebih sederhana untuk $\\sqrt[2]{49}$."
+            },
+            {
+                q: "Mengapa bentuk akar disebut sebagai bentuk lain dari pangkat rasional?",
+                options: [
+                    "Karena hasilnya selalu bilangan rasional",
+                    "Karena indeks akar menjadi penyebut dan pangkat radikan menjadi pembilang pada pangkat pecahan",
+                    "Karena hanya bilangan rasional yang bisa diakarkan",
+                    "Karena ditemukan oleh matematikawan bernama Rasional"
+                ],
+                correct: 1,
+                explanation: "Hubungan ini bersifat struktural. Notasi akar adalah cara visual untuk merepresentasikan pangkat berbentuk pecahan (rasional), di mana komponen-komponennya (indeks dan pangkat radikan) secara langsung berhubungan dengan penyebut dan pembilang dari pangkat tersebut."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
