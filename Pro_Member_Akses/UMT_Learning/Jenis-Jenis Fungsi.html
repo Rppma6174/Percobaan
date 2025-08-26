@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jenis-Jenis Fungsi - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .diagram-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background-color: var(--bg-main);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            margin-top: 1rem;
+        }
+        .diagram-container svg text { font-size: 14px; fill: var(--text-primary); }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Mengenal Jenis-Jenis Fungsi: Injektif, Surjektif, dan Bijektif</h1>
+<p>
+    Setelah kita memahami bahwa fungsi adalah relasi dengan aturan yang ketat, sekarang kita bisa mengklasifikasikan fungsi lebih jauh. Klasifikasi ini didasarkan pada bagaimana anggota-anggota di Kodomain (daerah kawan) dipasangkan. Ada tiga jenis utama sifat pemetaan pada fungsi.
+</p>
+
+<h2>1. Fungsi Injektif (Fungsi Satu-satu)</h2>
+<p>
+    Sebuah fungsi disebut <b>injektif</b> jika setiap anggota Domain dipetakan ke anggota Kodomain yang <b>berbeda</b>. Dengan kata lain, tidak boleh ada dua anggota Domain berbeda yang memiliki pasangan yang sama di Kodomain.
+</p>
+<ul>
+    <li><b>Analogi:</b> "Aturan anti-selingkuh dari sisi Kodomain". Satu anggota Kodomain tidak boleh "dipasangkan" oleh lebih dari satu anggota Domain.</li>
+    <li><b>Syarat Tambahan:</b> Jumlah anggota Domain harus kurang dari atau sama dengan jumlah anggota Kodomain ($n(A) \le n(B)$).</li>
+</ul>
+<div class="diagram-container">
+    <figure>
+        <figcaption style="text-align: center; color: var(--accent-green); margin-bottom: 10px;"><b>Contoh Injektif</b></figcaption>
+        <svg width="180" height="150">
+            <text x="35" y="15">A</text> <text x="135" y="15">B</text>
+            <circle cx="40" cy="50" r="4" fill="#C9D1D9"/> <text x="20" y="55">1</text>
+            <circle cx="40" cy="100" r="4" fill="#C9D1D9"/> <text x="20" y="105">2</text>
+            <circle cx="140" cy="40" r="4" fill="#C9D1D9"/> <text x="150" y="45">a</text>
+            <circle cx="140" cy="75" r="4" fill="#C9D1D9"/> <text x="150" y="80">b</text>
+            <circle cx="140" cy="110" r="4" fill="#C9D1D9"/> <text x="150" y="115">c</text>
+            <path d="M 45 50 L 135 75" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 45 100 L 135 110" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+        </svg>
+    </figure>
+    <figure>
+        <figcaption style="text-align: center; color: var(--accent-red); margin-bottom: 10px;"><b>Bukan Injektif</b></figcaption>
+        <svg width="180" height="150">
+            <text x="35" y="15">A</text> <text x="135" y="15">B</text>
+            <circle cx="40" cy="50" r="4" fill="#C9D1D9"/> <text x="20" y="55">1</text>
+            <circle cx="40" cy="100" r="4" fill="#C9D1D9"/> <text x="20" y="105">2</text>
+            <circle cx="140" cy="75" r="4" fill="#C9D1D9"/> <text x="150" y="80">b</text>
+            <path d="M 45 50 L 135 75" stroke="#F85149" stroke-width="2" marker-end="url(#arrow_red)"/>
+            <path d="M 45 100 L 135 75" stroke="#F85149" stroke-width="2" marker-end="url(#arrow_red)"/>
+            <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#C9D1D9" /></marker>
+            <marker id="arrow_red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#F85149" /></marker></defs>
+        </svg>
+    </figure>
+</div>
+
+<h2>2. Fungsi Surjektif (Fungsi Onto / Fungsi Kepada)</h2>
+<p>
+    Sebuah fungsi disebut <b>surjektif</b> jika setiap anggota Kodomain <b>memiliki pasangan</b> di Domain. Dengan kata lain, tidak boleh ada anggota Kodomain yang "jomblo". Ini berarti <b>Range = Kodomain</b>.
+</p>
+<ul>
+    <li><b>Analogi:</b> "Semua kursi di bioskop terisi". Setiap kemungkinan output (kursi) benar-benar didapatkan oleh input (penonton).</li>
+    <li><b>Syarat Tambahan:</b> Jumlah anggota Domain harus lebih besar dari atau sama dengan jumlah anggota Kodomain ($n(A) \ge n(B)$).</li>
+</ul>
+<div class="diagram-container">
+    <figure>
+        <figcaption style="text-align: center; color: var(--accent-green); margin-bottom: 10px;"><b>Contoh Surjektif</b></figcaption>
+        <svg width="180" height="150">
+            <text x="35" y="15">A</text> <text x="135" y="15">B</text>
+            <circle cx="40" cy="40" r="4" fill="#C9D1D9"/> <text x="20" y="45">1</text>
+            <circle cx="40" cy="75" r="4" fill="#C9D1D9"/> <text x="20" y="80">2</text>
+            <circle cx="40" cy="110" r="4" fill="#C9D1D9"/> <text x="20" y="115">3</text>
+            <circle cx="140" cy="50" r="4" fill="#C9D1D9"/> <text x="150" y="55">a</text>
+            <circle cx="140" cy="100" r="4" fill="#C9D1D9"/> <text x="150" y="105">b</text>
+            <path d="M 45 40 L 135 50" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 45 75 L 135 100" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 45 110 L 135 100" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+        </svg>
+    </figure>
+    <figure>
+        <figcaption style="text-align: center; color: var(--accent-red); margin-bottom: 10px;"><b>Bukan Surjektif</b></figcaption>
+        <svg width="180" height="150">
+            <text x="35" y="15">A</text> <text x="135" y="15">B</text>
+            <circle cx="40" cy="50" r="4" fill="#C9D1D9"/> <text x="20" y="55">1</text>
+            <circle cx="40" cy="100" r="4" fill="#C9D1D9"/> <text x="20" y="105">2</text>
+            <circle cx="140" cy="40" r="4" fill="#C9D1D9"/> <text x="150" y="45">a</text>
+            <circle cx="140" cy="75" r="4" fill="#C9D1D9"/> <text x="150" y="80">b</text>
+            <circle cx="140" cy="110" r="4" fill="#F85149"/> <text x="150" y="115">c</text>
+            <path d="M 45 50 L 135 40" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 45 100 L 135 75" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+            <text x="130" y="135" fill="#F85149" font-size="12">'c' jomblo</text>
+        </svg>
+    </figure>
+</div>
+
+<h2>3. Fungsi Bijektif (Korespondensi Satu-satu)</h2>
+<p>
+    Sebuah fungsi disebut <b>bijektif</b> jika ia bersifat <b>injektif sekaligus surjektif</b>. Ini adalah "pemetaan sempurna".
+</p>
+<ul>
+    <li>Setiap anggota Domain punya pasangan yang berbeda (sifat injektif).</li>
+    <li>Setiap anggota Kodomain habis terpasangkan (sifat surjektif).</li>
+    <li><b>Akibatnya:</b> Jumlah anggota Domain harus sama persis dengan jumlah anggota Kodomain ($n(A) = n(B)$).</li>
+    <li><b>Analogi:</b> "Perjodohan sempurna". Setiap orang di grup A berpasangan dengan tepat satu orang yang berbeda di grup B, dan tidak ada seorang pun di grup B yang tidak mendapat pasangan.</li>
+</ul>
+<div class="diagram-container">
+    <figure>
+        <figcaption style="text-align: center; color: var(--accent-green); margin-bottom: 10px;"><b>Contoh Bijektif</b></figcaption>
+        <svg width="180" height="150">
+            <text x="35" y="15">A</text> <text x="135" y="15">B</text>
+            <circle cx="40" cy="40" r="4" fill="#C9D1D9"/> <text x="20" y="45">1</text>
+            <circle cx="40" cy="75" r="4" fill="#C9D1D9"/> <text x="20" y="80">2</text>
+            <circle cx="40" cy="110" r="4" fill="#C9D1D9"/> <text x="20" y="115">3</text>
+            <circle cx="140" cy="40" r="4" fill="#C9D1D9"/> <text x="150" y="45">a</text>
+            <circle cx="140" cy="75" r="4" fill="#C9D1D9"/> <text x="150" y="80">b</text>
+            <circle cx="140" cy="110" r="4" fill="#C9D1D9"/> <text x="150" y="115">c</text>
+            <path d="M 45 40 L 135 75" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 45 75 L 135 110" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 45 110 L 135 40" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+        </svg>
+    </figure>
+</div>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang jenis-jenis fungsi.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Sebuah fungsi disebut injektif (satu-satu) jika...",
+                options: [
+                    "Setiap anggota domain punya pasangan",
+                    "Setiap anggota kodomain punya pasangan",
+                    "Setiap anggota domain yang berbeda memiliki pasangan yang berbeda pula",
+                    "Setiap anggota kodomain hanya boleh punya satu pasangan"
+                ],
+                correct: 2,
+                explanation: "Sifat injektif melarang adanya lebih dari satu input yang menghasilkan output yang sama. Setiap input harus dipetakan ke output yang unik."
+            },
+            {
+                q: "Ciri utama dari fungsi surjektif (onto) adalah...",
+                options: [ "Domain = Range", "Kodomain = Range", "Domain = Kodomain", "Tidak ada anggota domain yang bercabang" ],
+                correct: 1,
+                explanation: "Surjektif berarti 'menyeluruh' ke kodomain. Artinya, semua anggota kodomain habis terpetakan, sehingga daerah hasil (Range) sama persis dengan daerah kawan (Kodomain)."
+            },
+            {
+                q: "Sebuah fungsi yang bersifat injektif dan juga surjektif disebut...",
+                options: [ "Fungsi Refleksif", "Fungsi Konstan", "Fungsi Bijektif", "Fungsi Simetris" ],
+                correct: 2,
+                explanation: "Fungsi Bijektif (atau Korespondensi Satu-satu) adalah 'paket lengkap' yang memenuhi kedua sifat, menciptakan pemetaan yang sempurna antar dua himpunan."
+            },
+            {
+                q: "Jika $f: A \\to B$ adalah fungsi bijektif, maka pernyataan yang pasti benar mengenai jumlah anggota kedua himpunan ($n(A)$ dan $n(B)$) adalah...",
+                options: [ "$n(A) < n(B)$", "$n(A) > n(B)$", "$n(A) = n(B)$", "Tidak ada hubungan pasti" ],
+                correct: 2,
+                explanation: "Agar bisa menjadi injektif, $n(A)$ harus $\\le n(B)$. Agar bisa surjektif, $n(A)$ harus $\\ge n(B)$. Satu-satunya cara agar keduanya terpenuhi adalah jika $n(A) = n(B)$."
+            },
+            {
+                q: "Diberikan fungsi $f(x) = x^2$ dengan domain dan kodomain adalah semua bilangan real. Fungsi ini...",
+                options: [
+                    "Injektif tapi tidak surjektif",
+                    "Surjektif tapi tidak injektif",
+                    "Bijektif",
+                    "Bukan injektif dan bukan surjektif"
+                ],
+                correct: 3,
+                explanation: "Fungsi ini tidak injektif karena input yang berbeda bisa menghasilkan output yang sama (contoh: $f(2)=4$ dan $f(-2)=4$). Fungsi ini juga tidak surjektif karena tidak ada bilangan real $x$ yang jika dikuadratkan hasilnya negatif (contoh: -9 ada di kodomain tapi tidak ada di range)."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
