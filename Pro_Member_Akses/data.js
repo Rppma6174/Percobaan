@@ -253,6 +253,13 @@ const allContentData = {
             type: 'HTML Document', 
             filePath: 'UMT_Learning/Penyederhanaan Bentuk Akar.html', 
             fileType: 'html' 
+            },
+            { 
+            id: 'materi_bentuk_akar_3', 
+            title: 'Operasi Aljabar Pada Bentuk Akar', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Operasi Aljabar Bentuk Akar.html', 
+            fileType: 'html' 
             }
         ],
         "Trigonometri": [
