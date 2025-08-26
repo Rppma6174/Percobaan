@@ -276,7 +276,14 @@ const allContentData = {
             type: 'HTML Document', 
             filePath: 'UMT_Learning/Esensi Barisan Dan Deret.html', 
             fileType: 'html' 
-            }
+            },
+            { 
+            id: 'materi_barisan_dan_deret_2', 
+            title: 'Definisi Dan Jenis Barisan', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Definisi dan Jenis Barisan.html', 
+            fileType: 'html' 
+            },
         ],
         "Trigonometri": [
             { 
