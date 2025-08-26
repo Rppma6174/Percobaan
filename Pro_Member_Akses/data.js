@@ -312,6 +312,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Barisan Geometri.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_barisan_dan_deret_7', 
+            title: 'Deret Geometri', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Deret Geometri.html', 
+            fileType: 'html' 
+            },
         ],
         "Trigonometri": [
             { 
