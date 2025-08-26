@@ -284,6 +284,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Definisi dan Jenis Barisan.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_barisan_dan_deret_3', 
+            title: 'Barisan Aritmetika', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Barisan Aritmetika.html', 
+            fileType: 'html' 
+            },
         ],
         "Trigonometri": [
             { 
