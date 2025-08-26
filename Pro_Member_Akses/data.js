@@ -176,38 +176,44 @@ const allContentData = {
     materi: {
         "Nilai Mutlak": [
             { 
-            id: 'materi_esensi_nilai_mutlak', 
+            id: 'materi_nilai_mutlak_1', 
             title: 'Esensi Nilai Mutlak', 
             type: 'HTML Document', 
             filePath: 'UMT_Learning/esensi-nilai-mutlak.html', 
             fileType: 'html' 
             },
             { 
-            id: 'materi_definisi_nilai_mutlak', 
+            id: 'materi_nilai_mutlak_2', 
             title: 'Definisi Nilai Mutlak', 
             type: 'HTML Document', 
             filePath: 'UMT_Learning/definisi-nilai-mutlak.html', 
             fileType: 'html' 
             },
             { 
-            id: 'materi_representasi_geometri_nilai_mutlak', 
+            id: 'materi_nilai_mutlak_3', 
             title: 'Representasi Geometri Dari Nilai Mutlak', 
             type: 'HTML Document', 
             filePath: 'UMT_Learning/representasi-geometri-dari-nilai-mutlak.html', 
             fileType: 'html' 
             },
             { 
-            id: 'materi_sifat_dasar_nilai_mutlak', 
+            id: 'materi_nilai_mutlak_4', 
             title: 'Sifat - Sifat Dasar Nilai Mutlak', 
             type: 'HTML Document', 
             filePath: 'UMT_Learning/sifat_dasar_nilai_mutlak.html', 
             fileType: 'html' 
             },
             { 
-            id: 'materi_operasi_aljabar_pada_nilai_mutlak', 
+            id: 'materi_nilai_mutlak_5', 
             title: 'Operasi Aljabar dengan Nilai Mutlak', 
             type: 'HTML Document', 
             filePath: 'UMT_Learning/Operasi Aljabar dengan Nilai Mutlak.html', 
+            fileType: 'html' 
+            },
+            id: 'materi_nilai_mutlak_6', 
+            title: 'Transformasi Grafik Nilai Mutlak', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Transformasi Grafik Nilai Mutlak.html', 
             fileType: 'html' 
             },
         ],
