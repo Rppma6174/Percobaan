@@ -260,6 +260,13 @@ const allContentData = {
             type: 'HTML Document', 
             filePath: 'UMT_Learning/Operasi Aljabar Bentuk Akar.html', 
             fileType: 'html' 
+            },
+            { 
+            id: 'materi_bentuk_akar_4', 
+            title: 'Merasionalkan Bentuk Akar', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Merasionalkan Bentuk Akar.html', 
+            fileType: 'html' 
             }
         ],
         "Trigonometri": [
