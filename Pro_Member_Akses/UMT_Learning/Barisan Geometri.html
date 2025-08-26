@@ -194,7 +194,7 @@
                 button.addEventListener('click', () => {
                     const content = button.nextElementSibling;
                     document.querySelectorAll('.quiz-accordion-button').forEach(other => {
-                        if other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
                     });
                     button.classList.toggle('active'); content.classList.toggle('hidden');
                 });
