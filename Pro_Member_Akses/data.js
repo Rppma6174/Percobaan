@@ -293,7 +293,7 @@ const allContentData = {
             id: 'materi_relasi_dan_fungsi_8', 
             title: 'Jenis - Jenis Fungsi', 
             type: 'HTML Document', 
-            filePath: 'UMT_Learning/jenis-jenis Fungsi.html', 
+            filePath: 'UMT_Learning/Jenis-Jenis Fungsi.html', 
             fileType: 'html' 
             },
         ],
