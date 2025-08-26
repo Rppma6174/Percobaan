@@ -274,7 +274,7 @@ const allContentData = {
             id: 'materi_barisan_dan_deret_1', 
             title: 'Esensi Barisan Dan Deret', 
             type: 'HTML Document', 
-            filePath: '#', 
+            filePath: 'UMT_Learning/Esensi Barisan Dan Deret.html', 
             fileType: 'html' 
             }
         ],
