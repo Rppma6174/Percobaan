@@ -126,129 +126,130 @@
     </div>
 
     <script>
-        // 1. Pastikan seluruh struktur halaman (DOM) sudah siap sebelum menjalankan skrip apa pun.
+        // 1. Tunggu hingga seluruh struktur halaman (DOM) siap.
         document.addEventListener('DOMContentLoaded', () => {
             
-            // Cek session token
+            // Cek session token terlebih dahulu
             if (!sessionStorage.getItem('sessionToken')) {
                 window.location.href = '../../Login/';
-                return; // Hentikan eksekusi jika tidak ada token
+                return; 
             }
 
-            const quizzes = [
-                {
-                    q: "Manakah dari ekspresi berikut yang setara dengan $|-4x|$?",
-                    options: [ "-4|x|", "4x", "4|x|", "Tidak dapat disederhanakan" ],
-                    correct: 2,
-                    explanation: "Menggunakan sifat perkalian $|a \\cdot b| = |a| \\cdot |b|$. Maka, $|-4x| = |-4| \\cdot |x|$. Karena $|-4| = 4$, hasilnya menjadi $4|x|$."
-                },
-                {
-                    q: "Bentuk sederhana dari ekspresi $\\sqrt{(-7)^2}$ adalah...",
-                    options: [ "7", "-7", "49", "$\\pm 7$" ],
-                    correct: 0,
-                    explanation: "Ini adalah aplikasi langsung dari sifat $\\sqrt{x^2} = |x|$. Dalam kasus ini, $x = -7$. Maka, $\\sqrt{(-7)^2} = |-7| = 7$. Ingat, hasil dari operasi akar kuadrat tidak pernah negatif."
-                },
-                {
-                    q: "Jika $y \\ne 0$, manakah ekspresi yang senilai dengan $|\\frac{3}{-y}|$?",
-                    options: [ "\\frac{3}{y}", "\\frac{-3}{|y|}", "\\frac{3}{|-y|}", "-\\frac{3}{y}" ],
-                    correct: 2,
-                    explanation: "Menggunakan sifat pembagian $|\\frac{a}{b}| = \\frac{|a|}{|b|}$. Maka, $|\\frac{3}{-y}| = \\frac{|3|}{|-y|} = \\frac{3}{|-y|}$. Kita juga tahu bahwa $|-y| = |y|$, sehingga bentuk ini juga setara dengan $\\frac{3}{|y|}$."
-                },
-                {
-                    q: "Diketahui $a < 0$. Bentuk sederhana dari $\\sqrt{a^2} + |3a|$ adalah...",
-                    options: [ "4a", "-4a", "2a", "-2a" ],
-                    correct: 1,
-                    explanation: "Kita pecah satu per satu. Pertama, $\\sqrt{a^2} = |a|$. Kedua, $|3a| = |3| \\cdot |a| = 3|a|$. Jadi ekspresinya menjadi $|a| + 3|a| = 4|a|$. Karena diketahui $a < 0$ (negatif), maka sesuai definisi nilai mutlak, $|a| = -a$. Substitusikan ini kembali: $4(-a) = -4a$."
-                },
-                {
-                    q: "Manakah pernyataan di bawah ini yang <b>TIDAK SELALU</b> benar?",
-                    options: [ "$|x^2| = x^2$", "$\\sqrt{x^2} = |x|$", "$|x-y| = |y-x|$", "$|x+y| = |x| + |y|$" ],
-                    correct: 3,
-                    explanation: "Pernyataan $|x+y| = |x| + |y|$ hanya benar jika x dan y memiliki tanda yang sama. Jika tandanya berbeda, maka berlaku pertidaksamaan segitiga: $|x+y| < |x| + |y|$. Contoh: $|-3+5| = |2| = 2$, sedangkan $|-3|+|5| = 3+5=8$. Jadi, pernyataan ini tidak selalu benar."
-                }
-            ];
+            // 2. Setelah halaman siap, TUNGGU LAGI hingga MathJax benar-benar siap digunakan.
+            MathJax.startup.ready.then(() => {
+                
+                // --- SEMUA LOGIKA KUIS SEKARANG BERJALAN DI SINI ---
 
-            const quizContainer = document.getElementById("quiz-container");
-            let quizHTML = '';
+                const quizzes = [
+                    {
+                        q: "Manakah dari ekspresi berikut yang setara dengan $|-4x|$?",
+                        options: [ "-4|x|", "4x", "4|x|", "Tidak dapat disederhanakan" ],
+                        correct: 2,
+                        explanation: "Menggunakan sifat perkalian $|a \\cdot b| = |a| \\cdot |b|$. Maka, $|-4x| = |-4| \\cdot |x|$. Karena $|-4| = 4$, hasilnya menjadi $4|x|$."
+                    },
+                    {
+                        q: "Bentuk sederhana dari ekspresi $\\sqrt{(-7)^2}$ adalah...",
+                        options: [ "7", "-7", "49", "$\\pm 7$" ],
+                        correct: 0,
+                        explanation: "Ini adalah aplikasi langsung dari sifat $\\sqrt{x^2} = |x|$. Dalam kasus ini, $x = -7$. Maka, $\\sqrt{(-7)^2} = |-7| = 7$. Ingat, hasil dari operasi akar kuadrat tidak pernah negatif."
+                    },
+                    {
+                        q: "Jika $y \\ne 0$, manakah ekspresi yang senilai dengan $|\\frac{3}{-y}|$?",
+                        options: [ "\\frac{3}{y}", "\\frac{-3}{|y|}", "\\frac{3}{|-y|}", "-\\frac{3}{y}" ],
+                        correct: 2,
+                        explanation: "Menggunakan sifat pembagian $|\\frac{a}{b}| = \\frac{|a|}{|b|}$. Maka, $|\\frac{3}{-y}| = \\frac{|3|}{|-y|} = \\frac{3}{|-y|}$. Kita juga tahu bahwa $|-y| = |y|$, sehingga bentuk ini juga setara dengan $\\frac{3}{|y|}$."
+                    },
+                    {
+                        q: "Diketahui $a < 0$. Bentuk sederhana dari $\\sqrt{a^2} + |3a|$ adalah...",
+                        options: [ "4a", "-4a", "2a", "-2a" ],
+                        correct: 1,
+                        explanation: "Kita pecah satu per satu. Pertama, $\\sqrt{a^2} = |a|$. Kedua, $|3a| = |3| \\cdot |a| = 3|a|$. Jadi ekspresinya menjadi $|a| + 3|a| = 4|a|$. Karena diketahui $a < 0$ (negatif), maka sesuai definisi nilai mutlak, $|a| = -a$. Substitusikan ini kembali: $4(-a) = -4a$."
+                    },
+                    {
+                        q: "Manakah pernyataan di bawah ini yang <b>TIDAK SELALU</b> benar?",
+                        options: [ "$|x^2| = x^2$", "$\\sqrt{x^2} = |x|$", "$|x-y| = |y-x|$", "$|x+y| = |x| + |y|$" ],
+                        correct: 3,
+                        explanation: "Pernyataan $|x+y| = |x| + |y|$ hanya benar jika x dan y memiliki tanda yang sama. Jika tandanya berbeda, maka berlaku pertidaksamaan segitiga: $|x+y| < |x| + |y|$. Contoh: $|-3+5| = |2| = 2$, sedangkan $|-3|+|5| = 3+5=8$. Jadi, pernyataan ini tidak selalu benar."
+                    }
+                ];
 
-            // 2. Buat semua HTML untuk kuis dalam satu string
-            quizzes.forEach((quiz, index) => {
-                quizHTML += `
-                    <div class="quiz-accordion">
-                        <button class="quiz-accordion-button">
-                            <span>Kuis ${index + 1}</span>
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                        <div class="quiz-accordion-content hidden">
-                            <p class="question-text">${quiz.q}</p>
-                            <div class="options-container">
-                                ${quiz.options.map((opt, i) =>
-                                    `<div class="quiz-option" data-index="${index}" data-option-index="${i}">${opt}</div>`
-                                ).join("")}
-                            </div>
-                            <div class="quiz-explanation hidden">
-                                <b>Pembahasan:</b> ${quiz.explanation}
+                const quizContainer = document.getElementById("quiz-container");
+                let quizHTML = '';
+
+                // 3. Buat semua HTML untuk kuis
+                quizzes.forEach((quiz, index) => {
+                    quizHTML += `
+                        <div class="quiz-accordion">
+                            <button class="quiz-accordion-button">
+                                <span>Kuis ${index + 1}</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </button>
+                            <div class="quiz-accordion-content hidden">
+                                <p class="question-text">${quiz.q}</p>
+                                <div class="options-container">
+                                    ${quiz.options.map((opt, i) =>
+                                        `<div class="quiz-option" data-index="${index}" data-option-index="${i}">${opt}</div>`
+                                    ).join("")}
+                                </div>
+                                <div class="quiz-explanation hidden">
+                                    <b>Pembahasan:</b> ${quiz.explanation}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                `;
-            });
-            
-            // 3. Masukkan HTML ke dalam halaman HANYA SATU KALI (lebih efisien)
-            quizContainer.innerHTML = quizHTML;
-
-            // 4. Minta MathJax untuk merender konten BARU, dan TUNGGU hingga selesai
-            MathJax.typesetPromise([quizContainer]).then(() => {
-                // 5. SETELAH render selesai, barulah kita aktifkan fungsionalitas kuis
-                
-                // Fungsionalitas untuk membuka/tutup akordion
-                quizContainer.querySelectorAll('.quiz-accordion-button').forEach(button => {
-                    button.addEventListener('click', () => {
-                        const content = button.nextElementSibling;
-                        const isActive = button.classList.contains('active');
-
-                        // Tutup semua akordion lain
-                        quizContainer.querySelectorAll('.quiz-accordion-button').forEach(otherButton => {
-                            otherButton.classList.remove('active');
-                            otherButton.nextElementSibling.classList.add('hidden');
-                        });
-
-                        // Jika tombol yang diklik tadi tidak aktif, buka dia
-                        if (!isActive) {
-                            button.classList.add('active');
-                            content.classList.remove('hidden');
-                        }
-                    });
+                    `;
                 });
                 
-                // Fungsionalitas untuk memilih jawaban
-                quizContainer.querySelectorAll('.quiz-option').forEach(option => {
-                    option.addEventListener('click', () => {
-                        const optionsContainer = option.parentElement;
-                        if (optionsContainer.classList.contains('answered')) return;
-                        optionsContainer.classList.add('answered');
+                // 4. Masukkan HTML ke dalam halaman
+                quizContainer.innerHTML = quizHTML;
 
-                        const quizIndex = parseInt(option.dataset.index, 10);
-                        const optionIndex = parseInt(option.dataset.optionIndex, 10);
-                        const quizData = quizzes[quizIndex];
+                // 5. Minta MathJax untuk merender konten BARU, dan TUNGGU hingga selesai
+                MathJax.typesetPromise([quizContainer]).then(() => {
+                    // 6. SETELAH render selesai, barulah kita aktifkan fungsionalitas kuis
+                    
+                    quizContainer.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                        button.addEventListener('click', () => {
+                            const content = button.nextElementSibling;
+                            const isActive = button.classList.contains('active');
 
-                        const explanation = optionsContainer.nextElementSibling;
-                        explanation.classList.remove('hidden');
+                            quizContainer.querySelectorAll('.quiz-accordion-button').forEach(otherButton => {
+                                otherButton.classList.remove('active');
+                                otherButton.nextElementSibling.classList.add('hidden');
+                            });
 
-                        if (optionIndex === quizData.correct) {
-                            option.classList.add('correct');
-                        } else {
-                            option.classList.add('wrong');
-                            // Tandai juga jawaban yang benar
-                            const correctOption = optionsContainer.querySelector(`[data-option-index="${quizData.correct}"]`);
-                            if (correctOption) {
-                                correctOption.classList.add('correct');
+                            if (!isActive) {
+                                button.classList.add('active');
+                                content.classList.remove('hidden');
                             }
-                        }
+                        });
                     });
-                });
+                    
+                    quizContainer.querySelectorAll('.quiz-option').forEach(option => {
+                        option.addEventListener('click', () => {
+                            const optionsContainer = option.parentElement;
+                            if (optionsContainer.classList.contains('answered')) return;
+                            optionsContainer.classList.add('answered');
 
-            }).catch((err) => console.error('MathJax rendering error:', err));
+                            const quizIndex = parseInt(option.dataset.index, 10);
+                            const optionIndex = parseInt(option.dataset.optionIndex, 10);
+                            const quizData = quizzes[quizIndex];
+
+                            const explanation = optionsContainer.nextElementSibling;
+                            explanation.classList.remove('hidden');
+
+                            if (optionIndex === quizData.correct) {
+                                option.classList.add('correct');
+                            } else {
+                                option.classList.add('wrong');
+                                const correctOption = optionsContainer.querySelector(`[data-option-index="${quizData.correct}"]`);
+                                if (correctOption) {
+                                    correctOption.classList.add('correct');
+                                }
+                            }
+                        });
+                    });
+
+                }).catch((err) => console.error('MathJax rendering error:', err));
+            });
         });
     </script>
 </body>
