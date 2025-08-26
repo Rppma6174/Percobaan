@@ -203,6 +203,13 @@ const allContentData = {
             filePath: 'UMT_Learning/sifat_dasar_nilai_mutlak.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_operasi_aljabar_pada_nilai_mutlak', 
+            title: 'Operasi Aljabar dengan Nilai Mutlak', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Operasi Aljabar dengan Nilai Mutlak.html', 
+            fileType: 'html' 
+            },
         ],
         "Bentuk Akar": [
             { 
