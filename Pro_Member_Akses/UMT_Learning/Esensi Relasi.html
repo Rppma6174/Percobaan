@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esensi Relasi - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Esensi Relasi: Memahami Hubungan dalam Matematika</h1>
+<p>
+    Dalam kehidupan sehari-hari, kata "relasi" berarti hubungan. Misalnya, ada relasi "anak dari" antara Anda dan orang tua Anda, atau relasi "berwarna" antara buah stroberi dan warna merah. Dalam matematika, konsepnya sama persis: <b>relasi</b> adalah aturan yang menghubungkan anggota dari satu himpunan ke anggota himpunan lainnya.
+</p>
+<div class="important-note">
+    <b>Ide Inti:</b> Sebuah relasi dari himpunan A ke himpunan B adalah himpunan dari <b>pasangan berurutan</b> $(a, b)$, di mana $a$ adalah anggota A dan $b$ adalah anggota B, yang dibentuk berdasarkan suatu aturan tertentu.
+</div>
+
+<h2>Komponen-komponen Sebuah Relasi</h2>
+<p>
+    Setiap relasi memiliki beberapa komponen penting yang harus kita kenali. Mari kita gunakan contoh relasi "kurang dari" dari himpunan $A = \{1, 2, 3\}$ ke himpunan $B = \{1, 2, 3, 4\}$.
+</p>
+<ul>
+    <li>
+        <b>Domain (Daerah Asal):</b> Himpunan pertama dari mana hubungan dimulai. Dalam contoh ini, Domain adalah himpunan <b>A = {1, 2, 3}</b>.
+    </li>
+    <li>
+        <b>Kodomain (Daerah Kawan):</b> Himpunan kedua yang menjadi tujuan hubungan. Kodomain berisi semua kemungkinan pasangan. Dalam contoh ini, Kodomain adalah himpunan <b>B = {1, 2, 3, 4}</b>.
+    </li>
+    <li>
+        <b>Range (Daerah Hasil):</b> Himpunan bagian dari Kodomain yang anggotanya <b>benar-benar memiliki pasangan</b> di Domain. Untuk relasi "kurang dari":
+        <ul>
+            <li>1 kurang dari 2, 3, 4.</li>
+            <li>2 kurang dari 3, 4.</li>
+            <li>3 kurang dari 4.</li>
+        </ul>
+        Anggota B yang punya pasangan adalah {2, 3, 4}. Maka, Range-nya adalah <b>{2, 3, 4}</b>. Perhatikan bahwa 1 adalah anggota Kodomain, tetapi bukan anggota Range.
+    </li>
+</ul>
+
+<h2>Cara Menyatakan Relasi</h2>
+<p>
+    Sebuah relasi yang sama dapat disajikan dalam beberapa cara berbeda. Mari kita gunakan contoh relasi "pangkat dua dari" dari himpunan $P = \{1, 2, 3\}$ ke himpunan $Q = \{1, 2, ..., 10\}$.
+</p>
+<h3>1. Himpunan Pasangan Berurutan</h3>
+<p>
+    Ini adalah cara paling formal. Kita mendaftar semua pasangan yang memenuhi aturan relasi.
+    <br>
+    $R = \{(1, 1), (2, 4), (3, 9)\}$
+</p>
+<h3>2. Diagram Panah</h3>
+<p>
+    Cara ini sangat visual dan intuitif. Kita menggambar dua himpunan dan menghubungkan anggotanya dengan panah sesuai aturan relasi.
+    
+</p>
+<h3>3. Diagram Kartesius</h3>
+<p>
+    Kita memplot pasangan berurutan sebagai titik-titik pada grafik kartesius. Domain biasanya diletakkan pada sumbu X dan Kodomain pada sumbu Y.
+    
+</p>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang konsep dasar relasi.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Dalam matematika, apa definisi paling mendasar dari sebuah 'relasi'?",
+                options: [
+                    "Sebuah fungsi",
+                    "Sebuah grafik",
+                    "Aturan yang memasangkan anggota dari dua himpunan",
+                    "Sebuah persamaan aljabar"
+                ],
+                correct: 2,
+                explanation: "Definisi paling dasar dari relasi adalah adanya aturan atau kondisi yang menciptakan hubungan/pasangan antara anggota dari satu himpunan ke himpunan lainnya."
+            },
+            {
+                q: "Diberikan relasi 'ibu kota dari' antara himpunan A = {Jakarta, Tokyo, London} dan himpunan B = {Indonesia, Inggris, Jepang, Malaysia}. Himpunan B disebut sebagai...",
+                options: [ "Domain", "Kodomain", "Range", "Relasi" ],
+                correct: 1,
+                explanation: "Kodomain adalah himpunan 'kawan' atau himpunan yang berisi semua kemungkinan tujuan/pasangan, dalam hal ini semua negara yang tersedia."
+            },
+            {
+                q: "Dari soal sebelumnya, himpunan hasil (range) dari relasi tersebut adalah...",
+                options: [
+                    "{Indonesia, Inggris, Jepang, Malaysia}",
+                    "{Jakarta, Tokyo, London}",
+                    "{Indonesia, Inggris, Jepang}",
+                    "{Malaysia}"
+                ],
+                correct: 2,
+                explanation: "Range hanya berisi anggota kodomain yang benar-benar memiliki pasangan dari domain. Karena Malaysia tidak memiliki pasangan ibu kota di himpunan A, maka ia tidak termasuk dalam range."
+            },
+            {
+                q: "Manakah di antara berikut ini yang BUKAN cara standar untuk menyatakan relasi?",
+                options: [ "Diagram Panah", "Diagram Venn", "Diagram Kartesius", "Himpunan Pasangan Berurutan" ],
+                correct: 1,
+                explanation: "Diagram Venn digunakan untuk menunjukkan hubungan antar himpunan secara keseluruhan (irisan, gabungan), bukan untuk memetakan hubungan spesifik antar anggotanya secara berpasangan."
+            },
+            {
+                q: "Perbedaan utama antara Kodomain dan Range adalah...",
+                options: [
+                    "Tidak ada perbedaan, keduanya sama",
+                    "Kodomain adalah semua kemungkinan output, sedangkan Range adalah output yang benar-benar terpilih/terjadi",
+                    "Range selalu lebih besar dari Kodomain",
+                    "Kodomain untuk sumbu X, Range untuk sumbu Y"
+                ],
+                correct: 1,
+                explanation: "Ini adalah perbedaan kunci. Range adalah himpunan bagian dari (atau sama dengan) Kodomain. Semua anggota Range pasti ada di Kodomain, tetapi tidak semua anggota Kodomain pasti ada di Range."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
