@@ -261,6 +261,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Sifat dan Jenis Relasi.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_relasi_dan_fungsi_4', 
+            title: 'Esensi Fungsi', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Esensi Fungsi.html', 
+            fileType: 'html' 
+            },
         ],
         "Bentuk Akar": [
             { 
