@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esensi Fungsi - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .diagram-container {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background-color: var(--bg-main);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+        }
+        .diagram-container svg text { font-size: 14px; fill: var(--text-primary); }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Esensi Fungsi: Relasi dengan Aturan Ketat</h1>
+<p>
+    Setelah memahami relasi sebagai hubungan "bebas" antar himpunan, kini kita akan mengenal "sepupu"-nya yang lebih disiplin: <b>fungsi</b> (atau pemetaan). Fungsi adalah jenis relasi yang sangat teratur dan dapat diprediksi, yang menjadikannya salah satu alat paling kuat dalam matematika.
+</p>
+<p>
+    Sederhananya, <b>semua fungsi adalah relasi, tetapi tidak semua relasi adalah fungsi</b>.
+</p>
+<p>
+    Analogi yang tepat adalah remote TV:
+</p>
+<ul>
+    <li><b>Relasi (Remote Rusak):</b> Anda menekan tombol volume atas. Kadang volume naik, kadang channel berpindah, kadang tidak terjadi apa-apa. Hubungannya tidak pasti.</li>
+    <li><b>Fungsi (Remote Normal):</b> Anda menekan tombol volume atas. Dijamin 100% volume akan naik, dan hanya itu yang terjadi. Setiap input (tombol) memberikan tepat satu output (aksi) yang pasti.</li>
+</ul>
+
+<h2>Dua Aturan Emas yang Mendefinisikan Fungsi</h2>
+<p>
+    Sebuah relasi dari himpunan A (Domain) ke himpunan B (Kodomain) bisa disebut fungsi jika dan hanya jika memenuhi dua aturan ketat berikut:
+</p>
+<ol>
+    <li><b>Setiap anggota Domain HARUS memiliki pasangan di Kodomain.</b> Tidak boleh ada anggota di himpunan asal yang tidak dipetakan.</li>
+    <li><b>Setiap anggota Domain hanya boleh memiliki TEPAT SATU pasangan di Kodomain.</b> Pasangannya harus tunggal, tidak boleh bercabang.</li>
+</ol>
+
+<div class="important-note">
+    <b>Penting:</b> Aturan ini hanya berlaku ketat untuk <b>Domain</b>. Di sisi Kodomain, anggotanya boleh tidak punya pasangan, atau bahkan menjadi pasangan dari beberapa anggota Domain sekaligus.
+</div>
+
+<div class="diagram-container">
+    <figure>
+        <figcaption style="text-align: center; color: var(--accent-red); margin-bottom: 10px;"><b>Bukan Fungsi</b> (Aturan 1 dilanggar)</figcaption>
+        <svg width="180" height="150">
+            <text x="35" y="15">A</text> <text x="135" y="15">B</text>
+            <circle cx="40" cy="40" r="4" fill="#C9D1D9"/> <text x="20" y="45">1</text>
+            <circle cx="40" cy="75" r="4" fill="#C9D1D9"/> <text x="20" y="80">2</text>
+            <circle cx="40" cy="110" r="4" fill="#C9D1D9"/> <text x="20" y="115">3</text>
+            <circle cx="140" cy="40" r="4" fill="#C9D1D9"/> <text x="150" y="45">a</text>
+            <circle cx="140" cy="75" r="4" fill="#C9D1D9"/> <text x="150" y="80">b</text>
+            <circle cx="140" cy="110" r="4" fill="#C9D1D9"/> <text x="150" y="115">c</text>
+            <path d="M 45 40 L 135 75" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 45 110 L 135 110" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+            <text x="10" y="135" fill="#F85149" font-size="12">'2' tidak punya pasangan</text>
+            <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#C9D1D9" /></marker></defs>
+        </svg>
+    </figure>
+    <figure>
+        <figcaption style="text-align: center; color: var(--accent-red); margin-bottom: 10px;"><b>Bukan Fungsi</b> (Aturan 2 dilanggar)</figcaption>
+        <svg width="180" height="150">
+            <text x="35" y="15">A</text> <text x="135" y="15">B</text>
+            <circle cx="40" cy="40" r="4" fill="#C9D1D9"/> <text x="20" y="45">1</text>
+            <circle cx="40" cy="75" r="4" fill="#C9D1D9"/> <text x="20" y="80">2</text>
+            <circle cx="40" cy="110" r="4" fill="#C9D1D9"/> <text x="20" y="115">3</text>
+            <circle cx="140" cy="40" r="4" fill="#C9D1D9"/> <text x="150" y="45">a</text>
+            <circle cx="140" cy="75" r="4" fill="#C9D1D9"/> <text x="150" y="80">b</text>
+            <circle cx="140" cy="110" r="4" fill="#C9D1D9"/> <text x="150" y="115">c</text>
+            <path d="M 45 40 L 135 40" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 45 75 L 135 75" stroke="#F85149" stroke-width="2" marker-end="url(#arrow_red)"/>
+            <path d="M 45 75 L 135 110" stroke="#F85149" stroke-width="2" marker-end="url(#arrow_red)"/>
+            <path d="M 45 110 L 135 110" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+             <text x="15" y="135" fill="#F85149" font-size="12">'2' punya 2 pasangan</text>
+             <defs><marker id="arrow_red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#F85149" /></marker></defs>
+        </svg>
+    </figure>
+    <figure>
+        <figcaption style="text-align: center; color: var(--accent-green); margin-bottom: 10px;"><b>INI FUNGSI</b> (Semua aturan dipatuhi)</figcaption>
+        <svg width="180" height="150">
+            <text x="35" y="15">A</text> <text x="135" y="15">B</text>
+            <circle cx="40" cy="40" r="4" fill="#C9D1D9"/> <text x="20" y="45">1</text>
+            <circle cx="40" cy="75" r="4" fill="#C9D1D9"/> <text x="20" y="80">2</text>
+            <circle cx="40" cy="110" r="4" fill="#C9D1D9"/> <text x="20" y="115">3</text>
+            <circle cx="140" cy="40" r="4" fill="#C9D1D9"/> <text x="150" y="45">a</text>
+            <circle cx="140" cy="75" r="4" fill="#C9D1D9"/> <text x="150" y="80">b</text>
+            <circle cx="140" cy="110" r="4" fill="#C9D1D9"/> <text x="150" y="115">c</text>
+            <path d="M 45 40 L 135 40" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 45 75 L 135 110" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 45 110 L 135 110" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+        </svg>
+    </figure>
+</div>
+
+
+<h2>Notasi dan Terminologi Fungsi</h2>
+<p>
+    Fungsi umumnya dinotasikan sebagai $f: A \to B$ (dibaca "fungsi $f$ memetakan himpunan A ke himpunan B"). Aturan pemetaannya ditulis dalam bentuk persamaan, misalnya $f(x) = x+1$.
+</p>
+<ul>
+    <li>$x$ adalah variabel bebas (anggota Domain).</li>
+    <li>$f(x)$ adalah nilai fungsi (anggota Range), yang nilainya bergantung pada $x$.</li>
+</ul>
+
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang esensi sebuah fungsi.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Manakah pernyataan yang paling tepat mendeskripsikan perbedaan antara relasi dan fungsi?",
+                options: [
+                    "Fungsi memiliki aturan ketat untuk domainnya, sedangkan relasi tidak",
+                    "Fungsi hanya boleh menghubungkan angka, relasi boleh apa saja",
+                    "Fungsi harus memiliki jumlah domain dan kodomain yang sama",
+                    "Fungsi dan relasi adalah dua hal yang sama sekali berbeda"
+                ],
+                correct: 0,
+                explanation: "Esensi perbedaannya terletak pada aturan untuk domain. Fungsi adalah relasi yang memenuhi dua syarat: setiap domain terpetakan, dan terpetakan ke tepat satu tujuan."
+            },
+            {
+                q: "Diberikan himpunan pasangan berurutan {(1,a), (2,c), (1,b)}. Mengapa ini bukan fungsi?",
+                options: [
+                    "Karena ada anggota domain yang tidak punya pasangan",
+                    "Karena anggota domain '1' punya lebih dari satu pasangan (bercabang)",
+                    "Karena 'a', 'b', 'c' bukan angka",
+                    "Karena ada anggota kodomain yang tidak punya pasangan"
+                ],
+                correct: 1,
+                explanation: "Ini melanggar Aturan Emas #2. Input '1' tidak bisa menghasilkan dua output yang berbeda ('a' dan 'b'). Sebuah fungsi harus dapat diprediksi."
+            },
+            {
+                q: "Diberikan Domain A={x,y,z} dan Kodomain B={1,2}. Pasangan {(x,1), (y,1), (z,2)} merupakan...",
+                options: [
+                    "Sebuah fungsi",
+                    "Bukan fungsi, karena '1' punya dua pasangan",
+                    "Bukan fungsi, karena jumlah anggota A dan B tidak sama",
+                    "Bukan fungsi, karena tidak ada anggota domain yang berpasangan dengan '2'"
+                ],
+                correct: 0,
+                explanation: "Ini adalah sebuah fungsi. Aturan ketat hanya berlaku untuk Domain. Setiap anggota A (x, y, z) punya pasangan dan pasangannya tepat satu. Tidak masalah jika x dan y sama-sama menunjuk ke '1'."
+            },
+            {
+                q: "Dalam notasi $f(x) = 5x - 3$, ekspresi $5x-3$ itu sendiri merepresentasikan...",
+                options: [ "Domain fungsi", "Range fungsi", "Aturan atau 'resep' pemetaan fungsi", "Kodomain fungsi" ],
+                correct: 2,
+                explanation: "Ekspresi tersebut adalah aturan, resep, atau mesin yang mengubah setiap input $x$ menjadi output yang spesifik."
+            },
+            {
+                q: "Manakah dari himpunan pasangan berurutan berikut yang merupakan sebuah fungsi dari A={1,2,3}?",
+                options: [
+                    "{(1,a), (2,b)}",
+                    "{(1,a), (2,b), (3,c), (1,d)}",
+                    "{(1,c), (2,c), (3,c)}",
+                    "{(a,1), (b,2), (c,3)}"
+                ],
+                correct: 2,
+                explanation: "Pilihan ketiga adalah fungsi. Setiap anggota domain (1, 2, 3) muncul tepat satu kali sebagai elemen pertama. Pilihan pertama melanggar aturan #1 (3 tidak punya pasangan). Pilihan kedua melanggar aturan #2 (1 bercabang)."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
