@@ -183,6 +183,66 @@
                 options: [ "$|x^2| = x^2$", "$\\sqrt{x^2} = |x|$", "$|x-y| = |y-x|$", "$|x+y| = |x| + |y|$" ],
                 correct: 3,
                 explanation: "Pernyataan $|x+y| = |x| + |y|$ hanya benar jika x dan y memiliki tanda yang sama. Jika tandanya berbeda, maka berlaku pertidaksamaan segitiga: $|x+y| < |x| + |y|$. Contoh: $|-3+5| = |2| = 2$, sedangkan $|-3|+|5| = 3+5=8$. Jadi, pernyataan ini tidak selalu benar."
+            },
+            {
+                q: "Berapakah nilai $|-12|$?",
+                options: [ "-12", "12", "0", "Tidak dapat ditentukan" ],
+                correct: 1,
+                explanation: "Definisi nilai mutlak: jika bilangan negatif, ubah tandanya. $|-12|=12$."
+            },
+            {
+                q: "Pernyataan mana yang benar tentang $|x|$?",
+                options: [ "$|x|$ selalu negatif", "$|x| \\ge 0$", "$|x| = 0$ untuk semua $x$", "$|x|$ selalu sama dengan $x$" ],
+                correct: 1,
+                explanation: "Sifat non-negativitas: $|x|$ tidak pernah negatif, hanya $\\ge 0$."
+            },
+            {
+                q: "Manakah yang setara dengan $|-x|$?",
+                options: [ "$-x$", "$x$", "$|x|$", "$- |x|$" ],
+                correct: 2,
+                explanation: "Sifat simetri: $|-x| = |x|$."
+            },
+            {
+                q: "Jika $x=5$, maka $|x|^2$ sama dengan...",
+                options: [ "25", "5", "$|25|$", "$-25$" ],
+                correct: 0,
+                explanation: "Sifat kuadrat: $|x|^2 = x^2$. Jadi $|5|^2 = 25$."
+            },
+            {
+                q: "Bentuk sederhana dari $\\sqrt{(-8)^2}$ adalah...",
+                options: [ "8", "-8", "$\\pm 8$", "64" ],
+                correct: 0,
+                explanation: "Sifat akar-kuadrat: $\\sqrt{x^2} = |x|$. Jadi $\\sqrt{(-8)^2}=|-8|=8$."
+            },
+            {
+                q: "Hasil $|-4x|$ adalah...",
+                options: [ "$-4|x|$", "$4|x|$", "$-x$", "Tidak dapat disederhanakan" ],
+                correct: 1,
+                explanation: "Sifat perkalian: $|-4x| = |-4| \\cdot |x| = 4|x|$."
+            },
+            {
+                q: "Jika $y\\ne 0$, maka $|\\tfrac{6}{-y}|$ sama dengan...",
+                options: [ "$\\tfrac{6}{y}$", "$-\\tfrac{6}{|y|}$", "$\\tfrac{6}{|y|}$", "$-\\tfrac{6}{y}$" ],
+                correct: 2,
+                explanation: "Sifat pembagian: $|\\tfrac{6}{-y}|=\\tfrac{|6|}{|-y|}=\\tfrac{6}{|y|}$."
+            },
+            {
+                q: "Pernyataan yang benar adalah...",
+                options: [ "$|a+b| \\le |a| + |b|$", "$|a+b| = |a| + |b|$ untuk semua $a,b$", "$|a+b| \\ge |a| + |b|$", "Tidak ada yang benar" ],
+                correct: 0,
+                explanation: "Sifat pertidaksamaan segitiga: $|a+b| \\le |a|+|b|$."
+            },
+            {
+                q: "Manakah yang benar untuk $|a-b|$?",
+                options: [ "$|a-b| = |b-a|$", "$|a-b| = a-b$", "$|a-b| = -(a-b)$ selalu", "Tidak ada yang benar" ],
+                correct: 0,
+                explanation: "Sifat bentuk beda: $|a-b| = |b-a|$."
+            },
+            {
+                q: "Makna dari $|a-b|$ adalah...",
+                options: [ "Jumlah $a$ dan $b$", "Selisih biasa $a-b$", "Jarak antara $a$ dan $b$", "Tidak ada arti khusus" ],
+                correct: 2,
+                explanation: "$|a-b|$ menyatakan jarak titik $a$ dan $b$ pada garis bilangan, sehingga nilainya selalu non-negatif."
             }
         ];
 
