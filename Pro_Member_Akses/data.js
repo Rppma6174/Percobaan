@@ -269,6 +269,15 @@ const allContentData = {
             fileType: 'html' 
             }
         ],
+        "Barisan Dan Deret": [
+            { 
+            id: 'materi_barisan_dan_deret_1', 
+            title: 'Esensi Barisan Dan Deret', 
+            type: 'HTML Document', 
+            filePath: '#', 
+            fileType: 'html' 
+            }
+        ],
         "Trigonometri": [
             { 
             id: 'materi_esensi_trigonometri', 
