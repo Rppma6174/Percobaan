@@ -326,6 +326,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Aplikasi Barisan dan Deret.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_barisan_dan_deret_9', 
+            title: 'Barisan Rekursif', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Barisan Rekursif.html', 
+            fileType: 'html' 
+            },
         ],
         "Trigonometri": [
             { 
