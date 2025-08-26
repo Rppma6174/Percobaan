@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF--8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merasionalkan Penyebut Akar - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Merasionalkan Penyebut: Teknik Menghilangkan Akar</h1>
+<p>
+    "Merasionalkan penyebut" adalah sebuah proses aljabar untuk menghilangkan bentuk akar dari bagian penyebut (denominator) sebuah pecahan. Tujuannya adalah untuk mengubah ekspresi ke dalam "bentuk baku" atau bentuk yang lebih sederhana sesuai konvensi matematika.
+</p>
+<div class="important-note">
+    <b>Mengapa Perlu Dirasionalkan?</b><br>
+    Ini adalah sebuah konvensi. Secara historis, jauh lebih mudah melakukan pembagian dengan bilangan bulat daripada dengan bilangan irasional (misalnya, membagi dengan 2 lebih mudah daripada membagi dengan 1.41421...). Meskipun kalkulator modern membuat hal ini tidak lagi menjadi masalah komputasi, merasionalkan penyebut tetap menjadi standar penulisan bentuk sederhana dalam matematika.
+</div>
+
+<h2>Tipe 1: Penyebut Berbentuk $\sqrt{b}$</h2>
+<p>
+    Ini adalah bentuk paling dasar. Untuk merasionalkannya, kita kalikan pecahan tersebut dengan bentuk "1" yang cerdik, yaitu $\frac{\sqrt{b}}{\sqrt{b}}$.
+    <br>
+    <b>Logikanya:</b> Mengalikan dengan 1 tidak mengubah nilai. Di bagian penyebut, $\sqrt{b} \times \sqrt{b} = \sqrt{b^2} = b$, sehingga akarnya hilang.
+</p>
+<p><b>Contoh: Rasionalkan bentuk $\frac{6}{\sqrt{3}}$</b></p>
+<ol>
+    <li>Kalikan dengan $\frac{\sqrt{3}}{\sqrt{3}}$:
+        <br>$\frac{6}{\sqrt{3}} \times \frac{\sqrt{3}}{\sqrt{3}}$
+    </li>
+    <li>Lakukan perkalian pada pembilang dan penyebut:
+        <br>$\frac{6 \times \sqrt{3}}{\sqrt{3} \times \sqrt{3}} = \frac{6\sqrt{3}}{\sqrt{9}} = \frac{6\sqrt{3}}{3}$
+    </li>
+    <li>Sederhanakan hasilnya:
+        <br>$2\sqrt{3}$
+    </li>
+</ol>
+
+<h2>Tipe 2: Penyebut Berbentuk Penjumlahan/Pengurangan ($a \pm \sqrt{b}$ atau $\sqrt{a} \pm \sqrt{b}$)</h2>
+<p>
+    Untuk tipe ini, kita tidak bisa hanya mengalikan dengan akarnya. Kita harus menggunakan trik yang disebut <b>akar sekawan (konjugat)</b>.
+    <ul>
+        <li>Akar sekawan dari $(a + \sqrt{b})$ adalah $(a - \sqrt{b})$.</li>
+        <li>Akar sekawan dari $(\sqrt{a} - \sqrt{b})$ adalah $(\sqrt{a} + \sqrt{b})$.</li>
+    </ul>
+    <b>Logikanya:</b> Trik ini memanfaatkan rumus selisih kuadrat: $(x+y)(x-y) = x^2 - y^2$. Ketika penyebut dikalikan dengan sekawannya, semua suku yang mengandung akar akan saling menghilangkan atau menjadi kuadrat, sehingga akarnya hilang.
+    <br>
+    $(\sqrt{a} + \sqrt{b})(\sqrt{a} - \sqrt{b}) = (\sqrt{a})^2 - (\sqrt{b})^2 = a - b$.
+</p>
+<p><b>Contoh: Rasionalkan bentuk $\frac{4}{3 + \sqrt{5}}$</b></p>
+<ol>
+    <li>Identifikasi akar sekawan dari penyebut. Sekawan dari $(3 + \sqrt{5})$ adalah $(3 - \sqrt{5})$.</li>
+    <li>Kalikan pecahan dengan bentuk "1" dari akar sekawan:
+        <br>$\frac{4}{3 + \sqrt{5}} \times \frac{3 - \sqrt{5}}{3 - \sqrt{5}}$
+    </li>
+    <li>Lakukan perkalian:
+        <ul>
+            <li>Pembilang: $4 \times (3 - \sqrt{5}) = 12 - 4\sqrt{5}$</li>
+            <li>Penyebut: $(3)^2 - (\sqrt{5})^2 = 9 - 5 = 4$</li>
+        </ul>
+    </li>
+    <li>Gabungkan dan sederhanakan:
+        <br>$\frac{12 - 4\sqrt{5}}{4} = \frac{4(3 - \sqrt{5})}{4} = 3 - \sqrt{5}$
+    </li>
+</ol>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang teknik merasionalkan penyebut.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Apa tujuan utama dari merasionalkan penyebut sebuah pecahan?",
+                options: [
+                    "Menghilangkan bentuk akar dari pembilang",
+                    "Menghilangkan bentuk akar dari penyebut",
+                    "Membuat nilai pecahan menjadi lebih besar",
+                    "Mengubah semua bilangan menjadi bilangan bulat"
+                ],
+                correct: 1,
+                explanation: "Tujuan utama dan satu-satunya dari proses ini adalah untuk menghilangkan ekspresi akar dari bagian penyebut, sesuai dengan konvensi bentuk baku dalam matematika."
+            },
+            {
+                q: "Bentuk rasional dari $\\frac{10}{\\sqrt{5}}$ adalah...",
+                options: [
+                    "$2\\sqrt{5}$", "$5\\sqrt{2}$", "$\\frac{2}{\\sqrt{5}}$", "$10\\sqrt{5}$"
+                ],
+                correct: 0,
+                explanation: "Kita kalikan dengan $\\frac{\\sqrt{5}}{\\sqrt{5}}$, menjadi $\\frac{10\\sqrt{5}}{\\sqrt{25}} = \\frac{10\\sqrt{5}}{5}$. Setelah disederhanakan, hasilnya adalah $2\\sqrt{5}$."
+            },
+            {
+                q: "Apa akar sekawan (konjugat) dari $7 - \\sqrt{2}$?",
+                options: [
+                    "$7 + \\sqrt{2}$", "$-7 - \\sqrt{2}$", "$-7 + \\sqrt{2}$", "$\\sqrt{2} - 7$"
+                ],
+                correct: 0,
+                explanation: "Akar sekawan didapat dengan mengubah tanda operasi di antara dua suku. Jadi, sekawan dari (7 - \\sqrt{2}) adalah (7 + \\sqrt{2})."
+            },
+            {
+                q: "Hasil dari proses merasionalkan $\\frac{3}{\\sqrt{6} - \\sqrt{3}}$ adalah...",
+                options: [
+                    "$\\sqrt{6} + \\sqrt{3}$", "$3(\\sqrt{6} + \\sqrt{3})$", "$\\frac{\\sqrt{6} + \\sqrt{3}}{3}$", "$3$"
+                ],
+                correct: 0,
+                explanation: "Kalikan dengan sekawannya, $\\frac{\\sqrt{6} + \\sqrt{3}}{\\sqrt{6} + \\sqrt{3}}$. Pembilangnya menjadi $3(\\sqrt{6} + \\sqrt{3})$. Penyebutnya menjadi $(\\sqrt{6})^2 - (\\sqrt{3})^2 = 6 - 3 = 3$. Hasilnya $\\frac{3(\\sqrt{6} + \\sqrt{3})}{3} = \\sqrt{6} + \\sqrt{3}$."
+            },
+            {
+                q: "Mengapa mengalikan penyebut $(a+\\sqrt{b})$ dengan sekawannya $(a-\\sqrt{b})$ dapat menghilangkan akar?",
+                options: [
+                    "Karena menggunakan sifat komutatif",
+                    "Karena menghasilkan bentuk selisih kuadrat $(x^2-y^2)$ yang efektif mengkuadratkan suku akar",
+                    "Karena akar sekawan selalu bernilai 1",
+                    "Karena semua sukunya akan saling mengurangi menjadi nol"
+                ],
+                correct: 1,
+                explanation: "Ini adalah aplikasi dari rumus aljabar $(x+y)(x-y)=x^2-y^2$. Dengan $x=a$ dan $y=\\sqrt{b}$, hasilnya adalah $a^2 - (\\sqrt{b})^2 = a^2 - b$. Suku akar $(\\sqrt{b})$ menjadi kuadrat, sehingga akarnya hilang."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
