@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barisan Aritmetika - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Barisan Aritmetika: Menjelajahi Pola Penjumlahan Konstan</h1>
+<p>
+    Barisan Aritmetika adalah jenis barisan yang paling fundamental. Esensinya adalah sebuah pola di mana setiap suku, setelah suku pertama, dibentuk dengan menambahkan suatu bilangan konstan ke suku sebelumnya. Pola ini ibarat menaiki tangga dengan anak tangga yang jaraknya selalu sama.
+</p>
+<p>Dua komponen utama yang menjadi "DNA" dari barisan aritmetika adalah:</p>
+<ul>
+    <li><b>Suku Pertama ($a$ atau $U_1$)</b>: Titik awal atau nilai pertama dari barisan.</li>
+    <li><b>Beda ($b$)</b>: Selisih konstan antara dua suku yang berurutan. Beda dapat ditemukan dengan rumus $b = U_n - U_{n-1}$. Jika $b$ positif, barisan tersebut naik. Jika $b$ negatif, barisan tersebut turun.</li>
+</ul>
+
+<h2>Menemukan Rumus Suku ke-n ($U_n$)</h2>
+<p>
+    Bagaimana kita bisa menemukan suku ke-100 tanpa harus mendaftar semua 99 suku sebelumnya? Kita bisa membangun rumusnya secara logis:
+</p>
+<ul>
+    <li>$U_1 = a$</li>
+    <li>$U_2 = a + b$</li>
+    <li>$U_3 = U_2 + b = (a+b) + b = a + 2b$</li>
+    <li>$U_4 = U_3 + b = (a+2b) + b = a + 3b$</li>
+</ul>
+<p>
+    Perhatikan polanya: untuk mendapatkan suku ke-n ($U_n$), kita mulai dari $a$ dan menambahkan $b$ sebanyak $(n-1)$ kali. Dari sinilah rumus umum suku ke-n berasal.
+</p>
+<div class="important-note">
+    <b>Rumus Suku ke-n Barisan Aritmetika</b>
+    $$U_n = a + (n-1)b$$
+</div>
+<p>
+    <b>Contoh:</b> Diketahui barisan 3, 7, 11, 15, ... Tentukan suku ke-20.
+    <br><b>Identifikasi:</b> $a = 3$, dan $b = 7 - 3 = 4$.
+    <br><b>Gunakan Rumus:</b> $U_{20} = 3 + (20-1) \times 4 = 3 + (19 \times 4) = 3 + 76 = 79$.
+</p>
+
+<h2>Suku Tengah ($U_t$)</h2>
+<p>
+    Konsep ini hanya berlaku untuk barisan aritmetika <b>terhingga</b> yang memiliki <b>jumlah suku ganjil ($n$)</b>. Suku tengah adalah nilai yang berada tepat di tengah-tengah barisan.
+    <br><br>
+    Nilai suku tengah adalah rata-rata dari suku pertama dan suku terakhir. Posisinya ($t$) dapat ditemukan dengan $t = \frac{n+1}{2}$.
+    <br><br>
+    <b>Rumus Suku Tengah:</b> $U_t = \frac{a + U_n}{2}$
+</p>
+<p>
+    <b>Contoh:</b> Sebuah barisan aritmetika terdiri dari 11 suku. Jika suku pertamanya 5 dan suku terakhirnya 45, tentukan nilai suku tengahnya.
+    <br><b>Identifikasi:</b> $n=11$ (ganjil), $a=5$, $U_{11}=45$.
+    <br><b>Gunakan Rumus:</b> $U_t = \frac{5 + 45}{2} = \frac{50}{2} = 25$.
+</p>
+
+<h2>Sisipan dalam Barisan Aritmetika</h2>
+<p>
+    Sisipan adalah proses menyisipkan sejumlah bilangan di antara dua bilangan yang diketahui sehingga membentuk barisan aritmetika baru. Misalkan kita ingin menyisipkan $k$ buah bilangan di antara bilangan $x$ dan $y$.
+</p>
+<p>
+    Logikanya, barisan baru akan memiliki $x$ sebagai suku pertama, $y$ sebagai suku terakhir, dan total $(k+2)$ suku. Tugas kita adalah mencari beda baru ($b'$) dari barisan yang terbentuk.
+    <br><br>
+    <b>Rumus Beda Baru:</b> $b' = \frac{y-x}{k+1}$
+</p>
+<p>
+    <b>Contoh:</b> Sisipkan 4 buah bilangan di antara 2 dan 22.
+    <br><b>Identifikasi:</b> $x=2, y=22, k=4$.
+    <br><b>Cari Beda Baru:</b> $b' = \frac{22 - 2}{4+1} = \frac{20}{5} = 4$.
+    <br><b>Bentuk Barisannya:</b> Mulai dari 2, tambahkan 4 secara berulang: <b>2, 6, 10, 14, 18, 22</b>.
+</p>
+
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang berbagai konsep dalam barisan aritmetika.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Apa dua komponen utama yang mendefinisikan sebuah barisan aritmetika?",
+                options: [ "Suku pertama dan rasio", "Suku pertama dan beda", "Suku tengah dan jumlah", "Beda dan rasio" ],
+                correct: 1,
+                explanation: "Sebuah barisan aritmetika secara unik didefinisikan oleh titik awalnya (suku pertama, $a$) dan selisih konstannya (beda, $b$)."
+            },
+            {
+                q: "Diberikan barisan: 5, 2, -1, -4, ... Suku ke-10 ($U_{10}$) dari barisan tersebut adalah...",
+                options: [ "-22", "-25", "-28", "32" ],
+                correct: 0,
+                explanation: "Suku pertama $a=5$. Bedanya $b = 2 - 5 = -3$. Maka, $U_{10} = a + (10-1)b = 5 + 9(-3) = 5 - 27 = -22$."
+            },
+            {
+                q: "Sebuah barisan aritmetika memiliki 15 suku. Suku pertamanya adalah 10 dan suku terakhirnya adalah 80. Nilai suku tengahnya adalah...",
+                options: [ "45", "50", "35", "Tidak bisa ditentukan" ],
+                correct: 0,
+                explanation: "Karena jumlah suku (15) ganjil, suku tengah dapat dihitung. $U_t = \\frac{a + U_n}{2} = \\frac{10 + 80}{2} = \\frac{90}{2} = 45$."
+            },
+            {
+                q: "Jika di antara bilangan 5 dan 35 disisipkan 5 buah bilangan sehingga membentuk barisan aritmetika, beda barisan yang baru adalah...",
+                options: [ "5", "6", "7", "8" ],
+                correct: 0,
+                explanation: "Menggunakan rumus beda baru: $b' = \\frac{y-x}{k+1} = \\frac{35-5}{5+1} = \\frac{30}{6} = 5$."
+            },
+            {
+                q: "Rumus suku ke-n, $U_n = a + (n-1)b$, diturunkan dari logika bahwa untuk mencapai suku ke-n, kita memulai dari suku pertama ($a$) dan menambahkan beda ($b$) sebanyak...",
+                options: [ "n kali", "n+1 kali", "n-1 kali", "n/2 kali" ],
+                correct: 2,
+                explanation: "Logikanya adalah 'lompatan' atau penambahan beda terjadi sebanyak satu kali lebih sedikit dari nomor sukunya. Untuk mencapai suku ke-3, kita melompat 2 kali dari suku pertama. Untuk suku ke-n, kita melompat (n-1) kali."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
