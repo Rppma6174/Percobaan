@@ -427,6 +427,15 @@ const allContentData = {
             fileType: 'html' 
             },
         ],
+        "FPB dan KPK": [
+            { 
+            id: 'materi_fpb_kpk_1', 
+            title: 'Esensi FPB Dan KPK', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Esensi FPB dan KPK.html', 
+            fileType: 'html' 
+            }
+        ],
         "Trigonometri": [
             { 
             id: 'materi_esensi_trigonometri', 
