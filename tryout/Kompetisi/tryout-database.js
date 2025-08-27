@@ -1480,5 +1480,231 @@ const allTryouts = {
   }
     ]
   },
+  "tryout-utbk-matematika-1": {
+    "title": "Try Out UTBK: Penalaran Matematika & Pengetahuan Kuantitatif",
+    "duration": 1800,
+    "questions": [
+      {
+        "id": 1,
+        "text": "Sebuah pabrik memiliki dua mesin, A dan B, untuk memproduksi sepatu. Mesin A dapat memproduksi 150 pasang sepatu dalam 6 jam. Mesin B dapat memproduksi 200 pasang sepatu dalam 8 jam. Jika kedua mesin bekerja bersamaan selama 4 jam, berapa total pasang sepatu yang dapat diproduksi?",
+        "options": [
+          "100 pasang",
+          "200 pasang",
+          "250 pasang",
+          "350 pasang"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": 2,
+        "text": "Harga sebuah buku dinaikkan sebesar 20%. Kemudian, untuk menarik pembeli, harganya diturunkan sebesar 10% dari harga baru. Berapa persen perubahan harga buku dari harga awal?",
+        "options": [
+          "Naik 10%",
+          "Naik 8%",
+          "Naik 12%",
+          "Tetap"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": 3,
+        "text": "Dalam sebuah kotak terdapat bola merah, hijau, dan biru. Peluang terambilnya bola merah adalah 1/3 dan peluang terambilnya bola biru adalah 2/5. Jika jumlah semua bola adalah 60, berapakah jumlah bola hijau?",
+        "options": [
+          "12 bola",
+          "16 bola",
+          "20 bola",
+          "24 bola"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": 4,
+        "text": "Sebuah persegi panjang memiliki keliling 56 cm. Jika perbandingan panjang dan lebarnya adalah 4:3, berapakah luas persegi panjang tersebut?",
+        "options": [
+          "144 cm²",
+          "180 cm²",
+          "192 cm²",
+          "224 cm²"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": 5,
+        "text": "Rata-rata nilai 5 siswa adalah 80. Jika nilai siswa keenam ditambahkan, rata-ratanya menjadi 82. Berapakah nilai siswa keenam tersebut?",
+        "options": [
+          "82",
+          "88",
+          "90",
+          "92"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "id": 6,
+        "text": "Jika \\(x\\) dan \\(y\\) adalah bilangan bulat positif dan \\(x^2 - y^2 = 28\\), manakah nilai \\(x\\) yang mungkin?",
+        "options": [
+          "6",
+          "7",
+          "8",
+          "9"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": 7,
+        "text": "Sebuah proyek dijadwalkan selesai dalam 40 hari oleh 20 pekerja. Setelah 10 hari bekerja, proyek dihentikan selama 5 hari. Agar proyek selesai tepat waktu, berapa tambahan pekerja yang dibutuhkan?",
+        "options": [
+          "5 pekerja",
+          "8 pekerja",
+          "4 pekerja",
+          "10 pekerja"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": 8,
+        "text": "Barisan bilangan: 3, 4, 7, 11, 18, 29, ... Pola dari barisan tersebut adalah...",
+        "options": [
+          "Penjumlahan dengan bilangan prima berurutan",
+          "Setiap suku adalah hasil penjumlahan dua suku sebelumnya",
+          "Penjumlahan dengan bilangan ganjil berurutan",
+          "Pola kuadrat"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": 9,
+        "text": "Dua buah dadu dilempar bersamaan. Berapa peluang munculnya jumlah kedua mata dadu adalah 8?",
+        "options": [
+          "\\(\\frac{1}{6}\\)",
+          "\\(\\frac{5}{36}\\)",
+          "\\(\\frac{1}{9}\\)",
+          "\\(\\frac{1}{12}\\)"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": 10,
+        "text": "Jika \\(a*b = (a+b)/a\\), maka nilai dari \\(3*(2*1)\\) adalah...",
+        "options": [
+          "2",
+          "3",
+          "6",
+          "4"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "id": 11,
+        "text": "Manakah di antara bilangan berikut yang habis dibagi 3 tetapi tidak habis dibagi 5?",
+        "options": [
+          "135",
+          "243",
+          "350",
+          "412"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": 12,
+        "text": "Jika \\(p = 2a+3\\) dan \\(q = a-1\\). Manakah hubungan yang benar antara P dan Q berikut, berdasarkan informasi \\(a > 4\\)?",
+        "options": [
+          "P > Q",
+          "P < Q",
+          "P = Q",
+          "Hubungan P dan Q tidak dapat ditentukan"
+        ],
+        "correctAnswer": 0
+      },
+      {
+        "id": 13,
+        "text": "Kurva \\(y = ax^2 + 4x + 1\\) dengan \\(a \\ne 0\\) memotong sumbu-x di dua titik berbeda. Pernyataan yang benar adalah...",
+        "options": [
+          "\\(a > 4\\)",
+          "\\(a < 4\\)",
+          "\\(a > 1\\)",
+          "\\(a < 1\\)"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": 14,
+        "text": "Sebuah wadah berbentuk tabung dengan jari-jari 7 cm dan tinggi 10 cm terisi air penuh. Jika seluruh air tersebut dituangkan ke dalam wadah berbentuk kubus dengan panjang rusuk 14 cm, berapa ketinggian air di dalam kubus?",
+        "options": [
+          "5 cm",
+          "7.5 cm",
+          "10 cm",
+          "7,85 cm"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "id": 15,
+        "text": "Empat tahun yang lalu, umur seorang ayah adalah 6 kali umur anaknya. Delapan belas tahun dari sekarang, umur ayah akan menjadi 2 kali umur anaknya. Berapa umur anak sekarang?",
+        "options": [
+          "7 tahun",
+          "9 tahun",
+          "11 tahun",
+          "10 tahun"
+        ],
+        "correctAnswer": 3
+      },
+      {
+        "id": 16,
+        "text": "Jika \\(f(x) = 2x + 5\\) dan \\(g(x) = x - 3\\), maka \\((f \\circ g)(4)\\) adalah...",
+        "options": [
+          "3",
+          "7",
+          "10",
+          "13"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": 17,
+        "text": "Titik A(2, -3) dirotasikan 90 derajat berlawanan arah jarum jam dengan pusat O(0,0). Di manakah koordinat bayangan titik A?",
+        "options": [
+          "(-3, -2)",
+          "(-2, 3)",
+          "(3, 2)",
+          "(-3, 2)"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": 18,
+        "text": "Dari angka 1, 2, 3, 4, 5 akan dibentuk bilangan ratusan genap tanpa ada angka yang berulang. Berapa banyak bilangan yang dapat terbentuk?",
+        "options": [
+          "12",
+          "18",
+          "24",
+          "36"
+        ],
+        "correctAnswer": 2
+      },
+      {
+        "id": 19,
+        "text": "Jika \\(x\\) adalah 30% dari 80 dan \\(y\\) adalah akar kuadrat dari 625, maka...",
+        "options": [
+          "\\(x > y\\)",
+          "\\(x < y\\)",
+          "\\(x = y\\)",
+          "\\(2x = y\\)"
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "id": 20,
+        "text": "Luas sebuah lingkaran adalah \\(49\\pi\\) cm². Berapakah keliling lingkaran tersebut?",
+        "options": [
+          "\\(7\\pi\\) cm",
+          "\\(14\\pi\\) cm",
+          "\\(28\\pi\\) cm",
+          "\\(49\\pi\\) cm"
+        ],
+        "correctAnswer": 1
+      }
+    ]
+  },
   // Untuk tryout yang 'Segera Hadir', Anda tidak perlu membuat datanya di sini.
 };
