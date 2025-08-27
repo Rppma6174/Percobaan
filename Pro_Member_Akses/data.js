@@ -449,6 +449,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Cara Menentukan FPB dan KPK.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_fpb_kpk_4', 
+            title: 'Hubungan FPB Dan KPK', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Hubungan FPB dan KPK.html', 
+            fileType: 'html' 
+            },
         ],
         "Trigonometri": [
             { 
