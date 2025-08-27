@@ -463,6 +463,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Sifat-Sifat FPB dan KPK.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_fpb_kpk_6', 
+            title: 'Pengaplikasian FPB', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Aplikasi FPB.html', 
+            fileType: 'html' 
+            },
         ],
         "Trigonometri": [
             { 
