@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cara Menentukan FPB dan KPK - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        table {
+            width: 80%;
+            margin: 1.5rem auto;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+        }
+        th { background-color: #1e2a3a; }
+        td:first-child { font-weight: bold; color: var(--accent-cyan); }
+        .highlight { background-color: rgba(47, 129, 247, 0.2); border-left: 2px solid var(--accent-cyan); }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note, td, th {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Tiga Cara Jitu Menentukan FPB dan KPK</h1>
+<p>
+    Setelah memahami esensi dari FPB dan KPK, kini kita akan mempelajari tiga metode praktis untuk menghitungnya. Setiap metode memiliki keunggulannya masing-masing.
+</p>
+<p>Kita akan menggunakan contoh bilangan <b>24</b> dan <b>36</b> untuk membandingkan ketiga metode.</p>
+
+<h2>1. Metode Faktorisasi Prima</h2>
+<p>
+    Metode ini mengandalkan "DNA" dari sebuah bilangan, yaitu faktor-faktor primanya.
+    <br>$24 = 2^3 \times 3^1$
+    <br>$36 = 2^2 \times 3^2$
+</p>
+<ul>
+    <li>
+        <b>FPB:</b> Ambil faktor prima yang sama (<b>2</b> dan <b>3</b>) dengan <b>pangkat terkecil</b>.
+        <br>$FPB = 2^2 \times 3^1 = 4 \times 3 = 12$.
+    </li>
+    <li>
+        <b>KPK:</b> Ambil semua faktor prima (<b>2</b> dan <b>3</b>) dengan <b>pangkat terbesar</b>.
+        <br>$KPK = 2^3 \times 3^2 = 8 \times 9 = 72$.
+    </li>
+</ul>
+
+<h2>2. Metode Pembagian Bersusun (Metode Tabel)</h2>
+<p>
+    Metode ini sangat efisien karena dapat mencari FPB dan KPK secara bersamaan.
+</p>
+<ol>
+    <li>Siapkan tabel dan bagi kedua bilangan dengan bilangan prima yang bisa membagi minimal salah satunya.</li>
+    <li><b>Tandai (warnai)</b> baris di mana pembagi prima bisa membagi <b>semua</b> bilangan.</li>
+    <li>Lanjutkan sampai semua hasil bagi menjadi 1.</li>
+</ol>
+<table>
+    <thead><tr><th>Pembagi</th><th>24</th><th>36</th></tr></thead>
+    <tbody>
+        <tr class="highlight"><td>2</td><td>12</td><td>18</td></tr>
+        <tr class="highlight"><td>2</td><td>6</td><td>9</td></tr>
+        <tr class="highlight"><td>3</td><td>2</td><td>3</td></tr>
+        <tr><td>2</td><td>1</td><td>3</td></tr>
+        <tr><td>3</td><td>1</td><td>1</td></tr>
+    </tbody>
+</table>
+<ul>
+    <li><b>FPB:</b> Kalikan semua pembagi yang ditandai.
+        <br>$FPB = 2 \times 2 \times 3 = 12$.
+    </li>
+    <li><b>KPK:</b> Kalikan semua pembagi di kolom pertama.
+        <br>$KPK = 2 \times 2 \times 3 \times 2 \times 3 = 72$.
+    </li>
+</ul>
+
+<h2>3. Algoritma Euklides (Khusus FPB)</h2>
+<p>
+    Ini adalah metode kuno yang sangat cepat untuk mencari FPB dari dua bilangan tanpa perlu faktorisasi. Algoritma ini didasarkan pada pembagian bersisa.
+</p>
+<p><b>Prosedur:</b></p>
+<ol>
+    <li>Bagi bilangan yang lebih besar dengan yang lebih kecil. Ambil sisa baginya ($r$).</li>
+    <li>Jika sisa bagi adalah 0, maka pembagi adalah FPB-nya.</li>
+    <li>Jika sisa bagi bukan 0, ulangi pembagian dengan menggunakan pembagi sebelumnya sebagai bilangan yang akan dibagi, dan sisa bagi sebagai pembaginya.</li>
+</ol>
+<p><b>Contoh: Cari FPB dari 24 dan 36.</b></p>
+<ul>
+    <li>$36 = 1 \times 24 + 12$ (Sisa: 12)</li>
+    <li>$24 = 2 \times 12 + 0$ (Sisa: 0)</li>
+</ul>
+<p>Karena sisa bagi sudah 0, maka FPB adalah <b>pembagi terakhir</b>, yaitu <b>12</b>.</p>
+
+<div class="important-note">
+    <b>Mengapa Algoritma Euklides Bekerja? (Logika di Baliknya)</b><br>
+    Prinsip kuncinya adalah sebuah teorema: <b>FPB dari dua bilangan (a, b) adalah sama dengan FPB dari bilangan yang lebih kecil (b) dan sisa pembagiannya (r)</b>.
+    $$FPB(a, b) = FPB(b, r)$$
+    <b>Pembuktian Intuitif:</b>
+    <ol>
+        <li>Misalkan $d$ adalah FPB dari $a$ dan $b$. Ini berarti $a$ dan $b$ adalah kelipatan dari $d$.</li>
+        <li>Karena $a = q \cdot b + r$ (di mana $q$ adalah hasil bagi), kita bisa tulis $r = a - q \cdot b$.</li>
+        <li>Karena $a$ dan $b$ adalah kelipatan $d$, maka $(a - q \cdot b)$ juga pasti kelipatan $d$. Ini membuktikan bahwa $r$ juga kelipatan $d$. Jadi, $d$ juga merupakan FPB dari $b$ dan $r$.</li>
+    </ol>
+    Algoritma ini secara cerdas terus menerus menyederhanakan masalah ($FPB(36, 24) \to FPB(24, 12)$) tanpa mengubah FPB aslinya, sampai kita mencapai kasus paling sederhana di mana sisanya 0.
+</div>
+
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang berbagai metode mencari FPB dan KPK.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Metode mana yang paling fundamental karena menguraikan bilangan menjadi 'DNA'-nya?",
+                options: [ "Metode Tabel", "Algoritma Euklides", "Faktorisasi Prima", "Metode Coba-coba" ],
+                correct: 2,
+                explanation: "Faktorisasi prima menguraikan bilangan hingga ke komponen dasarnya (bilangan prima), yang bisa diibaratkan seperti DNA dari bilangan tersebut."
+            },
+            {
+                q: "Menggunakan metode tabel untuk mencari FPB dan KPK dari 18 dan 30, pembagi prima pertama yang bisa membagi keduanya adalah...",
+                options: [ "5", "3", "2", "6" ],
+                correct: 2,
+                explanation: "Kita selalu mulai dari bilangan prima terkecil. 18 dan 30 keduanya adalah bilangan genap, jadi pembagi prima pertama yang bisa membagi keduanya adalah 2."
+            },
+            {
+                q: "Langkah pertama menggunakan Algoritma Euklides untuk mencari FPB(52, 20) adalah...",
+                options: [ "$52 = 2 \\times 20 + 12$", "$52 = 3 \\times 20 - 8$", "$20 = 1 \\times 52 - 32$", "$52 = 20 + 32$" ],
+                correct: 0,
+                explanation: "Langkah pertama adalah membagi bilangan yang lebih besar (52) dengan yang lebih kecil (20) dan mencari sisa baginya. $52 = (2 \\times 20) + 12$."
+            },
+            {
+                q: "Prinsip utama yang membuat Algoritma Euklides bekerja adalah properti matematika...",
+                options: [
+                    "$FPB(a, b) = FPB(a, r)$",
+                    "$FPB(a, b) = FPB(b, r)$",
+                    "$FPB(a, b) = a - b$",
+                    "$FPB(a, b) = r$"
+                ],
+                correct: 1,
+                explanation: "Teorema dasarnya menyatakan bahwa FPB dari dua bilangan sama dengan FPB dari bilangan yang lebih kecil dan sisa baginya. Ini memungkinkan kita menyederhanakan masalah secara berulang."
+            },
+            {
+                q: "Diberikan $A = 2^2 \\times 3^3$ dan $B = 2^3 \\times 3 \\times 5$. Berapakah KPK dari A dan B?",
+                options: [
+                    "$2^2 \\times 3$",
+                    "$2^3 \\times 3^3 \\times 5$",
+                    "$2^2 \\times 3 \\times 5$",
+                    "$2^3 \\times 3^3$"
+                ],
+                correct: 1,
+                explanation: "Untuk KPK, kita ambil semua jenis faktor (2, 3, 5) dan gunakan pangkat terbesar untuk masing-masing: $2^3$, $3^3$, dan $5^1$. Hasilnya adalah $2^3 \\times 3^3 \\times 5$."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
