@@ -470,6 +470,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Aplikasi FPB.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_fpb_kpk_7', 
+            title: 'Pengaplikasian KPK', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Aplikasi KPK.html', 
+            fileType: 'html' 
+            },
         ],
         "Trigonometri": [
             { 
