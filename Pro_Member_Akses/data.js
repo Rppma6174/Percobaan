@@ -434,6 +434,13 @@ const allContentData = {
             type: 'HTML Document', 
             filePath: 'UMT_Learning/Esensi FPB dan KPK.html', 
             fileType: 'html' 
+            },
+            { 
+            id: 'materi_fpb_kpk_2', 
+            title: 'Definisi Formal FPB Dan KPK', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Definisi Formal FPB & KPK.html', 
+            fileType: 'html' 
             }
         ],
         "Trigonometri": [
