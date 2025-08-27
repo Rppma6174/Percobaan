@@ -477,6 +477,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Aplikasi KPK.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_fpb_kpk_8', 
+            title: 'Variasi Soal FPB dan KPK', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Variasi Soal FPB dan KPK.html', 
+            fileType: 'html' 
+            },
         ],
         "Trigonometri": [
             { 
