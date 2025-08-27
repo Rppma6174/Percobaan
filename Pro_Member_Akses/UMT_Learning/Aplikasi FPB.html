@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi FPB - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Aplikasi FPB: Membagi Rata & Mengelompokkan Secara Maksimal</h1>
+<p>
+    Kunci utama untuk mengenali masalah yang dapat diselesaikan dengan FPB adalah dengan memahami esensinya. FPB digunakan ketika kita ingin <b>membagi</b> beberapa kelompok benda yang berbeda jumlahnya menjadi kelompok-kelompok baru yang <b>sama rata</b> dan dalam jumlah yang <b>sebanyak-banyaknya</b>.
+</p>
+<div class="important-note">
+    <b>Kata Kunci untuk Masalah FPB:</b>
+    <ul>
+        <li>"jumlah ... <b>terbanyak</b>"</li>
+        <li>"dibagi sama rata" atau "komposisi yang sama"</li>
+        <li>"ukuran terpanjang yang bisa memotong"</li>
+        <li>"...tanpa sisa"</li>
+    </ul>
+    Jika Anda menemukan frasa-frasa ini, kemungkinan besar Anda sedang berhadapan dengan soal FPB.
+</div>
+
+<h2>Contoh Kasus Klasik: Pembagian Paket</h2>
+<p><b>Soal:</b> Panitia bakti sosial memiliki 48 kg beras, 60 kg gula, dan 72 kaleng sarden. Bantuan akan dibagikan dalam bentuk paket dengan isi setiap jenis barang yang sama di setiap paketnya. Berapa jumlah paket <b>terbanyak</b> yang bisa dibuat dan bagaimana komposisi setiap paketnya?</p>
+<ol>
+    <li>
+        <b>Analisis (Pola Pikir UMT):</b>
+        <ul>
+            <li>Kita ingin membuat paket dalam jumlah <b>terbanyak</b>. Ini berarti jumlah paket harus bisa <b>membagi habis</b> jumlah beras (48), gula (60), dan sarden (72).</li>
+            <li>Kita mencari sebuah bilangan pembagi yang sama (<b>Faktor Persekutuan</b>).</li>
+            <li>Karena diminta jumlah paket terbanyak, kita mencari pembagi bersama yang <b>Terbesar</b>. Ini adalah masalah FPB.</li>
+        </ul>
+    </li>
+    <li>
+        <b>Perhitungan: Cari FPB dari 48, 60, dan 72.</b>
+        <br>Kita gunakan metode tabel:
+        <table>
+            <thead><tr><th>Pembagi</th><th>48</th><th>60</th><th>72</th></tr></thead>
+            <tbody>
+                <tr style="background-color: rgba(47, 129, 247, 0.2);"><td><b>2</b></td><td>24</td><td>30</td><td>36</td></tr>
+                <tr style="background-color: rgba(47, 129, 247, 0.2);"><td><b>2</b></td><td>12</td><td>15</td><td>18</td></tr>
+                <tr style="background-color: rgba(47, 129, 247, 0.2);"><td><b>3</b></td><td>4</td><td>5</td><td>6</td></tr>
+            </tbody>
+        </table>
+        Pembagi yang bisa membagi ketiganya berhenti di sini.
+        <br>$FPB = 2 \times 2 \times 3 = 12$.
+    </li>
+    <li>
+        <b>Kesimpulan:</b>
+        <ul>
+            <li>Jumlah paket terbanyak yang bisa dibuat adalah <b>12 paket</b>.</li>
+            <li>Isi setiap paket:
+                <ul>
+                    <li>Beras: $48 \div 12 = 4$ kg</li>
+                    <li>Gula: $60 \div 12 = 5$ kg</li>
+                    <li>Sarden: $72 \div 12 = 6$ kaleng</li>
+                </ul>
+            </li>
+        </ul>
+    </li>
+</ol>
+
+<h2>Soal UTBK dan Pola Pikirnya</h2>
+<p>
+    Soal FPB di level ujian masuk perguruan tinggi seringkali tidak sekadar menghitung, tetapi menguji pemahaman konsep secara mendalam.
+</p>
+<p><b>Contoh Soal Mirip UTBK:</b></p>
+<p>
+    Sebuah panitia lomba akan membuat paket hadiah dari 96 buku tulis, 144 pulpen, dan 216 pensil. Setiap paket harus memiliki komposisi yang sama persis. Tepat sebelum dibagikan, panitia menyadari bahwa 24 buah pensil ternyata rusak dan tidak bisa dipakai. Berapakah selisih antara jumlah pulpen dan buku tulis dalam setiap paket yang akhirnya dibuat?
+</p>
+<ol>
+    <li>
+        <b>Analisis (Pola Pikir UMT):</b>
+        <ul>
+            <li>Ini adalah soal FPB yang dimodifikasi. Ada informasi "pengecoh" dan pertanyaan yang tidak langsung.</li>
+            <li>Langkah pertama adalah menentukan jumlah barang yang <b>sebenarnya</b> tersedia.</li>
+            <li>Kemudian, cari jumlah paket terbanyak (FPB) dari jumlah barang yang sebenarnya.</li>
+            <li>Terakhir, hitung isi setiap paket dan jawab pertanyaan spesifiknya (selisih pulpen dan buku).</li>
+        </ul>
+    </li>
+    <li>
+        <b>Perhitungan:</b>
+        <ul>
+            <li>Jumlah barang final: Buku=96, Pulpen=144, Pensil= $216 - 24 = 192$.</li>
+            <li>Cari FPB dari (96, 144, 192).
+                <br>$96 = 2^5 \times 3$
+                <br>$144 = 2^4 \times 3^2$
+                <br>$192 = 2^6 \times 3$
+                <br>$FPB = 2^4 \times 3^1 = 16 \times 3 = 48$. Jadi, akan ada <b>48 paket</b>.
+            </li>
+            <li>Hitung isi setiap paket:
+                <br>Buku: $96 \div 48 = 2$ buah.
+                <br>Pulpen: $144 \div 48 = 3$ buah.
+            </li>
+            <li>Jawab pertanyaan: Selisih pulpen dan buku = $3 - 2 = 1$.</li>
+        </ul>
+    </li>
+     <li><b>Kesimpulan:</b> Selisih antara jumlah pulpen dan buku tulis dalam setiap paket adalah <b>1 buah</b>.</li>
+</ol>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji kemampuan Anda dalam menganalisis dan menyelesaikan soal aplikasi FPB.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Seorang guru ingin membagi 32 siswa laki-laki dan 40 siswa perempuan ke dalam beberapa kelompok. Setiap kelompok memiliki jumlah siswa laki-laki yang sama dan jumlah siswa perempuan yang sama. Berapa jumlah kelompok terbanyak yang bisa dibentuk?",
+                options: [ "4", "8", "10", "16" ],
+                correct: 1,
+                explanation: "Kata kunci 'kelompok terbanyak' dengan 'jumlah yang sama' menunjukkan ini adalah masalah FPB. FPB dari 32 ($2^5$) dan 40 ($2^3 \\times 5$) adalah $2^3 = 8$. Jadi, 8 kelompok bisa dibentuk."
+            },
+            {
+                q: "Dari soal sebelumnya, berapa jumlah siswa perempuan di setiap kelompok?",
+                options: [ "4", "5", "8", "10" ],
+                correct: 1,
+                explanation: "Total ada 40 siswa perempuan dan akan dibentuk 8 kelompok. Maka, setiap kelompok akan memiliki $40 \\div 8 = 5$ siswa perempuan."
+            },
+            {
+                q: "Pak Ali ingin memasang ubin berbentuk persegi pada lantai berukuran 12 m x 18 m. Ia ingin menggunakan ubin dengan ukuran sebesar mungkin tanpa ada ubin yang dipotong. Berapa ukuran sisi ubin tersebut?",
+                options: [ "2 m", "3 m", "4 m", "6 m" ],
+                correct: 3,
+                explanation: "Ukuran sisi ubin harus bisa membagi habis panjang (18 m) dan lebar (12 m). Karena diinginkan ukuran 'sebesar mungkin', kita mencari FPB dari 18 dan 12. FPB(12, 18) = 6. Jadi, ukuran ubin terbesar adalah 6 m x 6 m."
+            },
+            {
+                q: "Jika FPB dari dua bilangan $a$ dan $b$ adalah 6, manakah pernyataan di bawah ini yang PASTI SALAH?",
+                options: [
+                    "$a=12, b=18$",
+                    "$a=6, b=12$",
+                    "$a=12, b=15$",
+                    "$a=30, b=36$"
+                ],
+                correct: 2,
+                explanation: "Definisi FPB adalah pembagi bersama. Artinya, kedua bilangan harus bisa dibagi habis oleh FPB-nya. Pada pilihan ketiga, 15 tidak bisa dibagi habis oleh 6, sehingga FPB dari 12 dan 15 tidak mungkin 6."
+            },
+            {
+                q: "Langkah pertama dan terpenting dalam menyelesaikan soal cerita FPB adalah...",
+                options: [
+                    "Langsung menghitung dengan metode tabel",
+                    "Menganalisis kata kunci dalam soal (seperti 'terbanyak', 'sama rata') untuk memastikan itu adalah masalah FPB",
+                    "Mengalikan semua angka yang ada di soal",
+                    "Mencari KPK terlebih dahulu"
+                ],
+                correct: 1,
+                explanation: "Pola pikir UMT menekankan pada pemahaman masalah terlebih dahulu. Sebelum menghitung, pastikan Anda yakin bahwa masalah tersebut memang menanyakan tentang faktor pembagi bersama yang terbesar."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
