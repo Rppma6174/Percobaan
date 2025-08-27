@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Definisi Formal FPB & KPK - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        pre {
+            background-color: #0D1117;
+            color: #C9D1D9;
+            padding: 1em;
+            border-radius: 0.5em;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>FPB & KPK: Metode Faktorisasi Prima</h1>
+<p>
+    Setelah memahami esensi FPB dan KPK melalui daftar faktor dan kelipatan, kini kita akan menggunakan metode yang lebih formal, cepat, dan ampuh: <b>Faktorisasi Prima</b>. Metode ini menguraikan sebuah bilangan menjadi "DNA"-nya, yaitu perkalian dari bilangan-bilangan prima.
+</p>
+<p>
+    <b>Bilangan Prima</b> adalah bilangan asli lebih dari 1 yang hanya memiliki dua faktor, yaitu 1 dan dirinya sendiri (contoh: 2, 3, 5, 7, 11, ...).
+</p>
+<p>
+    Kita dapat menemukan faktorisasi prima menggunakan <b>Pohon Faktor</b>. Mari kita cari faktorisasi prima dari <b>36</b> dan <b>48</b>.
+</p>
+<pre>
+      36               48
+     /  \             /  \
+    2    18          2    24
+         /  \             /  \
+        2    9           2    12
+             /  \             /  \
+            3    3           2    6
+                               /  \
+                              2    3
+</pre>
+<p>
+    Dari pohon faktor di atas, kita dapatkan:
+</p>
+<ul>
+    <li>Faktorisasi prima dari 36 adalah $2 \times 2 \times 3 \times 3 = 2^2 \times 3^2$</li>
+    <li>Faktorisasi prima dari 48 adalah $2 \times 2 \times 2 \times 2 \times 3 = 2^4 \times 3^1$</li>
+</ul>
+
+
+<h2>Menentukan FPB dengan Faktorisasi Prima</h2>
+<div class="important-note">
+    <b>Aturan FPB:</b>
+    <ol>
+        <li>Ambil hanya <b>faktor prima yang sama (persekutuan)</b> dari kedua bilangan.</li>
+        <li>Pilih <b>pangkat yang terkecil</b> dari setiap faktor tersebut.</li>
+    </ol>
+    <b>Logikanya:</b> FPB adalah <b>pembagi</b>, jadi ia tidak boleh memiliki faktor prima lebih banyak dari bilangan yang akan dibaginya. Kita dibatasi oleh pangkat yang paling sedikit.
+</div>
+<p>
+    <b>Contoh: Tentukan FPB dari 36 dan 48.</b>
+    <br>$36 = 2^2 \times 3^2$
+    <br>$48 = 2^4 \times 3^1$
+</p>
+<ul>
+    <li>Faktor prima yang sama adalah <b>2</b> dan <b>3</b>.</li>
+    <li>Pangkat terkecil untuk <b>2</b> adalah $2^2$.</li>
+    <li>Pangkat terkecil untuk <b>3</b> adalah $3^1$.</li>
+</ul>
+<p>Maka, FPB(36, 48) = $2^2 \times 3^1 = 4 \times 3 = 12$.</p>
+
+
+<h2>Menentukan KPK dengan Faktorisasi Prima</h2>
+<div class="important-note">
+    <b>Aturan KPK:</b>
+    <ol>
+        <li>Ambil <b>semua faktor prima yang ada</b> (baik yang sama maupun yang berbeda).</li>
+        <li>Jika ada faktor yang sama, pilih <b>pangkat yang terbesar</b>.</li>
+    </ol>
+    <b>Logikanya:</b> KPK adalah <b>kelipatan</b>, jadi ia harus bisa dibagi habis oleh kedua bilangan. Untuk itu, ia harus mengandung semua "bahan dasar" (faktor prima) dari kedua bilangan dengan jumlah yang mencukupi (pangkat terbesar).
+</div>
+<p>
+    <b>Contoh: Tentukan KPK dari 36 dan 48.</b>
+    <br>$36 = 2^2 \times 3^2$
+    <br>$48 = 2^4 \times 3^1$
+</p>
+<ul>
+    <li>Semua faktor prima yang ada adalah <b>2</b> dan <b>3</b>.</li>
+    <li>Pangkat terbesar untuk <b>2</b> adalah $2^4$.</li>
+    <li>Pangkat terbesar untuk <b>3</b> adalah $3^2$.</li>
+</ul>
+<p>Maka, KPK(36, 48) = $2^4 \times 3^2 = 16 \times 9 = 144$.</p>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang metode faktorisasi prima.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Faktorisasi prima yang tepat untuk bilangan 60 adalah...",
+                options: [ "$2 \\times 3 \\times 10$", "$4 \\times 15$", "$2^2 \\times 3 \\times 5$", "$6 \\times 10$" ],
+                correct: 2,
+                explanation: "Faktorisasi prima berarti menguraikan bilangan menjadi perkalian bilangan-bilangan prima. 10, 4, 15, dan 6 bukan bilangan prima. Bentuk yang benar adalah $2^2 \\times 3 \\times 5$."
+            },
+            {
+                q: "Aturan untuk mencari FPB dengan faktorisasi prima adalah...",
+                options: [
+                    "Kalikan semua faktor prima dengan pangkat terbesar",
+                    "Kalikan semua faktor prima dengan pangkat terkecil",
+                    "Kalikan faktor prima yang sama (persekutuan) dengan pangkat terbesar",
+                    "Kalikan faktor prima yang sama (persekutuan) dengan pangkat terkecil"
+                ],
+                correct: 3,
+                explanation: "Ingat, FPB adalah 'Faktor Persekutuan Terbesar'. Kita hanya ambil faktor yang sama (persekutuan) dan untuk bisa membagi keduanya, kita dibatasi oleh pangkat yang terkecil."
+            },
+            {
+                q: "Diberikan faktorisasi prima A = $2^3 \\times 3$ dan B = $2^2 \\times 3^2 \\times 5$. FPB dari A dan B adalah...",
+                options: [ "$2^2 \\times 3^1$", "$2^3 \\times 3^2 \\times 5$", "$2^2 \\times 3^2 \\times 5$", "$2^3 \\times 3^1$" ],
+                correct: 0,
+                explanation: "Faktor yang sama adalah 2 dan 3. Pangkat terkecil untuk 2 adalah $2^2$. Pangkat terkecil untuk 3 adalah $3^1$. Jadi FPB = $2^2 \\times 3 = 12$."
+            },
+            {
+                q: "Aturan untuk mencari KPK dengan faktorisasi prima adalah...",
+                options: [
+                    "Ambil semua faktor (yang sama dan berbeda), lalu pilih pangkat terbesar untuk masing-masing",
+                    "Ambil hanya faktor yang sama, lalu pilih pangkat terkecil",
+                    "Ambil semua faktor (yang sama dan berbeda), lalu pilih pangkat terkecil",
+                    "Ambil hanya faktor yang sama, lalu pilih pangkat terbesar"
+                ],
+                correct: 0,
+                explanation: "Ingat, KPK adalah 'Kelipatan Persekutuan Terkecil'. Kita ambil semua jenis faktor yang ada dan untuk bisa dibagi oleh keduanya, kita harus mengambil pangkat yang terbesar untuk setiap jenis faktor."
+            },
+            {
+                q: "Diberikan faktorisasi prima A = $2^3 \\times 3$ dan B = $2^2 \\times 3^2 \\times 5$. KPK dari A dan B adalah...",
+                options: [ "$2^2 \\times 3$", "$2^3 \\times 3^2$", "$2^2 \\times 3 \\times 5$", "$2^3 \\times 3^2 \\times 5$" ],
+                correct: 3,
+                explanation: "Semua jenis faktor yang ada adalah 2, 3, dan 5. Pangkat terbesar untuk 2 adalah $2^3$. Pangkat terbesar untuk 3 adalah $3^2$. Pangkat terbesar untuk 5 adalah $5^1$. Jadi KPK = $2^3 \\times 3^2 \\times 5 = 360$."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
