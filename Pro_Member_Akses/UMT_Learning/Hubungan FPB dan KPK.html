@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hubungan FPB dan KPK - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .special-note {
+            background-color: rgba(211, 159, 39, 0.1); border-left: 4px solid #d39f27;
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note, .special-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Hubungan Elegan antara FPB dan KPK</h1>
+<p>
+    FPB dan KPK bukanlah dua konsep yang terpisah. Keduanya terhubung oleh sebuah rumus yang sederhana dan sangat elegan. Memahami hubungan ini tidak hanya membantu kita dalam perhitungan, tetapi juga memperdalam pemahaman kita tentang struktur bilangan.
+</p>
+
+<h2>Menemukan Hubungan Melalui Contoh</h2>
+<p>
+    Mari kita lihat kembali hasil perhitungan kita untuk bilangan <b>24</b> dan <b>36</b>.
+</p>
+<ul>
+    <li>Faktorisasi: $24 = 2^3 \times 3$ dan $36 = 2^2 \times 3^2$.</li>
+    <li>FPB(24, 36) = $2^2 \times 3^1 = 12$.</li>
+    <li>KPK(24, 36) = $2^3 \times 3^2 = 72$.</li>
+</ul>
+<p>
+    Sekarang, mari kita coba lakukan dua perhitungan sederhana:
+</p>
+<ol>
+    <li><b>Kalikan kedua bilangan asli:</b>
+        <br>$24 \times 36 = 864$
+    </li>
+    <li><b>Kalikan hasil FPB dan KPK:</b>
+        <br>$12 \times 72 = 864$
+    </li>
+</ol>
+<p>
+    Hasilnya sama persis! Ini bukan kebetulan. Ini adalah sebuah sifat fundamental.
+</p>
+
+<h2>Rumus Umum dan Pembuktiannya</h2>
+<div class="important-note">
+    <b>Rumus Hubungan FPB dan KPK</b><br>
+    Untuk dua bilangan bulat positif $a$ dan $b$, berlaku:
+    $$ a \times b = \text{FPB}(a, b) \times \text{KPK}(a, b) $$
+</div>
+<p><b>Mengapa Rumus Ini Bekerja? (Logika di Balik Layar)</b></p>
+<p>
+    Kunci pembuktiannya terletak pada aturan pangkat dalam faktorisasi prima.
+</p>
+<ul>
+    <li>Untuk <b>FPB</b>, kita mengambil faktor prima yang sama dengan pangkat <b>terkecil</b>.</li>
+    <li>Untuk <b>KPK</b>, kita mengambil semua faktor prima dengan pangkat <b>terbesar</b>.</li>
+</ul>
+<p>
+    Saat kita mengalikan FPB dan KPK, kita sebenarnya menggabungkan kembali semua faktor prima dari kedua bilangan tersebut. Pangkat terkecil dari satu faktor akan "melengkapi" pangkat terbesar dari faktor yang sama, sehingga hasilnya setara dengan menjumlahkan pangkat aslinya, yang sama dengan perkalian kedua bilangan.
+</p>
+<p><b>Contoh:</b> $a = 2^3 \times 3^1$ dan $b = 2^2 \times 3^2$.</p>
+<ul>
+    <li>FPB = $2^2 \times 3^1$ (pangkat terkecil)</li>
+    <li>KPK = $2^3 \times 3^2$ (pangkat terbesar)</li>
+    <li>FPB $\times$ KPK = $(2^2 \times 3^1) \times (2^3 \times 3^2) = 2^{2+3} \times 3^{1+2} = 2^5 \times 3^3$</li>
+    <li>$a \times b$ = $(2^3 \times 3^1) \times (2^2 \times 3^2) = 2^{3+2} \times 3^{1+2} = 2^5 \times 3^3$</li>
+</ul>
+<p>Hasilnya terbukti sama.</p>
+
+<div class="special-note">
+    <b>Peringatan Penting:</b> Rumus ini hanya berlaku untuk <b>dua bilangan</b>. Rumus ini <b>tidak berlaku</b> untuk tiga bilangan atau lebih.
+    <br>
+    $a \times b \times c \neq \text{FPB}(a,b,c) \times \text{KPK}(a,b,c)$
+</div>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang hubungan antara FPB dan KPK.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Hubungan matematis yang benar antara dua bilangan (a dan b) dengan FPB dan KPK mereka adalah...",
+                options: [
+                    "$a + b = \\text{FPB} + \\text{KPK}$",
+                    "$a \\times b = \\text{FPB} \\times \\text{KPK}$",
+                    "$a - b = \\text{FPB} - \\text{KPK}$",
+                    "$a / b = \\text{FPB} / \\text{KPK}$"
+                ],
+                correct: 1,
+                explanation: "Rumus fundamental yang menghubungkan kedua konsep ini adalah perkalian. Hasil kali dua bilangan sama dengan hasil kali FPB dan KPK dari kedua bilangan tersebut."
+            },
+            {
+                q: "FPB dari 10 dan 15 adalah 5. Berapakah KPK dari 10 dan 15 jika dihitung menggunakan rumus hubungan?",
+                options: [ "25", "30", "50", "150" ],
+                correct: 1,
+                explanation: "Menggunakan rumus $a \\times b = \\text{FPB} \\times \\text{KPK}$, kita dapatkan $10 \\times 15 = 5 \\times \\text{KPK}$. Maka, $150 = 5 \\times \\text{KPK}$, sehingga KPK = $150 / 5 = 30$."
+            },
+            {
+                q: "KPK dari dua bilangan adalah 120 dan FPB-nya adalah 10. Jika salah satu bilangannya adalah 30, maka bilangan lainnya adalah...",
+                options: [ "40", "60", "20", "12" ],
+                correct: 0,
+                explanation: "Misalkan bilangan kedua adalah $x$. Maka, $30 \\times x = 10 \\times 120$. $30x = 1200$. Jadi, $x = 1200 / 30 = 40$."
+            },
+            {
+                q: "Mengapa rumus $a \\times b = \\text{FPB} \\times \\text{KPK}$ bisa bekerja?",
+                options: [
+                    "Karena FPB selalu merupakan kelipatan dari KPK",
+                    "Karena perkalian antara pangkat terbesar dan pangkat terkecil dari setiap faktor prima akan mengembalikan jumlah pangkat aslinya",
+                    "Karena KPK selalu lebih besar dari FPB",
+                    "Itu hanya kebetulan untuk beberapa angka saja"
+                ],
+                correct: 1,
+                explanation: "Logikanya terletak pada bagaimana pangkat-pangkat faktor prima didistribusikan. FPB mengambil 'porsi' pangkat terkecil, dan KPK mengambil 'porsi' pangkat terbesar. Ketika dikalikan, 'porsi' tersebut bergabung kembali menjadi total pangkat dari perkalian bilangan aslinya."
+            },
+            {
+                q: "Rumus $a \\times b \\times c = \\text{FPB}(a,b,c) \\times \\text{KPK}(a,b,c)$ berlaku untuk tiga bilangan.",
+                options: [ "Benar", "Salah" ],
+                correct: 1,
+                explanation: "Salah. Rumus elegan ini adalah properti khusus yang hanya berlaku untuk DUA bilangan. Untuk tiga bilangan atau lebih, hubungan ini tidak berlaku."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
