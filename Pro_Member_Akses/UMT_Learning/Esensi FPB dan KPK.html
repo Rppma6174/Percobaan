@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esensi FPB dan KPK - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Esensi FPB dan KPK: Faktor & Kelipatan Bersama</h1>
+<p>
+    FPB (Faktor Persekutuan Terbesar) dan KPK (Kelipatan Persekutuan Terkecil) adalah dua konsep dasar dalam teori bilangan. Kunci untuk memahaminya secara mendalam adalah dengan membedah arti dari setiap kata yang membentuknya, bukan sekadar menghafal cara menghitungnya.
+</p>
+<div class="important-note">
+    <b>Analogi Inti:</b>
+    <ul>
+        <li><b>FPB</b> ibarat mencari ukuran <b>alat potong terbesar</b> yang bisa digunakan untuk memotong beberapa benda berbeda panjang menjadi potongan-potongan yang sama besar tanpa sisa.</li>
+        <li><b>KPK</b> ibarat mencari <b>waktu pertemuan kembali</b> untuk beberapa peristiwa yang terjadi secara berkala dengan interval berbeda.</li>
+    </ul>
+</div>
+
+<h2>Membedah FPB (Faktor Persekutuan Terbesar)</h2>
+<p>Mari kita pecah istilahnya satu per satu untuk bilangan <b>12</b> dan <b>18</b>.</p>
+<ol>
+    <li>
+        <b>Faktor:</b> Adalah bilangan yang dapat <b>membagi habis</b> suatu bilangan.
+        <ul>
+            <li>Faktor dari 12 adalah: {1, 2, 3, 4, 6, 12}</li>
+            <li>Faktor dari 18 adalah: {1, 2, 3, 6, 9, 18}</li>
+        </ul>
+    </li>
+    <li>
+        <b>Persekutuan:</b> Artinya "yang sama" atau "milik bersama". Maka, <b>Faktor Persekutuan</b> adalah faktor-faktor yang sama-sama dimiliki oleh 12 dan 18.
+        <ul>
+            <li>Faktor Persekutuan dari 12 dan 18 adalah: {1, 2, 3, 6}</li>
+        </ul>
+    </li>
+    <li>
+        <b>Terbesar:</b> Dari kumpulan faktor persekutuan tersebut, kita ambil yang nilainya paling besar.
+        <ul>
+            <li>Faktor Persekutuan Terbesar (FPB) adalah <b>6</b>.</li>
+        </ul>
+    </li>
+</ol>
+<p><b>Esensi FPB:</b> FPB adalah bilangan bulat positif <b>terbesar</b> yang dapat <b>membagi habis</b> beberapa bilangan sekaligus.</p>
+
+<h2>Membedah KPK (Kelipatan Persekutuan Terkecil)</h2>
+<p>Sekarang, mari kita pecah istilahnya untuk bilangan <b>4</b> dan <b>6</b>.</p>
+<ol>
+    <li>
+        <b>Kelipatan:</b> Adalah hasil perkalian suatu bilangan dengan bilangan asli (1, 2, 3, ...).
+        <ul>
+            <li>Kelipatan dari 4 adalah: {4, 8, 12, 16, 20, 24, ...}</li>
+            <li>Kelipatan dari 6 adalah: {6, 12, 18, 24, 30, ...}</li>
+        </ul>
+    </li>
+    <li>
+        <b>Persekutuan:</b> Sama seperti sebelumnya, kita cari kelipatan yang dimiliki bersama oleh 4 dan 6.
+        <ul>
+            <li>Kelipatan Persekutuan dari 4 dan 6 adalah: {12, 24, 36, ...}</li>
+        </ul>
+    </li>
+    <li>
+        <b>Terkecil:</b> Dari kumpulan kelipatan persekutuan tersebut, kita ambil yang nilainya paling kecil.
+        <ul>
+            <li>Kelipatan Persekutuan Terkecil (KPK) adalah <b>12</b>.</li>
+        </ul>
+    </li>
+</ol>
+<p><b>Esensi KPK:</b> KPK adalah bilangan bulat positif <b>terkecil</b> yang <b>habis dibagi</b> oleh beberapa bilangan sekaligus.</p>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman mendasar Anda tentang esensi FPB dan KPK.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Istilah 'Faktor Persekutuan' dari 10 dan 20 merujuk pada...",
+                options: [
+                    "Bilangan-bilangan yang bisa membagi habis 10 dan juga bisa membagi habis 20",
+                    "Bilangan-bilangan yang merupakan hasil kali dari 10 dan 20",
+                    "Bilangan-bilangan yang bisa dibagi oleh 10 dan juga bisa dibagi oleh 20",
+                    "Semua faktor dari 10 dan semua faktor dari 20"
+                ],
+                correct: 0,
+                explanation: "'Faktor' berarti pembagi, dan 'Persekutuan' berarti yang sama/milik bersama. Jadi, faktor persekutuan adalah bilangan yang sama-sama menjadi pembagi dari kedua bilangan tersebut."
+            },
+            {
+                q: "FPB (Faktor Persekutuan Terbesar) dari 10 dan 15 adalah...",
+                options: [ "1", "2", "5", "10" ],
+                correct: 2,
+                explanation: "Faktor 10: {1,2,5,10}. Faktor 15: {1,3,5,15}. Faktor persekutuannya adalah {1,5}. Yang terbesar adalah 5."
+            },
+            {
+                q: "Istilah 'Kelipatan Persekutuan' dari 3 dan 5 merujuk pada...",
+                options: [
+                    "Bilangan-bilangan yang bisa membagi 3 atau 5",
+                    "Bilangan-bilangan hasil penjumlahan 3 dan 5",
+                    "Bilangan-bilangan yang habis dibagi oleh 3 dan juga habis dibagi oleh 5",
+                    "Semua kelipatan dari 3"
+                ],
+                correct: 2,
+                explanation: "'Kelipatan' adalah hasil kali, dan 'Persekutuan' berarti milik bersama. Jadi, kelipatan persekutuan adalah bilangan yang sama-sama merupakan kelipatan dari kedua bilangan tersebut (bisa dibagi habis oleh keduanya)."
+            },
+            {
+                q: "KPK (Kelipatan Persekutuan Terkecil) dari 8 dan 12 adalah...",
+                options: [ "4", "24", "48", "96" ],
+                correct: 1,
+                explanation: "Kelipatan 8: {8, 16, 24, 32, ...}. Kelipatan 12: {12, 24, 36, ...}. Kelipatan persekutuan yang pertama kali muncul (yang terkecil) adalah 24."
+            },
+            {
+                q: "Andi berenang setiap 4 hari sekali, Budi berenang setiap 6 hari sekali. Jika hari ini mereka berenang bersama, kapan mereka akan berenang bersama lagi? Masalah ini diselesaikan dengan mencari...",
+                options: [
+                    "FPB dari 4 dan 6",
+                    "KPK dari 4 dan 6",
+                    "Penjumlahan 4 dan 6",
+                    "Perkalian 4 dan 6"
+                ],
+                correct: 1,
+                explanation: "Ini adalah masalah 'kapan bertemu lagi'. Kita mencari kelipatan waktu yang sama untuk pertama kalinya, yang merupakan esensi dari KPK. KPK(4,6) = 12. Mereka akan bertemu lagi 12 hari kemudian."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
