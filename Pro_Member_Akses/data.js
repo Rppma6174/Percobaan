@@ -528,6 +528,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Argumen & Penarikan Kesimpulan.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_logika_matematika_7', 
+            title: 'Kuantor Universal & Eksistensial', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Kuantor Universal & Eksistensial.html', 
+            fileType: 'html' 
+            },
         ],
         "Trigonometri": [
             { 
