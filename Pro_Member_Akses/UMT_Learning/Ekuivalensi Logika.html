@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ekuivalensi Logika - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        table {
+            width: 100%;
+            margin: 1.5rem auto;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+        }
+        th { background-color: #1e2a3a; }
+        .equivalent { background-color: rgba(57, 211, 83, 0.1); }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note, td, th {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        .scrollable-wrapper {
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding-bottom: 8px;
+            margin: 1.5rem 0;
+        }
+        .scrollable-wrapper > table {
+            margin: 0;
+            width: 100%;
+            min-width: 600px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Ekuivalensi Logika: Saat Pernyataan Berbeda Bermakna Sama</h1>
+<p>
+    Dalam logika, dua atau lebih pernyataan majemuk disebut <b>ekuivalen secara logis</b> jika keduanya memiliki nilai kebenaran yang persis sama untuk semua kemungkinan nilai kebenaran dari proposisi-proposisi pembentuknya. Artinya, meskipun kalimat atau simbolnya berbeda, makna logisnya identik.
+</p>
+<p>
+    Kita menggunakan simbol $\equiv$ untuk menyatakan ekuivalensi. Jadi, $P \equiv Q$ dibaca "P ekuivalen secara logis dengan Q".
+</p>
+<div class="important-note">
+    <b>Cara Membuktikan Ekuivalensi:</b><br>
+    Cara paling fundamental untuk membuktikan dua pernyataan ekuivalen adalah dengan membuat <b>tabel kebenaran</b>. Jika kolom hasil akhir untuk kedua pernyataan tersebut sama persis, maka keduanya ekuivalen.
+</div>
+<p>Contoh yang sudah kita lihat adalah ekuivalensi antara Implikasi dan Kontraposisi: $p \to q \equiv \sim q \to \sim p$.</p>
+
+<h2>Hukum-Hukum Ekuivalensi Logika</h2>
+<p>
+    Ada beberapa ekuivalensi yang sangat berguna dan sering digunakan sehingga dianggap sebagai "hukum" dalam logika, mirip seperti hukum aljabar.
+</p>
+
+<h3>1. Hukum De Morgan</h3>
+<p>Hukum ini menjelaskan cara menegasikan sebuah konjungsi atau disjungsi.</p>
+<ul>
+    <li>$\sim (p \land q) \equiv \sim p \lor \sim q$</li>
+    <li>$\sim (p \lor q) \equiv \sim p \land \sim q$</li>
+</ul>
+<p><b>Analogi:</b> "Tidak benar bahwa kamu harus membawa buku DAN pensil" ($\sim(p \land q)$) artinya sama dengan "Kamu boleh tidak membawa buku ATAU kamu boleh tidak membawa pensil" ($\sim p \lor \sim q$).</p>
+
+<h3>2. Hukum Komutatif & Asosiatif</h3>
+<p>Sama seperti pada aljabar, urutan dan pengelompokan tidak menjadi masalah untuk konjungsi dan disjungsi.</p>
+<ul>
+    <li><b>Komutatif:</b> $p \land q \equiv q \land p$ dan $p \lor q \equiv q \lor p$</li>
+    <li><b>Asosiatif:</b> $(p \land q) \land r \equiv p \land (q \land r)$</li>
+</ul>
+
+<h3>3. Ekuivalensi Implikasi</h3>
+<p>Ini adalah salah satu ekuivalensi yang paling kuat dan sering digunakan dalam pembuktian.</p>
+<ul>
+    <li>$p \to q \equiv \sim p \lor q$</li>
+</ul>
+<p><b>Mengapa ini ekuivalen?</b></p>
+<p>Ingat kembali analogi "Janji Ayah": "Jika kamu ranking 1 ($p$), maka Ayah belikan sepeda ($q$)". Janji ini hanya dilanggar jika kamu ranking 1 (p Benar) TAPI tidak dibelikan sepeda (q Salah).</p>
+<p>Sekarang perhatikan pernyataan: "Kamu <b>tidak</b> ranking 1 ($\sim p$) <b>atau</b> Ayah belikan sepeda ($q$)". Pernyataan ini hanya akan salah jika kedua bagiannya salah, yaitu jika $\sim p$ salah (artinya $p$ benar) DAN $q$ salah. Ini adalah kondisi pelanggaran janji yang sama persis!</p>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang konsep ekuivalensi logika.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Dua pernyataan majemuk dikatakan ekuivalen secara logis jika...",
+                options: [
+                    "Memiliki operator logika yang sama",
+                    "Memiliki jumlah proposisi atomik yang sama",
+                    "Memiliki tabel kebenaran yang identik untuk semua kasus",
+                    "Keduanya selalu bernilai Benar"
+                ],
+                correct: 2,
+                explanation: "Definisi formal dari ekuivalensi logika adalah kesamaan mutlak pada nilai kebenaran di setiap baris tabel kebenaran."
+            },
+            {
+                q: "Berdasarkan Hukum De Morgan, bentuk yang ekuivalen dengan 'Tidak benar bahwa hari ini cerah DAN saya membawa payung' adalah...",
+                options: [
+                    "Hari ini tidak cerah DAN saya tidak membawa payung.",
+                    "Hari ini cerah ATAU saya membawa payung.",
+                    "Hari ini tidak cerah ATAU saya tidak membawa payung.",
+                    "Hari ini cerah DAN saya tidak membawa payung."
+                ],
+                correct: 2,
+                explanation: "Ini adalah bentuk $\\sim (p \\land q)$. Menurut De Morgan, ini ekuivalen dengan $\\sim p \\lor \\sim q$, atau 'Hari ini tidak cerah ATAU saya tidak membawa payung'."
+            },
+            {
+                q: "Pernyataan 'Jika hari cerah, maka saya akan ke pantai' ($p \\to q$) ekuivalen secara logis dengan...",
+                options: [
+                    "Hari cerah dan saya akan ke pantai ($p \\land q$)",
+                    "Hari tidak cerah atau saya akan ke pantai ($\\sim p \\lor q$)",
+                    "Jika saya ke pantai, maka hari cerah ($q \\to p$)",
+                    "Hari tidak cerah dan saya tidak ke pantai ($\\sim p \\land \\sim q$)"
+                ],
+                correct: 1,
+                explanation: "Ini adalah penerapan langsung dari hukum ekuivalensi implikasi, di mana $p \\to q \\equiv \\sim p \\lor q$."
+            },
+            {
+                q: "Pernyataan mana yang secara logis ekuivalen dengan Kontraposisi ($\\sim q \\to \\sim p$)?",
+                options: [ "Implikasi Asli ($p \\to q$)", "Konvers ($q \\to p$)", "Invers ($\\sim p \\to \\sim q$)", "Bi-implikasi ($p \\leftrightarrow q$)" ],
+                correct: 0,
+                explanation: "Seperti yang telah dibuktikan pada materi sebelumnya, implikasi dan kontraposisinya selalu memiliki nilai kebenaran yang sama, sehingga keduanya ekuivalen."
+            },
+            {
+                q: "Bentuk yang ekuivalen dengan $(p \\to q) \\land (q \\to p)$ adalah...",
+                options: [ "$p \\lor q$", "$p \\land q$", "$p \\leftrightarrow q$", "$p \\to (q \\land p)$" ],
+                correct: 2,
+                explanation: "Ini adalah definisi formal dari Bi-implikasi. Pernyataan 'p jika dan hanya jika q' adalah gabungan dari dua janji: 'jika p maka q' DAN 'jika q maka p'."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
