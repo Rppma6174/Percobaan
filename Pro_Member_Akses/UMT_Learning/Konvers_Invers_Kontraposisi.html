@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konvers, Invers, Kontraposisi - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        table {
+            width: 100%;
+            margin: 1.5rem auto;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+        }
+        th { background-color: #1e2a3a; }
+        .equivalent { background-color: rgba(57, 211, 83, 0.1); }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note, td, th {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Implikasi Lanjutan: Konvers, Invers, dan Kontraposisi</h1>
+<p>
+    Dari sebuah pernyataan implikasi ($p \to q$), kita dapat membentuk tiga pernyataan kondisional lain yang terkait. Memahami perbedaan dan hubungan di antara ketiganya sangat krusial dalam menganalisis validitas sebuah argumen.
+</p>
+<p>
+    Mari kita gunakan satu pernyataan sebagai contoh utama:
+    <br><b>Implikasi Asli ($p \to q$):</b> "Jika hari ini hujan ($p$), maka jalanan basah ($q$)."
+</p>
+
+<h2>Definisi Tiga Variasi Implikasi</h2>
+<p>
+    Berikut adalah tiga variasi yang dapat dibentuk dari implikasi asli:
+</p>
+<ul>
+    <li>
+        <b>Konvers ($q \to p$):</b>
+        <br><b>Aturan:</b> Tukar posisi sebab (anteseden) dan akibat (konsekuen).
+        <br><b>Contoh:</b> "Jika jalanan basah ($q$), maka hari ini hujan ($p$)."
+        <br><b>Hubungan:</b> Nilai kebenarannya <b>TIDAK SAMA</b> dengan implikasi asli. (Jalanan bisa basah karena disiram, tidak harus karena hujan).
+    </li>
+    <br>
+    <li>
+        <b>Invers ($\sim p \to \sim q$):</b>
+        <br><b>Aturan:</b> Negasikan kedua bagian, posisi tetap.
+        <br><b>Contoh:</b> "Jika hari ini tidak hujan ($\sim p$), maka jalanan tidak basah ($\sim q$)."
+        <br><b>Hubungan:</b> Nilai kebenarannya juga <b>TIDAK SAMA</b> dengan implikasi asli. (Meskipun tidak hujan sekarang, jalanan mungkin masih basah karena hujan tadi pagi).
+    </li>
+    <br>
+    <li>
+        <b>Kontraposisi ($\sim q \to \sim p$):</b>
+        <br><b>Aturan:</b> Tukar posisi DAN negasikan kedua bagian.
+        <br><b>Contoh:</b> "Jika jalanan tidak basah ($\sim q$), maka hari ini tidak hujan ($\sim p$)."
+        <br><b>Hubungan:</b> Nilai kebenarannya <b>SELALU SAMA (EKUIVALEN)</b> dengan implikasi asli. Jika pernyataan asli benar, maka kontraposisinya juga pasti benar.
+    </li>
+</ul>
+
+<h2>Analisis Tabel Kebenaran</h2>
+<p>
+    Pembuktian paling formal mengenai hubungan nilai kebenaran di atas adalah melalui tabel kebenaran. Mari kita lihat nilai kebenaran dari keempat pernyataan tersebut untuk semua kemungkinan.
+</p>
+<table>
+    <thead>
+        <tr><th>$p$</th><th>$q$</th><th class="equivalent">Implikasi ($p \to q$)</th><th>Konvers ($q \to p$)</th><th>Invers ($\sim p \to \sim q$)</th><th class="equivalent">Kontraposisi ($\sim q \to \sim p$)</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>B</td><td>B</td><td class="equivalent">B</td><td>B</td><td>B</td><td class="equivalent">B</td></tr>
+        <tr><td>B</td><td>S</td><td class="equivalent">S</td><td>B</td><td>B</td><td class="equivalent">S</td></tr>
+        <tr><td>S</td><td>B</td><td class="equivalent">B</td><td>S</td><td>S</td><td class="equivalent">B</td></tr>
+        <tr><td>S</td><td>S</td><td class="equivalent">B</td><td>B</td><td>B</td><td="equivalent">B</td></tr>
+    </tbody>
+</table>
+
+<div class="important-note">
+    <b>Kesimpulan dari Tabel Kebenaran:</b>
+    <ol>
+        <li>Kolom <b>Implikasi Asli</b> dan <b>Kontraposisi</b> memiliki pola nilai kebenaran yang identik (B, S, B, B). Ini membuktikan bahwa keduanya <b>ekuivalen secara logis</b>.</li>
+        <li>Kolom <b>Konvers</b> dan <b>Invers</b> juga memiliki pola yang identik satu sama lain (B, B, S, B), sehingga keduanya juga ekuivalen. Namun, pola ini berbeda dari Implikasi Asli.</li>
+    </ol>
+</div>
+
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji kemampuan Anda dalam membedakan ketiga variasi implikasi ini.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Diberikan implikasi 'Jika seekor hewan adalah kucing, maka ia mengeong'. Manakah Konvers dari pernyataan tersebut?",
+                options: [
+                    "Jika seekor hewan bukan kucing, maka ia tidak mengeong.",
+                    "Jika seekor hewan mengeong, maka ia adalah kucing.",
+                    "Jika seekor hewan tidak mengeong, maka ia bukan kucing."
+                ],
+                correct: 1,
+                explanation: "Konvers dibentuk dengan menukar posisi hipotesis dan konklusi. Jadi, 'jika mengeong ($q$), maka ia kucing ($p$)'."
+            },
+            {
+                q: "Dari soal yang sama, manakah Invers dari pernyataan 'Jika seekor hewan adalah kucing, maka ia mengeong'?",
+                options: [
+                    "Jika seekor hewan bukan kucing, maka ia tidak mengeong.",
+                    "Jika seekor hewan mengeong, maka ia adalah kucing.",
+                    "Jika seekor hewan tidak mengeong, maka ia bukan kucing."
+                ],
+                correct: 0,
+                explanation: "Invers dibentuk dengan menegasikan kedua bagian tanpa mengubah posisi. Jadi, 'jika bukan kucing ($\\sim p$), maka tidak mengeong ($\\sim q$)'."
+            },
+            {
+                q: "Pernyataan logika yang selalu ekuivalen (memiliki nilai kebenaran yang sama persis) dengan implikasi asli ($p \\to q$) adalah...",
+                options: [ "Konvers ($q \\to p$)", "Invers ($\\sim p \\to \\sim q$)", "Kontraposisi ($\\sim q \\to \\sim p$)", "Negasi ($\\sim(p \\to q)$)" ],
+                correct: 2,
+                explanation: "Kontraposisi adalah satu-satunya bentuk yang secara logis ekuivalen dengan implikasi aslinya. Jika salah satu benar, yang lain pasti benar."
+            },
+            {
+                q: "Perhatikan pernyataan: 'Jika saya lapar ($p$), maka saya makan ($q$).' Pernyataan mana di bawah ini yang memiliki makna logis yang sama?",
+                options: [
+                    "Jika saya makan, maka saya lapar. (Konvers)",
+                    "Jika saya tidak lapar, maka saya tidak makan. (Invers)",
+                    "Jika saya tidak makan, maka saya tidak lapar. (Kontraposisi)"
+                ],
+                correct: 2,
+                explanation: "Pernyataan yang ekuivalen adalah kontraposisinya. 'Jika saya tidak makan ($\\sim q$), maka dapat dipastikan saya tidak lapar ($\\sim p$)', karena jika saya lapar, saya pasti sudah makan."
+            },
+            {
+                q: "Jika sebuah pernyataan Konvers ($q \\to p$) terbukti benar, apakah pernyataan Invers ($\sim p \to \sim q$) juga pasti benar?",
+                options: [
+                    "Ya, selalu benar",
+                    "Tidak, tidak ada hubungan",
+                    "Kadang benar, kadang salah"
+                ],
+                correct: 0,
+                explanation: "Ya, selalu benar. Seperti yang ditunjukkan oleh tabel kebenaran, Konvers dan Invers adalah pasangan yang ekuivalen secara logis satu sama lain."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
