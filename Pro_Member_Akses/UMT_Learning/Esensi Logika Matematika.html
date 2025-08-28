@@ -42,7 +42,7 @@
             padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
         }
         table {
-            width: 50%;
+            width: 100%;
             margin: 1.5rem auto;
             border-collapse: collapse;
             text-align: center;
@@ -109,60 +109,48 @@
 <div class="important-note">
     <b>Tes Sederhana:</b> Untuk mengetahui apakah sebuah kalimat adalah proposisi, tanyakan pada diri Anda: "Bisakah saya secara objektif menyatakan kalimat ini Benar atau Salah?"
 </div>
-
 <p><b>Contoh Proposisi:</b></p>
 <ul>
     <li>"Indonesia memiliki 38 provinsi." (Nilai kebenaran: <b>Benar</b>)</li>
     <li>"2 + 3 = 6." (Nilai kebenaran: <b>Salah</b>)</li>
-    <li>"Bulan terbuat dari keju." (Nilai kebenaran: <b>Salah</b>)</li>
 </ul>
 <p><b>Contoh yang BUKAN Proposisi:</b></p>
 <ul>
-    <li><b>Kalimat Perintah:</b> "Tolong ambilkan buku itu!" (Tidak bisa dinilai benar/salah).</li>
-    <li><b>Kalimat Tanya:</b> "Jam berapa sekarang?" (Tidak bisa dinilai benar/salah).</li>
-    <li><b>Opini/Subjektif:</b> "Matematika itu pelajaran yang menyenangkan." (Nilai kebenarannya tergantung individu).</li>
-    <li><b>Kalimat Terbuka:</b> "$x + 5 = 10$". (Kalimat ini baru memiliki nilai kebenaran jika nilai $x$ sudah ditentukan. Jika $x=5$, ia menjadi proposisi yang Benar).</li>
+    <li><b>Kalimat Perintah:</b> "Tolong ambilkan buku itu!"</li>
+    <li><b>Kalimat Tanya:</b> "Jam berapa sekarang?"</li>
+    <li><b>Opini/Subjektif:</b> "Matematika itu pelajaran yang menyenangkan."</li>
+    <li><b>Kalimat Terbuka:</b> "$x + 5 = 10$". (Baru menjadi proposisi jika $x$ diberi nilai).</li>
 </ul>
 
-<h2>Negasi (Ingkaran): Membalik Kebenaran</h2>
+<h2>Penalaran Deduktif: Tulang Punggung Logika Matematika</h2>
 <p>
-    Operasi logika paling dasar adalah <b>negasi</b> atau <b>ingkaran</b> (dilambangkan dengan $\sim$ atau $\neg$). Negasi berfungsi untuk membalik nilai kebenaran dari sebuah proposisi.
+    Tujuan akhir dari logika adalah untuk membangun dan menganalisis <b>argumen</b>, yang terdiri dari serangkaian pernyataan (<b>premis</b>) yang mengarah ke sebuah <b>konklusi</b> (kesimpulan). Dalam matematika, jenis penalaran yang digunakan adalah <b>penalaran deduktif</b>.
 </p>
+<p>
+    <b>Logika Deduktif</b> bergerak dari <b>umum ke khusus</b>. Penalaran ini dimulai dengan sebuah aturan atau premis umum yang dianggap benar, kemudian menerapkannya pada kasus khusus untuk menghasilkan konklusi yang dijamin pasti benar.
+</p>
+<p><b>Contoh Argumen Deduktif:</b></p>
 <ul>
-    <li>Jika proposisi $p$ Benar, maka negasinya $\sim p$ Salah.</li>
-    <li>Jika proposisi $p$ Salah, maka negasinya $\sim p$ Benar.</li>
+    <li><b>Premis 1 (Umum):</b> Semua makhluk hidup membutuhkan air.</li>
+    <li><b>Premis 2 (Khusus):</b> Kucing adalah makhluk hidup.</li>
+    <li><b>Konklusi (Pasti):</b> Oleh karena itu, kucing membutuhkan air.</li>
 </ul>
-<p><b>Contoh:</b></p>
-<ul>
-    <li>$p$: "Paus adalah mamalia." (Benar)</li>
-    <li>$\sim p$: "Paus bukan mamalia." (Salah)</li>
-</ul>
-<p>Ini dapat diringkas dalam sebuah <b>Tabel Kebenaran</b>:</p>
-<table>
-    <thead><tr><th>$p$</th><th>$\sim p$</th></tr></thead>
-    <tbody>
-        <tr><td>Benar (B)</td><td>Salah (S)</td></tr>
-        <tr><td>Salah (S)</td><td>Benar (B)</td></tr>
-    </tbody>
-</table>
+<p>
+    Jika kedua premis di atas benar, maka konklusinya tidak mungkin salah. Inilah kekuatan logika deduktif yang menjadi dasar semua pembuktian matematika.
+</p>
 
-<h2>Argumen Logis</h2>
-<p>
-    Tujuan akhir dari logika adalah untuk membangun dan menganalisis <b>argumen</b>. Sebuah argumen terdiri dari:
-</p>
-<ul>
-    <li><b>Premis:</b> Satu atau lebih proposisi yang dianggap sebagai bukti atau landasan.</li>
-    <li><b>Konklusi:</b> Proposisi yang ditarik sebagai kesimpulan dari premis-premis tersebut.</li>
-</ul>
-<p><b>Contoh Argumen Sederhana:</b></p>
-<ul>
-    <li><b>Premis 1:</b> Semua makhluk hidup membutuhkan air.</li>
-    <li><b>Premis 2:</b> Kucing adalah makhluk hidup.</li>
-    <li><b>Konklusi:</b> Oleh karena itu, kucing membutuhkan air.</li>
-</ul>
-<p>
-    Pada materi selanjutnya, kita akan mempelajari "kata hubung" logika (seperti "dan", "atau", "jika-maka") yang memungkinkan kita merangkai proposisi-proposisi sederhana ini menjadi argumen yang kompleks dan valid.
-</p>
+<div class="important-note">
+    <b>Kontras dengan Logika Induktif</b><br>
+    Sebagai perbandingan, <b>Logika Induktif</b> bergerak dari <b>khusus ke umum</b>. Penalaran ini dimulai dengan mengamati beberapa contoh khusus, lalu mencoba membuat kesimpulan umum.
+    <br><br>
+    <b>Contoh Argumen Induktif:</b>
+    <ul>
+        <li><b>Observasi 1:</b> Angsa yang saya lihat di danau berwarna putih.</li>
+        <li><b>Observasi 2:</b> Angsa yang saya lihat di TV berwarna putih.</li>
+        <li><b>Konklusi (Kemungkinan):</b> Semua angsa berwarna putih.</li>
+    </ul>
+    Konklusi ini bersifat kemungkinan (probabilitas), bukan kepastian, karena bisa saja salah jika suatu saat kita menemukan satu angsa hitam. Logika induktif sangat berguna dalam sains untuk membuat hipotesis, tetapi <b>tidak digunakan untuk pembuktian dalam logika matematika</b>.
+</div>
 
 <h2>Uji Pemahaman Anda</h2>
 <p>Uji pemahaman mendasar Anda tentang esensi logika matematika.</p>
@@ -180,21 +168,21 @@
                 explanation: "'Angka 9 adalah bilangan prima' adalah kalimat deklaratif yang memiliki nilai kebenaran pasti, yaitu Salah. Kalimat lain adalah pertanyaan, perintah, atau kalimat terbuka."
             },
             {
-                q: "Apa yang menjadi ciri utama sebuah proposisi dalam logika matematika?",
-                options: [
-                    "Harus berupa kalimat yang panjang",
-                    "Harus memiliki nilai kebenaran yang pasti (benar atau salah)",
-                    "Harus mengandung variabel matematika",
-                    "Harus merupakan sebuah opini yang kuat"
-                ],
+                q: "Seorang ilmuwan mengamati 100 ekor gagak dan semuanya berwarna hitam, lalu ia menyimpulkan 'Semua gagak berwarna hitam'. Jenis penalaran yang ia gunakan adalah...",
+                options: [ "Deduktif", "Induktif", "Rekursif", "Negasi" ],
                 correct: 1,
-                explanation: "Ciri fundamental sebuah proposisi adalah kemampuannya untuk dinilai secara objektif sebagai Benar atau Salah, tidak bisa keduanya atau mengambang."
+                explanation: "Penalaran ini bergerak dari beberapa contoh spesifik (100 gagak) ke sebuah kesimpulan umum (semua gagak). Ini adalah ciri khas dari penalaran induktif."
             },
             {
-                q: "Diberikan proposisi $p$: 'Manusia bisa hidup tanpa oksigen.' Nilai kebenaran dari $p$ dan negasinya $\\sim p$ adalah...",
-                options: [ "$p$ (Benar), $\\sim p$ (Salah)", "$p$ (Salah), $\\sim p$ (Benar)", "$p$ (Benar), $\\sim p$ (Benar)", "$p$ (Salah), $\\sim p$ (Salah)" ],
+                q: "Diberikan premis 'Semua segitiga memiliki jumlah sudut 180°' dan 'ABC adalah sebuah segitiga'. Konklusi yang ditarik secara deduktif adalah...",
+                options: [
+                    "Mungkin ABC memiliki jumlah sudut 180°",
+                    "ABC pasti memiliki jumlah sudut 180°",
+                    "Beberapa segitiga memiliki jumlah sudut 180°",
+                    "ABC adalah segitiga siku-siku"
+                ],
                 correct: 1,
-                explanation: "Proposisi $p$ bernilai Salah. Maka, negasinya, yaitu 'Tidak benar bahwa manusia bisa hidup tanpa oksigen' atau 'Manusia tidak bisa hidup tanpa oksigen', bernilai Benar."
+                explanation: "Logika deduktif menerapkan aturan umum ('semua segitiga...') pada kasus khusus ('ABC'). Jika premisnya benar, konklusinya dijamin pasti benar."
             },
             {
                 q: "Kalimat 'Lukisan itu indah' bukan merupakan proposisi karena...",
