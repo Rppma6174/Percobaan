@@ -535,6 +535,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Kuantor Universal & Eksistensial.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_logika_matematika_8', 
+            title: 'Teknik Pembuktian Logis', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Teknik Pembuktian Logis.html', 
+            fileType: 'html' 
+            },
         ],
         "Trigonometri": [
             { 
