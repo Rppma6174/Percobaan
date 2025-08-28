@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teknik Pembuktian Logis - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Teknik Pembuktian Logis: Dari Premis Menuju Kebenaran</h1>
+<p>
+    Pembuktian matematika adalah sebuah argumen deduktif yang valid untuk menunjukkan kebenaran suatu pernyataan. Sebagian besar teorema matematika berbentuk implikasi: "<b>Jika</b> $P$ (premis/hipotesis), <b>maka</b> $K$ (konklusi)". Tugas kita adalah menunjukkan bahwa implikasi $P \to K$ ini adalah sebuah Tautologi.
+</p>
+<div class="important-note">
+    <b>Prinsip Dasar Pembuktian:</b>
+    Untuk membuktikan $P \to K$, kita selalu memulai dengan <b>mengasumsikan semua premis $P$ adalah benar</b>. Kemudian, dengan menggunakan langkah-langkah logis, kita harus menunjukkan bahwa asumsi ini secara tak terhindarkan membuat <b>konklusi $K$ juga menjadi benar</b>.
+</div>
+
+<h2>1. Pembuktian Langsung (Direct Proof)</h2>
+<p>
+    Ini adalah metode yang paling intuitif. Kita memulai dari premis $p$ dan maju langkah demi langkah menggunakan definisi, aksioma, atau teorema lain hingga kita sampai pada konklusi $q$.
+    <br><b>Alur:</b> Asumsikan $p$ benar $\implies \dots \implies$ Tunjukkan $q$ benar.
+</p>
+<p><b>Contoh:</b> Buktikan, "Jika $n$ adalah bilangan ganjil, maka $n^2$ adalah bilangan ganjil."</p>
+<ol>
+    <li><b>Asumsikan premis benar:</b> Misalkan $n$ adalah bilangan ganjil.</li>
+    <li><b>Gunakan definisi:</b> Menurut definisi, ada bilangan bulat $k$ sehingga $n = 2k + 1$.</li>
+    <li><b>Lakukan operasi aljabar:</b>
+        <br>$n^2 = (2k + 1)^2 = 4k^2 + 4k + 1$</li>
+    <li><b>Ubah ke bentuk tujuan:</b>
+        <br>$n^2 = 2(2k^2 + 2k) + 1$</li>
+    <li><b>Tarik kesimpulan:</b> Karena $k$ adalah bilangan bulat, maka $(2k^2 + 2k)$ juga merupakan bilangan bulat. Misalkan $m = 2k^2 + 2k$. Maka, $n^2$ dapat ditulis dalam bentuk $2m+1$, yang sesuai dengan definisi bilangan ganjil. <b>Terbukti.</b></li>
+</ol>
+
+<h2>2. Pembuktian dengan Kontraposisi</h2>
+<p>
+    Metode ini memanfaatkan ekuivalensi logika bahwa $p \to q \equiv \sim q \to \sim p$. Terkadang, membuktikan kontraposisinya jauh lebih mudah daripada membuktikan implikasi aslinya.
+    <br><b>Alur:</b> Asumsikan $\sim q$ benar $\implies \dots \implies$ Tunjukkan $\sim p$ benar.
+</p>
+<p><b>Contoh:</b> Buktikan, "Jika $n^2$ adalah bilangan genap, maka $n$ adalah bilangan genap."</p>
+<ol>
+    <li><b>Nyatakan Kontraposisinya:</b> Pernyataan ini ekuivalen dengan "Jika $n$ <b>bukan</b> genap (yaitu ganjil), maka $n^2$ <b>bukan</b> genap (yaitu ganjil)."</li>
+    <li><b>Buktikan Kontraposisi (dengan bukti langsung):</b>
+        <br>Ini adalah pernyataan yang persis sama dengan yang telah kita buktikan di metode Pembuktian Langsung di atas. Kita sudah menunjukkan bahwa jika $n$ ganjil, maka $n^2$ pasti ganjil.
+    </li>
+    <li><b>Kesimpulan:</b> Karena kontraposisinya ($\sim q \to \sim p$) terbukti benar, maka implikasi aslinya ($p \to q$) juga pasti benar. <b>Terbukti.</b></li>
+</ol>
+
+<h2>3. Pembuktian dengan Kontradiksi (Reductio ad Absurdum)</h2>
+<p>
+    Ini adalah metode yang sangat kuat. Untuk membuktikan sebuah pernyataan $p$ benar, kita mulai dengan mengasumsikan kebalikannya ($\sim p$) benar. Kemudian kita tunjukkan bahwa asumsi ini akan mengarah pada sebuah pertentangan logis (kontradiksi). Karena asumsi awal menghasilkan kekacauan logis, maka asumsi tersebut pasti salah, yang berarti pernyataan aslinya harus benar.
+</p>
+<p><b>Alur:</b> Asumsikan $p$ salah ($\sim p$ benar) $\implies \dots \implies$ Tiba pada sebuah kontradiksi (misal $R \land \sim R$) $\implies$ Simpulkan asumsi $\sim p$ salah, maka $p$ harus benar.</p>
+<p><b>Contoh Klasik:</b> Buktikan, "$\sqrt{2}$ adalah bilangan irasional."</p>
+<ol>
+    <li><b>Asumsikan negasinya (untuk mencari kontradiksi):</b> Anggap $\sqrt{2}$ adalah bilangan <b>rasional</b>.</li>
+    <li><b>Gunakan definisi:</b> Maka $\sqrt{2} = \frac{a}{b}$, di mana $a$ dan $b$ adalah bilangan bulat dan pecahan tersebut sudah dalam bentuk paling sederhana (FPB(a,b)=1).</li>
+    <li><b>Lakukan aljabar:</b>
+        <br>$2 = \frac{a^2}{b^2} \implies a^2 = 2b^2$. Ini berarti $a^2$ adalah bilangan genap.</li>
+    <li><b>Deduksi #1:</b> Berdasarkan bukti sebelumnya, jika $a^2$ genap, maka $a$ juga harus genap.</li>
+    <li><b>Gunakan definisi (lagi):</b> Jika $a$ genap, maka $a = 2k$ untuk suatu bilangan bulat $k$.</li>
+    <li><b>Substitusi kembali:</b> $(2k)^2 = 2b^2 \implies 4k^2 = 2b^2 \implies 2k^2 = b^2$. Ini berarti $b^2$ juga bilangan genap.</li>
+    <li><b>Deduksi #2:</b> Maka, $b$ juga harus bilangan genap.</li>
+    <li><b>TEMUKAN KONTRADIKSI:</b> Kita menyimpulkan bahwa $a$ dan $b$ keduanya adalah bilangan genap. Ini berarti keduanya memiliki faktor persekutuan 2. Hal ini <b>bertentangan</b> dengan asumsi awal kita di langkah 2 bahwa pecahan $\frac{a}{b}$ sudah dalam bentuk paling sederhana.</li>
+    <li><b>Kesimpulan:</b> Karena asumsi awal ("$\sqrt{2}$ adalah rasional") mengarah pada kontradiksi logis, maka asumsi tersebut harus salah. Oleh karena itu, kebalikannya ("$\sqrt{2}$ adalah irasional") haruslah benar. <b>Terbukti.</b></li>
+</ol>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang strategi pembuktian dalam logika.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Metode pembuktian yang dimulai dengan mengasumsikan premis $p$ benar dan bertujuan untuk menunjukkan $q$ juga benar melalui langkah-langkah logis disebut...",
+                options: [ "Pembuktian dengan Kontraposisi", "Pembuktian dengan Kontradiksi", "Pembuktian Langsung" ],
+                correct: 2,
+                explanation: "Pembuktian langsung adalah alur penalaran yang paling lurus ke depan: dari asumsi premis, kita secara deduktif tiba di konklusi."
+            },
+            {
+                q: "Untuk membuktikan pernyataan 'Jika $n^2$ ganjil, maka $n$ ganjil' menggunakan metode kontraposisi, kita harus memulai dengan membuktikan pernyataan...",
+                options: [
+                    "Jika $n$ ganjil, maka $n^2$ ganjil",
+                    "Jika $n$ genap, maka $n^2$ genap",
+                    "Jika $n^2$ genap, maka $n$ genap"
+                ],
+                correct: 1,
+                explanation: "Kontraposisi dari 'jika $p$, maka $q$' adalah 'jika bukan $q$, maka bukan $p$'. Dalam kasus ini, negasi dari 'n ganjil' adalah 'n genap', dan negasi dari '$n^2$ ganjil' adalah '$n^2$ genap'."
+            },
+            {
+                q: "Apa asumsi awal yang kita buat saat akan membuktikan pernyataan $P$ dengan metode kontradiksi?",
+                options: [ "Mengasumsikan $P$ benar", "Mengasumsikan negasinya ($\sim P$) benar", "Mengasumsikan $P$ bisa benar atau salah" ],
+                correct: 1,
+                explanation: "Metode kontradiksi bekerja dengan mengasumsikan kebalikan dari apa yang ingin kita buktikan, lalu menunjukkan bahwa asumsi tersebut mengarah pada absurditas atau pertentangan logis."
+            },
+            {
+                q: "Pembuktian klasik bahwa $\\sqrt{2}$ adalah bilangan irasional menggunakan metode...",
+                options: [ "Pembuktian Langsung", "Pembuktian dengan Kontraposisi", "Pembuktian dengan Kontradiksi" ],
+                correct: 2,
+                explanation: "Pembuktian ini adalah contoh paling terkenal dari pembuktian dengan kontradiksi, di mana asumsi bahwa $\\sqrt{2}$ rasional terbukti mengarah pada sebuah pertentangan."
+            },
+            {
+                q: "Anda ingin membuktikan 'Jika $x+y > 10$, maka $x>5$ atau $y>5$'. Metode mana yang paling mungkin lebih mudah digunakan?",
+                options: [ "Pembuktian Langsung", "Pembuktian dengan Kontraposisi" ],
+                correct: 1,
+                explanation: "Membuktikan secara langsung akan sulit karena banyak kasus. Kontraposisinya adalah 'Jika $\\sim(x>5 \\text{ atau } y>5)$, maka $\\sim(x+y>10)$'. Menggunakan De Morgan, ini menjadi 'Jika $x \\le 5$ DAN $y \\le 5$, maka $x+y \\le 10$'. Pernyataan ini jauh lebih mudah untuk dibuktikan secara langsung."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
