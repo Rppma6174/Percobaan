@@ -487,12 +487,19 @@ const allContentData = {
         ],
         "Logika Matematika": [
             { 
-            id: 'materi_logika_matematika', 
+            id: 'materi_logika_matematika_1', 
             title: 'Esensi Logika Matematika', 
             type: 'HTML Document', 
             filePath: 'UMT_Learning/Esensi Logika Matematika.html', 
             fileType: 'html' 
-            }
+            },
+            { 
+            id: 'materi_logika_matematika_2', 
+            title: 'Operator Logika & Tabel Kebenaran', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Operator Logika & Tabel Kebenaran.html', 
+            fileType: 'html' 
+            },
         ],
         "Trigonometri": [
             { 
