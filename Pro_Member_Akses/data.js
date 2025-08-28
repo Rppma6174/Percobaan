@@ -514,6 +514,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Ekuivalensi Logika.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_logika_matematika_5', 
+            title: 'Hukum - Hukum Logika Matematika', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Hukum-Hukum Logika Matematika.html', 
+            fileType: 'html' 
+            },
         ],
         "Trigonometri": [
             { 
