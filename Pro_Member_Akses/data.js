@@ -500,6 +500,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Operator Logika & Tabel Kebenaran.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_logika_matematika_3', 
+            title: 'Konvers, Invers Dan Kontraposisi', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Konvers_Invers_Kontraposisi.html', 
+            fileType: 'html' 
+            },
         ],
         "Trigonometri": [
             { 
