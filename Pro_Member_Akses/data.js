@@ -507,6 +507,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Konvers_Invers_Kontraposisi.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_logika_matematika_4', 
+            title: 'Ekuivalensi Logika', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Ekuivalensi Logika.html', 
+            fileType: 'html' 
+            },
         ],
         "Trigonometri": [
             { 
