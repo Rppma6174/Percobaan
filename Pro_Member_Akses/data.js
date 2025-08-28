@@ -521,6 +521,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Hukum-Hukum Logika Matematika.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_logika_matematika_6', 
+            title: 'Argumen & Penarikan Kesimpulan', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Argumen & Penarikan Kesimpulan.html', 
+            fileType: 'html' 
+            },
         ],
         "Trigonometri": [
             { 
