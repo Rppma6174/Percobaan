@@ -41,9 +41,19 @@
             background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
             padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
         }
-        table {
+        .scrollable-wrapper {
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding-bottom: 8px;
+            margin: 1.5rem 0;
+        }
+        .scrollable-wrapper > table {
+            margin: 0;
             width: 100%;
-            margin: 1.5rem auto;
+            min-width: 600px; /* Memaksa scrollbar muncul di layar sempit */
+        }
+        table {
             border-collapse: collapse;
             text-align: center;
         }
@@ -78,7 +88,7 @@
         }
         
         /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
-        p, li, .quiz-explanation, .important-note, td, th {
+        p, li, .quiz-explanation, .important-note {
             overflow-x: auto;
             padding-bottom: 8px;
         }
@@ -133,19 +143,30 @@
 
 <h2>Analisis Tabel Kebenaran</h2>
 <p>
-    Pembuktian paling formal mengenai hubungan nilai kebenaran di atas adalah melalui tabel kebenaran. Mari kita lihat nilai kebenaran dari keempat pernyataan tersebut untuk semua kemungkinan.
+    Pembuktian paling formal mengenai hubungan nilai kebenaran di atas adalah melalui tabel kebenaran.
 </p>
-<table>
-    <thead>
-        <tr><th>$p$</th><th>$q$</th><th class="equivalent">Implikasi ($p \to q$)</th><th>Konvers ($q \to p$)</th><th>Invers ($\sim p \to \sim q$)</th><th class="equivalent">Kontraposisi ($\sim q \to \sim p$)</th></tr>
-    </thead>
-    <tbody>
-        <tr><td>B</td><td>B</td><td class="equivalent">B</td><td>B</td><td>B</td><td class="equivalent">B</td></tr>
-        <tr><td>B</td><td>S</td><td class="equivalent">S</td><td>B</td><td>B</td><td class="equivalent">S</td></tr>
-        <tr><td>S</td><td>B</td><td class="equivalent">B</td><td>S</td><td>S</td><td class="equivalent">B</td></tr>
-        <tr><td>S</td><td>S</td><td class="equivalent">B</td><td>B</td><td>B</td><td="equivalent">B</td></tr>
-    </tbody>
-</table>
+<div class="scrollable-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>$p$</th>
+                <th>$q$</th>
+                <th>$\sim p$</th>
+                <th>$\sim q$</th>
+                <th class="equivalent">Implikasi<br>($p \to q$)</th>
+                <th>Konvers<br>($q \to p$)</th>
+                <th>Invers<br>($\sim p \to \sim q$)</th>
+                <th class="equivalent">Kontraposisi<br>($\sim q \to \sim p$)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>B</td><td>B</td><td>S</td><td>S</td><td class="equivalent">B</td><td>B</td><td>B</td><td class="equivalent">B</td></tr>
+            <tr><td>B</td><td>S</td><td>S</td><td>B</td><td class="equivalent">S</td><td>B</td><td>B</td><td class="equivalent">S</td></tr>
+            <tr><td>S</td><td>B</td><td>B</td><td>S</td><td class="equivalent">B</td><td>S</td><td>S</td><td class="equivalent">B</td></tr>
+            <tr><td>S</td><td>S</td><td>B</td><td>B</td><td class="equivalent">B</td><td>B</td><td>B</td><td class="equivalent">B</td></tr>
+        </tbody>
+    </table>
+</div>
 
 <div class="important-note">
     <b>Kesimpulan dari Tabel Kebenaran:</b>
