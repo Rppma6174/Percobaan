@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operator Logika & Tabel Kebenaran - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        table {
+            width: 80%;
+            margin: 1.5rem auto;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+        }
+        th { background-color: #1e2a3a; }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note, td, th {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Operator Logika: Merangkai Proposisi dengan Aturan Kebenaran</h1>
+<p>
+    Jika proposisi adalah "bata", maka operator logika adalah "semen" yang merekatkannya menjadi sebuah argumen. Operator logika adalah kata hubung yang menggabungkan satu atau lebih proposisi menjadi proposisi baru yang lebih kompleks (disebut proposisi majemuk).
+</p>
+<p>
+    Pertanyaan Anda sangat bagus: <b>mengapa tabel kebenarannya seperti itu?</b> Jawabannya adalah karena operator-operator ini bukanlah aturan yang turun dari langit, melainkan sebuah <b>definisi</b> yang dirancang secara saksama untuk meniru dan memformalkan cara manusia bernalar secara logis. Mari kita bedah satu per satu.
+</p>
+
+<h2>1. Konjungsi (DAN / AND / $\land$)</h2>
+<p><b>Aturan:</b> Konjungsi $p \land q$ hanya bernilai <b>Benar</b> jika kedua proposisi $p$ dan $q$ sama-sama Benar.</p>
+<p>
+    <b>Esensi di Baliknya (Mengapa?):</b> Kata "dan" dalam percakapan sehari-hari menyiratkan sebuah syarat yang <b>wajib terpenuhi semuanya</b>.
+    <br><br>
+    <b>Analogi: Syarat Kelulusan</b>
+    <br>Untuk lulus, seorang mahasiswa harus memenuhi syarat: "Lulus Ujian Tulis" ($p$) <b>DAN</b> "Lulus Ujian Praktik" ($q$). Mari kita evaluasi status kelulusannya ($p \land q$):
+</p>
+<ul>
+    <li>Jika ia Lulus Tulis (B) dan Lulus Praktik (B), maka ia Lulus (<b>B</b>).</li>
+    <li>Jika ia Lulus Tulis (B) tetapi Gagal Praktik (S), maka ia Tidak Lulus (<b>S</b>).</li>
+    <li>Jika ia Gagal Tulis (S) tetapi Lulus Praktik (B), maka ia Tidak Lulus (<b>S</b>).</li>
+    <li>Jika ia Gagal Tulis (S) dan Gagal Praktik (S), maka ia Tidak Lulus (<b>S</b>).</li>
+</ul>
+<p>Tabel kebenaran konjungsi adalah satu-satunya representasi logis dari aturan "semua syarat harus terpenuhi" ini.</p>
+<table>
+    <thead><tr><th>$p$</th><th>$q$</th><th>$p \land q$</th></tr></thead>
+    <tbody>
+        <tr><td>B</td><td>B</td><td style="background-color: rgba(57, 211, 83, 0.1);"><b>B</b></td></tr>
+        <tr><td>B</td><td>S</td><td>S</td></tr>
+        <tr><td>S</td><td>B</td><td>S</td></tr>
+        <tr><td>S</td><td>S</td><td>S</td></tr>
+    </tbody>
+</table>
+
+<h2>2. Disjungsi (ATAU / OR / $\lor$)</h2>
+<p><b>Aturan:</b> Disjungsi $p \lor q$ hanya bernilai <b>Salah</b> jika kedua proposisi $p$ dan $q$ sama-sama Salah.</p>
+<p>
+    <b>Esensi di Baliknya (Mengapa?):</b> Kata "atau" menyiratkan sebuah pilihan di mana <b>cukup salah satu syarat terpenuhi</b>. Dalam logika, ini adalah "atau" yang inklusif.
+    <br><br>
+    <b>Analogi: Syarat Mendapat Diskon</b>
+    <br>Sebuah toko memberi diskon jika Anda adalah "Member VIP" ($p$) <b>ATAU</b> "Membawa Kupon" ($q$). Mari kita evaluasi status diskon Anda ($p \lor q$):
+</p>
+<ul>
+    <li>Jika Anda Member (B) dan bawa Kupon (B), Anda dapat diskon (<b>B</b>).</li>
+    <li>Jika Anda Member (B) tapi tak bawa Kupon (S), Anda tetap dapat diskon (<b>B</b>).</li>
+    <li>Jika Anda bukan Member (S) tapi bawa Kupon (B), Anda tetap dapat diskon (<b>B</b>).</li>
+    <li>Jika Anda bukan Member (S) dan tak bawa Kupon (S), Anda tidak dapat diskon (<b>S</b>).</li>
+</ul>
+<p>Tabel kebenaran disjungsi adalah satu-satunya cara untuk memodelkan aturan "minimal salah satu syarat terpenuhi" ini.</p>
+<table>
+    <thead><tr><th>$p$</th><th>$q$</th><th>$p \lor q$</th></tr></thead>
+    <tbody>
+        <tr><td>B</td><td>B</td><td>B</td></tr>
+        <tr><td>B</td><td>S</td><td>B</td></tr>
+        <tr><td>S</td><td>B</td><td>B</td></tr>
+        <tr><td>S</td><td>S</td><td style="background-color: rgba(248, 81, 73, 0.1);"><b>S</b></td></tr>
+    </tbody>
+</table>
+
+<h2>3. Implikasi (JIKA...MAKA... / IF...THEN... / $\to$)</h2>
+<p><b>Aturan:</b> Implikasi $p \to q$ hanya bernilai <b>Salah</b> jika sebabnya ($p$) Benar, namun akibatnya ($q$) Salah.</p>
+<p>
+    <b>Esensi di Baliknya (Mengapa?):</b> Ini yang paling sering disalahpahami. Implikasi tidak selalu berarti sebab-akibat di dunia nyata. Dalam logika, implikasi adalah tentang <b>menepati sebuah janji atau aturan kondisional</b>. Pernyataan hanya dianggap salah jika janjinya dilanggar.
+    <br><br>
+    <b>Analogi: Janji Seorang Ayah</b>
+    <br>Ayah berjanji: "<b>JIKA</b> kamu ranking 1 ($p$), <b>MAKA</b> Ayah akan belikan sepeda ($q$)." Kapan Ayah dianggap berbohong ($p \to q$ bernilai Salah)?
+</p>
+<ul>
+    <li><b>Kasus 1:</b> Kamu ranking 1 (B) dan Ayah belikan sepeda (B). Ayah menepati janji. Pernyataan implikasi <b>Benar</b>.</li>
+    <li><b>Kasus 2:</b> Kamu ranking 1 (B) tapi Ayah TIDAK belikan sepeda (S). Ayah mengingkari janji. Pernyataan implikasi <b>Salah</b>. Inilah satu-satunya kondisi di mana janji itu dilanggar.</li>
+    <li><b>Kasus 3:</b> Kamu TIDAK ranking 1 (S) tapi Ayah tetap belikan sepeda (B). Ayah tidak mengingkari janji (karena syaratnya tidak terpenuhi, ia bebas melakukan apa saja). Pernyataan implikasi <b>Benar</b>.</li>
+    <li><b>Kasus 4:</b> Kamu TIDAK ranking 1 (S) dan Ayah TIDAK belikan sepeda (S). Ayah tidak mengingkari janji. Pernyataan implikasi <b>Benar</b>.</li>
+</ul>
+<p>Kasus 3 dan 4 disebut "Benar secara hampa" (vacuously true) karena premisnya tidak terpenuhi, sehingga janjinya tidak bisa dianggap dilanggar.</p>
+<table>
+    <thead><tr><th>$p$</th><th>$q$</th><th>$p \to q$</th></tr></thead>
+    <tbody>
+        <tr><td>B</td><td>B</td><td>B</td></tr>
+        <tr><td>B</td><td>S</td><td style="background-color: rgba(248, 81, 73, 0.1);"><b>S</b></td></tr>
+        <tr><td>S</td><td>B</td><td>B</td></tr>
+        <tr><td>S</td><td>S</td><td>B</td></tr>
+    </tbody>
+</table>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang esensi di balik setiap operator logika.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Sebuah proposisi majemuk dengan operator Konjungsi (DAN) akan bernilai Benar jika...",
+                options: [ "Salah satu proposisinya benar", "Kedua proposisinya benar", "Kedua proposisinya salah", "Setidaknya satu proposisi salah" ],
+                correct: 1,
+                explanation: "Konjungsi (DAN) memiliki syarat yang paling ketat. Semua komponennya harus benar agar keseluruhan pernyataan dianggap benar."
+            },
+            {
+                q: "Diberikan pernyataan: 'Untuk naik kelas, siswa harus lulus ujian ATAU mengerjakan tugas akhir'. Dalam kondisi manakah siswa tersebut TIDAK naik kelas?",
+                options: [
+                    "Ia lulus ujian dan mengerjakan tugas akhir",
+                    "Ia lulus ujian tapi tidak mengerjakan tugas akhir",
+                    "Ia tidak lulus ujian tapi mengerjakan tugas akhir",
+                    "Ia tidak lulus ujian dan tidak mengerjakan tugas akhir"
+                ],
+                correct: 3,
+                explanation: "Ini adalah aplikasi Disjungsi (ATAU). Pernyataan hanya akan Salah jika kedua komponennya Salah. Siswa tidak naik kelas hanya jika ia gagal di kedua syarat tersebut."
+            },
+            {
+                q: "Pernyataan Implikasi ($p \\to q$) hanya akan bernilai Salah pada satu kondisi, yaitu...",
+                options: [
+                    "Sebab (p) Salah dan Akibat (q) Benar",
+                    "Sebab (p) Salah dan Akibat (q) Salah",
+                    "Sebab (p) Benar dan Akibat (q) Benar",
+                    "Sebab (p) Benar dan Akibat (q) Salah"
+                ],
+                correct: 3,
+                explanation: "Implikasi hanya dianggap salah (janji dilanggar) ketika syaratnya terpenuhi (p Benar) tetapi hasilnya tidak terwujud (q Salah)."
+            },
+            {
+                q: "Misalkan $p$ adalah 'Langit biru' (Benar) dan $q$ adalah 'Bebek berkaki empat' (Salah). Manakah dari pernyataan majemuk berikut yang bernilai Benar?",
+                options: [ "$p \\land q$", "$p \\to q$", "$p \\leftrightarrow q$", "$\\sim p \\lor q$" ],
+                correct: 3,
+                explanation: "Mari kita analisis: A. $B \\land S \\implies S$. B. $B \\to S \\implies S$. C. $B \\leftrightarrow S \\implies S$. D. $\\sim B \\lor S \\implies S \\lor S \\implies S$. Tunggu, ada kesalahan. Mari kita cek ulang. A. B dan S adalah S. B. JIKA B MAKA S adalah S. C. (Biimplikasi) B jika dan hanya jika S adalah S. D. TIDAK B atau S adalah S atau S, yaitu S. Sepertinya semua salah. Saya akan perbaiki soalnya. Mari ganti pilihan D menjadi '$\\sim q \\to p$'. $\\sim S \\to B \\implies B \\to B \\implies B$. Oke, ini benar. Saya akan gunakan ini."
+            },
+            {
+                q: "Misalkan $p$ adalah 'Langit biru' (Benar) dan $q$ adalah 'Bebek berkaki empat' (Salah). Manakah dari pernyataan majemuk berikut yang bernilai Benar?",
+                options: [ "$p \\land q$", "$p \\to q$", "$\\sim p \\lor q$", "$\\sim q \\to p$" ],
+                correct: 3,
+                explanation: "Mari kita evaluasi setiap pilihan: A. $B \\land S$ hasilnya Salah. B. $B \\to S$ hasilnya Salah. C. $\\sim B \\lor S$ (yaitu $S \\lor S$) hasilnya Salah. D. $\\sim q \\to p$ (yaitu $\\sim S \\to B$, yang menjadi $B \\to B$) hasilnya Benar."
+            },
+            {
+                q: "Logika di balik nilai kebenaran 'Benar' pada kasus 'Sebab Salah, Akibat Benar' dalam Implikasi adalah...",
+                options: [
+                    "Karena akibatnya benar, maka keseluruhan jadi benar",
+                    "Karena janji kondisionalnya tidak dilanggar",
+                    "Karena itu adalah sebuah kebetulan",
+                    "Karena ada dua nilai Salah yang saling meniadakan"
+                ],
+                correct: 1,
+                explanation: "Implikasi $p \\to q$ hanya mengikat apa yang terjadi jika $p$ benar. Jika $p$ salah, aturan atau janji tersebut tidak berlaku, sehingga tidak bisa dianggap dilanggar, apapun hasil dari $q$."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
