@@ -485,6 +485,15 @@ const allContentData = {
             fileType: 'html' 
             },
         ],
+        "Logika Matematika": [
+            { 
+            id: 'materi_logika_matematika', 
+            title: 'Esensi Logika Matematika', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Esensi Logika Matematika.html', 
+            fileType: 'html' 
+            }
+        ],
         "Trigonometri": [
             { 
             id: 'materi_esensi_trigonometri', 
