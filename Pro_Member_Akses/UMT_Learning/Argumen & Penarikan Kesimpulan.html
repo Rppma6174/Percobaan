@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Argumen & Penarikan Kesimpulan - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .scrollable-wrapper {
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding-bottom: 8px;
+            margin: 1.5rem 0;
+        }
+        .scrollable-wrapper > table {
+            margin: 0;
+            width: 100%;
+            min-width: 600px;
+        }
+        table {
+            border-collapse: collapse;
+            text-align: center;
+        }
+        th, td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+        }
+        th { background-color: #1e2a3a; }
+        .highlight-true { background-color: rgba(57, 211, 83, 0.15); }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note, td, th {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Argumen & Penarikan Kesimpulan: Membangun Penalaran yang Sah</h1>
+<p>
+    Inilah puncak dari semua yang telah kita pelajari. Proposisi, operator, dan ekuivalensi adalah alat untuk membangun dan menganalisis sebuah <b>argumen</b>. Sebuah argumen dikatakan <b>valid (sah)</b> bukan karena premis atau kesimpulannya terasa benar, melainkan karena struktur logisnya tanpa cela.
+</p>
+<p>
+    Secara formal, setiap argumen dapat ditulis sebagai sebuah pernyataan implikasi tunggal yang besar:
+    $$ (P_1 \land P_2 \land \dots \land P_n) \to K $$
+    Di mana $P_1, P_2, \dots$ adalah premis-premisnya, dan $K$ adalah konklusinya.
+</p>
+<div class="important-note">
+    <b>Definisi Validitas Argumen:</b><br>
+    Sebuah argumen dikatakan <b>valid</b> jika bentuk implikasi formalnya merupakan sebuah <b>Tautologi</b> (selalu bernilai Benar).
+    <br><br>
+    <b>Artinya dalam praktik:</b> Kita harus memastikan bahwa <b>setiap kali SEMUA premisnya bernilai Benar, maka Konklusinya juga HARUS Benar</b>. Tidak boleh terjadi kasus di mana premis-premis yang benar menghasilkan konklusi yang salah (kasus $B \to S$ harus dihindari).
+</div>
+
+<h2>Teknik-Teknik Penarikan Kesimpulan yang Valid</h2>
+<p>Berikut adalah beberapa pola argumen yang sudah terbukti selalu valid.</p>
+
+<h3>1. Modus Ponens</h3>
+<ul>
+    <li><b>Premis 1:</b> $p \to q$ (Jika p, maka q)</li>
+    <li><b>Premis 2:</b> $p$ (p terjadi)</li>
+    <li><b>Konklusi:</b> $\therefore q$ (Maka, q terjadi)</li>
+</ul>
+<p><b>Contoh:</b> "Jika hari hujan, maka saya bawa payung. Hari ini hujan. Maka, saya bawa payung."</p>
+<p><b>Pembuktian Validitas:</b> Kita buktikan $((p \to q) \land p) \to q$ adalah tautologi.</p>
+<div class="scrollable-wrapper">
+    <table>
+      <thead><tr><th>$p$</th><th>$q$</th><th>$p \to q$</th><th>$(p \to q) \land p$</th><th>$((p \to q) \land p) \to q$</th></tr></thead>
+      <tbody>
+        <tr class="highlight-true"><td>B</td><td>B</td><td>B</td><td>B</td><td>B</td></tr>
+        <tr><td>B</td><td>S</td><td>S</td><td>S</td><td>B</td></tr>
+        <tr><td>S</td><td>B</td><td>B</td><td>S</td><td>B</td></tr>
+        <tr><td>S</td><td>S</td><td>B</td><td>S</td><td>B</td></tr>
+      </tbody>
+    </table>
+</div>
+<p>Karena kolom terakhir selalu Benar, argumen ini valid. Perhatikan pada baris pertama (yang di-highlight): saat kedua premis ($p \to q$ dan $p$) benar, konklusinya ($q$) juga benar.</p>
+
+<h3>2. Modus Tollens</h3>
+<ul>
+    <li><b>Premis 1:</b> $p \to q$</li>
+    <li><b>Premis 2:</b> $\sim q$ (q tidak terjadi)</li>
+    <li><b>Konklusi:</b> $\therefore \sim p$ (Maka, p tidak terjadi)</li>
+</ul>
+<p><b>Contoh:</b> "Jika ada api, maka ada asap. Tidak ada asap. Maka, tidak ada api."</p>
+<p><b>Pembuktian Validitas:</b> Kita buktikan $((p \to q) \land \sim q) \to \sim p$ adalah tautologi.</p>
+<div class="scrollable-wrapper">
+    <table>
+      <thead><tr><th>$p$</th><th>$q$</th><th>$\sim p$</th><th>$\sim q$</th><th>$p \to q$</th><th>$(p \to q) \land \sim q$</th><th>$((p \to q) \land \sim q) \to \sim p$</th></tr></thead>
+      <tbody>
+        <tr><td>B</td><td>B</td><td>S</td><td>S</td><td>B</td><td>S</td><td>B</td></tr>
+        <tr><td>B</td><td>S</td><td>S</td><td>B</td><td>S</td><td>S</td><td>B</td></tr>
+        <tr><td>S</td><td>B</td><td>B</td><td>S</td><td>B</td><td>S</td><td>B</td></tr>
+        <tr class="highlight-true"><td>S</td><td>S</td><td>B</td><td>B</td><td>B</td><td>B</td><td>B</td></tr>
+      </tbody>
+    </table>
+</div>
+<p>Kolom terakhir selalu Benar, argumen valid. Perhatikan pada baris terakhir: saat kedua premis ($p \to q$ dan $\sim q$) benar, konklusinya ($\sim p$) juga benar.</p>
+
+<h3>3. Silogisme Hipotesis (Sifat Transitif)</h3>
+<ul>
+    <li><b>Premis 1:</b> $p \to q$</li>
+    <li><b>Premis 2:</b> $q \to r$</li>
+    <li><b>Konklusi:</b> $\therefore p \to r$</li>
+</ul>
+<p><b>Contoh:</b> "Jika saya belajar, maka saya paham. Jika saya paham, maka saya lulus. Maka, jika saya belajar, saya lulus."</p>
+<p>Pembuktiannya menggunakan tabel kebenaran 8 baris dan juga terbukti sebagai tautologi.</p>
+
+<h3>4. Silogisme Disjungtif</h3>
+<ul>
+    <li><b>Premis 1:</b> $p \lor q$ (p atau q)</li>
+    <li><b>Premis 2:</b> $\sim p$ (Bukan p)</li>
+    <li><b>Konklusi:</b> $\therefore q$ (Maka, pasti q)</li>
+</ul>
+<p><b>Contoh:</b> "Kunci motor ada di saku atau di laci. Kuncinya tidak ada di saku. Maka, kuncinya pasti di laci."</p>
+<p><b>Pembuktian Validitas:</b> Kita buktikan $((p \lor q) \land \sim p) \to q$ adalah tautologi.</p>
+<div class="scrollable-wrapper">
+    <table>
+      <thead><tr><th>$p$</th><th>$q$</th><th>$\sim p$</th><th>$p \lor q$</th><th>$(p \lor q) \land \sim p$</th><th>$((p \lor q) \land \sim p) \to q$</th></tr></thead>
+      <tbody>
+        <tr><td>B</td><td>B</td><td>S</td><td>B</td><td>S</td><td>B</td></tr>
+        <tr><td>B</td><td>S</td><td>S</td><td>B</td><td>S</td><td>B</td></tr>
+        <tr class="highlight-true"><td>S</td><td>B</td><td>B</td><td>B</td><td>B</td><td>B</td></tr>
+        <tr><td>S</td><td>S</td><td>B</td><td>S</td><td>S</td><td>B</td></tr>
+      </tbody>
+    </table>
+</div>
+<p>Kolom terakhir selalu Benar, argumen valid. Perhatikan pada baris ketiga: saat kedua premis ($p \lor q$ dan $\sim p$) benar, konklusinya ($q$) juga benar.</p>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang validitas argumen dan teknik penarikan kesimpulan.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Sebuah argumen dalam logika matematika dikatakan valid jika...",
+                options: [
+                    "Semua premisnya harus benar di dunia nyata",
+                    "Konklusinya harus benar di dunia nyata",
+                    "Bentuk implikasi $(P_1 \\land P_2) \\to K$ merupakan sebuah Tautologi",
+                    "Premis dan konklusinya harus ekuivalen"
+                ],
+                correct: 2,
+                explanation: "Validitas adalah tentang struktur. Argumen valid jika bentuk formalnya (premis-premis mengimplikasikan konklusi) selalu benar, tidak peduli nilai kebenaran dari proposisi pembentuknya."
+            },
+            {
+                q: "Diberikan argumen: P1: $p \\to q$, P2: $p$. Kesimpulan yang valid berdasarkan Modus Ponens adalah...",
+                options: [ "$p$", "$q$", "$\\sim p$", "$\\sim q$" ],
+                correct: 1,
+                explanation: "Modus Ponens (aturan penegasan) menyatakan bahwa jika sebuah kondisi ($p \\to q$) benar dan sebabnya ($p$) terjadi, maka akibatnya ($q$) juga pasti terjadi."
+            },
+            {
+                q: "P1: 'Jika saya punya uang, saya akan beli buku.' P2: 'Saya tidak beli buku.' Kesimpulan yang valid adalah...",
+                options: [ "Saya punya uang.", "Saya tidak punya uang.", "Saya tidak punya uang dan tidak beli buku.", "Saya punya uang tapi tidak mau beli buku." ],
+                correct: 1,
+                explanation: "Ini adalah penerapan Modus Tollens. P1: $p \\to q$. P2: $\\sim q$. Maka kesimpulannya adalah $\\sim p$ (Saya tidak punya uang)."
+            },
+            {
+                q: "P1: 'Hari ini Minggu atau saya harus bekerja.' P2: 'Hari ini bukan Minggu.' Konklusinya adalah...",
+                options: [ "Saya harus bekerja.", "Saya tidak harus bekerja.", "Hari ini Minggu dan saya bekerja.", "Tidak ada kesimpulan." ],
+                correct: 0,
+                explanation: "Ini adalah Silogisme Disjungtif. P1: $p \\lor q$. P2: $\\sim p$. Maka kesimpulannya adalah $q$ (Saya harus bekerja)."
+            },
+            {
+                q: "Mengapa saat menguji validitas argumen kita harus fokus pada kasus di mana semua premis Benar?",
+                options: [
+                    "Agar konklusinya selalu Benar",
+                    "Karena hanya pada kasus itulah sebuah argumen bisa terbukti tidak valid (jika konklusinya Salah)",
+                    "Agar tabel kebenarannya lebih mudah dibuat dan lebih pendek",
+                    "Karena premis yang Salah tidak bisa digunakan dalam argumen"
+                ],
+                correct: 1,
+                explanation: "Sebuah argumen hanya 'gagal' jika ada kemungkinan premis-premis yang benar menghasilkan konklusi yang salah. Jika tidak ada kasus seperti itu, argumennya valid. Kasus lain (di mana salah satu premis Salah) tidak melanggar 'janji' dari argumen tersebut."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
