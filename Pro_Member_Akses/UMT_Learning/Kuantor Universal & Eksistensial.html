@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuantor Universal & Eksistensial - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Kuantor Universal & Eksistensial: Menjangkau 'Semua' dan 'Beberapa'</h1>
+<p>
+    Sejauh ini, logika yang kita bahas berurusan dengan proposisi spesifik seperti "5 adalah bilangan ganjil". Namun, bagaimana cara kita menangani pernyataan yang lebih umum seperti "<b>Semua</b> bilangan prima lebih dari 2 adalah ganjil" atau "<b>Ada</b> bilangan kuadrat yang juga bilangan kubik"?
+</p>
+<p>
+    Untuk itulah kita menggunakan <b>Kuantor (Quantifier)</b>. Kuantor adalah simbol logika yang menyatakan seberapa banyak elemen dalam suatu himpunan yang memenuhi suatu predikat (kalimat terbuka) tertentu, sehingga mengubah kalimat terbuka menjadi sebuah proposisi.
+</p>
+
+<h2>1. Kuantor Universal ($\forall$) - "Untuk Semua"</h2>
+<p>
+    <b>Simbol:</b> $\forall$, terlihat seperti huruf 'A' terbalik (dari kata "All").
+    <br><b>Dibaca:</b> "Untuk semua...", "Untuk setiap...".
+</p>
+<div class="important-note">
+    <b>Esensi Kuantor Universal:</b><br>
+    Pernyataan universal $(\forall x)P(x)$ adalah sebuah <b>klaim yang sangat kuat</b>. Ia menyatakan bahwa predikat $P(x)$ harus bernilai benar untuk <b>setiap anggota tanpa kecuali</b> dalam semesta pembicaraan (domain).
+    <ul>
+        <li>Untuk membuktikan pernyataan ini <b>SALAH</b>, kita hanya butuh <b>satu contoh penyangkal</b> (counterexample).</li>
+        <li>Untuk membuktikan pernyataan ini <b>BENAR</b>, kita harus menunjukkannya berlaku untuk semua anggota (biasanya melalui pembuktian umum).</li>
+    </ul>
+</div>
+<p>
+    <b>Contoh:</b> Misalkan semesta pembicaraan adalah himpunan bilangan real.
+    <br>Pernyataan: $(\forall x)(x^2 \ge 0)$ ("Untuk setiap bilangan real $x$, nilai $x^2$ lebih besar dari atau sama dengan 0").
+    <br><b>Nilai Kebenaran: Benar.</b> Tidak ada satu pun bilangan real yang jika dikuadratkan hasilnya negatif.
+</p>
+<p>
+    <b>Contoh Penyangkal:</b> Misalkan semesta pembicaraan adalah himpunan semua hewan.
+    <br>Pernyataan: $(\forall x)(x \text{ bisa terbang})$ ("Untuk setiap hewan $x$, $x$ bisa terbang").
+    <br><b>Nilai Kebenaran: Salah.</b> Kita hanya perlu satu contoh penyangkal, misalnya "kucing". Karena kucing adalah hewan yang tidak bisa terbang, klaim "semua" menjadi gugur.
+</p>
+
+
+<h2>2. Kuantor Eksistensial ($\exists$) - "Ada Beberapa"</h2>
+<p>
+    <b>Simbol:</b> $\exists$, terlihat seperti huruf 'E' terbalik (dari kata "Exists").
+    <br><b>Dibaca:</b> "Terdapat...", "Ada beberapa...", "Setidaknya ada satu...".
+</p>
+<div class="important-note">
+    <b>Esensi Kuantor Eksistensial:</b><br>
+    Pernyataan eksistensial $(\exists x)P(x)$ adalah sebuah <b>klaim yang lebih lemah</b>. Ia hanya menyatakan bahwa ada <b>setidaknya satu</b> anggota dalam domain yang memenuhi predikat $P(x)$.
+    <ul>
+        <li>Untuk membuktikan pernyataan ini <b>BENAR</b>, kita hanya butuh <b>satu contoh</b> yang berhasil.</li>
+        <li>Untuk membuktikan pernyataan ini <b>SALAH</b>, kita harus menunjukkan bahwa predikatnya gagal untuk semua anggota.</li>
+    </ul>
+</div>
+<p>
+    <b>Contoh:</b> Misalkan semesta pembicaraan adalah himpunan bilangan asli.
+    <br>Pernyataan: $(\exists x)(x \text{ adalah bilangan prima genap})$ ("Terdapat bilangan asli $x$ yang merupakan bilangan prima sekaligus genap").
+    <br><b>Nilai Kebenaran: Benar.</b> Kita hanya perlu menemukan satu contoh, yaitu $x=2$.
+</p>
+<p>
+    <b>Contoh Penyangkal:</b> Misalkan semesta pembicaraan adalah himpunan bilangan asli.
+    <br>Pernyataan: $(\exists x)(x + 5 = 2)$
+    <br><b>Nilai Kebenaran: Salah.</b> Satu-satunya solusi untuk persamaan tersebut adalah $x=-3$, yang tidak termasuk dalam semesta pembicaraan (bilangan asli). Karena tidak ada satupun anggota domain yang memenuhi, maka klaim "ada" menjadi salah.
+</p>
+
+<h2>3. Negasi dari Kuantor</h2>
+<p>
+    Menegasikan pernyataan berkuantor memiliki aturan khusus yang sangat logis dan mirip dengan Hukum De Morgan.
+</p>
+<ul>
+    <li>
+        <b>Negasi Universal: $\sim (\forall x)P(x) \equiv (\exists x)\sim P(x)$</b>
+        <br><b>Logika:</b> Untuk menyangkal pernyataan "<b>Semua</b> mahasiswa lulus", kita tidak perlu membuktikan "semua mahasiswa tidak lulus". Kita cukup membuktikan "<b>Ada</b> mahasiswa yang <b>tidak</b> lulus".
+    </li>
+    <br>
+    <li>
+        <b>Negasi Eksistensial: $\sim (\exists x)P(x) \equiv (\forall x)\sim P(x)$</b>
+        <br><b>Logika:</b> Untuk menyangkal pernyataan "<b>Ada</b> hantu di rumah ini", kita harus membuktikan bahwa "<b>Semua</b> (penghuni) di rumah ini <b>bukan</b> hantu".
+    </li>
+</ul>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang kuantor universal dan eksistensial.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Pernyataan 'Beberapa kucing berwarna hitam' menggunakan jenis kuantor...",
+                options: [ "Eksistensial", "Universal", "Negasi", "Implikasi" ],
+                correct: 0,
+                explanation: "Kata 'beberapa' atau 'ada' menunjukkan kuantor eksistensial ($\\exists$), yang mengklaim keberadaan setidaknya satu anggota yang memenuhi sifat tertentu."
+            },
+            {
+                q: "Manakah cara yang paling efisien untuk membuktikan bahwa pernyataan 'Semua bilangan prima adalah ganjil' bernilai SALAH?",
+                options: [
+                    "Membuktikan bahwa semua bilangan ganjil adalah prima",
+                    "Mencari satu contoh bilangan prima yang tidak ganjil (yaitu genap)",
+                    "Membuktikan bahwa pernyataan tersebut benar untuk 100 bilangan prima pertama",
+                    "Menunjukkan bahwa ada bilangan ganjil yang bukan prima"
+                ],
+                correct: 1,
+                explanation: "Untuk menggugurkan klaim universal ('semua'), kita hanya perlu menemukan satu contoh penyangkal. Dalam kasus ini, bilangan prima 2 adalah genap, sehingga pernyataan tersebut salah."
+            },
+            {
+                q: "Pernyataan $(\\exists n)$ di mana $n$ adalah bilangan bulat sedemikian sehingga $n^2 = 5$ bernilai...",
+                options: [ "Benar", "Salah" ],
+                correct: 1,
+                explanation: "Solusi untuk $n^2=5$ adalah $n = \\sqrt{5}$ dan $n = -\\sqrt{5}$. Keduanya bukan bilangan bulat. Karena tidak ada anggota domain (bilangan bulat) yang memenuhi, pernyataan ini Salah."
+            },
+            {
+                q: "Negasi dari pernyataan 'Semua murid mengerjakan PR' adalah...",
+                options: [
+                    "Semua murid tidak mengerjakan PR.",
+                    "Tidak ada murid yang mengerjakan PR.",
+                    "Beberapa murid tidak mengerjakan PR.",
+                    "Beberapa murid mengerjakan PR."
+                ],
+                correct: 2,
+                explanation: "Negasi dari kuantor universal (semua) adalah kuantor eksistensial (beberapa/ada) dengan predikat yang dinegasikan. Jadi, negasi dari 'semua A melakukan B' adalah 'ada A yang tidak melakukan B'."
+            },
+            {
+                q: "Negasi dari pernyataan 'Ada politisi yang jujur' adalah...",
+                options: [
+                    "Semua politisi tidak jujur.",
+                    "Beberapa politisi tidak jujur.",
+                    "Semua orang jujur adalah politisi.",
+                    "Tidak ada politisi yang jujur."
+                ],
+                correct: 0,
+                explanation: "Negasi dari kuantor eksistensial (ada) adalah kuantor universal (semua) dengan predikat yang dinegasikan. Jadi, negasi dari 'ada A yang B' adalah 'semua A adalah bukan B'."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
