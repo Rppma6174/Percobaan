@@ -558,6 +558,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Aturan Dasar Peluang.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_peluang_3', 
+            title: 'Peluang Teoretis & Frekuensi Relatif', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Peluang Teoretis & Frekuensi Relatif.html', 
+            fileType: 'html' 
+            },
         ],
         "Trigonometri": [
             { 
