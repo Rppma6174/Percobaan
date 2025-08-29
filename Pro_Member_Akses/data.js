@@ -553,7 +553,7 @@ const allContentData = {
             },
             { 
             id: 'materi_peluang_2', 
-            title: 'Esensi Peluang', 
+            title: 'Aturan Dasar Peluang', 
             type: 'HTML Document', 
             filePath: 'UMT_Learning/Aturan Dasar Peluang.html', 
             fileType: 'html' 
