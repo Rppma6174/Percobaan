@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esensi Peluang - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Esensi Peluang: Mengukur Ketidakpastian</h1>
+<p>
+    Setiap hari kita berhadapan dengan ketidakpastian. Apakah besok akan hujan? Apakah tim favorit kita akan menang? Peluang adalah cabang matematika yang memberikan kita alat untuk <b>mengukur</b> seberapa besar kemungkinan suatu peristiwa akan terjadi. Esensinya, peluang mengubah ketidakpastian menjadi sebuah angka.
+</p>
+<p>
+    Nilai peluang selalu berada di antara 0 dan 1:
+</p>
+<ul>
+    <li><b>0</b> berarti peristiwa tersebut <b>mustahil</b> terjadi.</li>
+    <li><b>1</b> berarti peristiwa tersebut <b>pasti</b> terjadi.</li>
+    <li>Nilai di antaranya (misal, 0.5 atau 50%) menunjukkan tingkat kemungkinan.</li>
+</ul>
+
+<h2>Terminologi Dasar dalam Peluang</h2>
+<p>Untuk bisa "berbicara" dalam bahasa peluang, kita perlu memahami beberapa istilah kunci.</p>
+<ol>
+    <li>
+        <b>Eksperimen:</b> Proses atau tindakan yang menghasilkan data atau hasil. Contoh: melempar dadu, mengambil kartu dari tumpukan.
+    </li>
+    <li>
+        <b>Ruang Sampel (S):</b> Himpunan dari <b>semua hasil yang mungkin</b> dari sebuah eksperimen.
+        <br>Contoh: Pada pelemparan satu dadu, Ruang Sampelnya adalah $S = \{1, 2, 3, 4, 5, 6\}$.
+    </li>
+    <li>
+        <b>Titik Sampel:</b> Setiap anggota dari Ruang Sampel. Contoh: '4' adalah satu titik sampel dari pelemparan dadu.
+    </li>
+    <li>
+        <b>Kejadian (A):</b> Himpunan bagian dari Ruang Sampel. Ini adalah hasil spesifik yang kita amati atau harapkan.
+        <br>Contoh: Kejadian "muncul mata dadu ganjil" adalah himpunan $A = \{1, 3, 5\}$.
+    </li>
+</ol>
+
+<h2>Definisi Klasik Peluang</h2>
+<p>
+    Untuk eksperimen di mana setiap titik sampel memiliki kemungkinan yang sama untuk terjadi (seperti pada dadu atau koin yang adil), kita dapat menghitung peluang sebuah kejadian dengan rumus sederhana.
+</p>
+<div class="important-note">
+    <b>Rumus Peluang Klasik</b>
+    $$ P(A) = \frac{n(A)}{n(S)} $$
+    Di mana:
+    <ul>
+        <li>$P(A)$ adalah Peluang terjadinya kejadian A.</li>
+        <li>$n(A)$ adalah jumlah anggota dalam himpunan kejadian A (banyaknya hasil yang diinginkan).</li>
+        <li>$n(S)$ adalah jumlah anggota dalam Ruang Sampel S (banyaknya semua hasil yang mungkin).</li>
+    </ul>
+</div>
+<p>
+    <b>Contoh: Peluang muncul mata dadu lebih dari 4</b>
+</p>
+<ul>
+    <li>Eksperimen: Melempar satu dadu.</li>
+    <li>Ruang Sampel: $S = \{1, 2, 3, 4, 5, 6\}$, maka $n(S)=6$.</li>
+    <li>Kejadian (A): Muncul mata dadu lebih dari 4, yaitu $A = \{5, 6\}$, maka $n(A)=2$.</li>
+    <li>Peluang: $P(A) = \frac{n(A)}{n(S)} = \frac{2}{6} = \frac{1}{3}$.</li>
+</ul>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman mendasar Anda tentang esensi peluang.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Tujuan utama dari teori peluang adalah...",
+                options: [
+                    "Untuk meramalkan masa depan dengan pasti",
+                    "Untuk memberikan nilai numerik pada tingkat ketidakpastian suatu peristiwa",
+                    "Untuk menghilangkan semua kemungkinan yang tidak diinginkan",
+                    "Untuk membuktikan bahwa semua peristiwa terjadi secara acak"
+                ],
+                correct: 1,
+                explanation: "Peluang tidak meramal, melainkan mengukur. Ia memberikan sebuah angka (antara 0 dan 1) untuk merepresentasikan seberapa besar kemungkinan suatu peristiwa akan terjadi."
+            },
+            {
+                q: "Dalam eksperimen melempar sebuah koin, himpunan {Angka, Gambar} disebut...",
+                options: [ "Kejadian", "Titik Sampel", "Ruang Sampel", "Eksperimen" ],
+                correct: 2,
+                explanation: "Ruang Sampel adalah himpunan yang berisi SEMUA kemungkinan hasil dari sebuah eksperimen. 'Angka' saja atau 'Gambar' saja adalah Titik Sampel."
+            },
+            {
+                q: "Sebuah dadu dilempar sekali. Peluang munculnya mata dadu bilangan prima adalah...",
+                options: [ "1/6", "2/6", "3/6 (atau 1/2)", "4/6 (atau 2/3)" ],
+                correct: 2,
+                explanation: "Ruang Sampel $n(S)=6$. Bilangan prima pada dadu adalah {2, 3, 5}, sehingga Kejadian $n(A)=3$. Peluangnya adalah $P(A) = \\frac{3}{6} = \\frac{1}{2}$."
+            },
+            {
+                q: "Jika peluang besok akan hujan adalah 0.7 (atau 70%), maka peluang besok TIDAK akan hujan adalah...",
+                options: [ "0.7", "0.3", "1", "Tidak bisa ditentukan" ],
+                correct: 1,
+                explanation: "Total peluang dari suatu peristiwa dan komplemennya (kebalikannya) adalah 1. Jadi, peluang tidak hujan adalah $1 - P(\\text{hujan}) = 1 - 0.7 = 0.3$ (atau 30%)."
+            },
+            {
+                q: "Sebuah kotak berisi 5 bola merah dan 3 bola biru. Jika satu bola diambil secara acak, pernyataan mana yang paling tepat?",
+                options: [
+                    "Peluang terambil bola merah dan biru sama",
+                    "Peluang terambil bola merah lebih besar dari peluang terambil bola biru",
+                    "Peluang terambil bola biru lebih besar dari peluang terambil bola merah",
+                    "Mustahil terambil bola merah"
+                ],
+                correct: 1,
+                explanation: "Ada 8 bola total. Peluang merah adalah $5/8$, sedangkan peluang biru adalah $3/8$. Karena $5/8 > 3/8$, maka peluang terambil bola merah lebih besar."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
