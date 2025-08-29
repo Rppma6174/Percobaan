@@ -543,6 +543,15 @@ const allContentData = {
             fileType: 'html' 
             },
         ],
+        "Peluang": [
+            { 
+            id: 'materi_peluang_1', 
+            title: 'Esensi Peluang', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Esensi Peluang.html', 
+            fileType: 'html' 
+            }
+        ],
         "Trigonometri": [
             { 
             id: 'materi_esensi_trigonometri', 
