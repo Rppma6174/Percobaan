@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peluang Kejadian Majemuk - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Peluang Kejadian Majemuk</h1>
+<p>
+    Kejadian majemuk adalah kejadian yang terbentuk dari dua atau lebih kejadian sederhana. Ada dua kata kunci utama dalam menggabungkan kejadian: <b>ATAU</b> (gabungan) dan <b>DAN</b> (irisan).
+</p>
+
+<h2>1. Peluang Gabungan Dua Kejadian (Aturan Penjumlahan)</h2>
+<p>
+    Ini digunakan untuk menghitung peluang terjadinya kejadian A <b>ATAU</b> B, ditulis $P(A \cup B)$. Ada dua skenario di sini.
+</p>
+
+<h3>a. Peluang Kejadian Saling Lepas</h3>
+<p>Dua kejadian disebut <b>saling lepas</b> (mutually exclusive) jika keduanya <b>tidak mungkin terjadi bersamaan</b>.</p>
+<p><b>Contoh:</b> Dalam sekali lemparan dadu, mendapatkan angka 1 dan mendapatkan angka 6 adalah saling lepas.</p>
+<div class="important-note">
+    <b>Rumus:</b> $$P(A \cup B) = P(A) + P(B)$$
+</div>
+<p><b>Soal:</b> Berapa peluang mendapatkan angka 1 atau 6 saat melempar dadu?</p>
+<p>$P(1 \cup 6) = P(1) + P(6) = \frac{1}{6} + \frac{1}{6} = \frac{2}{6} = \frac{1}{3}$.</p>
+
+<h3>b. Peluang Gabungan (Tidak Saling Lepas)</h3>
+<p>Ini adalah kasus di mana kedua kejadian <b>bisa terjadi bersamaan</b>.</p>
+<p><b>Contoh:</b> Mengambil kartu King dan kartu Hati (bisa mendapatkan King Hati).</p>
+<div class="important-note">
+    <b>Rumus:</b> $$P(A \cup B) = P(A) + P(B) - P(A \cap B)$$
+    Kita harus mengurangkan peluang irisannya ($A \cap B$) agar tidak dihitung dua kali.
+</div>
+<p><b>Soal:</b> Berapa peluang mendapat kartu King atau kartu Hati dari setumpuk kartu bridge?</p>
+<p>$P(\text{King}) = \frac{4}{52}$, $P(\text{Hati}) = \frac{13}{52}$, $P(\text{King Hati}) = \frac{1}{52}$.
+<br>$P(\text{King} \cup \text{Hati}) = \frac{4}{52} + \frac{13}{52} - \frac{1}{52} = \frac{16}{52} = \frac{4}{13}$.</p>
+
+<h2>2. Peluang Irisan Dua Kejadian (Aturan Perkalian)</h2>
+<p>Aturan ini digunakan untuk menghitung peluang terjadinya kejadian A <b>DAN</b> kejadian B, ditulis $P(A \cap B)$.</p>
+
+<h3>a. Peluang Kejadian Saling Bebas</h3>
+<p>Dua kejadian disebut <b>saling bebas</b> (independent) jika hasil dari kejadian pertama <b>tidak mempengaruhi</b> peluang kejadian kedua.</p>
+<p><b>Contoh:</b> Melempar koin (hasilnya Angka) lalu melempar dadu (hasilnya 5). Keduanya tidak saling mempengaruhi.</p>
+<div class="important-note">
+    <b>Rumus:</b> $$P(A \cap B) = P(A) \times P(B)$$
+</div>
+<p><b>Soal:</b> Berapa peluang mendapatkan Angka pada lemparan koin DAN 5 pada lemparan dadu?</p>
+<p>$P(\text{Angka} \cap 5) = P(\text{Angka}) \times P(5) = \frac{1}{2} \times \frac{1}{6} = \frac{1}{12}$.</p>
+
+<h3>b. Peluang Kejadian Bersyarat</h3>
+<p>Dua kejadian disebut <b>bersyarat</b> (dependent) jika hasil dari kejadian pertama <b>mempengaruhi</b> peluang kejadian kedua.</p>
+<div class="important-note">
+    <b>Rumus:</b> $$P(A \cap B) = P(A) \times P(B|A)$$
+    Di mana $P(B|A)$ adalah "peluang B terjadi, <b>dengan syarat</b> A sudah terjadi".
+</div>
+<p><b>Soal:</b> Sebuah kotak berisi 5 bola merah dan 3 bola biru. Dua bola diambil satu per satu tanpa pengembalian. Berapa peluang terambilnya bola merah pertama DAN bola biru kedua?</p>
+<ul>
+    <li>Peluang bola pertama merah, $P(M_1) = \frac{5}{8}$.</li>
+    <li>Setelah 1 bola merah diambil, tersisa 7 bola (4 merah, 3 biru). Peluang bola kedua biru dengan syarat bola pertama merah adalah $P(B_2|M_1) = \frac{3}{7}$.</li>
+    <li>$P(M_1 \cap B_2) = P(M_1) \times P(B_2|M_1) = \frac{5}{8} \times \frac{3}{7} = \frac{15}{56}$.</li>
+</ul>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang aturan-aturan kejadian majemuk.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Aturan Penjumlahan ($P(A \\cup B)$) digunakan ketika kita tertarik pada peluang terjadinya...",
+                options: [ "Kejadian A DAN B secara berurutan", "Kejadian A ATAU B (atau keduanya)", "Kejadian A JIKA B sudah terjadi", "Kejadian A dan B yang sama persis" ],
+                correct: 1,
+                explanation: "Aturan Penjumlahan berkaitan dengan gabungan (union) dari beberapa kejadian, yang dalam bahasa sehari-hari berarti 'atau'."
+            },
+            {
+                q: "Sebuah dadu dilempar. Peluang mendapatkan angka genap ATAU angka 5 adalah...",
+                options: [ "1/6", "3/6", "4/6 (atau 2/3)", "5/6" ],
+                correct: 2,
+                explanation: "Kejadian 'genap' {2,4,6} dan 'angka 5' {5} adalah saling lepas. Maka, $P(Genap \\cup 5) = P(Genap) + P(5) = \\frac{3}{6} + \\frac{1}{6} = \\frac{4}{6}$."
+            },
+            {
+                q: "Dari satu set kartu bridge (52 kartu), peluang mengambil kartu As ATAU kartu Keriting (Club) adalah...",
+                options: [ "17/52", "16/52 (atau 4/13)", "1/52", "4/52" ],
+                correct: 1,
+                explanation: "Ini kejadian tidak saling lepas. $P(As) = \\frac{4}{52}$, $P(Keriting) = \\frac{13}{52}$, dan $P(As \\cap Keriting) = \\frac{1}{52}$. Maka peluangnya adalah $\\frac{4}{52} + \\frac{13}{52} - \\frac{1}{52} = \\frac{16}{52}$."
+            },
+            {
+                q: "Dua kejadian disebut saling bebas jika...",
+                options: [
+                    "Keduanya tidak bisa terjadi secara bersamaan",
+                    "Terjadinya satu kejadian mempengaruhi peluang kejadian lainnya",
+                    "Terjadinya satu kejadian TIDAK mempengaruhi peluang kejadian lainnya"
+                ],
+                correct: 2,
+                explanation: "Independensi (saling bebas) berarti hasil dari satu percobaan tidak memberikan informasi apapun tentang hasil percobaan lainnya."
+            },
+            {
+                q: "Sebuah kotak berisi 5 kelereng merah dan 3 kelereng hijau. Dua kelereng diambil satu per satu tanpa pengembalian. Peluang terambil kelereng merah pertama DAN kelereng merah kedua adalah...",
+                options: [ "25/64", "20/64", "20/56 (atau 5/14)", "25/56" ],
+                correct: 2,
+                explanation: "Ini adalah kejadian bersyarat. Peluang pertama merah adalah $P(M_1) = \\frac{5}{8}$. Setelah itu, tersisa 7 kelereng dengan 4 merah. Peluang kedua merah adalah $P(M_2|M_1) = \\frac{4}{7}$. Peluang totalnya adalah $\\frac{5}{8} \\times \\frac{4}{7} = \\frac{20}{56}$."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
