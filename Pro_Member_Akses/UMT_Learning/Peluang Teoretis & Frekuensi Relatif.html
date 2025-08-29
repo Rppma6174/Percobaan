@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peluang Teoretis & Frekuensi Relatif - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .diagram-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-main);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+        }
+        .diagram-container svg text { font-size: 12px; fill: var(--text-primary); }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Peluang Teoretis vs. Frekuensi Relatif: Teori Bertemu Realita</h1>
+<p>
+    Dalam dunia peluang, ada dua cara pandang utama: apa yang <b>seharusnya</b> terjadi menurut logika matematika, dan apa yang <b>sebenarnya</b> terjadi ketika kita melakukan percobaan di dunia nyata. Keduanya saling berhubungan erat.
+</p>
+
+<h2>1. Peluang Teoretis</h2>
+<p>
+    <b>Peluang teoretis</b> adalah peluang yang kita hitung berdasarkan analisis matematis dari ruang sampel, <b>sebelum</b> melakukan percobaan apapun. Ini adalah nilai ideal yang didasarkan pada asumsi bahwa semua hasil memiliki kesempatan yang sama untuk terjadi.
+</p>
+<p>
+    Rumus yang kita gunakan adalah rumus klasik:
+    $$ P(A) = \frac{n(A)}{n(S)} $$
+</p>
+<p>
+    <b>Contoh:</b> Peluang teoretis munculnya mata dadu 3 pada sebuah dadu yang adil adalah $\frac{1}{6}$. Nilai ini adalah sebuah konstanta. Ia tidak akan berubah, tidak peduli berapa kali pun kita melempar dadu tersebut. Ini adalah nilai "di atas kertas".
+</p>
+
+<h2>2. Frekuensi Relatif (Peluang Empiris)</h2>
+<p>
+    <b>Frekuensi relatif</b> adalah "peluang" yang dihitung berdasarkan data hasil percobaan yang <b>sudah dilakukan</b>. Karena didasarkan pada observasi (empiris), nilainya bisa berubah-ubah setiap kali kita mengulang set percobaan.
+</p>
+<div class="important-note">
+    <b>Rumus Frekuensi Relatif:</b>
+    $$ F_r(A) = \frac{\text{Banyaknya kejadian A muncul}}{\text{Banyaknya total percobaan}} $$
+</div>
+<p>
+    <b>Contoh:</b> Anda melempar dadu sebanyak 20 kali dan mata dadu 3 muncul sebanyak 5 kali. Maka, frekuensi relatif munculnya mata dadu 3 pada set percobaan <b>tersebut</b> adalah:
+    <br>$F_r(3) = \frac{5}{20} = \frac{1}{4}$ atau 0.25.
+</p>
+<p>
+    Perhatikan bahwa nilai ini (0.25) berbeda dari peluang teoretisnya ($\frac{1}{6} \approx 0.167$). Jika Anda mengulang lemparan 20 kali lagi, mungkin mata dadu 3 hanya muncul 2 kali, sehingga frekuensi relatifnya menjadi $\frac{2}{20} = \frac{1}{10}$ atau 0.1.
+</p>
+
+<h2>Hubungan Keduanya: Hukum Bilangan Besar</h2>
+<p>
+    Jadi, mana yang "benar"? Keduanya benar dalam konteksnya masing-masing. Hubungan di antara keduanya dijelaskan oleh salah satu prinsip paling fundamental dalam statistik: <b>Hukum Bilangan Besar (Law of Large Numbers)</b>.
+</p>
+<div class="important-note">
+    <b>Isi Hukum Bilangan Besar:</b>
+    <p>Seiring dengan <b>semakin banyaknya jumlah percobaan</b> yang dilakukan, nilai <b>Frekuensi Relatif</b> dari sebuah kejadian akan cenderung <b>semakin mendekati</b> nilai <b>Peluang Teoretis</b>-nya.</p>
+</div>
+<p>
+    Artinya, meskipun dalam jangka pendek (misal 20 lemparan) hasilnya bisa sangat acak, dalam jangka panjang (ribuan atau jutaan lemparan), hasil dari dunia nyata akan "konvergen" atau menuju ke nilai ideal yang diprediksi oleh teori.
+</p>
+<div class="diagram-container">
+    <svg width="400" height="200" viewBox="0 0 400 200">
+        <text x="180" y="15">Konvergensi Peluang</text>
+        <path d="M 40 180 L 380 180 M 40 180 L 40 20" stroke="#8B949E"/>
+        <text x="370" y="195">Jumlah Percobaan</text>
+        <text x="0" y="115" transform="rotate(-90 15,110)">Frekuensi Relatif</text>
+        <path d="M 40 100 L 380 100" stroke="#2F81F7" stroke-dasharray="4 2"/>
+        <text x="280" y="95" fill="#2F81F7">Peluang Teoretis (1/6 ≈ 0.167)</text>
+        <path d="M 40 40 L 60 150 L 80 80 L 100 120 L 120 90 L 150 110 L 180 105 L 220 95 L 260 102 L 300 98 L 340 101 L 380 99" stroke="#39D353" fill="none" stroke-width="2"/>
+    </svg>
+</div>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang hubungan antara teori dan realita dalam peluang.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Peluang yang dihitung berdasarkan analisis matematis dari ruang sampel, tanpa melakukan percobaan, disebut...",
+                options: [ "Frekuensi Relatif", "Peluang Empiris", "Peluang Teoretis", "Peluang Acak" ],
+                correct: 2,
+                explanation: "Peluang Teoretis adalah nilai ideal yang dihitung dari struktur matematis sebuah eksperimen (misalnya, ada 6 sisi pada dadu yang adil)."
+            },
+            {
+                q: "Seorang peneliti melempar koin sebanyak 100 kali dan mendapatkan 55 sisi Angka. Nilai $\\frac{55}{100}$ merupakan...",
+                options: [ "Peluang Teoretis", "Frekuensi Relatif", "Ruang Sampel", "Kejadian Pasti" ],
+                correct: 1,
+                explanation: "Karena nilai ini didapat dari hasil observasi/eksperimen yang sudah dilakukan, maka ia disebut Frekuensi Relatif atau Peluang Empiris."
+            },
+            {
+                q: "Peluang teoretis munculnya sisi Angka pada koin yang adil adalah 0.5. Manakah pernyataan yang paling tepat?",
+                options: [
+                    "Jika saya melempar 10 kali, PASTI akan muncul 5 Angka.",
+                    "Jika saya melempar 1.000.000 kali, frekuensi relatif munculnya Angka akan sangat mendekati 0.5.",
+                    "Frekuensi relatifnya akan selalu 0.5, tidak peduli berapa kali dilempar.",
+                    "Mustahil untuk mendapatkan 3 Angka berturut-turut."
+                ],
+                correct: 1,
+                explanation: "Ini adalah inti dari Hukum Bilangan Besar. Hasil jangka pendek bisa sangat bervariasi, tetapi hasil jangka panjang akan cenderung menuju nilai teoretisnya."
+            },
+            {
+                q: "Sebuah dadu dilempar 50 kali. Frekuensi munculnya mata dadu ganjil adalah 21 kali. Berapakah frekuensi relatif munculnya mata dadu GENAP?",
+                options: [ "21/50", "29/50", "25/50", "Tidak bisa ditentukan" ],
+                correct: 1,
+                explanation: "Jika dari 50 lemparan, 21 di antaranya adalah ganjil, maka sisanya haruslah genap. Jumlah kemunculan genap = 50 - 21 = 29 kali. Maka frekuensi relatifnya adalah 29/50."
+            },
+            {
+                q: "Hubungan konvergensi antara peluang teoretis dan frekuensi relatif saat jumlah percobaan sangat besar dijelaskan oleh...",
+                options: [ "Teorema Pythagoras", "Hukum De Morgan", "Hukum Bilangan Besar", "Aturan Bayes" ],
+                correct: 2,
+                explanation: "Hukum Bilangan Besar (Law of Large Numbers) adalah prinsip fundamental yang menjembatani probabilitas teoretis dengan hasil eksperimental di dunia nyata."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
