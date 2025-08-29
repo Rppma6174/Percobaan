@@ -550,7 +550,14 @@ const allContentData = {
             type: 'HTML Document', 
             filePath: 'UMT_Learning/Esensi Peluang.html', 
             fileType: 'html' 
-            }
+            },
+            { 
+            id: 'materi_peluang_2', 
+            title: 'Esensi Peluang', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Aturan Dasar Peluang.html', 
+            fileType: 'html' 
+            },
         ],
         "Trigonometri": [
             { 
