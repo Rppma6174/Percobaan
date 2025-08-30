@@ -565,6 +565,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Peluang Teoretis & Frekuensi Relatif.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_peluang_4', 
+            title: 'Peluang Kejadian Majemuk', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Peluang Kejadian Majemuk.html', 
+            fileType: 'html' 
+            },
         ],
         "Trigonometri": [
             { 
