@@ -1,9 +1,3 @@
-Tentu, kita lanjutkan ke materi "Ukuran Penyebaran Data".
-
-Setelah memahami "pusat" data, materi ini fokus pada seberapa tersebar atau bervariasi data tersebut. Sesuai arahan, kita akan bahas konsepnya secara ringkas, lalu fokus pada rumus, strategi, dan aplikasi yang relevan untuk soal TKA.
-
-HTML
-
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -160,6 +154,9 @@ HTML
 </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         const quizzes = [
             { q: "Jangkauan dari data {2, 9, 3, 7, 11} adalah...", options: ["7", "8", "9", "11"], correct: 2, explanation: "Jangkauan = Nilai Maksimum - Nilai Minimum = $11 - 2 = 9$." },
             { q: "Diketahui data terurut: 2, 3, 5, 7, 8, 10, 12. Kuartil bawah ($Q_1$) dari data tersebut adalah...", options: ["3", "5", "7", "8"], correct: 0, explanation: "Median ($Q_2$) adalah 7. Setengah data bawah adalah {2, 3, 5}. Median dari data bawah ini adalah 3. Maka, $Q_1=3$." },
