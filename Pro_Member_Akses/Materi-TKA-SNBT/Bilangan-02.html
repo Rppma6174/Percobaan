@@ -165,6 +165,9 @@
     </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         const quizzes = [
             { q: "Faktorisasi prima dari 120 adalah...", options: ["$2 \\times 3 \\times 4 \\times 5$", "$2^3 \\times 15$", "$2^2 \\times 3 \\times 10$", "$2^3 \\times 3 \\times 5$"], correct: 3, explanation: "120 diuraikan menjadi faktor-faktor primanya: $120 = 10 \\times 12 = (2 \\times 5) \\times (4 \\times 3) = (2 \\times 5) \\times (2^2 \\times 3) = 2^3 \\times 3 \\times 5$." },
             { q: "FPB dari 24 dan 36 adalah...", options: ["4", "6", "12", "72"], correct: 2, explanation: "Faktorisasi $24=2^3 \\times 3$ dan $36=2^2 \\times 3^2$. Ambil faktor yang sama ($2$ dan $3$) dengan pangkat terkecil ($2^2$ dan $3^1$). FPB = $2^2 \\times 3 = 12$." },
