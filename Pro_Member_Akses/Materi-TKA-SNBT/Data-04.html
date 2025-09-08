@@ -166,6 +166,9 @@
 </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         const quizzes = [
             { q: "Dari kota A ke B ada 3 jalan, dan dari B ke C ada 4 jalan. Banyak cara perjalanan dari A ke C melalui B adalah...", options: ["7", "12", "9", "81"], correct: 1, explanation: "Ini adalah prosedur berurutan (pergi dari A ke B DAN dari B ke C). Maka, gunakan Aturan Perkalian: $3 \\times 4 = 12$ cara." },
             { q: "Banyak cara menyusun 4 orang untuk duduk pada 6 kursi yang tersedia dalam satu baris adalah...", options: ["24", "120", "360", "720"], correct: 2, explanation: "Urutan duduk orang penting (A di kursi 1, B di kursi 2 beda dengan sebaliknya). Ini adalah masalah permutasi 4 objek dari 6 tempat: $P(6,4) = \\frac{6!}{(6-4)!} = \\frac{6!}{2!} = 6 \\times 5 \\times 4 \\times 3 = 360$." },
