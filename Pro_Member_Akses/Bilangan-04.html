@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eksponen dan Bentuk Akar - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option, .mcma-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong),
+        .options-container.answered .mcma-option {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover, .mcma-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct, .mcma-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; opacity: 1;
+        }
+        .quiz-option.wrong, .mcma-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); opacity: 1;
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .confirm-btn {
+            background-color: var(--accent-cyan); color: white; border: none; padding: 10px 20px;
+            border-radius: 0.5rem; font-weight: bold; cursor: pointer; margin-top: 1rem; width: 100%;
+            transition: background-color 0.2s ease;
+        }
+        .confirm-btn:hover { background-color: #1f6eeb; }
+        .category-table { width: 100%; border-collapse: separate; border-spacing: 0 0.5rem; }
+        .category-table td { padding: 0.75rem; border: 2px solid var(--border-color); border-radius: 0.5rem; }
+        .category-table td:first-child { text-align: left; }
+        .category-table .correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); }
+        .category-table .wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto; padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Eksponen dan Bentuk Akar: Memahami Pangkat dan Akarnya</h1>
+<p>
+    Eksponen (perpangkatan) adalah notasi ringkas untuk perkalian berulang, sedangkan bentuk akar adalah operasi kebalikannya. Keduanya adalah dua sisi dari mata uang yang sama, yang terhubung erat melalui konsep pangkat pecahan.
+</p>
+
+<h2>1. Sifat-sifat Eksponen</h2>
+<p>Berikut adalah aturan-aturan fundamental yang berlaku untuk operasi eksponen.</p>
+<div class="important-note">
+    <ul>
+        <li><b>Perkalian:</b> $a^m \times a^n = a^{m+n}$</li>
+        <li><b>Pembagian:</b> $a^m \div a^n = a^{m-n}$</li>
+        <li><b>Pangkat dari Pangkat:</b> $(a^m)^n = a^{m \times n}$</li>
+        <li><b>Pangkat dari Perkalian:</b> $(a \times b)^n = a^n \times b^n$</li>
+        <li><b>Pangkat Nol:</b> $a^0 = 1$ (untuk $a \neq 0$)</li>
+        <li><b>Pangkat Negatif:</b> $a^{-n} = \frac{1}{a^n}$</li>
+    </ul>
+</div>
+
+<h2>2. Hubungan Bentuk Akar dan Pangkat Pecahan</h2>
+<p>
+    Pemahaman sejati dari bentuk akar adalah sebagai notasi lain untuk pangkat pecahan (rasional). Hubungan ini memungkinkan semua sifat eksponen di atas berlaku juga untuk akar.
+</p>
+<div class="important-note">
+    <b>Definisi Kunci:</b>
+    $$ \sqrt[n]{a^m} = a^{\frac{m}{n}} $$
+    <ul>
+        <li><b>Indeks akar ($n$)</b> menjadi <b>penyebut</b> pangkat.</li>
+        <li><b>Pangkat radikan ($m$)</b> menjadi <b>pembilang</b> pangkat.</li>
+    </ul>
+    Contoh: $\sqrt{x} = \sqrt[2]{x^1} = x^{\frac{1}{2}}$ dan $\sqrt[3]{y^2} = y^{\frac{2}{3}}$.
+</div>
+
+<h2>3. Operasi dan Penyederhanaan Bentuk Akar</h2>
+<ul>
+    <li>
+        <b>Penyederhanaan:</b> Keluarkan faktor pangkat $n$ sempurna dari dalam akar.
+        <br>Contoh: $\sqrt{72} = \sqrt{36 \times 2} = \sqrt{36} \times \sqrt{2} = 6\sqrt{2}$.
+    </li>
+    <li>
+        <b>Penjumlahan & Pengurangan:</b> Hanya bisa dilakukan pada akar-akar yang <b>sejenis</b> (indeks dan radikan sama).
+        <br>Contoh: $5\sqrt{3} + \sqrt{12} = 5\sqrt{3} + \sqrt{4 \times 3} = 5\sqrt{3} + 2\sqrt{3} = (5+2)\sqrt{3} = 7\sqrt{3}$.
+    </li>
+    <li>
+        <b>Perkalian:</b> Kalikan koefisien dengan koefisien dan radikan dengan radikan (jika indeks sama).
+        <br>Contoh: $2\sqrt{3} \times 5\sqrt{6} = 10\sqrt{18} = 10\sqrt{9 \times 2} = 10 \times 3\sqrt{2} = 30\sqrt{2}$.
+    </li>
+</ul>
+
+<h2>4. Merasionalkan Penyebut</h2>
+<p>
+    Ini adalah proses untuk menghilangkan bentuk akar dari penyebut pecahan, sebuah konvensi untuk bentuk sederhana.
+</p>
+<ul>
+    <li>
+        <b>Bentuk $\frac{a}{\sqrt{b}}$:</b> Kalikan dengan $\frac{\sqrt{b}}{\sqrt{b}}$.
+        <br>Contoh: $\frac{6}{\sqrt{2}} = \frac{6}{\sqrt{2}} \times \frac{\sqrt{2}}{\sqrt{2}} = \frac{6\sqrt{2}}{2} = 3\sqrt{2}$.
+    </li>
+    <li>
+        <b>Bentuk $\frac{c}{a \pm \sqrt{b}}$:</b> Kalikan dengan <b>akar sekawan</b> (konjugat).
+        <br>Contoh: $\frac{2}{3-\sqrt{7}} = \frac{2}{3-\sqrt{7}} \times \frac{3+\sqrt{7}}{3+\sqrt{7}} = \frac{2(3+\sqrt{7})}{3^2 - (\sqrt{7})^2} = \frac{6+2\sqrt{7}}{9-7} = \frac{6+2\sqrt{7}}{2} = 3+\sqrt{7}$.
+    </li>
+</ul>
+
+<h2>Uji Kompetensi</h2>
+<p>Kerjakan soal-soal berikut untuk menguji pemahaman Anda sesuai format TKA.</p>
+<div id="quiz-container"></div>
+</div>
+
+    <script>
+        // Script kuis lengkap akan dimasukkan di sini
+        const quizzes = [
+            { q: "Bentuk sederhana dari $x^5 \\cdot x^{-2} \\cdot x^0$ adalah...", options: ["$x^7$", "$x^3$", "$x^{-10}$", "$1$"], correct: 1, explanation: "Menggunakan sifat perkalian eksponen, pangkatnya dijumlahkan: $5 + (-2) + 0 = 3$. Maka hasilnya adalah $x^3$." },
+            { q: "Bentuk pangkat pecahan dari $\\sqrt[3]{a^5}$ adalah...", options: ["$a^{5/3}$", "$a^{3/5}$", "$a^{15}$", "$a^{8}$"], correct: 0, explanation: "Indeks akar (3) menjadi penyebut dan pangkat radikan (5) menjadi pembilang. Jadi, bentuknya adalah $a^{5/3}$." },
+            { q: "Hasil dari $\\sqrt{48} + 2\\sqrt{3}$ adalah...", options: ["$\\sqrt{54}$", "$4\\sqrt{6}$", "$6\\sqrt{3}$", "$18$"], correct: 2, explanation: "Sederhanakan dulu $\\sqrt{48} = \\sqrt{16 \\times 3} = 4\\sqrt{3}$. Kemudian jumlahkan dengan suku sejenis: $4\\sqrt{3} + 2\\sqrt{3} = (4+2)\\sqrt{3} = 6\\sqrt{3}$." },
+            { q: "Bentuk sederhana dari $\\frac{10}{2\\sqrt{5}}$ setelah dirasionalkan adalah...", options: ["$5\\sqrt{5}$", "$10\\sqrt{5}$", "$\\sqrt{5}$", "$2$"], correct: 2, explanation: "Kalikan dengan $\\frac{\\sqrt{5}}{\\sqrt{5}}$ menjadi $\\frac{10\\sqrt{5}}{2 \\times 5} = \\frac{10\\sqrt{5}}{10} = \\sqrt{5}$." },
+            { q: "Tentukan Benar atau Salah untuk setiap pernyataan berikut:", type: "category", statements: [{s: "$(x^2)^3 = x^5$.", a: false}, {s: "$5^{-1} = -5$.", a: false}, {s: "$\\sqrt{x} \\cdot \\sqrt{x} = x$ (untuk $x \\ge 0$).", a: true}], explanation: "A: Pangkat dari pangkat, pangkatnya dikalikan: $(x^2)^3 = x^{2 \\times 3} = x^6$ (Salah). B: Pangkat negatif artinya kebalikan: $5^{-1} = 1/5$ (Salah). C: Definisi akar kuadrat (Benar)." },
+            { q: "Hasil dari $(2\\sqrt{3})^2$ adalah...", options: ["6", "12", "18", "36"], correct: 1, explanation: "Menggunakan sifat $(ab)^n = a^n b^n$, maka $(2\\sqrt{3})^2 = 2^2 \\times (\\sqrt{3})^2 = 4 \\times 3 = 12$." },
+            { q: "Bentuk sederhana dari $\\frac{x^2y^{-1}z^3}{xy^2z^{-1}}$ adalah...", options: ["$\\frac{x z^2}{y}$", "$\\frac{x z^4}{y^3}$", "$x y^1 z^2$", "$\\frac{x^3 z^2}{y}$"], correct: 1, explanation: "Gunakan sifat pembagian eksponen (pangkat dikurang): $x^{2-1}y^{-1-2}z^{3-(-1)} = x^1 y^{-3} z^4$. Pangkat negatif pindah ke bawah menjadi positif: $\\frac{xz^4}{y^3}$." },
+            { q: "Manakah dari ekspresi berikut yang ekuivalen dengan $2\\sqrt{2}$? (Pilih semua jawaban yang benar)", type: "mcma", options: ["$\\sqrt{8}$", "$\\frac{4}{\\sqrt{2}}$", "$\\sqrt{50} - \\sqrt{18}$", "$2^{3/2}$", "$4^{1/2}$"], correct: [0,1,2,3], explanation: "A. $\\sqrt{8}=\\sqrt{4 \\cdot 2}=2\\sqrt{2}$. B. $\\frac{4}{\\sqrt{2}} = \\frac{4\\sqrt{2}}{2}=2\\sqrt{2}$. C. $5\\sqrt{2}-3\\sqrt{2}=2\\sqrt{2}$. D. $2^{3/2}=\\sqrt{2^3}=\\sqrt{8}=2\\sqrt{2}$. Pilihan E salah karena $4^{1/2}=\\sqrt{4}=2$." },
+            { q: "Hasil dari merasionalkan penyebut $\\frac{4}{\\sqrt{5}-1}$ adalah...", options: ["$\\sqrt{5}+1$", "$\\sqrt{5}-1$", "$4\\sqrt{5}+4$", "$2\\sqrt{5}-2$"], correct: 0, explanation: "Kalikan dengan sekawannya, $\\frac{\\sqrt{5}+1}{\\sqrt{5}+1}$. Hasilnya $\\frac{4(\\sqrt{5}+1)}{(\\sqrt{5})^2 - 1^2} = \\frac{4(\\sqrt{5}+1)}{5-1} = \\frac{4(\\sqrt{5}+1)}{4} = \\sqrt{5}+1$." },
+            { q: "Tentukan Benar atau Salah untuk pernyataan-pernyataan berikut:", type: "category", statements: [{s: "Untuk menjumlahkan $\\sqrt{a}+\\sqrt{b}$, kita bisa menggunakan rumus $\\sqrt{a+b}$.", a: false}, {s: "Bentuk akar adalah notasi lain untuk pangkat bilangan rasional.", a: true}, {s: "Bilangan $a^{-n}$ selalu bernilai negatif.", a: false}], explanation: "A: Penjumlahan akar tidak bisa digabung seperti itu, hanya berlaku untuk akar sejenis (Salah). B: Ini adalah definisi kunci hubungan keduanya (Benar). C: Pangkat negatif berarti kebalikan, bukan membuat bilangan menjadi negatif. $2^{-2}=1/4$ (positif) (Salah)." }
+        ];
+
+        // --- SCRIPT KUIS INTERAKTIF LENGKAP ---
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            let optionsHtml = ''; let dataCorrect = '';
+            if (quiz.type === 'category') {
+                const correctAnswers = quiz.statements.map(s => s.a).join(',');
+                dataCorrect = `data-correct="${correctAnswers}"`;
+                optionsHtml = `<table class="category-table"><tbody>
+                    ${quiz.statements.map((stmt, i) => `
+                        <tr>
+                            <td>${String.fromCharCode(65 + i)}. ${stmt.s}</td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="true"> Benar</label></td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="false"> Salah</label></td>
+                        </tr>
+                    `).join('')}
+                </tbody></table>`;
+            } else if (quiz.type === 'mcma') {
+                dataCorrect = `data-correct="${quiz.correct.join(',')}"`;
+                optionsHtml = quiz.options.map((opt, i) =>
+                    `<div class="mcma-option" data-index="${i}"><label style="width: 100%; cursor: pointer; display: block;"><input type="checkbox" style="margin-right: 10px; vertical-align: middle;">${opt}</label></div>`
+                ).join("");
+            } else {
+                dataCorrect = `data-correct="${quiz.correct}"`;
+                optionsHtml = quiz.options.map((opt, i) => 
+                    `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                ).join("");
+            }
+            const confirmBtnHtml = (quiz.type === 'category' || quiz.type === 'mcma') ? `<button class="confirm-btn">Konfirmasi Jawaban</button>` : '';
+            quizEl.innerHTML = `
+                <button class="quiz-accordion-button"><span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i></button>
+                <div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p>
+                    <div class="options-container" data-type="${quiz.type || 'pg'}" ${dataCorrect}>${optionsHtml}</div>
+                    ${confirmBtnHtml}
+                    <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                </div>`;
+            quizContainer.appendChild(quizEl);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.dataset.type === 'pg' && !optionsContainer.classList.contains('answered')) {
+                        optionsContainer.classList.add('answered');
+                        if (option.dataset.correct === 'true') {
+                            option.classList.add('correct');
+                        } else {
+                            option.classList.add('wrong');
+                            const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                            if (correctOption) correctOption.classList.add('correct');
+                        }
+                        const explanation = optionsContainer.nextElementSibling;
+                        explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.mcma-option label').forEach(label => {
+                label.addEventListener('click', (e) => {
+                    if (e.target.type !== 'checkbox') {
+                        const checkbox = label.querySelector('input[type="checkbox"]');
+                        if (checkbox && !checkbox.disabled) { checkbox.checked = !checkbox.checked; }
+                    }
+                });
+            });
+
+            document.querySelectorAll('.confirm-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const optionsContainer = button.previousElementSibling;
+                    const type = optionsContainer.dataset.type;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered'); button.style.display = 'none';
+
+                    if (type === 'category') {
+                        const correctAnswers = optionsContainer.dataset.correct.split(',');
+                        const rows = optionsContainer.querySelectorAll('tr');
+                        rows.forEach((row, i) => {
+                            const radios = row.querySelectorAll('input[type="radio"]');
+                            const selected = Array.from(radios).find(r => r.checked);
+                            const correctAnswer = correctAnswers[i];
+                            
+                            if (selected) {
+                                const selectedCell = selected.parentElement.closest('td');
+                                if (selected.value === correctAnswer) {
+                                    selectedCell.classList.add('correct');
+                                } else {
+                                    selectedCell.classList.add('wrong');
+                                }
+                            }
+
+                            if (!selected || selected.value !== correctAnswer) {
+                                const correctRadio = Array.from(radios).find(r => r.value === correctAnswer);
+                                if (correctRadio) {
+                                    correctRadio.parentElement.closest('td').classList.add('correct');
+                                }
+                            }
+                            radios.forEach(r => r.disabled = true);
+                        });
+                    } else if (type === 'mcma') {
+                        const correctIndices = optionsContainer.dataset.correct.split(',');
+                        const options = optionsContainer.querySelectorAll('.mcma-option');
+                        options.forEach((opt) => {
+                            const checkbox = opt.querySelector('input');
+                            const index = opt.dataset.index;
+                            const isChecked = checkbox.checked;
+                            const isCorrectAnswer = correctIndices.includes(index);
+                            
+                            if (isChecked && isCorrectAnswer) { opt.classList.add('correct');
+                            } else if (isChecked && !isCorrectAnswer) { opt.classList.add('wrong');
+                            } else if (!isChecked && isCorrectAnswer) { opt.classList.add('correct'); }
+                            checkbox.disabled = true;
+                        });
+                    }
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
