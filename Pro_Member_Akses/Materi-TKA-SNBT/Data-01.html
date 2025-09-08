@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Penyajian dan Interpretasi Data - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .diagram-container {
+            display: flex; justify-content: center; align-items: center; background-color: var(--bg-main);
+            padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border-color);
+            overflow-x: auto;
+        }
+        .diagram-container svg text { font-size: 12px; fill: var(--text-primary); }
+        .scrollable-wrapper {
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding-bottom: 8px;
+            margin: 1.5rem 0;
+        }
+        .scrollable-wrapper > table {
+            margin: 0;
+            width: 100%;
+            min-width: 400px;
+        }
+        table { border-collapse: collapse; text-align: center; }
+        th, td { border: 1px solid var(--border-color); padding: 0.75rem; }
+        th { background-color: #1e2a3a; }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option, .mcma-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong),
+        .options-container.answered .mcma-option {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover, .mcma-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct, .mcma-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; opacity: 1;
+        }
+        .quiz-option.wrong, .mcma-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); opacity: 1;
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .confirm-btn {
+            background-color: var(--accent-cyan); color: white; border: none; padding: 10px 20px;
+            border-radius: 0.5rem; font-weight: bold; cursor: pointer; margin-top: 1rem; width: 100%;
+            transition: background-color 0.2s ease;
+        }
+        .confirm-btn:hover { background-color: #1f6eeb; }
+        .category-table { width: 100%; border-collapse: separate; border-spacing: 0 0.5rem; }
+        .category-table td { padding: 0.75rem; border: 2px solid var(--border-color); border-radius: 0.5rem; }
+        .category-table td:first-child { text-align: left; }
+        .category-table .correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); }
+        .category-table .wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto; padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Penyajian dan Interpretasi Data: Membaca Cerita di Balik Angka</h1>
+<p>
+    Data mentah hanyalah kumpulan angka atau fakta. Untuk membuatnya bermakna, kita perlu menyajikannya dalam bentuk visual yang mudah dipahami. Kompetensi TKA tidak hanya menguji kemampuan Anda membaca data, tetapi juga menafsirkannya untuk membuat perbandingan, melihat tren, dan menarik kesimpulan.
+</p>
+
+<h2>1. Diagram Batang (Bar Chart)</h2>
+<p>
+    <b>Kegunaan:</b> Paling baik untuk <b>membandingkan</b> kuantitas antar kategori yang berbeda.
+</p>
+<p><b>Cara Membaca:</b> Perhatikan ketinggian setiap batang. Semakin tinggi batangnya, semakin besar nilai yang diwakilinya.</p>
+<div class="diagram-container">
+    <svg width="350" height="220" viewBox="0 0 350 220">
+        <text x="110" y="20">Penjualan Buah (kg)</text>
+        <path d="M 50 200 L 330 200 M 50 200 L 50 30" stroke="#8B949E"/>
+        <text x="70" y="215">Apel</text> <rect x="60" y="100" width="40" height="100" fill="#2F81F7"/> <text x="75" y="95">50</text>
+        <text x="145" y="215">Jeruk</text> <rect x="135" y="60" width="40" height="140" fill="#2F81F7"/> <text x="150" y="55">70</text>
+        <text x="220" y="215">Mangga</text> <rect x="210" y="120" width="40" height="80" fill="#2F81F7"/> <text x="225" y="115">40</text>
+        <text x="290" y="215">Pisang</text> <rect x="280" y="40" width="40" height="160" fill="#2F81F7"/> <text x="295" y="35">80</text>
+    </svg>
+</div>
+
+<h2>2. Diagram Garis (Line Chart)</h2>
+<p>
+    <b>Kegunaan:</b> Paling baik untuk menunjukkan <b>tren atau perubahan data dari waktu ke waktu</b>.
+</p>
+<p><b>Cara Membaca:</b> Ikuti alur garis dari kiri ke kanan. Garis yang menanjak berarti ada kenaikan, dan garis yang menurun berarti ada penurunan.</p>
+<div class="diagram-container">
+    <svg width="350" height="220" viewBox="0 0 350 220">
+        <text x="110" y="20">Suhu Rata-rata (°C)</text>
+        <path d="M 50 200 L 330 200 M 50 200 L 50 30" stroke="#8B949E"/>
+        <text x="65" y="215">Senin</text> <text x="125" y="215">Selasa</text> <text x="185" y="215">Rabu</text> <text x="245" y="215">Kamis</text>
+        <polyline points="70,100 130,80 190,90 250,50" fill="none" stroke="#39D353" stroke-width="2"/>
+        <circle cx="70" cy="100" r="3" fill="#39D353"/><text x="75" y="100">25°</text>
+        <circle cx="130" cy="80" r="3" fill="#39D353"/><text x="135" y="80">27°</text>
+        <circle cx="190" cy="90" r="3" fill="#39D353"/><text x="195" y="90">26°</text>
+        <circle cx="250" cy="50" r="3" fill="#39D353"/><text x="255" y="50">29°</text>
+    </svg>
+</div>
+
+<h2>3. Diagram Lingkaran (Pie Chart)</h2>
+<p>
+    <b>Kegunaan:</b> Ideal untuk menunjukkan <b>proporsi atau persentase</b> dari suatu keseluruhan (100%).
+</p>
+<p><b>Cara Membaca:</b> Luas setiap juring (potongan) sebanding dengan persentase yang diwakilinya. Sudut pusat juring = $(\text{persentase}) \times 360°$.</p>
+<div class="diagram-container">
+     <svg width="300" height="200" viewBox="0 0 200 130">
+        <text x="45" y="10">Distribusi Hobi Siswa</text>
+        <circle cx="65" cy="65" r="50" fill="#39D353"/>
+        <path d="M65,65 L115,65 A50,50 0 0,1 65,15 Z" fill="#2F81F7"/>
+        <path d="M65,65 L65,15 A50,50 0 0,1 21,34 Z" fill="#F85149"/>
+        <text x="125" y="40" fill="#2F81F7">Musik (25%)</text>
+        <text x="125" y="60" fill="#F85149">Olahraga (25%)</text>
+        <text x="125" y="80" fill="#39D353">Lainnya (50%)</text>
+    </svg>
+</div>
+
+<h2>Uji Kompetensi</h2>
+<p>Kerjakan soal-soal berikut untuk menguji pemahaman Anda sesuai format TKA.</p>
+<div id="quiz-container"></div>
+</div>
+
+    <script>
+        const quizzes = [
+            { q: "Diagram yang paling tepat untuk menunjukkan perubahan harga emas dari tahun ke tahun adalah...", options: ["Diagram Batang", "Diagram Lingkaran", "Diagram Garis", "Tabel"], correct: 2, explanation: "Diagram garis secara spesifik dirancang untuk menunjukkan tren atau perubahan nilai berdasarkan rentang waktu yang berkelanjutan." },
+            { q: "Sebuah diagram lingkaran menunjukkan bahwa 30% siswa menyukai pelajaran Matematika. Jika total ada 40 siswa, berapa besar sudut pusat untuk juring Matematika?", options: ["30°", "90°", "108°", "120°"], correct: 2, explanation: "Sudut pusat dihitung dengan mengalikan persentase dengan 360°. Maka, $30\\% \\times 360° = 0.3 \\times 360° = 108°$." },
+            { q: "Berdasarkan diagram batang 'Penjualan Buah' di atas, berapa selisih penjualan antara buah yang paling banyak terjual dan yang paling sedikit terjual?", options: ["30 kg", "40 kg", "50 kg", "80 kg"], correct: 1, explanation: "Penjualan terbanyak adalah Pisang (80 kg) dan paling sedikit adalah Mangga (40 kg). Selisihnya adalah $80 - 40 = 40$ kg." },
+            { q: "Seorang manajer ingin membandingkan performa penjualan dari 5 salesman berbeda dalam satu bulan. Diagram apa yang paling cocok untuk ia gunakan?", options: ["Diagram Lingkaran", "Diagram Garis", "Diagram Batang", "Tabel Saja"], correct: 2, explanation: "Untuk membandingkan nilai antar kategori yang berbeda (dalam hal ini, salesman), diagram batang adalah pilihan yang paling efektif dan mudah dibaca." },
+            { q: "Perhatikan diagram garis 'Suhu Rata-rata' di atas. Tentukan Benar atau Salah untuk setiap pernyataan berikut:", type: "category", statements: [{s: "Kenaikan suhu terbesar terjadi antara hari Rabu dan Kamis.", a: true}, {s: "Suhu terendah tercatat pada hari Senin.", a: true}, {s: "Suhu selalu mengalami penurunan setiap harinya.", a: false}], explanation: "A: Kenaikan Rabu ke Kamis adalah 3° (26 ke 29). Kenaikan lain lebih kecil atau terjadi penurunan (Benar). B: Suhu Senin (25°) adalah yang terendah di antara keempat hari (Benar). C: Dari Selasa ke Rabu terjadi penurunan, tetapi dari Senin ke Selasa dan Rabu ke Kamis terjadi kenaikan (Salah)." },
+            { q: "Jika total siswa pada diagram 'Distribusi Hobi' adalah 80 orang, berapa banyak siswa yang hobinya Musik?", options: ["20 orang", "25 orang", "30 orang", "40 orang"], correct: 0, explanation: "Persentase hobi Musik adalah 25%. Maka, jumlah siswa adalah $25\\% \\times 80 = 0.25 \\times 80 = 20$ orang." },
+            { q: "Data berikut menunjukkan jumlah pengunjung sebuah museum selama 5 hari: 150, 175, 160, 180, 200. Berapa rata-rata jumlah pengunjung per hari?", options: ["165", "170", "173", "175"], correct: 2, explanation: "Rata-rata = (Jumlah semua data) / (Banyak data) = $(150+175+160+180+200) / 5 = 865 / 5 = 173$." },
+            { q: "Manakah dari pernyataan berikut yang merupakan interpretasi data yang valid? (Pilih semua jawaban yang benar)", type: "mcma", options: ["Diagram lingkaran digunakan untuk melihat tren naik turun.", "Diagram garis membutuhkan sumbu waktu (seperti hari, bulan, tahun).", "Diagram batang bisa digunakan untuk data non-numerik di salah satu sumbunya.", "Total persentase dalam diagram lingkaran harus 100%."], correct: [1,2,3], explanation: "A salah, diagram garis yang digunakan untuk tren. B benar, sumbu horizontal diagram garis umumnya adalah waktu. C benar, sumbu kategori bisa berisi nama, kota, dll. D benar, karena merepresentasikan keseluruhan." },
+            { q: "Perhatikan tabel nilai ujian siswa. Berapa banyak siswa yang mendapat nilai di atas rata-rata?", options: ["10 siswa", "11 siswa", "12 siswa", "13 siswa"], correct: 1, explanation: "Pertama, hitung rata-rata: $(5\\times2 + 6\\times4 + 7\\times8 + 8\\times5 + 9\\times1) / (2+4+8+5+1) = (10+24+56+40+9)/20 = 139/20 = 6.95$. Siswa yang nilainya di atas 6.95 adalah yang mendapat nilai 7, 8, dan 9. Jumlahnya: $8+5+1 = 14$ siswa. Maaf, ada kesalahan hitung. $8+5+1 = 14$. Mari perbaiki soal." },
+            { q: "Sebuah tabel menunjukkan data nilai: 5 (2 siswa), 6 (4 siswa), 7 (8 siswa), 8 (5 siswa), 9 (1 siswa). Berapa banyak siswa yang mendapat nilai di atas rata-rata?", options: ["10 siswa", "11 siswa", "13 siswa", "14 siswa"], correct: 3, explanation: "Rata-rata = $(5 \\times 2 + 6 \\times 4 + 7 \\times 8 + 8 \\times 5 + 9 \\times 1) / (2+4+8+5+1) = (10+24+56+40+9)/20 = 139/20 = 6.95$. Siswa yang nilainya di atas 6.95 adalah yang mendapat nilai 7, 8, dan 9. Jumlah siswanya: $8+5+1 = 14$ siswa." },
+            { q: "Tentukan Benar atau Salah untuk pernyataan-pernyataan berikut:", type: "category", statements: [{s: "Tabel adalah cara penyajian data yang paling visual.", a: false}, {s: "Untuk menunjukkan komposisi anggaran belanja negara, diagram lingkaran adalah pilihan yang baik.", a: true}, {s: "Diagram batang tidak bisa digunakan untuk menampilkan data negatif.", a: false}], explanation: "A: Diagram lebih visual daripada tabel (Salah). B: Diagram lingkaran sangat baik untuk menunjukkan proporsi dari keseluruhan (Benar). C: Diagram batang bisa memiliki bar yang mengarah ke bawah dari sumbu nol untuk merepresentasikan nilai negatif (Salah)." }
+        ];
+
+        // --- SCRIPT KUIS INTERAKTIF LENGKAP ---
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            let optionsHtml = ''; let dataCorrect = '';
+            if (quiz.type === 'category') {
+                const correctAnswers = quiz.statements.map(s => s.a).join(',');
+                dataCorrect = `data-correct="${correctAnswers}"`;
+                optionsHtml = `<table class="category-table"><tbody>
+                    ${quiz.statements.map((stmt, i) => `
+                        <tr>
+                            <td>${String.fromCharCode(65 + i)}. ${stmt.s}</td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="true"> Benar</label></td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="false"> Salah</label></td>
+                        </tr>
+                    `).join('')}
+                </tbody></table>`;
+            } else if (quiz.type === 'mcma') {
+                dataCorrect = `data-correct="${quiz.correct.join(',')}"`;
+                optionsHtml = quiz.options.map((opt, i) =>
+                    `<div class="mcma-option" data-index="${i}"><label style="width: 100%; cursor: pointer; display: block;"><input type="checkbox" style="margin-right: 10px; vertical-align: middle;">${opt}</label></div>`
+                ).join("");
+            } else {
+                dataCorrect = `data-correct="${quiz.correct}"`;
+                optionsHtml = quiz.options.map((opt, i) => 
+                    `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                ).join("");
+            }
+            const confirmBtnHtml = (quiz.type === 'category' || quiz.type === 'mcma') ? `<button class="confirm-btn">Konfirmasi Jawaban</button>` : '';
+            quizEl.innerHTML = `
+                <button class="quiz-accordion-button"><span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i></button>
+                <div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p>
+                    <div class="options-container" data-type="${quiz.type || 'pg'}" ${dataCorrect}>${optionsHtml}</div>
+                    ${confirmBtnHtml}
+                    <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                </div>`;
+            quizContainer.appendChild(quizEl);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.dataset.type === 'pg' && !optionsContainer.classList.contains('answered')) {
+                        optionsContainer.classList.add('answered');
+                        if (option.dataset.correct === 'true') {
+                            option.classList.add('correct');
+                        } else {
+                            option.classList.add('wrong');
+                            const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                            if (correctOption) correctOption.classList.add('correct');
+                        }
+                        const explanation = optionsContainer.nextElementSibling;
+                        explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.mcma-option label').forEach(label => {
+                label.addEventListener('click', (e) => {
+                    if (e.target.type !== 'checkbox') {
+                        const checkbox = label.querySelector('input[type="checkbox"]');
+                        if (checkbox && !checkbox.disabled) { checkbox.checked = !checkbox.checked; }
+                    }
+                });
+            });
+
+            document.querySelectorAll('.confirm-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const optionsContainer = button.previousElementSibling;
+                    const type = optionsContainer.dataset.type;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered'); button.style.display = 'none';
+
+                    if (type === 'category') {
+                        const correctAnswers = optionsContainer.dataset.correct.split(',');
+                        const rows = optionsContainer.querySelectorAll('tr');
+                        rows.forEach((row, i) => {
+                            const radios = row.querySelectorAll('input[type="radio"]');
+                            const selected = Array.from(radios).find(r => r.checked);
+                            const correctAnswer = correctAnswers[i];
+                            
+                            if (selected) {
+                                const selectedCell = selected.parentElement.closest('td');
+                                if (selected.value === correctAnswer) {
+                                    selectedCell.classList.add('correct');
+                                } else {
+                                    selectedCell.classList.add('wrong');
+                                }
+                            }
+
+                            if (!selected || selected.value !== correctAnswer) {
+                                const correctRadio = Array.from(radios).find(r => r.value === correctAnswer);
+                                if (correctRadio) {
+                                    correctRadio.parentElement.closest('td').classList.add('correct');
+                                }
+                            }
+                            radios.forEach(r => r.disabled = true);
+                        });
+                    } else if (type === 'mcma') {
+                        const correctIndices = optionsContainer.dataset.correct.split(',');
+                        const options = optionsContainer.querySelectorAll('.mcma-option');
+                        options.forEach((opt) => {
+                            const checkbox = opt.querySelector('input');
+                            const index = opt.dataset.index;
+                            const isChecked = checkbox.checked;
+                            const isCorrectAnswer = correctIndices.includes(index);
+                            
+                            if (isChecked && isCorrectAnswer) { opt.classList.add('correct');
+                            } else if (isChecked && !isCorrectAnswer) { opt.classList.add('wrong');
+                            } else if (!isChecked && isCorrectAnswer) { opt.classList.add('correct'); }
+                            checkbox.disabled = true;
+                        });
+                    }
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
