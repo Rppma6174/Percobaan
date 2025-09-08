@@ -178,6 +178,9 @@
 </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         const quizzes = [
             { q: "Jika besar sebuah sudut adalah 70°, maka besar sudut pelurusnya adalah...", options: ["20°", "90°", "110°", "290°"], correct: 2, explanation: "Sudut berpelurus membentuk garis lurus (180°). Maka, pelurusnya adalah $180° - 70° = 110°$." },
             { q: "Dua sudut berpenyiku memiliki perbandingan 2 : 3. Besar sudut yang lebih kecil adalah...", options: ["18°", "36°", "54°", "90°"], correct: 1, explanation: "Total sudut berpenyiku adalah 90°. Total bagian perbandingan = $2+3=5$. Sudut terkecil = $\\frac{2}{5} \\times 90° = 36°$." },
