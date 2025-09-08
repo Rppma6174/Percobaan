@@ -228,6 +228,9 @@
                     <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('bank_soal', this)">
                         <i class="fa-solid fa-list-check text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Bank Soal</span>
                     </a>
+                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('snbt_tka', this)">
+                        <i class="fa-solid fa-graduation-cap text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">SNBT & TKA</span>
+                    </a>
                     <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('umt_lab', this)">
                         <i class="fa-solid fa-flask-vial text-lg md:w-6"></i>
                         <span class="hidden md:inline md:text-base md:mt-0">UMT Lab</span>
@@ -258,6 +261,30 @@
     <div id="modal-container" style="display: none;"></div>
 
     <script>
+    // === PERUBAHAN 2: Menambahkan data contoh untuk halaman SNBT & TKA ===
+    // (Ini seharusnya ada di file data.js, tapi untuk kemudahan, saya letakkan di sini)
+    const allContentData = {
+        materi: { "Materi Kelas 10": [], "Materi Kelas 11": [], "Materi Kelas 12": [] },
+        video: [],
+        bankSoal: [],
+        umtLab: [],
+        perpustakaan: [],
+        snbtTka: {
+            materi: [
+                { id: 'snbt-mat-01', title: 'Penalaran Matematika', summary: 'Kumpulan konsep dan rumus penting untuk menaklukkan soal-soal matematika.', icon: 'fa-solid fa-brain' },
+                { id: 'snbt-ppu-01', title: 'Penalaran Umum', summary: 'Latih kemampuan berpikir logis, analitis, dan memecahkan masalah secara efektif.', icon: 'fa-solid fa-lightbulb' },
+                { id: 'snbt-pbm-01', title: 'Pemahaman Bacaan & Menulis', summary: 'Tingkatkan pemahaman teks, analisis wacana, dan kaidah penulisan.', icon: 'fa-solid fa-book-open-reader' },
+                { id: 'snbt-pu-01', title: 'Literasi Bahasa Inggris', summary: 'Kuasai pemahaman teks dan kosakata Bahasa Inggris untuk soal literasi.', icon: 'fa-solid fa-language' }
+            ],
+            latihan: [
+                { id: 'snbt-tryout-01', title: 'Try Out SNBT #1', summary: 'Simulasi ujian lengkap dengan 150 soal untuk mengukur kesiapanmu.', icon: 'fa-solid fa-file-lines' },
+                { id: 'snbt-tka-saintek', title: 'Paket TKA Saintek', summary: 'Soal-soal Fisika, Kimia, Biologi, dan Matematika IPA.', icon: 'fa-solid fa-atom' },
+                { id: 'snbt-tka-soshum', title: 'Paket TKA Soshum', summary: 'Soal-soal Sejarah, Geografi, Sosiologi, dan Ekonomi.', icon: 'fa-solid fa-landmark' }
+            ]
+        }
+    };
+    const socialMediaUpdates = [];
+    
     const CONFIG = {
         API_URL: 'https://script.google.com/macros/s/AKfycbyP3jpWgs6ikQcA-9MsInRZYbLFQsshjxgo22twwXrzpACSPV9BREogrKUd-60crXV_mg/exec',
         LOGIN_PAGE: '../Login/',
@@ -346,11 +373,13 @@
     // =================================================================================
     const appContent = document.getElementById('app-content');
     
+    // === PERUBAHAN 3: Mendaftarkan fungsi render untuk halaman baru ===
     const pageRenderers = {
         'dashboard': renderDashboardPage,
         'materi': renderMateriPage,
         'perpustakaan': renderPerpustakaanPage,
         'bank_soal': renderBankSoalPage,
+        'snbt_tka': renderSnbtTkaPage, // <-- BARU
         'video': renderVideoPage,
         'forum': renderForumPage,
         'pengaturan': renderPengaturanPage,
@@ -365,7 +394,7 @@
         document.querySelectorAll('.sidebar-link, .bottom-nav-link').forEach(link => link.classList.remove('active'));
         if (clickedElement) {
             const targetLink = Array.from(document.querySelectorAll('.sidebar-link, .bottom-nav-link'))
-                                    .find(a => a.getAttribute('onclick').includes(`'${page}'`));
+                                      .find(a => a.getAttribute('onclick').includes(`'${page}'`));
             if(targetLink) targetLink.classList.add('active');
         }
         
@@ -413,7 +442,6 @@
         initializeAppDashboardWidgets();
     }
     
-    // [FUNGSI DIPERBAIKI] - Onclick sekarang memanggil openMateri untuk pelacakan
     function renderMateriPage() {
         let accordionHTML = '';
         const materiData = allContentData.materi;
@@ -470,7 +498,6 @@
         setupMateriSearch();
     }
 
-    // [FUNGSI BARU] - Melacak progres sebelum navigasi ke halaman HTML
     function openMateri(itemId, filePath) {
         if (!filePath || filePath === '#') {
             showToast('Konten untuk materi ini belum tersedia.', 'info');
@@ -540,6 +567,57 @@
         });
     }
         
+    // === PERUBAHAN 4: Fungsi baru untuk merender halaman SNBT & TKA ===
+    function renderSnbtTkaPage() {
+        const materiCards = allContentData.snbtTka.materi.map(item => `
+            <div class="card-item p-5 rounded-lg flex flex-col cursor-pointer" onclick="showToast('Materi ${item.title} belum tersedia.', 'info')">
+                <div class="flex items-center gap-4 mb-3">
+                    <i class="${item.icon} text-cyan-400 text-2xl w-8 text-center"></i>
+                    <h3 class="font-bold text-lg text-cyan-300">${item.title}</h3>
+                </div>
+                <p class="text-sm text-gray-400 flex-grow">${item.summary}</p>
+                <div class="mt-4 text-xs font-mono bg-gray-900/50 text-cyan-300 rounded-full px-3 py-1 self-start">
+                    Materi Belajar
+                </div>
+            </div>
+        `).join('');
+
+        const latihanCards = allContentData.snbtTka.latihan.map(item => `
+            <div class="card-item p-5 rounded-lg flex flex-col cursor-pointer" onclick="showToast('Latihan soal ${item.title} belum tersedia.', 'info')">
+                <div class="flex items-center gap-4 mb-3">
+                    <i class="${item.icon} text-green-400 text-2xl w-8 text-center"></i>
+                    <h3 class="font-bold text-lg text-green-300">${item.title}</h3>
+                </div>
+                <p class="text-sm text-gray-400 flex-grow">${item.summary}</p>
+                <div class="mt-4 text-xs font-mono bg-gray-900/50 text-green-300 rounded-full px-3 py-1 self-start">
+                    Latihan Soal
+                </div>
+            </div>
+        `).join('');
+
+        const pageHTML = `
+            <div class="panel">
+                <h2 class="text-2xl font-bold text-cyan-400">Persiapan SNBT & TKA</h2>
+                <p class="text-sm text-gray-400 mb-8">Fokuskan persiapanmu dengan materi dan latihan soal yang terstruktur.</p>
+
+                <div class="mb-10">
+                    <h3 class="text-xl font-semibold mb-4 border-b-2 border-cyan-500 pb-2">Materi Belajar</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                        ${materiCards}
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 border-b-2 border-green-500 pb-2">Latihan & Try Out</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                        ${latihanCards}
+                    </div>
+                </div>
+            </div>
+        `;
+        appContent.innerHTML = pageHTML;
+    }
+
     function renderVideoPage() {
         const categories = ['Semua', ...new Set(allContentData.video.map(item => item.category))];
 
@@ -809,8 +887,8 @@
                 <p class="text-xs text-gray-500 mb-3">Oleh ${item.author}</p>
                 <p class="text-sm text-gray-400 flex-grow">${item.summary}</p>
                  <div class="mt-4 text-xs font-mono bg-gray-900/50 text-cyan-300 rounded-full px-3 py-1 self-start">
-                    E-Book
-                </div>
+                     E-Book
+                 </div>
             </div>
         `).join('');
 
@@ -882,11 +960,9 @@
         const createWidget = (config) => {
             if (!config.data) return '';
 
-            // Tautan sekarang menjadi link file asli, dan tracking dilakukan di 'openMateri'
             let href = config.data.filePath || '#';
             let actionOnClick = `onclick="event.preventDefault(); openMateri('${config.data.id}', '${href}')"`;
             
-            // Khusus untuk video, tetap gunakan playVideoInModal
             if (config.type === 'video') {
                 actionOnClick = `onclick="event.preventDefault(); playVideoInModal('${config.data.videoId}', '${config.data.title.replace(/'/g, "\\'")}')"`;
             } else if (config.type === 'umtLab' || config.type === 'perpustakaan') {
@@ -917,7 +993,6 @@
         lastActivityContainer.innerHTML = activityHTML;
     }
     
-    // [FUNGSI DIPERBAIKI] - Menambahkan penghapusan 'userLastActivity'
     function resetProgress() {
         showConfirmationModal({
             title: 'Konfirmasi Reset Progres',
@@ -927,7 +1002,7 @@
             confirmAction: () => {
                 localStorage.removeItem(CONFIG.STORAGE_KEYS.COMPLETED_ITEMS);
                 localStorage.removeItem(CONFIG.STORAGE_KEYS.LAST_SCORE);
-                localStorage.removeItem('userLastActivity'); // <-- INI PERBAIKANNYA
+                localStorage.removeItem('userLastActivity');
                 showToast("Progres belajar berhasil direset.", "success");
                 navigateTo('dashboard', null);
             },
@@ -952,7 +1027,7 @@
         let dataToStore = {
             id: item.id,
             title: item.title,
-            filePath: item.filePath // Simpan filePath agar bisa diakses widget
+            filePath: item.filePath
         };
 
         if (type === 'video') {
@@ -1012,9 +1087,9 @@
                      <div>
                          <h4 class="font-bold text-lg text-cyan-300 mb-2">Pembahasan:</h4>
                          <div class="text-gray-300 leading-relaxed">
-                            <div class="explanation-container-vertical">
-                               <div class="explanation-content-inner">${question.explanation}</div>
-                            </div>
+                             <div class="explanation-container-vertical">
+                                 <div class="explanation-content-inner">${question.explanation}</div>
+                             </div>
                          </div>
                      </div>
                 </div>
@@ -1186,7 +1261,7 @@
                 <h4 class="font-bold text-lg text-cyan-300 mb-2">Pembahasan:</h4>
                 <div class="text-gray-300 leading-relaxed">
                    <div class="explanation-container-vertical">
-                      <div class="explanation-content-inner">${q.explanation}</div>
+                       <div class="explanation-content-inner">${q.explanation}</div>
                    </div>
                 </div>
             </div>
@@ -1272,8 +1347,8 @@
             });
             document.getElementById('modal-overlay').addEventListener('click', (event) => {
                  if (event.target === event.currentTarget) {
-                    if (typeof cancelAction === 'function') cancelAction();
-                    closeModal();
+                     if (typeof cancelAction === 'function') cancelAction();
+                     closeModal();
                  }
             });
         }
@@ -1300,7 +1375,7 @@
             navigateTo(lastActivePage, targetLink);
         } else {
             navigateTo('dashboard', document.querySelector('.sidebar-link'));
-        }        
+        }       
     
         if (!sessionStorage.getItem(CONFIG.STORAGE_KEYS.WELCOME_POPUP)) {
             showConfirmationModal({
