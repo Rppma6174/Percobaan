@@ -183,6 +183,9 @@
 </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         const quizzes = [
             { q: "Diagram yang paling tepat untuk menunjukkan perubahan harga emas dari tahun ke tahun adalah...", options: ["Diagram Batang", "Diagram Lingkaran", "Diagram Garis", "Tabel"], correct: 2, explanation: "Diagram garis secara spesifik dirancang untuk menunjukkan tren atau perubahan nilai berdasarkan rentang waktu yang berkelanjutan." },
             { q: "Sebuah diagram lingkaran menunjukkan bahwa 30% siswa menyukai pelajaran Matematika. Jika total ada 40 siswa, berapa besar sudut pusat untuk juring Matematika?", options: ["30°", "90°", "108°", "120°"], correct: 2, explanation: "Sudut pusat dihitung dengan mengalikan persentase dengan 360°. Maka, $30\\% \\times 360° = 0.3 \\times 360° = 108°$." },
