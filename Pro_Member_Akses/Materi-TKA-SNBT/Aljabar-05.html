@@ -174,6 +174,9 @@
 </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         const quizzes = [
             { q: "Sebuah fungsi yang grafiknya berupa parabola yang terbuka ke bawah adalah...", options: ["Fungsi Linear dengan gradien negatif", "Fungsi Kuadrat dengan $a < 0$", "Fungsi Kuadrat dengan $a > 0$", "Fungsi Rasional"], correct: 1, explanation: "Bentuk grafik parabola adalah ciri khas fungsi kuadrat. Koefisien $a$ pada suku $ax^2$ menentukan arah bukaan. Jika $a$ negatif, parabola terbuka ke bawah." },
             { q: "Grafik sebuah fungsi diuji dengan Uji Garis Horizontal dan ditemukan ada garis yang memotongnya di dua titik. Ini berarti fungsi tersebut...", options: ["Pasti Surjektif", "Tidak Injektif", "Pasti Bijektif", "Bukan Fungsi"], correct: 1, explanation: "Uji Garis Horizontal digunakan untuk memeriksa sifat injektif. Jika sebuah garis horizontal memotong lebih dari satu kali, berarti ada lebih dari satu input yang menghasilkan output yang sama, sehingga fungsi tersebut tidak injektif (bukan satu-satu)." },
