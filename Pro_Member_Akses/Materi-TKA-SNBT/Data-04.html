@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaidah Pencacahan - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .special-note {
+            background-color: rgba(39, 211, 159, 0.1); border-left: 4px solid #27d39f;
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option, .mcma-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong),
+        .options-container.answered .mcma-option {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover, .mcma-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct, .mcma-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; opacity: 1;
+        }
+        .quiz-option.wrong, .mcma-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); opacity: 1;
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .confirm-btn {
+            background-color: var(--accent-cyan); color: white; border: none; padding: 10px 20px;
+            border-radius: 0.5rem; font-weight: bold; cursor: pointer; margin-top: 1rem; width: 100%;
+            transition: background-color 0.2s ease;
+        }
+        .confirm-btn:hover { background-color: #1f6eeb; }
+        .category-table { width: 100%; border-collapse: separate; border-spacing: 0 0.5rem; }
+        .category-table td { padding: 0.75rem; border: 2px solid var(--border-color); border-radius: 0.5rem; }
+        .category-table td:first-child { text-align: left; }
+        .category-table .correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); }
+        .category-table .wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note, .special-note {
+            overflow-x: auto; padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Kaidah Pencacahan: Menghitung Semua Kemungkinan</h1>
+<p>
+    Sebelum menghitung peluang, kita harus tahu terlebih dahulu berapa banyak kemungkinan yang ada. Kaidah pencacahan (counting rules) adalah serangkaian metode untuk menghitung jumlah total hasil yang mungkin dari suatu percobaan tanpa harus mendaftar setiap kemungkinannya satu per satu.
+</p>
+
+<h2>1. Aturan Penjumlahan dan Perkalian</h2>
+<ul>
+    <li>
+        <b>Aturan Penjumlahan:</b> Digunakan jika ada beberapa pilihan yang <b>saling lepas</b> (hanya bisa memilih satu dari banyak opsi). Kata kuncinya adalah <b>"ATAU"</b>.
+        <br><b>Contoh:</b> Untuk ke sekolah, ada 3 jalur bus ATAU 2 jalur angkot. Total cara: $3+2=5$ cara.
+    </li>
+    <li>
+        <b>Aturan Perkalian (Filling Slots):</b> Digunakan jika sebuah prosedur terdiri dari <b>beberapa langkah berurutan</b>. Kata kuncinya adalah <b>"DAN"</b>.
+        <br><b>Contoh:</b> Seseorang punya 3 baju DAN 2 celana. Total cara berpakaian: $3 \times 2 = 6$ cara.
+    </li>
+</ul>
+
+<h2>2. Permutasi (Urutan Penting)</h2>
+<p>
+    Permutasi adalah penyusunan atau pemilihan objek di mana <b>urutan sangat diperhatikan</b>.
+</p>
+<div class="important-note">
+    <b>Tips & Strategi: Kapan Menggunakan Permutasi?</b>
+    <p>Gunakan permutasi jika perubahan urutan menghasilkan hasil yang berbeda. Kata kuncinya melibatkan jabatan atau peran yang berbeda.</p>
+    <ul>
+        <li>Memilih <b>juara 1, 2, 3</b>.</li>
+        <li>Menyusun <b>pengurus (ketua, wakil, bendahara)</b>.</li>
+        <li>Menyusun angka, huruf, atau orang dalam satu barisan.</li>
+    </ul>
+    <b>Rumus:</b> Jumlah permutasi $r$ objek dari $n$ objek yang tersedia adalah:
+    $$ P(n,r) = \frac{n!}{(n-r)!} $$
+</div>
+<p><b>Contoh:</b> Dari 8 calon, akan dipilih ketua, wakil, dan bendahara. Berapa banyak susunan pengurus yang mungkin?</p>
+<p>Karena urutan jabatan penting (Adi jadi Ketua beda dengan Adi jadi Wakil), kita gunakan permutasi:
+<br>$P(8,3) = \frac{8!}{(8-3)!} = \frac{8!}{5!} = 8 \times 7 \times 6 = 336$ susunan.</p>
+
+
+<h2>3. Kombinasi (Urutan Tidak Penting)</h2>
+<p>
+    Kombinasi adalah pemilihan objek di mana <b>urutan tidak diperhatikan</b>.
+</p>
+<div class="important-note">
+    <b>Tips & Strategi: Kapan Menggunakan Kombinasi?</b>
+    <p>Gunakan kombinasi jika perubahan urutan tidak menghasilkan hasil yang berbeda. Kata kuncinya melibatkan kelompok atau tim tanpa peran spesifik.</p>
+    <ul>
+        <li>Mengambil <b>3 bola sekaligus</b> dari sebuah kantong.</li>
+        <li>Membentuk <b>tim atau delegasi</b>.</li>
+        <li>Memilih soal dari sekumpulan soal ujian.</li>
+    </ul>
+    <b>Rumus:</b> Jumlah kombinasi $r$ objek dari $n$ objek yang tersedia adalah:
+    $$ C(n,r) = \binom{n}{r} = \frac{n!}{r!(n-r)!} $$
+</div>
+<p><b>Contoh:</b> Dari 8 siswa, akan dipilih 3 siswa untuk mewakili sekolah dalam tim cerdas cermat. Berapa tim berbeda yang bisa dibentuk?</p>
+<p>Karena tim {Adi, Budi, Cici} sama saja dengan {Budi, Cici, Adi}, urutan tidak penting. Kita gunakan kombinasi:
+<br>$C(8,3) = \frac{8!}{3!(8-3)!} = \frac{8!}{3!5!} = \frac{8 \times 7 \times 6}{3 \times 2 \times 1} = 56$ tim.</p>
+
+<h2>Uji Kompetensi</h2>
+<p>Kerjakan soal-soal berikut untuk menguji pemahaman Anda sesuai format TKA.</p>
+<div id="quiz-container"></div>
+</div>
+
+    <script>
+        const quizzes = [
+            { q: "Dari kota A ke B ada 3 jalan, dan dari B ke C ada 4 jalan. Banyak cara perjalanan dari A ke C melalui B adalah...", options: ["7", "12", "9", "81"], correct: 1, explanation: "Ini adalah prosedur berurutan (pergi dari A ke B DAN dari B ke C). Maka, gunakan Aturan Perkalian: $3 \\times 4 = 12$ cara." },
+            { q: "Banyak cara menyusun 4 orang untuk duduk pada 6 kursi yang tersedia dalam satu baris adalah...", options: ["24", "120", "360", "720"], correct: 2, explanation: "Urutan duduk orang penting (A di kursi 1, B di kursi 2 beda dengan sebaliknya). Ini adalah masalah permutasi 4 objek dari 6 tempat: $P(6,4) = \\frac{6!}{(6-4)!} = \\frac{6!}{2!} = 6 \\times 5 \\times 4 \\times 3 = 360$." },
+            { q: "Dari 10 siswa terbaik, akan dipilih 3 siswa untuk membentuk sebuah tim olimpiade. Banyak cara memilih tim tersebut adalah...", options: ["720", "30", "120", "6"], correct: 2, explanation: "Dalam sebuah tim, urutan anggota tidak penting. Ini adalah masalah kombinasi: $C(10,3) = \\frac{10!}{3!(10-3)!} = \\frac{10 \\times 9 \\times 8}{3 \\times 2 \\times 1} = 10 \\times 3 \\times 4 = 120$." },
+            { q: "Untuk memilih 3 orang pemenang medali Emas, Perak, dan Perunggu dari 10 finalis, metode yang digunakan adalah...", options: ["Permutasi", "Kombinasi", "Aturan Penjumlahan", "Faktorial"], correct: 0, explanation: "Karena medali (jabatan) berbeda, urutan sangat penting. Pemenang {A, B, C} untuk {Emas, Perak, Perunggu} sangat berbeda dengan {B, C, A}. Maka, ini adalah permutasi." },
+            { q: "Dari huruf-huruf pada kata 'KOTA'. Tentukan Benar atau Salah untuk setiap pernyataan berikut:", type: "category", statements: [{s: "Jumlah susunan 4 huruf berbeda adalah 24.", a: true}, {s: "Jumlah cara memilih 2 huruf dari kata tersebut adalah 6.", a: true}, {s: "Jika huruf pertama harus vokal, ada 12 susunan kata.", a: true}], explanation: "A. Menyusun 4 huruf berbeda: $4! = 24$ (Benar). B. Memilih 2 huruf (urutan tak penting): $C(4,2) = \\frac{4!}{2!2!} = 6$ (Benar). C. Huruf vokal ada 2 (O,A). Slot pertama 2 pilihan, sisa 3 huruf disusun dalam $3!$ cara. Total: $2 \\times 3! = 2 \\times 6 = 12$ (Benar)." },
+            { q: "Berapa banyak susunan kata unik yang bisa dibentuk dari huruf-huruf pada kata 'MATEMATIKA'?", options: ["151.200", "3.628.800", "1.814.400", "302.400"], correct: 0, explanation: "Ini adalah permutasi dengan unsur yang sama. Total 10 huruf. Huruf sama: M(2), A(3), T(2). Jumlah susunan = $\\frac{10!}{2!3!2!} = \\frac{3.628.800}{2 \\times 6 \\times 2} = \\frac{3.628.800}{24} = 151.200$." },
+            { q: "Dari 5 pria dan 4 wanita, akan dibentuk panitia berisi 3 orang yang terdiri dari 2 pria dan 1 wanita. Banyak cara pembentukan panitia tersebut adalah...", options: ["40", "84", "30", "180"], correct: 0, explanation: "Kita harus memilih 2 pria DARI 5 pria (Kombinasi) DAN memilih 1 wanita DARI 4 wanita (Kombinasi). Total cara = $C(5,2) \\times C(4,1) = \\frac{5!}{2!3!} \\times \\frac{4!}{1!3!} = 10 \\times 4 = 40$." },
+            { q: "Sebuah password terdiri dari 2 huruf berbeda diikuti 2 angka berbeda. Manakah pernyataan berikut yang benar? (Pilih semua jawaban yang benar)", type: "mcma", options: ["Banyak susunan untuk bagian huruf adalah $26 \\times 25$.", "Banyak susunan untuk bagian angka adalah $10 \\times 9$.", "Total kemungkinan password adalah 58.500.", "Masalah ini menggunakan konsep kombinasi."], correct: [0,1,2], explanation: "Ini adalah aturan perkalian (filling slots). Slot 1 (huruf): 26 pilihan. Slot 2 (huruf berbeda): 25 pilihan. Slot 3 (angka): 10 pilihan. Slot 4 (angka berbeda): 9 pilihan. Total = $26 \\times 25 \\times 10 \\times 9 = 58.500$. Karena urutan penting, ini bukan kombinasi." },
+            { q: "Dalam sebuah ruangan ada 10 orang yang saling berjabat tangan satu sama lain tepat satu kali. Berapa banyak jabat tangan yang terjadi?", options: ["100", "90", "50", "45"], correct: 3, explanation: "Jabat tangan antara A dan B sama dengan B dan A, jadi urutan tidak penting. Ini adalah masalah kombinasi memilih 2 orang dari 10: $C(10,2) = \\frac{10!}{2!8!} = \\frac{10 \\times 9}{2} = 45$." },
+            { q: "Tentukan Benar atau Salah untuk pernyataan-pernyataan berikut:", type: "category", statements: [{s: "$P(n,r)$ selalu lebih besar dari atau sama dengan $C(n,r)$.", a: true}, {s: "Aturan Penjumlahan digunakan untuk tugas-tugas yang berurutan.", a: false}, {s: "$5! = 120$.", a: true}], explanation: "A. Benar, karena $C(n,r) = P(n,r)/r!$. B. Salah, tugas berurutan menggunakan Aturan Perkalian. C. Benar, $5 \\times 4 \\times 3 \\times 2 \\times 1 = 120$." }
+        ];
+
+        // --- SCRIPT KUIS INTERAKTIF LENGKAP ---
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            let optionsHtml = ''; let dataCorrect = '';
+            if (quiz.type === 'category') {
+                const correctAnswers = quiz.statements.map(s => s.a).join(',');
+                dataCorrect = `data-correct="${correctAnswers}"`;
+                optionsHtml = `<table class="category-table"><tbody>
+                    ${quiz.statements.map((stmt, i) => `
+                        <tr>
+                            <td>${String.fromCharCode(65 + i)}. ${stmt.s}</td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="true"> Benar</label></td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="false"> Salah</label></td>
+                        </tr>
+                    `).join('')}
+                </tbody></table>`;
+            } else if (quiz.type === 'mcma') {
+                dataCorrect = `data-correct="${quiz.correct.join(',')}"`;
+                optionsHtml = quiz.options.map((opt, i) =>
+                    `<div class="mcma-option" data-index="${i}"><label style="width: 100%; cursor: pointer; display: block;"><input type="checkbox" style="margin-right: 10px; vertical-align: middle;">${opt}</label></div>`
+                ).join("");
+            } else {
+                dataCorrect = `data-correct="${quiz.correct}"`;
+                optionsHtml = quiz.options.map((opt, i) => 
+                    `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                ).join("");
+            }
+            const confirmBtnHtml = (quiz.type === 'category' || quiz.type === 'mcma') ? `<button class="confirm-btn">Konfirmasi Jawaban</button>` : '';
+            quizEl.innerHTML = `
+                <button class="quiz-accordion-button"><span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i></button>
+                <div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p>
+                    <div class="options-container" data-type="${quiz.type || 'pg'}" ${dataCorrect}>${optionsHtml}</div>
+                    ${confirmBtnHtml}
+                    <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                </div>`;
+            quizContainer.appendChild(quizEl);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.dataset.type === 'pg' && !optionsContainer.classList.contains('answered')) {
+                        optionsContainer.classList.add('answered');
+                        if (option.dataset.correct === 'true') {
+                            option.classList.add('correct');
+                        } else {
+                            option.classList.add('wrong');
+                            const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                            if (correctOption) correctOption.classList.add('correct');
+                        }
+                        const explanation = optionsContainer.nextElementSibling;
+                        explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.mcma-option label').forEach(label => {
+                label.addEventListener('click', (e) => {
+                    if (e.target.type !== 'checkbox') {
+                        const checkbox = label.querySelector('input[type="checkbox"]');
+                        if (checkbox && !checkbox.disabled) { checkbox.checked = !checkbox.checked; }
+                    }
+                });
+            });
+
+            document.querySelectorAll('.confirm-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const optionsContainer = button.previousElementSibling;
+                    const type = optionsContainer.dataset.type;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered'); button.style.display = 'none';
+
+                    if (type === 'category') {
+                        const correctAnswers = optionsContainer.dataset.correct.split(',');
+                        const rows = optionsContainer.querySelectorAll('tr');
+                        rows.forEach((row, i) => {
+                            const radios = row.querySelectorAll('input[type="radio"]');
+                            const selected = Array.from(radios).find(r => r.checked);
+                            const correctAnswer = correctAnswers[i];
+                            
+                            if (selected) {
+                                const selectedCell = selected.parentElement.closest('td');
+                                if (selected.value === correctAnswer) {
+                                    selectedCell.classList.add('correct');
+                                } else {
+                                    selectedCell.classList.add('wrong');
+                                }
+                            }
+
+                            if (!selected || selected.value !== correctAnswer) {
+                                const correctRadio = Array.from(radios).find(r => r.value === correctAnswer);
+                                if (correctRadio) {
+                                    correctRadio.parentElement.closest('td').classList.add('correct');
+                                }
+                            }
+                            radios.forEach(r => r.disabled = true);
+                        });
+                    } else if (type === 'mcma') {
+                        const correctIndices = optionsContainer.dataset.correct.split(',');
+                        const options = optionsContainer.querySelectorAll('.mcma-option');
+                        options.forEach((opt) => {
+                            const checkbox = opt.querySelector('input');
+                            const index = opt.dataset.index;
+                            const isChecked = checkbox.checked;
+                            const isCorrectAnswer = correctIndices.includes(index);
+                            
+                            if (isChecked && isCorrectAnswer) { opt.classList.add('correct');
+                            } else if (isChecked && !isCorrectAnswer) { opt.classList.add('wrong');
+                            } else if (!isChecked && isCorrectAnswer) { opt.classList.add('correct'); }
+                            checkbox.disabled = true;
+                        });
+                    }
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
