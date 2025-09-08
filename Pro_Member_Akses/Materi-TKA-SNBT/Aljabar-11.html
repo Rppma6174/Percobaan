@@ -146,6 +146,9 @@
 </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         const quizzes = [
             { q: "Seorang karyawan mendapat gaji awal Rp4.000.000 dan setiap tahun gajinya naik sebesar Rp250.000. Gaji karyawan tersebut pada tahun ke-10 dapat dihitung menggunakan konsep...", options: ["Barisan Geometri", "Deret Geometri", "Barisan Aritmetika", "Deret Aritmetika"], correct: 2, explanation: "Kenaikan gaji sebesar JUMLAH yang tetap menunjukkan pola Aritmetika. Pertanyaan tentang gaji pada TAHUN TERTENTU (satu titik waktu) menggunakan konsep Barisan ($U_n$)." },
             { q: "Sebuah bola dijatuhkan dan memantul kembali setinggi 80% dari ketinggian sebelumnya. Fenomena ini menunjukkan pola...", options: ["Aritmetika dengan beda 0.8", "Aritmetika dengan beda -0.2", "Geometri dengan rasio 0.8", "Geometri dengan rasio 1.25"], correct: 2, explanation: "Ketinggian selalu DIKALIKAN dengan faktor 80% atau 0.8. Perkalian berulang adalah ciri khas pola Geometri dengan rasio $r=0.8$." },
