@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Operasi, Komposisi, dan Invers Fungsi - UMT Learning</title>
+    <title>Aplikasi dan Pemodelan Fungsi - UMT Learning</title>
     <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     
@@ -39,10 +39,6 @@
         .hidden { display: none; }
         .important-note {
             background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
-            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
-        }
-        .special-note {
-            background-color: rgba(248, 81, 73, 0.1); border-left: 4px solid var(--accent-red);
             padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
         }
         .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
@@ -88,7 +84,7 @@
         .category-table .wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
 
         /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
-        p, li, .quiz-explanation, .important-note, .special-note {
+        p, li, .quiz-explanation, .important-note {
             overflow-x: auto; padding-bottom: 8px;
         }
         /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
@@ -104,70 +100,64 @@
             <i class="fas fa-arrow-left"></i>
         </a>
 
-<h1>Operasi, Komposisi, dan Invers Fungsi</h1>
+<h1>Aplikasi dan Pemodelan Fungsi</h1>
 <p>
-    Fungsi dapat digabungkan dengan berbagai cara. Materi ini membahas tiga pilar utama dalam manipulasi fungsi: operasi aljabar, komposisi, dan invers.
-</p>
-
-<h2>1. Operasi Aljabar pada Fungsi</h2>
-<p>
-    Sama seperti bilangan, dua fungsi $f(x)$ dan $g(x)$ dapat dijumlahkan, dikurangkan, dikalikan, atau dibagi.
-</p>
-<p>Misalkan $f(x) = x-3$ dan $g(x) = x^2+2x$.</p>
-<ul>
-    <li><b>Penjumlahan $(f+g)(x)$:</b> $(x-3) + (x^2+2x) = x^2+3x-3$</li>
-    <li><b>Pengurangan $(f-g)(x)$:</b> $(x-3) - (x^2+2x) = -x^2-x-3$</li>
-    <li><b>Perkalian $(f \cdot g)(x)$:</b> $(x-3)(x^2+2x) = x^3-x^2-6x$</li>
-    <li><b>Pembagian $(\frac{f}{g})(x)$:</b> $\frac{x-3}{x^2+2x}$</li>
-</ul>
-<div class="special-note">
-    <b>Peringatan Domain Pembagian:</b><br>
-    Domain dari fungsi hasil bagi $(\frac{f}{g})(x)$ memiliki syarat tambahan, yaitu penyebutnya $g(x)$ tidak boleh nol. Pada contoh di atas, $x^2+2x \neq 0$, sehingga domainnya adalah semua bilangan real kecuali $x=0$ dan $x=-2$.
-</div>
-
-<h2>2. Komposisi Fungsi</h2>
-<p>
-    Komposisi adalah operasi "fungsi di dalam fungsi". Output dari satu fungsi menjadi input bagi fungsi berikutnya.
+    Fungsi adalah alat utama untuk memodelkan hubungan antar variabel di dunia nyata. Keterampilan kunci dalam TKA adalah kemampuan untuk menerjemahkan soal cerita menjadi model fungsi yang tepat (linear, kuadrat, dll.), lalu menggunakan model tersebut untuk menyelesaikan masalah.
 </p>
 <div class="important-note">
-    <b>Tips & Strategi:</b>
-    <ul>
-        <li>Notasi $(f \circ g)(x)$ dibaca "f bundaran g x" dan artinya $f(g(x))$.</li>
-        <li><b>Aturan Pengerjaan:</b> Selalu kerjakan fungsi yang di sebelah <b>kanan</b> terlebih dahulu. Untuk $(f \circ g)(x)$, hitung $g(x)$ dulu.</li>
-        <li><b>Sifat:</b> Komposisi fungsi <b>tidak komutatif</b>, artinya $(f \circ g)(x)$ umumnya tidak sama dengan $(g \circ f)(x)$.</li>
-    </ul>
-</div>
-<p><b>Contoh:</b> Masih dengan $f(x) = x-3$ dan $g(x) = x^2+2x$.</p>
-<ul>
-    <li><b>$(f \circ g)(x) = f(g(x))$:</b> Masukkan seluruh rumus $g(x)$ ke dalam $x$ pada fungsi $f(x)$.
-        <br>$f(g(x)) = (x^2+2x) - 3 = x^2+2x-3$.
-    </li>
-    <li><b>$(g \circ f)(x) = g(f(x))$:</b> Masukkan seluruh rumus $f(x)$ ke dalam setiap $x$ pada fungsi $g(x)$.
-        <br>$g(f(x)) = (x-3)^2 + 2(x-3) = (x^2-6x+9) + (2x-6) = x^2-4x+3$.
-    </li>
-</ul>
-
-<h2>3. Fungsi Invers ($f^{-1}$)</h2>
-<p>
-    Fungsi invers ($f^{-1}$) adalah fungsi yang "membalik" atau "membatalkan" aksi dari fungsi asalnya ($f$). Jika $f(a)=b$, maka $f^{-1}(b)=a$.
-</p>
-<div class="important-note">
-    <b>Strategi Mencari Invers:</b>
+    <b>Proses Pemodelan:</b>
     <ol>
-        <li>Ganti $f(x)$ dengan $y$.</li>
-        <li>Buatlah persamaan menjadi bentuk $x = \dots$ (jadikan $x$ sebagai subjek).</li>
-        <li>Ganti $x$ dengan $f^{-1}(x)$ dan ganti $y$ dengan $x$.</li>
+        <li><b>Identifikasi Variabel:</b> Tentukan mana variabel bebas ($x$) dan variabel terikat ($y$).</li>
+        <li><b>Kenali Pola Hubungan:</b> Apakah perubahannya konstan (linear)? Apakah membentuk lintasan parabola atau mencari nilai optimum (kuadrat)?</li>
+        <li><b>Bentuk Fungsi:</b> Tuliskan rumus fungsi yang merepresentasikan hubungan tersebut.</li>
+        <li><b>Selesaikan & Interpretasi:</b> Hitung nilai yang ditanyakan dan artikan kembali dalam konteks soal.</li>
     </ol>
-    <b>Peringatan:</b> Sebuah fungsi hanya memiliki invers jika ia bersifat <b>bijektif</b>.
 </div>
-<p><b>Contoh:</b> Tentukan invers dari $f(x) = \frac{2x+1}{x-3}$.</p>
-<ol>
-    <li>$y = \frac{2x+1}{x-3}$</li>
-    <li>$y(x-3) = 2x+1 \implies yx - 3y = 2x+1$</li>
-    <li>$yx - 2x = 3y+1 \implies x(y-2) = 3y+1 \implies x = \frac{3y+1}{y-2}$</li>
-    <li>$f^{-1}(x) = \frac{3x+1}{x-2}$</li>
-</ol>
 
+<h2>1. Model Fungsi Linear ($y = mx + c$)</h2>
+<p>
+    Model ini digunakan untuk situasi dengan <b>biaya awal/tetap</b> dan <b>tingkat perubahan yang konstan</b>.
+</p>
+<ul>
+    <li>$c$ (intersep): Nilai awal saat input nol (contoh: biaya pemasangan, tarif buka pintu).</li>
+    <li>$m$ (gradien): Tingkat perubahan konstan (contoh: harga per kg, biaya per menit).</li>
+</ul>
+<p><b>Contoh Aplikasi: Biaya Rental Mobil</b></p>
+<p>
+    Sebuah rental mobil mengenakan biaya sewa dasar Rp250.000 per hari ditambah biaya Rp2.000 per kilometer. Buatlah fungsi untuk total biaya ($B$) berdasarkan jarak ($d$ km), dan hitung biaya untuk perjalanan 150 km.
+</p>
+<ul>
+    <li><b>Pemodelan:</b> Biaya awal ($c$) = 250.000. Tingkat perubahan ($m$) = 2.000.
+        <br>Fungsi: $B(d) = 2000d + 250000$.
+    </li>
+    <li><b>Solusi:</b> $B(150) = 2000(150) + 250000 = 300.000 + 250.000 = 550.000$.</li>
+    <li><b>Interpretasi:</b> Total biaya untuk perjalanan 150 km adalah Rp550.000.</li>
+</ul>
+
+<h2>2. Model Fungsi Kuadrat ($y = ax^2 + bx + c$)</h2>
+<p>
+    Model ini sangat berguna untuk masalah yang melibatkan lintasan parabola (seperti gerak benda yang dilempar) atau masalah optimisasi (mencari nilai <b>maksimum</b> atau <b>minimum</b>).
+</p>
+<div class="important-note">
+    <b>Tips & Strategi: Mencari Nilai Optimum</b><br>
+    Nilai optimum (maksimum/minimum) dari fungsi kuadrat selalu terjadi di titik puncaknya. Posisi puncak ($x_p$) dapat ditemukan dengan rumus:
+    $$x_p = -\frac{b}{2a}$$
+    Untuk menemukan nilai optimumnya ($y_p$), substitusikan $x_p$ kembali ke dalam fungsi.
+</div>
+<p><b>Contoh Aplikasi: Luas Maksimum</b></p>
+<p>
+    Pak Budi ingin membuat kandang persegi panjang menggunakan 80 meter kawat pagar. Salah satu sisi kandang menempel pada tembok, sehingga ia hanya perlu memagari tiga sisi. Berapa luas maksimum kandang yang bisa ia buat?
+</p>
+<ul>
+    <li><b>Pemodelan:</b> Misal lebar = $l$, panjang = $p$. Pagar = $p + 2l = 80$, sehingga $p = 80 - 2l$.
+        <br>Fungsi Luas: $L = p \times l = (80 - 2l)l = 80l - 2l^2$.
+        <br>Ini adalah fungsi kuadrat $L(l) = -2l^2 + 80l$ dengan $a=-2, b=80, c=0$.
+    </li>
+    <li><b>Solusi:</b> Karena $a<0$, fungsi ini memiliki nilai maksimum. Lebar untuk luas maksimum:
+        <br>$l = -\frac{b}{2a} = -\frac{80}{2(-2)} = 20$ meter.
+        <br>Luas maksimumnya: $L(20) = -2(20)^2 + 80(20) = -800 + 1600 = 800$ m².
+    </li>
+</ul>
 
 <h2>Uji Kompetensi</h2>
 <p>Kerjakan soal-soal berikut untuk menguji pemahaman Anda sesuai format TKA.</p>
@@ -176,16 +166,16 @@
 
     <script>
         const quizzes = [
-            { q: "Diketahui $f(x)=2x+1$ dan $g(x)=x-3$. Hasil dari $(f-g)(x)$ adalah...", options: ["$x-2$", "$x+4$", "$3x-2$", "$x-4$"], correct: 1, explanation: "$(f-g)(x) = f(x) - g(x) = (2x+1) - (x-3) = 2x+1-x+3 = x+4$." },
-            { q: "Diketahui $f(x)=x^2$ dan $g(x)=x-3$. Hasil dari $(f \\circ g)(x)$ adalah...", options: ["$x^2-3$", "$x^2-6x+9$", "$x^2-9$", "$x^2+9$"], correct: 1, explanation: "$(f \\circ g)(x) = f(g(x))$. Masukkan $g(x)$ ke dalam $f(x)$, menjadi $f(x-3) = (x-3)^2 = x^2-6x+9$." },
-            { q: "Invers dari fungsi $f(x) = 3x+4$ adalah...", options: ["$f^{-1}(x) = 3x-4$", "$f^{-1}(x) = \\frac{x-4}{3}$", "$f^{-1}(x) = \\frac{x+4}{3}$", "$f^{-1}(x) = 4-3x$"], correct: 1, explanation: "$y=3x+4 \\implies y-4=3x \\implies x=\\frac{y-4}{3}$. Ganti variabel menjadi $f^{-1}(x) = \\frac{x-4}{3}$." },
-            { q: "Diketahui $f(x)=x+5$. Nilai dari $(f^{-1} \\circ f)(10)$ adalah...", options: ["5", "10", "15", "20"], correct: 1, explanation: "Komposisi sebuah fungsi dengan inversnya akan saling meniadakan dan menghasilkan nilai input aslinya. Jadi, $(f^{-1} \\circ f)(x) = x$, maka nilainya adalah 10." },
-            { q: "Diberikan $f(x)=2x$ dan $g(x)=x/2$. Tentukan Benar atau Salah untuk setiap pernyataan berikut:", type: "category", statements: [{s: "$(f \\circ g)(x) = x$.", a: true}, {s: "$(g \\circ f)(x) = x$.", a: true}, {s: "$f(x)$ dan $g(x)$ adalah fungsi yang saling invers.", a: true}], explanation: "A. $f(g(x)) = f(x/2) = 2(x/2) = x$ (Benar). B. $g(f(x)) = g(2x) = (2x)/2 = x$ (Benar). C. Karena komposisi bolak-balik menghasilkan $x$, keduanya adalah fungsi invers (Benar)." },
-            { q: "Jika $(f \\circ g)(x) = 4x^2+1$ dan $g(x) = 2x-1$, maka $f(x)$ adalah...", options: ["$x^2+2x+2$", "$x^2+1$", "$2x^2+2x+1$", "$x^2+x+1$"], correct: 0, explanation: "Misal $y=g(x)=2x-1$, maka $x=\\frac{y+1}{2}$. Substitusi $x$ ke dalam $(f \\circ g)(x)$: $f(y) = 4(\\frac{y+1}{2})^2+1 = 4(\\frac{y^2+2y+1}{4})+1 = y^2+2y+1+1 = y^2+2y+2$. Jadi $f(x)=x^2+2x+2$." },
-            { q: "Domain dari fungsi $(\\frac{f}{g})(x)$ untuk $f(x)=x$ dan $g(x)=x^2-4$ adalah...", options: ["Semua bilangan real", "Semua bilangan real kecuali 0", "Semua bilangan real kecuali 4", "Semua bilangan real kecuali 2 dan -2"], correct: 3, explanation: "Domain untuk fungsi pembagian memiliki syarat penyebut tidak boleh nol. $g(x) \\neq 0 \\implies x^2-4 \\neq 0 \\implies (x-2)(x+2) \\neq 0$. Maka $x \\neq 2$ dan $x \\neq -2$." },
-            { q: "Diketahui $f(x) = \\sqrt{x}$ dan $g(x)=x^2$. Manakah pernyataan yang PASTI benar? (Pilih semua jawaban yang benar)", type: "mcma", options: ["Domain fungsi $f(x)$ adalah $x \\ge 0$.", "$(f \\circ g)(x) = |x|$.", "$(g \\circ f)(x) = x$ untuk domain $x \\ge 0$.", "$f(x)$ adalah invers dari $g(x)$ untuk $x \\ge 0$."], correct: [0,1,2,3], explanation: "A. Benar, akar kuadrat terdefinisi untuk bilangan non-negatif. B. Benar, $f(g(x))=\\sqrt{x^2}=|x|$. C. Benar, $g(f(x))=(\\sqrt{x})^2=x$, hanya berlaku jika $x \\ge 0$. D. Benar, karena komposisinya menghasilkan $x$ (dengan batasan domain), keduanya saling invers." },
-            { q: "Jika $f^{-1}(x) = \\frac{x-1}{2}$, maka $f(x)$ adalah...", options: ["$2x+1$", "$2x-1$", "$\\frac{x+1}{2}$", "$\\frac{x-2}{1}$"], correct: 0, explanation: "Untuk mencari $f(x)$ dari $f^{-1}(x)$, kita inverskan kembali. $y = \\frac{x-1}{2} \\implies 2y=x-1 \\implies x = 2y+1$. Maka, $f(y)=2y+1$, sehingga $f(x)=2x+1$." },
-            { q: "Tentukan Benar atau Salah untuk pernyataan-pernyataan berikut:", type: "category", statements: [{s: "Operasi komposisi fungsi bersifat komutatif.", a: false}, {s: "Semua fungsi linear memiliki invers.", a: false}, {s: "$(f+g)(x)$ selalu sama dengan $(g+f)(x)$.", a: true}], explanation: "A: Umumnya $(f \\circ g)(x) \\neq (g \\circ f)(x)$ (Salah). B: Fungsi linear konstan (horizontal) tidak injektif sehingga tidak punya invers (Salah). C: Penjumlahan biasa bersifat komutatif (Benar)." }
+            { q: "Sebuah layanan streaming musik memiliki biaya langganan bulanan tetap Rp50.000, berapapun lagu yang didengarkan. Jika $B$ adalah biaya dan $l$ adalah jumlah lagu, model fungsi yang paling tepat adalah...", options: ["Fungsi Kuadrat", "Fungsi Linear dengan gradien 50.000", "Fungsi Konstan", "Fungsi Invers"], correct: 2, explanation: "Karena biayanya tetap dan tidak bergantung pada jumlah lagu, ini adalah fungsi konstan, yaitu $B(l) = 50000$. Fungsi konstan adalah kasus khusus dari fungsi linear di mana gradien $m=0$." },
+            { q: "Dalam fungsi biaya taksi $C(d) = 4000d + 7000$, di mana $d$ adalah jarak dalam km, angka 4000 merepresentasikan...", options: ["Tarif awal (buka pintu)", "Jarak maksimum", "Biaya total perjalanan", "Biaya per kilometer"], correct: 3, explanation: "Angka 4000 adalah gradien ($m$), yang merepresentasikan tingkat perubahan biaya terhadap jarak, atau biaya per kilometer." },
+            { q: "Ketinggian roket air setelah $t$ detik diluncurkan dimodelkan oleh $h(t) = -5t^2 + 30t$. Waktu yang dibutuhkan roket untuk mencapai ketinggian maksimum adalah...", options: ["3 detik", "5 detik", "6 detik", "30 detik"], correct: 0, explanation: "Ini adalah fungsi kuadrat dengan $a=-5, b=30$. Waktu mencapai maksimum terjadi di puncak: $t = -\\frac{b}{2a} = -\\frac{30}{2(-5)} = -\\frac{30}{-10} = 3$ detik." },
+            { q: "Sebuah perusahaan percetakan menetapkan harga untuk mencetak brosur dengan fungsi $B(x) = 500x + 200000$, di mana $x$ adalah jumlah brosur. Tentukan Benar atau Salah untuk setiap pernyataan berikut:", type: "category", statements: [{s: "Biaya tetap untuk sekali cetak adalah Rp500.", a: false}, {s: "Biaya untuk mencetak 1000 brosur adalah Rp700.000.", a: true}, {s: "Model ini adalah contoh fungsi kuadrat.", a: false}], explanation: "A: Biaya tetap (intersep) adalah 200.000 (Salah). B: $B(1000) = 500(1000)+200000 = 500000+200000 = 700000$ (Benar). C: Bentuk $mx+c$ adalah fungsi linear (Salah)." },
+            { q: "Jumlah dua bilangan adalah 20. Tentukan hasil kali maksimum dari kedua bilangan tersebut.", options: ["50", "80", "100", "120"], correct: 2, explanation: "Misal bilangan itu $x$ dan $y$. $x+y=20 \\implies y=20-x$. Hasil kali $K(x) = x \\cdot y = x(20-x) = -x^2+20x$. Ini fungsi kuadrat dengan $a=-1, b=20$. Maksimum terjadi pada $x = -\\frac{20}{2(-1)}=10$. Hasil kali maksimum adalah $K(10) = 10(20-10) = 10 \\times 10 = 100$." },
+            { q: "Fungsi untuk mengubah suhu dari Celsius (C) ke Fahrenheit (F) adalah $F(C) = \\frac{9}{5}C + 32$. Fungsi untuk mengubah Fahrenheit kembali ke Celsius adalah...", options: ["$C(F) = \\frac{5}{9}(F - 32)$", "$C(F) = \\frac{9}{5}(F - 32)$", "$C(F) = \\frac{5}{9}F - 32$", "Tidak bisa ditentukan"], correct: 0, explanation: "Kita mencari invers dari fungsi F. $y = \\frac{9}{5}x + 32 \\implies y-32 = \\frac{9}{5}x \\implies x = \\frac{5}{9}(y-32)$. Jadi, $C(F) = \\frac{5}{9}(F - 32)$." },
+            { q: "Manakah dari situasi berikut yang paling baik dimodelkan oleh fungsi kuadrat?", options: ["Total biaya telepon dengan tarif per menit yang konstan.", "Jarak yang ditempuh mobil dengan kecepatan konstan.", "Luas sebuah taman persegi panjang dengan keliling yang tetap.", "Populasi bakteri yang membelah diri setiap jam."], correct: 2, explanation: "Luas dengan keliling tetap akan menghasilkan fungsi kuadrat (contohnya $L(l)=-l^2+kl/2$). Pilihan lain cenderung linear atau eksponensial." },
+            { q: "Sebuah toko online menjual produk seharga Rp50.000 per buah. Biaya pengiriman tetap untuk setiap transaksi adalah Rp10.000. Manakah pernyataan yang benar? (Pilih semua jawaban yang benar)", type: "mcma", options: ["Model biayanya adalah fungsi linear.", "Membeli 2 barang biayanya Rp110.000.", "Jika total tagihan Rp260.000, berarti membeli 5 barang.", "Biaya pengiriman adalah gradien dari fungsi.", "Harga per buah adalah gradien dari fungsi."], correct: [0,1,2,4], explanation: "Fungsinya $B(x)=50000x+10000$. Ini linear. $B(2)=110000$. Jika $B(x)=260000 \implies 50000x=250000 \implies x=5$. Gradien (tingkat perubahan) adalah harga per buah, bukan biaya kirim." },
+            { q: "Sebuah perusahaan menemukan bahwa keuntungan (P) dari menjual $x$ unit produk dimodelkan oleh $P(x)=-2x^2+80x-150$. Berapa unit yang harus dijual untuk mencapai keuntungan maksimum?", options: ["10", "20", "40", "80"], correct: 1, explanation: "Keuntungan maksimum terjadi di puncak parabola. $x = -\\frac{b}{2a} = -\\frac{80}{2(-2)} = -\\frac{80}{-4} = 20$ unit." },
+            { q: "Tentukan Benar atau Salah untuk identifikasi model berikut:", type: "category", statements: [{s: "Hubungan antara jarak, kecepatan konstan, dan waktu adalah model linear.", a: true}, {s: "Peluruhan nilai sebuah aset sebesar 10% per tahun adalah model linear.", a: false}, {s: "Ketinggian ayunan terhadap waktu adalah model kuadrat.", a: false}], explanation: "A: $d=vt$. Jika $v$ konstan, $d$ adalah fungsi linear dari $t$ (Benar). B: Peluruhan persentase adalah perkalian berulang, jadi modelnya eksponensial/geometri (Salah). C: Gerak ayunan adalah periodik, lebih cocok dimodelkan dengan fungsi trigonometri (Salah)." }
         ];
 
         // --- SCRIPT KUIS INTERAKTIF LENGKAP ---
