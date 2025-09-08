@@ -166,6 +166,9 @@
 </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         const quizzes = [
             { q: "Sebuah segitiga siku-siku memiliki sisi penyiku 8 cm dan 15 cm. Panjang sisi miringnya adalah...", options: ["17 cm", "19 cm", "23 cm", "25 cm"], correct: 0, explanation: "Ini adalah Tripel Pythagoras yang umum: 8, 15, 17. Secara perhitungan: $c^2 = 8^2+15^2 = 64+225=289$, maka $c = \\sqrt{289} = 17$ cm." },
             { q: "Sebuah jajargenjang memiliki salah satu sudut sebesar 120°. Besar sudut di sebelahnya adalah...", options: ["60°", "90°", "120°", "180°"], correct: 0, explanation: "Pada jajargenjang, sudut-sudut yang berdekatan selalu berjumlah 180°. Maka, sudut di sebelahnya adalah $180° - 120° = 60°$." },
