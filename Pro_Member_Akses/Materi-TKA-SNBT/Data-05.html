@@ -161,6 +161,9 @@ $P(\text{As} \cup \text{Wajik}) = P(\text{As}) + P(\text{Wajik}) - P(\text{As Wa
 </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         const quizzes = [
             { q: "Dari satu set kartu bridge (52 kartu), peluang terambilnya kartu Queen adalah...", options: ["1/52", "4/52 (atau 1/13)", "13/52", "1/4"], correct: 1, explanation: "Ada 4 kartu Queen dalam 52 kartu. Maka, $P(Queen) = \\frac{4}{52} = \\frac{1}{13}$." },
             { q: "Sebuah dadu dan sebuah koin dilempar bersamaan. Peluang munculnya mata dadu ganjil DAN sisi Angka pada koin adalah...", options: ["1/4", "1/2", "3/4", "1/12"], correct: 0, explanation: "Ini adalah dua kejadian saling bebas. $P(Ganjil) = \\frac{3}{6} = \\frac{1}{2}$. $P(Angka) = \\frac{1}{2}$. Peluang gabungannya adalah $P(Ganjil \\cap Angka) = \\frac{1}{2} \\times \\frac{1}{2} = \\frac{1}{4}$." },
