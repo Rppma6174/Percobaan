@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bangun Ruang (Geometri Ruang) - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .diagram-container {
+            display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 1.5rem;
+            background-color: var(--bg-main); padding: 1.5rem 1rem; border-radius: 0.5rem;
+            border: 1px solid var(--border-color); margin-top: 1rem;
+        }
+        .diagram-container svg text { font-size: 12px; fill: var(--text-primary); }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option, .mcma-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong),
+        .options-container.answered .mcma-option {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover, .mcma-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct, .mcma-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; opacity: 1;
+        }
+        .quiz-option.wrong, .mcma-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); opacity: 1;
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .confirm-btn {
+            background-color: var(--accent-cyan); color: white; border: none; padding: 10px 20px;
+            border-radius: 0.5rem; font-weight: bold; cursor: pointer; margin-top: 1rem; width: 100%;
+            transition: background-color 0.2s ease;
+        }
+        .confirm-btn:hover { background-color: #1f6eeb; }
+        .category-table { width: 100%; border-collapse: separate; border-spacing: 0 0.5rem; }
+        .category-table td { padding: 0.75rem; border: 2px solid var(--border-color); border-radius: 0.5rem; }
+        .category-table td:first-child { text-align: left; }
+        .category-table .correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); }
+        .category-table .wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto; padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Geometri Ruang: Sifat, Jarak, Luas, dan Volume</h1>
+<p>
+    Geometri ruang adalah studi tentang objek tiga dimensi. Kompetensi yang diuji dalam TKA mencakup pemahaman sifat-sifat bangun ruang, kemampuan menghitung jarak antar unsur dalam ruang, serta perhitungan luas permukaan dan volume.
+</p>
+
+<h2>1. Unsur dan Jarak dalam Ruang</h2>
+<p>
+    Unsur-unsur dasar bangun ruang adalah <b>rusuk</b> (edge), <b>sisi</b> (face), dan <b>titik sudut</b> (vertex). Selain itu, terdapat juga diagonal sisi dan diagonal ruang. Konsep terpenting dalam geometri ruang adalah <b>jarak</b>, yang selalu diukur sebagai segmen garis terpendek yang tegak lurus.
+</p>
+<div class="important-note">
+    <b>Tips & Strategi: Jarak dalam Kubus</b><br>
+    Untuk kubus dengan panjang rusuk $s$:
+    <ul>
+        <li>Panjang <b>Diagonal Sisi</b> (misal AC) adalah $s\sqrt{2}$.</li>
+        <li>Panjang <b>Diagonal Ruang</b> (misal AG) adalah $s\sqrt{3}$.</li>
+    </ul>
+    Menghafal rumus ini dapat sangat mempercepat pengerjaan soal.
+</div>
+<div class="diagram-container">
+    <svg width="200" height="180" viewBox="0 0 100 90">
+        <path d="M 20 30 L 60 30 L 80 10 L 40 10 Z" stroke="#C9D1D9" fill="rgba(201,209,217,0.1)"/>
+        <path d="M 20 30 L 20 70 L 60 70 L 60 30" stroke="#C9D1D9" fill="rgba(201,209,217,0.1)"/>
+        <path d="M 60 70 L 80 50 L 80 10" stroke="#C9D1D9" fill="rgba(201,209,217,0.1)"/>
+        <path d="M 20 70 L 40 50 L 80 50" stroke="#C9D1D9" stroke-width="0.5" fill="none" stroke-dasharray="2 2"/>
+        <path d="M 40 10 L 40 50" stroke="#C9D1D9" stroke-width="0.5" fill="none" stroke-dasharray="2 2"/>
+        <path d="M 20 30 L 80 50" stroke="#39D353" stroke-width="1.5"/>
+        <text x="5" y="30">A</text><text x="62" y="30">B</text>
+        <text x="15" y="75">D</text><text x="62" y="75">C</text>
+        <text x="35" y="5">E</text><text x="82" y="10">F</text>
+        <text x="42" y="55">H</text><text x="82" y="55">G</text>
+        <text x="25" y="45" fill="#39D353" font-size="8">Diagonal Ruang</text>
+    </svg>
+</div>
+
+<h2>2. Polihedron (Bangun Ruang Sisi Datar)</h2>
+<ul>
+    <li>
+        <b>Prisma:</b> Memiliki alas dan tutup yang identik dan sejajar.
+        <br><b>Volume:</b> $V = \text{Luas Alas} \times \text{Tinggi}$
+        <br><b>Luas Permukaan:</b> $LP = (2 \times \text{Luas Alas}) + (\text{Keliling Alas} \times \text{Tinggi})$
+    </li>
+    <li>
+        <b>Limas:</b> Memiliki alas dan satu titik puncak.
+        <br><b>Volume:</b> $V = \frac{1}{3} \times \text{Luas Alas} \times \text{Tinggi}$
+        <br><b>Luas Permukaan:</b> $LP = \text{Luas Alas} + \text{Jumlah Luas Semua Sisi Tegak}$
+    </li>
+</ul>
+
+<h2>3. Bangun Ruang Sisi Lengkung</h2>
+<ul>
+    <li><b>Tabung:</b> $V = \pi r^2 t$, $LP = 2\pi r(r+t)$</li>
+    <li><b>Kerucut:</b> $V = \frac{1}{3}\pi r^2 t$, $LP = \pi r(r+s)$ (di mana $s$ adalah garis pelukis, $s^2=r^2+t^2$)</li>
+    <li><b>Bola:</b> $V = \frac{4}{3}\pi r^3$, $LP = 4\pi r^2$</li>
+</ul>
+
+<h2>Uji Kompetensi</h2>
+<p>Kerjakan soal-soal berikut untuk menguji pemahaman Anda sesuai format TKA.</p>
+<div id="quiz-container"></div>
+</div>
+
+    <script>
+        const quizzes = [
+            { q: "Volume sebuah tabung dengan jari-jari 7 cm dan tinggi 10 cm adalah... (gunakan $\\pi = \\frac{22}{7}$)", options: ["1540 cm³", "770 cm³", "2200 cm³", "440 cm³"], correct: 0, explanation: "Volume Tabung = $\\pi r^2 t = \\frac{22}{7} \\times 7^2 \\times 10 = 22 \\times 7 \\times 10 = 1540$ cm³." },
+            { q: "Panjang diagonal ruang sebuah kubus dengan rusuk 6 cm adalah...", options: ["$6\\sqrt{2}$ cm", "$12\\sqrt{2}$ cm", "$6\\sqrt{3}$ cm", "18 cm"], correct: 2, explanation: "Menggunakan rumus cepat untuk diagonal ruang kubus, panjangnya adalah $s\\sqrt{3}$, di mana $s$ adalah panjang rusuk. Maka, hasilnya adalah $6\\sqrt{3}$ cm." },
+            { q: "Sebuah limas memiliki alas persegi dengan sisi 10 cm dan tinggi limas 12 cm. Panjang garis tinggi pada sisi tegaknya (apotema) adalah...", options: ["12 cm", "13 cm", "15 cm", "17 cm"], correct: 1, explanation: "Tinggi limas (12 cm), setengah sisi alas (5 cm), dan tinggi sisi tegak membentuk segitiga siku-siku. Ini adalah Tripel Pythagoras 5-12-13. Jadi, tinggi sisi tegaknya adalah 13 cm." },
+            { q: "Sebuah kerucut dan sebuah tabung memiliki jari-jari dan tinggi yang sama. Tentukan Benar atau Salah untuk setiap pernyataan berikut:", type: "category", statements: [{s: "Volume kerucut adalah sepertiga dari volume tabung.", a: true}, {s: "Luas permukaan kerucut adalah sepertiga dari luas permukaan tabung.", a: false}, {s: "Jika jari-jari diduakalikan, volume tabung menjadi empat kali lebih besar.", a: true}], explanation: "A. Benar, $V_{kerucut} = \\frac{1}{3}\\pi r^2 t$ dan $V_{tabung} = \\pi r^2 t$. B. Rumus luas permukaan keduanya berbeda dan tidak memiliki hubungan sepertiga (Salah). C. Volume sebanding dengan $r^2$, jadi jika $r$ menjadi $2r$, volume menjadi $(2r)^2 = 4r^2$, atau 4 kali lebih besar (Benar)." },
+            { q: "Luas permukaan sebuah bola adalah $144\\pi$ cm². Volume bola tersebut adalah...", options: ["$144\\pi$ cm³", "$288\\pi$ cm³", "$192\\pi$ cm³", "$256\\pi$ cm³"], correct: 1, explanation: "$LP = 4\\pi r^2 = 144\\pi \\implies r^2 = 36 \\implies r=6$. Maka, Volume $V = \\frac{4}{3}\\pi r^3 = \\frac{4}{3}\\pi (6)^3 = \\frac{4}{3}\\pi (216) = 4 \\times 72\\pi = 288\\pi$ cm³." },
+            { q: "Pada kubus ABCDEFGH dengan rusuk 4 cm, jarak dari titik A ke garis BC adalah...", options: ["4 cm", "$4\\sqrt{2}$ cm", "$4\\sqrt{3}$ cm", "2 cm"], correct: 0, explanation: "Jarak dari sebuah titik ke sebuah garis adalah panjang ruas garis tegak lurus dari titik tersebut ke garis. Garis AB tegak lurus dengan garis BC. Maka, jarak dari A ke BC adalah panjang rusuk AB, yaitu 4 cm." },
+            { q: "Sebuah akuarium berbentuk balok memiliki ukuran 30 cm x 40 cm x 50 cm. Panjang diagonal ruang akuarium tersebut adalah...", options: ["$50\\sqrt{2}$ cm", "50 cm", "60 cm", "70 cm"], correct: 0, explanation: "Diagonal ruang balok $d = \\sqrt{p^2+l^2+t^2} = \\sqrt{30^2+40^2+50^2} = \\sqrt{900+1600+2500} = \\sqrt{5000} = \\sqrt{2500 \\times 2} = 50\\sqrt{2}$ cm." },
+            { q: "Pada kubus ABCDEFGH, manakah pernyataan berikut yang benar? (Pilih semua jawaban yang benar)", type: "mcma", options: ["Garis AB sejajar dengan bidang EFGH.", "Garis AC menembus bidang EFGH.", "Garis AE tegak lurus dengan bidang ABCD.", "Garis EH bersilangan dengan garis CG.", "Bidang ABFE sejajar dengan bidang DCGH."], correct: [0,2,3,4], explanation: "A: Benar. C: Benar. D: Benar. E: Benar. Pernyataan B salah karena AC sejajar dengan bidang EFGH (karena AC sejajar EG)." },
+            { q: "Volume sebuah prisma dengan alas segitiga siku-siku (sisi 3 cm, 4 cm, 5 cm) dan tinggi prisma 10 cm adalah...", options: ["30 cm³", "60 cm³", "120 cm³", "150 cm³"], correct: 1, explanation: "Luas alas (segitiga siku-siku) = $\\frac{1}{2} \\times 3 \\times 4 = 6$ cm². Volume Prisma = Luas Alas $\\times$ Tinggi = $6 \\times 10 = 60$ cm³." },
+            { q: "Tentukan Benar atau Salah untuk pernyataan-pernyataan berikut:", type: "category", statements: [{s: "Diagonal sisi kubus dengan rusuk $s$ adalah $s\\sqrt{3}$.", a: false}, {s: "Semua prisma tegak memiliki sisi tegak berbentuk persegi panjang.", a: true}, {s: "Garis pelukis kerucut selalu lebih panjang dari tingginya.", a: true}], explanation: "A: Diagonal sisi adalah $s\\sqrt{2}$ (Salah). B: Ini adalah definisi dari prisma tegak (Benar). C: Garis pelukis ($s$) adalah sisi miring dari segitiga siku-siku yang dibentuk oleh jari-jari ($r$) dan tinggi ($t$), $s^2=r^2+t^2$, sehingga $s$ pasti lebih panjang dari $t$ (Benar)." }
+        ];
+
+        // --- SCRIPT KUIS INTERAKTIF LENGKAP ---
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            let optionsHtml = ''; let dataCorrect = '';
+            if (quiz.type === 'category') {
+                const correctAnswers = quiz.statements.map(s => s.a).join(',');
+                dataCorrect = `data-correct="${correctAnswers}"`;
+                optionsHtml = `<table class="category-table"><tbody>
+                    ${quiz.statements.map((stmt, i) => `
+                        <tr>
+                            <td>${String.fromCharCode(65 + i)}. ${stmt.s}</td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="true"> Benar</label></td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="false"> Salah</label></td>
+                        </tr>
+                    `).join('')}
+                </tbody></table>`;
+            } else if (quiz.type === 'mcma') {
+                dataCorrect = `data-correct="${quiz.correct.join(',')}"`;
+                optionsHtml = quiz.options.map((opt, i) =>
+                    `<div class="mcma-option" data-index="${i}"><label style="width: 100%; cursor: pointer; display: block;"><input type="checkbox" style="margin-right: 10px; vertical-align: middle;">${opt}</label></div>`
+                ).join("");
+            } else {
+                dataCorrect = `data-correct="${quiz.correct}"`;
+                optionsHtml = quiz.options.map((opt, i) => 
+                    `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                ).join("");
+            }
+            const confirmBtnHtml = (quiz.type === 'category' || quiz.type === 'mcma') ? `<button class="confirm-btn">Konfirmasi Jawaban</button>` : '';
+            quizEl.innerHTML = `
+                <button class="quiz-accordion-button"><span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i></button>
+                <div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p>
+                    <div class="options-container" data-type="${quiz.type || 'pg'}" ${dataCorrect}>${optionsHtml}</div>
+                    ${confirmBtnHtml}
+                    <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                </div>`;
+            quizContainer.appendChild(quizEl);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.dataset.type === 'pg' && !optionsContainer.classList.contains('answered')) {
+                        optionsContainer.classList.add('answered');
+                        if (option.dataset.correct === 'true') {
+                            option.classList.add('correct');
+                        } else {
+                            option.classList.add('wrong');
+                            const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                            if (correctOption) correctOption.classList.add('correct');
+                        }
+                        const explanation = optionsContainer.nextElementSibling;
+                        explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.mcma-option label').forEach(label => {
+                label.addEventListener('click', (e) => {
+                    if (e.target.type !== 'checkbox') {
+                        const checkbox = label.querySelector('input[type="checkbox"]');
+                        if (checkbox && !checkbox.disabled) { checkbox.checked = !checkbox.checked; }
+                    }
+                });
+            });
+
+            document.querySelectorAll('.confirm-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const optionsContainer = button.previousElementSibling;
+                    const type = optionsContainer.dataset.type;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered'); button.style.display = 'none';
+
+                    if (type === 'category') {
+                        const correctAnswers = optionsContainer.dataset.correct.split(',');
+                        const rows = optionsContainer.querySelectorAll('tr');
+                        rows.forEach((row, i) => {
+                            const radios = row.querySelectorAll('input[type="radio"]');
+                            const selected = Array.from(radios).find(r => r.checked);
+                            const correctAnswer = correctAnswers[i];
+                            
+                            if (selected) {
+                                const selectedCell = selected.parentElement.closest('td');
+                                if (selected.value === correctAnswer) {
+                                    selectedCell.classList.add('correct');
+                                } else {
+                                    selectedCell.classList.add('wrong');
+                                }
+                            }
+
+                            if (!selected || selected.value !== correctAnswer) {
+                                const correctRadio = Array.from(radios).find(r => r.value === correctAnswer);
+                                if (correctRadio) {
+                                    correctRadio.parentElement.closest('td').classList.add('correct');
+                                }
+                            }
+                            radios.forEach(r => r.disabled = true);
+                        });
+                    } else if (type === 'mcma') {
+                        const correctIndices = optionsContainer.dataset.correct.split(',');
+                        const options = optionsContainer.querySelectorAll('.mcma-option');
+                        options.forEach((opt) => {
+                            const checkbox = opt.querySelector('input');
+                            const index = opt.dataset.index;
+                            const isChecked = checkbox.checked;
+                            const isCorrectAnswer = correctIndices.includes(index);
+                            
+                            if (isChecked && isCorrectAnswer) { opt.classList.add('correct');
+                            } else if (isChecked && !isCorrectAnswer) { opt.classList.add('wrong');
+                            } else if (!isChecked && isCorrectAnswer) { opt.classList.add('correct'); }
+                            checkbox.disabled = true;
+                        });
+                    }
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
