@@ -175,6 +175,9 @@
 </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         const quizzes = [
             { q: "Himpunan penyelesaian dari $5x - 4 = 11$ adalah...", options: ["$x=1$", "$x=2$", "$x=3$", "$x=5$"], correct: 2, explanation: "$5x - 4 = 11 \\implies 5x = 11+4 \\implies 5x = 15 \\implies x = 3$." },
             { q: "Himpunan penyelesaian dari $7 - 2x < 1$ adalah...", options: ["$x < 3$", "$x > 3$", "$x < -3$", "$x > -3$"], correct: 1, explanation: "$7 - 2x < 1 \\implies -2x < 1-7 \\implies -2x < -6$. Karena dibagi dengan -2, tanda dibalik: $x > 3$." },
