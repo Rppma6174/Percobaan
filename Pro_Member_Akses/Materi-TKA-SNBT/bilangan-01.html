@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konsep Bilangan & Sifatnya - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .diagram-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-main);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+        }
+        .diagram-container svg text { font-size: 14px; fill: var(--text-primary); font-weight: bold; }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Konsep Bilangan dan Sifat-sifatnya: Fondasi Matematika</h1>
+<p>
+    Bilangan adalah bahasa universal matematika. Sebelum kita dapat menyelesaikan masalah yang kompleks, kita harus terlebih dahulu memahami "keluarga" bilangan yang berbeda dan "aturan main" (sifat-sifat) yang mengatur bagaimana mereka berinteraksi.
+</p>
+
+<h2>1. Jenis-Jenis Bilangan</h2>
+<p>
+    Bilangan dapat diklasifikasikan ke dalam beberapa himpunan yang saling berkaitan, dari yang paling sederhana hingga yang paling mencakup.
+</p>
+<div class="diagram-container">
+    <svg width="400" height="250" viewBox="0 0 400 250">
+        <rect x="5" y="5" width="390" height="240" rx="15" fill="#161B22" stroke="#2F81F7" stroke-width="2"/>
+        <text x="150" y="30">Bilangan Real ($\mathbb{R}$)</text>
+        <rect x="15" y="40" width="220" height="190" rx="10" fill="#222c3c" stroke="#30363D"/>
+        <text x="60" y="60">Bilangan Rasional ($\mathbb{Q}$)</text>
+        <rect x="25" y="70" width="200" height="150" rx="10" fill="#161B22" stroke="#30363D"/>
+        <text x="70" y="90">Bilangan Bulat ($\mathbb{Z}$)</text>
+        <rect x="35" y="100" width="180" height="110" rx="10" fill="#222c3c" stroke="#30363D"/>
+        <text x="70" y="120">Bilangan Cacah ($\mathbb{W}$)</text>
+        <rect x="45" y="130" width="160" height="70" rx="10" fill="#161B22" stroke="#30363D"/>
+        <text x="70" y="150">Bilangan Asli ($\mathbb{N}$)</text>
+        <text x="90" y="175" fill="#C9D1D9" font-size="12">1, 2, 3, ...</text>
+        <text x="40" y="225" fill="#C9D1D9" font-size="12">0</text>
+        <text x="30" y="235" fill="#C9D1D9" font-size="12">...,-2,-1</text>
+        <text x="30" y="200" fill="#C9D1D9" font-size="12">$\frac{1}{2}, -0.75, 0.\bar{3}$</text>
+        <rect x="245" y="40" width="140" height="190" rx="10" fill="#222c3c" stroke="#30363D"/>
+        <text x="260" y="60">Bilangan Irasional ($\mathbb{I}$)</text>
+        <text x="280" y="140" fill="#C9D1D9" font-size="12">$\pi, \sqrt{2}, e$</text>
+    </svg>
+</div>
+<ul>
+    <li><b>Bilangan Asli ($\mathbb{N}$):</b> Bilangan yang kita gunakan untuk menghitung: $\{1, 2, 3, \dots\}$.</li>
+    <li><b>Bilangan Cacah ($\mathbb{W}$):</b> Bilangan Asli ditambah dengan nol: $\{0, 1, 2, 3, \dots\}$.</li>
+    <li><b>Bilangan Bulat ($\mathbb{Z}$):</b> Bilangan Cacah beserta bentuk negatifnya: $\{\dots, -2, -1, 0, 1, 2, \dots\}$.</li>
+    <li><b>Bilangan Rasional ($\mathbb{Q}$):</b> Bilangan apapun yang bisa dinyatakan sebagai pecahan $\frac{a}{b}$, di mana $a$ dan $b$ adalah bilangan bulat dan $b \neq 0$. Ini mencakup semua bilangan bulat, desimal terbatas, dan desimal berulang.</li>
+    <li><b>Bilangan Irasional ($\mathbb{I}$):</b> Bilangan yang tidak bisa dinyatakan sebagai pecahan biasa. Bentuk desimalnya tidak terbatas dan tidak berulang (contoh: $\pi, \sqrt{2}$).</li>
+    <li><b>Bilangan Real ($\mathbb{R}$):</b> Gabungan dari himpunan bilangan rasional dan irasional. Ini adalah semua bilangan yang dapat direpresentasikan pada garis bilangan.</li>
+</ul>
+
+<h2>2. Sifat-sifat Operasi Hitung</h2>
+<p>
+    Sifat-sifat ini adalah "aturan main" dalam aritmetika yang memungkinkan kita memanipulasi ekspresi matematika untuk perhitungan yang lebih efisien.
+</p>
+<div class="important-note">
+    <ul>
+        <li>
+            <b>Sifat Komutatif (Tukar Posisi):</b> $a+b=b+a$ dan $a \times b = b \times a$.
+            <br>Hanya berlaku untuk penjumlahan dan perkalian. Urutan tidak mengubah hasil.
+        </li>
+        <li>
+            <b>Sifat Asosiatif (Kelompokkan):</b> $(a+b)+c = a+(b+c)$ dan $(a \times b) \times c = a \times (b \times c)$.
+            <br>Hanya berlaku untuk penjumlahan dan perkalian. Pengelompokan tidak mengubah hasil.
+            <br><b>Aplikasi:</b> Untuk menghitung $25+88+12$, lebih mudah mengelompokkan $(88+12)$ terlebih dahulu: $25+100=125$.
+        </li>
+        <li>
+            <b>Sifat Distributif (Sebar):</b> $a \times (b+c) = (a \times b) + (a \times c)$.
+            <br>Sifat ini adalah jembatan antara perkalian dan penjumlahan.
+            <br><b>Aplikasi:</b> Untuk menghitung $8 \times 52$, lebih mudah menghitung $8 \times (50+2) = (8 \times 50) + (8 \times 2) = 400 + 16 = 416$.
+        </li>
+    </ul>
+</div>
+
+<h2>3. Konsep Bilangan Prima</h2>
+<ul>
+    <li><b>Bilangan Prima:</b> Bilangan asli yang lebih besar dari 1 dan hanya memiliki dua faktor pembagi: 1 dan dirinya sendiri. (Contoh: 2, 3, 5, 7, 11, ...).</li>
+    <li><b>Bilangan Komposit:</b> Bilangan asli yang lebih besar dari 1 dan bukan bilangan prima.</li>
+    <li><b>Faktorisasi Prima:</b> Proses menguraikan bilangan komposit menjadi perkalian faktor-faktor primanya. Menurut <b>Teorema Fundamental Aritmetika</b>, setiap bilangan komposit memiliki satu set faktor prima yang unik.
+    <br><b>Contoh:</b> Faktorisasi prima dari 90 adalah $2 \times 3^2 \times 5$.
+    </li>
+</ul>
+
+<h2>Uji Pemahaman Anda</h2>
+<p>Uji pemahaman Anda tentang konsep-konsep dasar bilangan.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+      if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+        // Boilerplate script
+        const quizzes = [
+            {
+                q: "Manakah dari berikut ini yang merupakan bilangan irasional?",
+                options: [ "$\\sqrt{9}$", "$0.75$", "$\\pi$", "$3.14$" ],
+                correct: 2,
+                explanation: "$\\pi$ (Pi) adalah bilangan irasional karena bentuk desimalnya tidak terbatas dan tidak berulang. $\\sqrt{9}=3$ (bulat), $0.75=\\frac{3}{4}$ (rasional), dan $3.14=\\frac{314}{100}$ (rasional)."
+            },
+            {
+                q: "Menghitung $(58+17)+3$ dengan cara $58+(17+3)$ untuk mempermudah adalah penerapan dari sifat...",
+                options: [ "Komutatif", "Asosiatif", "Distributif", "Identitas" ],
+                correct: 1,
+                explanation: "Sifat Asosiatif berkaitan dengan pengubahan pengelompokan dalam operasi penjumlahan atau perkalian tanpa mengubah hasilnya."
+            },
+            {
+                q: "Manakah pernyataan yang BENAR mengenai bilangan prima?",
+                options: [
+                    "Semua bilangan prima adalah bilangan ganjil.",
+                    "1 adalah bilangan prima terkecil.",
+                    "Bilangan prima hanya memiliki tepat dua faktor pembagi.",
+                    "Jumlah dua bilangan prima selalu genap."
+                ],
+                correct: 2,
+                explanation: "Definisi bilangan prima adalah bilangan asli > 1 yang hanya memiliki dua faktor: 1 dan dirinya sendiri. Angka 2 adalah bilangan prima yang genap, jadi pilihan pertama salah. 1 bukan prima. $2+3=5$ (ganjil), jadi pilihan terakhir salah."
+            },
+            {
+                q: "Faktorisasi prima dari 90 adalah...",
+                options: [ "$9 \\times 10$", "$2 \\times 3 \\times 15$", "$2 \\times 3^2 \\times 5$", "$2 \\times 5 \\times 9$" ],
+                correct: 2,
+                explanation: "Faktorisasi prima harus terdiri dari bilangan-bilangan prima saja. $90 = 2 \\times 45 = 2 \\times 9 \\times 5 = 2 \\times 3 \\times 3 \\times 5 = 2 \\times 3^2 \\times 5$."
+            },
+            {
+                q: "Bilangan $\\frac{22}{7}$ adalah contoh dari bilangan...",
+                options: [ "Bulat", "Rasional", "Irasional", "Asli" ],
+                correct: 1,
+                explanation: "Meskipun nilainya sering digunakan sebagai pendekatan untuk $\\pi$, $\\frac{22}{7}$ adalah sebuah pecahan yang terbentuk dari dua bilangan bulat. Sesuai definisi, ini adalah bilangan rasional."
+            }
+        ];
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Kuis ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("")}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+            quizContainer.appendChild(quizEl);
+        });
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    document.querySelectorAll('.quiz-accordion-button').forEach(other => {
+                        if (other !== button) { other.classList.remove('active'); other.nextElementSibling.classList.add('hidden'); }
+                    });
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling; explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') { option.classList.add('correct');
+                    } else { option.classList.add('wrong'); const correctOption = optionsContainer.querySelector('[data-correct="true"]'); if (correctOption) { correctOption.classList.add('correct'); } }
+                    MathJax.typesetPromise([explanation, option.parentElement.previousElementSibling]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
