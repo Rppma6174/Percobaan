@@ -160,6 +160,9 @@
 </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         // Script kuis lengkap akan dimasukkan di sini
         const quizzes = [
             { q: "Bentuk desimal dari pecahan $\\frac{7}{8}$ adalah...", options: ["0.875", "0.78", "0.625", "0.8"], correct: 0, explanation: "Bentuk desimal didapat dengan membagi pembilang dengan penyebut: $7 \\div 8 = 0.875$." },
