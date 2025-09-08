@@ -157,9 +157,8 @@
     </div>
 
     <script>
-        if (!sessionStorage.getItem('sessionToken')) {
-            // Uncomment baris di bawah jika ingin mengaktifkan proteksi halaman
-            // window.location.href = '../../Login/';
+      if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
         }
 
         const quizzes = [
