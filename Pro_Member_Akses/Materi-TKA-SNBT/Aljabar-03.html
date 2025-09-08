@@ -178,6 +178,9 @@
 </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         const quizzes = [
             { q: "Daerah yang diarsir pada grafik sistem pertidaksamaan linear disebut...", options: ["Daerah Asal (Domain)", "Daerah Hasil (Range)", "Daerah Himpunan Penyelesaian (DHP)", "Titik Optimum"], correct: 2, explanation: "DHP atau Feasible Region adalah istilah teknis untuk daerah yang memenuhi semua pertidaksamaan dalam sistem." },
             { q: "Garis batas untuk pertidaksamaan $3x - 2y < 6$ seharusnya digambar sebagai...", options: ["Garis tegas/penuh", "Garis putus-putus", "Garis vertikal", "Garis horizontal"], correct: 1, explanation: "Tanda ketidaksamaan $<$ atau $>$ (tanpa 'sama dengan') berarti titik-titik pada garis batas itu sendiri tidak termasuk dalam himpunan penyelesaian, sehingga digambar putus-putus." },
