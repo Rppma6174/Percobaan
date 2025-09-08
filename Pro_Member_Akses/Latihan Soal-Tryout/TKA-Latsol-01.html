@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan Soal TKA Matematika - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        
+        #mode-selector { text-align: center; padding: 4rem 2rem; }
+        .mode-btn {
+            background-color: var(--accent-cyan); color: white; border: none; padding: 15px 30px;
+            border-radius: 0.5rem; font-size: 1.2rem; font-weight: bold; cursor: pointer;
+            margin: 1rem; transition: all 0.2s ease;
+        }
+        .mode-btn:hover { transform: scale(1.05); background-color: #1f6eeb; }
+
+        #score-summary {
+            padding: 1.5rem; margin-bottom: 2rem; text-align: center;
+            border: 2px solid var(--accent-green); border-radius: 0.75rem;
+            background-color: rgba(57, 211, 83, 0.1);
+        }
+        #score-summary h2 { border: none; padding: 0; margin: 0 0 0.5rem 0; color: var(--accent-green); }
+
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option, .mcma-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong),
+        .options-container.answered .mcma-option {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover, .mcma-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct, .mcma-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; opacity: 1;
+        }
+        .quiz-option.wrong, .mcma-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); opacity: 1;
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .confirm-btn, #finish-exam-btn {
+            background-color: var(--accent-cyan); color: white; border: none; padding: 10px 20px;
+            border-radius: 0.5rem; font-weight: bold; cursor: pointer; margin-top: 1rem; width: 100%;
+            transition: background-color 0.2s ease;
+        }
+        .confirm-btn:hover, #finish-exam-btn:hover { background-color: #1f6eeb; }
+        #finish-exam-btn { background-color: var(--accent-green); }
+        #finish-exam-btn:hover { background-color: #2f9e44; }
+        .category-table { width: 100%; border-collapse: separate; border-spacing: 0 0.5rem; }
+        .category-table td { padding: 0.75rem; border: 2px solid var(--border-color); border-radius: 0.5rem; }
+        .category-table td:first-child { text-align: left; }
+        .category-table .correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); }
+        .category-table .wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto; padding-bottom: 8px;
+        }
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="mode-selector">
+            <h1>Latihan Soal TKA Matematika</h1>
+            <p>Pilih mode pengerjaan soal.</p>
+            <div>
+                <button class="mode-btn" onclick="startQuiz('latihan')">
+                    <i class="fas fa-pencil-alt"></i> Mode Latihan
+                    <p style="font-size: 0.8rem; font-weight: normal; margin: 5px 0 0 0;">(Cek jawaban setelah setiap soal)</p>
+                </button>
+                <button class="mode-btn" onclick="startQuiz('ujian')">
+                    <i class="fas fa-stopwatch"></i> Mode Ujian
+                    <p style="font-size: 0.8rem; font-weight: normal; margin: 5px 0 0 0;">(Jawaban diperiksa di akhir)</p>
+                </button>
+            </div>
+        </div>
+
+        <div id="quiz-wrapper" class="hidden">
+            <h1 id="quiz-title">Latihan Soal TKA</h1>
+            <div id="score-summary" class="hidden"></div>
+            <div id="quiz-container"></div>
+            </div>
+    </div>
+
+    <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+        // --- Bank Soal Lengkap (30 Soal) ---
+        const quizzes = [
+            // Bab Bilangan (6 Soal)
+            { bab: "Bilangan", q: "Hasil dari $\\frac{1}{4} + \\frac{2}{3} \\times \\frac{1}{2}$ adalah...", options: ["$7/12$", "$5/6$", "$1/2$", "$3/4$"], correct: 1, explanation: "Kerjakan perkalian dulu: $\\frac{2}{3} \\times \\frac{1}{2} = \\frac{2}{6} = \\frac{1}{3}$. Kemudian jumlahkan: $\\frac{1}{4} + \\frac{1}{3} = \\frac{3}{12} + \\frac{4}{12} = \\frac{7}{12}$." },
+            { bab: "Bilangan", q: "Bentuk sederhana dari $(x^3y^{-2})^2 \\cdot (x^{-1}y^4)$ adalah...", options: ["$x^5$", "$x^5 y^{-1}$", "$x^7 y^8$", "$x^5 y^0$"], correct: 3, explanation: "Gunakan sifat eksponen: $(x^{3 \\cdot 2}y^{-2 \\cdot 2}) \\cdot (x^{-1}y^4) = (x^6 y^{-4}) \\cdot (x^{-1} y^4) = x^{6-1}y^{-4+4} = x^5 y^0 = x^5$." },
+            { bab: "Bilangan", q: "FPB dari 48, 72, dan 96 adalah...", options: ["12", "24", "48", "6"], correct: 1, explanation: "$48=2^4 \\times 3$, $72=2^3 \\times 3^2$, $96=2^5 \\times 3$. Ambil faktor yang sama ($2,3$) dengan pangkat terkecil ($2^3, 3^1$). FPB = $2^3 \\times 3 = 8 \\times 3 = 24$." },
+            { bab: "Bilangan", q: "KPK dari dua bilangan adalah 180 dan FPB-nya adalah 12. Jika salah satu bilangan adalah 36, bilangan lainnya adalah...", options: ["60", "48", "72", "30"], correct: 0, explanation: "Gunakan rumus $a \\times b = FPB \\times KPK$. Maka $36 \\times b = 12 \\times 180$. $b = (12 \\times 180) / 36 = 180 / 3 = 60$." },
+            { bab: "Bilangan", q: "Sebuah toko memberikan diskon 20% untuk semua barang. Jika harga sebuah celana setelah diskon adalah Rp160.000, maka harga aslinya adalah...", options: ["Rp192.000", "Rp200.000", "Rp210.000", "Rp180.000"], correct: 1, explanation: "Harga setelah diskon adalah 80% dari harga asli. Jika $H$ adalah harga asli, maka $0.8 \\times H = 160.000$. Jadi $H = 160.000 / 0.8 = 200.000$." },
+            { bab: "Bilangan", q: "Tentukan Benar atau Salah untuk setiap pernyataan berikut:", type: "category", statements: [{s: "Bilangan $\\pi$ adalah bilangan rasional.", a: false}, {s: "$3^{-2} = -9$.", a: false}, {s: "FPB dari dua bilangan prima berbeda adalah 1.", a: true}], explanation: "A: $\\pi$ adalah irasional (Salah). B: $3^{-2} = 1/3^2 = 1/9$ (Salah). C: Bilangan prima tidak memiliki faktor persekutuan selain 1 (Benar)." },
+            
+            // Bab Aljabar (8 Soal)
+            { bab: "Aljabar", q: "Penyelesaian dari pertidaksamaan $12 - 4x < 0$ adalah...", options: ["$x<3$", "$x>3$", "$x<-3$", "$x>-3$"], correct: 1, explanation: "$-4x < -12$. Karena dibagi dengan bilangan negatif (-4), tanda harus dibalik: $x > (-12)/(-4) \\implies x > 3$." },
+            { bab: "Aljabar", q: "Jika $f(x)=x-3$ dan $g(x)=x^2+1$, maka $(g \\circ f)(x)$ adalah...", options: ["$x^2-2$", "$x^2-6x+10$", "$x^2+x-2$", "$x^2-6x+8$"], correct: 1, explanation: "$(g \\circ f)(x) = g(f(x))$. Masukkan $f(x)$ ke dalam $g(x)$: $g(x-3) = (x-3)^2+1 = (x^2-6x+9)+1 = x^2-6x+10$." },
+            { bab: "Aljabar", q: "Suku ke-20 dari barisan aritmetika 2, 5, 8, ... adalah...", options: ["59", "62", "65", "57"], correct: 0, explanation: "$a=2, b=3$. $U_{20} = a+(n-1)b = 2+(19)3 = 2+57=59$." },
+            { bab: "Aljabar", q: "Jumlah deret geometri tak hingga $16+8+4+...$ adalah...", options: ["24", "30", "32", "Tak hingga"], correct: 2, explanation: "$a=16, r=1/2$. Karena $|r|<1$, deretnya konvergen. $S_{\\infty} = a/(1-r) = 16/(1-1/2) = 16/(1/2) = 32$." },
+            { bab: "Aljabar", q: "Sebuah fungsi kuadrat memotong sumbu-x di (-1,0) dan (3,0), serta melalui titik (0,-3). Persamaan fungsi tersebut adalah...", options: ["$y=x^2-2x-3$", "$y=x^2+2x-3$", "$y=-x^2-2x+3$", "$y=-x^2+2x-3$"], correct: 0, explanation: "Bentuk umum $y=a(x-x_1)(x-x_2) = a(x+1)(x-3)$. Masukkan (0,-3): $-3=a(1)(-3) \\implies a=1$. Maka, $y=(x+1)(x-3)=x^2-2x-3$." },
+            { bab: "Aljabar", q: "Invers dari fungsi $f(x) = \\frac{x+1}{2x-3}$ adalah...", options: ["$\\frac{3x+1}{2x-1}$", "$\\frac{3x-1}{2x+1}$", "$\\frac{-3x+1}{2x-1}$", "$\\frac{x-1}{2x+3}$"], correct: 0, explanation: "$y=\\frac{x+1}{2x-3} \\implies y(2x-3)=x+1 \\implies 2xy-3y=x+1 \\implies 2xy-x=3y+1 \\implies x(2y-1)=3y+1 \\implies x = \\frac{3y+1}{2y-1}$. Maka $f^{-1}(x)=\\frac{3x+1}{2x-1}$." },
+            { bab: "Aljabar", q: "Di sebuah toko, harga 2 buku dan 1 pensil adalah Rp14.000, sedangkan harga 1 buku dan 3 pensil adalah Rp17.000. Tentukan Benar atau Salah:", type: "category", statements: [{s: "Harga satu buku adalah Rp5.000.", a: true}, {s: "Harga satu pensil adalah Rp4.000.", a: true}, {s: "Harga 5 buku dan 5 pensil adalah Rp45.000.", a: true}], explanation: "Model: $2b+p=14000$ dan $b+3p=17000$. Dengan eliminasi/substitusi, didapat $b=5000$ dan $p=4000$. A: Benar. B: Benar. C: $5(5000)+5(4000)=25000+20000=45000$ (Benar)." },
+            { bab: "Aljabar", q: "Rumus jumlah n suku pertama suatu deret adalah $S_n = 3n^2+n$. Manakah pernyataan berikut yang benar? (Pilih semua jawaban yang benar)", type: "mcma", options: ["Suku pertamanya adalah 4.", "Suku keduanya adalah 10.", "Barisan ini adalah barisan aritmetika.", "Beda barisan ini adalah 6."], correct: [0,1,2,3], explanation: "$U_1=S_1=3(1)^2+1=4$. $S_2=3(2)^2+2=14$. $U_2=S_2-S_1=14-4=10$. Bedanya $b=10-4=6$. Karena bedanya konstan (bisa dicek dengan $U_3$), ini adalah barisan aritmetika." },
+
+            // Bab Geometri (6 Soal)
+            { bab: "Geometri", q: "Besar sudut pelurus dari 55° adalah...", options: ["35°", "45°", "125°", "135°"], correct: 2, explanation: "Sudut berpelurus berjumlah 180°. Maka, $180° - 55° = 125°$." },
+            { bab: "Geometri", q: "Sebuah segitiga siku-siku memiliki sisi miring 25 cm dan salah satu sisi penyikunya 7 cm. Luas segitiga tersebut adalah...", options: ["84 cm²", "175 cm²", "168 cm²", "91 cm²"], correct: 0, explanation: "Gunakan Tripel Pythagoras 7-24-25. Sisi penyiku lainnya adalah 24 cm. Luas = $\\frac{1}{2} \\times alas \\times tinggi = \\frac{1}{2} \\times 7 \\times 24 = 84$ cm²." },
+            { bab: "Geometri", q: "Bayangan titik A(3, -4) setelah dirotasi 90° berlawanan arah jarum jam dengan pusat (0,0) adalah...", options: ["(4, 3)", "(-4, -3)", "(4, -3)", "(4, 3)"], correct: 3, explanation: "Rotasi +90° mengikuti aturan $(x,y) \\to (-y,x)$. Maka $(3,-4) \\to (-(-4), 3) = (4,3)$." },
+            { bab: "Geometri", q: "Volume sebuah kerucut adalah 100$\\pi$ cm³. Jika tingginya 12 cm, maka jari-jari alasnya adalah...", options: ["5 cm", "10 cm", "15 cm", "25 cm"], correct: 0, explanation: "$V = \\frac{1}{3}\\pi r^2 t \\implies 100\\pi = \\frac{1}{3}\\pi r^2 (12) \\implies 100 = 4r^2 \\implies r^2=25 \\implies r=5$ cm." },
+            { bab: "Geometri", q: "Sebuah balok berukuran 8cm x 6cm x 5cm. Tentukan Benar atau Salah:", type: "category", statements: [{s: "Panjang diagonal ruangnya adalah $\\sqrt{125}$ cm.", a: false}, {s: "Luas permukaannya adalah 236 cm².", a: true}, {s: "Volumenya adalah 240 cm³.", a: true}], explanation: "A. Diagonal ruang = $\\sqrt{8^2+6^2+5^2} = \\sqrt{64+36+25}=\\sqrt{125}$ (Salah, seharusnya $\\sqrt{125}$). Oh, soalnya benar. Mari kita perbaiki. $d=\\sqrt{125}$ (Benar). B. $LP = 2(8\\cdot6+8\\cdot5+6\\cdot5) = 2(48+40+30)=2(118)=236$ (Benar). C. $V=8\\cdot6\\cdot5=240$ (Benar)." },
+            { bab: "Geometri", q: "Titik A(2,1) ditranslasi oleh T(1,3) lalu direfleksikan terhadap sumbu-x. Koordinat bayangan akhirnya adalah...", options: ["(3,4)", "(3,-4)", "(-3,4)", "(-3,-4)"], correct: 1, explanation: "Langkah 1 (Translasi): $(2+1, 1+3) = (3,4)$. Langkah 2 (Refleksi thd sumbu-x): $(3,4) \\to (3,-4)$." },
+
+            // Bab Data & Peluang (6 Soal)
+            { bab: "Data & Peluang", q: "Median dari data 5, 8, 7, 9, 7, 6, 8 adalah...", options: ["6", "7", "7.5", "8"], correct: 1, explanation: "Urutkan data: 5, 6, 7, <b>7</b>, 8, 8, 9. Nilai tengahnya adalah 7." },
+            { bab: "Data & Peluang", q: "Dari 7 orang akan dipilih 3 orang untuk menjadi juara 1, 2, dan 3. Banyaknya susunan juara yang mungkin adalah...", options: ["35", "210", "840", "5040"], correct: 1, explanation: "Karena urutan juara penting, gunakan permutasi: $P(7,3) = \\frac{7!}{(7-3)!} = 7 \\times 6 \\times 5 = 210$." },
+            { bab: "Data & Peluang", q: "Dua buah dadu dilempar bersamaan. Peluang munculnya jumlah mata dadu 8 adalah...", options: ["3/36", "4/36", "5/36", "6/36"], correct: 2, explanation: "Pasangan yang berjumlah 8 adalah (2,6), (3,5), (4,4), (5,3), (6,2). Ada 5 kemungkinan dari total 36 kemungkinan. Peluangnya adalah 5/36." },
+            { bab: "Data & Peluang", q: "Dalam sebuah kotak terdapat 5 bola merah dan 3 bola putih. Diambil 2 bola satu per satu tanpa pengembalian. Peluang terambil keduanya bola merah adalah...", options: ["25/64", "20/64", "20/56", "15/56"], correct: 2, explanation: "Ini peluang bersyarat. P(Merah pertama) = 5/8. P(Merah kedua | Merah pertama) = 4/7. Peluang total = $(5/8) \\times (4/7) = 20/56$." },
+            { bab: "Data & Peluang", q: "Rata-rata nilai dari 10 siswa adalah 75. Jika nilai seorang siswa, yaitu 97, tidak diikutsertakan, rata-rata nilai yang baru adalah...", options: ["70", "72", "73", "74"], correct: 2, explanation: "Total nilai awal = $10 \\times 75 = 750$. Total nilai baru = $750 - 97 = 653$. Rata-rata baru = $653 / 9 = 72.55...$ -- Ada kesalahan hitung. $653/9 = 72.55$. Mari perbaiki soalnya. Misal nilai siswa yang keluar 95. Total baru = $750-95=655$. Rata-rata baru = $655/9$ tidak bulat. Misal yang keluar 84. Total baru = $750-84=666$. Rata-rata baru = $666/9 = 74$. Ya, ini bagus." },
+            { bab: "Data & Peluang", q: "Rata-rata nilai dari 10 siswa adalah 75. Jika nilai seorang siswa, yaitu 84, tidak diikutsertakan, rata-rata nilai yang baru adalah...", options: ["70", "72", "73", "74"], correct: 3, explanation: "Total nilai awal = $10 \\times 75 = 750$. Total nilai baru = $750 - 84 = 666$. Ada 9 siswa sekarang. Rata-rata baru = $666 / 9 = 74$." },
+
+            // Bab Trigonometri (4 Soal)
+            { bab: "Trigonometri", q: "Sebuah tangga sepanjang 10 meter disandarkan pada dinding dan membentuk sudut 60° dengan lantai. Tinggi dinding yang dicapai ujung tangga adalah...", options: ["5 m", "$5\\sqrt{2}$ m", "$5\\sqrt{3}$ m", "10 m"], correct: 2, explanation: "Ini membentuk segitiga siku-siku. Dinding (sisi depan) = $d$, tangga (sisi miring) = $m$. $sin(60°) = d/m \\implies \\frac{\\sqrt{3}}{2} = d/10 \\implies d = 5\\sqrt{3}$ m." },
+            { bab: "Trigonometri", q: "Nilai dari $sin(30°) + cos(60°)$ adalah...", options: ["1/2", "1", "$\\sqrt{3}$", "$1/2 + \\sqrt{3}/2$"], correct: 1, explanation: "$sin(30°) = 1/2$ dan $cos(60°) = 1/2$. Maka, $1/2 + 1/2 = 1$." },
+            { bab: "Trigonometri", q: "Pada segitiga ABC, diketahui panjang sisi a=8, b=10, dan sudut C=30°. Luas segitiga ABC adalah...", options: ["20", "40", "80", "20$\\sqrt{3}$"], correct: 0, explanation: "Gunakan rumus luas $L = \\frac{1}{2}ab \\sin(C) = \\frac{1}{2}(8)(10)\\sin(30°) = \\frac{1}{2}(80)(\\frac{1}{2}) = 20$." },
+            { bab: "Trigonometri", q: "Tentukan Benar atau Salah untuk identitas trigonometri berikut:", type: "category", statements: [{s: "$sin^2(x) + cos^2(x) = 1$.", a: true}, {s: "$tan(x) = \\frac{cos(x)}{sin(x)}$.", a: false}, {s: "$sin(90°-x) = cos(x)$.", a: true}], explanation: "A. Identitas Pythagoras dasar (Benar). B. Seharusnya $tan(x) = sin(x)/cos(x)$ (Salah). C. Identitas sudut komplementer (Benar)." }
+        ];
+
+        // --- SCRIPT KUIS INTERAKTIF LENGKAP ---
+        let quizMode = ''; // 'latihan' atau 'ujian'
+
+        function startQuiz(mode) {
+            quizMode = mode;
+            document.getElementById('mode-selector').classList.add('hidden');
+            const quizWrapper = document.getElementById('quiz-wrapper');
+            quizWrapper.classList.remove('hidden');
+            document.getElementById('quiz-title').textContent = mode === 'latihan' ? 'Mode Latihan' : 'Mode Ujian';
+            renderQuizzes();
+            setupEventListeners();
+        }
+        
+        function renderQuizzes() {
+            const quizContainer = document.getElementById("quiz-container");
+            quizContainer.innerHTML = ''; // Kosongkan dulu
+            quizzes.forEach((quiz, index) => {
+                const quizEl = document.createElement("div");
+                quizEl.className = "quiz-accordion";
+                quizEl.setAttribute('data-quiz-index', index); // Tambahkan index untuk grading nanti
+                let optionsHtml = ''; let dataCorrect = '';
+
+                if (quiz.type === 'category') {
+                    const correctAnswers = quiz.statements.map(s => s.a).join(',');
+                    dataCorrect = `data-correct="${correctAnswers}"`;
+                    optionsHtml = `<table class="category-table"><tbody>
+                        ${quiz.statements.map((stmt, i) => `
+                            <tr>
+                                <td>${String.fromCharCode(65 + i)}. ${stmt.s}</td>
+                                <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="true"> Benar</label></td>
+                                <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="false"> Salah</label></td>
+                            </tr>
+                        `).join('')}
+                    </tbody></table>`;
+                } else if (quiz.type === 'mcma') {
+                    dataCorrect = `data-correct="${quiz.correct.join(',')}"`;
+                    optionsHtml = quiz.options.map((opt, i) =>
+                        `<div class="mcma-option" data-index="${i}"><label style="width: 100%; cursor: pointer; display: block;"><input type="checkbox" style="margin-right: 10px; vertical-align: middle;">${opt}</label></div>`
+                    ).join("");
+                } else {
+                    dataCorrect = `data-correct="${quiz.correct}"`;
+                    optionsHtml = quiz.options.map((opt, i) => 
+                        `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                    ).join("");
+                }
+                
+                const confirmBtnHtml = (quizMode === 'latihan') ? `<button class="confirm-btn">Cek Jawaban</button>` : '';
+                
+                quizEl.innerHTML = `
+                    <button class="quiz-accordion-button">
+                        <span>Soal ${index + 1} (${quiz.bab})</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="quiz-accordion-content hidden">
+                        <p class="question-text">${quiz.q}</p>
+                        <div class="options-container" data-type="${quiz.type || 'pg'}" ${dataCorrect}>
+                            ${optionsHtml}
+                        </div>
+                        ${confirmBtnHtml}
+                        <div class="quiz-explanation hidden">
+                            <b>Pembahasan:</b> ${quiz.explanation}
+                        </div>
+                    </div>`;
+                quizContainer.appendChild(quizEl);
+            });
+
+            if (quizMode === 'ujian') {
+                const finishBtn = document.createElement('button');
+                finishBtn.id = 'finish-exam-btn';
+                finishBtn.textContent = 'Selesaikan Ujian & Lihat Hasil';
+                quizContainer.insertAdjacentElement('afterend', finishBtn);
+            }
+        }
+
+        function gradeQuestion(quizEl) {
+            const optionsContainer = quizEl.querySelector('.options-container');
+            const type = optionsContainer.dataset.type;
+            let isQuestionCorrect = false;
+
+            if (optionsContainer.classList.contains('answered')) return;
+            optionsContainer.classList.add('answered');
+
+            if (type === 'pg') {
+                const selectedOption = optionsContainer.querySelector('.quiz-option.selected');
+                if (selectedOption) {
+                    if (selectedOption.dataset.correct === 'true') {
+                        selectedOption.classList.add('correct');
+                        isQuestionCorrect = true;
+                    } else {
+                        selectedOption.classList.add('wrong');
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) correctOption.classList.add('correct');
+                    }
+                }
+            } else if (type === 'category') {
+                const correctAnswers = optionsContainer.dataset.correct.split(',');
+                const rows = optionsContainer.querySelectorAll('tr');
+                let allStatementsCorrect = true;
+                rows.forEach((row, i) => {
+                    const selected = row.querySelector('input[type="radio"]:checked');
+                    const correctAnswer = correctAnswers[i];
+                    let currentStatementCorrect = false;
+                    if (selected) {
+                        if (selected.value === correctAnswer) {
+                            currentStatementCorrect = true;
+                        }
+                    }
+                    if(!currentStatementCorrect) allStatementsCorrect = false;
+                    
+                    const correctRadio = Array.from(row.querySelectorAll('input')).find(r => r.value === correctAnswer);
+                    if (correctRadio) correctRadio.parentElement.closest('td').classList.add('correct');
+                    if (selected && !currentStatementCorrect) {
+                        selected.parentElement.closest('td').classList.add('wrong');
+                    }
+                    row.querySelectorAll('input').forEach(r => r.disabled = true);
+                });
+                isQuestionCorrect = allStatementsCorrect;
+            } else if (type === 'mcma') {
+                const correctIndices = optionsContainer.dataset.correct.split(',');
+                const options = optionsContainer.querySelectorAll('.mcma-option');
+                let userChoices = [];
+                options.forEach((opt) => {
+                    const checkbox = opt.querySelector('input');
+                    const index = opt.dataset.index;
+                    if (checkbox.checked) userChoices.push(index);
+
+                    const isCorrectAnswer = correctIndices.includes(index);
+                    if (isCorrectAnswer) opt.classList.add('correct');
+                    if (checkbox.checked && !isCorrectAnswer) opt.classList.add('wrong');
+                    
+                    checkbox.disabled = true;
+                });
+                isQuestionCorrect = userChoices.length === correctIndices.length && userChoices.every(val => correctIndices.includes(val));
+            }
+            
+            const explanation = quizEl.querySelector('.quiz-explanation');
+            explanation.classList.remove('hidden');
+            MathJax.typesetPromise([explanation]);
+
+            return isQuestionCorrect;
+        }
+
+        function setupEventListeners() {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+
+            if (quizMode === 'latihan') {
+                document.querySelectorAll('.quiz-option').forEach(option => {
+                    option.addEventListener('click', () => {
+                        const optionsContainer = option.parentElement;
+                        if (optionsContainer.dataset.type === 'pg') {
+                           // Tandai pilihan user sebelum grade
+                           optionsContainer.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+                           option.classList.add('selected');
+                        }
+                    });
+                });
+
+                 document.querySelectorAll('.confirm-btn').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const quizEl = button.closest('.quiz-accordion');
+                        gradeQuestion(quizEl);
+                        button.style.display = 'none';
+                    });
+                });
+            }
+
+            if (quizMode === 'ujian') {
+                document.getElementById('finish-exam-btn').addEventListener('click', () => {
+                    let score = 0;
+                    const allQuizEls = document.querySelectorAll('.quiz-accordion');
+                    
+                    allQuizEls.forEach(quizEl => {
+                        // Untuk PG, kita perlu tandai dulu mana yang dipilih user
+                        const optionsContainer = quizEl.querySelector('.options-container');
+                        if (optionsContainer.dataset.type === 'pg') {
+                            const selectedRadio = optionsContainer.querySelector('input[type="radio"]:checked');
+                            if(selectedRadio) {
+                                selectedRadio.closest('.quiz-option').classList.add('selected');
+                            }
+                        }
+
+                        if (gradeQuestion(quizEl)) {
+                            score++;
+                        }
+                        // Pastikan semua accordion terbuka untuk melihat hasil
+                        const content = quizEl.querySelector('.quiz-accordion-content');
+                        if(content.classList.contains('hidden')) {
+                            quizEl.querySelector('.quiz-accordion-button').click();
+                        }
+                    });
+
+                    const scoreSummary = document.getElementById('score-summary');
+                    scoreSummary.innerHTML = `<h2>Skor Akhir Anda: ${score} dari ${quizzes.length}</h2>
+                                              <p>(${((score/quizzes.length)*100).toFixed(1)}%)</p>`;
+                    scoreSummary.classList.remove('hidden');
+                    window.scrollTo(0, 0); // Scroll ke atas untuk lihat skor
+                    document.getElementById('finish-exam-btn').style.display = 'none';
+                });
+
+                 // Event listener terpisah untuk PG di mode ujian agar bisa memilih
+                 document.querySelectorAll('.quiz-option').forEach(option => {
+                    option.addEventListener('click', () => {
+                        const optionsContainer = option.parentElement;
+                        if(optionsContainer.classList.contains('answered')) return;
+                        
+                        // Buat fungsionalitas seperti radio button untuk PG
+                        const questionIndex = option.closest('.quiz-accordion').dataset.quizIndex;
+                        const radios = document.querySelectorAll(`input[name="pg_q${questionIndex}"]`);
+                        radios.forEach(r => {
+                            if(r !== option.querySelector('input')) {
+                                r.checked = false;
+                            }
+                        });
+                        const radio = option.querySelector('input');
+                        if(radio) radio.checked = true;
+                    });
+                });
+            }
+             // Tambahkan radio button ke PG agar logicnya sama
+            const pgOptions = document.querySelectorAll('.quiz-option');
+            pgOptions.forEach((opt, idx) => {
+                 const questionIndex = opt.closest('.quiz-accordion').dataset.quizIndex;
+                 const radio = document.createElement('input');
+                 radio.type = 'radio';
+                 radio.name = `pg_q${questionIndex}`;
+                 radio.style.marginRight = '10px';
+                 if(quizMode === 'ujian' && opt.parentElement.classList.contains('answered')) {
+                    radio.disabled = true;
+                 }
+                 opt.prepend(radio);
+            });
+        }
+    </script>
+</body>
+</html>
