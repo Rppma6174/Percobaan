@@ -6,7 +6,7 @@
     <title>UMT Pro Command Center</title>
     <link rel="icon" type="image/png" href="UMT-Logo - Copy.png">
     
-    <script src="data.js"></script>
+    <script src="data.js"></script> 
     
     <script>
       MathJax = {
@@ -153,7 +153,6 @@
         .modal-btn-cancel { background-color: #30363D; color: var(--text-primary); }
         .modal-btn-cancel:hover { background-color: #484f58; }
         
-        /* Kontainer LUAR: Mengatur tinggi maksimal dan scroll vertikal di mobile */
         .explanation-container-vertical {
             max-height: 45vh;
             overflow-y: auto;
@@ -163,7 +162,6 @@
             padding: 0.75rem;
             background-color: #0d1117;
         }
-        /* Kontainer DALAM: Mengatur format teks dan scroll horizontal */
         .explanation-content-inner {
             overflow-wrap: break-word;
             word-wrap: break-word;
@@ -261,15 +259,10 @@
     <div id="modal-container" style="display: none;"></div>
 
     <script>
-    // === PERUBAHAN 2: Menambahkan data contoh untuk halaman SNBT & TKA ===
-    // (Ini seharusnya ada di file data.js, tapi untuk kemudahan, saya letakkan di sini)
-    const allContentData = {
-        materi: { "Materi Kelas 10": [], "Materi Kelas 11": [], "Materi Kelas 12": [] },
-        video: [],
-        bankSoal: [],
-        umtLab: [],
-        perpustakaan: [],
-        snbtTka: {
+    // === [PERBAIKAN] ===
+    // Tambahkan data SNBT & TKA ke objek allContentData yang sudah ada dari data.js
+    if (typeof allContentData !== 'undefined') {
+        allContentData.snbtTka = {
             materi: [
                 { id: 'snbt-mat-01', title: 'Penalaran Matematika', summary: 'Kumpulan konsep dan rumus penting untuk menaklukkan soal-soal matematika.', icon: 'fa-solid fa-brain' },
                 { id: 'snbt-ppu-01', title: 'Penalaran Umum', summary: 'Latih kemampuan berpikir logis, analitis, dan memecahkan masalah secara efektif.', icon: 'fa-solid fa-lightbulb' },
@@ -281,9 +274,8 @@
                 { id: 'snbt-tka-saintek', title: 'Paket TKA Saintek', summary: 'Soal-soal Fisika, Kimia, Biologi, dan Matematika IPA.', icon: 'fa-solid fa-atom' },
                 { id: 'snbt-tka-soshum', title: 'Paket TKA Soshum', summary: 'Soal-soal Sejarah, Geografi, Sosiologi, dan Ekonomi.', icon: 'fa-solid fa-landmark' }
             ]
-        }
-    };
-    const socialMediaUpdates = [];
+        };
+    }
     
     const CONFIG = {
         API_URL: 'https://script.google.com/macros/s/AKfycbyP3jpWgs6ikQcA-9MsInRZYbLFQsshjxgo22twwXrzpACSPV9BREogrKUd-60crXV_mg/exec',
@@ -305,9 +297,6 @@
     let userAnswers = [];
     let currentExplanationIndex = 0;
     
-    // =================================================================================
-    // BAGIAN 1: LOGIKA SESI & KEAMANAN
-    // =================================================================================
     async function verifySession(token, email) {
         try {
             const response = await fetch(CONFIG.API_URL, {
@@ -368,18 +357,14 @@
         });
     }
     
-    // =================================================================================
-    // BAGIAN 2: LOGIKA APLIKASI UTAMA (NAVIGASI & RENDER GLOBAL)
-    // =================================================================================
     const appContent = document.getElementById('app-content');
     
-    // === PERUBAHAN 3: Mendaftarkan fungsi render untuk halaman baru ===
     const pageRenderers = {
         'dashboard': renderDashboardPage,
         'materi': renderMateriPage,
         'perpustakaan': renderPerpustakaanPage,
         'bank_soal': renderBankSoalPage,
-        'snbt_tka': renderSnbtTkaPage, // <-- BARU
+        'snbt_tka': renderSnbtTkaPage,
         'video': renderVideoPage,
         'forum': renderForumPage,
         'pengaturan': renderPengaturanPage,
@@ -407,9 +392,6 @@
         }
     }
     
-    // =================================================================================
-    // BAGIAN 3: FUNGSI RENDER UNTUK SETIAP HALAMAN
-    // =================================================================================
     function renderDashboardPage() {
         appContent.innerHTML = `
             <header class="panel flex justify-between items-center">
@@ -567,7 +549,6 @@
         });
     }
         
-    // === PERUBAHAN 4: Fungsi baru untuk merender halaman SNBT & TKA ===
     function renderSnbtTkaPage() {
         const materiCards = allContentData.snbtTka.materi.map(item => `
             <div class="card-item p-5 rounded-lg flex flex-col cursor-pointer" onclick="showToast('Materi ${item.title} belum tersedia.', 'info')">
@@ -904,9 +885,6 @@
         appContent.innerHTML = pageHTML;
     }
 
-    // =================================================================================
-    // BAGIAN 4: LOGIKA WIDGET DASBOR & PROGRES
-    // =================================================================================
     function getTotalItemCount() {
         const totalMateri = Object.values(allContentData.materi).flat().length;
         const totalVideo = allContentData.video.length;
@@ -1038,9 +1016,6 @@
         localStorage.setItem(key, JSON.stringify(lastActivity));
     }
     
-    // =================================================================================
-    // BAGIAN 5: LOGIKA KUIS
-    // =================================================================================
     function startQuiz(quizId) {
         currentQuizData = allContentData.bankSoal.find(q => q.id === quizId);
         if (!currentQuizData) { showToast('Kuis tidak ditemukan!', 'error'); return; }
@@ -1278,9 +1253,6 @@
     function nextExplanation() { if (currentExplanationIndex < currentQuizData.questions.length - 1) { currentExplanationIndex++; renderSingleExplanation(currentExplanationIndex); } }
     function prevExplanation() { if (currentExplanationIndex > 0) { currentExplanationIndex--; renderSingleExplanation(currentExplanationIndex); } }
     
-    // =================================================================================
-    // BAGIAN 6: FUNGSI UTILITAS GLOBAL
-    // =================================================================================
     function showToast(message, type = 'info') {
         const container = document.getElementById('toast-container');
         const toast = document.createElement('div');
@@ -1354,9 +1326,6 @@
         }
     }
     
-    // =================================================================================
-    // BAGIAN 7: INISIALISASI APLIKASI
-    // =================================================================================
     function initializeApp() {
         const token = sessionStorage.getItem(CONFIG.SESSION_KEYS.TOKEN);
         const email = sessionStorage.getItem(CONFIG.SESSION_KEYS.EMAIL);
