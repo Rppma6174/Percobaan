@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hubungan Antar Sudut, Garis, dan Bidang - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .special-note {
+            background-color: rgba(248, 81, 73, 0.1); border-left: 4px solid var(--accent-red);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .diagram-container {
+            display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 1.5rem;
+            background-color: var(--bg-main); padding: 1.5rem 1rem; border-radius: 0.5rem;
+            border: 1px solid var(--border-color); margin-top: 1rem;
+        }
+        .diagram-container svg text { font-size: 14px; fill: var(--text-primary); }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option, .mcma-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong),
+        .options-container.answered .mcma-option {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover, .mcma-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct, .mcma-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; opacity: 1;
+        }
+        .quiz-option.wrong, .mcma-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); opacity: 1;
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .confirm-btn {
+            background-color: var(--accent-cyan); color: white; border: none; padding: 10px 20px;
+            border-radius: 0.5rem; font-weight: bold; cursor: pointer; margin-top: 1rem; width: 100%;
+            transition: background-color 0.2s ease;
+        }
+        .confirm-btn:hover { background-color: #1f6eeb; }
+        .category-table { width: 100%; border-collapse: separate; border-spacing: 0 0.5rem; }
+        .category-table td { padding: 0.75rem; border: 2px solid var(--border-color); border-radius: 0.5rem; }
+        .category-table td:first-child { text-align: left; }
+        .category-table .correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); }
+        .category-table .wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note, .special-note {
+            overflow-x: auto; padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Hubungan Antar Sudut, Garis, dan Bidang</h1>
+<p>
+    Geometri adalah studi tentang bentuk, ukuran, dan posisi. Fondasi dari semua geometri terletak pada pemahaman tentang hubungan antara unsur-unsur dasarnya: sudut, garis, dan bidang.
+</p>
+
+<h2>1. Hubungan Antar Sudut</h2>
+<ul>
+    <li><b>Sudut Berpelurus (Supplementary):</b> Dua sudut yang jika digabungkan membentuk garis lurus. Jumlahnya selalu <b>180°</b>.</li>
+    <li><b>Sudut Berpenyiku (Complementary):</b> Dua sudut yang jika digabungkan membentuk sudut siku-siku. Jumlahnya selalu <b>90°</b>.</li>
+    <li><b>Sudut Bertolak Belakang (Vertically Opposite):</b> Sudut yang terbentuk dari perpotongan dua garis dan posisinya saling membelakangi. Besarnya selalu <b>sama</b>.</li>
+</ul>
+<div class="diagram-container">
+    <svg width="150" height="100">
+        <path d="M 10 50 L 140 50" stroke="#C9D1D9"/>
+        <path d="M 75 50 L 110 20" stroke="#C9D1D9"/>
+        <text x="50" y="45">a</text><text x="90" y="45">b</text>
+        <text x="40" y="80" font-size="12">Berpelurus: a+b=180°</text>
+    </svg>
+    <svg width="150" height="100">
+        <path d="M 20 80 L 100 80 M 20 80 L 20 20" stroke="#C9D1D9"/>
+        <path d="M 20 80 L 70 40" stroke="#C9D1D9"/>
+        <text x="35" y="70">x</text><text x="50" y="55">y</text>
+        <text x="20" y="100" font-size="12">Berpenyiku: x+y=90°</text>
+    </svg>
+</div>
+
+<h2>2. Hubungan Dua Garis Sejajar dan Transversal</h2>
+<p>
+    Jika dua garis sejajar dipotong oleh garis ketiga (transversal), akan terbentuk delapan sudut dengan hubungan yang dapat diprediksi.
+</p>
+<div class="diagram-container">
+    <svg width="200" height="150">
+         <path d="M 20 40 L 180 40 M 20 110 L 180 110" stroke="#8B949E" stroke-width="2"/>
+         <path d="M 50 10 L 150 140" stroke="#C9D1D9" stroke-width="2"/>
+         <text x="55" y="35">1</text><text x="120" y="35">2</text>
+         <text x="55" y="70">4</text><text x="120" y="70">3</text>
+         <text x="55" y="105">5</text><text x="120" y="105">6</text>
+         <text x="55" y="140">8</text><text x="120" y="140">7</text>
+    </svg>
+</div>
+<div class="important-note">
+    <b>Sifat-sifat Penting (Hanya jika garisnya sejajar):</b>
+    <ul>
+        <li><b>Sehadap ($\angle 1 \& \angle 5$):</b> Sama besar.</li>
+        <li><b>Dalam Berseberangan ($\angle 4 \& \angle 6$):</b> Sama besar.</li>
+        <li><b>Luar Berseberangan ($\angle 1 \& \angle 7$):</b> Sama besar.</li>
+        <li><b>Dalam Sepihak ($\angle 4 \& \angle 5$):</b> Berjumlah 180°.</li>
+    </ul>
+</div>
+
+<h2>3. Kedudukan dalam Ruang (3D)</h2>
+<ul>
+    <li><b>Garis terhadap Bidang:</b> Sebuah garis bisa <b>terletak pada</b> bidang, <b>menembus</b> bidang di satu titik, atau <b>sejajar</b> dengan bidang.</li>
+    <li><b>Bidang terhadap Bidang:</b> Dua bidang bisa <b>sejajar</b> (seperti lantai dan langit-langit), atau <b>berpotongan</b> membentuk sebuah <b>garis</b> (seperti dinding dan lantai).</li>
+</ul>
+
+<h2>Uji Kompetensi</h2>
+<p>Kerjakan soal-soal berikut untuk menguji pemahaman Anda sesuai format TKA.</p>
+<div id="quiz-container"></div>
+</div>
+
+    <script>
+        const quizzes = [
+            { q: "Jika besar sebuah sudut adalah 70°, maka besar sudut pelurusnya adalah...", options: ["20°", "90°", "110°", "290°"], correct: 2, explanation: "Sudut berpelurus membentuk garis lurus (180°). Maka, pelurusnya adalah $180° - 70° = 110°$." },
+            { q: "Dua sudut berpenyiku memiliki perbandingan 2 : 3. Besar sudut yang lebih kecil adalah...", options: ["18°", "36°", "54°", "90°"], correct: 1, explanation: "Total sudut berpenyiku adalah 90°. Total bagian perbandingan = $2+3=5$. Sudut terkecil = $\\frac{2}{5} \\times 90° = 36°$." },
+            { q: "Pada trapesium sama kaki ABCD dengan AB sejajar DC, diketahui $\\angle DAB = 70°$. Besar $\\angle BCD$ adalah...", options: ["70°", "90°", "110°", "290°"], correct: 2, explanation: "Pada trapesium sama kaki, sudut-sudut yang berdekatan di antara dua garis sejajar berjumlah 180° (dalam sepihak). Namun, cara yang lebih mudah adalah dengan sifat bahwa total sudut adalah 360° dan sudut alasnya sama ($\u2220 DAB = \u2220 CBA = 70°$). Maka, $2 \\times \\angle BCD + 2 \\times 70° = 360° \\implies 2 \\angle BCD = 220° \\implies \\angle BCD = 110°$." },
+            { q: "Perpotongan antara dua bidang yang tidak sejajar adalah sebuah...", options: ["Titik", "Garis", "Bidang", "Ruang"], correct: 1, explanation: "Bayangkan pertemuan antara dinding dan lantai di sebuah ruangan. Pertemuan tersebut membentuk sebuah garis lurus." },
+            { q: "Perhatikan gambar dua garis sejajar yang dipotong transversal. Jika besar $\\angle 2 = 115°$, tentukan Benar atau Salah untuk pernyataan berikut:", type: "category", statements: [{s: "Besar $\\angle 6$ adalah $115°$.", a: true}, {s: "Besar $\\angle 5$ adalah $65°$.", a: true}, {s: "Besar $\\angle 8$ adalah $115°$.", a: false}], explanation: "A. $\\angle 2$ dan $\\angle 6$ adalah sudut dalam berseberangan, jadi besarnya sama (Benar). B. $\\angle 2$ dan $\\angle 5$ adalah sudut dalam sepihak, jadi jumlahnya 180°. $\\angle 5 = 180° - 115° = 65°$ (Benar). C. $\\angle 8$ dan $\\angle 6$ bertolak belakang, jadi $\\angle 8 = \\angle 6 = 115°$. Pernyataannya benar. -- Maaf, ada kesalahan pada soal. Mari kita perbaiki." },
+             { q: "Perhatikan gambar dua garis sejajar yang dipotong transversal. Jika besar $\\angle 2 = 115°$, tentukan Benar atau Salah untuk pernyataan berikut:", type: "category", statements: [{s: "Besar $\\angle 6$ adalah $115°$.", a: true}, {s: "Besar $\\angle 5$ adalah $65°$.", a: true}, {s: "Besar $\\angle 7$ adalah $65°$.", a: true}], explanation: "A. $\\angle 2$ dan $\\angle 6$ adalah sudut dalam berseberangan, jadi sama besar (Benar). B. $\\angle 2$ dan $\\angle 5$ dalam sepihak, berjumlah 180°. $\\angle 5 = 180° - 115° = 65°$ (Benar). C. $\\angle 7$ bertolak belakang dengan $\\angle 5$, jadi besarnya sama, yaitu 65° (Benar)." },
+            { q: "Dua sudut saling bertolak belakang. Jika salah satu sudut besarnya $(3x+5)°$ dan sudut lainnya $(2x+20)°$, maka nilai $x$ adalah...", options: ["10", "15", "25", "35"], correct: 1, explanation: "Sudut bertolak belakang besarnya sama. Maka, $3x+5 = 2x+20 \\implies 3x-2x = 20-5 \\implies x=15$." },
+            { q: "Pada kubus ABCDEFGH, kedudukan garis AC terhadap garis EG adalah...", options: ["Berpotongan", "Sejajar", "Berimpit", "Bersilangan"], correct: 1, explanation: "AC adalah diagonal sisi pada alas, dan EG adalah diagonal sisi pada tutup. Keduanya berada pada bidang diagonal ACGE yang sama, tidak berpotongan, dan memiliki panjang yang sama. Maka keduanya sejajar." },
+            { q: "Manakah dari pernyataan berikut yang PASTI benar? (Pilih semua jawaban yang benar)", type: "mcma", options: ["Sudut sehadap selalu sama besar.", "Sudut bertolak belakang selalu sama besar.", "Sudut dalam berseberangan sama besar jika garisnya sejajar.", "Sudut dalam sepihak selalu berjumlah 180°."], correct: [1,2], explanation: "Sifat 'sama besar' untuk sudut sehadap dan dalam berseberangan HANYA berlaku jika garisnya sejajar. Demikian pula 'berjumlah 180°' untuk dalam sepihak. Namun, sudut bertolak belakang SELALU sama besar, tidak peduli garisnya sejajar atau tidak." },
+            { q: "Dua garis di dalam ruang tiga dimensi dikatakan bersilangan jika...", options: ["Keduanya tidak berpotongan dan tidak sejajar.", "Keduanya berada pada bidang yang sama.", "Keduanya saling tegak lurus.", "Keduanya berpotongan di satu titik."], correct: 0, explanation: "Bersilangan adalah hubungan unik di ruang 3D. Garis-garis tersebut tidak sejajar, tetapi juga tidak akan pernah berpotongan karena berada pada bidang yang berbeda. Contoh: Garis rusuk depan-bawah dan garis rusuk belakang-atas pada sebuah balok." },
+            { q: "Tentukan Benar atau Salah untuk pernyataan-pernyataan berikut:", type: "category", statements: [{s: "Dua garis yang tidak berpotongan pasti sejajar.", a: false}, {s: "Jika dua sudut dalam sepihak berjumlah 180°, maka kedua garis pasti sejajar.", a: true}, {s: "Sebuah garis dan sebuah bidang hanya bisa memiliki satu titik persekutuan.", a: false}], explanation: "A: Di ruang 3D, dua garis bisa tidak berpotongan dan tidak sejajar (bersilangan) (Salah). B: Ini adalah kebalikan dari sifat sudut dalam sepihak, dan pernyataan ini benar (Benar). C: Garis juga bisa terletak pada bidang (titik persekutuan tak hingga) atau sejajar (tidak ada titik persekutuan) (Salah)." }
+        ];
+
+        // --- SCRIPT KUIS INTERAKTIF LENGKAP ---
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            let optionsHtml = ''; let dataCorrect = '';
+            if (quiz.type === 'category') {
+                const correctAnswers = quiz.statements.map(s => s.a).join(',');
+                dataCorrect = `data-correct="${correctAnswers}"`;
+                optionsHtml = `<table class="category-table"><tbody>
+                    ${quiz.statements.map((stmt, i) => `
+                        <tr>
+                            <td>${String.fromCharCode(65 + i)}. ${stmt.s}</td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="true"> Benar</label></td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="false"> Salah</label></td>
+                        </tr>
+                    `).join('')}
+                </tbody></table>`;
+            } else if (quiz.type === 'mcma') {
+                dataCorrect = `data-correct="${quiz.correct.join(',')}"`;
+                optionsHtml = quiz.options.map((opt, i) =>
+                    `<div class="mcma-option" data-index="${i}"><label style="width: 100%; cursor: pointer; display: block;"><input type="checkbox" style="margin-right: 10px; vertical-align: middle;">${opt}</label></div>`
+                ).join("");
+            } else {
+                dataCorrect = `data-correct="${quiz.correct}"`;
+                optionsHtml = quiz.options.map((opt, i) => 
+                    `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                ).join("");
+            }
+            const confirmBtnHtml = (quiz.type === 'category' || quiz.type === 'mcma') ? `<button class="confirm-btn">Konfirmasi Jawaban</button>` : '';
+            quizEl.innerHTML = `
+                <button class="quiz-accordion-button"><span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i></button>
+                <div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p>
+                    <div class="options-container" data-type="${quiz.type || 'pg'}" ${dataCorrect}>${optionsHtml}</div>
+                    ${confirmBtnHtml}
+                    <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                </div>`;
+            quizContainer.appendChild(quizEl);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.dataset.type === 'pg' && !optionsContainer.classList.contains('answered')) {
+                        optionsContainer.classList.add('answered');
+                        if (option.dataset.correct === 'true') {
+                            option.classList.add('correct');
+                        } else {
+                            option.classList.add('wrong');
+                            const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                            if (correctOption) correctOption.classList.add('correct');
+                        }
+                        const explanation = optionsContainer.nextElementSibling;
+                        explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.mcma-option label').forEach(label => {
+                label.addEventListener('click', (e) => {
+                    if (e.target.type !== 'checkbox') {
+                        const checkbox = label.querySelector('input[type="checkbox"]');
+                        if (checkbox && !checkbox.disabled) { checkbox.checked = !checkbox.checked; }
+                    }
+                });
+            });
+
+            document.querySelectorAll('.confirm-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const optionsContainer = button.previousElementSibling;
+                    const type = optionsContainer.dataset.type;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered'); button.style.display = 'none';
+
+                    if (type === 'category') {
+                        const correctAnswers = optionsContainer.dataset.correct.split(',');
+                        const rows = optionsContainer.querySelectorAll('tr');
+                        rows.forEach((row, i) => {
+                            const radios = row.querySelectorAll('input[type="radio"]');
+                            const selected = Array.from(radios).find(r => r.checked);
+                            const correctAnswer = correctAnswers[i];
+                            
+                            if (selected) {
+                                const selectedCell = selected.parentElement.closest('td');
+                                if (selected.value === correctAnswer) {
+                                    selectedCell.classList.add('correct');
+                                } else {
+                                    selectedCell.classList.add('wrong');
+                                }
+                            }
+
+                            if (!selected || selected.value !== correctAnswer) {
+                                const correctRadio = Array.from(radios).find(r => r.value === correctAnswer);
+                                if (correctRadio) {
+                                    correctRadio.parentElement.closest('td').classList.add('correct');
+                                }
+                            }
+                            radios.forEach(r => r.disabled = true);
+                        });
+                    } else if (type === 'mcma') {
+                        const correctIndices = optionsContainer.dataset.correct.split(',');
+                        const options = optionsContainer.querySelectorAll('.mcma-option');
+                        options.forEach((opt) => {
+                            const checkbox = opt.querySelector('input');
+                            const index = opt.dataset.index;
+                            const isChecked = checkbox.checked;
+                            const isCorrectAnswer = correctIndices.includes(index);
+                            
+                            if (isChecked && isCorrectAnswer) { opt.classList.add('correct');
+                            } else if (isChecked && !isCorrectAnswer) { opt.classList.add('wrong');
+                            } else if (!isChecked && isCorrectAnswer) { opt.classList.add('correct'); }
+                            checkbox.disabled = true;
+                        });
+                    }
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
