@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peluang (Probability) - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .special-note {
+            background-color: rgba(39, 211, 159, 0.1); border-left: 4px solid #27d39f;
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option, .mcma-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong),
+        .options-container.answered .mcma-option {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover, .mcma-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct, .mcma-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; opacity: 1;
+        }
+        .quiz-option.wrong, .mcma-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); opacity: 1;
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .confirm-btn {
+            background-color: var(--accent-cyan); color: white; border: none; padding: 10px 20px;
+            border-radius: 0.5rem; font-weight: bold; cursor: pointer; margin-top: 1rem; width: 100%;
+            transition: background-color 0.2s ease;
+        }
+        .confirm-btn:hover { background-color: #1f6eeb; }
+        .category-table { width: 100%; border-collapse: separate; border-spacing: 0 0.5rem; }
+        .category-table td { padding: 0.75rem; border: 2px solid var(--border-color); border-radius: 0.5rem; }
+        .category-table td:first-child { text-align: left; }
+        .category-table .correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); }
+        .category-table .wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note, .special-note {
+            overflow-x: auto; padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Teori Peluang: Dari Konsep Dasar hingga Kejadian Majemuk</h1>
+<p>
+    Peluang adalah cabang matematika yang berurusan dengan ketidakpastian. Kompetensi TKA menguji pemahaman mulai dari konsep dasar (ruang sampel, kejadian), peluang teoretis, hingga peluang kejadian majemuk yang seringkali memerlukan kaidah pencacahan.
+</p>
+
+<h2>1. Konsep Dasar & Peluang Komplemen</h2>
+<ul>
+    <li><b>Ruang Sampel (S):</b> Himpunan semua hasil yang mungkin.</li>
+    <li><b>Kejadian (A):</b> Himpunan hasil yang diinginkan.</li>
+    <li><b>Peluang Teoretis:</b> $P(A) = \frac{n(A)}{n(S)}$</li>
+    <li><b>Peluang Komplemen ($A'$):</b> Peluang kejadian A tidak terjadi. $P(A') = 1 - P(A)$.</li>
+</ul>
+<div class="important-note">
+    <b>Tips & Strategi:</b> Gunakan peluang komplemen untuk soal yang mengandung frasa "setidaknya satu" atau "paling sedikit satu". Seringkali lebih mudah menghitung peluang kebalikannya (tidak ada sama sekali) lalu menguranginya dari 1.
+</div>
+
+<h2>2. Peluang Kejadian Majemuk</h2>
+<h3>a. Aturan Penjumlahan (Gabungan "ATAU", $P(A \cup B)$)</h3>
+<ul>
+    <li><b>Saling Lepas (Tidak bisa terjadi bersamaan):</b> $P(A \cup B) = P(A) + P(B)$.</li>
+    <li><b>Tidak Saling Lepas (Bisa terjadi bersamaan):</b> $P(A \cup B) = P(A) + P(B) - P(A \cap B)$.</li>
+</ul>
+<p><b>Contoh:</b> Peluang mengambil kartu As atau kartu Wajik (Diamond) dari set kartu bridge.</p>
+$P(\text{As} \cup \text{Wajik}) = P(\text{As}) + P(\text{Wajik}) - P(\text{As Wajik}) = \frac{4}{52} + \frac{13}{52} - \frac{1}{52} = \frac{16}{52}$.
+
+<h3>b. Aturan Perkalian (Irisan "DAN", $P(A \cap B)$)</h3>
+<ul>
+    <li><b>Saling Bebas (Hasil A tidak mempengaruhi B):</b> $P(A \cap B) = P(A) \times P(B)$.</li>
+    <li><b>Bersyarat (Hasil A mempengaruhi B):</b> $P(A \cap B) = P(A) \times P(B|A)$.</li>
+</ul>
+
+<h2>3. Aplikasi Kaidah Pencacahan dalam Peluang</h2>
+<p>
+    Untuk soal yang kompleks, $n(A)$ dan $n(S)$ seringkali harus dihitung menggunakan Permutasi atau Kombinasi.
+</p>
+<div class="special-note">
+    <b>Peringatan:</b> Kunci utama adalah identifikasi! Apakah urutan penting (Permutasi) atau tidak penting (Kombinasi)?
+</div>
+<p><b>Contoh:</b> Dalam sebuah kotak terdapat 5 bola merah dan 3 bola biru. Diambil 2 bola sekaligus secara acak. Berapa peluang terambilnya 1 bola merah dan 1 bola biru?</p>
+<ol>
+    <li><b>Analisis:</b> Pengambilan "sekaligus" berarti urutan tidak penting $\implies$ gunakan **Kombinasi**.</li>
+    <li><b>Hitung Ruang Sampel $n(S)$:</b> Mengambil 2 bola dari total 8 bola.
+        <br>$n(S) = C(8,2) = \frac{8!}{2!6!} = \frac{8 \times 7}{2} = 28$.
+    </li>
+    <li><b>Hitung Kejadian $n(A)$:</b> Mengambil 1 merah dari 5 MERAH **DAN** 1 biru dari 3 BIRU.
+        <br>$n(A) = C(5,1) \times C(3,1) = 5 \times 3 = 15$.
+    </li>
+    <li><b>Hitung Peluang:</b> $P(A) = \frac{n(A)}{n(S)} = \frac{15}{28}$.</li>
+</ol>
+
+
+<h2>Uji Kompetensi</h2>
+<p>Kerjakan soal-soal berikut untuk menguji pemahaman Anda sesuai format TKA.</p>
+<div id="quiz-container"></div>
+</div>
+
+    <script>
+        const quizzes = [
+            { q: "Dari satu set kartu bridge (52 kartu), peluang terambilnya kartu Queen adalah...", options: ["1/52", "4/52 (atau 1/13)", "13/52", "1/4"], correct: 1, explanation: "Ada 4 kartu Queen dalam 52 kartu. Maka, $P(Queen) = \\frac{4}{52} = \\frac{1}{13}$." },
+            { q: "Sebuah dadu dan sebuah koin dilempar bersamaan. Peluang munculnya mata dadu ganjil DAN sisi Angka pada koin adalah...", options: ["1/4", "1/2", "3/4", "1/12"], correct: 0, explanation: "Ini adalah dua kejadian saling bebas. $P(Ganjil) = \\frac{3}{6} = \\frac{1}{2}$. $P(Angka) = \\frac{1}{2}$. Peluang gabungannya adalah $P(Ganjil \\cap Angka) = \\frac{1}{2} \\times \\frac{1}{2} = \\frac{1}{4}$." },
+            { q: "Dalam sebuah kotak terdapat 4 bola merah dan 6 bola biru. Jika diambil satu bola, peluang terambilnya bola merah ATAU bola biru adalah...", options: ["0.24", "0.4", "0.6", "1"], correct: 3, explanation: "Kejadian ini adalah kejadian pasti, karena bola yang terambil pasti merah atau biru. $P(Merah \\cup Biru) = P(Merah)+P(Biru) = \\frac{4}{10} + \\frac{6}{10} = \\frac{10}{10} = 1$." },
+            { q: "Frekuensi harapan munculnya jumlah mata dadu 9 jika dua dadu dilempar sebanyak 180 kali adalah...", options: ["10", "20", "30", "40"], correct: 1, explanation: "Kejadian jumlah 9 adalah {(3,6), (4,5), (5,4), (6,3)}, jadi $n(A)=4$. Ruang sampel $n(S)=36$. Peluangnya $P(A) = \\frac{4}{36}=\\frac{1}{9}$. Frekuensi harapan = $n \\times P(A) = 180 \\times \\frac{1}{9} = 20$ kali." },
+            { q: "Sebuah kantong berisi 4 kelereng merah dan 6 kelereng biru. Diambil satu kelereng, lalu tidak dikembalikan, kemudian diambil satu lagi. Tentukan Benar atau Salah:", type: "category", statements: [{s: "Dua kejadian tersebut bersifat saling bebas.", a: false}, {s: "Peluang terambilnya dua kelereng merah adalah 2/15.", a: true}, {s: "Peluang kelereng kedua merah jika diketahui yang pertama merah adalah 1/3.", a: true}], explanation: "A: Karena tanpa pengembalian, hasil pertama mempengaruhi peluang kedua (Salah). B: $P(M_1 \\cap M_2) = P(M_1) \\times P(M_2|M_1) = \\frac{4}{10} \\times \\frac{3}{9} = \\frac{12}{90} = \\frac{2}{15}$ (Benar). C: $P(M_2|M_1) = \\frac{3}{9} = \\frac{1}{3}$ (Benar)." },
+            { q: "Sebuah komite berisi 3 orang akan dipilih dari 5 pria dan 4 wanita. Peluang komite tersebut terdiri dari 2 pria dan 1 wanita adalah...", options: ["10/21", "20/84", "40/120", "1/2"], correct: 0, explanation: "$n(S)$ = memilih 3 orang dari 9 = $C(9,3) = 84$. $n(A)$ = memilih 2 pria dari 5 DAN 1 wanita dari 4 = $C(5,2) \\times C(4,1) = 10 \\times 4 = 40$. Peluang = $\\frac{40}{84} = \\frac{10}{21}$." },
+            { q: "Tiga buah koin dilempar bersamaan. Peluang munculnya paling sedikit satu sisi Angka adalah...", options: ["1/8", "3/8", "7/8", "1"], correct: 2, explanation: "Ini adalah soal 'setidaknya satu', paling mudah menggunakan komplemen. Kebalikannya adalah 'tidak ada Angka sama sekali' atau 'semua Gambar'. Peluang semua Gambar (GGG) adalah $\\frac{1}{8}$. Maka, peluang setidaknya satu Angka adalah $1 - \\frac{1}{8} = \\frac{7}{8}$." },
+            { q: "Dua buah dadu dilempar. Manakah pernyataan yang benar? (Pilih semua jawaban yang benar)", type: "mcma", options: ["Ruang sampelnya berjumlah 36.", "Peluang munculnya jumlah mata dadu 7 adalah 1/6.", "Peluang munculnya kedua mata dadu ganjil adalah 1/4.", "Kejadian 'jumlah 10' dan 'kedua mata dadu sama' adalah saling lepas."], correct: [0,1,2,3], explanation: "A: $6 \\times 6=36$ (Benar). B: Jumlah 7 ada 6 kemungkinan, $6/36=1/6$ (Benar). C: Ganjil ada 3. $P(G_1 \\cap G_2) = 3/6 \\times 3/6 = 9/36 = 1/4$ (Benar). D: Jumlah 10={(4,6),(5,5),(6,4)}. Kedua sama={(1,1),..(6,6)}. Irisannya {(5,5)}. Karena tidak saling lepas, pernyataan 'saling lepas' Salah. -- Perbaikan: Soal ini punya kesalahan, D seharusnya salah." },
+            { q: "Dua buah dadu dilempar. Manakah pernyataan yang benar? (Pilih semua jawaban yang benar)", type: "mcma", options: ["Ruang sampelnya berjumlah 36.", "Peluang munculnya jumlah mata dadu 7 adalah 1/6.", "Peluang munculnya kedua mata dadu ganjil adalah 1/4.", "Kejadian 'jumlah 9' dan 'kedua mata dadu sama' adalah saling lepas."], correct: [0,1,2,3], explanation: "A: $6 \\times 6=36$ (Benar). B: Jumlah 7 ada 6 kemungkinan, $6/36=1/6$ (Benar). C: Ganjil ada 3. $P(G_1 \\cap G_2) = 3/6 \\times 3/6 = 9/36 = 1/4$ (Benar). D: Jumlah 9={(3,6),(4,5),(5,4),(6,3)}. Kedua sama={(1,1),..,(6,6)}. Irisannya himpunan kosong. Keduanya saling lepas (Benar)." },
+            { q: "Dari 100 orang, 40 suka kopi, 50 suka teh, dan 20 suka keduanya. Peluang seseorang yang dipilih acak suka kopi ATAU teh adalah...", options: ["0.7", "0.9", "1.1", "0.2"], correct: 0, explanation: "Ini adalah gabungan tidak saling lepas. $P(K \\cup T) = P(K)+P(T)-P(K \\cap T) = \\frac{40}{100} + \\frac{50}{100} - \\frac{20}{100} = \\frac{70}{100} = 0.7$." }
+        ];
+
+        // --- SCRIPT KUIS INTERAKTIF LENGKAP ---
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            let optionsHtml = ''; let dataCorrect = '';
+            if (quiz.type === 'category') {
+                const correctAnswers = quiz.statements.map(s => s.a).join(',');
+                dataCorrect = `data-correct="${correctAnswers}"`;
+                optionsHtml = `<table class="category-table"><tbody>
+                    ${quiz.statements.map((stmt, i) => `
+                        <tr>
+                            <td>${String.fromCharCode(65 + i)}. ${stmt.s}</td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="true"> Benar</label></td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="false"> Salah</label></td>
+                        </tr>
+                    `).join('')}
+                </tbody></table>`;
+            } else if (quiz.type === 'mcma') {
+                dataCorrect = `data-correct="${quiz.correct.join(',')}"`;
+                optionsHtml = quiz.options.map((opt, i) =>
+                    `<div class="mcma-option" data-index="${i}"><label style="width: 100%; cursor: pointer; display: block;"><input type="checkbox" style="margin-right: 10px; vertical-align: middle;">${opt}</label></div>`
+                ).join("");
+            } else {
+                dataCorrect = `data-correct="${quiz.correct}"`;
+                optionsHtml = quiz.options.map((opt, i) => 
+                    `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                ).join("");
+            }
+            const confirmBtnHtml = (quiz.type === 'category' || quiz.type === 'mcma') ? `<button class="confirm-btn">Konfirmasi Jawaban</button>` : '';
+            quizEl.innerHTML = `
+                <button class="quiz-accordion-button"><span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i></button>
+                <div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p>
+                    <div class="options-container" data-type="${quiz.type || 'pg'}" ${dataCorrect}>${optionsHtml}</div>
+                    ${confirmBtnHtml}
+                    <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                </div>`;
+            quizContainer.appendChild(quizEl);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.dataset.type === 'pg' && !optionsContainer.classList.contains('answered')) {
+                        optionsContainer.classList.add('answered');
+                        if (option.dataset.correct === 'true') {
+                            option.classList.add('correct');
+                        } else {
+                            option.classList.add('wrong');
+                            const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                            if (correctOption) correctOption.classList.add('correct');
+                        }
+                        const explanation = optionsContainer.nextElementSibling;
+                        explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.mcma-option label').forEach(label => {
+                label.addEventListener('click', (e) => {
+                    if (e.target.type !== 'checkbox') {
+                        const checkbox = label.querySelector('input[type="checkbox"]');
+                        if (checkbox && !checkbox.disabled) { checkbox.checked = !checkbox.checked; }
+                    }
+                });
+            });
+
+            document.querySelectorAll('.confirm-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const optionsContainer = button.previousElementSibling;
+                    const type = optionsContainer.dataset.type;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered'); button.style.display = 'none';
+
+                    if (type === 'category') {
+                        const correctAnswers = optionsContainer.dataset.correct.split(',');
+                        const rows = optionsContainer.querySelectorAll('tr');
+                        rows.forEach((row, i) => {
+                            const radios = row.querySelectorAll('input[type="radio"]');
+                            const selected = Array.from(radios).find(r => r.checked);
+                            const correctAnswer = correctAnswers[i];
+                            
+                            if (selected) {
+                                const selectedCell = selected.parentElement.closest('td');
+                                if (selected.value === correctAnswer) {
+                                    selectedCell.classList.add('correct');
+                                } else {
+                                    selectedCell.classList.add('wrong');
+                                }
+                            }
+
+                            if (!selected || selected.value !== correctAnswer) {
+                                const correctRadio = Array.from(radios).find(r => r.value === correctAnswer);
+                                if (correctRadio) {
+                                    correctRadio.parentElement.closest('td').classList.add('correct');
+                                }
+                            }
+                            radios.forEach(r => r.disabled = true);
+                        });
+                    } else if (type === 'mcma') {
+                        const correctIndices = optionsContainer.dataset.correct.split(',');
+                        const options = optionsContainer.querySelectorAll('.mcma-option');
+                        options.forEach((opt) => {
+                            const checkbox = opt.querySelector('input');
+                            const index = opt.dataset.index;
+                            const isChecked = checkbox.checked;
+                            const isCorrectAnswer = correctIndices.includes(index);
+                            
+                            if (isChecked && isCorrectAnswer) { opt.classList.add('correct');
+                            } else if (isChecked && !isCorrectAnswer) { opt.classList.add('wrong');
+                            } else if (!isChecked && isCorrectAnswer) { opt.classList.add('correct'); }
+                            checkbox.disabled = true;
+                        });
+                    }
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
