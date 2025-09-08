@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bangun Datar (Geometri Bidang) - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .special-note {
+            background-color: rgba(39, 211, 159, 0.1); border-left: 4px solid #27d39f;
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .diagram-container {
+            display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 1.5rem;
+            background-color: var(--bg-main); padding: 1.5rem 1rem; border-radius: 0.5rem;
+            border: 1px solid var(--border-color); margin-top: 1rem;
+        }
+        .diagram-container svg text { font-size: 12px; fill: var(--text-primary); }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option, .mcma-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong),
+        .options-container.answered .mcma-option {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover, .mcma-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct, .mcma-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; opacity: 1;
+        }
+        .quiz-option.wrong, .mcma-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); opacity: 1;
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .confirm-btn {
+            background-color: var(--accent-cyan); color: white; border: none; padding: 10px 20px;
+            border-radius: 0.5rem; font-weight: bold; cursor: pointer; margin-top: 1rem; width: 100%;
+            transition: background-color 0.2s ease;
+        }
+        .confirm-btn:hover { background-color: #1f6eeb; }
+        .category-table { width: 100%; border-collapse: separate; border-spacing: 0 0.5rem; }
+        .category-table td { padding: 0.75rem; border: 2px solid var(--border-color); border-radius: 0.5rem; }
+        .category-table td:first-child { text-align: left; }
+        .category-table .correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); }
+        .category-table .wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note, .special-note {
+            overflow-x: auto; padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Bangun Datar (Geometri Bidang): Segitiga, Segiempat, dan Teorema Kunci</h1>
+<p>
+    Geometri bidang adalah studi tentang bangun-bangun dua dimensi. Pemahaman mendalam tentang sifat, teorema, dan rumus dari bangun datar, terutama segitiga dan segiempat, adalah kompetensi esensial yang sering diuji.
+</p>
+
+<h2>1. Segitiga</h2>
+<h3>a. Sifat-sifat Dasar</h3>
+<ul>
+    <li><b>Jumlah Sudut:</b> Total sudut dalam segitiga selalu <b>180°</b>.</li>
+    <li><b>Ketaksamaan Segitiga:</b> Jumlah panjang dua sisi manapun dalam sebuah segitiga selalu lebih besar dari panjang sisi ketiga. ($a+b > c$).</li>
+</ul>
+<h3>b. Teorema Pythagoras</h3>
+<div class="important-note">
+    <b>Kapan Digunakan:</b> Hanya berlaku untuk segitiga <b>siku-siku</b>.
+    <br><b>Rumus:</b> $a^2 + b^2 = c^2$, di mana $c$ adalah sisi miring (hipotenusa).
+</div>
+<div class="special-note">
+    <b>Tips & Strategi TKA: Tripel Pythagoras</b><br>
+    Hafalkan beberapa set bilangan bulat yang memenuhi Teorema Pythagoras untuk mempercepat perhitungan:
+    <ul>
+        <li><b>3, 4, 5</b> dan kelipatannya (6, 8, 10; 9, 12, 15; ...)</li>
+        <li><b>5, 12, 13</b> dan kelipatannya (10, 24, 26; ...)</li>
+        <li><b>7, 24, 25</b></li>
+        <li><b>8, 15, 17</b></li>
+    </ul>
+</div>
+
+<h3>c. Kesebangunan dan Kekongruenan</h3>
+<ul>
+    <li><b>Kongruen:</b> Dua segitiga yang <b>sama persis</b> (bentuk dan ukuran sama).</li>
+    <li><b>Sebangun:</b> Dua segitiga yang <b>bentuknya sama</b> tapi ukurannya bisa berbeda. Sifat utamanya: sudut-sudut yang bersesuaian sama besar dan perbandingan sisi-sisi yang bersesuaian senilai.</li>
+</ul>
+
+<h2>2. Segiempat (Quadrilaterals)</h2>
+<ul>
+    <li><b>Persegi & Persegi Panjang:</b> Memiliki empat sudut siku-siku. Luas = panjang $\times$ lebar. Keliling = 2(panjang+lebar).</li>
+    <li><b>Jajargenjang:</b> Sisi berhadapan sejajar dan sama panjang; sudut berhadapan sama besar. Luas = alas $\times$ tinggi.</li>
+    <li><b>Belah Ketupat:</b> Semua sisi sama panjang; diagonal berpotongan tegak lurus. Luas = $\frac{1}{2} \times d_1 \times d_2$.</li>
+    <li><b>Trapesium:</b> Memiliki tepat sepasang sisi sejajar. Luas = $\frac{1}{2} \times (\text{jumlah sisi sejajar}) \times tinggi$.</li>
+</ul>
+<div class="diagram-container">
+    <svg width="200" height="120">
+        <polygon points="20,100 180,100 150,20 50,20" fill="none" stroke="#C9D1D9" stroke-width="2"/>
+        <path d="M 80 100 L 80 20" stroke="#8B949E" stroke-dasharray="3 2"/>
+        <text x="85" y="65">t</text>
+        <text x="90" y="115">sisi sejajar 1</text>
+        <text x="90" y="15">sisi sejajar 2</text>
+    </svg>
+</div>
+
+<h2>Uji Kompetensi</h2>
+<p>Kerjakan soal-soal berikut untuk menguji pemahaman Anda sesuai format TKA.</p>
+<div id="quiz-container"></div>
+</div>
+
+    <script>
+        const quizzes = [
+            { q: "Sebuah segitiga siku-siku memiliki sisi penyiku 8 cm dan 15 cm. Panjang sisi miringnya adalah...", options: ["17 cm", "19 cm", "23 cm", "25 cm"], correct: 0, explanation: "Ini adalah Tripel Pythagoras yang umum: 8, 15, 17. Secara perhitungan: $c^2 = 8^2+15^2 = 64+225=289$, maka $c = \\sqrt{289} = 17$ cm." },
+            { q: "Sebuah jajargenjang memiliki salah satu sudut sebesar 120°. Besar sudut di sebelahnya adalah...", options: ["60°", "90°", "120°", "180°"], correct: 0, explanation: "Pada jajargenjang, sudut-sudut yang berdekatan selalu berjumlah 180°. Maka, sudut di sebelahnya adalah $180° - 120° = 60°$." },
+            { q: "Sebuah foto berukuran 4 cm x 6 cm akan diperbesar. Jika sisi yang lebih pendek pada versi yang diperbesar berukuran 10 cm, berapa panjang sisi yang lebih panjang?", options: ["12 cm", "15 cm", "18 cm", "24 cm"], correct: 1, explanation: "Ini adalah masalah kesebangunan. Perbandingannya harus tetap: $\\frac{\\text{pendek}}{\\text{panjang}} = \\frac{4}{6} = \\frac{10}{x}$. Maka $4x = 60$, sehingga $x=15$ cm." },
+            { q: "Luas sebuah trapesium dengan sisi-sisi sejajar 10 cm dan 14 cm, serta tinggi 7 cm, adalah...", options: ["84 cm²", "98 cm²", "168 cm²", "24 cm²"], correct: 0, explanation: "Luas = $\\frac{1}{2} \\times (\\text{jumlah sisi sejajar}) \\times t = \\frac{1}{2} \\times (10+14) \\times 7 = \\frac{1}{2} \\times 24 \\times 7 = 12 \\times 7 = 84$ cm²." },
+            { q: "Sebuah belah ketupat memiliki panjang diagonal 10 cm dan 24 cm. Tentukan Benar atau Salah untuk setiap pernyataan berikut:", type: "category", statements: [{s: "Luas belah ketupat adalah 120 cm².", a: true}, {s: "Panjang sisi belah ketupat adalah 13 cm.", a: true}, {s: "Keliling belah ketupat adalah 52 cm.", a: true}], explanation: "A. Luas = $\\frac{1}{2} d_1 d_2 = \\frac{1}{2}(10)(24)=120$ (Benar). B. Diagonal membagi belah ketupat menjadi 4 segitiga siku-siku dengan sisi penyiku $10/2=5$ dan $24/2=12$. Sisi miringnya (sisi belah ketupat) adalah 13 (Tripel Pythagoras 5-12-13) (Benar). C. Keliling = $4 \\times sisi = 4 \\times 13 = 52$ (Benar)." },
+            { q: "Manakah dari kombinasi panjang sisi berikut yang TIDAK BISA membentuk sebuah segitiga?", options: ["{3, 4, 5}", "{5, 12, 13}", "{2, 3, 6}", "{7, 7, 1}"], correct: 2, explanation: "Menurut ketaksamaan segitiga, jumlah dua sisi terpendek harus lebih besar dari sisi terpanjang. Pada pilihan ketiga, $2+3=5$, yang tidak lebih besar dari 6. Maka, sisi-sisi ini tidak bisa membentuk segitiga." },
+            { q: "Dalam trapesium sama kaki ABCD, AB sejajar DC, AD=BC, $\\angle BAD = 65°$. Berapakah besar $\\angle ADC$?", options: ["65°", "25°", "115°", "90°"], correct: 2, explanation: "Pada trapesium, sudut-sudut di antara dua sisi sejajar (sudut dalam sepihak) berjumlah 180°. Maka, $\\angle ADC = 180° - \\angle BAD = 180° - 65° = 115°$." },
+            { q: "Manakah dari pernyataan berikut yang PASTI benar? (Pilih semua jawaban yang benar)", type: "mcma", options: ["Semua persegi adalah persegi panjang.", "Semua persegi panjang adalah persegi.", "Semua belah ketupat adalah jajargenjang.", "Dua segitiga yang kongruen pasti sebangun.", "Dua segitiga yang sebangun pasti kongruen."], correct: [0,2,3], explanation: "Persegi memenuhi semua syarat persegi panjang. Belah ketupat memenuhi semua syarat jajargenjang. Segitiga kongruen adalah kasus khusus dari sebangun (dengan rasio 1:1). Pernyataan sebaliknya tidak selalu benar." },
+            { q: "Sebuah segitiga ABC siku-siku di B. Jika panjang AB = 5 dan AC = 13, maka luas segitiga tersebut adalah...", options: ["30", "32.5", "60", "65"], correct: 0, explanation: "Pertama, cari panjang sisi BC menggunakan Pythagoras. $BC^2 = AC^2 - AB^2 = 13^2 - 5^2 = 169 - 25 = 144$. Maka $BC = 12$. Luas segitiga siku-siku = $\\frac{1}{2} \\times alas \\times tinggi = \\frac{1}{2} \\times AB \\times BC = \\frac{1}{2} \\times 5 \\times 12 = 30$." },
+            { q: "Tentukan Benar atau Salah untuk pernyataan-pernyataan berikut:", type: "category", statements: [{s: "Teorema Pythagoras berlaku untuk semua jenis segitiga.", a: false}, {s: "Tinggi sebuah segitiga selalu tegak lurus dengan alasnya.", a: true}, {s: "Diagonal sebuah persegi panjang selalu berpotongan tegak lurus.", a: false}], explanation: "A: Pythagoras hanya untuk segitiga siku-siku (Salah). B: Ini adalah definisi dari tinggi dalam konteks luas segitiga (Benar). C: Sifat ini dimiliki oleh belah ketupat dan persegi, tetapi tidak semua persegi panjang (Salah)." }
+        ];
+
+        // --- SCRIPT KUIS INTERAKTIF LENGKAP ---
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            let optionsHtml = ''; let dataCorrect = '';
+            if (quiz.type === 'category') {
+                const correctAnswers = quiz.statements.map(s => s.a).join(',');
+                dataCorrect = `data-correct="${correctAnswers}"`;
+                optionsHtml = `<table class="category-table"><tbody>
+                    ${quiz.statements.map((stmt, i) => `
+                        <tr>
+                            <td>${String.fromCharCode(65 + i)}. ${stmt.s}</td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="true"> Benar</label></td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="false"> Salah</label></td>
+                        </tr>
+                    `).join('')}
+                </tbody></table>`;
+            } else if (quiz.type === 'mcma') {
+                dataCorrect = `data-correct="${quiz.correct.join(',')}"`;
+                optionsHtml = quiz.options.map((opt, i) =>
+                    `<div class="mcma-option" data-index="${i}"><label style="width: 100%; cursor: pointer; display: block;"><input type="checkbox" style="margin-right: 10px; vertical-align: middle;">${opt}</label></div>`
+                ).join("");
+            } else {
+                dataCorrect = `data-correct="${quiz.correct}"`;
+                optionsHtml = quiz.options.map((opt, i) => 
+                    `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                ).join("");
+            }
+            const confirmBtnHtml = (quiz.type === 'category' || quiz.type === 'mcma') ? `<button class="confirm-btn">Konfirmasi Jawaban</button>` : '';
+            quizEl.innerHTML = `
+                <button class="quiz-accordion-button"><span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i></button>
+                <div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p>
+                    <div class="options-container" data-type="${quiz.type || 'pg'}" ${dataCorrect}>${optionsHtml}</div>
+                    ${confirmBtnHtml}
+                    <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                </div>`;
+            quizContainer.appendChild(quizEl);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.dataset.type === 'pg' && !optionsContainer.classList.contains('answered')) {
+                        optionsContainer.classList.add('answered');
+                        if (option.dataset.correct === 'true') {
+                            option.classList.add('correct');
+                        } else {
+                            option.classList.add('wrong');
+                            const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                            if (correctOption) correctOption.classList.add('correct');
+                        }
+                        const explanation = optionsContainer.nextElementSibling;
+                        explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.mcma-option label').forEach(label => {
+                label.addEventListener('click', (e) => {
+                    if (e.target.type !== 'checkbox') {
+                        const checkbox = label.querySelector('input[type="checkbox"]');
+                        if (checkbox && !checkbox.disabled) { checkbox.checked = !checkbox.checked; }
+                    }
+                });
+            });
+
+            document.querySelectorAll('.confirm-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const optionsContainer = button.previousElementSibling;
+                    const type = optionsContainer.dataset.type;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered'); button.style.display = 'none';
+
+                    if (type === 'category') {
+                        const correctAnswers = optionsContainer.dataset.correct.split(',');
+                        const rows = optionsContainer.querySelectorAll('tr');
+                        rows.forEach((row, i) => {
+                            const radios = row.querySelectorAll('input[type="radio"]');
+                            const selected = Array.from(radios).find(r => r.checked);
+                            const correctAnswer = correctAnswers[i];
+                            
+                            if (selected) {
+                                const selectedCell = selected.parentElement.closest('td');
+                                if (selected.value === correctAnswer) {
+                                    selectedCell.classList.add('correct');
+                                } else {
+                                    selectedCell.classList.add('wrong');
+                                }
+                            }
+
+                            if (!selected || selected.value !== correctAnswer) {
+                                const correctRadio = Array.from(radios).find(r => r.value === correctAnswer);
+                                if (correctRadio) {
+                                    correctRadio.parentElement.closest('td').classList.add('correct');
+                                }
+                            }
+                            radios.forEach(r => r.disabled = true);
+                        });
+                    } else if (type === 'mcma') {
+                        const correctIndices = optionsContainer.dataset.correct.split(',');
+                        const options = optionsContainer.querySelectorAll('.mcma-option');
+                        options.forEach((opt) => {
+                            const checkbox = opt.querySelector('input');
+                            const index = opt.dataset.index;
+                            const isChecked = checkbox.checked;
+                            const isCorrectAnswer = correctIndices.includes(index);
+                            
+                            if (isChecked && isCorrectAnswer) { opt.classList.add('correct');
+                            } else if (isChecked && !isCorrectAnswer) { opt.classList.add('wrong');
+                            } else if (!isChecked && isCorrectAnswer) { opt.classList.add('correct'); }
+                            checkbox.disabled = true;
+                        });
+                    }
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
