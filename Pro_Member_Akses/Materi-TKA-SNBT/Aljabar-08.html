@@ -160,6 +160,9 @@
 </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         const quizzes = [
             { q: "Sebuah daftar bilangan yang terurut dan mengikuti suatu pola tertentu disebut...", options: ["Deret", "Relasi", "Barisan", "Fungsi"], correct: 2, explanation: "Barisan adalah daftar bilangannya (dipisahkan koma), sedangkan Deret adalah hasil penjumlahannya." },
             { q: "Dalam barisan 10, 7, 4, ..., nilai dari $U_3$ adalah...", options: ["21", "10", "7", "4"], correct: 3, explanation: "$U_3$ adalah notasi untuk suku ke-3. Pada daftar tersebut, suku ketiga adalah 4." },
