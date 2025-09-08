@@ -160,6 +160,9 @@
 </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         const quizzes = [
             { q: "Suku ke-15 dari barisan aritmetika 4, 9, 14, ... adalah...", options: ["74", "69", "79", "64"], correct: 0, explanation: "Diketahui $a=4$ dan $b=9-4=5$. Maka $U_{15} = a + (15-1)b = 4 + 14(5) = 4 + 70 = 74$." },
             { q: "Jumlah 10 suku pertama dari deret aritmetika 2 + 5 + 8 + ... adalah...", options: ["155", "140", "125", "170"], correct: 0, explanation: "Diketahui $a=2, b=3, n=10$. Maka $S_{10} = \\frac{10}{2}(2(2) + (10-1)3) = 5(4 + 9 \\times 3) = 5(4+27) = 5(31) = 155$." },
