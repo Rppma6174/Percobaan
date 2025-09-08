@@ -175,6 +175,9 @@
 </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         const quizzes = [
             { q: "Diketahui $f(x)=2x+1$ dan $g(x)=x-3$. Hasil dari $(f-g)(x)$ adalah...", options: ["$x-2$", "$x+4$", "$3x-2$", "$x-4$"], correct: 1, explanation: "$(f-g)(x) = f(x) - g(x) = (2x+1) - (x-3) = 2x+1-x+3 = x+4$." },
             { q: "Diketahui $f(x)=x^2$ dan $g(x)=x-3$. Hasil dari $(f \\circ g)(x)$ adalah...", options: ["$x^2-3$", "$x^2-6x+9$", "$x^2-9$", "$x^2+9$"], correct: 1, explanation: "$(f \\circ g)(x) = f(g(x))$. Masukkan $g(x)$ ke dalam $f(x)$, menjadi $f(x-3) = (x-3)^2 = x^2-6x+9$." },
