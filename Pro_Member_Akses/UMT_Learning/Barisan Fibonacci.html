@@ -146,6 +146,9 @@ $$ F_n = \frac{\Phi^n - \psi^n}{\sqrt{5}} $$
     </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         // Boilerplate script
         const quizzes = [
             {
