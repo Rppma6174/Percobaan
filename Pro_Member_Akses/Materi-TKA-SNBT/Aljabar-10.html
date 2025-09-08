@@ -162,6 +162,9 @@
 </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         const quizzes = [
             { q: "Suku ke-6 dari barisan geometri 5, 10, 20, ... adalah...", options: ["80", "160", "320", "640"], correct: 1, explanation: "Diketahui $a=5$ dan $r=10/5=2$. Maka $U_6 = ar^{6-1} = 5 \\times 2^5 = 5 \\times 32 = 160$." },
             { q: "Jumlah 4 suku pertama dari deret 2 + 8 + 32 + ... adalah...", options: ["85", "170", "255", "340"], correct: 1, explanation: "Diketahui $a=2, r=4, n=4$. Karena $r>1$, kita gunakan $S_4 = \\frac{a(r^4 - 1)}{r - 1} = \\frac{2(4^4 - 1)}{4 - 1} = \\frac{2(256 - 1)}{3} = \\frac{2(255)}{3} = 170$." },
