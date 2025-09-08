@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konsep Dasar Relasi dan Fungsi - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .special-note {
+            background-color: rgba(39, 211, 159, 0.1); border-left: 4px solid #27d39f;
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .diagram-container {
+            display: flex; justify-content: space-around; align-items: flex-start; flex-wrap: wrap; gap: 1.5rem;
+            background-color: var(--bg-main); padding: 1.5rem 1rem; border-radius: 0.5rem;
+            border: 1px solid var(--border-color); margin-top: 1rem;
+        }
+        .diagram-container svg text { font-size: 14px; fill: var(--text-primary); }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option, .mcma-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong),
+        .options-container.answered .mcma-option {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover, .mcma-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct, .mcma-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; opacity: 1;
+        }
+        .quiz-option.wrong, .mcma-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); opacity: 1;
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .confirm-btn {
+            background-color: var(--accent-cyan); color: white; border: none; padding: 10px 20px;
+            border-radius: 0.5rem; font-weight: bold; cursor: pointer; margin-top: 1rem; width: 100%;
+            transition: background-color 0.2s ease;
+        }
+        .confirm-btn:hover { background-color: #1f6eeb; }
+        .category-table { width: 100%; border-collapse: separate; border-spacing: 0 0.5rem; }
+        .category-table td { padding: 0.75rem; border: 2px solid var(--border-color); border-radius: 0.5rem; }
+        .category-table td:first-child { text-align: left; }
+        .category-table .correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); }
+        .category-table .wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note, .special-note {
+            overflow-x: auto; padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Konsep Dasar Relasi dan Fungsi</h1>
+<p>
+    Dalam matematika, <b>relasi</b> adalah aturan yang menghubungkan anggota dari satu himpunan ke himpunan lainnya. <b>Fungsi</b> adalah jenis relasi yang lebih khusus, dengan aturan yang lebih ketat. Memahami perbedaan keduanya adalah fondasi penting dalam aljabar.
+</p>
+<p>
+    Komponen dasar yang perlu diketahui adalah <b>Domain</b> (daerah asal), <b>Kodomain</b> (daerah kawan/semua kemungkinan tujuan), dan <b>Range</b> (daerah hasil/tujuan yang benar-benar tercapai).
+</p>
+
+<h2>Fungsi: Relasi dengan Aturan Ketat</h2>
+<p>
+    Sebuah relasi dapat disebut sebagai fungsi jika memenuhi <b>dua aturan wajib</b> berikut:
+</p>
+<ol>
+    <li><b>Setiap anggota Domain HARUS memiliki pasangan.</b> (Tidak boleh ada yang tidak terpetakan).</li>
+    <li><b>Setiap anggota Domain hanya boleh memiliki TEPAT SATU pasangan.</b> (Tidak boleh bercabang).</li>
+</ol>
+
+<div class="diagram-container">
+    <figure>
+        <figcaption style="text-align: center; color: var(--accent-red); margin-bottom: 10px;"><b>Bukan Fungsi</b></figcaption>
+        <svg width="220" height="150">
+            <text x="35" y="15">Siswa</text> <text x="155" y="15">Hobi</text>
+            <circle cx="40" cy="40" r="4" fill="#C9D1D9"/> <text x="50" y="45">Ana</text>
+            <circle cx="40" cy="75" r="4" fill="#C9D1D9"/> <text x="50" y="80">Budi</text>
+            <circle cx="40" cy="110" r="4" fill="#C9D1D9"/> <text x="50" y="115">Cici</text>
+            <circle cx="160" cy="40" r="4" fill="#C9D1D9"/> <text x="170" y="45">Baca</text>
+            <circle cx="160" cy="75" r="4" fill="#C9D1D9"/> <text x="170" y="80">Musik</text>
+            <circle cx="160" cy="110" r="4" fill="#C9D1D9"/> <text x="170" y="115">Renang</text>
+            <path d="M 45 40 L 155 40" stroke="#F85149" stroke-width="2" marker-end="url(#arrow_red)"/>
+            <path d="M 45 40 L 155 75" stroke="#F85149" stroke-width="2" marker-end="url(#arrow_red)"/>
+            <path d="M 45 75 L 155 110" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+            <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#C9D1D9" /></marker>
+            <marker id="arrow_red" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#F85149" /></marker></defs>
+        </svg>
+    </figure>
+    <figure>
+        <figcaption style="text-align: center; color: var(--accent-green); margin-bottom: 10px;"><b>Ini Fungsi</b></figcaption>
+        <svg width="180" height="150">
+            <text x="35" y="15">A</text> <text x="135" y="15">B</text>
+            <circle cx="40" cy="40" r="4" fill="#C9D1D9"/> <text x="20" y="45">1</text>
+            <circle cx="40" cy="75" r="4" fill="#C9D1D9"/> <text x="20" y="80">2</text>
+            <circle cx="40" cy="110" r="4" fill="#C9D1D9"/> <text x="20" y="115">3</text>
+            <circle cx="140" cy="40" r="4" fill="#C9D1D9"/> <text x="150" y="45">a</text>
+            <circle cx="140" cy="75" r="4" fill="#C9D1D9"/> <text x="150" y="80">b</text>
+            <circle cx="140" cy="110" r="4" fill="#C9D1D9"/> <text x="150" y="115">c</text>
+            <path d="M 45 40 L 135 40" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 45 75 L 135 110" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+            <path d="M 45 110 L 135 110" stroke="#C9D1D9" stroke-width="2" marker-end="url(#arrow)"/>
+        </svg>
+    </figure>
+</div>
+<p>
+    Pada diagram "Bukan Fungsi", <b>Ana</b> memiliki dua pasangan (melanggar aturan 2) dan <b>Cici</b> tidak memiliki pasangan (melanggar aturan 1).
+</p>
+
+<h2>Strategi TKA: Uji Garis Vertikal</h2>
+<p>
+    Untuk soal yang menyajikan grafik, ada cara cepat untuk menentukan apakah grafik tersebut merupakan fungsi atau bukan.
+</p>
+<div class="important-note">
+    <b>Tips & Strategi: Uji Garis Vertikal</b><br>
+    Tarik sebuah garis vertikal imajiner di sepanjang grafik.
+    <ul>
+        <li>Jika garis tersebut <b>memotong grafik di lebih dari satu titik</b> di posisi manapun, maka grafik tersebut <b>BUKAN</b> grafik fungsi.</li>
+        <li>Jika garis vertikal selalu memotong grafik di <b>tepat satu titik</b>, maka grafik tersebut <b>ADALAH</b> grafik fungsi.</li>
+    </ul>
+</div>
+<div class="diagram-container">
+    <figure>
+        <figcaption style="text-align: center; color: var(--accent-red); margin-bottom: 10px;">Bukan Fungsi</figcaption>
+        <svg width="200" height="150">
+            <path d="M 30 140 L 200 140 M 30 140 L 30 10" stroke="#8B949E"/>
+            <path d="M 50 20 C 180 70, 180 120, 50 130" stroke="#C9D1D9" stroke-width="2" fill="none"/>
+            <line x1="100" y1="20" x2="100" y2="130" stroke="#F85149" stroke-dasharray="4 2" stroke-width="2"/>
+            <circle cx="100" cy="55" r="3" fill="#F85149"/><circle cx="100" cy="95" r="3" fill="#F85149"/>
+        </svg>
+    </figure>
+    <figure>
+        <figcaption style="text-align: center; color: var(--accent-green); margin-bottom: 10px;">Ini Fungsi</figcaption>
+        <svg width="200" height="150">
+            <path d="M 30 140 L 200 140 M 30 140 L 30 10" stroke="#8B949E"/>
+            <path d="M 40 130 C 80 10, 120 10, 160 130" stroke="#C9D1D9" stroke-width="2" fill="none"/>
+            <line x1="100" y1="20" x2="100" y2="130" stroke="#8B949E" stroke-dasharray="4 2"/>
+            <circle cx="100" cy="30" r="3" fill="#C9D1D9"/>
+        </svg>
+    </figure>
+</div>
+
+<h2>Uji Kompetensi</h2>
+<p>Kerjakan soal-soal berikut untuk menguji pemahaman Anda sesuai format TKA.</p>
+<div id="quiz-container"></div>
+</div>
+
+    <script>
+        const quizzes = [
+            { q: "Manakah dari himpunan pasangan berurutan berikut yang merupakan sebuah fungsi? (Domain adalah {a, b, c})", options: ["{(a,1), (b,2)}", "{(a,1), (b,2), (c,1)}", "{(a,1), (a,2), (b,3), (c,4)}", "{(1,a), (2,b), (3,c)}"], correct: 1, explanation: "Pilihan kedua adalah fungsi karena setiap anggota domain (a,b,c) muncul tepat satu kali sebagai elemen pertama. Pilihan pertama melanggar aturan 1 (c tidak punya pasangan). Pilihan ketiga melanggar aturan 2 (a bercabang)." },
+            { q: "Manakah dari pernyataan berikut yang paling tepat mendefinisikan fungsi?", options: ["Setiap anggota domain harus memiliki tepat satu pasangan di kodomain.", "Setiap anggota kodomain harus memiliki tepat satu pasangan di domain.", "Jumlah anggota domain dan kodomain harus sama.", "Panah pada diagram tidak boleh mengarah pada anggota kodomain yang sama."], correct: 0, explanation: "Dua aturan emas fungsi berfokus pada domain: semua anggota domain harus terpetakan, dan masing-masing hanya ke satu tujuan." },
+            { q: "Diberikan relasi dari A={1,2,3} ke B={p,q,r,s} dengan diagram panah sebagai berikut: 1→p, 2→q, 3→r. Manakah unsur yang BUKAN merupakan anggota Range?", options: ["p", "q", "r", "s"], correct: 3, explanation: "Range (daerah hasil) adalah himpunan anggota kodomain yang benar-benar menerima panah. Dalam kasus ini, 's' tidak menerima panah, sehingga ia bukan anggota Range." },
+            { q: "Tentukan Benar atau Salah untuk setiap pernyataan berikut:", type: "category", statements: [{s: "Setiap fungsi adalah relasi.", a: true}, {s: "Setiap relasi adalah fungsi.", a: false}, {s: "Dalam sebuah fungsi, Range bisa memiliki anggota lebih banyak dari Kodomain.", a: false}], explanation: "A: Fungsi adalah jenis relasi yang khusus (Benar). B: Relasi baru bisa disebut fungsi jika memenuhi dua aturan ketat (Salah). C: Range adalah himpunan bagian dari Kodomain, jadi tidak mungkin lebih banyak anggotanya (Salah)." },
+            { q: "Grafik dari persamaan $x^2 + y^2 = 9$ (sebuah lingkaran) merupakan...", options: ["Fungsi", "Bukan Fungsi"], correct: 1, explanation: "Jika kita melakukan Uji Garis Vertikal pada sebuah lingkaran, garis vertikal akan memotong grafik di dua titik (kecuali di ujung). Karena satu input x bisa menghasilkan dua output y, ini bukanlah fungsi." },
+            { q: "Dalam relasi dari himpunan A ke B, himpunan semua kemungkinan output disebut...", options: ["Domain", "Range", "Kodomain", "Relasi"], correct: 2, explanation: "Kodomain adalah istilah untuk seluruh himpunan tujuan (kawan), yang berisi semua kemungkinan output, baik yang terpilih maupun yang tidak." },
+            { q: "Relasi antara 'siswa' dan 'mata pelajaran favorit' di sebuah sekolah umumnya bukan fungsi karena...", options: ["Seorang siswa bisa tidak punya mapel favorit.", "Seorang siswa bisa punya lebih dari satu mapel favorit.", "Satu mata pelajaran bisa disukai banyak siswa.", "Semua jawaban benar."], correct: 3, explanation: "Kemungkinan seorang siswa tidak punya mapel favorit (melanggar aturan 1) dan kemungkinan seorang siswa suka lebih dari satu mapel (melanggar aturan 2) membuat relasi ini bukan fungsi." },
+            { q: "Diberikan relasi R = {(1,a), (2,b), (3,c)} dari himpunan asal A={1,2,3,4} ke B={a,b,c,d}. Manakah pernyataan berikut yang PASTI benar? (Pilih semua jawaban yang benar)", type: "mcma", options: ["R adalah sebuah relasi.", "R adalah sebuah fungsi.", "Domain dari R adalah {1,2,3}.", "Range dari R adalah {a,b,c}.", "Kodomain dari R adalah {a,b,c}."], correct: [0,2,3], explanation: "A: Setiap himpunan pasangan berurutan adalah relasi. B: Bukan fungsi karena 4 (anggota A) tidak terpetakan. C: Domain hanya anggota yang terpetakan. D: Range hanya anggota yang jadi tujuan. E: Kodomain adalah seluruh himpunan B, yaitu {a,b,c,d}." },
+            { q: "Manakah dari himpunan pasangan berurutan berikut yang TIDAK merepresentasikan sebuah fungsi?", options: ["{(1,1),(2,1),(3,1)}", "{(1,1),(2,2),(3,3)}", "{(1,3),(2,2),(1,1)}", "{(1,2),(2,3),(3,1)}"], correct: 2, explanation: "Pada pilihan ketiga, anggota domain '1' muncul dua kali sebagai elemen pertama dengan pasangan yang berbeda ((1,3) dan (1,1)). Ini melanggar aturan 'tidak bercabang'." },
+            { q: "Tentukan Benar atau Salah untuk pernyataan-pernyataan berikut:", type: "category", statements: [{s: "Pada sebuah fungsi, dua anggota domain berbeda boleh memiliki pasangan yang sama di kodomain.", a: true}, {s: "Uji Garis Horizontal digunakan untuk menentukan apakah sebuah grafik adalah fungsi.", a: false}, {s: "Jika Range = Kodomain, maka relasi tersebut pasti sebuah fungsi.", a: false}], explanation: "A: Boleh, ini disebut fungsi 'many-to-one' (Benar). B: Yang digunakan adalah Uji Garis Vertikal (Salah). C: Meskipun Range=Kodomain (sifat surjektif), relasi tersebut masih bisa melanggar aturan domain (bercabang atau tidak terpetakan), jadi belum tentu fungsi (Salah)." }
+        ];
+
+        // --- SCRIPT KUIS INTERAKTIF LENGKAP ---
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            let optionsHtml = ''; let dataCorrect = '';
+            if (quiz.type === 'category') {
+                const correctAnswers = quiz.statements.map(s => s.a).join(',');
+                dataCorrect = `data-correct="${correctAnswers}"`;
+                optionsHtml = `<table class="category-table"><tbody>
+                    ${quiz.statements.map((stmt, i) => `
+                        <tr>
+                            <td>${String.fromCharCode(65 + i)}. ${stmt.s}</td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="true"> Benar</label></td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="false"> Salah</label></td>
+                        </tr>
+                    `).join('')}
+                </tbody></table>`;
+            } else if (quiz.type === 'mcma') {
+                dataCorrect = `data-correct="${quiz.correct.join(',')}"`;
+                optionsHtml = quiz.options.map((opt, i) =>
+                    `<div class="mcma-option" data-index="${i}"><label style="width: 100%; cursor: pointer; display: block;"><input type="checkbox" style="margin-right: 10px; vertical-align: middle;">${opt}</label></div>`
+                ).join("");
+            } else {
+                dataCorrect = `data-correct="${quiz.correct}"`;
+                optionsHtml = quiz.options.map((opt, i) => 
+                    `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                ).join("");
+            }
+            const confirmBtnHtml = (quiz.type === 'category' || quiz.type === 'mcma') ? `<button class="confirm-btn">Konfirmasi Jawaban</button>` : '';
+            quizEl.innerHTML = `
+                <button class="quiz-accordion-button"><span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i></button>
+                <div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p>
+                    <div class="options-container" data-type="${quiz.type || 'pg'}" ${dataCorrect}>${optionsHtml}</div>
+                    ${confirmBtnHtml}
+                    <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                </div>`;
+            quizContainer.appendChild(quizEl);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.dataset.type === 'pg' && !optionsContainer.classList.contains('answered')) {
+                        optionsContainer.classList.add('answered');
+                        if (option.dataset.correct === 'true') {
+                            option.classList.add('correct');
+                        } else {
+                            option.classList.add('wrong');
+                            const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                            if (correctOption) correctOption.classList.add('correct');
+                        }
+                        const explanation = optionsContainer.nextElementSibling;
+                        explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.mcma-option label').forEach(label => {
+                label.addEventListener('click', (e) => {
+                    if (e.target.type !== 'checkbox') {
+                        const checkbox = label.querySelector('input[type="checkbox"]');
+                        if (checkbox && !checkbox.disabled) { checkbox.checked = !checkbox.checked; }
+                    }
+                });
+            });
+
+            document.querySelectorAll('.confirm-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const optionsContainer = button.previousElementSibling;
+                    const type = optionsContainer.dataset.type;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered'); button.style.display = 'none';
+
+                    if (type === 'category') {
+                        const correctAnswers = optionsContainer.dataset.correct.split(',');
+                        const rows = optionsContainer.querySelectorAll('tr');
+                        rows.forEach((row, i) => {
+                            const radios = row.querySelectorAll('input[type="radio"]');
+                            const selected = Array.from(radios).find(r => r.checked);
+                            const correctAnswer = correctAnswers[i];
+                            
+                            if (selected) {
+                                const selectedCell = selected.parentElement.closest('td');
+                                if (selected.value === correctAnswer) {
+                                    selectedCell.classList.add('correct');
+                                } else {
+                                    selectedCell.classList.add('wrong');
+                                }
+                            }
+
+                            if (!selected || selected.value !== correctAnswer) {
+                                const correctRadio = Array.from(radios).find(r => r.value === correctAnswer);
+                                if (correctRadio) {
+                                    correctRadio.parentElement.closest('td').classList.add('correct');
+                                }
+                            }
+                            radios.forEach(r => r.disabled = true);
+                        });
+                    } else if (type === 'mcma') {
+                        const correctIndices = optionsContainer.dataset.correct.split(',');
+                        const options = optionsContainer.querySelectorAll('.mcma-option');
+                        options.forEach((opt) => {
+                            const checkbox = opt.querySelector('input');
+                            const index = opt.dataset.index;
+                            const isChecked = checkbox.checked;
+                            const isCorrectAnswer = correctIndices.includes(index);
+                            
+                            if (isChecked && isCorrectAnswer) { opt.classList.add('correct');
+                            } else if (isChecked && !isCorrectAnswer) { opt.classList.add('wrong');
+                            } else if (!isChecked && isCorrectAnswer) { opt.classList.add('correct'); }
+                            checkbox.disabled = true;
+                        });
+                    }
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
