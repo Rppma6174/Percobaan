@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPB dan KPK: Konsep Dasar & Faktorisasi Prima - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        pre {
+            background-color: #0D1117;
+            color: #C9D1D9;
+            padding: 1em;
+            border-radius: 0.5em;
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.6; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto;
+            padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>FPB dan KPK: Konsep Dasar & Faktorisasi Prima</h1>
+<p>
+    <b>Faktor Persekutuan Terbesar (FPB)</b> dan <b>Kelipatan Persekutuan Terkecil (KPK)</b> adalah konsep fundamental dalam teori bilangan yang mempelajari hubungan pembagi dan kelipatan antara bilangan bulat. Penguasaan konsep ini penting untuk menyelesaikan berbagai masalah matematika.
+</p>
+
+<h2>Definisi Dasar</h2>
+<ul>
+    <li><b>Faktor</b> adalah bilangan yang dapat membagi habis suatu bilangan tanpa sisa.</li>
+    <li><b>Kelipatan</b> adalah bilangan yang merupakan hasil kali suatu bilangan dengan bilangan asli.</li>
+    <li><b>FPB</b> adalah <b>faktor</b> persekutuan (bersama) yang nilainya paling <b>besar</b>.</li>
+    <li><b>KPK</b> adalah <b>kelipatan</b> persekutuan (bersama) yang nilainya paling <b>kecil</b>.</li>
+</ul>
+<p>
+    Metode paling dasar dan sistematis untuk menentukan FPB dan KPK adalah melalui <b>faktorisasi prima</b>.
+</p>
+
+<h2>Faktorisasi Prima</h2>
+<p>
+    <b>Bilangan prima</b> adalah bilangan asli lebih dari 1 yang hanya memiliki dua faktor, yaitu 1 dan dirinya sendiri (contoh: 2, 3, 5, 7, ...). <b>Faktorisasi prima</b> adalah proses menguraikan sebuah bilangan menjadi perkalian dari faktor-faktor primanya.
+</p>
+<p><b>Contoh:</b> Tentukan faktorisasi prima dari 84 dan 90.</p>
+<pre>
+      84               90
+     /  \             /  \
+    2    42          2    45
+         /  \             /  \
+        2    21           3    15
+             /  \             /  \
+            3    7           3    5
+</pre>
+<ul>
+    <li>Faktorisasi prima dari 84 adalah $2 \times 2 \times 3 \times 7 = 2^2 \times 3 \times 7$</li>
+    <li>Faktorisasi prima dari 90 adalah $2 \times 3 \times 3 \times 5 = 2 \times 3^2 \times 5$</li>
+</ul>
+
+<h2>Menentukan FPB dan KPK dengan Faktorisasi Prima</h2>
+<div class="important-note">
+    <b>Aturan Penentuan:</b>
+    <ul>
+        <li><b>FPB:</b> Kalikan semua <b>faktor prima yang sama</b> (persekutuan), dan ambil <b>pangkat yang terkecil</b> untuk setiap faktornya.</li>
+        <li><b>KPK:</b> Kalikan <b>semua faktor prima yang ada</b> (baik yang sama maupun berbeda), dan jika ada faktor yang sama, ambil <b>pangkat yang terbesar</b>.</li>
+    </ul>
+</div>
+<p><b>Contoh: Tentukan FPB dan KPK dari 84 dan 90.</b></p>
+<p>$84 = 2^2 \times 3^1 \times 7^1$</p>
+<p>$90 = 2^1 \times 3^2 \times 5^1$</p>
+<ul>
+    <li><b>FPB:</b> Faktor yang sama adalah 2 dan 3. Pangkat terkecil untuk 2 adalah 1. Pangkat terkecil untuk 3 adalah 1.
+    <br>$FPB = 2^1 \times 3^1 = 6$.
+    </li>
+    <li><b>KPK:</b> Semua faktor yang ada adalah 2, 3, 5, dan 7. Pangkat terbesar untuk 2 adalah 2. Pangkat terbesar untuk 3 adalah 2. Pangkat terbesar untuk 5 adalah 1. Pangkat terbesar untuk 7 adalah 1.
+    <br>$KPK = 2^2 \times 3^2 \times 5^1 \times 7^1 = 4 \times 9 \times 5 \times 7 = 1260$.
+    </li>
+</ul>
+
+<h2>Uji Kompetensi</h2>
+<p>Kerjakan soal-soal berikut untuk menguji pemahaman Anda.</p>
+
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Boilerplate script
+        const quizzes = [
+            // Konten kuis akan dimasukkan di sini
+            { q: "Faktorisasi prima dari 120 adalah...", options: ["$2 \\times 3 \\times 4 \\times 5$", "$2^3 \\times 15$", "$2^2 \\times 3 \\times 10$", "$2^3 \\times 3 \\times 5$"], correct: 3, explanation: "120 diuraikan menjadi faktor-faktor primanya: $120 = 10 \\times 12 = (2 \\times 5) \\times (4 \\times 3) = (2 \\times 5) \\times (2^2 \\times 3) = 2^3 \\times 3 \\times 5$." },
+            { q: "FPB dari 24 dan 36 adalah...", options: ["4", "6", "12", "72"], correct: 2, explanation: "Faktorisasi $24=2^3 \\times 3$ dan $36=2^2 \\times 3^2$. Ambil faktor yang sama ($2$ dan $3$) dengan pangkat terkecil ($2^2$ dan $3^1$). FPB = $2^2 \\times 3 = 12$." },
+            { q: "KPK dari 20 dan 30 adalah...", options: ["10", "60", "120", "600"], correct: 1, explanation: "Faktorisasi $20=2^2 \\times 5$ dan $30=2 \\times 3 \\times 5$. Ambil semua faktor ($2, 3, 5$) dengan pangkat terbesar ($2^2, 3^1, 5^1$). KPK = $2^2 \\times 3 \\times 5 = 60$." },
+            { q: "Diberikan bilangan A = $2^3 \\times 3$ dan B = $2 \\times 3^2$. Tentukan Benar atau Salah untuk setiap pernyataan berikut:", type: "category", statements: [{s: "FPB dari A dan B adalah 6.", a: true}, {s: "KPK dari A dan B adalah 36.", a: false}, {s: "Bilangan 5 adalah faktor prima dari B.", a: false}], explanation: "A. FPB: ambil pangkat terkecil dari faktor yg sama $2^1 \\times 3^1=6$ (Benar). B. KPK: ambil pangkat terbesar dari faktor yg sama $2^3 \\times 3^2=72$ (Salah). C. Faktor prima B hanya 2 dan 3 (Salah)." },
+            { q: "Ibu memiliki 18 kue dan 24 jeruk. Ia ingin membuat parsel dengan jumlah kue dan jeruk yang sama di setiap parsel. Berapa parsel terbanyak yang bisa dibuat?", options: ["3", "6", "9", "12"], correct: 1, explanation: "Masalah 'membagi sama rata' dengan jumlah 'terbanyak' diselesaikan dengan FPB. FPB(18, 24) = 6. Jadi, bisa dibuat 6 parsel." },
+            { q: "Lampu A menyala setiap 8 detik dan Lampu B setiap 12 detik. Keduanya menyala bersama pada detik ke-0. Pada detik ke berapa keduanya akan menyala bersama lagi?", options: ["4", "12", "24", "96"], correct: 2, explanation: "Masalah 'kapan terjadi bersamaan lagi' diselesaikan dengan KPK. KPK(8, 12) = 24. Mereka akan menyala bersama lagi pada detik ke-24." },
+            { q: "Jika FPB dari dua bilangan adalah 1, maka kedua bilangan tersebut disebut...", options: ["Bilangan Prima", "Bilangan Komposit", "Prima Relatif", "Bilangan Sempurna"], correct: 2, explanation: "Dua bilangan disebut prima relatif jika satu-satunya faktor persekutuan positif mereka adalah 1. Contoh: FPB(8, 9) = 1." },
+            { q: "FPB dari bilangan x dan y adalah 8. Manakah dari pernyataan berikut yang PASTI benar? (Jawaban bisa lebih dari satu)", type: "mcma", options: ["x adalah kelipatan 8.", "y adalah kelipatan 8.", "x + y adalah kelipatan 8.", "KPK(x,y) adalah kelipatan 8."], correct: [0,1,2,3], explanation: "Jika 8 adalah FPB dari x dan y, maka 8 adalah faktor dari x dan y. Ini berarti x dan y adalah kelipatan 8. Penjumlahan dan KPK dari dua kelipatan 8 juga pasti merupakan kelipatan 8." },
+            { q: "KPK dari dua bilangan adalah 120. Manakah dari berikut ini yang TIDAK MUNGKIN menjadi FPB dari kedua bilangan tersebut?", options: ["10", "12", "15", "18"], correct: 3, explanation: "Ada sifat di mana FPB dari dua bilangan selalu habis membagi KPK-nya. 120 habis dibagi 10, 12, dan 15. Namun, 120 tidak habis dibagi 18. Maka, 18 tidak mungkin menjadi FPB-nya." },
+            { q: "Tentukan Benar atau Salah untuk identifikasi masalah berikut:", type: "category", statements: [{s: "Menentukan jadwal piket bersama diselesaikan dengan KPK.", a: true}, {s: "Membagi siswa menjadi beberapa kelompok sama rata diselesaikan dengan KPK.", a: false}, {s: "Mencari ukuran ubin persegi terbesar untuk menutupi lantai diselesaikan dengan FPB.", a: true}], explanation: "A. Jadwal bersama mencari kelipatan waktu, jadi KPK (Benar). B. Membagi rata mencari faktor/pembagi, jadi FPB (Salah). C. Ukuran ubin terbesar yang bisa membagi panjang dan lebar adalah FPB (Benar)." }
+        ];
+
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div");
+            quizEl.className = "quiz-accordion";
+            let optionsHtml = '';
+            if (quiz.type === 'category') {
+                optionsHtml = `
+                    <table style="width: 100%; text-align: left;">
+                        <thead><tr><th>Pernyataan</th><th style="text-align:center;">Benar</th><th style="text-align:center;">Salah</th></tr></thead>
+                        <tbody>
+                            ${quiz.statements.map((stmt, i) => `
+                                <tr>
+                                    <td>${String.fromCharCode(65 + i)}. ${stmt.s}</td>
+                                    <td style="text-align:center;"><input type="radio" name="cat_q${index}_${i}" value="true"></td>
+                                    <td style="text-align:center;"><input type="radio" name="cat_q${index}_${i}" value="false"></td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+            } else if (quiz.type === 'mcma') {
+                 optionsHtml = quiz.options.map((opt, i) =>
+                    `<div class="quiz-option" data-index="${i}"><input type="checkbox" style="margin-right: 10px;">${opt}</div>`
+                ).join("");
+            } else {
+                optionsHtml = quiz.options.map((opt, i) => 
+                    `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                ).join("");
+            }
+            
+            quizEl.innerHTML = `
+                <button class="quiz-accordion-button">
+                    <span>Soal ${index + 1}</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+                <div class="quiz-accordion-content hidden">
+                    <p class="question-text">${quiz.q}</p>
+                    <div class="options-container" data-type="${quiz.type || 'pg'}" data-correct="${Array.isArray(quiz.correct) ? quiz.correct.join(',') : quiz.correct}">
+                        ${optionsHtml}
+                    </div>
+                    <div class="quiz-explanation hidden">
+                        <b>Pembahasan:</b> ${quiz.explanation}
+                    </div>
+                </div>
+            `;
+            quizContainer.appendChild(quizEl);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    button.classList.toggle('active');
+                    content.classList.toggle('hidden');
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', (e) => {
+                    const optionsContainer = option.parentElement;
+                    const type = optionsContainer.dataset.type;
+
+                    if (type === 'pg' && !optionsContainer.classList.contains('answered')) {
+                        optionsContainer.classList.add('answered');
+                        const isCorrect = option.dataset.correct === 'true';
+                        option.classList.add(isCorrect ? 'correct' : 'wrong');
+                        if (!isCorrect) {
+                            const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                            if (correctOption) correctOption.classList.add('correct');
+                        }
+                        const explanation = optionsContainer.nextElementSibling;
+                        explanation.classList.remove('hidden');
+                        MathJax.typesetPromise([explanation]);
+                    } else if (type === 'mcma') {
+                        const checkbox = option.querySelector('input[type="checkbox"]');
+                        if (e.target !== checkbox) {
+                           checkbox.checked = !checkbox.checked;
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
