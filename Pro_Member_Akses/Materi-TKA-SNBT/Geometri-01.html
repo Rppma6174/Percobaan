@@ -41,10 +41,6 @@
             background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
             padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
         }
-        .special-note {
-            background-color: rgba(248, 81, 73, 0.1); border-left: 4px solid var(--accent-red);
-            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
-        }
         .diagram-container {
             display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 1.5rem;
             background-color: var(--bg-main); padding: 1.5rem 1rem; border-radius: 0.5rem;
@@ -94,7 +90,7 @@
         .category-table .wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
 
         /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
-        p, li, .quiz-explanation, .important-note, .special-note {
+        p, li, .quiz-explanation, .important-note {
             overflow-x: auto; padding-bottom: 8px;
         }
         /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
@@ -122,18 +118,28 @@
     <li><b>Sudut Bertolak Belakang (Vertically Opposite):</b> Sudut yang terbentuk dari perpotongan dua garis dan posisinya saling membelakangi. Besarnya selalu <b>sama</b>.</li>
 </ul>
 <div class="diagram-container">
-    <svg width="150" height="100">
-        <path d="M 10 50 L 140 50" stroke="#C9D1D9"/>
-        <path d="M 75 50 L 110 20" stroke="#C9D1D9"/>
-        <text x="50" y="45">a</text><text x="90" y="45">b</text>
-        <text x="40" y="80" font-size="12">Berpelurus: a+b=180°</text>
-    </svg>
-    <svg width="150" height="100">
-        <path d="M 20 80 L 100 80 M 20 80 L 20 20" stroke="#C9D1D9"/>
-        <path d="M 20 80 L 70 40" stroke="#C9D1D9"/>
-        <text x="35" y="70">x</text><text x="50" y="55">y</text>
-        <text x="20" y="100" font-size="12">Berpenyiku: x+y=90°</text>
-    </svg>
+    <figure>
+      <figcaption style="text-align: center; color: var(--text-secondary); margin-bottom: 10px;">Sudut Berpelurus</figcaption>
+      <svg width="180" height="120">
+        <path d="M 10 80 L 170 80" stroke="#C9D1D9" stroke-width="2"/>
+        <path d="M 90 80 L 130 40" stroke="#C9D1D9" stroke-width="2"/>
+        <path d="M 110 80 A 20 20, 0, 0, 0, 107 59" fill="none" stroke="#8B949E"/>
+        <path d="M 70 80 A 20 20, 0, 0, 1, 80 62" fill="none" stroke="#8B949E"/>
+        <text x="65" y="70">a</text><text x="110" y="70">b</text>
+        <text x="45" y="110" font-size="12">a + b = 180°</text>
+      </svg>
+    </figure>
+    <figure>
+      <figcaption style="text-align: center; color: var(--text-secondary); margin-bottom: 10px;">Sudut Berpenyiku</figcaption>
+      <svg width="180" height="120">
+        <path d="M 30 100 L 110 100 M 30 100 L 30 20" stroke="#C9D1D9" stroke-width="2"/>
+        <path d="M 30 100 L 80 60" stroke="#C9D1D9" stroke-width="2"/>
+        <path d="M 50 100 A 20 20, 0, 0, 1, 48 81" fill="none" stroke="#8B949E"/>
+        <path d="M 30 80 A 20 20, 0, 0, 1, 44 67" fill="none" stroke="#8B949E"/>
+        <text x="50" y="90">x</text><text x="50" y="70">y</text>
+        <text x="30" y="115" font-size="12">x + y = 90°</text>
+      </svg>
+    </figure>
 </div>
 
 <h2>2. Hubungan Dua Garis Sejajar dan Transversal</h2>
@@ -144,10 +150,10 @@
     <svg width="200" height="150">
          <path d="M 20 40 L 180 40 M 20 110 L 180 110" stroke="#8B949E" stroke-width="2"/>
          <path d="M 50 10 L 150 140" stroke="#C9D1D9" stroke-width="2"/>
-         <text x="55" y="35">1</text><text x="120" y="35">2</text>
-         <text x="55" y="70">4</text><text x="120" y="70">3</text>
-         <text x="55" y="105">5</text><text x="120" y="105">6</text>
-         <text x="55" y="140">8</text><text x="120" y="140">7</text>
+         <text x="55" y="35" font-size="14">1</text><text x="120" y="35" font-size="14">2</text>
+         <text x="55" y="70" font-size="14">4</text><text x="120" y="70" font-size="14">3</text>
+         <text x="55" y="105" font-size="14">5</text><text x="120" y="105" font-size="14">6</text>
+         <text x="55" y="140" font-size="14">8</text><text x="120" y="140" font-size="14">7</text>
     </svg>
 </div>
 <div class="important-note">
@@ -175,10 +181,9 @@
         const quizzes = [
             { q: "Jika besar sebuah sudut adalah 70°, maka besar sudut pelurusnya adalah...", options: ["20°", "90°", "110°", "290°"], correct: 2, explanation: "Sudut berpelurus membentuk garis lurus (180°). Maka, pelurusnya adalah $180° - 70° = 110°$." },
             { q: "Dua sudut berpenyiku memiliki perbandingan 2 : 3. Besar sudut yang lebih kecil adalah...", options: ["18°", "36°", "54°", "90°"], correct: 1, explanation: "Total sudut berpenyiku adalah 90°. Total bagian perbandingan = $2+3=5$. Sudut terkecil = $\\frac{2}{5} \\times 90° = 36°$." },
-            { q: "Pada trapesium sama kaki ABCD dengan AB sejajar DC, diketahui $\\angle DAB = 70°$. Besar $\\angle BCD$ adalah...", options: ["70°", "90°", "110°", "290°"], correct: 2, explanation: "Pada trapesium sama kaki, sudut-sudut yang berdekatan di antara dua garis sejajar berjumlah 180° (dalam sepihak). Namun, cara yang lebih mudah adalah dengan sifat bahwa total sudut adalah 360° dan sudut alasnya sama ($\u2220 DAB = \u2220 CBA = 70°$). Maka, $2 \\times \\angle BCD + 2 \\times 70° = 360° \\implies 2 \\angle BCD = 220° \\implies \\angle BCD = 110°$." },
+            { q: "Pada trapesium sama kaki ABCD dengan AB sejajar DC, diketahui $\\angle DAB = 70°$. Besar $\\angle BCD$ adalah...", options: ["70°", "90°", "110°", "290°"], correct: 2, explanation: "Pada trapesium sama kaki, sudut pada alas yang sama besarnya sama ($\u2220 DAB = \u2220 CBA = 70°$), dan sudut pada sisi atas juga sama ($\u2220 ADC = \u2220 BCD$). Total sudut segiempat adalah 360°. Maka, $2 \\times \\angle BCD + 2 \\times 70° = 360° \\implies 2 \\angle BCD = 220° \\implies \\angle BCD = 110°$." },
             { q: "Perpotongan antara dua bidang yang tidak sejajar adalah sebuah...", options: ["Titik", "Garis", "Bidang", "Ruang"], correct: 1, explanation: "Bayangkan pertemuan antara dinding dan lantai di sebuah ruangan. Pertemuan tersebut membentuk sebuah garis lurus." },
-            { q: "Perhatikan gambar dua garis sejajar yang dipotong transversal. Jika besar $\\angle 2 = 115°$, tentukan Benar atau Salah untuk pernyataan berikut:", type: "category", statements: [{s: "Besar $\\angle 6$ adalah $115°$.", a: true}, {s: "Besar $\\angle 5$ adalah $65°$.", a: true}, {s: "Besar $\\angle 8$ adalah $115°$.", a: false}], explanation: "A. $\\angle 2$ dan $\\angle 6$ adalah sudut dalam berseberangan, jadi besarnya sama (Benar). B. $\\angle 2$ dan $\\angle 5$ adalah sudut dalam sepihak, jadi jumlahnya 180°. $\\angle 5 = 180° - 115° = 65°$ (Benar). C. $\\angle 8$ dan $\\angle 6$ bertolak belakang, jadi $\\angle 8 = \\angle 6 = 115°$. Pernyataannya benar. -- Maaf, ada kesalahan pada soal. Mari kita perbaiki." },
-             { q: "Perhatikan gambar dua garis sejajar yang dipotong transversal. Jika besar $\\angle 2 = 115°$, tentukan Benar atau Salah untuk pernyataan berikut:", type: "category", statements: [{s: "Besar $\\angle 6$ adalah $115°$.", a: true}, {s: "Besar $\\angle 5$ adalah $65°$.", a: true}, {s: "Besar $\\angle 7$ adalah $65°$.", a: true}], explanation: "A. $\\angle 2$ dan $\\angle 6$ adalah sudut dalam berseberangan, jadi sama besar (Benar). B. $\\angle 2$ dan $\\angle 5$ dalam sepihak, berjumlah 180°. $\\angle 5 = 180° - 115° = 65°$ (Benar). C. $\\angle 7$ bertolak belakang dengan $\\angle 5$, jadi besarnya sama, yaitu 65° (Benar)." },
+            { q: "Perhatikan gambar dua garis sejajar yang dipotong transversal. Jika besar $\\angle 2 = 115°$, tentukan Benar atau Salah untuk pernyataan berikut:", type: "category", statements: [{s: "Besar $\\angle 6$ adalah $115°$.", a: true}, {s: "Besar $\\angle 5$ adalah $65°$.", a: true}, {s: "Besar $\\angle 7$ adalah $65°$.", a: true}], explanation: "A. $\\angle 2$ dan $\\angle 6$ adalah sudut dalam berseberangan, jadi sama besar (Benar). B. $\\angle 2$ dan $\\angle 5$ dalam sepihak, berjumlah 180°. $\\angle 5 = 180° - 115° = 65°$ (Benar). C. $\\angle 7$ bertolak belakang dengan $\\angle 5$, jadi besarnya sama, yaitu 65° (Benar)." },
             { q: "Dua sudut saling bertolak belakang. Jika salah satu sudut besarnya $(3x+5)°$ dan sudut lainnya $(2x+20)°$, maka nilai $x$ adalah...", options: ["10", "15", "25", "35"], correct: 1, explanation: "Sudut bertolak belakang besarnya sama. Maka, $3x+5 = 2x+20 \\implies 3x-2x = 20-5 \\implies x=15$." },
             { q: "Pada kubus ABCDEFGH, kedudukan garis AC terhadap garis EG adalah...", options: ["Berpotongan", "Sejajar", "Berimpit", "Bersilangan"], correct: 1, explanation: "AC adalah diagonal sisi pada alas, dan EG adalah diagonal sisi pada tutup. Keduanya berada pada bidang diagonal ACGE yang sama, tidak berpotongan, dan memiliki panjang yang sama. Maka keduanya sejajar." },
             { q: "Manakah dari pernyataan berikut yang PASTI benar? (Pilih semua jawaban yang benar)", type: "mcma", options: ["Sudut sehadap selalu sama besar.", "Sudut bertolak belakang selalu sama besar.", "Sudut dalam berseberangan sama besar jika garisnya sejajar.", "Sudut dalam sepihak selalu berjumlah 180°."], correct: [1,2], explanation: "Sifat 'sama besar' untuk sudut sehadap dan dalam berseberangan HANYA berlaku jika garisnya sejajar. Demikian pula 'berjumlah 180°' untuk dalam sepihak. Namun, sudut bertolak belakang SELALU sama besar, tidak peduli garisnya sejajar atau tidak." },
