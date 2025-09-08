@@ -147,9 +147,8 @@
 
     <script>
         // Pemeriksaan sesi (jika diperlukan)
-        if (!sessionStorage.getItem('sessionToken')) {
-            // Nonaktifkan baris di bawah jika halaman tidak butuh login
-            // window.location.href = '../../Login/';
+       if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
         }
 
         // Data kuis untuk halaman ini
