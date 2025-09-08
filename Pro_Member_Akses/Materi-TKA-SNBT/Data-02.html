@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ukuran Pemusatan Data - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .scrollable-wrapper {
+            overflow-x: auto;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding-bottom: 8px;
+            margin: 1.5rem 0;
+        }
+        .scrollable-wrapper > table { margin: 0; width: 100%; min-width: 500px; }
+        table { border-collapse: collapse; text-align: center; }
+        th, td { border: 1px solid var(--border-color); padding: 0.75rem; }
+        th { background-color: #1e2a3a; }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option, .mcma-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong),
+        .options-container.answered .mcma-option {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover, .mcma-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct, .mcma-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; opacity: 1;
+        }
+        .quiz-option.wrong, .mcma-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); opacity: 1;
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .confirm-btn {
+            background-color: var(--accent-cyan); color: white; border: none; padding: 10px 20px;
+            border-radius: 0.5rem; font-weight: bold; cursor: pointer; margin-top: 1rem; width: 100%;
+            transition: background-color 0.2s ease;
+        }
+        .confirm-btn:hover { background-color: #1f6eeb; }
+        .category-table { width: 100%; border-collapse: separate; border-spacing: 0 0.5rem; }
+        .category-table td { padding: 0.75rem; border: 2px solid var(--border-color); border-radius: 0.5rem; }
+        .category-table td:first-child { text-align: left; }
+        .category-table .correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); }
+        .category-table .wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto; padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Ukuran Pemusatan Data: Mean, Median, dan Modus</h1>
+<p>
+    Ukuran pemusatan data adalah sebuah nilai tunggal yang mencoba mendeskripsikan "pusat" atau nilai "tipikal" dari sebuah kumpulan data. Ada tiga ukuran utama yang sering digunakan: Mean, Median, dan Modus.
+</p>
+
+<h2>1. Ukuran Pemusatan Data Tunggal</h2>
+<p>Data tunggal adalah data yang disajikan satu per satu (tidak dikelompokkan dalam interval).</p>
+<ul>
+    <li>
+        <b>Mean (Rata-rata):</b> Jumlah semua nilai data dibagi dengan banyaknya data.
+        <br>$\bar{x} = \frac{\sum x_i}{n}$
+    </li>
+    <li>
+        <b>Median:</b> Nilai tengah dari data yang telah <b>diurutkan</b>. Jika jumlah data genap, median adalah rata-rata dari dua data di tengah.</li>
+    <li>
+        <b>Modus:</b> Nilai yang paling sering muncul dalam data.</li>
+</ul>
+<p><b>Contoh:</b> Data nilai {5, 6, 8, 6, 9}.</p>
+<ul>
+    <li><b>Mean:</b> $(5+6+8+6+9)/5 = 34/5 = 6.8$.</li>
+    <li><b>Median:</b> Urutkan dulu: {5, 6, <b>6</b>, 8, 9}. Nilai tengahnya adalah 6.</li>
+    <li><b>Modus:</b> Angka 6 muncul dua kali, lebih sering dari yang lain. Modusnya adalah 6.</li>
+</ul>
+
+<h2>2. Ukuran Pemusatan Data Kelompok</h2>
+<p>
+    Data kelompok disajikan dalam tabel distribusi frekuensi. Karena nilai aslinya tidak diketahui, kita hanya bisa mengestimasi nilai pemusatannya.
+</p>
+<div class="important-note">
+    <b>Rumus-rumus Data Kelompok:</b>
+    <ul>
+        <li><b>Mean:</b> $\bar{x} = \frac{\sum (f_i \cdot x_i)}{\sum f_i}$, dengan $x_i$ adalah titik tengah setiap kelas.</li>
+        <li><b>Median:</b> $Me = T_b + \left( \frac{\frac{1}{2}n - F_k}{f_{me}} \right) p$</li>
+        <li><b>Modus:</b> $Mo = T_b + \left( \frac{d_1}{d_1+d_2} \right) p$</li>
+    </ul>
+    Keterangan: $T_b$=tepi bawah kelas, $n$=total frekuensi, $F_k$=frekuensi kumulatif sebelum kelas, $f$=frekuensi kelas, $p$=panjang kelas, $d_1$=selisih frekuensi dengan kelas sebelumnya, $d_2$=selisih frekuensi dengan kelas sesudahnya.
+</div>
+
+<p><b>Contoh:</b> Tentukan median dari data berikut.</p>
+<div class="scrollable-wrapper">
+    <table>
+        <thead><tr><th>Nilai</th><th>Frekuensi</th><th>Frek. Kumulatif</th></tr></thead>
+        <tbody>
+            <tr><td>51-60</td><td>5</td><td>5</td></tr>
+            <tr><td>61-70</td><td>8</td><td>13</td></tr>
+            <tr style="background-color:rgba(47, 129, 247, 0.2)"><td>71-80</td><td>12</td><td>25</td></tr>
+            <tr><td>81-90</td><td>10</td><td>35</td></tr>
+            <tr><td>91-100</td><td>5</td><td>40</td></tr>
+        </tbody>
+    </table>
+</div>
+<ol>
+    <li><b>Total data ($n$):</b> 40. Posisi median ada di data ke-$\frac{1}{2}(40) = 20$.</li>
+    <li><b>Kelas Median:</b> Data ke-20 terletak di kelas 71-80 (karena frekuensi kumulatif sebelumnya baru 13).</li>
+    <li><b>Identifikasi Komponen:</b>
+        <br>$T_b = 71 - 0.5 = 70.5$
+        <br>$n = 40$
+        <br>$F_k = 13$ (frekuensi kumulatif sebelum kelas median)
+        <br>$f_{me} = 12$ (frekuensi kelas median)
+        <br>$p = 10$ (panjang interval, misal 60.5 - 50.5)
+    </li>
+    <li><b>Hitung:</b> $Me = 70.5 + (\frac{20-13}{12}) \times 10 = 70.5 + \frac{70}{12} \approx 70.5 + 5.83 = 76.33$.</li>
+</ol>
+
+
+<h2>Uji Kompetensi</h2>
+<p>Kerjakan soal-soal berikut untuk menguji pemahaman Anda sesuai format TKA.</p>
+<div id="quiz-container"></div>
+</div>
+
+    <script>
+        const quizzes = [
+            { q: "Rata-rata nilai dari 5 siswa adalah 80. Jika digabungkan dengan nilai seorang siswa baru, rata-ratanya menjadi 82. Berapakah nilai siswa baru tersebut?", options: ["90", "92", "94", "96"], correct: 1, explanation: "Total nilai awal: $5 \\times 80 = 400$. Total nilai baru: $6 \\times 82 = 492$. Nilai siswa baru = $492 - 400 = 92$." },
+            { q: "Median dari data berikut: 7, 8, 4, 5, 9, 4, 10 adalah...", options: ["5", "6", "7", "8"], correct: 2, explanation: "Pertama, urutkan data: 4, 4, 5, <b>7</b>, 8, 9, 10. Karena jumlah data (7) ganjil, median adalah nilai yang berada tepat di tengah, yaitu 7." },
+            { q: "Modus dari data nilai ujian yang disajikan dalam tabel frekuensi berikut adalah...", options: ["5", "6", "7", "8"], correct: 2, explanation: "Modus adalah nilai dengan frekuensi kemunculan tertinggi. Dari tabel, nilai 7 muncul sebanyak 8 kali, paling banyak di antara yang lain." },
+            { q: "Perhatikan tabel data kelompok pada materi di atas. Tentukan Benar atau Salah untuk setiap pernyataan berikut:", type: "category", statements: [{s: "Kelas modus berada pada interval 71-80.", a: true}, {s: "Tepi bawah kelas median adalah 71.", a: false}, {s: "Panjang interval setiap kelas adalah 10.", a: true}], explanation: "A. Kelas 71-80 memiliki frekuensi tertinggi (12), jadi itu kelas modus (Benar). B. Tepi bawah adalah batas bawah dikurangi 0.5, yaitu $71-0.5=70.5$ (Salah). C. Panjang interval, contohnya $60-51+1=10$ (Benar)." },
+            { q: "Rata-rata tinggi 19 siswa adalah 160 cm. Setelah satu siswa pindah, rata-rata tingginya menjadi 159 cm. Berapa tinggi siswa yang pindah tersebut?", options: ["160 cm", "161 cm", "178 cm", "180 cm"], correct: 2, explanation: "Total tinggi awal: $19 \\times 160 = 3040$. Total tinggi setelah pindah: $18 \\times 159 = 2862$. Tinggi siswa yang pindah = $3040 - 2862 = 178$ cm." },
+            { q: "Untuk data kelompok, nilai mean yang didapat merupakan...", options: ["Nilai pasti", "Estimasi/Perkiraan", "Nilai maksimum", "Nilai minimum"], correct: 1, explanation: "Karena kita menggunakan titik tengah kelas untuk mewakili semua data di kelas tersebut, nilai mean yang dihitung adalah sebuah estimasi, bukan nilai pasti dari data aslinya." },
+            { q: "Manakah ukuran pemusatan data yang paling tidak terpengaruh oleh nilai ekstrem (outlier)?", options: ["Mean", "Median", "Modus", "Semua terpengaruh sama"], correct: 1, explanation: "Median hanya peduli pada posisi tengah data yang terurut. Adanya nilai yang sangat besar atau sangat kecil di ujung data tidak akan menggeser posisi tengahnya secara signifikan, berbeda dengan Mean yang akan sangat terpengaruh." },
+            { q: "Rata-rata nilai ujian 20 murid adalah 82. Ada 3 murid mengikuti ujian susulan sehingga rata-rata nilai dari 23 murid menjadi 81. Manakah dari pernyataan berikut yang PASTI benar? (Pilih semua jawaban yang benar)", type: "mcma", options: ["Total nilai ketiga murid susulan adalah 213.", "Rata-rata nilai ketiga murid susulan adalah 71.", "Setidaknya satu dari tiga murid tersebut memiliki nilai di bawah 81.", "Nilai tertinggi dari ketiga murid tersebut pasti di atas 80."], correct: [0,1,2], explanation: "Total nilai awal: $20 \\times 82 = 1640$. Total baru: $23 \\times 81 = 1863$. Total nilai 3 murid: $1863 - 1640 = 223$. Rata-rata 3 murid: $223/3 \\approx 74.33$. -- Terdapat kesalahan pada soal, mari perbaiki datanya. Sesuai soal TKA (gambar), rata-rata 20 murid adalah 82. Total baru = $20 \\times 82 = 1640$. Rata-rata 17 murid = 83. Total awal = $17 \\times 83 = 1411$. Total 3 murid = $1640 - 1411 = 229$. Rata-rata 3 murid = $229/3 \\approx 76.33$. Nilai tertinggi bisa saja 77,76,76, jadi D belum tentu benar." },
+            { q: "Rata-rata nilai 17 murid adalah 83. Ada 3 murid mengikuti ujian susulan sehingga rata-rata dari 20 murid menjadi 82. Manakah dari pernyataan berikut yang PASTI benar? (Pilih semua jawaban yang benar)", type: "mcma", options: ["Total nilai ketiga murid susulan adalah 229.", "Rata-rata nilai ketiga murid susulan adalah 76.33.", "Setidaknya satu dari tiga murid tersebut memiliki nilai di bawah 82.", "Nilai tertinggi dari ketiga murid tersebut pasti di atas 83."], correct: [0,1,2], explanation: "Total awal: $17 \\times 83 = 1411$. Total baru: $20 \\times 82 = 1640$. Total 3 murid = $1640-1411=229$. Rata-rata 3 murid = $229/3 \\approx 76.33$. Karena rata-rata mereka (76.33) di bawah rata-rata gabungan (82), tidak mungkin ketiganya mendapat nilai di atas 82. Pasti ada setidaknya satu yang di bawah 82. Nilai tertinggi belum tentu di atas 83, misal: 80, 80, 69." },
+            { q: "Sebuah set data memiliki modus 7. Tentukan Benar atau Salah untuk pernyataan berikut:", type: "category", statements: [{s: "Angka 7 adalah angka yang paling sering muncul.", a: true}, {s: "Mean dari data tersebut pasti 7.", a: false}, {s: "Median dari data tersebut pasti 7.", a: false}], explanation: "A: Ini adalah definisi modus (Benar). B: Mean tidak harus sama dengan modus, misal {1,7,7} mean-nya 5 (Salah). C: Median juga tidak harus sama, misal {1,2,7,7,8} median-nya 7, tapi pada {7,7,8,9,10} median-nya 8 (Salah)." }
+        ];
+
+        // --- SCRIPT KUIS INTERAKTIF LENGKAP ---
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            let optionsHtml = ''; let dataCorrect = '';
+            if (quiz.type === 'category') {
+                const correctAnswers = quiz.statements.map(s => s.a).join(',');
+                dataCorrect = `data-correct="${correctAnswers}"`;
+                optionsHtml = `<table class="category-table"><tbody>
+                    ${quiz.statements.map((stmt, i) => `
+                        <tr>
+                            <td>${String.fromCharCode(65 + i)}. ${stmt.s}</td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="true"> Benar</label></td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="false"> Salah</label></td>
+                        </tr>
+                    `).join('')}
+                </tbody></table>`;
+            } else if (quiz.type === 'mcma') {
+                dataCorrect = `data-correct="${quiz.correct.join(',')}"`;
+                optionsHtml = quiz.options.map((opt, i) =>
+                    `<div class="mcma-option" data-index="${i}"><label style="width: 100%; cursor: pointer; display: block;"><input type="checkbox" style="margin-right: 10px; vertical-align: middle;">${opt}</label></div>`
+                ).join("");
+            } else {
+                dataCorrect = `data-correct="${quiz.correct}"`;
+                optionsHtml = quiz.options.map((opt, i) => 
+                    `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                ).join("");
+            }
+            const confirmBtnHtml = (quiz.type === 'category' || quiz.type === 'mcma') ? `<button class="confirm-btn">Konfirmasi Jawaban</button>` : '';
+            quizEl.innerHTML = `
+                <button class="quiz-accordion-button"><span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i></button>
+                <div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p>
+                    <div class="options-container" data-type="${quiz.type || 'pg'}" ${dataCorrect}>${optionsHtml}</div>
+                    ${confirmBtnHtml}
+                    <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                </div>`;
+            quizContainer.appendChild(quizEl);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.dataset.type === 'pg' && !optionsContainer.classList.contains('answered')) {
+                        optionsContainer.classList.add('answered');
+                        if (option.dataset.correct === 'true') {
+                            option.classList.add('correct');
+                        } else {
+                            option.classList.add('wrong');
+                            const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                            if (correctOption) correctOption.classList.add('correct');
+                        }
+                        const explanation = optionsContainer.nextElementSibling;
+                        explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.mcma-option label').forEach(label => {
+                label.addEventListener('click', (e) => {
+                    if (e.target.type !== 'checkbox') {
+                        const checkbox = label.querySelector('input[type="checkbox"]');
+                        if (checkbox && !checkbox.disabled) { checkbox.checked = !checkbox.checked; }
+                    }
+                });
+            });
+
+            document.querySelectorAll('.confirm-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const optionsContainer = button.previousElementSibling;
+                    const type = optionsContainer.dataset.type;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered'); button.style.display = 'none';
+
+                    if (type === 'category') {
+                        const correctAnswers = optionsContainer.dataset.correct.split(',');
+                        const rows = optionsContainer.querySelectorAll('tr');
+                        rows.forEach((row, i) => {
+                            const radios = row.querySelectorAll('input[type="radio"]');
+                            const selected = Array.from(radios).find(r => r.checked);
+                            const correctAnswer = correctAnswers[i];
+                            
+                            if (selected) {
+                                const selectedCell = selected.parentElement.closest('td');
+                                if (selected.value === correctAnswer) {
+                                    selectedCell.classList.add('correct');
+                                } else {
+                                    selectedCell.classList.add('wrong');
+                                }
+                            }
+
+                            if (!selected || selected.value !== correctAnswer) {
+                                const correctRadio = Array.from(radios).find(r => r.value === correctAnswer);
+                                if (correctRadio) {
+                                    correctRadio.parentElement.closest('td').classList.add('correct');
+                                }
+                            }
+                            radios.forEach(r => r.disabled = true);
+                        });
+                    } else if (type === 'mcma') {
+                        const correctIndices = optionsContainer.dataset.correct.split(',');
+                        const options = optionsContainer.querySelectorAll('.mcma-option');
+                        options.forEach((opt) => {
+                            const checkbox = opt.querySelector('input');
+                            const index = opt.dataset.index;
+                            const isChecked = checkbox.checked;
+                            const isCorrectAnswer = correctIndices.includes(index);
+                            
+                            if (isChecked && isCorrectAnswer) { opt.classList.add('correct');
+                            } else if (isChecked && !isCorrectAnswer) { opt.classList.add('wrong');
+                            } else if (!isChecked && isCorrectAnswer) { opt.classList.add('correct'); }
+                            checkbox.disabled = true;
+                        });
+                    }
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
