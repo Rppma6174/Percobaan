@@ -592,52 +592,27 @@
     function renderSnbtDetailPage(categoryId) {
         const allCategories = [...allContentData.snbtTka.materi, ...allContentData.snbtTka.latihan];
         const categoryData = allCategories.find(item => item.id === categoryId);
-
-        if (!categoryData) {
-            appContent.innerHTML = `<p>Konten tidak ditemukan.</p>`;
-            return;
-        }
-
+        if (!categoryData) { appContent.innerHTML = `<p>Konten tidak ditemukan.</p>`; return; }
         let accordionHTML = '';
         if (Object.keys(categoryData.content).length === 0) {
             accordionHTML = `<p class="p-4 text-gray-500">Materi untuk kategori ini belum tersedia.</p>`;
         } else {
             for (const subCategory in categoryData.content) {
-                const itemsHTML = categoryData.content[subCategory].map(item => `
-                    <li id="card-${item.id}"
-                        class="card-item-list block p-3 rounded-md hover:bg-gray-700 cursor-pointer"
-                        onclick="openMateri('${item.id}', '${item.filePath}')">
-                        <span class="font-semibold">${item.title}</span>
-                        <span class="block text-xs text-gray-400">${item.type}</span>
-                    </li>
-                `).join('');
-
-                accordionHTML += `
-                    <div class="accordion-item border-b border-gray-700" data-accordion-group>
-                        <h2>
-                            <button type="button" class="accordion-button flex items-center justify-between w-full p-4 font-semibold text-left text-cyan-300">
-                                <span>${subCategory}</span>
-                                <i class="accordion-icon fa-solid fa-chevron-down shrink-0 transition-transform duration-200"></i>
-                            </button>
-                        </h2>
-                        <div class="accordion-content hidden p-2">
-                            <ul class="space-y-2">${itemsHTML}</ul>
-                        </div>
-                    </div>
-                `;
+                const itemsHTML = categoryData.content[subCategory].map(item => `<li id="card-${item.id}" class="card-item-list block p-3 rounded-md hover:bg-gray-700 cursor-pointer" onclick="openMateri('${item.id}', '${item.filePath}')"><span class="font-semibold">${item.title}</span><span class="block text-xs text-gray-400">${item.type}</span></li>`).join('');
+                accordionHTML += `<div class="accordion-item border-b border-gray-700" data-accordion-group><h2><button type="button" class="accordion-button flex items-center justify-between w-full p-4 font-semibold text-left text-cyan-300"><span>${subCategory}</span><i class="accordion-icon fa-solid fa-chevron-down shrink-0 transition-transform duration-200"></i></button></h2><div class="accordion-content hidden p-2"><ul class="space-y-2">${itemsHTML}</ul></div></div>`;
             }
         }
-
+        
         const pageHTML = `
-            <div class="panel">
-                <div class="flex items-center mb-6">
-                    <button onclick="navigateTo('snbt_tka', document.querySelector('.sidebar-link[onclick*=\\'snbt_tka\\']'))" class="text-gray-400 hover:text-white mr-4">
-                        <i class="fa-solid fa-arrow-left text-xl"></i>
-                    </button>
-                    <div>
-                        <h2 class="text-2xl font-bold text-cyan-400">${categoryData.title}</h2>
-                        <p class="text-sm text-gray-400">${categoryData.summary}</p>
-                    </div>
+            <div class="panel relative">
+                <button onclick="navigateTo('snbt_tka', document.querySelector('.sidebar-link[onclick*=\\'snbt_tka\\']'))" 
+                        class="absolute top-4 right-4 md:top-6 md:right-6 h-10 w-10 flex items-center justify-center bg-gray-800/50 hover:bg-gray-700 rounded-full text-gray-400 hover:text-white transition-colors"
+                        aria-label="Kembali ke daftar kategori SNBT">
+                    <i class="fa-solid fa-times text-xl"></i>
+                </button>
+                <div class="mb-6 pr-12">
+                    <h2 class="text-2xl font-bold text-cyan-400">${categoryData.title}</h2>
+                    <p class="text-sm text-gray-400">${categoryData.summary}</p>
                 </div>
                 <div class="border border-gray-700 rounded-lg bg-gray-900/50">
                     ${accordionHTML}
@@ -645,9 +620,8 @@
             </div>
         `;
         appContent.innerHTML = pageHTML;
-        setupAccordionListeners(); // Terapkan event listener ke accordion yang baru dibuat
+        setupAccordionListeners();
     }
-    
     // ... (Sisa kode Anda dari openMateri, setupMateriSearch, renderVideoPage, dst. tetap sama) ...
     function openMateri(itemId, filePath) {
         if (!filePath || filePath === '#') {
@@ -1454,3 +1428,4 @@
 
 </body>
 </html>
+
