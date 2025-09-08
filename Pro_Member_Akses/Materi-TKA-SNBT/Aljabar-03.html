@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Pertidaksamaan Linear & Program Linear - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .diagram-container {
+            display: flex; justify-content: center; align-items: center; background-color: var(--bg-main);
+            padding: 1rem; border-radius: 0.5rem; border: 1px solid var(--border-color);
+        }
+        .diagram-container svg text { font-size: 12px; fill: var(--text-primary); }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option, .mcma-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong),
+        .options-container.answered .mcma-option {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover, .mcma-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct, .mcma-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; opacity: 1;
+        }
+        .quiz-option.wrong, .mcma-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); opacity: 1;
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .confirm-btn {
+            background-color: var(--accent-cyan); color: white; border: none; padding: 10px 20px;
+            border-radius: 0.5rem; font-weight: bold; cursor: pointer; margin-top: 1rem; width: 100%;
+            transition: background-color 0.2s ease;
+        }
+        .confirm-btn:hover { background-color: #1f6eeb; }
+        .category-table { width: 100%; border-collapse: separate; border-spacing: 0 0.5rem; }
+        .category-table td { padding: 0.75rem; border: 2px solid var(--border-color); border-radius: 0.5rem; }
+        .category-table td:first-child { text-align: left; }
+        .category-table .correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); }
+        .category-table .wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto; padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Sistem Pertidaksamaan Linear & Program Linear: Mengoptimalkan Pilihan</h1>
+<p>
+    Topik ini adalah salah satu aplikasi aljabar yang paling nyata dan berguna. <b>Sistem Pertidaksamaan Linear</b> memungkinkan kita untuk menggambarkan situasi dengan beberapa batasan sekaligus (misalnya, batasan modal, waktu, dan bahan baku). Puncaknya adalah <b>Program Linear</b>, yaitu metode untuk mencari solusi terbaik (seperti keuntungan maksimum atau biaya minimum) di dalam batasan-batasan tersebut.
+</p>
+
+<h2>1. Menggambar Daerah Himpunan Penyelesaian (DHP)</h2>
+<p>
+    Solusi dari sistem pertidaksamaan linear adalah sebuah daerah pada grafik Kartesius yang disebut Daerah Himpunan Penyelesaian (DHP) atau <i>Feasible Region</i>. Ini adalah area di mana semua arsiran dari setiap pertidaksamaan saling tumpang tindih.
+</p>
+<div class="important-note">
+    <b>Tips & Strategi Menggambar DHP:</b>
+    <ol>
+        <li><b>Ubah jadi Persamaan:</b> Ganti tanda ($\le, \ge, <, >$) dengan (=) untuk menemukan garis batasnya.</li>
+        <li><b>Cari Titik Potong:</b> Cara termudah menggambar garis adalah mencari titik potong sumbu-x (saat $y=0$) dan sumbu-y (saat $x=0$).</li>
+        <li><b>Tentukan Jenis Garis:</b> Gunakan <b>garis tegas/penuh</b> untuk $\le$ dan $\ge$. Gunakan <b>garis putus-putus</b> untuk $<$ dan $>$.</li>
+        <li><b>Uji Titik untuk Arsiran:</b> Ambil titik uji yang mudah (biasanya (0,0)) dan masukkan ke pertidaksamaan. Jika hasilnya benar, arsir daerah yang mengandung titik itu. Jika salah, arsir daerah sebaliknya.</li>
+        <li><b>DHP adalah Irisan:</b> Daerah yang terkena semua arsiran adalah DHP-nya.</li>
+    </ol>
+</div>
+<div class="diagram-container">
+    <svg width="300" height="250" viewBox="0 0 300 250">
+        <path d="M 30 220 L 280 220 M 30 220 L 30 20" stroke="#8B949E"/>
+        <text x="280" y="215">x</text><text x="35" y="25">y</text>
+        <path d="M 130 20 L 30 180" stroke="#C9D1D9" stroke-width="1.5"/>
+        <text x="135" y="30" font-size="10">$2x+y=20$</text>
+        <path d="M 230 20 L 30 120" stroke="#C9D1D9" stroke-width="1.5"/>
+        <text x="235" y="30" font-size="10">$x+2y=20$</text>
+        <polygon points="30,20 30,120 130,20" fill="rgba(47, 129, 247, 0.3)"/>
+        <text x="60" y="90" fill="#2F81F7" font-weight="bold">DHP</text>
+    </svg>
+</div>
+
+<h2>2. Program Linear: Mencari Nilai Optimum</h2>
+<p>
+    Program linear adalah metode untuk mengoptimalkan (memaksimalkan atau meminimalkan) suatu <b>fungsi objektif</b> $f(x,y)=ax+by$ yang tunduk pada beberapa <b>fungsi kendala</b> (sistem pertidaksamaan linear).
+</p>
+<div class="important-note">
+    <b>Teorema Fundamental (Metode Titik Pojok):</b><br>
+    Nilai optimum (maksimum atau minimum) dari sebuah fungsi objektif, jika ada, <b>selalu terletak pada salah satu titik pojok (vertex)</b> dari Daerah Himpunan Penyelesaian (DHP).
+</div>
+<p><b>Contoh: Keuntungan Maksimum</b></p>
+<p>Seorang pengrajin membuat meja ($x$) dan kursi ($y$). Batasan waktu kerja: <b>Mesin A:</b> $4x+3y \le 240$ jam. <b>Mesin B:</b> $2x+3y \le 180$ jam. Keuntungan meja Rp300.000 dan kursi Rp250.000. Tentukan keuntungan maksimum.</p>
+<ol>
+    <li><b>Modelkan Masalah:</b>
+        <ul>
+            <li>Kendala: $x \ge 0; y \ge 0; 4x+3y \le 240; 2x+3y \le 180$.</li>
+            <li>Fungsi Objektif (Keuntungan): $P(x,y) = 300000x + 250000y$.</li>
+        </ul>
+    </li>
+    <li><b>Tentukan Titik Pojok DHP:</b>
+        <ul>
+            <li>Titik potong sumbu: (0,0), (60,0) [dari $4x=240$], (0,60) [dari $3y=180$].</li>
+            <li>Titik potong kedua garis: Eliminasi $4x+3y=240$ dan $2x+3y=180$ menghasilkan $2x=60 \implies x=30$. Substitusi $x=30$ menghasilkan $2(30)+3y=180 \implies 3y=120 \implies y=40$. Titik potongnya adalah (30,40).</li>
+        </ul>
+    </li>
+    <li><b>Uji Titik Pojok ke Fungsi Objektif:</b>
+        <ul>
+            <li>$P(0,0) = 0$</li>
+            <li>$P(60,0) = 300.000(60) = 18.000.000$</li>
+            <li>$P(0,60) = 250.000(60) = 15.000.000$</li>
+            <li>$P(30,40) = 300.000(30) + 250.000(40) = 9.000.000 + 10.000.000 = 19.000.000$</li>
+        </ul>
+    </li>
+    <li><b>Kesimpulan:</b> Keuntungan maksimum adalah <b>Rp19.000.000</b>, yang dicapai dengan membuat 30 meja dan 40 kursi.</li>
+</ol>
+
+
+<h2>Uji Kompetensi</h2>
+<p>Kerjakan soal-soal berikut untuk menguji pemahaman Anda sesuai format TKA.</p>
+<div id="quiz-container"></div>
+</div>
+
+    <script>
+        const quizzes = [
+            { q: "Daerah yang diarsir pada grafik sistem pertidaksamaan linear disebut...", options: ["Daerah Asal (Domain)", "Daerah Hasil (Range)", "Daerah Himpunan Penyelesaian (DHP)", "Titik Optimum"], correct: 2, explanation: "DHP atau Feasible Region adalah istilah teknis untuk daerah yang memenuhi semua pertidaksamaan dalam sistem." },
+            { q: "Garis batas untuk pertidaksamaan $3x - 2y < 6$ seharusnya digambar sebagai...", options: ["Garis tegas/penuh", "Garis putus-putus", "Garis vertikal", "Garis horizontal"], correct: 1, explanation: "Tanda ketidaksamaan $<$ atau $>$ (tanpa 'sama dengan') berarti titik-titik pada garis batas itu sendiri tidak termasuk dalam himpunan penyelesaian, sehingga digambar putus-putus." },
+            { q: "Dalam program linear, fungsi yang nilainya ingin kita maksimalkan atau minimalkan disebut...", options: ["Fungsi Kendala", "Fungsi Kuadrat", "Fungsi Objektif", "Fungsi Linear"], correct: 2, explanation: "Fungsi Objektif (atau Fungsi Tujuan) adalah fungsi yang menjadi target optimisasi, misalnya $P(x,y) = \text{profit}$ atau $C(x,y) = \text{biaya}$." },
+            { q: "Nilai optimum (maksimum atau minimum) dalam masalah program linear selalu ditemukan pada...", options: ["Pusat Daerah Penyelesaian", "Titik potong sumbu-y", "Titik potong sumbu-x", "Titik pojok Daerah Penyelesaian"], correct: 3, explanation: "Ini adalah inti dari Teorema Fundamental Program Linear. Solusi optimal selalu terletak di salah satu titik sudut (vertex) dari Daerah Himpunan Penyelesaian (DHP)." },
+            { q: "Sebuah perusahaan memproduksi meja (x) dan kursi (y). Kendala yang ada adalah $2x+y \\le 10$ dan $x+3y \\le 12$. Tentukan Benar atau Salah untuk setiap skenario produksi berikut:", type: "category", statements: [{s: "Memproduksi 4 meja dan 3 kursi adalah mungkin.", a: false}, {s: "Memproduksi 3 meja dan 3 kursi adalah mungkin.", a: true}, {s: "Memproduksi 6 meja dan 0 kursi adalah tidak mungkin.", a: true}], explanation: "A. $2(4)+3=11$, yang lebih besar dari 10 (Salah, melanggar kendala pertama). B. $2(3)+3=9 \\le 10$ dan $3+3(3)=12 \\le 12$ (Benar, memenuhi kedua kendala). C. $2(6)+0=12$, yang lebih besar dari 10 (Benar, tidak mungkin karena melanggar kendala pertama)." },
+            { q: "Seorang pedagang memiliki modal Rp1.000.000 untuk membeli 2 jenis buah. Apel seharga Rp20.000/kg dan Jeruk seharga Rp10.000/kg. Kiosnya hanya bisa menampung total 60 kg buah. Jika $x$ adalah banyak kg Apel dan $y$ adalah banyak kg Jeruk, model matematika yang sesuai adalah...", options: ["$2x+y \\le 100$ dan $x+y \\ge 60$", "$20x+10y \\le 100$ dan $x+y \\le 60$", "$2x+y \\le 100$ dan $x+y \\le 60$", "$x+y \\le 100$ dan $2x+y \\le 60$"], correct: 2, explanation: "Kendala modal: $20000x+10000y \\le 1000000$, disederhanakan menjadi $2x+y \\le 100$. Kendala kapasitas: $x+y \\le 60$." },
+            { q: "Manakah dari titik berikut yang merupakan titik pojok dari daerah yang dibatasi oleh $x \\ge 0, y \\ge 0, x+y \\le 5,$ dan $y \\le 3$?", options: ["(5,0)", "(0,5)", "(2,3)", "(3,2)"], correct: 0, explanation: "Titik (5,0) adalah perpotongan $x+y=5$ dengan sumbu-x. (0,5) bukan titik pojok karena dibatasi oleh $y \le 3$. (2,3) adalah perpotongan $x+y=5$ dan $y=3$. (3,2) bukan titik pojok. Titik pojok lainnya adalah (0,0) dan (0,3). Di antara pilihan, hanya (5,0) yang benar." },
+            { q: "Diberikan fungsi objektif $P=3x+2y$ dan DHP dengan titik pojok (0,0), (4,0), (0,5), dan (2,3). Manakah pernyataan berikut yang benar? (Pilih semua jawaban yang benar)", type: "mcma", options: ["Nilai maksimum adalah 12.", "Nilai minimum adalah 0.", "Nilai maksimum terjadi di dua titik.", "Nilai di titik (0,5) lebih besar dari nilai di titik (2,3)."], correct: [0,1,2], explanation: "$P(0,0)=0$ (Minimum). $P(4,0)=12$. $P(0,5)=10$. $P(2,3)=12$. Nilai maksimumnya adalah 12, yang terjadi di titik (4,0) dan (2,3). Nilai di (0,5) yaitu 10, lebih kecil dari 12." },
+            { q: "Untuk pertidaksamaan $y > 2x-4$, daerah penyelesaiannya berada di...", options: ["Sebelah kanan garis", "Sebelah kiri garis", "Di atas garis", "Di bawah garis"], correct: 2, explanation: "Untuk pertidaksamaan dalam bentuk $y > mx+c$ atau $y < mx+c$, penyelesaiannya adalah daerah di 'atas' atau di 'bawah' garis batasnya. Uji titik (0,0): $0 > 2(0)-4 \implies 0 > -4$ (Benar). Maka arsirannya adalah daerah yang mengandung (0,0), yaitu di 'atas' garis." },
+            { q: "Tentukan Benar atau Salah untuk pernyataan-pernyataan berikut:", type: "category", statements: [{s: "Dalam program linear, fungsi kendala biasanya berbentuk persamaan.", a: false}, {s: "Daerah Himpunan Penyelesaian (DHP) bisa berupa daerah yang tidak terbatas.", a: true}, {s: "Titik uji (0,0) selalu bisa digunakan untuk menentukan daerah arsiran.", a: false}], explanation: "A: Kendala adalah batasan, sehingga berbentuk pertidaksamaan (Salah). B: DHP bisa tidak terbatas (unbounded) jika tidak ada batasan atas/bawah (Benar). C: Titik (0,0) tidak bisa digunakan jika garis batasnya melalui titik tersebut (Salah)." }
+        ];
+
+        // --- SCRIPT KUIS INTERAKTIF LENGKAP ---
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            let optionsHtml = ''; let dataCorrect = '';
+            if (quiz.type === 'category') {
+                const correctAnswers = quiz.statements.map(s => s.a).join(',');
+                dataCorrect = `data-correct="${correctAnswers}"`;
+                optionsHtml = `<table class="category-table"><tbody>
+                    ${quiz.statements.map((stmt, i) => `
+                        <tr>
+                            <td>${String.fromCharCode(65 + i)}. ${stmt.s}</td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="true"> Benar</label></td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="false"> Salah</label></td>
+                        </tr>
+                    `).join('')}
+                </tbody></table>`;
+            } else if (quiz.type === 'mcma') {
+                dataCorrect = `data-correct="${quiz.correct.join(',')}"`;
+                optionsHtml = quiz.options.map((opt, i) =>
+                    `<div class="mcma-option" data-index="${i}"><label style="width: 100%; cursor: pointer; display: block;"><input type="checkbox" style="margin-right: 10px; vertical-align: middle;">${opt}</label></div>`
+                ).join("");
+            } else {
+                dataCorrect = `data-correct="${quiz.correct}"`;
+                optionsHtml = quiz.options.map((opt, i) => 
+                    `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                ).join("");
+            }
+            const confirmBtnHtml = (quiz.type === 'category' || quiz.type === 'mcma') ? `<button class="confirm-btn">Konfirmasi Jawaban</button>` : '';
+            quizEl.innerHTML = `
+                <button class="quiz-accordion-button"><span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i></button>
+                <div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p>
+                    <div class="options-container" data-type="${quiz.type || 'pg'}" ${dataCorrect}>${optionsHtml}</div>
+                    ${confirmBtnHtml}
+                    <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                </div>`;
+            quizContainer.appendChild(quizEl);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.dataset.type === 'pg' && !optionsContainer.classList.contains('answered')) {
+                        optionsContainer.classList.add('answered');
+                        if (option.dataset.correct === 'true') {
+                            option.classList.add('correct');
+                        } else {
+                            option.classList.add('wrong');
+                            const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                            if (correctOption) correctOption.classList.add('correct');
+                        }
+                        const explanation = optionsContainer.nextElementSibling;
+                        explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.mcma-option label').forEach(label => {
+                label.addEventListener('click', (e) => {
+                    if (e.target.type !== 'checkbox') {
+                        const checkbox = label.querySelector('input[type="checkbox"]');
+                        if (checkbox && !checkbox.disabled) { checkbox.checked = !checkbox.checked; }
+                    }
+                });
+            });
+
+            document.querySelectorAll('.confirm-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const optionsContainer = button.previousElementSibling;
+                    const type = optionsContainer.dataset.type;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered'); button.style.display = 'none';
+
+                    if (type === 'category') {
+                        const correctAnswers = optionsContainer.dataset.correct.split(',');
+                        const rows = optionsContainer.querySelectorAll('tr');
+                        rows.forEach((row, i) => {
+                            const radios = row.querySelectorAll('input[type="radio"]');
+                            const selected = Array.from(radios).find(r => r.checked);
+                            const correctAnswer = correctAnswers[i];
+                            
+                            if (selected) {
+                                const selectedCell = selected.parentElement.closest('td');
+                                if (selected.value === correctAnswer) {
+                                    selectedCell.classList.add('correct');
+                                } else {
+                                    selectedCell.classList.add('wrong');
+                                }
+                            }
+
+                            if (!selected || selected.value !== correctAnswer) {
+                                const correctRadio = Array.from(radios).find(r => r.value === correctAnswer);
+                                if (correctRadio) {
+                                    correctRadio.parentElement.closest('td').classList.add('correct');
+                                }
+                            }
+                            radios.forEach(r => r.disabled = true);
+                        });
+                    } else if (type === 'mcma') {
+                        const correctIndices = optionsContainer.dataset.correct.split(',');
+                        const options = optionsContainer.querySelectorAll('.mcma-option');
+                        options.forEach((opt) => {
+                            const checkbox = opt.querySelector('input');
+                            const index = opt.dataset.index;
+                            const isChecked = checkbox.checked;
+                            const isCorrectAnswer = correctIndices.includes(index);
+                            
+                            if (isChecked && isCorrectAnswer) { opt.classList.add('correct');
+                            } else if (isChecked && !isCorrectAnswer) { opt.classList.add('wrong');
+                            } else if (!isChecked && isCorrectAnswer) { opt.classList.add('correct'); }
+                            checkbox.disabled = true;
+                        });
+                    }
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
