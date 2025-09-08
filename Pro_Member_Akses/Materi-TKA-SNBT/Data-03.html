@@ -1,0 +1,305 @@
+Tentu, kita lanjutkan ke materi "Ukuran Penyebaran Data".
+
+Setelah memahami "pusat" data, materi ini fokus pada seberapa tersebar atau bervariasi data tersebut. Sesuai arahan, kita akan bahas konsepnya secara ringkas, lalu fokus pada rumus, strategi, dan aplikasi yang relevan untuk soal TKA.
+
+HTML
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ukuran Penyebaran Data - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .special-note {
+            background-color: rgba(248, 81, 73, 0.1); border-left: 4px solid var(--accent-red);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option, .mcma-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong),
+        .options-container.answered .mcma-option {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover, .mcma-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct, .mcma-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; opacity: 1;
+        }
+        .quiz-option.wrong, .mcma-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); opacity: 1;
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .confirm-btn {
+            background-color: var(--accent-cyan); color: white; border: none; padding: 10px 20px;
+            border-radius: 0.5rem; font-weight: bold; cursor: pointer; margin-top: 1rem; width: 100%;
+            transition: background-color 0.2s ease;
+        }
+        .confirm-btn:hover { background-color: #1f6eeb; }
+        .category-table { width: 100%; border-collapse: separate; border-spacing: 0 0.5rem; }
+        .category-table td { padding: 0.75rem; border: 2px solid var(--border-color); border-radius: 0.5rem; }
+        .category-table td:first-child { text-align: left; }
+        .category-table .correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); }
+        .category-table .wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note, .special-note {
+            overflow-x: auto; padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Ukuran Penyebaran Data: Jangkauan, Kuartil, dan Simpangan</h1>
+<p>
+    Ukuran pemusatan (mean, median, modus) memberi tahu kita di mana "pusat" data, namun tidak memberi tahu seberapa **tersebar** data tersebut. Ukuran penyebaran mengkuantifikasi variasi atau sebaran dari kumpulan data.
+</p>
+
+<h2>1. Jangkauan (Range)</h2>
+<p>
+    Ini adalah ukuran penyebaran yang paling sederhana.
+    <br><b>Rumus:</b> Jangkauan = Nilai Maksimum - Nilai Minimum.
+</p>
+<div class="special-note">
+    <b>Peringatan:</b> Jangkauan sangat sensitif terhadap nilai ekstrem (pencilan/outlier) dan bisa memberikan gambaran yang kurang akurat tentang sebaran data secara keseluruhan.
+</div>
+
+<h2>2. Kuartil dan Jangkauan Interkuartil (IQR)</h2>
+<p>
+    Kuartil membagi data yang telah <b>diurutkan</b> menjadi empat bagian sama besar.
+</p>
+<ul>
+    <li><b>Kuartil Bawah ($Q_1$):</b> Median dari setengah data bagian bawah.</li>
+    <li><b>Kuartil Tengah ($Q_2$):</b> Median dari seluruh data.</li>
+    <li><b>Kuartil Atas ($Q_3$):</b> Median dari setengah data bagian atas.</li>
+</ul>
+<div class="important-note">
+    <b>Jangkauan Interkuartil (IQR):</b><br>
+    $IQR = Q_3 - Q_1$. Ukuran ini menunjukkan sebaran dari 50% data yang berada di tengah. Karena tidak memperhitungkan 25% data terendah dan 25% data tertinggi, IQR <b>jauh lebih tahan terhadap nilai ekstrem</b> dibandingkan jangkauan biasa.
+</div>
+<p><b>Rumus Kuartil Data Kelompok:</b> $Q_i = T_b + \left( \frac{\frac{i}{4}n - F_k}{f_{Qi}} \right) p$, di mana $i$ adalah kuartil ke-1, 2, atau 3.</p>
+
+<h2>3. Simpangan Baku (Standard Deviation)</h2>
+<p>
+    Ini adalah ukuran penyebaran yang paling umum digunakan dan paling informatif. Simpangan baku mengukur rata-rata jarak setiap titik data dari mean.
+</p>
+<ul>
+    <li><b>Simpangan Baku Kecil:</b> Data cenderung berkumpul di dekat nilai rata-rata (konsisten).</li>
+    <li><b>Simpangan Baku Besar:</b> Data lebih tersebar jauh dari nilai rata-rata (bervariasi).</li>
+</ul>
+<div class="important-note">
+    <b>Rumus Simpangan Baku (Data Tunggal):</b>
+    $$ S = \sqrt{\frac{\sum (x_i - \bar{x})^2}{n}} $$
+    Langkah-langkahnya: (1) Hitung mean ($\bar{x}$), (2) Hitung selisih kuadrat setiap data dari mean, (3) Rata-ratakan selisih kuadrat tersebut (ini disebut <b>Ragam/Varians</b>), (4) Ambil akar kuadratnya.
+</div>
+
+
+<h2>Uji Kompetensi</h2>
+<p>Kerjakan soal-soal berikut untuk menguji pemahaman Anda sesuai format TKA.</p>
+<div id="quiz-container"></div>
+</div>
+
+    <script>
+        const quizzes = [
+            { q: "Jangkauan dari data {2, 9, 3, 7, 11} adalah...", options: ["7", "8", "9", "11"], correct: 2, explanation: "Jangkauan = Nilai Maksimum - Nilai Minimum = $11 - 2 = 9$." },
+            { q: "Diketahui data terurut: 2, 3, 5, 7, 8, 10, 12. Kuartil bawah ($Q_1$) dari data tersebut adalah...", options: ["3", "5", "7", "8"], correct: 0, explanation: "Median ($Q_2$) adalah 7. Setengah data bawah adalah {2, 3, 5}. Median dari data bawah ini adalah 3. Maka, $Q_1=3$." },
+            { q: "Dari data pada soal sebelumnya, jangkauan interkuartil (IQR) adalah...", options: ["5", "7", "9", "10"], correct: 1, explanation: "$Q_1=3$. Setengah data atas adalah {8, 10, 12}, sehingga $Q_3=10$. Maka, $IQR = Q_3 - Q_1 = 10 - 3 = 7$." },
+            { q: "Rata-rata nilai ulangan kelas A adalah 80. Jika setiap siswa di kelas tersebut mendapat tambahan nilai 5 poin, apa yang terjadi pada simpangan baku nilai mereka?", options: ["Bertambah 5", "Berkurang 5", "Menjadi 5 kali lebih besar", "Tetap"], correct: 3, explanation: "Simpangan baku mengukur sebaran data terhadap mean. Jika semua data digeser dengan jumlah yang sama, mean juga akan bergeser, tetapi sebaran atau jarak antar datanya tetap sama." },
+            { q: "Sebuah set data memiliki simpangan baku sebesar 0. Tentukan Benar atau Salah untuk setiap pernyataan berikut:", type: "category", statements: [{s: "Semua data dalam set tersebut memiliki nilai yang sama.", a: true}, {s: "Mean dari data tersebut pasti 0.", a: false}, {s: "Jangkauan dari data tersebut adalah 0.", a: true}], explanation: "A. Simpangan baku 0 berarti tidak ada sebaran sama sekali, semua data identik (Benar). B. Mean bisa berapa saja, contoh data {5,5,5} mean-nya 5 tapi simpangan bakunya 0 (Salah). C. Jika semua data sama, maka Maks-Min = 0 (Benar)." },
+            { q: "Dua tim basket, A dan B, memiliki rata-rata skor per pertandingan yang sama. Tim A memiliki simpangan baku skor 5, sedangkan Tim B memiliki simpangan baku 15. Tim manakah yang penampilannya lebih konsisten?", options: ["Tim A", "Tim B", "Keduanya sama konsisten", "Tidak cukup informasi"], correct: 0, explanation: "Simpangan baku yang lebih kecil menunjukkan bahwa data (skor) lebih berkumpul di sekitar rata-rata. Ini berarti penampilan Tim A lebih stabil dan konsisten." },
+            { q: "Ragam (varians) dari data {2, 4, 6} adalah...", options: ["2", "4", "8/3", "4/3"], correct: 2, explanation: "Mean = $(2+4+6)/3=4$. Jumlah selisih kuadrat = $(2-4)^2 + (4-4)^2 + (6-4)^2 = 4+0+4=8$. Ragam = $8/3$." },
+            { q: "Diberikan data {10, 20, 30, 40, 100}. Manakah pernyataan berikut yang benar? (Pilih semua jawaban yang benar)", type: "mcma", options: ["Jangkauan data adalah 90.", "Mean sangat dipengaruhi oleh nilai 100.", "Median adalah ukuran pemusatan yang lebih baik untuk data ini.", "Jangkauan interkuartil (IQR) lebih tahan terhadap nilai 100 daripada jangkauan biasa."], correct: [0,1,2,3], explanation: "Semua pernyataan benar. Nilai 100 adalah pencilan (outlier) yang sangat mempengaruhi mean dan jangkauan. Median dan IQR lebih robust karena fokus pada data tengah." },
+            { q: "Pada tabel distribusi frekuensi, kelas kuartil atas ($Q_3$) adalah kelas di mana...", options: ["Frekuensi tertinggi berada", "Data ke-1/4 berada", "Data ke-3/4 berada", "Nilai tengah berada"], correct: 2, explanation: "Kuartil atas ($Q_3$) adalah batas yang memisahkan 75% data terbawah dari 25% data teratas. Posisinya ada di data ke- $\\frac{3}{4}n$." },
+            { q: "Tentukan Benar atau Salah untuk pernyataan-pernyataan berikut:", type: "category", statements: [{s: "Jangkauan Interkuartil mengukur sebaran 50% data di tengah.", a: true}, {s: "Simpangan baku bisa bernilai negatif.", a: false}, {s: "Kuartil kedua ($Q_2$) selalu sama dengan modus.", a: false}], explanation: "A. Benar, IQR adalah $Q_3-Q_1$, mengabaikan 25% data bawah dan 25% data atas. B. Salah, karena merupakan hasil akar kuadrat, nilainya selalu non-negatif. C. Salah, $Q_2$ selalu sama dengan median." }
+        ];
+
+        // --- SCRIPT KUIS INTERAKTIF LENGKAP ---
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            let optionsHtml = ''; let dataCorrect = '';
+            if (quiz.type === 'category') {
+                const correctAnswers = quiz.statements.map(s => s.a).join(',');
+                dataCorrect = `data-correct="${correctAnswers}"`;
+                optionsHtml = `<table class="category-table"><tbody>
+                    ${quiz.statements.map((stmt, i) => `
+                        <tr>
+                            <td>${String.fromCharCode(65 + i)}. ${stmt.s}</td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="true"> Benar</label></td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="false"> Salah</label></td>
+                        </tr>
+                    `).join('')}
+                </tbody></table>`;
+            } else if (quiz.type === 'mcma') {
+                dataCorrect = `data-correct="${quiz.correct.join(',')}"`;
+                optionsHtml = quiz.options.map((opt, i) =>
+                    `<div class="mcma-option" data-index="${i}"><label style="width: 100%; cursor: pointer; display: block;"><input type="checkbox" style="margin-right: 10px; vertical-align: middle;">${opt}</label></div>`
+                ).join("");
+            } else {
+                dataCorrect = `data-correct="${quiz.correct}"`;
+                optionsHtml = quiz.options.map((opt, i) => 
+                    `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                ).join("");
+            }
+            const confirmBtnHtml = (quiz.type === 'category' || quiz.type === 'mcma') ? `<button class="confirm-btn">Konfirmasi Jawaban</button>` : '';
+            quizEl.innerHTML = `
+                <button class="quiz-accordion-button"><span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i></button>
+                <div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p>
+                    <div class="options-container" data-type="${quiz.type || 'pg'}" ${dataCorrect}>${optionsHtml}</div>
+                    ${confirmBtnHtml}
+                    <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                </div>`;
+            quizContainer.appendChild(quizEl);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.dataset.type === 'pg' && !optionsContainer.classList.contains('answered')) {
+                        optionsContainer.classList.add('answered');
+                        if (option.dataset.correct === 'true') {
+                            option.classList.add('correct');
+                        } else {
+                            option.classList.add('wrong');
+                            const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                            if (correctOption) correctOption.classList.add('correct');
+                        }
+                        const explanation = optionsContainer.nextElementSibling;
+                        explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.mcma-option label').forEach(label => {
+                label.addEventListener('click', (e) => {
+                    if (e.target.type !== 'checkbox') {
+                        const checkbox = label.querySelector('input[type="checkbox"]');
+                        if (checkbox && !checkbox.disabled) { checkbox.checked = !checkbox.checked; }
+                    }
+                });
+            });
+
+            document.querySelectorAll('.confirm-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const optionsContainer = button.previousElementSibling;
+                    const type = optionsContainer.dataset.type;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered'); button.style.display = 'none';
+
+                    if (type === 'category') {
+                        const correctAnswers = optionsContainer.dataset.correct.split(',');
+                        const rows = optionsContainer.querySelectorAll('tr');
+                        rows.forEach((row, i) => {
+                            const radios = row.querySelectorAll('input[type="radio"]');
+                            const selected = Array.from(radios).find(r => r.checked);
+                            const correctAnswer = correctAnswers[i];
+                            
+                            if (selected) {
+                                const selectedCell = selected.parentElement.closest('td');
+                                if (selected.value === correctAnswer) {
+                                    selectedCell.classList.add('correct');
+                                } else {
+                                    selectedCell.classList.add('wrong');
+                                }
+                            }
+
+                            if (!selected || selected.value !== correctAnswer) {
+                                const correctRadio = Array.from(radios).find(r => r.value === correctAnswer);
+                                if (correctRadio) {
+                                    correctRadio.parentElement.closest('td').classList.add('correct');
+                                }
+                            }
+                            radios.forEach(r => r.disabled = true);
+                        });
+                    } else if (type === 'mcma') {
+                        const correctIndices = optionsContainer.dataset.correct.split(',');
+                        const options = optionsContainer.querySelectorAll('.mcma-option');
+                        options.forEach((opt) => {
+                            const checkbox = opt.querySelector('input');
+                            const index = opt.dataset.index;
+                            const isChecked = checkbox.checked;
+                            const isCorrectAnswer = correctIndices.includes(index);
+                            
+                            if (isChecked && isCorrectAnswer) { opt.classList.add('correct');
+                            } else if (isChecked && !isCorrectAnswer) { opt.classList.add('wrong');
+                            } else if (!isChecked && isCorrectAnswer) { opt.classList.add('correct'); }
+                            checkbox.disabled = true;
+                        });
+                    }
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
