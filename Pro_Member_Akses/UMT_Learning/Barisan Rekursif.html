@@ -153,6 +153,9 @@
     </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         // Boilerplate script
         const quizzes = [
             {
