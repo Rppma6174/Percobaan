@@ -165,6 +165,9 @@
 </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         const quizzes = [
             { q: "Sebuah layanan streaming musik memiliki biaya langganan bulanan tetap Rp50.000, berapapun lagu yang didengarkan. Jika $B$ adalah biaya dan $l$ adalah jumlah lagu, model fungsi yang paling tepat adalah...", options: ["Fungsi Kuadrat", "Fungsi Linear dengan gradien 50.000", "Fungsi Konstan", "Fungsi Invers"], correct: 2, explanation: "Karena biayanya tetap dan tidak bergantung pada jumlah lagu, ini adalah fungsi konstan, yaitu $B(l) = 50000$. Fungsi konstan adalah kasus khusus dari fungsi linear di mana gradien $m=0$." },
             { q: "Dalam fungsi biaya taksi $C(d) = 4000d + 7000$, di mana $d$ adalah jarak dalam km, angka 4000 merepresentasikan...", options: ["Tarif awal (buka pintu)", "Jarak maksimum", "Biaya total perjalanan", "Biaya per kilometer"], correct: 3, explanation: "Angka 4000 adalah gradien ($m$), yang merepresentasikan tingkat perubahan biaya terhadap jarak, atau biaya per kilometer." },
