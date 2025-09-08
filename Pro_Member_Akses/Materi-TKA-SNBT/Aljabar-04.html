@@ -204,6 +204,9 @@
 </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         const quizzes = [
             { q: "Manakah dari himpunan pasangan berurutan berikut yang merupakan sebuah fungsi? (Domain adalah {a, b, c})", options: ["{(a,1), (b,2)}", "{(a,1), (b,2), (c,1)}", "{(a,1), (a,2), (b,3), (c,4)}", "{(1,a), (2,b), (3,c)}"], correct: 1, explanation: "Pilihan kedua adalah fungsi karena setiap anggota domain (a,b,c) muncul tepat satu kali sebagai elemen pertama. Pilihan pertama melanggar aturan 1 (c tidak punya pasangan). Pilihan ketiga melanggar aturan 2 (a bercabang)." },
             { q: "Manakah dari pernyataan berikut yang paling tepat mendefinisikan fungsi?", options: ["Setiap anggota domain harus memiliki tepat satu pasangan di kodomain.", "Setiap anggota kodomain harus memiliki tepat satu pasangan di domain.", "Jumlah anggota domain dan kodomain harus sama.", "Panah pada diagram tidak boleh mengarah pada anggota kodomain yang sama."], correct: 0, explanation: "Dua aturan emas fungsi berfokus pada domain: semua anggota domain harus terpetakan, dan masing-masing hanya ke satu tujuan." },
