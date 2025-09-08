@@ -181,10 +181,8 @@
 
     <script>
         if (!sessionStorage.getItem('sessionToken')) {
-            // Uncomment baris di bawah jika ingin mengaktifkan proteksi halaman
-            // window.location.href = '../../Login/';
+            window.location.href = '../../Login/';
         }
-
         const quizzes = [
             {
                 q: "Di manakah letak titik puncak (vertex) dari grafik fungsi $f(x) = |x-5| + 2$?",
