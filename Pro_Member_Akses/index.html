@@ -49,61 +49,61 @@
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .nav-btn:disabled { background-color: #30363D; color: #8B949E; cursor: not-allowed; }
 
-.dropdown-container {
-    position: relative;
-    width: 100%;
-    max-width: 320px;
-    user-select: none;
-}
-.dropdown-button {
-    background-color: var(--bg-panel);
-    border: 1px solid var(--border-color);
-    padding: 0.75rem 1rem;
-    width: 100%;
-    border-radius: 0.5rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-    transition: border-color 0.2s;
-}
-.dropdown-button:hover {
-    border-color: var(--accent-cyan);
-}
-.dropdown-button span {
-    font-weight: 600;
-}
-.dropdown-button i {
-    transition: transform 0.3s ease;
-}
-.dropdown-menu {
-    display: none;
-    position: absolute;
-    top: calc(100% + 0.5rem);
-    left: 0;
-    width: 100%;
-    background-color: var(--bg-panel);
-    border: 1px solid var(--border-color);
-    border-radius: 0.5rem;
-    z-index: 10;
-    max-height: 250px;
-    overflow-y: auto;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-}
-.dropdown-menu.open {
-    display: block;
-}
-.dropdown-button.open i {
-    transform: rotate(180deg);
-}
-.dropdown-item {
-    padding: 0.75rem 1rem;
-    cursor: pointer;
-}
-.dropdown-item:hover {
-    background-color: var(--accent-cyan);
-    color: white;
-}
+        .dropdown-container {
+            position: relative;
+            width: 100%;
+            max-width: 320px;
+            user-select: none;
+        }
+        .dropdown-button {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 0.75rem 1rem;
+            width: 100%;
+            border-radius: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+        .dropdown-button:hover {
+            border-color: var(--accent-cyan);
+        }
+        .dropdown-button span {
+            font-weight: 600;
+        }
+        .dropdown-button i {
+            transition: transform 0.3s ease;
+        }
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            top: calc(100% + 0.5rem);
+            left: 0;
+            width: 100%;
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            z-index: 10;
+            max-height: 250px;
+            overflow-y: auto;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .dropdown-menu.open {
+            display: block;
+        }
+        .dropdown-button.open i {
+            transform: rotate(180deg);
+        }
+        .dropdown-item {
+            padding: 0.75rem 1rem;
+            cursor: pointer;
+        }
+        .dropdown-item:hover {
+            background-color: var(--accent-cyan);
+            color: white;
+        }
 
         @keyframes slideInRight { from { opacity: 0; transform: translateX(100%); } to { opacity: 1; transform: translateX(0); } }
         @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; transform: translateY(-20px); } }
@@ -259,20 +259,58 @@
     <div id="modal-container" style="display: none;"></div>
 
     <script>
-    // === [PERBAIKAN] ===
-    // Tambahkan data SNBT & TKA ke objek allContentData yang sudah ada dari data.js
+    // === [PERBAIKAN STRUKTUR DATA] ===
+    // Tambahkan data materi di dalam setiap kategori SNBT & TKA
     if (typeof allContentData !== 'undefined') {
         allContentData.snbtTka = {
             materi: [
-                { id: 'snbt-mat-01', title: 'Penalaran Matematika', summary: 'Kumpulan konsep dan rumus penting untuk menaklukkan soal-soal matematika.', icon: 'fa-solid fa-brain' },
-                { id: 'snbt-ppu-01', title: 'Penalaran Umum', summary: 'Latih kemampuan berpikir logis, analitis, dan memecahkan masalah secara efektif.', icon: 'fa-solid fa-lightbulb' },
-                { id: 'snbt-pbm-01', title: 'Pemahaman Bacaan & Menulis', summary: 'Tingkatkan pemahaman teks, analisis wacana, dan kaidah penulisan.', icon: 'fa-solid fa-book-open-reader' },
-                { id: 'snbt-pu-01', title: 'Literasi Bahasa Inggris', summary: 'Kuasai pemahaman teks dan kosakata Bahasa Inggris untuk soal literasi.', icon: 'fa-solid fa-language' }
+                { 
+                    id: 'snbt-mat-01', title: 'Penalaran Matematika', summary: 'Kumpulan konsep dan rumus penting untuk menaklukkan soal-soal matematika.', icon: 'fa-solid fa-brain',
+                    content: {
+                        "Konsep Dasar & Aljabar": [
+                            { id: 'snbt-mat-sub-01', title: 'Logika & Pola Bilangan', type: 'HTML Document', filePath: '#' },
+                            { id: 'snbt-mat-sub-02', title: 'Operasi Aljabar Dasar', type: 'HTML Document', filePath: '#' },
+                        ],
+                        "Analisis Data & Peluang": [
+                            { id: 'snbt-mat-sub-03', title: 'Statistika Deskriptif', type: 'HTML Document', filePath: '#' },
+                            { id: 'snbt-mat-sub-04', title: 'Peluang Kejadian', type: 'HTML Document', filePath: '#' },
+                        ]
+                    }
+                },
+                { 
+                    id: 'snbt-ppu-01', title: 'Penalaran Umum', summary: 'Latih kemampuan berpikir logis, analitis, dan memecahkan masalah secara efektif.', icon: 'fa-solid fa-lightbulb',
+                    content: {
+                        "Penalaran Logis": [
+                             { id: 'snbt-ppu-sub-01', title: 'Silogisme dan Penarikan Kesimpulan', type: 'HTML Document', filePath: '#' },
+                        ]
+                    }
+                },
+                { 
+                    id: 'snbt-pbm-01', title: 'Pemahaman Bacaan & Menulis', summary: 'Tingkatkan pemahaman teks, analisis wacana, dan kaidah penulisan.', icon: 'fa-solid fa-book-open-reader',
+                    content: {} // Kosong sebagai contoh
+                },
+                { 
+                    id: 'snbt-pu-01', title: 'Literasi Bahasa Inggris', summary: 'Kuasai pemahaman teks dan kosakata Bahasa Inggris untuk soal literasi.', icon: 'fa-solid fa-language',
+                    content: {} // Kosong sebagai contoh
+                }
             ],
             latihan: [
-                { id: 'snbt-tryout-01', title: 'Try Out SNBT #1', summary: 'Simulasi ujian lengkap dengan 150 soal untuk mengukur kesiapanmu.', icon: 'fa-solid fa-file-lines' },
-                { id: 'snbt-tka-saintek', title: 'Paket TKA Saintek', summary: 'Soal-soal Fisika, Kimia, Biologi, dan Matematika IPA.', icon: 'fa-solid fa-atom' },
-                { id: 'snbt-tka-soshum', title: 'Paket TKA Soshum', summary: 'Soal-soal Sejarah, Geografi, Sosiologi, dan Ekonomi.', icon: 'fa-solid fa-landmark' }
+                { 
+                    id: 'snbt-tryout-01', title: 'Try Out SNBT #1', summary: 'Simulasi ujian lengkap dengan 150 soal untuk mengukur kesiapanmu.', icon: 'fa-solid fa-file-lines',
+                    content: {
+                        "Paket Try Out": [
+                            { id: 'snbt-to-sub-01', title: 'Mulai Try Out SNBT #1', type: 'Latihan Soal', filePath: '#' },
+                        ]
+                    }
+                },
+                { 
+                    id: 'snbt-tka-saintek', title: 'Paket TKA Saintek', summary: 'Soal-soal Fisika, Kimia, Biologi, dan Matematika IPA.', icon: 'fa-solid fa-atom',
+                    content: {}
+                },
+                { 
+                    id: 'snbt-tka-soshum', title: 'Paket TKA Soshum', summary: 'Soal-soal Sejarah, Geografi, Sosiologi, dan Ekonomi.', icon: 'fa-solid fa-landmark',
+                    content: {}
+                }
             ]
         };
     }
@@ -296,7 +334,9 @@
     let currentQuestionIndex = 0;
     let userAnswers = [];
     let currentExplanationIndex = 0;
+    let currentSnbtViewId = null; // <-- Variabel state untuk halaman SNBT
     
+    // ... (Sisa fungsi keamanan seperti verifySession, logout, etc. tetap sama) ...
     async function verifySession(token, email) {
         try {
             const response = await fetch(CONFIG.API_URL, {
@@ -313,13 +353,11 @@
             showToast("Gagal terhubung ke server. Memeriksa kembali...", "error");
         }
     }
-    
     function startSessionHeartbeat(token, email) {
         if (heartbeatIntervalId) clearInterval(heartbeatIntervalId);
         verifySession(token, email);
         heartbeatIntervalId = setInterval(() => verifySession(token, email), 60000);
     }
-    
     function forceLogout(message) {
         if (heartbeatIntervalId) {
             clearInterval(heartbeatIntervalId);
@@ -338,7 +376,6 @@
             showCancelButton: false
         });
     }
-    
     function logout() {
         showConfirmationModal({
             title: 'Konfirmasi Logout',
@@ -375,6 +412,10 @@
         if (page !== 'pengaturan') {
             sessionStorage.setItem('lastActivePage', page);
         }
+        // [PERBAIKAN] Reset tampilan detail SNBT saat navigasi
+        if (page === 'snbt_tka') {
+            currentSnbtViewId = null;
+        }
 
         document.querySelectorAll('.sidebar-link, .bottom-nav-link').forEach(link => link.classList.remove('active'));
         if (clickedElement) {
@@ -392,6 +433,7 @@
         }
     }
     
+    // ... (Fungsi render lainnya seperti renderDashboardPage, renderMateriPage, dll tetap sama) ...
     function renderDashboardPage() {
         appContent.innerHTML = `
             <header class="panel flex justify-between items-center">
@@ -423,7 +465,6 @@
         `;
         initializeAppDashboardWidgets();
     }
-    
     function renderMateriPage() {
         let accordionHTML = '';
         const materiData = allContentData.materi;
@@ -467,7 +508,12 @@
             </div>
         `;
         appContent.innerHTML = materiPageHTML;
-
+        setupAccordionListeners();
+        setupMateriSearch();
+    }
+    
+    // === [FUNGSI BARU] Mengatur event listener untuk semua accordion ===
+    function setupAccordionListeners() {
         document.querySelectorAll('.accordion-button').forEach(button => {
             button.addEventListener('click', () => {
                 const content = button.parentElement.nextElementSibling;
@@ -476,10 +522,133 @@
                 icon.classList.toggle('rotate-180');
             });
         });
-
-        setupMateriSearch();
     }
 
+    // === [FUNGSI BARU] Membuka halaman detail kategori SNBT ===
+    function openSnbtCategory(categoryId) {
+        currentSnbtViewId = categoryId;
+        renderSnbtTkaPage();
+    }
+
+    // === [FUNGSI DIPERBARUI] Menjadi router untuk halaman SNBT & TKA ===
+    function renderSnbtTkaPage() {
+        if (!currentSnbtViewId) {
+            renderSnbtMainPage();
+        } else {
+            renderSnbtDetailPage(currentSnbtViewId);
+        }
+    }
+
+    // === [FUNGSI BARU] Merender halaman utama SNBT (kartu-kartu) ===
+    function renderSnbtMainPage() {
+        const materiCards = allContentData.snbtTka.materi.map(item => `
+            <div class="card-item p-5 rounded-lg flex flex-col" onclick="openSnbtCategory('${item.id}')">
+                <div class="flex items-center gap-4 mb-3">
+                    <i class="${item.icon} text-cyan-400 text-2xl w-8 text-center"></i>
+                    <h3 class="font-bold text-lg text-cyan-300">${item.title}</h3>
+                </div>
+                <p class="text-sm text-gray-400 flex-grow">${item.summary}</p>
+                <div class="mt-4 text-xs font-mono bg-gray-900/50 text-cyan-300 rounded-full px-3 py-1 self-start">
+                    Materi Belajar
+                </div>
+            </div>
+        `).join('');
+
+        const latihanCards = allContentData.snbtTka.latihan.map(item => `
+            <div class="card-item p-5 rounded-lg flex flex-col" onclick="openSnbtCategory('${item.id}')">
+                <div class="flex items-center gap-4 mb-3">
+                    <i class="${item.icon} text-green-400 text-2xl w-8 text-center"></i>
+                    <h3 class="font-bold text-lg text-green-300">${item.title}</h3>
+                </div>
+                <p class="text-sm text-gray-400 flex-grow">${item.summary}</p>
+                <div class="mt-4 text-xs font-mono bg-gray-900/50 text-green-300 rounded-full px-3 py-1 self-start">
+                    Latihan Soal
+                </div>
+            </div>
+        `).join('');
+
+        const pageHTML = `
+            <div class="panel">
+                <h2 class="text-2xl font-bold text-cyan-400">Persiapan SNBT & TKA</h2>
+                <p class="text-sm text-gray-400 mb-8">Fokuskan persiapanmu dengan materi dan latihan soal yang terstruktur.</p>
+                <div class="mb-10">
+                    <h3 class="text-xl font-semibold mb-4 border-b-2 border-cyan-500 pb-2">Materi Belajar</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                        ${materiCards}
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-semibold mb-4 border-b-2 border-green-500 pb-2">Latihan & Try Out</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
+                        ${latihanCards}
+                    </div>
+                </div>
+            </div>
+        `;
+        appContent.innerHTML = pageHTML;
+    }
+
+    // === [FUNGSI BARU] Merender halaman detail materi SNBT (tampilan accordion) ===
+    function renderSnbtDetailPage(categoryId) {
+        const allCategories = [...allContentData.snbtTka.materi, ...allContentData.snbtTka.latihan];
+        const categoryData = allCategories.find(item => item.id === categoryId);
+
+        if (!categoryData) {
+            appContent.innerHTML = `<p>Konten tidak ditemukan.</p>`;
+            return;
+        }
+
+        let accordionHTML = '';
+        if (Object.keys(categoryData.content).length === 0) {
+            accordionHTML = `<p class="p-4 text-gray-500">Materi untuk kategori ini belum tersedia.</p>`;
+        } else {
+            for (const subCategory in categoryData.content) {
+                const itemsHTML = categoryData.content[subCategory].map(item => `
+                    <li id="card-${item.id}"
+                        class="card-item-list block p-3 rounded-md hover:bg-gray-700 cursor-pointer"
+                        onclick="openMateri('${item.id}', '${item.filePath}')">
+                        <span class="font-semibold">${item.title}</span>
+                        <span class="block text-xs text-gray-400">${item.type}</span>
+                    </li>
+                `).join('');
+
+                accordionHTML += `
+                    <div class="accordion-item border-b border-gray-700" data-accordion-group>
+                        <h2>
+                            <button type="button" class="accordion-button flex items-center justify-between w-full p-4 font-semibold text-left text-cyan-300">
+                                <span>${subCategory}</span>
+                                <i class="accordion-icon fa-solid fa-chevron-down shrink-0 transition-transform duration-200"></i>
+                            </button>
+                        </h2>
+                        <div class="accordion-content hidden p-2">
+                            <ul class="space-y-2">${itemsHTML}</ul>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        const pageHTML = `
+            <div class="panel">
+                <div class="flex items-center mb-6">
+                    <button onclick="navigateTo('snbt_tka', document.querySelector('.sidebar-link[onclick*=\\'snbt_tka\\']'))" class="text-gray-400 hover:text-white mr-4">
+                        <i class="fa-solid fa-arrow-left text-xl"></i>
+                    </button>
+                    <div>
+                        <h2 class="text-2xl font-bold text-cyan-400">${categoryData.title}</h2>
+                        <p class="text-sm text-gray-400">${categoryData.summary}</p>
+                    </div>
+                </div>
+                <div class="border border-gray-700 rounded-lg bg-gray-900/50">
+                    ${accordionHTML}
+                </div>
+            </div>
+        `;
+        appContent.innerHTML = pageHTML;
+        setupAccordionListeners(); // Terapkan event listener ke accordion yang baru dibuat
+    }
+    
+    // ... (Sisa kode Anda dari openMateri, setupMateriSearch, renderVideoPage, dst. tetap sama) ...
     function openMateri(itemId, filePath) {
         if (!filePath || filePath === '#') {
             showToast('Konten untuk materi ini belum tersedia.', 'info');
@@ -502,7 +671,6 @@
 
         window.location.href = filePath;
     }
-
     function setupMateriSearch() {
         const searchInput = document.getElementById('materi-search-input');
         if (!searchInput) return;
@@ -548,57 +716,6 @@
             });
         });
     }
-        
-    function renderSnbtTkaPage() {
-        const materiCards = allContentData.snbtTka.materi.map(item => `
-            <div class="card-item p-5 rounded-lg flex flex-col cursor-pointer" onclick="showToast('Materi ${item.title} belum tersedia.', 'info')">
-                <div class="flex items-center gap-4 mb-3">
-                    <i class="${item.icon} text-cyan-400 text-2xl w-8 text-center"></i>
-                    <h3 class="font-bold text-lg text-cyan-300">${item.title}</h3>
-                </div>
-                <p class="text-sm text-gray-400 flex-grow">${item.summary}</p>
-                <div class="mt-4 text-xs font-mono bg-gray-900/50 text-cyan-300 rounded-full px-3 py-1 self-start">
-                    Materi Belajar
-                </div>
-            </div>
-        `).join('');
-
-        const latihanCards = allContentData.snbtTka.latihan.map(item => `
-            <div class="card-item p-5 rounded-lg flex flex-col cursor-pointer" onclick="showToast('Latihan soal ${item.title} belum tersedia.', 'info')">
-                <div class="flex items-center gap-4 mb-3">
-                    <i class="${item.icon} text-green-400 text-2xl w-8 text-center"></i>
-                    <h3 class="font-bold text-lg text-green-300">${item.title}</h3>
-                </div>
-                <p class="text-sm text-gray-400 flex-grow">${item.summary}</p>
-                <div class="mt-4 text-xs font-mono bg-gray-900/50 text-green-300 rounded-full px-3 py-1 self-start">
-                    Latihan Soal
-                </div>
-            </div>
-        `).join('');
-
-        const pageHTML = `
-            <div class="panel">
-                <h2 class="text-2xl font-bold text-cyan-400">Persiapan SNBT & TKA</h2>
-                <p class="text-sm text-gray-400 mb-8">Fokuskan persiapanmu dengan materi dan latihan soal yang terstruktur.</p>
-
-                <div class="mb-10">
-                    <h3 class="text-xl font-semibold mb-4 border-b-2 border-cyan-500 pb-2">Materi Belajar</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                        ${materiCards}
-                    </div>
-                </div>
-
-                <div>
-                    <h3 class="text-xl font-semibold mb-4 border-b-2 border-green-500 pb-2">Latihan & Try Out</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                        ${latihanCards}
-                    </div>
-                </div>
-            </div>
-        `;
-        appContent.innerHTML = pageHTML;
-    }
-
     function renderVideoPage() {
         const categories = ['Semua', ...new Set(allContentData.video.map(item => item.category))];
 
@@ -632,7 +749,6 @@
 
         setupVideoFilter();
     }
-
     function playVideoInModal(videoId, title) {
         const videoItem = allContentData.video.find(v => v.videoId === videoId);
         if (videoItem) {
@@ -660,7 +776,6 @@
             confirmButtonClass: 'modal-btn-confirm mt-4 w-full justify-center',
         });
     }
-
     function setupVideoFilter() {
         const filterContainer = document.getElementById('video-filter-container');
         const videoCards = document.querySelectorAll('.video-card');
@@ -687,7 +802,6 @@
             });
         });
     }
-        
     function renderBankSoalPage() {
         const categories = ['Semua', ...new Set(allContentData.bankSoal.map(quiz => quiz.category || 'Lainnya'))];
 
@@ -754,7 +868,6 @@
 
         setupBankSoalFilter();
     }
-
     function setupBankSoalFilter() {
         const dropdownContainer = document.getElementById('filter-dropdown');
         if (!dropdownContainer) return;
@@ -794,11 +907,9 @@
             }
         });
     }
-
     function renderForumPage() {
         appContent.innerHTML = `<div class="forum-container"><div class="intro"><h1>Forum Belajar UMT</h1><p>Bergabunglah dengan komunitas eksklusif UMT Academy! Tempat terbaik untuk berdiskusi, bertanya, berbagi ilmu, dan menguasai matematika bersama sesama pelajar dan fasilitator.</p></div><div class="community-links"><h2>Pilih Komunitas Pilihanmu Sekarang!</h2><div class="flex justify-center gap-4 flex-wrap"><a href="https://chat.whatsapp.com/GpyKRFFjMINBcjqGEYSXQ6" target="_blank" class="community-btn whatsapp-btn"><i class="fab fa-whatsapp"></i><span>Komunitas WhatsApp</span></a><a href="https://t.me/umt6174" target="_blank" class="community-btn telegram-btn"><i class="fab fa-telegram"></i><span>Komunitas Telegram</span></a></div><p class="subtext">Bergabunglah dengan ribuan pelajar lainnya!</p></div></div>`;
     }
-    
     function renderPengaturanPage() {
         appContent.innerHTML = `
         <div class="panel max-w-2xl mx-auto">
@@ -824,7 +935,6 @@
             </div>
         </div>`;
     }
-
     function renderUmtLabPage() {
         const analisisArticles = allContentData.umtLab.filter(p => p.category === 'Analisis & Kajian');
         const eksplorasiArticles = allContentData.umtLab.filter(p => p.category === 'Eksplorasi Teori');
@@ -860,7 +970,6 @@
         appContent.innerHTML = labPageHTML;
         if (window.MathJax) { MathJax.typeset(); }
     }
-
     function renderPerpustakaanPage() {
         const libraryHTML = allContentData.perpustakaan.map(item => `
             <div class="card-item p-5 rounded-lg flex flex-col" onclick="window.location.href='viewer.html?id=${item.id}'">
@@ -884,7 +993,6 @@
         `;
         appContent.innerHTML = pageHTML;
     }
-
     function getTotalItemCount() {
         const totalMateri = Object.values(allContentData.materi).flat().length;
         const totalVideo = allContentData.video.length;
@@ -893,7 +1001,6 @@
         const totalPerpustakaan = allContentData.perpustakaan.length;
         return totalMateri + totalVideo + totalBankSoal + totalUmtLab + totalPerpustakaan;
     }
-    
     function initializeAppDashboardWidgets() {
         const email = sessionStorage.getItem(CONFIG.SESSION_KEYS.EMAIL) || 'pengguna@email.com';
         const namePart = email.split('@')[0];
@@ -970,7 +1077,6 @@
         activityHTML += createWidget({ title: "Buku Terakhir Dibuka", icon: "fa-solid fa-book-atlas", actionText: "Lanjutkan Membaca", data: lastActivity.perpustakaan, type: 'perpustakaan' });
         lastActivityContainer.innerHTML = activityHTML;
     }
-    
     function resetProgress() {
         showConfirmationModal({
             title: 'Konfirmasi Reset Progres',
@@ -987,7 +1093,6 @@
             cancelAction: () => showToast("Aksi reset dibatalkan.", "info")
         });
     }
-    
     function markAsCompleted(itemId, options = { showToast: false }) {
         let completed = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEYS.COMPLETED_ITEMS)) || [];
         if (!completed.includes(itemId)) {
@@ -1015,7 +1120,6 @@
         lastActivity[type] = dataToStore;
         localStorage.setItem(key, JSON.stringify(lastActivity));
     }
-    
     function startQuiz(quizId) {
         currentQuizData = allContentData.bankSoal.find(q => q.id === quizId);
         if (!currentQuizData) { showToast('Kuis tidak ditemukan!', 'error'); return; }
@@ -1093,7 +1197,6 @@
             activeNavItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         }
     }
-
     function showAnswerAndExplanation(isRestoringState = false) {
         const quiz = currentQuizData;
         const question = quiz.questions[currentQuestionIndex];
@@ -1126,7 +1229,6 @@
             MathJax.typesetPromise([explanationText]).catch(err => console.log('MathJax error:', err));
         }
     }
-        
     function selectAnswer(answer, element) {
         if (userAnswers[currentQuestionIndex] !== null) {
             return;
@@ -1140,21 +1242,18 @@
         
         showAnswerAndExplanation();
     }
-
     function nextQuestion() {
         if (currentQuestionIndex < currentQuizData.questions.length - 1) {
             currentQuestionIndex++;
             renderQuizInterface();
         }
     }
-
     function previousQuestion() {
         if (currentQuestionIndex > 0) {
             currentQuestionIndex--;
             renderQuizInterface();
         }
     }
-
     function jumpToQuestion(index) {
         currentQuestionIndex = index;
         renderQuizInterface();
@@ -1164,12 +1263,10 @@
             activeNavItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
         }
     }
-
     function submitQuiz() {
         if (userAnswers[currentQuestionIndex] === null) { showToast('Silakan pilih jawaban terlebih dahulu!', 'error'); return; }
         if (currentQuestionIndex < currentQuizData.questions.length - 1) { currentQuestionIndex++; renderQuizInterface(); } else { renderQuizResults(); }
     }
-    
     function renderQuizResults() {
         const quiz = currentQuizData;
         let score = 0;
@@ -1211,7 +1308,6 @@
         currentExplanationIndex = 0;
         renderSingleExplanation(currentExplanationIndex);
     }
-    
     function renderSingleExplanation(index) {
         const container = document.getElementById('single-explanation-container');
         const quiz = currentQuizData;
@@ -1249,10 +1345,8 @@
             MathJax.typesetPromise([container]).catch(err => console.log('MathJax error: ', err.message));
         }
     }
-    
     function nextExplanation() { if (currentExplanationIndex < currentQuizData.questions.length - 1) { currentExplanationIndex++; renderSingleExplanation(currentExplanationIndex); } }
     function prevExplanation() { if (currentExplanationIndex > 0) { currentExplanationIndex--; renderSingleExplanation(currentExplanationIndex); } }
-    
     function showToast(message, type = 'info') {
         const container = document.getElementById('toast-container');
         const toast = document.createElement('div');
@@ -1269,7 +1363,6 @@
             toast.addEventListener('animationend', () => toast.remove());
         }, 5000);
     }
-    
     function showConfirmationModal(options) {
         const {
             title,
@@ -1325,7 +1418,6 @@
             });
         }
     }
-    
     function initializeApp() {
         const token = sessionStorage.getItem(CONFIG.SESSION_KEYS.TOKEN);
         const email = sessionStorage.getItem(CONFIG.SESSION_KEYS.EMAIL);
