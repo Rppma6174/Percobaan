@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transformasi Geometri - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .special-note {
+            background-color: rgba(248, 81, 73, 0.1); border-left: 4px solid var(--accent-red);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .diagram-container {
+            display: flex; justify-content: space-around; align-items: center; flex-wrap: wrap; gap: 1.5rem;
+            background-color: var(--bg-main); padding: 1.5rem 1rem; border-radius: 0.5rem;
+            border: 1px solid var(--border-color); margin-top: 1rem;
+        }
+        .diagram-container svg text { font-size: 12px; fill: var(--text-primary); }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option, .mcma-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong),
+        .options-container.answered .mcma-option {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover, .mcma-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct, .mcma-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; opacity: 1;
+        }
+        .quiz-option.wrong, .mcma-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); opacity: 1;
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .confirm-btn {
+            background-color: var(--accent-cyan); color: white; border: none; padding: 10px 20px;
+            border-radius: 0.5rem; font-weight: bold; cursor: pointer; margin-top: 1rem; width: 100%;
+            transition: background-color 0.2s ease;
+        }
+        .confirm-btn:hover { background-color: #1f6eeb; }
+        .category-table { width: 100%; border-collapse: separate; border-spacing: 0 0.5rem; }
+        .category-table td { padding: 0.75rem; border: 2px solid var(--border-color); border-radius: 0.5rem; }
+        .category-table td:first-child { text-align: left; }
+        .category-table .correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); }
+        .category-table .wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note, .special-note {
+            overflow-x: auto; padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Transformasi Geometri: Menggeser, Mencerminkan, Memutar, dan Mengubah Skala</h1>
+<p>
+    Transformasi geometri adalah studi tentang bagaimana objek dapat dipindahkan atau diubah pada sebuah bidang. Ada empat jenis transformasi dasar yang perlu dikuasai: Translasi, Refleksi, Rotasi, dan Dilatasi.
+</p>
+
+<h2>1. Translasi (Pergeseran)</h2>
+<p>Translasi adalah pergeseran setiap titik dari suatu objek sejauh jarak dan arah yang sama. Dinyatakan oleh vektor translasi $T = \begin{pmatrix} a \\ b \end{pmatrix}$.</p>
+<div class="important-note">
+    <b>Rumus Translasi:</b> $P(x,y) \xrightarrow{T(a,b)} P'(x+a, y+b)$
+</div>
+
+<h2>2. Refleksi (Pencerminan)</h2>
+<p>Refleksi adalah pencerminan objek terhadap sebuah garis (cermin).</p>
+<div class="important-note">
+    <b>Rumus Refleksi Umum:</b>
+    <ul>
+        <li>Terhadap sumbu-x: $(x,y) \to (x, -y)$</li>
+        <li>Terhadap sumbu-y: $(x,y) \to (-x, y)$</li>
+        <li>Terhadap garis $y=x$: $(x,y) \to (y, x)$</li>
+        <li>Terhadap garis $y=-x$: $(x,y) \to (-y, -x)$</li>
+        <li>Terhadap titik asal (0,0): $(x,y) \to (-x, -y)$</li>
+    </ul>
+</div>
+
+<h2>3. Rotasi (Perputaran)</h2>
+<p>Rotasi adalah perputaran objek mengelilingi sebuah titik pusat sejauh sudut tertentu. Arah positif berarti berlawanan arah jarum jam.</p>
+<div class="important-note">
+    <b>Rumus Rotasi (Pusat di (0,0)):</b>
+    <ul>
+        <li>Rotasi +90°: $(x,y) \to (-y, x)$</li>
+        <li>Rotasi -90°: $(x,y) \to (y, -x)$</li>
+        <li>Rotasi 180°: $(x,y) \to (-x, -y)$</li>
+    </ul>
+</div>
+
+<h2>4. Dilatasi (Perubahan Skala)</h2>
+<p>Dilatasi adalah transformasi yang memperbesar atau memperkecil ukuran objek dari sebuah titik pusat, dengan faktor skala $k$.</p>
+<div class="important-note">
+    <b>Rumus Dilatasi (Pusat di (0,0)):</b> $P(x,y) \xrightarrow{[O,k]} P'(kx, ky)$
+</div>
+
+<h2>5. Komposisi Transformasi</h2>
+<p>
+    Komposisi adalah penerapan dua atau lebih transformasi secara berurutan.
+</p>
+<div class="special-note">
+    <b>Tips & Strategi:</b>
+    <p>Kerjakan transformasi satu per satu sesuai urutan. Bayangan dari transformasi pertama menjadi objek untuk transformasi kedua.</p>
+    <b>Peringatan:</b> Urutan transformasi sangat penting! $T_2 \circ T_1$ (artinya $T_1$ dulu baru $T_2$) umumnya tidak sama dengan $T_1 \circ T_2$.
+</div>
+<p><b>Contoh:</b> Titik A(2, 3) dirotasi +90° berpusat di (0,0), lalu ditranslasi oleh $T = \begin{pmatrix} 1 \\ -2 \end{pmatrix}$.</p>
+<ol>
+    <li><b>Rotasi:</b> A(2, 3) $\xrightarrow{R_{+90^\circ}}$ A'(-3, 2).</li>
+    <li><b>Translasi:</b> A'(-3, 2) $\xrightarrow{T(1,-2)}$ A''(-3+1, 2-2) = A''(-2, 0).</li>
+</ol>
+
+
+<h2>Uji Kompetensi</h2>
+<p>Kerjakan soal-soal berikut untuk menguji pemahaman Anda sesuai format TKA.</p>
+<div id="quiz-container"></div>
+</div>
+
+    <script>
+        const quizzes = [
+            { q: "Bayangan titik (3, -2) oleh translasi $T = \\begin{pmatrix} 4 \\ 5 \\end{pmatrix}$ adalah...", options: ["(7, 3)", "(-1, -7)", "(1, 7)", "(7, -7)"], correct: 0, explanation: "$x' = x+a = 3+4=7$. $y' = y+b = -2+5=3$. Jadi, bayangannya adalah (7, 3)." },
+            { q: "Bayangan titik (5, 2) jika dicerminkan terhadap sumbu-x adalah...", options: ["(-5, 2)", "(5, -2)", "(-5, -2)", "(2, 5)"], correct: 1, explanation: "Refleksi terhadap sumbu-x mengikuti aturan $(x,y) \\to (x,-y)$. Maka, (5, 2) menjadi (5, -2)." },
+            { q: "Titik (4, 1) dirotasi -90° terhadap pusat (0,0). Bayangannya adalah...", options: ["(-1, 4)", "(1, -4)", "(-4, -1)", "(-4, 1)"], correct: 1, explanation: "Rotasi -90° mengikuti aturan $(x,y) \\to (y, -x)$. Maka, (4, 1) menjadi (1, -4)." },
+            { q: "Titik (-2, 3) didilatasi dengan pusat (0,0) dan faktor skala 3. Bayangannya adalah...", options: ["(-6, 9)", "(1, 6)", "(6, -9)", "(-5, 6)"], correct: 0, explanation: "Dilatasi dengan pusat (0,0) mengikuti aturan $(x,y) \\to (kx, ky)$. Maka, (-2, 3) menjadi $(3 \\times -2, 3 \\times 3) = (-6, 9)$." },
+            { q: "Sebuah segitiga ABC dengan titik A(1,1) ditransformasi. Tentukan Benar atau Salah untuk setiap pernyataan berikut:", type: "category", statements: [{s: "Jika ditranslasi oleh T(-1,-1), bayangan A' adalah (0,0).", a: true}, {s: "Jika direfleksikan terhadap garis y=x, bayangan A' adalah (1,1).", a: true}, {s: "Jika dirotasi 180° terhadap (0,0), bayangan A' adalah (-1,-1).", a: true}], explanation: "A. (1+(-1), 1+(-1)) = (0,0) (Benar). B. Aturan cermin y=x adalah (x,y) -> (y,x), jadi (1,1) tetap (Benar). C. Aturan rotasi 180° adalah (x,y) -> (-x,-y), jadi (1,1) menjadi (-1,-1) (Benar)." },
+            { q: "Titik (1, 5) dicerminkan terhadap sumbu-y, lalu dilanjutkan dengan rotasi +90° terhadap (0,0). Bayangan akhirnya adalah...", options: ["(-5, -1)", "(5, 1)", "(-5, 1)", "(5, -1)"], correct: 0, explanation: "Langkah 1 (Refleksi sumbu-y): $(1,5) \\to (-1,5)$. Langkah 2 (Rotasi +90°): $(-1,5) \\to (-5,-1)$. Jadi, bayangan akhirnya adalah (-5,-1)." },
+            { q: "Bayangan titik P oleh translasi $T(2,-3)$ adalah P'(5,1). Koordinat titik P adalah...", options: ["(7, -2)", "(3, 4)", "(-3, -4)", "(3, -2)"], correct: 1, explanation: "Ini adalah proses invers. Jika $x+2=5$, maka $x=3$. Jika $y-3=1$, maka $y=4$. Jadi titik asalnya adalah (3,4)." },
+            { q: "Sebuah garis $y=2x+1$ ditransformasi. Manakah pernyataan yang benar? (Pilih semua jawaban yang benar)", type: "mcma", options: ["Jika ditranslasi, gradiennya tetap 2.", "Jika direfleksikan terhadap sumbu-y, persamaan barunya menjadi $y=-2x+1$.", "Jika didilatasi [O,2], persamaan barunya menjadi $y=2x+2$.", "Jika dirotasi 180°, gradiennya tetap 2."], correct: [0,1,2,3], explanation: "A. Translasi hanya menggeser, tidak mengubah kemiringan (Benar). B. Refleksi thd sumbu-y: $(x,y) \\to (-x,y)$. Substitusi: $y=2(-x)+1 \implies y=-2x+1$ (Benar). C. Dilatasi [O,2]: $(x,y) \\to (x/2, y/2)$. Substitusi: $y/2 = 2(x/2)+1 \implies y/2=x+1 \implies y=2x+2$ (Benar). D. Rotasi 180°: $(x,y) \\to (-x,-y)$. Substitusi: $-y=2(-x)+1 \implies y=2x-1$. Gradiennya tetap 2 (Benar)." },
+            { q: "Sebuah segitiga siku-siku dengan alas 3 dan tinggi 4 didilatasi dengan faktor skala 2 dari pusat (0,0). Luas bayangannya adalah...", options: ["12", "24", "36", "48"], correct: 1, explanation: "Luas awal = $\\frac{1}{2} \\times 3 \\times 4 = 6$. Untuk dilatasi, luas baru adalah $k^2 \\times$ Luas Awal. Maka, Luas Baru = $2^2 \\times 6 = 4 \\times 6 = 24$." },
+            { q: "Tentukan Benar atau Salah untuk pernyataan-pernyataan berikut:", type: "category", statements: [{s: "Refleksi terhadap sumbu-x dilanjutkan refleksi terhadap sumbu-y ekuivalen dengan rotasi 180°.", a: true}, {s: "Translasi adalah transformasi yang mengubah ukuran benda.", a: false}, {s: "Urutan dalam komposisi transformasi umumnya tidak penting.", a: false}], explanation: "A: $(x,y) \\xrightarrow{sumbu-x} (x,-y) \\xrightarrow{sumbu-y} (-x,-y)$. Ini sama dengan aturan rotasi 180° (Benar). B: Translasi hanya mengubah posisi (Salah). C: Urutan sangat penting dan bisa menghasilkan bayangan yang berbeda (Salah)." }
+        ];
+
+        // --- SCRIPT KUIS INTERAKTIF LENGKAP ---
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            let optionsHtml = ''; let dataCorrect = '';
+            if (quiz.type === 'category') {
+                const correctAnswers = quiz.statements.map(s => s.a).join(',');
+                dataCorrect = `data-correct="${correctAnswers}"`;
+                optionsHtml = `<table class="category-table"><tbody>
+                    ${quiz.statements.map((stmt, i) => `
+                        <tr>
+                            <td>${String.fromCharCode(65 + i)}. ${stmt.s}</td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="true"> Benar</label></td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="false"> Salah</label></td>
+                        </tr>
+                    `).join('')}
+                </tbody></table>`;
+            } else if (quiz.type === 'mcma') {
+                dataCorrect = `data-correct="${quiz.correct.join(',')}"`;
+                optionsHtml = quiz.options.map((opt, i) =>
+                    `<div class="mcma-option" data-index="${i}"><label style="width: 100%; cursor: pointer; display: block;"><input type="checkbox" style="margin-right: 10px; vertical-align: middle;">${opt}</label></div>`
+                ).join("");
+            } else {
+                dataCorrect = `data-correct="${quiz.correct}"`;
+                optionsHtml = quiz.options.map((opt, i) => 
+                    `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                ).join("");
+            }
+            const confirmBtnHtml = (quiz.type === 'category' || quiz.type === 'mcma') ? `<button class="confirm-btn">Konfirmasi Jawaban</button>` : '';
+            quizEl.innerHTML = `
+                <button class="quiz-accordion-button"><span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i></button>
+                <div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p>
+                    <div class="options-container" data-type="${quiz.type || 'pg'}" ${dataCorrect}>${optionsHtml}</div>
+                    ${confirmBtnHtml}
+                    <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                </div>`;
+            quizContainer.appendChild(quizEl);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.dataset.type === 'pg' && !optionsContainer.classList.contains('answered')) {
+                        optionsContainer.classList.add('answered');
+                        if (option.dataset.correct === 'true') {
+                            option.classList.add('correct');
+                        } else {
+                            option.classList.add('wrong');
+                            const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                            if (correctOption) correctOption.classList.add('correct');
+                        }
+                        const explanation = optionsContainer.nextElementSibling;
+                        explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.mcma-option label').forEach(label => {
+                label.addEventListener('click', (e) => {
+                    if (e.target.type !== 'checkbox') {
+                        const checkbox = label.querySelector('input[type="checkbox"]');
+                        if (checkbox && !checkbox.disabled) { checkbox.checked = !checkbox.checked; }
+                    }
+                });
+            });
+
+            document.querySelectorAll('.confirm-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const optionsContainer = button.previousElementSibling;
+                    const type = optionsContainer.dataset.type;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered'); button.style.display = 'none';
+
+                    if (type === 'category') {
+                        const correctAnswers = optionsContainer.dataset.correct.split(',');
+                        const rows = optionsContainer.querySelectorAll('tr');
+                        rows.forEach((row, i) => {
+                            const radios = row.querySelectorAll('input[type="radio"]');
+                            const selected = Array.from(radios).find(r => r.checked);
+                            const correctAnswer = correctAnswers[i];
+                            
+                            if (selected) {
+                                const selectedCell = selected.parentElement.closest('td');
+                                if (selected.value === correctAnswer) {
+                                    selectedCell.classList.add('correct');
+                                } else {
+                                    selectedCell.classList.add('wrong');
+                                }
+                            }
+
+                            if (!selected || selected.value !== correctAnswer) {
+                                const correctRadio = Array.from(radios).find(r => r.value === correctAnswer);
+                                if (correctRadio) {
+                                    correctRadio.parentElement.closest('td').classList.add('correct');
+                                }
+                            }
+                            radios.forEach(r => r.disabled = true);
+                        });
+                    } else if (type === 'mcma') {
+                        const correctIndices = optionsContainer.dataset.correct.split(',');
+                        const options = optionsContainer.querySelectorAll('.mcma-option');
+                        options.forEach((opt) => {
+                            const checkbox = opt.querySelector('input');
+                            const index = opt.dataset.index;
+                            const isChecked = checkbox.checked;
+                            const isCorrectAnswer = correctIndices.includes(index);
+                            
+                            if (isChecked && isCorrectAnswer) { opt.classList.add('correct');
+                            } else if (isChecked && !isCorrectAnswer) { opt.classList.add('wrong');
+                            } else if (!isChecked && isCorrectAnswer) { opt.classList.add('correct'); }
+                            checkbox.disabled = true;
+                        });
+                    }
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
