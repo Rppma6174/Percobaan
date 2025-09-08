@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jenis-jenis Fungsi dan Grafiknya - UMT Learning</title>
+    <title>Operasi, Komposisi, dan Invers Fungsi - UMT Learning</title>
     <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     
@@ -41,12 +41,10 @@
             background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
             padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
         }
-        .diagram-container {
-            display: flex; justify-content: space-around; align-items: flex-start; flex-wrap: wrap; gap: 1.5rem;
-            background-color: var(--bg-main); padding: 1.5rem 1rem; border-radius: 0.5rem;
-            border: 1px solid var(--border-color); margin-top: 1rem;
+        .special-note {
+            background-color: rgba(248, 81, 73, 0.1); border-left: 4px solid var(--accent-red);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
         }
-        .diagram-container svg text { font-size: 12px; fill: var(--text-primary); }
         .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
         .quiz-accordion-button {
             background-color: var(--bg-panel); color: var(--text-primary);
@@ -90,7 +88,7 @@
         .category-table .wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
 
         /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
-        p, li, .quiz-explanation, .important-note {
+        p, li, .quiz-explanation, .important-note, .special-note {
             overflow-x: auto; padding-bottom: 8px;
         }
         /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
@@ -106,67 +104,70 @@
             <i class="fas fa-arrow-left"></i>
         </a>
 
-<h1>Jenis-jenis Fungsi dan Grafiknya</h1>
+<h1>Operasi, Komposisi, dan Invers Fungsi</h1>
 <p>
-    Setelah memahami definisi fungsi, kita dapat mengklasifikasikannya berdasarkan sifat pemetaan dan bentuk grafiknya. Pengenalan ini penting untuk menganalisis karakteristik sebuah fungsi secara cepat.
+    Fungsi dapat digabungkan dengan berbagai cara. Materi ini membahas tiga pilar utama dalam manipulasi fungsi: operasi aljabar, komposisi, dan invers.
 </p>
 
-<h2>1. Klasifikasi Berdasarkan Sifat Pemetaan</h2>
-<p>Sifat ini menjelaskan bagaimana anggota domain dipetakan ke kodomain.</p>
+<h2>1. Operasi Aljabar pada Fungsi</h2>
+<p>
+    Sama seperti bilangan, dua fungsi $f(x)$ dan $g(x)$ dapat dijumlahkan, dikurangkan, dikalikan, atau dibagi.
+</p>
+<p>Misalkan $f(x) = x-3$ dan $g(x) = x^2+2x$.</p>
 <ul>
-    <li><b>Fungsi Injektif (Satu-satu):</b> Setiap anggota domain yang berbeda memiliki pasangan yang berbeda di kodomain. Tidak ada dua input berbeda yang menuju output yang sama.</li>
-    <li><b>Fungsi Surjektif (Onto):</b> Setiap anggota kodomain memiliki pasangan (minimal satu). Dengan kata lain, <b>Range = Kodomain</b>.</li>
-    <li><b>Fungsi Bijektif (Korespondensi Satu-satu):</b> Gabungan dari keduanya. Sebuah fungsi yang bersifat injektif sekaligus surjektif.</li>
+    <li><b>Penjumlahan $(f+g)(x)$:</b> $(x-3) + (x^2+2x) = x^2+3x-3$</li>
+    <li><b>Pengurangan $(f-g)(x)$:</b> $(x-3) - (x^2+2x) = -x^2-x-3$</li>
+    <li><b>Perkalian $(f \cdot g)(x)$:</b> $(x-3)(x^2+2x) = x^3-x^2-6x$</li>
+    <li><b>Pembagian $(\frac{f}{g})(x)$:</b> $\frac{x-3}{x^2+2x}$</li>
 </ul>
+<div class="special-note">
+    <b>Peringatan Domain Pembagian:</b><br>
+    Domain dari fungsi hasil bagi $(\frac{f}{g})(x)$ memiliki syarat tambahan, yaitu penyebutnya $g(x)$ tidak boleh nol. Pada contoh di atas, $x^2+2x \neq 0$, sehingga domainnya adalah semua bilangan real kecuali $x=0$ dan $x=-2$.
+</div>
+
+<h2>2. Komposisi Fungsi</h2>
+<p>
+    Komposisi adalah operasi "fungsi di dalam fungsi". Output dari satu fungsi menjadi input bagi fungsi berikutnya.
+</p>
 <div class="important-note">
-    <b>Tips & Strategi: Uji Garis Horizontal</b><br>
-    Untuk menguji sifat injektif dari sebuah grafik, gunakan Uji Garis Horizontal.
+    <b>Tips & Strategi:</b>
     <ul>
-        <li>Jika ada garis horizontal yang memotong grafik di <b>lebih dari satu titik</b>, fungsi tersebut <b>TIDAK INJEKTIF</b>.</li>
-        <li>Jika semua garis horizontal memotong grafik di <b>maksimal satu titik</b>, fungsi tersebut <b>INJEKTIF</b>.</li>
+        <li>Notasi $(f \circ g)(x)$ dibaca "f bundaran g x" dan artinya $f(g(x))$.</li>
+        <li><b>Aturan Pengerjaan:</b> Selalu kerjakan fungsi yang di sebelah <b>kanan</b> terlebih dahulu. Untuk $(f \circ g)(x)$, hitung $g(x)$ dulu.</li>
+        <li><b>Sifat:</b> Komposisi fungsi <b>tidak komutatif</b>, artinya $(f \circ g)(x)$ umumnya tidak sama dengan $(g \circ f)(x)$.</li>
     </ul>
 </div>
-<div class="diagram-container">
-    <figure>
-        <figcaption style="text-align: center; color: var(--accent-red); margin-bottom: 10px;">Bukan Injektif (Gagal Uji)</figcaption>
-        <svg width="200" height="150">
-            <path d="M 30 140 L 200 140 M 30 140 L 30 10" stroke="#8B949E"/>
-            <path d="M 40 130 C 80 10, 120 10, 160 130" stroke="#C9D1D9" stroke-width="2" fill="none"/>
-            <line x1="20" y1="70" x2="180" y2="70" stroke="#F85149" stroke-dasharray="4 2" stroke-width="2"/>
-            <circle cx="65" cy="70" r="3" fill="#F85149"/><circle cx="135" cy="70" r="3" fill="#F85149"/>
-        </svg>
-    </figure>
-    <figure>
-        <figcaption style="text-align: center; color: var(--accent-green); margin-bottom: 10px;">Injektif (Lolos Uji)</figcaption>
-        <svg width="200" height="150">
-            <path d="M 30 140 L 200 140 M 30 140 L 30 10" stroke="#8B949E"/>
-            <path d="M 40 130 C 80 10, 120 10, 160 30" stroke="#C9D1D9" stroke-width="2" fill="none"/>
-            <line x1="20" y1="70" x2="180" y2="70" stroke="#8B949E" stroke-dasharray="4 2"/>
-            <circle cx="95" cy="70" r="3" fill="#C9D1D9"/>
-        </svg>
-    </figure>
+<p><b>Contoh:</b> Masih dengan $f(x) = x-3$ dan $g(x) = x^2+2x$.</p>
+<ul>
+    <li><b>$(f \circ g)(x) = f(g(x))$:</b> Masukkan seluruh rumus $g(x)$ ke dalam $x$ pada fungsi $f(x)$.
+        <br>$f(g(x)) = (x^2+2x) - 3 = x^2+2x-3$.
+    </li>
+    <li><b>$(g \circ f)(x) = g(f(x))$:</b> Masukkan seluruh rumus $f(x)$ ke dalam setiap $x$ pada fungsi $g(x)$.
+        <br>$g(f(x)) = (x-3)^2 + 2(x-3) = (x^2-6x+9) + (2x-6) = x^2-4x+3$.
+    </li>
+</ul>
+
+<h2>3. Fungsi Invers ($f^{-1}$)</h2>
+<p>
+    Fungsi invers ($f^{-1}$) adalah fungsi yang "membalik" atau "membatalkan" aksi dari fungsi asalnya ($f$). Jika $f(a)=b$, maka $f^{-1}(b)=a$.
+</p>
+<div class="important-note">
+    <b>Strategi Mencari Invers:</b>
+    <ol>
+        <li>Ganti $f(x)$ dengan $y$.</li>
+        <li>Buatlah persamaan menjadi bentuk $x = \dots$ (jadikan $x$ sebagai subjek).</li>
+        <li>Ganti $x$ dengan $f^{-1}(x)$ dan ganti $y$ dengan $x$.</li>
+    </ol>
+    <b>Peringatan:</b> Sebuah fungsi hanya memiliki invers jika ia bersifat <b>bijektif</b>.
 </div>
+<p><b>Contoh:</b> Tentukan invers dari $f(x) = \frac{2x+1}{x-3}$.</p>
+<ol>
+    <li>$y = \frac{2x+1}{x-3}$</li>
+    <li>$y(x-3) = 2x+1 \implies yx - 3y = 2x+1$</li>
+    <li>$yx - 2x = 3y+1 \implies x(y-2) = 3y+1 \implies x = \frac{3y+1}{y-2}$</li>
+    <li>$f^{-1}(x) = \frac{3x+1}{x-2}$</li>
+</ol>
 
-<h2>2. Grafik Fungsi-Fungsi Umum</h2>
-<h3>a. Fungsi Linear: $f(x) = mx+c$</h3>
-<p>Grafiknya selalu berupa <b>garis lurus</b>. Gradien $m$ menentukan kemiringan dan $c$ adalah titik potong sumbu-y.</p>
-
-<h3>b. Fungsi Kuadrat: $f(x) = ax^2+bx+c$</h3>
-<p>Grafiknya selalu berupa <b>parabola</b>. Karakteristik utamanya ditentukan oleh nilai $a$ dan diskriminan $D=b^2-4ac$.</p>
-<ul>
-    <li>$a > 0 \implies$ Parabola terbuka ke atas, memiliki titik minimum.</li>
-    <li>$a < 0 \implies$ Parabola terbuka ke bawah, memiliki titik maksimum.</li>
-    <li>$D > 0 \implies$ Memotong sumbu-x di dua titik.</li>
-    <li>$D = 0 \implies$ Menyinggung sumbu-x di satu titik.</li>
-    <li>$D < 0 \implies$ Tidak memotong sumbu-x.</li>
-</ul>
-
-<h3>c. Fungsi Rasional: $f(x) = \frac{P(x)}{Q(x)}$</h3>
-<p>Fungsi berbentuk pecahan. Ciri khas utamanya adalah keberadaan <b>Asimtot</b>, yaitu garis imajiner yang didekati oleh grafik tetapi tidak pernah disentuh.</p>
-<ul>
-    <li><b>Asimtot Tegak:</b> Terjadi saat penyebut $Q(x)=0$.</li>
-    <li><b>Asimtot Datar:</b> Ditentukan oleh perbandingan derajat (pangkat tertinggi) antara $P(x)$ dan $Q(x)$.</li>
-</ul>
 
 <h2>Uji Kompetensi</h2>
 <p>Kerjakan soal-soal berikut untuk menguji pemahaman Anda sesuai format TKA.</p>
@@ -175,16 +176,16 @@
 
     <script>
         const quizzes = [
-            { q: "Sebuah fungsi yang grafiknya berupa parabola yang terbuka ke bawah adalah...", options: ["Fungsi Linear dengan gradien negatif", "Fungsi Kuadrat dengan $a < 0$", "Fungsi Kuadrat dengan $a > 0$", "Fungsi Rasional"], correct: 1, explanation: "Bentuk grafik parabola adalah ciri khas fungsi kuadrat. Koefisien $a$ pada suku $ax^2$ menentukan arah bukaan. Jika $a$ negatif, parabola terbuka ke bawah." },
-            { q: "Grafik sebuah fungsi diuji dengan Uji Garis Horizontal dan ditemukan ada garis yang memotongnya di dua titik. Ini berarti fungsi tersebut...", options: ["Pasti Surjektif", "Tidak Injektif", "Pasti Bijektif", "Bukan Fungsi"], correct: 1, explanation: "Uji Garis Horizontal digunakan untuk memeriksa sifat injektif. Jika sebuah garis horizontal memotong lebih dari satu kali, berarti ada lebih dari satu input yang menghasilkan output yang sama, sehingga fungsi tersebut tidak injektif (bukan satu-satu)." },
-            { q: "Sebuah fungsi $f: A \\to B$ dikatakan surjektif jika...", options: ["$n(A) = n(B)$", "Setiap anggota A punya pasangan berbeda", "Range = Kodomain", "Domain = Range"], correct: 2, explanation: "Sifat surjektif (onto) berarti semua anggota di himpunan tujuan (Kodomain) habis terpetakan. Dengan kata lain, daerah hasil (Range) sama persis dengan daerah kawan (Kodomain)." },
-            { q: "Tentukan Benar atau Salah untuk setiap pernyataan mengenai fungsi $f(x)=-x^2+4x-3$:", type: "category", statements: [{s: "Grafiknya terbuka ke atas.", a: false}, {s: "Grafiknya memiliki nilai maksimum.", a: true}, {s: "Grafiknya memotong sumbu-y di titik (0, 3).", a: false}], explanation: "A: Koefisien $a=-1$ (negatif), maka parabola terbuka ke bawah (Salah). B: Karena terbuka ke bawah, ia memiliki titik puncak yang merupakan nilai maksimum (Benar). C: Titik potong sumbu-y terjadi saat $x=0$, yaitu $f(0)=-3$. Jadi, memotong di (0,-3) (Salah)." },
-            { q: "Asimtot tegak dari fungsi rasional $f(x) = \\frac{2x+1}{x-3}$ terjadi pada...", options: ["$x=3$", "$x=-3$", "$y=2$", "$y=1/3$"], correct: 0, explanation: "Asimtot tegak terjadi ketika penyebut bernilai nol. $x-3=0 \\implies x=3$. Ini adalah garis vertikal yang tidak akan pernah dipotong oleh grafik." },
-            { q: "Fungsi yang bersifat injektif sekaligus surjektif disebut...", options: ["Fungsi Konstan", "Fungsi Identitas", "Fungsi Bijektif", "Fungsi Kuadrat"], correct: 2, explanation: "Fungsi Bijektif (atau Korespondensi Satu-satu) adalah pemetaan 'sempurna' di mana kedua sifat, injektif dan surjektif, terpenuhi." },
-            { q: "Grafik sebuah garis lurus yang tidak horizontal maupun vertikal merupakan representasi dari fungsi...", options: ["Kuadrat", "Rasional", "Linear", "Konstan"], correct: 2, explanation: "Grafik berupa garis lurus adalah ciri khas dari fungsi linear $f(x)=mx+c$, di mana $m \neq 0$." },
-            { q: "Diberikan fungsi $f(x) = x^3 - x$ dengan domain dan kodomain himpunan bilangan real. Manakah pernyataan berikut yang benar? (Pilih semua jawaban yang benar)", type: "mcma", options: ["Fungsi ini surjektif.", "Grafik fungsi melalui titik (0,0).", "Grafik fungsi simetris terhadap titik asal.", "Fungsi ini injektif."], correct: [0,1,2], explanation: "A. Fungsi pangkat ganjil umumnya surjektif (Benar). B. $f(0)=0^3-0=0$ (Benar). C. Ini adalah fungsi ganjil, $f(-x)=(-x)^3-(-x)=-x^3+x=-(x^3-x)=-f(x)$, sehingga simetris terhadap titik asal (Benar). D. Fungsi ini tidak injektif, karena $f(1)=0$, $f(0)=0$, dan $f(-1)=0$. Ada lebih dari satu input ke output 0 (Salah)." },
-            { q: "Fungsi $f$ memetakan A={a,b,c} ke B={1,2,3,4}. Manakah himpunan pasangan berurutan berikut yang mewakili fungsi injektif?", options: ["{(a,1), (b,2), (c,2)}", "{(a,4), (b,1), (c,3)}", "{(a,1), (b,2)}", "{(a,1), (b,2), (c,1), (a,3)}"], correct: 1, explanation: "Fungsi injektif memetakan setiap domain ke range yang berbeda. Pilihan kedua memenuhi syarat ini. Pilihan pertama tidak injektif karena b dan c sama-sama dipetakan ke 2. Pilihan ketiga bukan fungsi karena c tidak dipetakan. Pilihan keempat bukan fungsi karena a bercabang." },
-            { q: "Tentukan Benar atau Salah untuk pernyataan-pernyataan berikut:", type: "category", statements: [{s: "Fungsi linear yang tidak horizontal selalu bijektif (jika domain & kodomain $\\mathbb{R}$).", a: true}, {s: "Uji Garis Vertikal digunakan untuk menguji sifat surjektif.", a: false}, {s: "Fungsi bijektif pasti memiliki fungsi invers.", a: true}], explanation: "A. Garis lurus miring akan lolos uji garis vertikal dan horizontal (Benar). B. Uji Garis Vertikal untuk menentukan apakah suatu grafik merupakan fungsi atau bukan (Salah). C. Sifat bijektif adalah syarat mutlak agar sebuah fungsi memiliki invers (Benar)." }
+            { q: "Diketahui $f(x)=2x+1$ dan $g(x)=x-3$. Hasil dari $(f-g)(x)$ adalah...", options: ["$x-2$", "$x+4$", "$3x-2$", "$x-4$"], correct: 1, explanation: "$(f-g)(x) = f(x) - g(x) = (2x+1) - (x-3) = 2x+1-x+3 = x+4$." },
+            { q: "Diketahui $f(x)=x^2$ dan $g(x)=x-3$. Hasil dari $(f \\circ g)(x)$ adalah...", options: ["$x^2-3$", "$x^2-6x+9$", "$x^2-9$", "$x^2+9$"], correct: 1, explanation: "$(f \\circ g)(x) = f(g(x))$. Masukkan $g(x)$ ke dalam $f(x)$, menjadi $f(x-3) = (x-3)^2 = x^2-6x+9$." },
+            { q: "Invers dari fungsi $f(x) = 3x+4$ adalah...", options: ["$f^{-1}(x) = 3x-4$", "$f^{-1}(x) = \\frac{x-4}{3}$", "$f^{-1}(x) = \\frac{x+4}{3}$", "$f^{-1}(x) = 4-3x$"], correct: 1, explanation: "$y=3x+4 \\implies y-4=3x \\implies x=\\frac{y-4}{3}$. Ganti variabel menjadi $f^{-1}(x) = \\frac{x-4}{3}$." },
+            { q: "Diketahui $f(x)=x+5$. Nilai dari $(f^{-1} \\circ f)(10)$ adalah...", options: ["5", "10", "15", "20"], correct: 1, explanation: "Komposisi sebuah fungsi dengan inversnya akan saling meniadakan dan menghasilkan nilai input aslinya. Jadi, $(f^{-1} \\circ f)(x) = x$, maka nilainya adalah 10." },
+            { q: "Diberikan $f(x)=2x$ dan $g(x)=x/2$. Tentukan Benar atau Salah untuk setiap pernyataan berikut:", type: "category", statements: [{s: "$(f \\circ g)(x) = x$.", a: true}, {s: "$(g \\circ f)(x) = x$.", a: true}, {s: "$f(x)$ dan $g(x)$ adalah fungsi yang saling invers.", a: true}], explanation: "A. $f(g(x)) = f(x/2) = 2(x/2) = x$ (Benar). B. $g(f(x)) = g(2x) = (2x)/2 = x$ (Benar). C. Karena komposisi bolak-balik menghasilkan $x$, keduanya adalah fungsi invers (Benar)." },
+            { q: "Jika $(f \\circ g)(x) = 4x^2+1$ dan $g(x) = 2x-1$, maka $f(x)$ adalah...", options: ["$x^2+2x+2$", "$x^2+1$", "$2x^2+2x+1$", "$x^2+x+1$"], correct: 0, explanation: "Misal $y=g(x)=2x-1$, maka $x=\\frac{y+1}{2}$. Substitusi $x$ ke dalam $(f \\circ g)(x)$: $f(y) = 4(\\frac{y+1}{2})^2+1 = 4(\\frac{y^2+2y+1}{4})+1 = y^2+2y+1+1 = y^2+2y+2$. Jadi $f(x)=x^2+2x+2$." },
+            { q: "Domain dari fungsi $(\\frac{f}{g})(x)$ untuk $f(x)=x$ dan $g(x)=x^2-4$ adalah...", options: ["Semua bilangan real", "Semua bilangan real kecuali 0", "Semua bilangan real kecuali 4", "Semua bilangan real kecuali 2 dan -2"], correct: 3, explanation: "Domain untuk fungsi pembagian memiliki syarat penyebut tidak boleh nol. $g(x) \\neq 0 \\implies x^2-4 \\neq 0 \\implies (x-2)(x+2) \\neq 0$. Maka $x \\neq 2$ dan $x \\neq -2$." },
+            { q: "Diketahui $f(x) = \\sqrt{x}$ dan $g(x)=x^2$. Manakah pernyataan yang PASTI benar? (Pilih semua jawaban yang benar)", type: "mcma", options: ["Domain fungsi $f(x)$ adalah $x \\ge 0$.", "$(f \\circ g)(x) = |x|$.", "$(g \\circ f)(x) = x$ untuk domain $x \\ge 0$.", "$f(x)$ adalah invers dari $g(x)$ untuk $x \\ge 0$."], correct: [0,1,2,3], explanation: "A. Benar, akar kuadrat terdefinisi untuk bilangan non-negatif. B. Benar, $f(g(x))=\\sqrt{x^2}=|x|$. C. Benar, $g(f(x))=(\\sqrt{x})^2=x$, hanya berlaku jika $x \\ge 0$. D. Benar, karena komposisinya menghasilkan $x$ (dengan batasan domain), keduanya saling invers." },
+            { q: "Jika $f^{-1}(x) = \\frac{x-1}{2}$, maka $f(x)$ adalah...", options: ["$2x+1$", "$2x-1$", "$\\frac{x+1}{2}$", "$\\frac{x-2}{1}$"], correct: 0, explanation: "Untuk mencari $f(x)$ dari $f^{-1}(x)$, kita inverskan kembali. $y = \\frac{x-1}{2} \\implies 2y=x-1 \\implies x = 2y+1$. Maka, $f(y)=2y+1$, sehingga $f(x)=2x+1$." },
+            { q: "Tentukan Benar atau Salah untuk pernyataan-pernyataan berikut:", type: "category", statements: [{s: "Operasi komposisi fungsi bersifat komutatif.", a: false}, {s: "Semua fungsi linear memiliki invers.", a: false}, {s: "$(f+g)(x)$ selalu sama dengan $(g+f)(x)$.", a: true}], explanation: "A: Umumnya $(f \\circ g)(x) \\neq (g \\circ f)(x)$ (Salah). B: Fungsi linear konstan (horizontal) tidak injektif sehingga tidak punya invers (Salah). C: Penjumlahan biasa bersifat komutatif (Benar)." }
         ];
 
         // --- SCRIPT KUIS INTERAKTIF LENGKAP ---
