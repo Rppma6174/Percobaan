@@ -173,6 +173,9 @@
 </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         const quizzes = [
             { q: "Bayangan titik (3, -2) oleh translasi $T = \\begin{pmatrix} 4 \\ 5 \\end{pmatrix}$ adalah...", options: ["(7, 3)", "(-1, -7)", "(1, 7)", "(7, -7)"], correct: 0, explanation: "$x' = x+a = 3+4=7$. $y' = y+b = -2+5=3$. Jadi, bayangannya adalah (7, 3)." },
             { q: "Bayangan titik (5, 2) jika dicerminkan terhadap sumbu-x adalah...", options: ["(-5, 2)", "(5, -2)", "(-5, -2)", "(2, 5)"], correct: 1, explanation: "Refleksi terhadap sumbu-x mengikuti aturan $(x,y) \\to (x,-y)$. Maka, (5, 2) menjadi (5, -2)." },
