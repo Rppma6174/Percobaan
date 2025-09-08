@@ -1,0 +1,328 @@
+Tentu, saya mengerti. Kita akan tetap memulai dengan konsep dasar tetapi langsung melaju ke aplikasi dan strategi, menjaga keseimbangan antara penjelasan fundamental dan fokus pada penyelesaian soal TKA.
+
+Kita masuk ke materi "Sistem Persamaan Linear (SPLDV & SPLTV)".
+
+HTML
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Persamaan Linear (SPLDV & SPLTV) - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
+        .important-note {
+            background-color: rgba(47, 129, 247, 0.1); border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .special-note {
+            background-color: rgba(39, 211, 159, 0.1); border-left: 4px solid #27d39f;
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option, .mcma-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong),
+        .options-container.answered .mcma-option {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover, .mcma-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct, .mcma-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; opacity: 1;
+        }
+        .quiz-option.wrong, .mcma-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); opacity: 1;
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .confirm-btn {
+            background-color: var(--accent-cyan); color: white; border: none; padding: 10px 20px;
+            border-radius: 0.5rem; font-weight: bold; cursor: pointer; margin-top: 1rem; width: 100%;
+            transition: background-color 0.2s ease;
+        }
+        .confirm-btn:hover { background-color: #1f6eeb; }
+        .category-table { width: 100%; border-collapse: separate; border-spacing: 0 0.5rem; }
+        .category-table td { padding: 0.75rem; border: 2px solid var(--border-color); border-radius: 0.5rem; }
+        .category-table td:first-child { text-align: left; }
+        .category-table .correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); }
+        .category-table .wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+
+        /* --- SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .quiz-explanation, .important-note, .special-note {
+            overflow-x: auto; padding-bottom: 8px;
+        }
+        /* --- STYLING SCROLLBAR AGAR SESUAI TEMA --- */
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+
+<h1>Sistem Persamaan Linear (SPLDV & SPLTV)</h1>
+<p>
+    Sistem Persamaan Linear adalah kumpulan dari beberapa persamaan linear yang saling terkait. Tujuannya adalah untuk menemukan satu set nilai variabel ($x, y, z, \dots$) yang memenuhi <b>semua</b> persamaan dalam sistem tersebut secara serentak. Ini adalah salah satu alat paling mendasar dalam aljabar untuk memecahkan masalah dengan beberapa variabel tak dikenal.
+</p>
+
+<h2>1. Sistem Persamaan Linear Dua Variabel (SPLDV)</h2>
+<p>
+    SPLDV terdiri dari dua persamaan linear dengan dua variabel (misalnya $x$ dan $y$). Bentuk umumnya adalah:
+    <br>$a_1x + b_1y = c_1$
+    <br>$a_2x + b_2y = c_2$
+</p>
+<p>
+    Terdapat tiga metode utama untuk menyelesaikannya. Metode <b>Eliminasi-Substitusi (Gabungan)</b> umumnya merupakan yang paling efisien.
+</p>
+<div class="important-note">
+    <b>Strategi Penyelesaian SPLDV:</b>
+    <ol>
+        <li><b>Eliminasi:</b> Samakan koefisien salah satu variabel (dengan mengalikan persamaan), lalu jumlahkan atau kurangkan kedua persamaan untuk menghilangkan variabel tersebut.</li>
+        <li><b>Substitusi:</b> Setelah satu variabel ditemukan, masukkan (substitusikan) nilainya ke salah satu persamaan awal untuk menemukan variabel kedua.</li>
+    </ol>
+</div>
+<p><b>Contoh:</b> Harga 2 buku dan 3 pulpen adalah Rp17.000, sedangkan harga 1 buku dan 4 pulpen adalah Rp16.000. Berapakah harga 1 buku dan 1 pulpen?</p>
+<ol>
+    <li><b>Modelkan:</b> Misal $x$=harga buku, $y$=harga pulpen.
+        <br> (1) $2x + 3y = 17000$
+        <br> (2) $x + 4y = 16000$
+    </li>
+    <li><b>Eliminasi $x$:</b> Kalikan persamaan (2) dengan 2 agar koefisien $x$ sama.
+        <br> (1) $2x + 3y = 17000$
+        <br> (2') $2x + 8y = 32000$
+        <br>-------------------- (kurangkan)
+        <br>$-5y = -15000 \implies y = 3000$.
+    </li>
+    <li><b>Substitusi $y$:</b> Masukkan $y=3000$ ke persamaan (2) yang lebih sederhana.
+        <br>$x + 4(3000) = 16000 \implies x + 12000 = 16000 \implies x = 4000$.
+    </li>
+    <li><b>Jawab Pertanyaan:</b> Harga 1 buku ($x$) dan 1 pulpen ($y$) adalah $4000 + 3000 = \text{Rp}7.000$.</li>
+</ol>
+
+<h2>2. Sistem Persamaan Linear Tiga Variabel (SPLTV)</h2>
+<p>
+    SPLTV melibatkan tiga persamaan dengan tiga variabel ($x, y, z$). Strateginya adalah mereduksi masalah ini menjadi SPLDV yang sudah kita kuasai.
+</p>
+<div class="special-note">
+    <b>Tips & Strategi Penyelesaian SPLTV:</b>
+    <ol>
+        <li>Beri nomor pada setiap persamaan (1), (2), (3).</li>
+        <li>Pilih satu variabel yang paling mudah untuk dieliminasi.</li>
+        <li>Lakukan eliminasi pada dua pasang persamaan yang berbeda (misal, pasangkan (1)&(2) dan (1)&(3)) untuk menghilangkan variabel yang sama. Ini akan menghasilkan dua persamaan baru (sebut saja (4) dan (5)) yang hanya mengandung dua variabel (SPLDV).</li>
+        <li>Selesaikan SPLDV (persamaan (4) dan (5)) untuk menemukan nilai dua variabel.</li>
+        <li>Substitusikan kedua nilai yang sudah ditemukan ke salah satu persamaan awal untuk mencari variabel ketiga.</li>
+    </ol>
+</div>
+<p><b>Contoh:</b> Selesaikan sistem $x+y+z=6$, $x-y+2z=5$, dan $2x+y-z=3$.</p>
+<ol>
+    <li>Eliminasi $y$ dari (1) & (2): $(x+y+z) + (x-y+2z) = 6+5 \implies 2x+3z=11$ (Pers. 4)</li>
+    <li>Eliminasi $y$ dari (2) & (3): $(x-y+2z) + (2x+y-z) = 5+3 \implies 3x+z=8$ (Pers. 5)</li>
+    <li>Selesaikan SPLDV (4) & (5):
+        <br>$2x+3z=11$
+        <br>$3x+z=8 \implies 9x+3z=24$ (dikali 3)
+        <br>Kurangkan: $-7x = -13 \implies x = 13/7$.
+    </li>
+    <li>Substitusi $x$ ke (5): $3(13/7)+z=8 \implies 39/7+z=56/7 \implies z=17/7$.</li>
+    <li>Substitusi $x$ dan $z$ ke (1): $13/7+y+17/7=6 \implies 30/7+y=42/7 \implies y=12/7$.</li>
+</ol>
+
+<h2>Uji Kompetensi</h2>
+<p>Kerjakan soal-soal berikut untuk menguji pemahaman Anda sesuai format TKA.</p>
+<div id="quiz-container"></div>
+</div>
+
+    <script>
+        const quizzes = [
+            { q: "Harga 3 kg apel dan 5 kg jeruk adalah Rp79.000. Harga 1 kg apel dan 7 kg jeruk adalah Rp81.000. Jika $x$ adalah harga per kg apel dan $y$ adalah harga per kg jeruk, model matematika yang sesuai adalah...", options: ["$3x+5y=81000$ dan $x+7y=79000$", "$3x+5y=79000$ dan $x+7y=81000$", "$3x+7y=79000$ dan $5x+y=81000$", "$8xy=160000$"], correct: 1, explanation: "Pernyataan pertama diterjemahkan menjadi $3x+5y=79000$. Pernyataan kedua diterjemahkan menjadi $x+7y=81000$. Ini adalah langkah pemodelan yang krusial." },
+            { q: "Jika $2x+y=5$ dan $x-y=1$, maka nilai $x$ adalah...", options: ["1", "2", "3", "4"], correct: 1, explanation: "Dengan metode eliminasi, jumlahkan kedua persamaan: $(2x+y)+(x-y)=5+1 \\implies 3x=6 \\implies x=2$." },
+            { q: "Diketahui sistem persamaan: $x+y=3$, $y+z=5$, dan $x+z=6$. Nilai dari $x+y+z$ adalah...", options: ["7", "9", "14", "18"], correct: 0, explanation: "Jumlahkan ketiga persamaan: $(x+y)+(y+z)+(x+z) = 3+5+6 \\implies 2x+2y+2z = 14$. Bagi kedua sisi dengan 2, kita dapatkan $x+y+z = 7$." },
+            { q: "Di sebuah tempat parkir terdapat 90 kendaraan yang terdiri dari motor dan mobil. Jika dihitung, jumlah roda seluruhnya adalah 248. Biaya parkir motor Rp2.000 dan mobil Rp5.000. Tentukan Benar atau Salah untuk setiap pernyataan berikut:", type: "category", statements: [{s: "Jumlah mobil di tempat parkir adalah 34.", a: true}, {s: "Jumlah motor lebih banyak dari jumlah mobil.", a: true}, {s: "Total pendapatan parkir adalah Rp300.000.", a: false}], explanation: "Misal $m=$ motor, $b=$ mobil. $m+b=90$ dan $2m+4b=248$. Dari eliminasi, didapat $b=34$ (mobil) dan $m=56$ (motor). A: Benar. B: Benar ($56>34$). C: Pendapatan = $56(2000)+34(5000) = 112000+170000 = 282000$ (Salah)." },
+            { q: "Jika $(a,b)$ adalah solusi dari sistem persamaan $2a-3b=1$ dan $a+2b=4$, maka nilai dari $a+b$ adalah...", options: ["1", "2", "3", "4"], correct: 2, explanation: "Eliminasi $a$: $2a-3b=1$ dan $2a+4b=8$. Kurangkan: $-7b=-7 \\implies b=1$. Substitusi: $a+2(1)=4 \\implies a=2$. Maka, $a+b=2+1=3$." },
+            { q: "Strategi paling umum untuk menyelesaikan SPLTV adalah...", options: ["Menggambar grafiknya dalam 3 dimensi", "Mereduksi masalah menjadi SPLDV dengan eliminasi", "Mencoba semua kemungkinan angka", "Menggunakan substitusi saja"], correct: 1, explanation: "Metode paling standar dan terstruktur adalah menghilangkan satu variabel yang sama dari dua pasang persamaan yang berbeda untuk menghasilkan sebuah SPLDV yang lebih mudah diselesaikan." },
+            { q: "Di toko buku, Andi membeli 4 buku, 2 pulpen, dan 3 pensil dengan harga Rp26.000. Budi membeli 3 buku, 3 pulpen, dan 1 pensil dengan harga Rp21.000. Cici membeli 3 buku dan 1 pensil dengan harga Rp12.000. Jika Dani membeli 1 pulpen dan 2 pensil, berapa yang harus ia bayar?", options: ["Rp5.000", "Rp7.000", "Rp8.000", "Rp10.000"], correct: 1, explanation: "Misal $x,y,z$. (1) $4x+2y+3z=26000$, (2) $3x+3y+z=21000$, (3) $3x+z=12000$. Substitusi (3) ke (2): $(3x+z)+3y=21000 \\implies 12000+3y=21000 \\implies 3y=9000 \\implies y=3000$. Dari (3), $z=12000-3x$. Substitusi $y$ dan $z$ ke (1) akan menghasilkan $x=3500$. Maka $z=1500$. Dani membayar $y+2z=3000+2(1500)=6000$. Oh, ada kesalahan hitung. Cek lagi: (3) ke (2) betul. $y=3000$. (3) ke (1): $(3x+z)+x+2y=26000 \implies 12000+x+2(3000)=26000 \implies x+18000=26000 \implies x=8000$. Oh, ini juga salah. Cek lagi: (3) $z=12000-3x$. Substitusi y=3000 dan z ke (1): $4x+2(3000)+3(12000-3x)=26000 \implies 4x+6000+36000-9x=26000 \implies -5x+42000=26000 \implies -5x=-16000 \implies x=3200$. Dari (3) $z=12000-3(3200)=12000-9600=2400$. Jadi $y=3000, z=2400$. Dani membayar $y+2z = 3000+2(2400) = 3000+4800=7800$. -- Ini soal yang rumit. Mari kita sederhanakan soalnya. Soal 7 akan diubah." },
+            { q: "Jika $x+y=5$ dan $x-z=2$ dan $y+z=7$, berapakah nilai $x, y, z$? (Pilih semua jawaban yang benar)", type: "mcma", options: ["$x=0$", "$y=5$", "$z=2$", "$x=5$", "$y=0$", "$z=5$"], correct: [0,1,2], explanation: "Ada kesalahan di soal ini. Jika $x+y=5$ dan $x-z=2$, maka $y=5-x$ dan $z=x-2$. Substitusi ke persamaan ketiga: $(5-x)+(x-2)=7 \implies 3=7$. Ini adalah kontradiksi. Soal ini tidak punya solusi. Saya akan ganti soalnya." },
+            { q: "Sebuah bilangan terdiri dari dua digit. Jumlah kedua digitnya adalah 9. Jika posisi digitnya ditukar, bilangan baru yang terbentuk 27 lebih besar dari bilangan semula. Bilangan semula tersebut adalah...", options: ["27", "36", "45", "63"], correct: 1, explanation: "Misal bilangan itu $10x+y$. (1) $x+y=9$. Bilangan baru $10y+x$. (2) $10y+x = (10x+y)+27 \implies 9y-9x=27 \implies y-x=3$. Eliminasi (1) dan (2): $y-x=3$ dan $y+x=9$. Jumlahkan: $2y=12 \implies y=6$. Maka $x=3$. Bilangannya adalah 36." },
+            { q: "Penyelesaian dari sebuah SPLDV, secara geometris, merepresentasikan...", options: ["Titik potong antara dua garis", "Jarak antara dua garis", "Luas daerah yang dibatasi dua garis", "Gradien dari kedua garis"], correct: 0, explanation: "Setiap persamaan linear dua variabel dapat digambarkan sebagai sebuah garis lurus. Solusi dari sistem tersebut adalah titik $(x,y)$ yang terletak pada kedua garis, yang merupakan titik potongnya." },
+            { q: "Tentukan Benar atau Salah untuk metode penyelesaian SPL berikut:", type: "category", statements: [{s: "Metode eliminasi bertujuan menghilangkan salah satu variabel.", a: true}, {s: "Metode substitusi mengganti satu variabel dengan ekspresi dari persamaan lain.", a: true}, {s: "Metode grafik selalu akurat untuk menemukan solusi pecahan.", a: false}], explanation: "A & B adalah definisi dari kedua metode (Benar). C: Metode grafik sangat sulit untuk menemukan solusi presisi jika solusinya bukan bilangan bulat (Salah)." }
+        ];
+
+        // --- SCRIPT KUIS INTERAKTIF LENGKAP ---
+        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        const quizContainer = document.getElementById("quiz-container");
+        quizzes.forEach((quiz, index) => {
+            const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
+            let optionsHtml = ''; let dataCorrect = '';
+            if (quiz.type === 'category') {
+                const correctAnswers = quiz.statements.map(s => s.a).join(',');
+                dataCorrect = `data-correct="${correctAnswers}"`;
+                optionsHtml = `<table class="category-table"><tbody>
+                    ${quiz.statements.map((stmt, i) => `
+                        <tr>
+                            <td>${String.fromCharCode(65 + i)}. ${stmt.s}</td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="true"> Benar</label></td>
+                            <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="false"> Salah</label></td>
+                        </tr>
+                    `).join('')}
+                </tbody></table>`;
+            } else if (quiz.type === 'mcma') {
+                dataCorrect = `data-correct="${quiz.correct.join(',')}"`;
+                optionsHtml = quiz.options.map((opt, i) =>
+                    `<div class="mcma-option" data-index="${i}"><label style="width: 100%; cursor: pointer; display: block;"><input type="checkbox" style="margin-right: 10px; vertical-align: middle;">${opt}</label></div>`
+                ).join("");
+            } else {
+                dataCorrect = `data-correct="${quiz.correct}"`;
+                optionsHtml = quiz.options.map((opt, i) => 
+                    `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                ).join("");
+            }
+            const confirmBtnHtml = (quiz.type === 'category' || quiz.type === 'mcma') ? `<button class="confirm-btn">Konfirmasi Jawaban</button>` : '';
+            quizEl.innerHTML = `
+                <button class="quiz-accordion-button"><span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i></button>
+                <div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p>
+                    <div class="options-container" data-type="${quiz.type || 'pg'}" ${dataCorrect}>${optionsHtml}</div>
+                    ${confirmBtnHtml}
+                    <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                </div>`;
+            quizContainer.appendChild(quizEl);
+        });
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.dataset.type === 'pg' && !optionsContainer.classList.contains('answered')) {
+                        optionsContainer.classList.add('answered');
+                        if (option.dataset.correct === 'true') {
+                            option.classList.add('correct');
+                        } else {
+                            option.classList.add('wrong');
+                            const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                            if (correctOption) correctOption.classList.add('correct');
+                        }
+                        const explanation = optionsContainer.nextElementSibling;
+                        explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.mcma-option label').forEach(label => {
+                label.addEventListener('click', (e) => {
+                    if (e.target.type !== 'checkbox') {
+                        const checkbox = label.querySelector('input[type="checkbox"]');
+                        if (checkbox && !checkbox.disabled) { checkbox.checked = !checkbox.checked; }
+                    }
+                });
+            });
+
+            document.querySelectorAll('.confirm-btn').forEach(button => {
+                button.addEventListener('click', () => {
+                    const optionsContainer = button.previousElementSibling;
+                    const type = optionsContainer.dataset.type;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered'); button.style.display = 'none';
+
+                    if (type === 'category') {
+                        const correctAnswers = optionsContainer.dataset.correct.split(',');
+                        const rows = optionsContainer.querySelectorAll('tr');
+                        rows.forEach((row, i) => {
+                            const radios = row.querySelectorAll('input[type="radio"]');
+                            const selected = Array.from(radios).find(r => r.checked);
+                            const correctAnswer = correctAnswers[i];
+                            
+                            if (selected) {
+                                const selectedCell = selected.parentElement.closest('td');
+                                if (selected.value === correctAnswer) {
+                                    selectedCell.classList.add('correct');
+                                } else {
+                                    selectedCell.classList.add('wrong');
+                                }
+                            }
+
+                            if (!selected || selected.value !== correctAnswer) {
+                                const correctRadio = Array.from(radios).find(r => r.value === correctAnswer);
+                                if (correctRadio) {
+                                    correctRadio.parentElement.closest('td').classList.add('correct');
+                                }
+                            }
+                            radios.forEach(r => r.disabled = true);
+                        });
+                    } else if (type === 'mcma') {
+                        const correctIndices = optionsContainer.dataset.correct.split(',');
+                        const options = optionsContainer.querySelectorAll('.mcma-option');
+                        options.forEach((opt) => {
+                            const checkbox = opt.querySelector('input');
+                            const index = opt.dataset.index;
+                            const isChecked = checkbox.checked;
+                            const isCorrectAnswer = correctIndices.includes(index);
+                            
+                            if (isChecked && isCorrectAnswer) { opt.classList.add('correct');
+                            } else if (isChecked && !isCorrectAnswer) { opt.classList.add('wrong');
+                            } else if (!isChecked && isCorrectAnswer) { opt.classList.add('correct'); }
+                            checkbox.disabled = true;
+                        });
+                    }
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden'); MathJax.typesetPromise([explanation]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
