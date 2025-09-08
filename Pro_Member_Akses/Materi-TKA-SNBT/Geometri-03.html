@@ -167,6 +167,9 @@
 </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         const quizzes = [
             { q: "Volume sebuah tabung dengan jari-jari 7 cm dan tinggi 10 cm adalah... (gunakan $\\pi = \\frac{22}{7}$)", options: ["1540 cm³", "770 cm³", "2200 cm³", "440 cm³"], correct: 0, explanation: "Volume Tabung = $\\pi r^2 t = \\frac{22}{7} \\times 7^2 \\times 10 = 22 \\times 7 \\times 10 = 1540$ cm³." },
             { q: "Panjang diagonal ruang sebuah kubus dengan rusuk 6 cm adalah...", options: ["$6\\sqrt{2}$ cm", "$12\\sqrt{2}$ cm", "$6\\sqrt{3}$ cm", "18 cm"], correct: 2, explanation: "Menggunakan rumus cepat untuk diagonal ruang kubus, panjangnya adalah $s\\sqrt{3}$, di mana $s$ adalah panjang rusuk. Maka, hasilnya adalah $6\\sqrt{3}$ cm." },
