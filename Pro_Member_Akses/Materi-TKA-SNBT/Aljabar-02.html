@@ -176,6 +176,9 @@
 </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         const quizzes = [
             { q: "Harga 3 kg apel dan 5 kg jeruk adalah Rp79.000. Harga 1 kg apel dan 7 kg jeruk adalah Rp81.000. Jika $x$ adalah harga per kg apel dan $y$ adalah harga per kg jeruk, model matematika yang sesuai adalah...", options: ["$3x+5y=81000$ dan $x+7y=79000$", "$3x+5y=79000$ dan $x+7y=81000$", "$3x+7y=79000$ dan $5x+y=81000$", "$8xy=160000$"], correct: 1, explanation: "Pernyataan pertama diterjemahkan menjadi $3x+5y=79000$. Pernyataan kedua diterjemahkan menjadi $x+7y=81000$. Ini adalah langkah pemodelan yang krusial." },
             { q: "Jika $2x+y=5$ dan $x-y=1$, maka nilai $x$ adalah...", options: ["1", "2", "3", "4"], correct: 1, explanation: "Dengan metode eliminasi, jumlahkan kedua persamaan: $(2x+y)+(x-y)=5+1 \\implies 3x=6 \\implies x=2$." },
