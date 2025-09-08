@@ -191,7 +191,7 @@
         ];
 
         // --- SCRIPT KUIS INTERAKTIF LENGKAP ---
-        if (!sessionStorage.getItem('sessionToken')) { /* window.location.href = '../../Login/'; */ }
+        if (!sessionStorage.getItem('sessionToken')) { window.location.href = '../../Login/'; }
         const quizContainer = document.getElementById("quiz-container");
         quizzes.forEach((quiz, index) => {
             const quizEl = document.createElement("div"); quizEl.className = "quiz-accordion";
