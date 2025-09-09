@@ -123,13 +123,10 @@
     </div>
 
     <script>
-        if (!sessionStorage.getItem('sessionToken')) {
-            window.location.href = '../../Login/';
-        }
         // --- Bank Soal Lengkap (30 Soal) ---
         const quizzes = [
             // Bab Bilangan (6 Soal)
-            { bab: "Bilangan", q: "Hasil dari $\\frac{1}{4} + \\frac{2}{3} \\times \\frac{1}{2}$ adalah...", options: ["$7/12$", "$5/6$", "$1/2$", "$3/4$"], correct: 1, explanation: "Kerjakan perkalian dulu: $\\frac{2}{3} \\times \\frac{1}{2} = \\frac{2}{6} = \\frac{1}{3}$. Kemudian jumlahkan: $\\frac{1}{4} + \\frac{1}{3} = \\frac{3}{12} + \\frac{4}{12} = \\frac{7}{12}$." },
+            { bab: "Bilangan", q: "Hasil dari $\\frac{1}{4} + \\frac{2}{3} \\times \\frac{1}{2}$ adalah...", options: ["$7/12$", "$5/12$", "$1/2$", "$3/4$"], correct: 1, explanation: "Kerjakan perkalian dulu: $\\frac{2}{3} \\times \\frac{1}{2} = \\frac{2}{6} = \\frac{1}{3}$. Kemudian jumlahkan: $\\frac{1}{4} + \\frac{1}{3} = \\frac{3}{12} + \\frac{4}{12} = \\frac{7}{12}$." },
             { bab: "Bilangan", q: "Bentuk sederhana dari $(x^3y^{-2})^2 \\cdot (x^{-1}y^4)$ adalah...", options: ["$x^5$", "$x^5 y^{-1}$", "$x^7 y^8$", "$x^5 y^0$"], correct: 3, explanation: "Gunakan sifat eksponen: $(x^{3 \\cdot 2}y^{-2 \\cdot 2}) \\cdot (x^{-1}y^4) = (x^6 y^{-4}) \\cdot (x^{-1} y^4) = x^{6-1}y^{-4+4} = x^5 y^0 = x^5$." },
             { bab: "Bilangan", q: "FPB dari 48, 72, dan 96 adalah...", options: ["12", "24", "48", "6"], correct: 1, explanation: "$48=2^4 \\times 3$, $72=2^3 \\times 3^2$, $96=2^5 \\times 3$. Ambil faktor yang sama ($2,3$) dengan pangkat terkecil ($2^3, 3^1$). FPB = $2^3 \\times 3 = 8 \\times 3 = 24$." },
             { bab: "Bilangan", q: "KPK dari dua bilangan adalah 180 dan FPB-nya adalah 12. Jika salah satu bilangan adalah 36, bilangan lainnya adalah...", options: ["60", "48", "72", "30"], correct: 0, explanation: "Gunakan rumus $a \\times b = FPB \\times KPK$. Maka $36 \\times b = 12 \\times 180$. $b = (12 \\times 180) / 36 = 180 / 3 = 60$." },
@@ -149,9 +146,9 @@
             // Bab Geometri (6 Soal)
             { bab: "Geometri", q: "Besar sudut pelurus dari 55° adalah...", options: ["35°", "45°", "125°", "135°"], correct: 2, explanation: "Sudut berpelurus berjumlah 180°. Maka, $180° - 55° = 125°$." },
             { bab: "Geometri", q: "Sebuah segitiga siku-siku memiliki sisi miring 25 cm dan salah satu sisi penyikunya 7 cm. Luas segitiga tersebut adalah...", options: ["84 cm²", "175 cm²", "168 cm²", "91 cm²"], correct: 0, explanation: "Gunakan Tripel Pythagoras 7-24-25. Sisi penyiku lainnya adalah 24 cm. Luas = $\\frac{1}{2} \\times alas \\times tinggi = \\frac{1}{2} \\times 7 \\times 24 = 84$ cm²." },
-            { bab: "Geometri", q: "Bayangan titik A(3, -4) setelah dirotasi 90° berlawanan arah jarum jam dengan pusat (0,0) adalah...", options: ["(4, 3)", "(-4, -3)", "(4, -3)", "(4, 3)"], correct: 3, explanation: "Rotasi +90° mengikuti aturan $(x,y) \\to (-y,x)$. Maka $(3,-4) \\to (-(-4), 3) = (4,3)$." },
+            { bab: "Geometri", q: "Bayangan titik A(3, -4) setelah dirotasi 90° berlawanan arah jarum jam dengan pusat (0,0) adalah...", options: ["(4, 3)", "(-4, -3)", "(4, -3)", "(-4, 3)"], correct: 3, explanation: "Rotasi +90° mengikuti aturan $(x,y) \\to (-y,x)$. Maka $(3,-4) \\to (-(-4), 3) = (4,3)$." },
             { bab: "Geometri", q: "Volume sebuah kerucut adalah 100$\\pi$ cm³. Jika tingginya 12 cm, maka jari-jari alasnya adalah...", options: ["5 cm", "10 cm", "15 cm", "25 cm"], correct: 0, explanation: "$V = \\frac{1}{3}\\pi r^2 t \\implies 100\\pi = \\frac{1}{3}\\pi r^2 (12) \\implies 100 = 4r^2 \\implies r^2=25 \\implies r=5$ cm." },
-            { bab: "Geometri", q: "Sebuah balok berukuran 8cm x 6cm x 5cm. Tentukan Benar atau Salah:", type: "category", statements: [{s: "Panjang diagonal ruangnya adalah $\\sqrt{125}$ cm.", a: false}, {s: "Luas permukaannya adalah 236 cm².", a: true}, {s: "Volumenya adalah 240 cm³.", a: true}], explanation: "A. Diagonal ruang = $\\sqrt{8^2+6^2+5^2} = \\sqrt{64+36+25}=\\sqrt{125}$ (Salah, seharusnya $\\sqrt{125}$). Oh, soalnya benar. Mari kita perbaiki. $d=\\sqrt{125}$ (Benar). B. $LP = 2(8\\cdot6+8\\cdot5+6\\cdot5) = 2(48+40+30)=2(118)=236$ (Benar). C. $V=8\\cdot6\\cdot5=240$ (Benar)." },
+            { bab: "Geometri", q: "Sebuah balok berukuran 8cm x 6cm x 5cm. Tentukan Benar atau Salah:", type: "category", statements: [{s: "Panjang diagonal ruangnya adalah $\\sqrt{125}$ cm.", a: true}, {s: "Luas permukaannya adalah 236 cm².", a: true}, {s: "Volumenya adalah 240 cm³.", a: true}], explanation: "A. Diagonal ruang = $\\sqrt{8^2+6^2+5^2} = \\sqrt{64+36+25}=\\sqrt{125}$ (Benar). B. $LP = 2(8\\cdot6+8\\cdot5+6\\cdot5) = 2(48+40+30)=2(118)=236$ (Benar). C. $V=8\\cdot6\\cdot5=240$ (Benar)." },
             { bab: "Geometri", q: "Titik A(2,1) ditranslasi oleh T(1,3) lalu direfleksikan terhadap sumbu-x. Koordinat bayangan akhirnya adalah...", options: ["(3,4)", "(3,-4)", "(-3,4)", "(-3,-4)"], correct: 1, explanation: "Langkah 1 (Translasi): $(2+1, 1+3) = (3,4)$. Langkah 2 (Refleksi thd sumbu-x): $(3,4) \\to (3,-4)$." },
 
             // Bab Data & Peluang (6 Soal)
@@ -159,7 +156,6 @@
             { bab: "Data & Peluang", q: "Dari 7 orang akan dipilih 3 orang untuk menjadi juara 1, 2, dan 3. Banyaknya susunan juara yang mungkin adalah...", options: ["35", "210", "840", "5040"], correct: 1, explanation: "Karena urutan juara penting, gunakan permutasi: $P(7,3) = \\frac{7!}{(7-3)!} = 7 \\times 6 \\times 5 = 210$." },
             { bab: "Data & Peluang", q: "Dua buah dadu dilempar bersamaan. Peluang munculnya jumlah mata dadu 8 adalah...", options: ["3/36", "4/36", "5/36", "6/36"], correct: 2, explanation: "Pasangan yang berjumlah 8 adalah (2,6), (3,5), (4,4), (5,3), (6,2). Ada 5 kemungkinan dari total 36 kemungkinan. Peluangnya adalah 5/36." },
             { bab: "Data & Peluang", q: "Dalam sebuah kotak terdapat 5 bola merah dan 3 bola putih. Diambil 2 bola satu per satu tanpa pengembalian. Peluang terambil keduanya bola merah adalah...", options: ["25/64", "20/64", "20/56", "15/56"], correct: 2, explanation: "Ini peluang bersyarat. P(Merah pertama) = 5/8. P(Merah kedua | Merah pertama) = 4/7. Peluang total = $(5/8) \\times (4/7) = 20/56$." },
-            { bab: "Data & Peluang", q: "Rata-rata nilai dari 10 siswa adalah 75. Jika nilai seorang siswa, yaitu 97, tidak diikutsertakan, rata-rata nilai yang baru adalah...", options: ["70", "72", "73", "74"], correct: 2, explanation: "Total nilai awal = $10 \\times 75 = 750$. Total nilai baru = $750 - 97 = 653$. Rata-rata baru = $653 / 9 = 72.55...$ -- Ada kesalahan hitung. $653/9 = 72.55$. Mari perbaiki soalnya. Misal nilai siswa yang keluar 95. Total baru = $750-95=655$. Rata-rata baru = $655/9$ tidak bulat. Misal yang keluar 84. Total baru = $750-84=666$. Rata-rata baru = $666/9 = 74$. Ya, ini bagus." },
             { bab: "Data & Peluang", q: "Rata-rata nilai dari 10 siswa adalah 75. Jika nilai seorang siswa, yaitu 84, tidak diikutsertakan, rata-rata nilai yang baru adalah...", options: ["70", "72", "73", "74"], correct: 3, explanation: "Total nilai awal = $10 \\times 75 = 750$. Total nilai baru = $750 - 84 = 666$. Ada 9 siswa sekarang. Rata-rata baru = $666 / 9 = 74$." },
 
             // Bab Trigonometri (4 Soal)
@@ -169,8 +165,7 @@
             { bab: "Trigonometri", q: "Tentukan Benar atau Salah untuk identitas trigonometri berikut:", type: "category", statements: [{s: "$sin^2(x) + cos^2(x) = 1$.", a: true}, {s: "$tan(x) = \\frac{cos(x)}{sin(x)}$.", a: false}, {s: "$sin(90°-x) = cos(x)$.", a: true}], explanation: "A. Identitas Pythagoras dasar (Benar). B. Seharusnya $tan(x) = sin(x)/cos(x)$ (Salah). C. Identitas sudut komplementer (Benar)." }
         ];
 
-        // --- SCRIPT KUIS INTERAKTIF LENGKAP ---
-        let quizMode = ''; // 'latihan' atau 'ujian'
+        let quizMode = '';
 
         function startQuiz(mode) {
             quizMode = mode;
@@ -184,13 +179,13 @@
         
         function renderQuizzes() {
             const quizContainer = document.getElementById("quiz-container");
-            quizContainer.innerHTML = ''; // Kosongkan dulu
+            quizContainer.innerHTML = '';
             quizzes.forEach((quiz, index) => {
                 const quizEl = document.createElement("div");
                 quizEl.className = "quiz-accordion";
-                quizEl.setAttribute('data-quiz-index', index); // Tambahkan index untuk grading nanti
+                quizEl.setAttribute('data-quiz-index', index);
                 let optionsHtml = ''; let dataCorrect = '';
-
+                
                 if (quiz.type === 'category') {
                     const correctAnswers = quiz.statements.map(s => s.a).join(',');
                     dataCorrect = `data-correct="${correctAnswers}"`;
@@ -208,14 +203,20 @@
                     optionsHtml = quiz.options.map((opt, i) =>
                         `<div class="mcma-option" data-index="${i}"><label style="width: 100%; cursor: pointer; display: block;"><input type="checkbox" style="margin-right: 10px; vertical-align: middle;">${opt}</label></div>`
                     ).join("");
-                } else {
+                } else { // PG
                     dataCorrect = `data-correct="${quiz.correct}"`;
                     optionsHtml = quiz.options.map((opt, i) => 
-                        `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                        `<div class="quiz-option" data-correct="${i === quiz.correct}" data-index="${i}">
+                            <label style="width: 100%; cursor: pointer; display: block;">
+                                <input type="radio" name="pg_q${index}" value="${i}" style="margin-right: 10px; vertical-align: middle;">
+                                ${opt}
+                            </label>
+                        </div>`
                     ).join("");
                 }
                 
-                const confirmBtnHtml = (quizMode === 'latihan') ? `<button class="confirm-btn">Cek Jawaban</button>` : '';
+                const confirmBtnHtml = (quizMode === 'latihan' && quiz.type !== 'pg') ? `<button class="confirm-btn">Cek Jawaban</button>` : '';
+                 const singleConfirmBtnHtml = (quizMode === 'latihan' && quiz.type === 'pg') ? `<button class="confirm-btn">Cek Jawaban</button>` : '';
                 
                 quizEl.innerHTML = `
                     <button class="quiz-accordion-button">
@@ -227,7 +228,7 @@
                         <div class="options-container" data-type="${quiz.type || 'pg'}" ${dataCorrect}>
                             ${optionsHtml}
                         </div>
-                        ${confirmBtnHtml}
+                        ${confirmBtnHtml || singleConfirmBtnHtml}
                         <div class="quiz-explanation hidden">
                             <b>Pembahasan:</b> ${quiz.explanation}
                         </div>
@@ -252,17 +253,24 @@
             optionsContainer.classList.add('answered');
 
             if (type === 'pg') {
-                const selectedOption = optionsContainer.querySelector('.quiz-option.selected');
-                if (selectedOption) {
-                    if (selectedOption.dataset.correct === 'true') {
+                const correctIndex = optionsContainer.dataset.correct;
+                const options = optionsContainer.querySelectorAll('.quiz-option');
+                const selectedRadio = optionsContainer.querySelector('input[type="radio"]:checked');
+                
+                if (selectedRadio) {
+                    const selectedOption = selectedRadio.closest('.quiz-option');
+                    if (selectedRadio.value === correctIndex) {
                         selectedOption.classList.add('correct');
                         isQuestionCorrect = true;
                     } else {
                         selectedOption.classList.add('wrong');
-                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
-                        if (correctOption) correctOption.classList.add('correct');
+                        options[correctIndex].classList.add('correct');
                     }
+                } else {
+                     options[correctIndex].classList.add('correct');
                 }
+                 options.forEach(opt => opt.querySelectorAll('input').forEach(inp => inp.disabled = true));
+
             } else if (type === 'category') {
                 const correctAnswers = optionsContainer.dataset.correct.split(',');
                 const rows = optionsContainer.querySelectorAll('tr');
@@ -271,37 +279,49 @@
                     const selected = row.querySelector('input[type="radio"]:checked');
                     const correctAnswer = correctAnswers[i];
                     let currentStatementCorrect = false;
+                    
                     if (selected) {
+                        const selectedCell = selected.parentElement.closest('td');
                         if (selected.value === correctAnswer) {
+                            selectedCell.classList.add('correct');
                             currentStatementCorrect = true;
+                        } else {
+                            selectedCell.classList.add('wrong');
                         }
                     }
                     if(!currentStatementCorrect) allStatementsCorrect = false;
-                    
-                    const correctRadio = Array.from(row.querySelectorAll('input')).find(r => r.value === correctAnswer);
-                    if (correctRadio) correctRadio.parentElement.closest('td').classList.add('correct');
-                    if (selected && !currentStatementCorrect) {
-                        selected.parentElement.closest('td').classList.add('wrong');
+
+                    if (!selected || selected.value !== correctAnswer) {
+                        const correctRadio = Array.from(row.querySelectorAll('input')).find(r => r.value === correctAnswer);
+                        if (correctRadio) correctRadio.parentElement.closest('td').classList.add('correct');
                     }
                     row.querySelectorAll('input').forEach(r => r.disabled = true);
                 });
                 isQuestionCorrect = allStatementsCorrect;
             } else if (type === 'mcma') {
-                const correctIndices = optionsContainer.dataset.correct.split(',');
+                const correctIndices = new Set(optionsContainer.dataset.correct.split(','));
                 const options = optionsContainer.querySelectorAll('.mcma-option');
-                let userChoices = [];
+                let userChoices = new Set();
+                
                 options.forEach((opt) => {
                     const checkbox = opt.querySelector('input');
                     const index = opt.dataset.index;
-                    if (checkbox.checked) userChoices.push(index);
+                    if (checkbox.checked) userChoices.add(index);
+                });
 
-                    const isCorrectAnswer = correctIndices.includes(index);
-                    if (isCorrectAnswer) opt.classList.add('correct');
-                    if (checkbox.checked && !isCorrectAnswer) opt.classList.add('wrong');
+                isQuestionCorrect = (userChoices.size === correctIndices.size) && [...userChoices].every(index => correctIndices.has(index));
+                
+                options.forEach((opt) => {
+                    const checkbox = opt.querySelector('input');
+                    const index = opt.dataset.index;
+                    const isChecked = checkbox.checked;
+                    const isCorrectAnswer = correctIndices.has(index);
                     
+                    if (isChecked && isCorrectAnswer) { opt.classList.add('correct'); } 
+                    else if (isChecked && !isCorrectAnswer) { opt.classList.add('wrong'); } 
+                    else if (!isChecked && isCorrectAnswer) { opt.classList.add('correct'); }
                     checkbox.disabled = true;
                 });
-                isQuestionCorrect = userChoices.length === correctIndices.length && userChoices.every(val => correctIndices.includes(val));
             }
             
             const explanation = quizEl.querySelector('.quiz-explanation');
@@ -315,29 +335,31 @@
             document.querySelectorAll('.quiz-accordion-button').forEach(button => {
                 button.addEventListener('click', () => {
                     const content = button.nextElementSibling;
+                    const isActive = button.classList.contains('active');
+                    if (!isActive) {
+                        MathJax.typesetPromise([content]);
+                    }
                     button.classList.toggle('active'); content.classList.toggle('hidden');
                 });
             });
 
             if (quizMode === 'latihan') {
+                document.querySelectorAll('.confirm-btn').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const quizEl = button.closest('.quiz-accordion');
+                        gradeQuestion(quizEl);
+                    });
+                });
+
                 document.querySelectorAll('.quiz-option').forEach(option => {
-                    option.addEventListener('click', () => {
-                        const optionsContainer = option.parentElement;
-                        if (optionsContainer.dataset.type === 'pg') {
-                           // Tandai pilihan user sebelum grade
-                           optionsContainer.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
-                           option.classList.add('selected');
+                    option.addEventListener('click', (e) => {
+                         if (e.target.type !== 'radio') {
+                            const radio = option.querySelector('input');
+                            if (radio && !radio.disabled) radio.checked = true;
                         }
                     });
                 });
 
-                 document.querySelectorAll('.confirm-btn').forEach(button => {
-                    button.addEventListener('click', () => {
-                        const quizEl = button.closest('.quiz-accordion');
-                        gradeQuestion(quizEl);
-                        button.style.display = 'none';
-                    });
-                });
             }
 
             if (quizMode === 'ujian') {
@@ -346,65 +368,36 @@
                     const allQuizEls = document.querySelectorAll('.quiz-accordion');
                     
                     allQuizEls.forEach(quizEl => {
-                        // Untuk PG, kita perlu tandai dulu mana yang dipilih user
-                        const optionsContainer = quizEl.querySelector('.options-container');
-                        if (optionsContainer.dataset.type === 'pg') {
-                            const selectedRadio = optionsContainer.querySelector('input[type="radio"]:checked');
-                            if(selectedRadio) {
-                                selectedRadio.closest('.quiz-option').classList.add('selected');
-                            }
-                        }
-
                         if (gradeQuestion(quizEl)) {
                             score++;
                         }
-                        // Pastikan semua accordion terbuka untuk melihat hasil
                         const content = quizEl.querySelector('.quiz-accordion-content');
+                        const button = quizEl.querySelector('.quiz-accordion-button');
                         if(content.classList.contains('hidden')) {
-                            quizEl.querySelector('.quiz-accordion-button').click();
+                            content.classList.remove('hidden');
+                            button.classList.add('active');
                         }
                     });
 
                     const scoreSummary = document.getElementById('score-summary');
                     scoreSummary.innerHTML = `<h2>Skor Akhir Anda: ${score} dari ${quizzes.length}</h2>
-                                              <p>(${((score/quizzes.length)*100).toFixed(1)}%)</p>`;
+                                              <p>(${((score/quizzes.length)*100).toFixed(1)}%) Benar</p>`;
                     scoreSummary.classList.remove('hidden');
-                    window.scrollTo(0, 0); // Scroll ke atas untuk lihat skor
+                    window.scrollTo(0, 0);
                     document.getElementById('finish-exam-btn').style.display = 'none';
                 });
-
-                 // Event listener terpisah untuk PG di mode ujian agar bisa memilih
-                 document.querySelectorAll('.quiz-option').forEach(option => {
-                    option.addEventListener('click', () => {
-                        const optionsContainer = option.parentElement;
-                        if(optionsContainer.classList.contains('answered')) return;
-                        
-                        // Buat fungsionalitas seperti radio button untuk PG
-                        const questionIndex = option.closest('.quiz-accordion').dataset.quizIndex;
-                        const radios = document.querySelectorAll(`input[name="pg_q${questionIndex}"]`);
-                        radios.forEach(r => {
-                            if(r !== option.querySelector('input')) {
-                                r.checked = false;
+                 document.querySelectorAll('.mcma-option label, .quiz-option label').forEach(label => {
+                    label.addEventListener('click', (e) => {
+                         if (e.target.type !== 'checkbox' && e.target.type !== 'radio') {
+                            const input = label.querySelector('input');
+                            if (input && !input.disabled) {
+                                if(input.type === 'checkbox') input.checked = !input.checked;
+                                if(input.type === 'radio') input.checked = true;
                             }
-                        });
-                        const radio = option.querySelector('input');
-                        if(radio) radio.checked = true;
+                        }
                     });
                 });
             }
-             // Tambahkan radio button ke PG agar logicnya sama
-            const pgOptions = document.querySelectorAll('.quiz-option');
-            pgOptions.forEach((opt, idx) => {
-                 const questionIndex = opt.closest('.quiz-accordion').dataset.quizIndex;
-                 const radio = document.createElement('input');
-                 radio.type = 'radio';
-                 radio.name = `pg_q${questionIndex}`;
-                 radio.style.marginRight = '10px';
-                 if(quizMode === 'ujian' && opt.parentElement.classList.contains('answered')) {
-                    radio.disabled = true;
-                 }
-                 opt.prepend(radio);
-            });
         }
     </script>
 </body>
