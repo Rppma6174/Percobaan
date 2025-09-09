@@ -123,6 +123,9 @@
     </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         // --- Bank Soal Lengkap (30 Soal) ---
         const quizzes = [
             // Bab Bilangan (6 Soal)
