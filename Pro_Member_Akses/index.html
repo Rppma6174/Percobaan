@@ -240,6 +240,9 @@
                     <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('forum', this)">
                         <i class="fa-solid fa-comments text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Forum</span>
                     </a>
+                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('informasi', this)">
+                        <i class="fa-solid fa-info-circle text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Informasi</span>
+                    </a>
                     <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('pengaturan', this)">
                         <i class="fa-solid fa-user-gear text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Pengaturan</span>
                     </a>
@@ -421,6 +424,7 @@
     
     const appContent = document.getElementById('app-content');
     
+    // [DIUBAH] Menambahkan renderer untuk halaman informasi
     const pageRenderers = {
         'dashboard': renderDashboardPage,
         'materi': renderMateriPage,
@@ -429,6 +433,7 @@
         'snbt_tka': renderSnbtTkaPage,
         'video': renderVideoPage,
         'forum': renderForumPage,
+        'informasi': renderInformasiPage, // [BARU]
         'pengaturan': renderPengaturanPage,
         'umt_lab': renderUmtLabPage,
     };
@@ -647,6 +652,68 @@
         appContent.innerHTML = pageHTML;
         setupAccordionListeners();
     }
+        
+    // [BARU] Fungsi untuk merender Halaman Informasi
+    function renderInformasiPage() {
+        appContent.innerHTML = `
+            <div class="panel max-w-4xl mx-auto space-y-8">
+                <div>
+                    <h2 class="text-2xl font-bold text-cyan-400">Pusat Informasi</h2>
+                    <p class="text-sm text-gray-400 mt-1">Semua yang perlu Anda ketahui tentang UMT Pro, komunitas, dan pengembangan platform.</p>
+                </div>
+
+                <div class="bg-gray-900/50 p-5 rounded-lg border border-gray-700">
+                    <h3 class="font-bold text-lg text-cyan-300 mb-3">Tentang UMT & Komunitas</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                        UMT Pro adalah platform yang didedikasikan untuk membantu Anda menguasai matematika dengan cara yang lebih efektif dan interaktif. Kami percaya belajar bisa menjadi petualangan yang menyenangkan. Bergabunglah dengan komunitas kami untuk terhubung dengan sesama pembelajar, bertukar pikiran, dan mendapatkan dukungan langsung.
+                    </p>
+                    <button onclick="navigateTo('forum', document.querySelector('.sidebar-link[onclick*=\\'forum\\']'))" class="bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg text-sm">
+                        <i class="fa-solid fa-comments mr-2"></i>Kunjungi Forum Komunitas
+                    </button>
+                </div>
+
+                <div class="bg-gray-900/50 p-5 rounded-lg border border-gray-700">
+                    <h3 class="font-bold text-lg text-green-300 mb-3">Keuntungan Member Pro</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                        Sebagai Member Pro, Anda mendapatkan akses penuh ke semua fitur premium kami, termasuk bank soal eksklusif, video pembelajaran mendalam, materi TKA, dan akses prioritas ke UMT Lab. Tingkatkan persiapan Anda ke level selanjutnya.
+                    </p>
+                    <ul class="text-sm text-gray-400 space-y-2 list-disc list-inside mb-4">
+                        <li>Akses tak terbatas ke seluruh bank soal.</li>
+                        <li>Video pembahasan dan materi premium.</li>
+                        <li>Analisis dan kajian mendalam di UMT Lab.</li>
+                        <li>Dukungan prioritas dari tim kami.</li>
+                    </ul>
+                    <p class="text-xs text-gray-500"><i>*Fitur Member Pro akan terus dikembangkan dan ditambahkan.</i></p>
+                </div>
+
+                <div class="bg-gray-900/50 p-5 rounded-lg border border-gray-700">
+                    <h3 class="font-bold text-lg text-amber-300 mb-3">Peta Jalan Pengembangan</h3>
+                    <p class="text-gray-300 text-sm leading-relaxed mb-4">
+                        Kami berkomitmen untuk terus meningkatkan platform UMT Pro. Berikut adalah beberapa fitur yang sedang dan akan kami kembangkan:
+                    </p>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-spinner fa-spin text-cyan-400 w-5 text-center"></i>
+                            <span class="text-sm">Sistem Try Out Real-time dengan Peringkat Nasional</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-check-circle text-green-400 w-5 text-center"></i>
+                            <span class="text-sm">Perpustakaan Digital dengan E-Book Matematika</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fa-regular fa-circle text-gray-500 w-5 text-center"></i>
+                            <span class="text-sm">Fitur Laporan Progres Belajar yang Lebih Detail</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center pt-4 border-t border-gray-800">
+                    <p class="text-sm text-gray-400">Punya pertanyaan atau masukan? Hubungi kami melalui <a href="mailto:dukungan@umtpro.com" class="text-cyan-400 hover:underline">dukungan@umtpro.com</a>.</p>
+                </div>
+            </div>
+        `;
+    }
+
     // ... (Sisa kode Anda dari openMateri, setupMateriSearch, renderVideoPage, dst. tetap sama) ...
     function openMateri(itemId, filePath) {
         if (!filePath || filePath === '#') {
@@ -976,7 +1043,7 @@
                 <p class="text-xs text-gray-500 mb-3">Oleh ${item.author}</p>
                 <p class="text-sm text-gray-400 flex-grow">${item.summary}</p>
                  <div class="mt-4 text-xs font-mono bg-gray-900/50 text-cyan-300 rounded-full px-3 py-1 self-start">
-                     E-Book
+                      E-Book
                  </div>
             </div>
         `).join('');
@@ -1165,9 +1232,9 @@
                      <div>
                          <h4 class="font-bold text-lg text-cyan-300 mb-2">Pembahasan:</h4>
                          <div class="text-gray-300 leading-relaxed">
-                             <div class="explanation-container-vertical">
-                                 <div class="explanation-content-inner">${question.explanation}</div>
-                             </div>
+                              <div class="explanation-container-vertical">
+                                   <div class="explanation-content-inner">${question.explanation}</div>
+                              </div>
                          </div>
                      </div>
                 </div>
@@ -1175,8 +1242,8 @@
                 <div class="flex justify-between items-center">
                      <button id="prev-btn" onclick="previousQuestion()" class="nav-btn bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-6 rounded-lg">Sebelumnya</button>
                      ${currentQuestionIndex === quiz.questions.length - 1 ? 
-                       `<button onclick="renderQuizResults()" class="nav-btn bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-6 rounded-lg">Lihat Hasil</button>` :
-                       `<button id="next-btn" onclick="nextQuestion()" class="nav-btn bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-6 rounded-lg">Selanjutnya</button>`
+                        `<button onclick="renderQuizResults()" class="nav-btn bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-6 rounded-lg">Lihat Hasil</button>` :
+                        `<button id="next-btn" onclick="nextQuestion()" class="nav-btn bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-6 rounded-lg">Selanjutnya</button>`
                      }
                 </div>
             </div>
@@ -1331,7 +1398,7 @@
                 <h4 class="font-bold text-lg text-cyan-300 mb-2">Pembahasan:</h4>
                 <div class="text-gray-300 leading-relaxed">
                    <div class="explanation-container-vertical">
-                       <div class="explanation-content-inner">${q.explanation}</div>
+                        <div class="explanation-content-inner">${q.explanation}</div>
                    </div>
                 </div>
             </div>
@@ -1411,8 +1478,8 @@
             });
             document.getElementById('modal-overlay').addEventListener('click', (event) => {
                  if (event.target === event.currentTarget) {
-                     if (typeof cancelAction === 'function') cancelAction();
-                     closeModal();
+                      if (typeof cancelAction === 'function') cancelAction();
+                      closeModal();
                  }
             });
         }
