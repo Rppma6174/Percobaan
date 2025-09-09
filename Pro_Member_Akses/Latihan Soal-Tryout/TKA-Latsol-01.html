@@ -1,1522 +1,407 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>UMT Pro Command Center</title>
-    <link rel="icon" type="image/png" href="UMT-Logo - Copy.png">
-    
-    <script src="data.js"></script> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latihan Soal TKA Matematika - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     
     <script>
-      MathJax = {
-        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] }
-      };
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@400;600;700&display=swap');
         :root {
             --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
             --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
             --accent-green: #39D353; --accent-red: #F85149;
         }
-        body { background-color: var(--bg-main); color: var(--text-primary); font-family: 'Inter', sans-serif; }
-        .font-mono { font-family: 'Fira Code', monospace; }
-        .panel {
-            background-color: var(--bg-panel);
-            border: 1px solid var(--border-color);
-            border-radius: 0.75rem;
-            padding: 1rem;
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
         }
-        @media (min-width: 768px) {
-            .panel {
-                padding: 1.5rem;
-            }
-        }
-        .bottom-nav-link.active { color: var(--accent-cyan); }
-        .sidebar-link.active { background-color: #30363D; color: white; }
-        .card-item { background-color: #21262D; transition: transform 0.2s; cursor: pointer; }
-        .card-item:hover { transform: translateY(-4px); background-color: #30363D; }
-        .quiz-option { border: 2px solid var(--border-color); }
-        .quiz-option:hover { border-color: var(--accent-cyan); }
-        .quiz-option.selected { border-color: var(--accent-cyan); background-color: rgba(47, 129, 247, 0.2); }
-        .correct-answer { background-color: rgba(57, 211, 83, 0.1); border-left: 4px solid var(--accent-green); }
-        .wrong-answer { background-color: rgba(248, 81, 73, 0.1); border-left: 4px solid var(--accent-red); }
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        .nav-btn:disabled { background-color: #30363D; color: #8B949E; cursor: not-allowed; }
-
-        .dropdown-container {
-            position: relative;
-            width: 100%;
-            max-width: 320px;
-            user-select: none;
-        }
-        .dropdown-button {
-            background-color: var(--bg-panel);
-            border: 1px solid var(--border-color);
-            padding: 0.75rem 1rem;
-            width: 100%;
-            border-radius: 0.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            transition: border-color 0.2s;
-        }
-        .dropdown-button:hover {
-            border-color: var(--accent-cyan);
-        }
-        .dropdown-button span {
-            font-weight: 600;
-        }
-        .dropdown-button i {
-            transition: transform 0.3s ease;
-        }
-        .dropdown-menu {
-            display: none;
-            position: absolute;
-            top: calc(100% + 0.5rem);
-            left: 0;
-            width: 100%;
-            background-color: var(--bg-panel);
-            border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
-            z-index: 10;
-            max-height: 250px;
-            overflow-y: auto;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-        .dropdown-menu.open {
-            display: block;
-        }
-        .dropdown-button.open i {
-            transform: rotate(180deg);
-        }
-        .dropdown-item {
-            padding: 0.75rem 1rem;
-            cursor: pointer;
-        }
-        .dropdown-item:hover {
-            background-color: var(--accent-cyan);
-            color: white;
-        }
-
-        @keyframes slideInRight { from { opacity: 0; transform: translateX(100%); } to { opacity: 1; transform: translateX(0); } }
-        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; transform: translateY(-20px); } }
-        .toast-in { animation: slideInRight 0.5s forwards; }
-        .toast-out { animation: fadeOut 0.5s forwards; }
-
-        .forum-container { background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; padding: 2.5rem 2rem; max-width: 800px; margin: 2rem auto; text-align: center; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); }
-        .intro h1 { font-size: 2.25rem; font-weight: 700; color: var(--accent-cyan); margin-bottom: 0.75rem; }
-        .intro p { color: var(--text-secondary); max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6; }
-        .community-links { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--border-color); }
-        .community-links h2 { font-size: 1.25rem; font-weight: 600; color: var(--text-primary); margin-bottom: 1.5rem; }
-        .community-btn { text-decoration: none; color: white; font-weight: bold; padding: 0.75rem 1.5rem; border-radius: 9999px; display: inline-flex; align-items: center; gap: 0.75rem; transition: all 0.3s ease; border: 2px solid transparent; }
-        .community-btn i { font-size: 1.25rem; }
-        .community-btn:hover { transform: translateY(-4px); box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25); }
-        .whatsapp-btn { background-color: #25D366; }
-        .whatsapp-btn:hover { background-color: #1DAA54; }
-        .telegram-btn { background-color: #229ED9; }
-        .telegram-btn:hover { background-color: #1C84B3; }
-        .community-links .subtext { color: var(--text-secondary); margin-top: 1.5rem; font-size: 0.875rem; }
-
-        @media (max-width: 768px) {
-            .intro h1 { font-size: 1.75rem; }
-            .forum-container { padding: 2rem 1rem; margin: 1rem; }
-            .community-btn { width: 100%; justify-content: center; }
-        }
-
-        @media (max-width: 640px) {
-            #single-explanation-container .text-lg { font-size: 1.125rem; }
-            #single-explanation-container .text-sm { font-size: 0.95rem; line-height: 1.5; }
-            #single-explanation-container .font-bold { font-size: 1.125rem; }
-            .quiz-nav-buttons { flex-direction: column; gap: 0.75rem; }
-            .quiz-nav-buttons > button { width: 100%; justify-content: center; }
-        }
-
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes scaleIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.7); z-index: 1000; display: flex; justify-content: center; align-items: center; animation: fadeIn 0.3s ease; }
-        .modal-box { background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; padding: 1.5rem; width: 90%; max-width: 450px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); animation: scaleIn 0.3s ease; }
-        .modal-title { font-size: 1.25rem; font-weight: 700; color: var(--text-primary); margin-bottom: 0.75rem; }
-        .modal-content { color: var(--text-secondary); line-height: 1.6; margin-bottom: 1.5rem; }
-        .modal-buttons { display: flex; justify-content: flex-end; gap: 0.75rem; }
-        .modal-btn { padding: 0.5rem 1.25rem; border-radius: 0.5rem; font-weight: 600; border: none; cursor: pointer; transition: background-color 0.2s; }
-        .modal-btn-confirm { background-color: var(--accent-cyan); color: white; }
-        .modal-btn-confirm:hover { background-color: #2577e3; }
-        .modal-btn-danger { background-color: var(--accent-red); color: white; }
-        .modal-btn-danger:hover { background-color: #e4433b; }
-        .modal-btn-cancel { background-color: #30363D; color: var(--text-primary); }
-        .modal-btn-cancel:hover { background-color: #484f58; }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        h1, h2 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        .hidden { display: none; }
         
-        .explanation-container-vertical {
-            max-height: 45vh;
-            overflow-y: auto;
-            overflow-x: hidden;
-            border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
-            padding: 0.75rem;
-            background-color: #0d1117;
+        #mode-selector { text-align: center; padding: 4rem 2rem; }
+        .mode-btn {
+            background-color: var(--accent-cyan); color: white; border: none; padding: 15px 30px;
+            border-radius: 0.5rem; font-size: 1.2rem; font-weight: bold; cursor: pointer;
+            margin: 1rem; transition: all 0.2s ease;
         }
-        .explanation-content-inner {
-            overflow-wrap: break-word;
-            word-wrap: break-word;
-            white-space: pre-wrap;
-            overflow-x: auto;
-            min-height: 100%;
-            overflow-y: hidden;
-        }
+        .mode-btn:hover { transform: scale(1.05); background-color: #1f6eeb; }
 
-        .quiz-nav-container {
-            display: flex;
-            overflow-x: auto;
-            padding-bottom: 0.75rem;
-            margin-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border-color);
+        #score-summary {
+            padding: 1.5rem; margin-bottom: 2rem; text-align: center;
+            border: 2px solid var(--accent-green); border-radius: 0.75rem;
+            background-color: rgba(57, 211, 83, 0.1);
         }
-        .quiz-nav-item {
-            flex-shrink: 0;
-            width: 2.5rem;
-            height: 2.5rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px solid var(--border-color);
-            border-radius: 50%;
-            margin-right: 0.75rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
+        #score-summary h2 { border: none; padding: 0; margin: 0 0 0.5rem 0; color: var(--accent-green); }
+
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
         }
-        .quiz-nav-item:hover {
-            border-color: var(--accent-cyan);
-            color: var(--accent-cyan);
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option, .mcma-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
         }
-        .quiz-nav-item.current {
-            background-color: var(--accent-cyan);
-            border-color: var(--accent-cyan);
-            color: white;
+        .options-container.answered .quiz-option:not(.correct):not(.wrong),
+        .options-container.answered .mcma-option {
+            opacity: 0.7; cursor: not-allowed;
         }
-        .quiz-nav-item.answered {
-            background-color: #39D35330;
-            border-color: var(--accent-green);
+        .quiz-option:hover, .mcma-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct, .mcma-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; opacity: 1;
         }
+        .quiz-option.wrong, .mcma-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); opacity: 1;
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .confirm-btn, #finish-exam-btn {
+            background-color: var(--accent-cyan); color: white; border: none; padding: 10px 20px;
+            border-radius: 0.5rem; font-weight: bold; cursor: pointer; margin-top: 1rem; width: 100%;
+            transition: background-color 0.2s ease;
+        }
+        .confirm-btn:hover, #finish-exam-btn:hover { background-color: #1f6eeb; }
+        #finish-exam-btn { background-color: var(--accent-green); }
+        #finish-exam-btn:hover { background-color: #2f9e44; }
+        .category-table { width: 100%; border-collapse: separate; border-spacing: 0 0.5rem; }
+        .category-table td { padding: 0.75rem; border: 2px solid var(--border-color); border-radius: 0.5rem; }
+        .category-table td:first-child { text-align: left; }
+        .category-table .correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); }
+        .category-table .wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+
+        p, li, .quiz-explanation, .important-note {
+            overflow-x: auto; padding-bottom: 8px;
+        }
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
     </style>
 </head>
-<body class="text-white">
-
-    <div class="flex min-h-screen">
-        <aside class="fixed bottom-0 left-0 z-50 w-full h-16 bg-[var(--bg-panel)] border-t border-[var(--border-color)] md:relative md:w-64 md:h-screen md:flex md:flex-col md:border-t-0 md:border-r md:p-6">
-            <h1 class="hidden text-xl font-bold mb-10 text-cyan-400 md:block md:text-2xl">UMT Pro</h1>
-            <nav id="sidebar-nav" class="no-scrollbar flex overflow-x-auto h-full md:flex-col md:space-y-4 md:h-auto">
-                <div class="flex flex-nowrap items-center justify-start gap-2 px-2 md:flex-col md:items-stretch md:gap-0 md:px-0">
-                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('dashboard', this)">
-                        <i class="fa-solid fa-chart-pie text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Dashboard</span>
-                    </a>
-                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('materi', this)">
-                        <i class="fa-solid fa-book text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Materi</span>
-                    </a>
-                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('perpustakaan', this)">
-                        <i class="fa-solid fa-book-atlas text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Perpustakaan</span>
-                    </a>
-                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('bank_soal', this)">
-                        <i class="fa-solid fa-list-check text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Bank Soal</span>
-                    </a>
-                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('snbt_tka', this)">
-                        <i class="fa-solid fa-graduation-cap text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">SNBT & TKA</span>
-                    </a>
-                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('umt_lab', this)">
-                        <i class="fa-solid fa-flask-vial text-lg md:w-6"></i>
-                        <span class="hidden md:inline md:text-base md:mt-0">UMT Lab</span>
-                        <span class="text-xs mt-1 md:hidden">Lab</span>
-                    </a>
-                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('video', this)">
-                        <i class="fa-solid fa-video text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Video</span>
-                    </a>
-                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('forum', this)">
-                        <i class="fa-solid fa-comments text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Forum</span>
-                    </a>
-                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('informasi', this)">
-                        <i class="fa-solid fa-info-circle text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Informasi</span>
-                    </a>
-                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('pengaturan', this)">
-                        <i class="fa-solid fa-user-gear text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Pengaturan</span>
-                    </a>
-                </div>
-            </nav>
-            <div class="hidden mt-auto md:block">
-                <button onclick="logout()" class="w-full bg-red-800 hover:bg-red-700 text-white py-2 px-3 rounded">
-                    <i class="fa-solid fa-right-from-bracket"></i><span class="md:inline"> Logout</span>
+<body>
+    <div class="container">
+        <div id="mode-selector">
+            <h1>Latihan Soal TKA Matematika</h1>
+            <p>Pilih mode pengerjaan soal.</p>
+            <div>
+                <button class="mode-btn" onclick="startQuiz('latihan')">
+                    <i class="fas fa-pencil-alt"></i> Mode Latihan
+                    <p style="font-size: 0.8rem; font-weight: normal; margin: 5px 0 0 0;">(Cek jawaban setelah setiap soal)</p>
+                </button>
+                <button class="mode-btn" onclick="startQuiz('ujian')">
+                    <i class="fas fa-stopwatch"></i> Mode Ujian
+                    <p style="font-size: 0.8rem; font-weight: normal; margin: 5px 0 0 0;">(Jawaban diperiksa di akhir)</p>
                 </button>
             </div>
-        </aside>
+        </div>
 
-        <main id="app-content" class="flex-1 p-4 md:p-6 space-y-6 pb-24 md:pb-6 overflow-x-hidden"></main>
+        <div id="quiz-wrapper" class="hidden">
+            <h1 id="quiz-title">Latihan Soal TKA</h1>
+            <div id="score-summary" class="hidden"></div>
+            <div id="quiz-container"></div>
+            </div>
     </div>
 
-    <div id="toast-container" class="fixed top-5 right-5 z-[100] space-y-3 w-80"></div>
-    <div id="modal-container" style="display: none;"></div>
-
     <script>
-    // === [PERBAIKAN STRUKTUR DATA] ===
-    // Tambahkan data materi di dalam setiap kategori SNBT & TKA
-    if (typeof allContentData !== 'undefined') {
-        allContentData.snbtTka = {
-            materi: [
-                { 
-                    id: 'snbt-mat-01', title: 'Matematika Wajib & Tingkat Lanjut (TKA)', summary: 'Kumpulan konsep dan rumus penting untuk menaklukkan soal-soal matematika.', icon: 'fa-solid fa-brain',
-                    content: {
-                        "Bilangan": [
-                            { id: 'snbt-mat-sub-01', title: 'Konsep Bilangan dan Sifat-sifatnya', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Bilangan-01.html' },
-                            { id: 'snbt-mat-sub-02', title: 'FPB dan KPK', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Bilangan-02.html' },
-                            { id: 'snbt-mat-sub-03', title: 'Pecahan, Desimal, dan Persentase', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Bilangan-03.html' },
-                            { id: 'snbt-mat-sub-04', title: 'Eksponen dan Bentuk Akar', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Bilangan-04.html' },
-                        ],
-                        "Aljabar": [
-                            { id: 'snbt-mat-sub-05', title: 'Persamaan & Pertidaksamaan Linear Satu Variabel', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Aljabar-01.html' },
-                            { id: 'snbt-mat-sub-06', title: 'Sistem Persamaan Linear (SPLDV & SPLTV)', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Aljabar-02.html' },
-                            { id: 'snbt-mat-sub-07', title: 'Sistem Pertidaksamaan Linear dan Program Linear', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Aljabar-03.html' },
-                            { id: 'snbt-mat-sub-08', title: 'Konsep Dasar Relasi Dan Fungsi', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Aljabar-04.html' },
-                            { id: 'snbt-mat-sub-09', title: 'Jenis-jenis Fungsi dan Grafiknya', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Aljabar-05.html' },
-                            { id: 'snbt-mat-sub-10', title: 'Operasi, Komposisi, dan Invers Fungsi', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Aljabar-06.html' },
-                            { id: 'snbt-mat-sub-11', title: 'Aplikasi dan Pemodelan Fungsi', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Aljabar-07.html' },
-                            { id: 'snbt-mat-sub-12', title: 'Konsep Dasar Barisan dan Deret', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Aljabar-08.html' },
-                            { id: 'snbt-mat-sub-13', title: 'Barisan dan Deret Aritmetika', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Aljabar-09.html' },
-                            { id: 'snbt-mat-sub-14', title: 'Barisan dan Deret Geometri', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Aljabar-10.html' },
-                            { id: 'snbt-mat-sub-15', title: 'Aplikasi dan Pemodelan Barisan dan Deret', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Aljabar-11.html' },
-                            
-                        ],
-                        "Geometri Dan Pengukuran": [
-                            { id: 'snbt-mat-sub-16', title: 'Hubungan Antar Sudut, Garis, dan Bidang', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Geometri-01.html' },
-                            { id: 'snbt-mat-sub-17', title: 'Bangun Datar (Geometri Bidang)', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Geometri-02.html' },
-                            { id: 'snbt-mat-sub-18', title: 'Bangun Ruang (Geometri Ruang)', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Geometri-03.html' },
-                            { id: 'snbt-mat-sub-19', title: 'Transformasi Geometri', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Geometri-04.html' },
-                        ],
-                        "Data dan Peluang": [
-                            { id: 'snbt-mat-sub-05', title: 'Penyajian dan Interpretasi Data', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Data-01.html' },
-                            { id: 'snbt-mat-sub-05', title: 'Ukuran Pemusatan Data (Data Tunggal & Kelompok)', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Data-02.html' },
-                            { id: 'snbt-mat-sub-05', title: 'Ukuran Penyebaran Data (Data Tunggal & Kelompok)', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Data-03.html' },
-                            { id: 'snbt-mat-sub-05', title: 'Kaidah Pencacahan (Counting Rules)', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Data-04.html' },
-                            { id: 'snbt-mat-sub-05', title: 'Peluang (Probability)', type: 'HTML Document', filePath: 'Materi-TKA-SNBT/Data-05.html' },
-                        ],
-                         "Trigonometri": [
-                            // { id: 'snbt-mat-sub-05', title: 'Statistika Deskriptif', type: 'HTML Document', filePath: '#' },
-                            // { id: 'snbt-mat-sub-06', title: 'Peluang Kejadian', type: 'HTML Document', filePath: '#' },
-                        ],
-                    }
-                },
-                // { 
-                //     id: 'snbt-ppu-01', title: 'Matematika Wajib (TKA)', summary: 'Latih kemampuan berpikir logis, analitis, dan memecahkan masalah secara efektif.', icon: 'fa-solid fa-lightbulb',
-                //     content: {
-                //         "Penalaran Logis": [
-                //              { id: 'snbt-ppu-sub-01', title: 'Silogisme dan Penarikan Kesimpulan', type: 'HTML Document', filePath: '#' },
-                //         ]
-                //     }
-                // },
-                { 
-                    id: 'snbt-pbm-01', title: 'Matematika SNBT', summary: 'Tingkatkan pemahaman teks, analisis wacana, dan kaidah penulisan.', icon: 'fa-solid fa-book-open-reader',
-                    content: {} 
-                },
-            ],
-            latihan: [
-                { 
-                    id: 'tka-tryout-01', title: 'Latihan Soal TKA Matematika', summary: 'Simulasi ujian lengkap dengan 15 soal untuk mengukur kesiapanmu.', icon: 'fa-solid fa-file-lines',
-                    content: {
-                        "Paket Try Out": [
-                            { id: 'tka-to-sub-01', title: 'Mulai Latihan Soal - 01', type: 'Latihan Soal', filePath: 'Latihan Soal-Tryout/TKA-Latsol-01.html' },
-                        ]
-                    }
-                },
-                // { 
-                //     id: 'snbt-tka-saintek', title: 'Paket TKA Saintek', summary: 'Soal-soal Fisika, Kimia, Biologi, dan Matematika IPA.', icon: 'fa-solid fa-atom',
-                //     content: {}
-                // },
-                // { 
-                //     id: 'snbt-tka-soshum', title: 'Paket TKA Soshum', summary: 'Soal-soal Sejarah, Geografi, Sosiologi, dan Ekonomi.', icon: 'fa-solid fa-landmark',
-                //     content: {}
-                // }
-            ]
-        };
-    }
-    
-    const CONFIG = {
-        API_URL: 'https://script.google.com/macros/s/AKfycbyP3jpWgs6ikQcA-9MsInRZYbLFQsshjxgo22twwXrzpACSPV9BREogrKUd-60crXV_mg/exec',
-        LOGIN_PAGE: '../Login/',
-        SESSION_KEYS: {
-            TOKEN: 'sessionToken',
-            EMAIL: 'sessionEmail',
-        },
-        STORAGE_KEYS: {
-            COMPLETED_ITEMS: 'userCompletedItems',
-            LAST_SCORE: 'lastQuizScore',
-            WELCOME_POPUP: 'welcomePopupShown',
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
         }
-    };
-    
-    let heartbeatIntervalId = null;
-    let currentQuizData = null;
-    let currentQuestionIndex = 0;
-    let userAnswers = [];
-    let currentExplanationIndex = 0;
-    let currentSnbtViewId = null; // <-- Variabel state untuk halaman SNBT
-    
-    // ... (Sisa fungsi keamanan seperti verifySession, logout, etc. tetap sama) ...
-    async function verifySession(token, email) {
-        try {
-            const response = await fetch(CONFIG.API_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                body: JSON.stringify({ action: 'check_session', token: token, email: email })
-            });
-            const result = await response.json();
-            if (!result.isValid) {
-                forceLogout("Sesi Anda tidak valid atau telah berakhir. Silakan login kembali.");
-            }
-        } catch (error) {
-            console.error("Heartbeat check failed:", error);
-            showToast("Gagal terhubung ke server. Memeriksa kembali...", "error");
-        }
-    }
-    function startSessionHeartbeat(token, email) {
-        if (heartbeatIntervalId) clearInterval(heartbeatIntervalId);
-        verifySession(token, email);
-        heartbeatIntervalId = setInterval(() => verifySession(token, email), 60000);
-    }
-    function forceLogout(message) {
-        if (heartbeatIntervalId) {
-            clearInterval(heartbeatIntervalId);
-            heartbeatIntervalId = null;
-        }
-        const onConfirmAction = () => {
-            sessionStorage.removeItem(CONFIG.SESSION_KEYS.TOKEN);
-            sessionStorage.removeItem(CONFIG.SESSION_KEYS.EMAIL);
-            window.location.href = CONFIG.LOGIN_PAGE;
-        };
-        showConfirmationModal({
-            title: 'Sesi Berakhir',
-            message: message,
-            confirmText: 'OK',
-            confirmAction: onConfirmAction,
-            showCancelButton: false
-        });
-    }
-    function logout() {
-        showConfirmationModal({
-            title: 'Konfirmasi Logout',
-            message: 'Apakah Anda yakin ingin keluar dari sesi Anda?',
-            confirmText: 'Logout',
-            confirmButtonClass: 'modal-btn-danger',
-            confirmAction: () => {
-                sessionStorage.removeItem(CONFIG.SESSION_KEYS.TOKEN);
-                sessionStorage.removeItem(CONFIG.SESSION_KEYS.EMAIL);
-                if (heartbeatIntervalId) {
-                    clearInterval(heartbeatIntervalId);
-                    heartbeatIntervalId = null;
-                }
-                window.location.href = CONFIG.LOGIN_PAGE;
-            }
-        });
-    }
-    
-    const appContent = document.getElementById('app-content');
-    
-    // [DIUBAH] Menambahkan renderer untuk halaman informasi
-    const pageRenderers = {
-        'dashboard': renderDashboardPage,
-        'materi': renderMateriPage,
-        'perpustakaan': renderPerpustakaanPage,
-        'bank_soal': renderBankSoalPage,
-        'snbt_tka': renderSnbtTkaPage,
-        'video': renderVideoPage,
-        'forum': renderForumPage,
-        'informasi': renderInformasiPage, // [BARU]
-        'pengaturan': renderPengaturanPage,
-        'umt_lab': renderUmtLabPage,
-    };
-    
-    function navigateTo(page, clickedElement) {
-        if (page !== 'pengaturan') {
-            sessionStorage.setItem('lastActivePage', page);
-        }
-        // [PERBAIKAN] Reset tampilan detail SNBT saat navigasi
-        if (page === 'snbt_tka') {
-            currentSnbtViewId = null;
-        }
-
-        document.querySelectorAll('.sidebar-link, .bottom-nav-link').forEach(link => link.classList.remove('active'));
-        if (clickedElement) {
-            const targetLink = Array.from(document.querySelectorAll('.sidebar-link, .bottom-nav-link'))
-                                      .find(a => a.getAttribute('onclick').includes(`'${page}'`));
-            if(targetLink) targetLink.classList.add('active');
-        }
-        
-        const renderFunction = pageRenderers[page];
-        if (renderFunction) {
-            renderFunction();
-        } else {
-            console.error(`Tidak ada renderer untuk halaman: ${page}`);
-            appContent.innerHTML = `<p class="text-center text-red-500">Halaman tidak ditemukan.</p>`;
-        }
-    }
-    
-    // ... (Fungsi render lainnya seperti renderDashboardPage, renderMateriPage, dll tetap sama) ...
-    function renderDashboardPage() {
-        appContent.innerHTML = `
-            <header class="panel flex justify-between items-center">
-                <div>
-                    <h2 id="user-greeting" class="text-xl font-bold"></h2>
-                    <p class="text-sm text-gray-400">Selamat datang di Command Center Anda.</p>
-                </div>
-            </header>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-                <div class="col-span-1 lg:col-span-2 space-y-6">
-                    <div class="panel">
-                        <h4 class="font-bold text-lg mb-4">Status Anda</h4>
-                        <div id="status-container" class="space-y-4"></div>
-                    </div>
-                    <div id="last-score-widget-container"></div>
-                    <div id="last-activity-container" class="space-y-6"></div>
-                </div>
-                <div class="col-span-1 space-y-6">
-                    <div class="panel">
-                        <h4 class="font-bold text-lg mb-4">Pencapaian</h4>
-                        <div id="lencana-container" class="flex gap-4"></div>
-                    </div>
-                     <div class="panel">
-                        <h4 class="font-bold text-lg mb-4">Info Terbaru UMT</h4>
-                        <div id="social-media-container" class="space-y-4"></div>
-                    </div>
-                </div>
-            </div>
-        `;
-        initializeAppDashboardWidgets();
-    }
-    function renderMateriPage() {
-        let accordionHTML = '';
-        const materiData = allContentData.materi;
-
-        for (const gradeKey in materiData) {
-            const itemsHTML = materiData[gradeKey].map(item => `
-                <li id="card-${item.id}"
-                    class="card-item-list block p-3 rounded-md hover:bg-gray-700 cursor-pointer"
-                    onclick="openMateri('${item.id}', '${item.filePath}')"> 
-                    <span class="font-semibold">${item.title}</span>
-                    <span class="block text-xs text-gray-400">${item.type}</span>
-                </li>
-            `).join('');
-
-            accordionHTML += `
-                <div class="accordion-item border-b border-gray-700" data-accordion-group>
-                    <h2>
-                        <button type="button" class="accordion-button flex items-center justify-between w-full p-4 font-semibold text-left text-cyan-300">
-                            <span>${gradeKey}</span>
-                            <i class="accordion-icon fa-solid fa-chevron-down shrink-0 transition-transform duration-200"></i>
-                        </button>
-                    </h2>
-                    <div class="accordion-content hidden p-2">
-                        <ul class="space-y-2">${itemsHTML}</ul>
-                    </div>
-                </div>
-            `;
-        }
-
-        const materiPageHTML = `
-            <div class="panel">
-                <h2 class="text-2xl font-bold text-cyan-400">Materi UMT Learning</h2>
-                <p class="text-sm text-gray-400 mb-6">Cari atau pilih Materi UMT Learning yang ingin kamu pelajari.</p>
-                <div class="relative mb-6">
-                    <input type="text" id="materi-search-input" class="w-full bg-gray-900/80 border border-gray-600 rounded-lg py-2 pl-10 pr-4 text-white placeholder-gray-500 focus:ring-2 focus:ring-cyan-500 focus:outline-none" placeholder="Ketik untuk mencari materi...">
-                    <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"></i>
-                </div>
-                <div class="border border-gray-700 rounded-lg bg-gray-900/50">
-                    ${accordionHTML}
-                </div>
-            </div>
-        `;
-        appContent.innerHTML = materiPageHTML;
-        setupAccordionListeners();
-        setupMateriSearch();
-    }
-    
-    // === [FUNGSI BARU] Mengatur event listener untuk semua accordion ===
-    function setupAccordionListeners() {
-        document.querySelectorAll('.accordion-button').forEach(button => {
-            button.addEventListener('click', () => {
-                const content = button.parentElement.nextElementSibling;
-                const icon = button.querySelector('.accordion-icon');
-                content.classList.toggle('hidden');
-                icon.classList.toggle('rotate-180');
-            });
-        });
-    }
-
-    // === [FUNGSI BARU] Membuka halaman detail kategori SNBT ===
-    function openSnbtCategory(categoryId) {
-        currentSnbtViewId = categoryId;
-        renderSnbtTkaPage();
-    }
-
-    // === [FUNGSI DIPERBARUI] Menjadi router untuk halaman SNBT & TKA ===
-    function renderSnbtTkaPage() {
-        if (!currentSnbtViewId) {
-            renderSnbtMainPage();
-        } else {
-            renderSnbtDetailPage(currentSnbtViewId);
-        }
-    }
-
-    // === [FUNGSI BARU] Merender halaman utama SNBT (kartu-kartu) ===
-    function renderSnbtMainPage() {
-        const materiCards = allContentData.snbtTka.materi.map(item => `
-            <div class="card-item p-5 rounded-lg flex flex-col" onclick="openSnbtCategory('${item.id}')">
-                <div class="flex items-center gap-4 mb-3">
-                    <i class="${item.icon} text-cyan-400 text-2xl w-8 text-center"></i>
-                    <h3 class="font-bold text-lg text-cyan-300">${item.title}</h3>
-                </div>
-                <p class="text-sm text-gray-400 flex-grow">${item.summary}</p>
-                <div class="mt-4 text-xs font-mono bg-gray-900/50 text-cyan-300 rounded-full px-3 py-1 self-start">
-                    Materi Belajar
-                </div>
-            </div>
-        `).join('');
-
-        const latihanCards = allContentData.snbtTka.latihan.map(item => `
-            <div class="card-item p-5 rounded-lg flex flex-col" onclick="openSnbtCategory('${item.id}')">
-                <div class="flex items-center gap-4 mb-3">
-                    <i class="${item.icon} text-green-400 text-2xl w-8 text-center"></i>
-                    <h3 class="font-bold text-lg text-green-300">${item.title}</h3>
-                </div>
-                <p class="text-sm text-gray-400 flex-grow">${item.summary}</p>
-                <div class="mt-4 text-xs font-mono bg-gray-900/50 text-green-300 rounded-full px-3 py-1 self-start">
-                    Latihan Soal
-                </div>
-            </div>
-        `).join('');
-
-        const pageHTML = `
-            <div class="panel">
-                <h2 class="text-2xl font-bold text-cyan-400">Persiapan SNBT & TKA</h2>
-                <p class="text-sm text-gray-400 mb-8">Fokuskan persiapanmu dengan materi dan latihan soal yang terstruktur.</p>
-                <div class="mb-10">
-                    <h3 class="text-xl font-semibold mb-4 border-b-2 border-cyan-500 pb-2">Materi Belajar</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                        ${materiCards}
-                    </div>
-                </div>
-                <div>
-                    <h3 class="text-xl font-semibold mb-4 border-b-2 border-green-500 pb-2">Latihan & Try Out</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4">
-                        ${latihanCards}
-                    </div>
-                </div>
-            </div>
-        `;
-        appContent.innerHTML = pageHTML;
-    }
-
-    // === [FUNGSI BARU] Merender halaman detail materi SNBT (tampilan accordion) ===
-    function renderSnbtDetailPage(categoryId) {
-        const allCategories = [...allContentData.snbtTka.materi, ...allContentData.snbtTka.latihan];
-        const categoryData = allCategories.find(item => item.id === categoryId);
-        if (!categoryData) { appContent.innerHTML = `<p>Konten tidak ditemukan.</p>`; return; }
-        let accordionHTML = '';
-        if (Object.keys(categoryData.content).length === 0) {
-            accordionHTML = `<p class="p-4 text-gray-500">Materi untuk kategori ini belum tersedia.</p>`;
-        } else {
-            for (const subCategory in categoryData.content) {
-                const itemsHTML = categoryData.content[subCategory].map(item => `<li id="card-${item.id}" class="card-item-list block p-3 rounded-md hover:bg-gray-700 cursor-pointer" onclick="openMateri('${item.id}', '${item.filePath}')"><span class="font-semibold">${item.title}</span><span class="block text-xs text-gray-400">${item.type}</span></li>`).join('');
-                accordionHTML += `<div class="accordion-item border-b border-gray-700" data-accordion-group><h2><button type="button" class="accordion-button flex items-center justify-between w-full p-4 font-semibold text-left text-cyan-300"><span>${subCategory}</span><i class="accordion-icon fa-solid fa-chevron-down shrink-0 transition-transform duration-200"></i></button></h2><div class="accordion-content hidden p-2"><ul class="space-y-2">${itemsHTML}</ul></div></div>`;
-            }
-        }
-        
-        const pageHTML = `
-            <div class="panel relative">
-                <button onclick="navigateTo('snbt_tka', document.querySelector('.sidebar-link[onclick*=\\'snbt_tka\\']'))" 
-                        class="absolute top-4 right-4 md:top-6 md:right-6 h-10 w-10 flex items-center justify-center bg-gray-800/50 hover:bg-gray-700 rounded-full text-gray-400 hover:text-white transition-colors"
-                        aria-label="Kembali ke daftar kategori SNBT">
-                    <i class="fa-solid fa-times text-xl"></i>
-                </button>
-                <div class="mb-6 pr-12">
-                    <h2 class="text-2xl font-bold text-cyan-400">${categoryData.title}</h2>
-                    <p class="text-sm text-gray-400">${categoryData.summary}</p>
-                </div>
-                <div class="border border-gray-700 rounded-lg bg-gray-900/50">
-                    ${accordionHTML}
-                </div>
-            </div>
-        `;
-        appContent.innerHTML = pageHTML;
-        setupAccordionListeners();
-    }
-        
-    // [BARU] Fungsi untuk merender Halaman Informasi
-    function renderInformasiPage() {
-        appContent.innerHTML = `
-            <div class="panel max-w-4xl mx-auto space-y-8">
-                <div>
-                    <h2 class="text-2xl font-bold text-cyan-400">Pusat Informasi</h2>
-                    <p class="text-sm text-gray-400 mt-1">Semua yang perlu Anda ketahui tentang UMT Pro, komunitas, dan pengembangan platform.</p>
-                </div>
-
-                <div class="bg-gray-900/50 p-5 rounded-lg border border-gray-700">
-                    <h3 class="font-bold text-lg text-cyan-300 mb-3">Tentang UMT & Komunitas</h3>
-                    <p class="text-gray-300 text-sm leading-relaxed mb-4">
-                        UMT Pro adalah platform yang didedikasikan untuk membantu Anda menguasai matematika dengan cara yang lebih efektif dan interaktif. Kami percaya belajar bisa menjadi petualangan yang menyenangkan. Bergabunglah dengan komunitas kami untuk terhubung dengan sesama pembelajar, bertukar pikiran, dan mendapatkan dukungan langsung.
-                    </p>
-                    <button onclick="navigateTo('forum', document.querySelector('.sidebar-link[onclick*=\\'forum\\']'))" class="bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-lg text-sm">
-                        <i class="fa-solid fa-comments mr-2"></i>Kunjungi Forum Komunitas
-                    </button>
-                </div>
-
-                <div class="bg-gray-900/50 p-5 rounded-lg border border-gray-700">
-                    <h3 class="font-bold text-lg text-green-300 mb-3">Keuntungan Member Pro</h3>
-                    <p class="text-gray-300 text-sm leading-relaxed mb-4">
-                        Sebagai Member Pro, Anda mendapatkan akses penuh ke semua fitur premium kami, termasuk bank soal eksklusif, video pembelajaran mendalam, materi TKA, dan akses prioritas ke UMT Lab. Tingkatkan persiapan Anda ke level selanjutnya.
-                    </p>
-                    <ul class="text-sm text-gray-400 space-y-2 list-disc list-inside mb-4">
-                        <li>Akses tak terbatas ke seluruh bank soal.</li>
-                        <li>Video pembahasan dan materi premium.</li>
-                        <li>Analisis dan kajian mendalam di UMT Lab.</li>
-                        <li>Dukungan prioritas dari tim kami.</li>
-                    </ul>
-                    <p class="text-xs text-gray-500"><i>*Fitur Member Pro akan terus dikembangkan dan ditambahkan.</i></p>
-                </div>
-
-                <div class="bg-gray-900/50 p-5 rounded-lg border border-gray-700">
-                    <h3 class="font-bold text-lg text-amber-300 mb-3">Peta Jalan Pengembangan</h3>
-                    <p class="text-gray-300 text-sm leading-relaxed mb-4">
-                        Kami berkomitmen untuk terus meningkatkan platform UMT Pro. Berikut adalah beberapa fitur yang sedang dan akan kami kembangkan:
-                    </p>
-                    <div class="space-y-3">
-                        <div class="flex items-center gap-3">
-                            <i class="fa-solid fa-spinner fa-spin text-cyan-400 w-5 text-center"></i>
-                            <span class="text-sm">Sistem Try Out Real-time dengan Peringkat Nasional</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <i class="fa-solid fa-check-circle text-green-400 w-5 text-center"></i>
-                            <span class="text-sm">Perpustakaan Digital dengan E-Book Matematika</span>
-                        </div>
-                        <div class="flex items-center gap-3">
-                            <i class="fa-regular fa-circle text-gray-500 w-5 text-center"></i>
-                            <span class="text-sm">Fitur Laporan Progres Belajar yang Lebih Detail</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="text-center pt-4 border-t border-gray-800">
-                    <p class="text-sm text-gray-400">Punya pertanyaan atau masukan? Hubungi kami melalui <a href="mailto:dukungan@umtpro.com" class="text-cyan-400 hover:underline">dukungan@umtpro.com</a>.</p>
-                </div>
-            </div>
-        `;
-    }
-
-    // ... (Sisa kode Anda dari openMateri, setupMateriSearch, renderVideoPage, dst. tetap sama) ...
-    function openMateri(itemId, filePath) {
-        if (!filePath || filePath === '#') {
-            showToast('Konten untuk materi ini belum tersedia.', 'info');
-            return; 
-        }
-
-        let materiItem = null;
-        for (const gradeKey in allContentData.materi) {
-            const foundItem = allContentData.materi[gradeKey].find(item => item.id === itemId);
-            if (foundItem) {
-                materiItem = foundItem;
-                break;
-            }
-        }
-
-        if (materiItem) {
-            updateLastActivity('materi', materiItem);
-            markAsCompleted(itemId);
-        }
-
-        window.location.href = filePath;
-    }
-    function setupMateriSearch() {
-        const searchInput = document.getElementById('materi-search-input');
-        if (!searchInput) return;
-
-        searchInput.addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase().trim();
-            const allMateriItems = document.querySelectorAll('.card-item-list');
-            const allAccordionGroups = document.querySelectorAll('[data-accordion-group]');
-
-            if (searchTerm === '') {
-                allMateriItems.forEach(item => {
-                    item.style.display = 'block';
-                });
-                allAccordionGroups.forEach(group => {
-                    group.style.display = 'block';
-                    group.querySelector('.accordion-content').classList.add('hidden');
-                    group.querySelector('.accordion-icon').classList.remove('rotate-180');
-                });
-                return;
-            }
-
-            allAccordionGroups.forEach(group => {
-                const itemsInGroup = group.querySelectorAll('.card-item-list');
-                let hasVisibleItemInGroup = false;
-
-                itemsInGroup.forEach(item => {
-                    const title = item.querySelector('.font-semibold').textContent.toLowerCase();
-                    if (title.includes(searchTerm)) {
-                        item.style.display = 'block';
-                        hasVisibleItemInGroup = true;
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-
-                if (hasVisibleItemInGroup) {
-                    group.style.display = 'block';
-                    group.querySelector('.accordion-content').classList.remove('hidden');
-                    group.querySelector('.accordion-icon').classList.add('rotate-180');
-                } else {
-                    group.style.display = 'none';
-                }
-            });
-        });
-    }
-    function renderVideoPage() {
-        const categories = ['Semua', ...new Set(allContentData.video.map(item => item.category))];
-
-        const filterButtonsHTML = categories.map(category => `
-            <button class="filter-btn text-sm py-2 px-4 rounded-full bg-gray-700 hover:bg-cyan-600 transition-colors" data-filter="${category}">
-                ${category}
-            </button>
-        `).join('');
-
-        const videoHTML = allContentData.video.map(item => `
-            <div class="video-card card-item p-4 rounded-lg flex flex-col" data-category="${item.category}" onclick="playVideoInModal('${item.videoId}', '${item.title}')">
-                <img src="https://img.youtube.com/vi/${item.videoId}/mqdefault.jpg" alt="${item.title}" class="rounded-md mb-3">
-                <h3 class="font-bold text-base mb-2 flex-grow">${item.title}</h3>
-                <div class="text-xs font-mono text-cyan-300 flex items-center gap-2">
-                    <img src="UMT-Logo - Copy.png" alt="UMT Logo" class="w-4 h-4 rounded-full"> <span>Premium Video</span> </div>
-                </div>
-        `).join('');
-
-        appContent.innerHTML = `
-            <div class="panel">
-                <h2 class="text-2xl font-bold text-cyan-400">Video Pembelajaran</h2>
-                <p class="text-sm text-gray-400 mb-6">Pilih kategori atau tonton video pilihan untuk pemahaman lebih dalam.</p>
-                <div class="mb-8 flex flex-wrap gap-2" id="video-filter-container">
-                    ${filterButtonsHTML}
-                </div>
-                <div id="video-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    ${videoHTML}
-                </div>
-            </div>
-        `;
-
-        setupVideoFilter();
-    }
-    function playVideoInModal(videoId, title) {
-        const videoItem = allContentData.video.find(v => v.videoId === videoId);
-        if (videoItem) {
-            markAsCompleted(videoItem.id, { showToast: true });
-            updateLastActivity('video', videoItem);
-        }
-
-        const videoPlayerHTML = `
-            <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-                <iframe
-                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                    src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowfullscreen>
-                </iframe>
-            </div>
-        `;
-
-        showConfirmationModal({
-            title: title,
-            message: videoPlayerHTML,
-            confirmText: 'Tutup',
-            showCancelButton: false,
-            confirmButtonClass: 'modal-btn-confirm mt-4 w-full justify-center',
-        });
-    }
-    function setupVideoFilter() {
-        const filterContainer = document.getElementById('video-filter-container');
-        const videoCards = document.querySelectorAll('.video-card');
-        if (!filterContainer) return;
-
-        filterContainer.querySelector('[data-filter="Semua"]').classList.add('bg-cyan-600');
-
-        filterContainer.addEventListener('click', (e) => {
-            if (!e.target.matches('.filter-btn')) return;
-
-            const selectedFilter = e.target.dataset.filter;
-
-            document.querySelectorAll('#video-filter-container .filter-btn').forEach(btn => {
-                btn.classList.remove('bg-cyan-600');
-            });
-            e.target.classList.add('bg-cyan-600');
-
-            videoCards.forEach(card => {
-                if (selectedFilter === 'Semua' || card.dataset.category === selectedFilter) {
-                    card.style.display = 'flex';
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-        });
-    }
-    function renderBankSoalPage() {
-        const categories = ['Semua', ...new Set(allContentData.bankSoal.map(quiz => quiz.category || 'Lainnya'))];
-
-        const dropdownItemsHTML = categories.map(category => `
-            <div class="dropdown-item" data-filter="${category}">${category}</div>
-        `).join('');
-
-        const dropdownFilterHTML = `
-            <div class="mb-8">
-                <label class="block text-sm font-medium text-gray-400 mb-2">Filter Kategori:</label>
-                <div class="dropdown-container" id="filter-dropdown">
-                    <button class="dropdown-button" id="dropdown-button">
-                        <span id="dropdown-label">Semua</span>
-                        <i class="fa-solid fa-chevron-down"></i>
-                    </button>
-                    <div class="dropdown-menu no-scrollbar" id="dropdown-menu">
-                        ${dropdownItemsHTML}
-                    </div>
-                </div>
-            </div>
-        `;
-
-        const categoriesHTML = allContentData.bankSoal.reduce((acc, quiz) => {
-            const category = quiz.category || 'Lainnya';
-            if (!acc[category]) acc[category] = [];
-            acc[category].push(quiz);
-            return acc;
-        }, {});
-
-        let quizSectionsHTML = '';
-        for (const category in categoriesHTML) {
-            const quizzes = categoriesHTML[category];
-            const cardsHTML = quizzes.map(quiz => `
-                <div class="card-item p-6 rounded-lg flex flex-col flex-shrink-0 w-72 md:w-80" onclick="startQuiz('${quiz.id}')">
-                    <h3 class="font-bold text-lg mb-2">${quiz.title}</h3>
-                    <p class="text-sm text-gray-400 mb-4">${quiz.subject}</p>
-                    <div class="mt-auto text-xs font-mono bg-gray-900/50 text-cyan-300 rounded-full px-3 py-1 self-start">
-                        ${quiz.totalQuestions} Soal
-                    </div>
-                </div>
-            `).join('');
-
-            quizSectionsHTML += `
-                <div class="quiz-category-section mb-8" data-category="${category}">
-                    <h3 class="text-xl font-bold mb-4 text-cyan-300">${category}</h3>
-                    <div class="no-scrollbar flex overflow-x-auto gap-4 pb-4">
-                        ${cardsHTML}
-                    </div>
-                </div>
-            `;
-        }
-        
-        const bankSoalHTML = `
-            <div class="panel">
-                <h2 class="text-2xl font-bold mb-1 text-cyan-400">Bank Soal</h2>
-                <p class="text-sm text-gray-400 mb-6">Pilih paket soal untuk mulai berlatih.</p>
-                ${dropdownFilterHTML}
-                <div id="quiz-list-container">
-                    ${quizSectionsHTML}
-                </div>
-            </div>
-        `;
-        appContent.innerHTML = bankSoalHTML;
-
-        setupBankSoalFilter();
-    }
-    function setupBankSoalFilter() {
-        const dropdownContainer = document.getElementById('filter-dropdown');
-        if (!dropdownContainer) return;
-
-        const button = document.getElementById('dropdown-button');
-        const menu = document.getElementById('dropdown-menu');
-        const label = document.getElementById('dropdown-label');
-        const items = menu.querySelectorAll('.dropdown-item');
-        const quizSections = document.querySelectorAll('.quiz-category-section');
-
-        button.addEventListener('click', (event) => {
-            event.stopPropagation();
-            menu.classList.toggle('open');
-            button.classList.toggle('open');
-        });
-
-        items.forEach(item => {
-            item.addEventListener('click', () => {
-                const selectedFilter = item.getAttribute('data-filter');
-                label.textContent = selectedFilter;
-                quizSections.forEach(section => {
-                    if (selectedFilter === 'Semua' || section.dataset.category === selectedFilter) {
-                        section.style.display = 'block';
-                    } else {
-                        section.style.display = 'none';
-                    }
-                });
-                menu.classList.remove('open');
-                button.classList.remove('open');
-            });
-        });
-
-        window.addEventListener('click', (event) => {
-            if (!dropdownContainer.contains(event.target)) {
-                menu.classList.remove('open');
-                button.classList.remove('open');
-            }
-        });
-    }
-    function renderForumPage() {
-        appContent.innerHTML = `<div class="forum-container"><div class="intro"><h1>Forum Belajar UMT</h1><p>Bergabunglah dengan komunitas eksklusif UMT Academy! Tempat terbaik untuk berdiskusi, bertanya, berbagi ilmu, dan menguasai matematika bersama sesama pelajar dan fasilitator.</p></div><div class="community-links"><h2>Pilih Komunitas Pilihanmu Sekarang!</h2><div class="flex justify-center gap-4 flex-wrap"><a href="https://chat.whatsapp.com/GpyKRFFjMINBcjqGEYSXQ6" target="_blank" class="community-btn whatsapp-btn"><i class="fab fa-whatsapp"></i><span>Komunitas WhatsApp</span></a><a href="https://t.me/umt6174" target="_blank" class="community-btn telegram-btn"><i class="fab fa-telegram"></i><span>Komunitas Telegram</span></a></div><p class="subtext">Bergabunglah dengan ribuan pelajar lainnya!</p></div></div>`;
-    }
-    function renderPengaturanPage() {
-        appContent.innerHTML = `
-        <div class="panel max-w-2xl mx-auto">
-            <h2 class="text-2xl font-bold mb-1 text-cyan-400">Pengaturan</h2>
-            <p class="text-sm text-gray-400 mb-6">Kelola data aplikasi dan akun Anda di sini.</p>
-            <div class="space-y-4">
-                <div class="bg-gray-900/50 p-4 rounded-lg flex items-center justify-between flex-wrap gap-3">
-                    <div>
-                        <h4 class="font-bold">Reset Progres Belajar</h4>
-                        <p class="text-xs text-gray-400 mt-1">Aksi ini akan menghapus semua progres dan lencana Anda.</p>
-                    </div>
-                    <button onclick="resetProgress()" class="bg-red-800 hover:bg-red-700 text-white text-sm font-bold py-2 px-4 rounded-lg flex-shrink-0">Reset Data</button>
-                </div>
-                <div class="bg-gray-900/50 p-4 rounded-lg flex items-center justify-between flex-wrap gap-3">
-                    <div>
-                        <h4 class="font-bold">Akun</h4>
-                        <p class="text-xs text-gray-400 mt-1">Keluar dari akun Anda pada perangkat ini.</p>
-                    </div>
-                    <button onclick="logout()" class="w-full sm:w-auto bg-red-800 hover:bg-red-700 text-white text-sm font-bold py-2 px-4 rounded-lg flex-shrink-0">
-                        <i class="fa-solid fa-right-from-bracket"></i> Logout
-                    </button>
-                </div>
-            </div>
-        </div>`;
-    }
-    function renderUmtLabPage() {
-        const analisisArticles = allContentData.umtLab.filter(p => p.category === 'Analisis & Kajian');
-        const eksplorasiArticles = allContentData.umtLab.filter(p => p.category === 'Eksplorasi Teori');
-
-        const createPostCard = (post) => `
-            <div class="card-item p-5 rounded-lg flex flex-col flex-shrink-0 w-72 md:w-80" onclick="window.location.href='viewer.html?id=${post.id}'">
-                <h3 class="font-bold text-lg text-cyan-400 mb-2">${post.title}</h3>
-                <p class="text-xs text-gray-500 mb-3">Oleh ${post.author} - ${post.date}</p>
-                <p class="text-sm text-gray-400">${post.summary}</p>
-            </div>
-        `;
-        
-        const labPageHTML = `
-            <div class="panel">
-                <h2 class="text-2xl font-bold text-cyan-400">UMT Lab</h2>
-                <p class="text-sm text-gray-400 mb-8">Ruang untuk mendalami konsep dan analisis matematika tingkat lanjut.</p>
-
-                <div>
-                    <h3 class="text-xl font-semibold mb-4 border-b-2 border-cyan-500 pb-2">Analisis & Kajian Matematika</h3>
-                    <div class="no-scrollbar flex overflow-x-auto gap-4 pb-4">
-                        ${analisisArticles.length > 0 ? analisisArticles.map(createPostCard).join('') : '<p class="text-gray-500">Belum ada konten.</p>'}
-                    </div>
-                </div>
-
-                <div class="mt-10">
-                    <h3 class="text-xl font-semibold mb-4 border-b-2 border-cyan-500 pb-2">Eksplorasi Teori</h3>
-                    <div class="no-scrollbar flex overflow-x-auto gap-4 pb-4">
-                        ${eksplorasiArticles.length > 0 ? eksplorasiArticles.map(createPostCard).join('') : '<p class="text-gray-500">Belum ada konten.</p>'}
-                    </div>
-                </div>
-            </div>
-        `;
-        appContent.innerHTML = labPageHTML;
-        if (window.MathJax) { MathJax.typeset(); }
-    }
-    function renderPerpustakaanPage() {
-        const libraryHTML = allContentData.perpustakaan.map(item => `
-            <div class="card-item p-5 rounded-lg flex flex-col" onclick="window.location.href='viewer.html?id=${item.id}'">
-                <h3 class="font-bold text-lg text-cyan-400 mb-2">${item.title}</h3>
-                <p class="text-xs text-gray-500 mb-3">Oleh ${item.author}</p>
-                <p class="text-sm text-gray-400 flex-grow">${item.summary}</p>
-                 <div class="mt-4 text-xs font-mono bg-gray-900/50 text-cyan-300 rounded-full px-3 py-1 self-start">
-                      E-Book
-                 </div>
-            </div>
-        `).join('');
-
-        const pageHTML = `
-            <div class="panel">
-                <h2 class="text-2xl font-bold text-cyan-400">Perpustakaan Digital</h2>
-                <p class="text-sm text-gray-400 mb-8">Koleksi buku digital dan referensi untuk pendalaman materi.</p>
-                <div id="library-grid-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    ${libraryHTML.length > 0 ? libraryHTML : '<p class="text-gray-500 col-span-full">Belum ada buku di perpustakaan.</p>'}
-                </div>
-            </div>
-        `;
-        appContent.innerHTML = pageHTML;
-    }
-    function getTotalItemCount() {
-        const totalMateri = Object.values(allContentData.materi).flat().length;
-        const totalVideo = allContentData.video.length;
-        const totalBankSoal = allContentData.bankSoal.length;
-        const totalUmtLab = allContentData.umtLab.length;
-        const totalPerpustakaan = allContentData.perpustakaan.length;
-        return totalMateri + totalVideo + totalBankSoal + totalUmtLab + totalPerpustakaan;
-    }
-    function initializeAppDashboardWidgets() {
-        const email = sessionStorage.getItem(CONFIG.SESSION_KEYS.EMAIL) || 'pengguna@email.com';
-        const namePart = email.split('@')[0];
-        document.getElementById('user-greeting').innerHTML = `Halo, ${namePart.charAt(0).toUpperCase() + namePart.slice(1)} 👋`;
-        
-        const completedItems = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEYS.COMPLETED_ITEMS)) || [];
-        const totalItems = getTotalItemCount(); 
-        const progress = totalItems > 0 ? Math.round((completedItems.length / totalItems) * 100) : 0;
-        
-        document.getElementById('status-container').innerHTML = `<div><span class="text-sm">📚 Progress Keseluruhan (${completedItems.length}/${totalItems})</span><div class="w-full bg-gray-700 rounded-full h-2.5 mt-1"><div class="bg-cyan-500 h-2.5 rounded-full transition-all duration-500" style="width: ${progress}%"></div></div></div>`;
-        
-        let lencanaHTML = '';
-        if (completedItems.length >= 1) lencanaHTML += `<div title="Langkah Pertama"><i class="fa-solid fa-shoe-prints text-cyan-400 text-2xl"></i></div>`;
-        if (progress >= 50) lencanaHTML += `<div title="Setengah Jalan!"><i class="fa-solid fa-road-circle-check text-green-400 text-2xl"></i></div>`;
-        if (progress === 100) lencanaHTML += `<div title="100% Selesai!"><i class="fa-solid fa-trophy text-amber-400 text-2xl"></i></div>`;
-        document.getElementById('lencana-container').innerHTML = lencanaHTML || `<p class="text-sm text-gray-500">Selesaikan materi untuk dapat lencana!</p>`;
-    
-        document.getElementById('social-media-container').innerHTML = socialMediaUpdates.map(item => `
-            <a href="${item.link}" target="_blank" class="flex items-start gap-3 p-2 rounded-lg hover:bg-gray-800">
-                ${item.icon.endsWith('.png') ? `<img src="${item.icon}" class="w-6 h-6">` : `<i class="${item.icon} ${item.color} text-xl w-6 text-center"></i>`}
-                <span class="text-sm text-gray-300">${item.text}</span>
-            </a>
-        `).join('');
-    
-        const lastScoreContainer = document.getElementById('last-score-widget-container');
-        const lastScoreData = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEYS.LAST_SCORE));
-        if (lastScoreData) {
-            lastScoreContainer.innerHTML = `
-                <div class="panel">
-                    <h4 class="font-bold text-lg mb-4">Skor Kuis Terakhir</h4>
-                    <div class="text-center">
-                        <p class="text-sm text-gray-400">${lastScoreData.title}</p>
-                        <p class="text-4xl font-bold text-cyan-400 mt-2">${lastScoreData.percentage}%</p>
-                        <p class="text-gray-300 mt-1 text-xs">(${lastScoreData.score} dari ${lastScoreData.total} soal benar)</p>
-                    </div>
-                </div>`;
-        }
-        const lastActivityContainer = document.getElementById('last-activity-container');
-        const lastActivity = JSON.parse(localStorage.getItem('userLastActivity')) || {};
-        let activityHTML = '';
-
-        const createWidget = (config) => {
-            if (!config.data) return '';
-
-            let href = config.data.filePath || '#';
-            let actionOnClick = `onclick="event.preventDefault(); openMateri('${config.data.id}', '${href}')"`;
+        // --- Bank Soal Lengkap (30 Soal) ---
+        const quizzes = [
+            // Bab Bilangan (6 Soal)
+            { bab: "Bilangan", q: "Hasil dari $\\frac{1}{4} + \\frac{2}{3} \\times \\frac{1}{2}$ adalah...", options: ["$7/12$", "$5/12$", "$1/2$", "$3/4$"], correct: 1, explanation: "Kerjakan perkalian dulu: $\\frac{2}{3} \\times \\frac{1}{2} = \\frac{2}{6} = \\frac{1}{3}$. Kemudian jumlahkan: $\\frac{1}{4} + \\frac{1}{3} = \\frac{3}{12} + \\frac{4}{12} = \\frac{7}{12}$." },
+            { bab: "Bilangan", q: "Bentuk sederhana dari $(x^3y^{-2})^2 \\cdot (x^{-1}y^4)$ adalah...", options: ["$x^5$", "$x^5 y^{-1}$", "$x^7 y^8$", "$x^5 y^0$"], correct: 3, explanation: "Gunakan sifat eksponen: $(x^{3 \\cdot 2}y^{-2 \\cdot 2}) \\cdot (x^{-1}y^4) = (x^6 y^{-4}) \\cdot (x^{-1} y^4) = x^{6-1}y^{-4+4} = x^5 y^0 = x^5$." },
+            { bab: "Bilangan", q: "FPB dari 48, 72, dan 96 adalah...", options: ["12", "24", "48", "6"], correct: 1, explanation: "$48=2^4 \\times 3$, $72=2^3 \\times 3^2$, $96=2^5 \\times 3$. Ambil faktor yang sama ($2,3$) dengan pangkat terkecil ($2^3, 3^1$). FPB = $2^3 \\times 3 = 8 \\times 3 = 24$." },
+            { bab: "Bilangan", q: "KPK dari dua bilangan adalah 180 dan FPB-nya adalah 12. Jika salah satu bilangan adalah 36, bilangan lainnya adalah...", options: ["60", "48", "72", "30"], correct: 0, explanation: "Gunakan rumus $a \\times b = FPB \\times KPK$. Maka $36 \\times b = 12 \\times 180$. $b = (12 \\times 180) / 36 = 180 / 3 = 60$." },
+            { bab: "Bilangan", q: "Sebuah toko memberikan diskon 20% untuk semua barang. Jika harga sebuah celana setelah diskon adalah Rp160.000, maka harga aslinya adalah...", options: ["Rp192.000", "Rp200.000", "Rp210.000", "Rp180.000"], correct: 1, explanation: "Harga setelah diskon adalah 80% dari harga asli. Jika $H$ adalah harga asli, maka $0.8 \\times H = 160.000$. Jadi $H = 160.000 / 0.8 = 200.000$." },
+            { bab: "Bilangan", q: "Tentukan Benar atau Salah untuk setiap pernyataan berikut:", type: "category", statements: [{s: "Bilangan $\\pi$ adalah bilangan rasional.", a: false}, {s: "$3^{-2} = -9$.", a: false}, {s: "FPB dari dua bilangan prima berbeda adalah 1.", a: true}], explanation: "A: $\\pi$ adalah irasional (Salah). B: $3^{-2} = 1/3^2 = 1/9$ (Salah). C: Bilangan prima tidak memiliki faktor persekutuan selain 1 (Benar)." },
             
-            if (config.type === 'video') {
-                actionOnClick = `onclick="event.preventDefault(); playVideoInModal('${config.data.videoId}', '${config.data.title.replace(/'/g, "\\'")}')"`;
-            } else if (config.type === 'umtLab' || config.type === 'perpustakaan') {
-                href = `viewer.html?id=${config.data.id}`;
-                actionOnClick = `onclick="window.location.href='${href}'"`;
-            }
+            // Bab Aljabar (8 Soal)
+            { bab: "Aljabar", q: "Penyelesaian dari pertidaksamaan $12 - 4x < 0$ adalah...", options: ["$x<3$", "$x>3$", "$x<-3$", "$x>-3$"], correct: 1, explanation: "$-4x < -12$. Karena dibagi dengan bilangan negatif (-4), tanda harus dibalik: $x > (-12)/(-4) \\implies x > 3$." },
+            { bab: "Aljabar", q: "Jika $f(x)=x-3$ dan $g(x)=x^2+1$, maka $(g \\circ f)(x)$ adalah...", options: ["$x^2-2$", "$x^2-6x+10$", "$x^2+x-2$", "$x^2-6x+8$"], correct: 1, explanation: "$(g \\circ f)(x) = g(f(x))$. Masukkan $f(x)$ ke dalam $g(x)$: $g(x-3) = (x-3)^2+1 = (x^2-6x+9)+1 = x^2-6x+10$." },
+            { bab: "Aljabar", q: "Suku ke-20 dari barisan aritmetika 2, 5, 8, ... adalah...", options: ["59", "62", "65", "57"], correct: 0, explanation: "$a=2, b=3$. $U_{20} = a+(n-1)b = 2+(19)3 = 2+57=59$." },
+            { bab: "Aljabar", q: "Jumlah deret geometri tak hingga $16+8+4+...$ adalah...", options: ["24", "30", "32", "Tak hingga"], correct: 2, explanation: "$a=16, r=1/2$. Karena $|r|<1$, deretnya konvergen. $S_{\\infty} = a/(1-r) = 16/(1-1/2) = 16/(1/2) = 32$." },
+            { bab: "Aljabar", q: "Sebuah fungsi kuadrat memotong sumbu-x di (-1,0) dan (3,0), serta melalui titik (0,-3). Persamaan fungsi tersebut adalah...", options: ["$y=x^2-2x-3$", "$y=x^2+2x-3$", "$y=-x^2-2x+3$", "$y=-x^2+2x-3$"], correct: 0, explanation: "Bentuk umum $y=a(x-x_1)(x-x_2) = a(x+1)(x-3)$. Masukkan (0,-3): $-3=a(1)(-3) \\implies a=1$. Maka, $y=(x+1)(x-3)=x^2-2x-3$." },
+            { bab: "Aljabar", q: "Invers dari fungsi $f(x) = \\frac{x+1}{2x-3}$ adalah...", options: ["$\\frac{3x+1}{2x-1}$", "$\\frac{3x-1}{2x+1}$", "$\\frac{-3x+1}{2x-1}$", "$\\frac{x-1}{2x+3}$"], correct: 0, explanation: "$y=\\frac{x+1}{2x-3} \\implies y(2x-3)=x+1 \\implies 2xy-3y=x+1 \\implies 2xy-x=3y+1 \\implies x(2y-1)=3y+1 \\implies x = \\frac{3y+1}{2y-1}$. Maka $f^{-1}(x)=\\frac{3x+1}{2x-1}$." },
+            { bab: "Aljabar", q: "Di sebuah toko, harga 2 buku dan 1 pensil adalah Rp14.000, sedangkan harga 1 buku dan 3 pensil adalah Rp17.000. Tentukan Benar atau Salah:", type: "category", statements: [{s: "Harga satu buku adalah Rp5.000.", a: true}, {s: "Harga satu pensil adalah Rp4.000.", a: true}, {s: "Harga 5 buku dan 5 pensil adalah Rp45.000.", a: true}], explanation: "Model: $2b+p=14000$ dan $b+3p=17000$. Dengan eliminasi/substitusi, didapat $b=5000$ dan $p=4000$. A: Benar. B: Benar. C: $5(5000)+5(4000)=25000+20000=45000$ (Benar)." },
+            { bab: "Aljabar", q: "Rumus jumlah n suku pertama suatu deret adalah $S_n = 3n^2+n$. Manakah pernyataan berikut yang benar? (Pilih semua jawaban yang benar)", type: "mcma", options: ["Suku pertamanya adalah 4.", "Suku keduanya adalah 10.", "Barisan ini adalah barisan aritmetika.", "Beda barisan ini adalah 6."], correct: [0,1,2,3], explanation: "$U_1=S_1=3(1)^2+1=4$. $S_2=3(2)^2+2=14$. $U_2=S_2-S_1=14-4=10$. Bedanya $b=10-4=6$. Karena bedanya konstan (bisa dicek dengan $U_3$), ini adalah barisan aritmetika." },
 
-            return `
-                <div class="panel">
-                    <h4 class="font-bold text-lg mb-3">${config.title}</h4>
-                    <div class="flex items-center gap-4 p-3 rounded-lg bg-gray-900/50">
-                        <i class="${config.icon} text-cyan-400 text-2xl w-8 text-center"></i>
-                        <div class="flex-grow">
-                            <p class="text-sm font-semibold">${config.data.title}</p>
-                            <a href="${href}" ${actionOnClick} class="text-xs text-cyan-400 hover:underline cursor-pointer">
-                                ${config.actionText}
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            `;
-        };
+            // Bab Geometri (6 Soal)
+            { bab: "Geometri", q: "Besar sudut pelurus dari 55° adalah...", options: ["35°", "45°", "125°", "135°"], correct: 2, explanation: "Sudut berpelurus berjumlah 180°. Maka, $180° - 55° = 125°$." },
+            { bab: "Geometri", q: "Sebuah segitiga siku-siku memiliki sisi miring 25 cm dan salah satu sisi penyikunya 7 cm. Luas segitiga tersebut adalah...", options: ["84 cm²", "175 cm²", "168 cm²", "91 cm²"], correct: 0, explanation: "Gunakan Tripel Pythagoras 7-24-25. Sisi penyiku lainnya adalah 24 cm. Luas = $\\frac{1}{2} \\times alas \\times tinggi = \\frac{1}{2} \\times 7 \\times 24 = 84$ cm²." },
+            { bab: "Geometri", q: "Bayangan titik A(3, -4) setelah dirotasi 90° berlawanan arah jarum jam dengan pusat (0,0) adalah...", options: ["(4, 3)", "(-4, -3)", "(4, -3)", "(-4, 3)"], correct: 3, explanation: "Rotasi +90° mengikuti aturan $(x,y) \\to (-y,x)$. Maka $(3,-4) \\to (-(-4), 3) = (4,3)$." },
+            { bab: "Geometri", q: "Volume sebuah kerucut adalah 100$\\pi$ cm³. Jika tingginya 12 cm, maka jari-jari alasnya adalah...", options: ["5 cm", "10 cm", "15 cm", "25 cm"], correct: 0, explanation: "$V = \\frac{1}{3}\\pi r^2 t \\implies 100\\pi = \\frac{1}{3}\\pi r^2 (12) \\implies 100 = 4r^2 \\implies r^2=25 \\implies r=5$ cm." },
+            { bab: "Geometri", q: "Sebuah balok berukuran 8cm x 6cm x 5cm. Tentukan Benar atau Salah:", type: "category", statements: [{s: "Panjang diagonal ruangnya adalah $\\sqrt{125}$ cm.", a: true}, {s: "Luas permukaannya adalah 236 cm².", a: true}, {s: "Volumenya adalah 240 cm³.", a: true}], explanation: "A. Diagonal ruang = $\\sqrt{8^2+6^2+5^2} = \\sqrt{64+36+25}=\\sqrt{125}$ (Benar). B. $LP = 2(8\\cdot6+8\\cdot5+6\\cdot5) = 2(48+40+30)=2(118)=236$ (Benar). C. $V=8\\cdot6\\cdot5=240$ (Benar)." },
+            { bab: "Geometri", q: "Titik A(2,1) ditranslasi oleh T(1,3) lalu direfleksikan terhadap sumbu-x. Koordinat bayangan akhirnya adalah...", options: ["(3,4)", "(3,-4)", "(-3,4)", "(-3,-4)"], correct: 1, explanation: "Langkah 1 (Translasi): $(2+1, 1+3) = (3,4)$. Langkah 2 (Refleksi thd sumbu-x): $(3,4) \\to (3,-4)$." },
 
-        activityHTML += createWidget({ title: "Materi Terakhir Dibaca", icon: "fa-solid fa-book-open", actionText: "Lanjutkan Membaca", data: lastActivity.materi, type: 'materi' });
-        activityHTML += createWidget({ title: "Video Terakhir Ditonton", icon: "fa-solid fa-circle-play", actionText: "Tonton Lagi", data: lastActivity.video, type: 'video' });
-        activityHTML += createWidget({ title: "Lab Terakhir Dibaca", icon: "fa-solid fa-flask-vial", actionText: "Lanjutkan Membaca", data: lastActivity.umtLab, type: 'umtLab'});
-        activityHTML += createWidget({ title: "Buku Terakhir Dibuka", icon: "fa-solid fa-book-atlas", actionText: "Lanjutkan Membaca", data: lastActivity.perpustakaan, type: 'perpustakaan' });
-        lastActivityContainer.innerHTML = activityHTML;
-    }
-    function resetProgress() {
-        showConfirmationModal({
-            title: 'Konfirmasi Reset Progres',
-            message: 'Apakah Anda yakin ingin mereset semua progres belajar Anda? Aksi ini tidak dapat dibatalkan.',
-            confirmText: 'Ya, Reset',
-            confirmButtonClass: 'modal-btn-danger',
-            confirmAction: () => {
-                localStorage.removeItem(CONFIG.STORAGE_KEYS.COMPLETED_ITEMS);
-                localStorage.removeItem(CONFIG.STORAGE_KEYS.LAST_SCORE);
-                localStorage.removeItem('userLastActivity');
-                showToast("Progres belajar berhasil direset.", "success");
-                navigateTo('dashboard', null);
-            },
-            cancelAction: () => showToast("Aksi reset dibatalkan.", "info")
-        });
-    }
-    function markAsCompleted(itemId, options = { showToast: false }) {
-        let completed = JSON.parse(localStorage.getItem(CONFIG.STORAGE_KEYS.COMPLETED_ITEMS)) || [];
-        if (!completed.includes(itemId)) {
-            completed.push(itemId);
-            localStorage.setItem(CONFIG.STORAGE_KEYS.COMPLETED_ITEMS, JSON.stringify(completed));
-            if (options.showToast) {
-                showToast("Progres telah dicatat!", "success");
-            }
+            // Bab Data & Peluang (6 Soal)
+            { bab: "Data & Peluang", q: "Median dari data 5, 8, 7, 9, 7, 6, 8 adalah...", options: ["6", "7", "7.5", "8"], correct: 1, explanation: "Urutkan data: 5, 6, 7, <b>7</b>, 8, 8, 9. Nilai tengahnya adalah 7." },
+            { bab: "Data & Peluang", q: "Dari 7 orang akan dipilih 3 orang untuk menjadi juara 1, 2, dan 3. Banyaknya susunan juara yang mungkin adalah...", options: ["35", "210", "840", "5040"], correct: 1, explanation: "Karena urutan juara penting, gunakan permutasi: $P(7,3) = \\frac{7!}{(7-3)!} = 7 \\times 6 \\times 5 = 210$." },
+            { bab: "Data & Peluang", q: "Dua buah dadu dilempar bersamaan. Peluang munculnya jumlah mata dadu 8 adalah...", options: ["3/36", "4/36", "5/36", "6/36"], correct: 2, explanation: "Pasangan yang berjumlah 8 adalah (2,6), (3,5), (4,4), (5,3), (6,2). Ada 5 kemungkinan dari total 36 kemungkinan. Peluangnya adalah 5/36." },
+            { bab: "Data & Peluang", q: "Dalam sebuah kotak terdapat 5 bola merah dan 3 bola putih. Diambil 2 bola satu per satu tanpa pengembalian. Peluang terambil keduanya bola merah adalah...", options: ["25/64", "20/64", "20/56", "15/56"], correct: 2, explanation: "Ini peluang bersyarat. P(Merah pertama) = 5/8. P(Merah kedua | Merah pertama) = 4/7. Peluang total = $(5/8) \\times (4/7) = 20/56$." },
+            { bab: "Data & Peluang", q: "Rata-rata nilai dari 10 siswa adalah 75. Jika nilai seorang siswa, yaitu 84, tidak diikutsertakan, rata-rata nilai yang baru adalah...", options: ["70", "72", "73", "74"], correct: 3, explanation: "Total nilai awal = $10 \\times 75 = 750$. Total nilai baru = $750 - 84 = 666$. Ada 9 siswa sekarang. Rata-rata baru = $666 / 9 = 74$." },
+
+            // Bab Trigonometri (4 Soal)
+            { bab: "Trigonometri", q: "Sebuah tangga sepanjang 10 meter disandarkan pada dinding dan membentuk sudut 60° dengan lantai. Tinggi dinding yang dicapai ujung tangga adalah...", options: ["5 m", "$5\\sqrt{2}$ m", "$5\\sqrt{3}$ m", "10 m"], correct: 2, explanation: "Ini membentuk segitiga siku-siku. Dinding (sisi depan) = $d$, tangga (sisi miring) = $m$. $sin(60°) = d/m \\implies \\frac{\\sqrt{3}}{2} = d/10 \\implies d = 5\\sqrt{3}$ m." },
+            { bab: "Trigonometri", q: "Nilai dari $sin(30°) + cos(60°)$ adalah...", options: ["1/2", "1", "$\\sqrt{3}$", "$1/2 + \\sqrt{3}/2$"], correct: 1, explanation: "$sin(30°) = 1/2$ dan $cos(60°) = 1/2$. Maka, $1/2 + 1/2 = 1$." },
+            { bab: "Trigonometri", q: "Pada segitiga ABC, diketahui panjang sisi a=8, b=10, dan sudut C=30°. Luas segitiga ABC adalah...", options: ["20", "40", "80", "20$\\sqrt{3}$"], correct: 0, explanation: "Gunakan rumus luas $L = \\frac{1}{2}ab \\sin(C) = \\frac{1}{2}(8)(10)\\sin(30°) = \\frac{1}{2}(80)(\\frac{1}{2}) = 20$." },
+            { bab: "Trigonometri", q: "Tentukan Benar atau Salah untuk identitas trigonometri berikut:", type: "category", statements: [{s: "$sin^2(x) + cos^2(x) = 1$.", a: true}, {s: "$tan(x) = \\frac{cos(x)}{sin(x)}$.", a: false}, {s: "$sin(90°-x) = cos(x)$.", a: true}], explanation: "A. Identitas Pythagoras dasar (Benar). B. Seharusnya $tan(x) = sin(x)/cos(x)$ (Salah). C. Identitas sudut komplementer (Benar)." }
+        ];
+
+        let quizMode = '';
+
+        function startQuiz(mode) {
+            quizMode = mode;
+            document.getElementById('mode-selector').classList.add('hidden');
+            const quizWrapper = document.getElementById('quiz-wrapper');
+            quizWrapper.classList.remove('hidden');
+            document.getElementById('quiz-title').textContent = mode === 'latihan' ? 'Mode Latihan' : 'Mode Ujian';
+            renderQuizzes();
+            setupEventListeners();
         }
-    }
-    function updateLastActivity(type, item) {
-        const key = 'userLastActivity';
-        let lastActivity = JSON.parse(localStorage.getItem(key)) || {};
-
-        let dataToStore = {
-            id: item.id,
-            title: item.title,
-            filePath: item.filePath
-        };
-
-        if (type === 'video') {
-            dataToStore.videoId = item.videoId;
-        }
-
-        lastActivity[type] = dataToStore;
-        localStorage.setItem(key, JSON.stringify(lastActivity));
-    }
-    function startQuiz(quizId) {
-        currentQuizData = allContentData.bankSoal.find(q => q.id === quizId);
-        if (!currentQuizData) { showToast('Kuis tidak ditemukan!', 'error'); return; }
-        currentQuestionIndex = 0;
-        userAnswers = new Array(currentQuizData.questions.length).fill(null);
-        renderQuizInterface();
-    }
-    function renderQuizInterface() {
-        const quiz = currentQuizData;
-        const question = quiz.questions[currentQuestionIndex];
-
-        const questionNavHTML = quiz.questions.map((_, index) => {
-            let classes = 'quiz-nav-item';
-            if (index === currentQuestionIndex) {
-                classes += ' current';
-            } else if (userAnswers[index] !== null) {
-                classes += ' answered';
-            }
-            return `<div class="${classes}" onclick="jumpToQuestion(${index})">${index + 1}</div>`;
-        }).join('');
-
-        const optionsHTML = question.options.map((opt, index) =>
-            `<div id="option-${index}" class="quiz-option p-4 rounded-lg cursor-pointer transition-colors" onclick="selectAnswer('${opt.replace(/'/g, "\\'")}', this)">
-                ${opt}
-            </div>`
-        ).join('');
-
-        const quizHTML = `
-            <div class="panel max-w-4xl mx-auto">
-                <div class="flex justify-between items-start mb-4">
-                    <div>
-                        <h2 class="text-xl font-bold text-cyan-400">${quiz.title}</h2>
-                        <p class="text-sm text-gray-400">Soal ${currentQuestionIndex + 1} dari ${quiz.questions.length}</p>
-                    </div>
-                    <button onclick="navigateTo('bank_soal', document.querySelector('.sidebar-link[onclick*=\\'bank_soal\\']'))" class="text-gray-400 hover:text-white text-2xl leading-none">&times;</button>
-                </div>
+        
+        function renderQuizzes() {
+            const quizContainer = document.getElementById("quiz-container");
+            quizContainer.innerHTML = '';
+            quizzes.forEach((quiz, index) => {
+                const quizEl = document.createElement("div");
+                quizEl.className = "quiz-accordion";
+                quizEl.setAttribute('data-quiz-index', index);
+                let optionsHtml = ''; let dataCorrect = '';
                 
-                <div class="quiz-nav-container no-scrollbar">${questionNavHTML}</div>
+                if (quiz.type === 'category') {
+                    const correctAnswers = quiz.statements.map(s => s.a).join(',');
+                    dataCorrect = `data-correct="${correctAnswers}"`;
+                    optionsHtml = `<table class="category-table"><tbody>
+                        ${quiz.statements.map((stmt, i) => `
+                            <tr>
+                                <td>${String.fromCharCode(65 + i)}. ${stmt.s}</td>
+                                <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="true"> Benar</label></td>
+                                <td style="width: 80px; text-align: center;"><label><input type="radio" name="cat_q${index}_${i}" value="false"> Salah</label></td>
+                            </tr>
+                        `).join('')}
+                    </tbody></table>`;
+                } else if (quiz.type === 'mcma') {
+                    dataCorrect = `data-correct="${quiz.correct.join(',')}"`;
+                    optionsHtml = quiz.options.map((opt, i) =>
+                        `<div class="mcma-option" data-index="${i}"><label style="width: 100%; cursor: pointer; display: block;"><input type="checkbox" style="margin-right: 10px; vertical-align: middle;">${opt}</label></div>`
+                    ).join("");
+                } else { // PG
+                    dataCorrect = `data-correct="${quiz.correct}"`;
+                    optionsHtml = quiz.options.map((opt, i) => 
+                        `<div class="quiz-option" data-correct="${i === quiz.correct}" data-index="${i}">
+                            <label style="width: 100%; cursor: pointer; display: block;">
+                                <input type="radio" name="pg_q${index}" value="${i}" style="margin-right: 10px; vertical-align: middle;">
+                                ${opt}
+                            </label>
+                        </div>`
+                    ).join("");
+                }
+                
+                const confirmBtnHtml = (quizMode === 'latihan' && quiz.type !== 'pg') ? `<button class="confirm-btn">Cek Jawaban</button>` : '';
+                 const singleConfirmBtnHtml = (quizMode === 'latihan' && quiz.type === 'pg') ? `<button class="confirm-btn">Cek Jawaban</button>` : '';
+                
+                quizEl.innerHTML = `
+                    <button class="quiz-accordion-button">
+                        <span>Soal ${index + 1} (${quiz.bab})</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="quiz-accordion-content hidden">
+                        <p class="question-text">${quiz.q}</p>
+                        <div class="options-container" data-type="${quiz.type || 'pg'}" ${dataCorrect}>
+                            ${optionsHtml}
+                        </div>
+                        ${confirmBtnHtml || singleConfirmBtnHtml}
+                        <div class="quiz-explanation hidden">
+                            <b>Pembahasan:</b> ${quiz.explanation}
+                        </div>
+                    </div>`;
+                quizContainer.appendChild(quizEl);
+            });
 
-                <div class="mb-6 min-h-[60px] text-lg text-gray-200">${question.questionText}</div>
-                <div id="quiz-options" class="space-y-3">${optionsHTML}</div>
-                <div id="explanation-container" class="hidden mt-6">
-                     <hr class="border-gray-700 my-5"/>
-                     <div>
-                         <h4 class="font-bold text-lg text-cyan-300 mb-2">Pembahasan:</h4>
-                         <div class="text-gray-300 leading-relaxed">
-                              <div class="explanation-container-vertical">
-                                   <div class="explanation-content-inner">${question.explanation}</div>
-                              </div>
-                         </div>
-                     </div>
-                </div>
-                <hr class="border-gray-700 my-6"/>
-                <div class="flex justify-between items-center">
-                     <button id="prev-btn" onclick="previousQuestion()" class="nav-btn bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-6 rounded-lg">Sebelumnya</button>
-                     ${currentQuestionIndex === quiz.questions.length - 1 ? 
-                        `<button onclick="renderQuizResults()" class="nav-btn bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-6 rounded-lg">Lihat Hasil</button>` :
-                        `<button id="next-btn" onclick="nextQuestion()" class="nav-btn bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-6 rounded-lg">Selanjutnya</button>`
-                     }
-                </div>
-            </div>
-        `;
-
-        appContent.innerHTML = quizHTML;
-        if (window.MathJax) { MathJax.typeset(); }
-
-        if (userAnswers[currentQuestionIndex] !== null) {
-            showAnswerAndExplanation(true);
-        }
-
-        document.getElementById('prev-btn').disabled = (currentQuestionIndex === 0);
-        
-        const activeNavItem = document.querySelector('.quiz-nav-item.current');
-        if (activeNavItem) {
-            activeNavItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-        }
-    }
-    function showAnswerAndExplanation(isRestoringState = false) {
-        const quiz = currentQuizData;
-        const question = quiz.questions[currentQuestionIndex];
-        const selectedAnswer = userAnswers[currentQuestionIndex];
-        
-        const optionsContainer = document.getElementById('quiz-options');
-        const allOptions = optionsContainer.children;
-
-        optionsContainer.classList.add('pointer-events-none');
-
-        for (let i = 0; i < allOptions.length; i++) {
-            const optionEl = allOptions[i];
-            const optionText = question.options[i];
-
-            if (optionText === question.correctAnswer) {
-                optionEl.classList.remove('quiz-option');
-                optionEl.classList.add('correct-answer');
-            }
-
-            if (!isRestoringState && optionText === selectedAnswer && selectedAnswer !== question.correctAnswer) {
-                optionEl.classList.remove('quiz-option');
-                optionEl.classList.add('wrong-answer');
+            if (quizMode === 'ujian') {
+                const finishBtn = document.createElement('button');
+                finishBtn.id = 'finish-exam-btn';
+                finishBtn.textContent = 'Selesaikan Ujian & Lihat Hasil';
+                quizContainer.insertAdjacentElement('afterend', finishBtn);
             }
         }
-        
-        document.getElementById('explanation-container').classList.remove('hidden');
-        
-        if (window.MathJax) {
-            const explanationText = document.querySelector('.explanation-content-inner');
-            MathJax.typesetPromise([explanationText]).catch(err => console.log('MathJax error:', err));
-        }
-    }
-    function selectAnswer(answer, element) {
-        if (userAnswers[currentQuestionIndex] !== null) {
-            return;
-        }
-        userAnswers[currentQuestionIndex] = answer;
 
-        const navItem = document.querySelector(`.quiz-nav-item:nth-child(${currentQuestionIndex + 1})`);
-        if (navItem) {
-            navItem.classList.add('answered');
+        function gradeQuestion(quizEl) {
+            const optionsContainer = quizEl.querySelector('.options-container');
+            const type = optionsContainer.dataset.type;
+            let isQuestionCorrect = false;
+
+            if (optionsContainer.classList.contains('answered')) return;
+            optionsContainer.classList.add('answered');
+
+            if (type === 'pg') {
+                const correctIndex = optionsContainer.dataset.correct;
+                const options = optionsContainer.querySelectorAll('.quiz-option');
+                const selectedRadio = optionsContainer.querySelector('input[type="radio"]:checked');
+                
+                if (selectedRadio) {
+                    const selectedOption = selectedRadio.closest('.quiz-option');
+                    if (selectedRadio.value === correctIndex) {
+                        selectedOption.classList.add('correct');
+                        isQuestionCorrect = true;
+                    } else {
+                        selectedOption.classList.add('wrong');
+                        options[correctIndex].classList.add('correct');
+                    }
+                } else {
+                     options[correctIndex].classList.add('correct');
+                }
+                 options.forEach(opt => opt.querySelectorAll('input').forEach(inp => inp.disabled = true));
+
+            } else if (type === 'category') {
+                const correctAnswers = optionsContainer.dataset.correct.split(',');
+                const rows = optionsContainer.querySelectorAll('tr');
+                let allStatementsCorrect = true;
+                rows.forEach((row, i) => {
+                    const selected = row.querySelector('input[type="radio"]:checked');
+                    const correctAnswer = correctAnswers[i];
+                    let currentStatementCorrect = false;
+                    
+                    if (selected) {
+                        const selectedCell = selected.parentElement.closest('td');
+                        if (selected.value === correctAnswer) {
+                            selectedCell.classList.add('correct');
+                            currentStatementCorrect = true;
+                        } else {
+                            selectedCell.classList.add('wrong');
+                        }
+                    }
+                    if(!currentStatementCorrect) allStatementsCorrect = false;
+
+                    if (!selected || selected.value !== correctAnswer) {
+                        const correctRadio = Array.from(row.querySelectorAll('input')).find(r => r.value === correctAnswer);
+                        if (correctRadio) correctRadio.parentElement.closest('td').classList.add('correct');
+                    }
+                    row.querySelectorAll('input').forEach(r => r.disabled = true);
+                });
+                isQuestionCorrect = allStatementsCorrect;
+            } else if (type === 'mcma') {
+                const correctIndices = new Set(optionsContainer.dataset.correct.split(','));
+                const options = optionsContainer.querySelectorAll('.mcma-option');
+                let userChoices = new Set();
+                
+                options.forEach((opt) => {
+                    const checkbox = opt.querySelector('input');
+                    const index = opt.dataset.index;
+                    if (checkbox.checked) userChoices.add(index);
+                });
+
+                isQuestionCorrect = (userChoices.size === correctIndices.size) && [...userChoices].every(index => correctIndices.has(index));
+                
+                options.forEach((opt) => {
+                    const checkbox = opt.querySelector('input');
+                    const index = opt.dataset.index;
+                    const isChecked = checkbox.checked;
+                    const isCorrectAnswer = correctIndices.has(index);
+                    
+                    if (isChecked && isCorrectAnswer) { opt.classList.add('correct'); } 
+                    else if (isChecked && !isCorrectAnswer) { opt.classList.add('wrong'); } 
+                    else if (!isChecked && isCorrectAnswer) { opt.classList.add('correct'); }
+                    checkbox.disabled = true;
+                });
+            }
+            
+            const explanation = quizEl.querySelector('.quiz-explanation');
+            explanation.classList.remove('hidden');
+            MathJax.typesetPromise([explanation]);
+
+            return isQuestionCorrect;
         }
-        
-        showAnswerAndExplanation();
-    }
-    function nextQuestion() {
-        if (currentQuestionIndex < currentQuizData.questions.length - 1) {
-            currentQuestionIndex++;
-            renderQuizInterface();
-        }
-    }
-    function previousQuestion() {
-        if (currentQuestionIndex > 0) {
-            currentQuestionIndex--;
-            renderQuizInterface();
-        }
-    }
-    function jumpToQuestion(index) {
-        currentQuestionIndex = index;
-        renderQuizInterface();
 
-        const activeNavItem = document.querySelector(`.quiz-nav-item.current`);
-        if (activeNavItem) {
-            activeNavItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-        }
-    }
-    function submitQuiz() {
-        if (userAnswers[currentQuestionIndex] === null) { showToast('Silakan pilih jawaban terlebih dahulu!', 'error'); return; }
-        if (currentQuestionIndex < currentQuizData.questions.length - 1) { currentQuestionIndex++; renderQuizInterface(); } else { renderQuizResults(); }
-    }
-    function renderQuizResults() {
-        const quiz = currentQuizData;
-        let score = 0;
-        quiz.questions.forEach((q, index) => { if (q.correctAnswer === userAnswers[index]) { score++; } });
-        
-        markAsCompleted(quiz.id);
-    
-        const finalScorePercentage = quiz.questions.length > 0 ? Math.round((score / quiz.questions.length) * 100) : 0;
-        localStorage.setItem(CONFIG.STORAGE_KEYS.LAST_SCORE, JSON.stringify({
-            title: quiz.title,
-            score: score,
-            total: quiz.questions.length,
-            percentage: finalScorePercentage
-        }));
-        
-        appContent.innerHTML = `
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-2xl font-bold text-center mb-2 text-white">${quiz.title}</h2>
-            <p class="text-center text-sm text-gray-400 mb-6">Berikut adalah pembahasan dari latihan yang kamu kerjakan.</p>
-            <div class="text-center my-6 bg-gray-900/50 p-4 rounded-lg border border-gray-700">
-                 <p class="text-gray-400">Skor Akhir Anda</p>
-                 <p class="text-5xl font-bold text-cyan-400 mt-2">${finalScorePercentage}%</p>
-                 <p class="text-gray-300 mt-2">(${score} dari ${quiz.questions.length} soal benar)</p>
-            </div>
-            <div id="single-explanation-container" class="space-y-4"></div>
-            <div class="flex justify-between items-center mt-8 quiz-nav-buttons">
-                <button id="prev-explanation-btn" onclick="prevExplanation()" class="nav-btn bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2">
-                    <i class="fa-solid fa-chevron-left"></i> Sebelumnya
-                </button>
-                <button onclick="navigateTo('bank_soal', null)" class="bg-cyan-800 hover:bg-cyan-700 text-white text-sm py-2 px-4 rounded-lg">
-                    Kembali ke Bank Soal
-                </button>
-                <button id="next-explanation-btn" onclick="nextExplanation()" class="nav-btn bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-lg flex items-center gap-2">
-                    Selanjutnya <i class="fa-solid fa-chevron-right"></i>
-                </button>
-            </div>
-        </div>`;
-    
-        currentExplanationIndex = 0;
-        renderSingleExplanation(currentExplanationIndex);
-    }
-    function renderSingleExplanation(index) {
-        const container = document.getElementById('single-explanation-container');
-        const quiz = currentQuizData;
-        const q = quiz.questions[index];
-    
-        container.innerHTML = `
-        <div class="panel">
-            <p class="text-sm text-gray-400 mb-4">Pertanyaan ${index + 1} dari ${quiz.questions.length}</p>
-            <div class="mb-5 text-gray-200 text-lg">${q.questionText}</div>
-            <div class="space-y-3 text-base">
-                <p class="${userAnswers[index] === q.correctAnswer ? 'correct-answer' : 'wrong-answer'} p-3 rounded-lg">
-                    <span class="font-bold block">Jawaban Anda:</span>
-                    ${userAnswers[index] || 'Tidak dijawab'}
-                </p>
-                <p class="correct-answer p-3 rounded-lg">
-                    <span class="font-bold block">Jawaban Benar:</span>
-                    ${q.correctAnswer}
-                </p>
-            </div>
-            <hr class="border-gray-700 my-5"/>
-            <div>
-                <h4 class="font-bold text-lg text-cyan-300 mb-2">Pembahasan:</h4>
-                <div class="text-gray-300 leading-relaxed">
-                   <div class="explanation-container-vertical">
-                        <div class="explanation-content-inner">${q.explanation}</div>
-                   </div>
-                </div>
-            </div>
-        </div>`;
-        
-        document.getElementById('prev-explanation-btn').disabled = (index === 0);
-        document.getElementById('next-explanation-btn').disabled = (index === quiz.questions.length - 1);
-        
-        if (window.MathJax) {
-            MathJax.typesetPromise([container]).catch(err => console.log('MathJax error: ', err.message));
-        }
-    }
-    function nextExplanation() { if (currentExplanationIndex < currentQuizData.questions.length - 1) { currentExplanationIndex++; renderSingleExplanation(currentExplanationIndex); } }
-    function prevExplanation() { if (currentExplanationIndex > 0) { currentExplanationIndex--; renderSingleExplanation(currentExplanationIndex); } }
-    function showToast(message, type = 'info') {
-        const container = document.getElementById('toast-container');
-        const toast = document.createElement('div');
-        const icons = { info: 'fa-solid fa-circle-info', success: 'fa-solid fa-check-circle', error: 'fa-solid fa-triangle-exclamation' };
-        const colors = { info: 'text-cyan-400', success: 'text-green-400', error: 'text-red-400' };
-        toast.className = 'toast-in flex items-start p-4 rounded-lg shadow-lg text-sm';
-        toast.style.backgroundColor = 'var(--bg-panel)';
-        toast.style.border = '1px solid var(--border-color)';
-        toast.innerHTML = `<div class="flex-shrink-0"><i class="${icons[type] || icons['info']} ${colors[type] || colors['info']} text-xl"></i></div><div class="ml-3"><p class="font-bold capitalize ${colors[type] || colors['info']}">${type}</p><p class="text-gray-300 mt-1">${message}</p></div>`;
-        container.appendChild(toast);
-        setTimeout(() => {
-            toast.classList.remove('toast-in');
-            toast.classList.add('toast-out');
-            toast.addEventListener('animationend', () => toast.remove());
-        }, 5000);
-    }
-    function showConfirmationModal(options) {
-        const {
-            title,
-            message,
-            confirmText = 'Konfirmasi',
-            cancelText = 'Batal',
-            confirmAction,
-            cancelAction,
-            showCancelButton = true,
-            confirmButtonClass = 'modal-btn-confirm',
-            customModalClass = ''
-        } = options;
-
-        const modalContainer = document.getElementById('modal-container');
-        
-        const modalHTML = `
-            <div class="modal-overlay" id="modal-overlay">
-                <div class="modal-box ${customModalClass}"> 
-                    <h3 class="modal-title">${title}</h3>
-                    <div class="modal-content">${message}</div>
-                    <div class="modal-buttons">
-                        ${showCancelButton ? `<button id="modal-cancel-btn" class="modal-btn modal-btn-cancel">${cancelText}</button>` : ''}
-                        <button id="modal-confirm-btn" class="modal-btn ${confirmButtonClass}">${confirmText}</button>
-                    </div>
-                </div>
-            </div>
-        `;
-
-        modalContainer.innerHTML = modalHTML;
-        modalContainer.style.display = 'block';
-
-        const closeModal = () => {
-            modalContainer.style.display = 'none';
-            modalContainer.innerHTML = '';
-        };
-
-        document.getElementById('modal-confirm-btn').addEventListener('click', () => {
-            if (typeof confirmAction === 'function') confirmAction();
-            closeModal();
-        });
-
-        if (showCancelButton) {
-            const cancelBtn = document.getElementById('modal-cancel-btn');
-            cancelBtn.addEventListener('click', () => {
-                if (typeof cancelAction === 'function') cancelAction();
-                closeModal();
+        function setupEventListeners() {
+            document.querySelectorAll('.quiz-accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.nextElementSibling;
+                    const isActive = button.classList.contains('active');
+                    if (!isActive) {
+                        MathJax.typesetPromise([content]);
+                    }
+                    button.classList.toggle('active'); content.classList.toggle('hidden');
+                });
             });
-            document.getElementById('modal-overlay').addEventListener('click', (event) => {
-                 if (event.target === event.currentTarget) {
-                      if (typeof cancelAction === 'function') cancelAction();
-                      closeModal();
-                 }
-            });
-        }
-    }
-    function initializeApp() {
-        const token = sessionStorage.getItem(CONFIG.SESSION_KEYS.TOKEN);
-        const email = sessionStorage.getItem(CONFIG.SESSION_KEYS.EMAIL);
-    
-        if (!token || !email) {
-            window.location.href = CONFIG.LOGIN_PAGE;
-            return;
-        }
-        
-        startSessionHeartbeat(token, email);
-    
-        const lastActivePage = sessionStorage.getItem('lastActivePage');
 
-        if (lastActivePage) {
-            const targetLink = document.querySelector(`.sidebar-link[onclick*="'${lastActivePage}'"]`);
-            navigateTo(lastActivePage, targetLink);
-        } else {
-            navigateTo('dashboard', document.querySelector('.sidebar-link'));
-        }       
-    
-        if (!sessionStorage.getItem(CONFIG.STORAGE_KEYS.WELCOME_POPUP)) {
-            showConfirmationModal({
-                title: '🎉 Selamat Datang di UMT Pro!',
-                message: 'Mohon maaf, halaman untuk Member Pro saat ini masih dalam tahap pengembangan aktif. Jadi, hanya terdapat beberapa halaman yang terisi lengkap yang dapat anda jelajahi dan sebagian masih dalam tahap pengembangan. Terima kasih atas pengertiannya!',
-                confirmText: 'Mengerti',
-                showCancelButton: false,
-                confirmAction: () => sessionStorage.setItem(CONFIG.STORAGE_KEYS.WELCOME_POPUP, 'true')
-            });
+            if (quizMode === 'latihan') {
+                document.querySelectorAll('.confirm-btn').forEach(button => {
+                    button.addEventListener('click', () => {
+                        const quizEl = button.closest('.quiz-accordion');
+                        gradeQuestion(quizEl);
+                    });
+                });
+
+                document.querySelectorAll('.quiz-option').forEach(option => {
+                    option.addEventListener('click', (e) => {
+                         if (e.target.type !== 'radio') {
+                            const radio = option.querySelector('input');
+                            if (radio && !radio.disabled) radio.checked = true;
+                        }
+                    });
+                });
+
+            }
+
+            if (quizMode === 'ujian') {
+                document.getElementById('finish-exam-btn').addEventListener('click', () => {
+                    let score = 0;
+                    const allQuizEls = document.querySelectorAll('.quiz-accordion');
+                    
+                    allQuizEls.forEach(quizEl => {
+                        if (gradeQuestion(quizEl)) {
+                            score++;
+                        }
+                        const content = quizEl.querySelector('.quiz-accordion-content');
+                        const button = quizEl.querySelector('.quiz-accordion-button');
+                        if(content.classList.contains('hidden')) {
+                            content.classList.remove('hidden');
+                            button.classList.add('active');
+                        }
+                    });
+
+                    const scoreSummary = document.getElementById('score-summary');
+                    scoreSummary.innerHTML = `<h2>Skor Akhir Anda: ${score} dari ${quizzes.length}</h2>
+                                              <p>(${((score/quizzes.length)*100).toFixed(1)}%) Benar</p>`;
+                    scoreSummary.classList.remove('hidden');
+                    window.scrollTo(0, 0);
+                    document.getElementById('finish-exam-btn').style.display = 'none';
+                });
+                 document.querySelectorAll('.mcma-option label, .quiz-option label').forEach(label => {
+                    label.addEventListener('click', (e) => {
+                         if (e.target.type !== 'checkbox' && e.target.type !== 'radio') {
+                            const input = label.querySelector('input');
+                            if (input && !input.disabled) {
+                                if(input.type === 'checkbox') input.checked = !input.checked;
+                                if(input.type === 'radio') input.checked = true;
+                            }
+                        }
+                    });
+                });
+            }
         }
-    }
-    
-    document.addEventListener('DOMContentLoaded', initializeApp);
     </script>
-
 </body>
 </html>
