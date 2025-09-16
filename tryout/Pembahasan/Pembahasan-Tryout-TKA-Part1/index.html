@@ -103,8 +103,12 @@
 
     <script>
          if (!sessionStorage.getItem('sessionToken')) {
-            window.location.href = '../../login-pembahasan.html';
-        }
+        // SIMPAN LOKASI SEKARANG SEBELUM PINDAH HALAMAN
+        sessionStorage.setItem('redirectUrl', window.location.href); 
+        
+        // BARU ARAHKAN KE HALAMAN LOGIN
+        window.location.href = '../../login-pembahasan.html';
+    }
         // Data JSON (lengkap dengan 20 soal dan pembahasan)
         const quizData = {
           "tryout-tka-matematika-1": {
