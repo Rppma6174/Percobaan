@@ -102,6 +102,9 @@
     </div>
 
     <script>
+         if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         // Data JSON (lengkap dengan 20 soal dan pembahasan)
         const quizData = {
           "tryout-tka-matematika-1": {
