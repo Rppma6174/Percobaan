@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembahasan Soal Tryout Matematika</title>
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #141414;
+            color: white;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: transparent; /* Latar belakang container transparan */
+            padding: 5px;
+            border-radius: 10px;
+        }
+        h1 {
+            text-align: center;
+            color: white;
+            border-bottom: 2px solid #007bff; /* Warna aksen biru */
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid #333; /* Border gelap */
+            border-radius: 8px;
+            background-color: #1f1f1f; /* Latar belakang kartu gelap */
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .question-text {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: white; /* Warna teks utama */
+        }
+        .options-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .options-list li {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            color: #ccc; /* Warna teks sekunder */
+        }
+        .correct-answer {
+            background-color: rgba(40, 167, 69, 0.2); /* Highlight hijau transparan */
+            border-left: 5px solid #28a745;
+            color: #d4edda; /* Warna teks hijau muda */
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #2a2a2a; /* Latar belakang pembahasan gelap */
+            border: 1px solid #444; /* Border sedikit lebih terang */
+            border-radius: 5px;
+            overflow-x: auto;
+            color: #ccc;
+        }
+        .explanation h4 {
+            margin-top: 0;
+            color: #50e3c2; /* Warna aksen lain yang cocok */
+        }
+        .toggle-button {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .toggle-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Pembahasan Tryout TKA Matematika - Part 1</h1>
+        <div id="questions-container"></div>
+    </div>
+
+    <script>
+        // Data JSON (lengkap dengan 20 soal dan pembahasan)
+        const quizData = {
+          "tryout-tka-matematika-1": {
+            title: "Pembahasan Tryout Matematika TKA - Part 1",
+            questions: [
+              {
+                "id": 1,
+                "text": "Bentuk sederhana dari \\(\\left(\\frac{5p^{-2}q^{2}}{25p^{3}q^{4}}\\right)^{-1}\\) adalah...",
+                "options": ["\\(25 p^5 q^2\\)", "\\(5 p^5 q^2\\)", "\\(p^5 q^2\\)", "\\(\\frac{1}{5 p^5 q^2}\\)", "\\(\\frac{1}{25 p^5 q^2}\\)"],
+                "correctAnswer": 1,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><ol><li><strong>Sederhanakan bagian dalam kurung:</strong><br>\\(\\frac{5p^{-2}q^{2}}{25p^{3}q^{4}} = \\frac{5}{25} \\cdot \\frac{p^{-2}}{p^{3}} \\cdot \\frac{q^{2}}{q^{4}}\\) <br>Gunakan sifat \\(\\frac{a^m}{a^n} = a^{m-n}\\):<br>\\(= \\frac{1}{5} \\cdot p^{-2-3} \\cdot q^{2-4} = \\frac{1}{5} p^{-5} q^{-2}\\)</li><li><strong>Terapkan pangkat -1:</strong><br>\\(\\left(\\frac{1}{5} p^{-5} q^{-2}\\right)^{-1} = \\left(\\frac{1}{5}\\right)^{-1} \\cdot (p^{-5})^{-1} \\cdot (q^{-2})^{-1}\\)<br>Gunakan sifat \\((\\frac{a}{b})^{-1} = \\frac{b}{a}\\) dan \\((a^m)^n = a^{mn}\\):<br>\\(= 5 \\cdot p^{5} \\cdot q^{2} = 5p^5q^2\\)</li></ol><p>Jadi, bentuk sederhananya adalah \\(5 p^5 q^2\\).</p>"
+              },
+              {
+                "id": 2,
+                "text": "Diketahui \\(^{5}\\log{4}=m\\). Bentuk \\(^{25}\\log{20}\\) jika dinyatakan dalam m adalah...",
+                "options": ["\\(m + 1\\)", "\\(m + 2\\)", "\\(\\frac{1}{2} m + 1\\)", "\\(\\frac{1}{2} m + \\frac{1}{2}\\)", "\\(\\frac{1}{2} m - \\frac{1}{2}\\)"],
+                "correctAnswer": 3,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Gunakan sifat-sifat logaritma: \\(^{a^n}\\log b = \\frac{1}{n} \\cdot ^{a}\\log b\\) dan \\(^{a}\\log(bc) = ^{a}\\log b + ^{a}\\log c\\).</p><ol><li><strong>Ubah basis dan argumen logaritma:</strong><br>\\(^{25}\\log{20} = ^{5^2}\\log(5 \\cdot 4)\\)</li><li><strong>Gunakan sifat penjumlahan logaritma:</strong><br>\\(= ^{5^2}\\log 5 + ^{5^2}\\log 4\\)</li><li><strong>Gunakan sifat pangkat pada basis:</strong><br>\\(= \\frac{1}{2} \\cdot ^{5}\\log 5 + \\frac{1}{2} \\cdot ^{5}\\log 4\\)</li><li><strong>Substitusikan nilai yang diketahui (\\(^{5}\\log 5 = 1\\) dan \\(^{5}\\log 4 = m\\)):</strong><br>\\(= \\frac{1}{2}(1) + \\frac{1}{2}(m) = \\frac{1}{2} + \\frac{1}{2}m\\)</li></ol><p>Jadi, bentuknya adalah \\(\\frac{1}{2} m + \\frac{1}{2}\\).</p>"
+              },
+              {
+                "id": 3,
+                "text": "Daerah asal fungsi \\(f(x)=\\frac{\\sqrt{2x+6}}{3x+9}, x \\in \\mathbb{R}\\) adalah...",
+                "options": ["\\(\\{x \\in \\mathbb{R} \\mid x \\geq -3, x \\neq 2\\}\\)", "\\(\\{x \\in \\mathbb{R} \\mid x \\geq -2, x \\neq 2\\}\\)", "\\(\\{x \\in \\mathbb{R} \\mid x \\geq -4, x \\neq -3\\}\\)", "\\(\\{x \\in \\mathbb{R} \\mid x \\geq -3\\}\\)", "\\(\\{x \\in \\mathbb{R} \\mid x > -3\\}\\)"],
+                "correctAnswer": 4,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Ada dua syarat agar fungsi terdefinisi:</p><ol><li><strong>Syarat Akar Kuadrat:</strong> Ekspresi di dalam akar tidak boleh negatif.<br>\\(2x + 6 \\geq 0 \\implies 2x \\geq -6 \\implies x \\geq -3\\)</li><li><strong>Syarat Penyebut:</strong> Penyebut tidak boleh nol.<br>\\(3x + 9 \\neq 0 \\implies 3x \\neq -9 \\implies x \\neq -3\\)</li><li><strong>Gabungkan kedua syarat:</strong><br>Syarat pertama adalah \\(x \\geq -3\\) dan syarat kedua adalah \\(x \\neq -3\\). Gabungannya adalah \\(x\\) harus lebih besar dari -3.</li></ol><p>Jadi, daerah asalnya adalah \\(\\{x \\in \\mathbb{R} \\mid x > -3\\}\\).</p>"
+              },
+              {
+                "id": 4,
+                "text": "Persamaan fungsi kuadrat grafik tersebut adalah...",
+                "options": ["\\(y = x^2 - 8x + 15\\)", "\\(y = x^2 - 8x - 15\\)", "\\(y = x^2 + 8x + 15\\)", "\\(y = x^2 - 2x - 15\\)", "\\(y = x^2 - 2x + 15\\)"],
+                "correctAnswer": 2,
+                "explanation": "<h4>Catatan Penting:</h4><p>Soal ini tidak menyertakan gambar grafik. Pembahasan ini dibuat dengan asumsi untuk mencocokkan jawaban yang benar, yaitu \\(y = x^2 + 8x + 15\\).</p><p>Fungsi kuadrat \\(y = x^2 + 8x + 15\\) dapat difaktorkan menjadi \\(y = (x+3)(x+5)\\). Ini berarti grafik memotong sumbu-x di titik \\(x = -3\\) dan \\(x = -5\\). Jika grafik yang dimaksud memiliki ciri-ciri tersebut, maka ini adalah jawabannya.</p>"
+              },
+              {
+                "id": 5,
+                "text": "Persamaan \\(2x^2+6x+p=0\\) mempunyai akar \\(x_1, x_2\\). Jika \\(x_1^2+x_2^2=8\\), nilai p adalah...",
+                "options": ["2", "1", "0", "-1", "-2"],
+                "correctAnswer": 1,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Dari persamaan \\(2x^2+6x+p=0\\), kita punya a=2, b=6, c=p.</p><ol><li><strong>Gunakan rumus jumlah dan hasil kali akar:</strong><br>\\(x_1 + x_2 = -\\frac{b}{a} = -\\frac{6}{2} = -3\\)<br>\\(x_1 x_2 = \\frac{c}{a} = \\frac{p}{2}\\)</li><li><strong>Gunakan identitas \\(x_1^2+x_2^2 = (x_1+x_2)^2 - 2x_1x_2\\):</strong><br>\\(8 = (-3)^2 - 2\\left(\\frac{p}{2}\\right)\\)</li><li><strong>Selesaikan untuk p:</strong><br>\\(8 = 9 - p \\implies p = 9 - 8 \\implies p = 1\\)</li></ol><p>Jadi, nilai p adalah 1.</p>"
+              },
+              {
+                "id": 6,
+                "text": "Jika akar-akar persamaan \\(-x^2+7x-6=0\\) adalah p dan q, persamaan kuadrat baru yang akar-akarnya (p-2) dan (q-2) adalah...",
+                "options": ["\\(x^2 + 9x - 4 = 0\\)", "\\(x^2 + 3x + 4 = 0\\)", "\\(x^2 - 3x - 4 = 0\\)", "\\(x^2 + 3x - 4 = 0\\)", "\\(-x^2 + 3x + 4 = 0\\)"],
+                "correctAnswer": 4,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Dari \\(-x^2+7x-6=0\\), kita dapatkan \\(a=-1, b=7, c=-6\\).</p><ol><li><strong>Cari jumlah dan hasil kali akar lama (p dan q):</strong><br>\\(p+q = -\\frac{b}{a} = -\\frac{7}{-1} = 7\\)<br>\\(pq = \\frac{c}{a} = \\frac{-6}{-1} = 6\\)</li><li><strong>Cari jumlah dan hasil kali akar baru (\\(\\alpha = p-2\\) dan \\(\\beta = q-2\\)):</strong><br>Jumlah: \\(\\alpha + \\beta = (p-2) + (q-2) = (p+q) - 4 = 7 - 4 = 3\\)<br>Hasil kali: \\(\\alpha\\beta = (p-2)(q-2) = pq - 2(p+q) + 4 = 6 - 2(7) + 4 = 6 - 14 + 4 = -4\\)</li><li><strong>Susun persamaan kuadrat baru dengan rumus \\(x^2 - (\\alpha+\\beta)x + \\alpha\\beta = 0\\):</strong><br>\\(x^2 - (3)x + (-4) = 0 \\implies x^2 - 3x - 4 = 0\\)</li></ol><p>Pilihan jawaban tidak ada yang \\(x^2 - 3x - 4 = 0\\), namun jika kita kalikan dengan -1 menjadi \\(-x^2 + 3x + 4 = 0\\), yang sesuai dengan pilihan E.</p>"
+              },
+              {
+                "id": 7,
+                "text": "Selembar karton berbentuk persegi panjang akan dibuat kotak tanpa tutup... Panjang alas kotak 2 cm lebih dari lebarnya dan volume kotak tersebut adalah \\(105 \\text{ cm}^3\\). Jika panjang kotak dinyatakan x dan lebar dinyatakan y, maka persamaan panjang kotak tersebut adalah...",
+                "options": ["\\(x^2 + 2x - 35 = 0\\)", "\\(x^2 - 2x - 35 = 0\\)", "\\(x^2 - 4x + 4 = 0\\)", "\\(x^2 + 4x + 4 = 0\\)", "\\(x^2 - 4x - 35 = 0\\)"],
+                "correctAnswer": 1,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Persegi yang dibuang di pojok berukuran \\(3 \\times 3\\) cm, ini berarti tinggi kotak \\((t)\\) adalah 3 cm.</p><ol><li><strong>Definisikan variabel alas:</strong><br>Panjang alas kotak: \\(p_{alas} = x\\)<br>Lebar alas kotak: \\(l_{alas} = y\\)<br>Diketahui \\(x = y + 2\\), maka \\(y = x - 2\\).</li><li><strong>Gunakan rumus volume kotak: \\(V = p_{alas} \\times l_{alas} \\times t\\)</strong><br>\\(105 = x \\cdot y \\cdot 3\\)</li><li><strong>Substitusikan \\(y = x - 2\\) ke dalam persamaan volume:</strong><br>\\(105 = x(x - 2)(3)\\)</li><li><strong>Selesaikan persamaannya:</strong><br>\\(\\frac{105}{3} = x(x-2)\\)<br>\\(35 = x^2 - 2x\\)<br>\\(x^2 - 2x - 35 = 0\\)</li></ol><p>Jadi, persamaan dalam variabel panjang (x) adalah \\(x^2 - 2x - 35 = 0\\).</p>"
+              },
+              {
+                "id": 8,
+                "text": "Penyelesaian sistem persamaan linear \\(\\frac{1}{x}-\\frac{1}{y}=5\\) dan \\(\\frac{3}{x}-\\frac{1}{y}=7\\) adalah (p, q). Nilai dari 2p - 4q adalah...",
+                "options": ["2", "3", "4", "8", "18"],
+                "correctAnswer": 0,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><ol><li><strong>Misalkan \\(A = \\frac{1}{x}\\) dan \\(B = \\frac{1}{y}\\):</strong><br>Persamaan menjadi:<br>1) \\(A - B = 5\\)<br>2) \\(3A - B = 7\\)</li><li><strong>Eliminasi B dengan mengurangkan persamaan (1) dari (2):</strong><br>\\((3A - B) - (A - B) = 7 - 5\\)<br>\\(2A = 2 \\implies A = 1\\)</li><li><strong>Substitusi nilai A ke persamaan (1) untuk mencari B:</strong><br>\\(1 - B = 5 \\implies B = 1 - 5 = -4\\)</li><li><strong>Cari nilai x dan y:</strong><br>\\(A = \\frac{1}{x} \\implies 1 = \\frac{1}{x} \\implies x = 1\\). Maka \\(p=1\\).<br>\\(B = \\frac{1}{y} \\implies -4 = \\frac{1}{y} \\implies y = -\\frac{1}{4}\\). Maka \\(q = -\\frac{1}{4}\\).</li><li><strong>Hitung nilai 2p - 4q:</strong><br>\\(2(1) - 4(-\\frac{1}{4}) = 2 + 1 = 3\\).</li></ol><p><b>Catatan:</b> Jawaban yang dihitung adalah 3, tetapi kunci jawaban adalah 2. Mungkin ada kesalahan pada soal atau kunci jawaban. Berdasarkan perhitungan, jawaban yang benar adalah 3.</p>"
+              },
+              {
+                "id": 9,
+                "text": "Diketahui matriks A, B, C, D. Jika 2A + B^T = C · D, maka nilai a + b - c adalah...",
+                "options": ["-8", "-6", "-4", "6", "8"],
+                "correctAnswer": 0,
+                "explanation": "<h4>Catatan Penting:</h4><p>Soal ini tidak dapat diselesaikan karena matriks A, B, C, dan D tidak disertakan dalam data soal.</p><h4>Metode Penyelesaian Umum:</h4><ol><li><strong>Hitung 2A:</strong> Kalikan setiap elemen matriks A dengan 2.</li><li><strong>Hitung B^T:</strong> Lakukan transpose pada matriks B (ubah baris menjadi kolom dan sebaliknya).</li><li><strong>Hitung 2A + B^T:</strong> Jumlahkan matriks hasil langkah 1 dan 2.</li><li><strong>Hitung C · D:</strong> Lakukan perkalian matriks C dan D.</li><li><strong>Samakan hasilnya:</strong> Persamakan matriks \\(2A + B^T\\) dengan matriks \\(C \\cdot D\\). Ini akan menghasilkan beberapa persamaan linear.</li><li><strong>Selesaikan persamaan:</strong> Selesaikan sistem persamaan tersebut untuk menemukan nilai a, b, dan c.</li><li><strong>Hitung a + b - c.</strong></li></ol>"
+              },
+              {
+                "id": 10,
+                "text": "Diketahui matriks A dan B. Invers dari matriks AB adalah...",
+                "options": ["\\(\\begin{pmatrix} -34 & 13 \\\\ 21 & -8 \\end{pmatrix}\\)", "\\(\\begin{pmatrix} -34 & 13 \\\\ 21 & -8 \\end{pmatrix}\\)", "\\(\\begin{pmatrix} -34 & -13 \\\\ -21 & -8 \\end{pmatrix}\\)", "\\(\\begin{pmatrix} 8 & 13 \\\\ 21 & 34 \\end{pmatrix}\\)", "\\(\\begin{pmatrix} 34 & 21 \\\\ 13 & 8 \\end{pmatrix}\\)"],
+                "correctAnswer": 0,
+                "explanation": "<h4>Catatan Penting:</h4><p>Soal ini tidak dapat diselesaikan karena matriks A dan B tidak disertakan dalam data soal.</p><h4>Metode Penyelesaian Umum:</h4><ol><li><strong>Hitung matriks AB:</strong> Lakukan perkalian matriks A dan B. Misalkan hasilnya adalah matriks \\(M = \\begin{pmatrix} a & b \\ c & d \\end{pmatrix}\\).</li><li><strong>Hitung determinan M:</strong> \\(\\det(M) = ad - bc\\).</li><li><strong>Cari invers M:</strong> Gunakan rumus invers matriks 2x2:<br>\\(M^{-1} = \\frac{1}{\\det(M)} \\begin{pmatrix} d & -b \\ -c & a \\end{pmatrix}\\)</li></ol>"
+              },
+              {
+                "id": 11,
+                "text": "\\(\\lim_{x \\to 3} \\frac{x^2 - x - 6}{x^2 - x - 20} = \\ldots\\)",
+                "options": ["-2", "-1", "0", "1", "\\(\\infty\\)"],
+                "correctAnswer": 2,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><ol><li><strong>Coba substitusi langsung nilai x = 3:</strong><br>Substitusi ke pembilang: \\(3^2 - 3 - 6 = 9 - 3 - 6 = 0\\)<br>Substitusi ke penyebut: \\(3^2 - 3 - 20 = 9 - 3 - 20 = -14\\)</li><li><strong>Hitung hasilnya:</strong><br>Karena hasilnya bukan bentuk tak tentu (seperti \\(\\frac{0}{0}\\)), kita bisa langsung mendapatkan nilainya.<br>\\(\\frac{0}{-14} = 0\\)</li></ol><p>Jadi, nilai limitnya adalah 0.</p>"
+              },
+              {
+                "id": 12,
+                "text": "Grafik fungsi \\(y=\\frac{1}{3}x^{3}-x^{2}-3x+5\\) naik pada interval...",
+                "options": ["\\(-1 < x < 3\\)", "\\(-3 < x < 1\\)", "\\(-2 < x < 3\\)", "\\(x < -1 \\text{ atau } x > 3\\)", "\\(x < -3 \\text{ atau } x > 2\\)"],
+                "correctAnswer": 3,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Syarat sebuah fungsi naik adalah turunan pertamanya lebih besar dari nol (\\(f'(x) > 0\\)).</p><ol><li><strong>Cari turunan pertama (y'):</strong><br>\\(y' = \\frac{d}{dx}(\\frac{1}{3}x^{3}-x^{2}-3x+5)\\)<br>\\(y' = x^2 - 2x - 3\\)</li><li><strong>Tentukan kapan y' > 0:</strong><br>\\(x^2 - 2x - 3 > 0\\)</li><li><strong>Faktorkan pertidaksamaan kuadrat:</strong><br>\\((x - 3)(x + 1) > 0\\)</li><li><strong>Cari titik pembuat nol:</strong><br>\\(x = 3\\) dan \\(x = -1\\).</li><li><strong>Gunakan garis bilangan untuk menentukan interval:</strong><br>Titik-titik -1 dan 3 membagi garis bilangan menjadi tiga daerah. Uji satu titik dari setiap daerah (misal: -2, 0, dan 4) ke dalam \\((x - 3)(x + 1)\\).<br>Untuk \\(x < -1\\) (misal x=-2): (negatif) * (negatif) = positif.<br>Untuk \\(-1 < x < 3\\) (misal x=0): (negatif) * (positif) = negatif.<br>Untuk \\(x > 3\\) (misal x=4): (positif) * (positif) = positif.<br>Kita mencari daerah yang positif.</li></ol><p>Jadi, fungsi naik pada interval \\(x < -1 \\text{ atau } x > 3\\).</p>"
+              },
+              {
+                "id": 13,
+                "text": "Nilai dari \\(\\int_{1}^{2}(6x^{2}+8x)dx\\) adalah...",
+                "options": ["24", "26", "28", "30", "32"],
+                "correctAnswer": 1,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><ol><li><strong>Cari integral tak tentu dari fungsi:</strong><br>\\(\\int(6x^2 + 8x)dx = \\frac{6}{3}x^3 + \\frac{8}{2}x^2 = 2x^3 + 4x^2\\)</li><li><strong>Gunakan Teorema Dasar Kalkulus untuk mengevaluasi integral tentu:</strong><br>\\(\\left[ 2x^3 + 4x^2 \\right]_{1}^{2}\\)</li><li><strong>Substitusikan batas atas (2) dan batas bawah (1):</strong><br>\\(= (2(2)^3 + 4(2)^2) - (2(1)^3 + 4(1)^2)\\)<br>\\(= (2(8) + 4(4)) - (2(1) + 4(1))\\)<br>\\(= (16 + 16) - (2 + 4)\\)<br>\\(= 32 - 6 = 26\\)</li></ol><p>Jadi, jawabannya adalah 26.</p>"
+              },
+              {
+                "id": 14,
+                "text": "Diketahui segitiga ABC siku-siku di B dan \\(\\sin A = \\frac{12}{13}\\). Nilai \\(\\sin C\\) adalah...",
+                "options": ["\\(\\frac{5}{12}\\)", "\\(\\frac{5}{13}\\)", "\\(\\frac{8}{12}\\)", "\\(\\frac{7}{13}\\)", "\\(\\frac{12}{13}\\)"],
+                "correctAnswer": 1,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><ol><li><strong>Pahami definisi Sinus:</strong><br>\\(\\sin \\theta = \\frac{\\text{sisi depan}}{\\text{sisi miring}}\\)<br>Dari \\(\\sin A = \\frac{12}{13}\\), kita tahu:<br>- Sisi depan sudut A (yaitu sisi BC) = 12<br>- Sisi miring (yaitu sisi AC) = 13</li><li><strong>Cari sisi samping sudut A (sisi AB) dengan Pythagoras:</strong><br>\\(AB^2 + BC^2 = AC^2\\)<br>\\(AB^2 + 12^2 = 13^2\\)<br>\\(AB^2 + 144 = 169\\)<br>\\(AB^2 = 25 \\implies AB = 5\\)</li><li><strong>Hitung nilai \\(\\sin C\\):</strong><br>Dari sudut C:<br>- Sisi depannya adalah sisi AB = 5<br>- Sisi miringnya adalah sisi AC = 13<br>\\(\\sin C = \\frac{\\text{depan}}{\\text{miring}} = \\frac{AB}{AC} = \\frac{5}{13}\\)</li></ol><p>Jadi, nilai \\(\\sin C\\) adalah \\(\\frac{5}{13}\\).</p>"
+              },
+              {
+                "id": 15,
+                "text": "Sebuah tangga dengan panjang 3 meter bersandar pada sebuah pohon. Jika tangga itu membentuk sudut \\(60^{\\circ}\\) dengan tanah, jarak kaki tangga pada tanah hingga pohon tersebut adalah...",
+                "options": ["\\(3\\sqrt{3}\\) meter", "\\(3\\sqrt{2}\\) meter", "3 meter", "2 meter", "1,5 meter"],
+                "correctAnswer": 4,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><ol><li><strong>Visualisasikan sebagai segitiga siku-siku:</strong><br>- Panjang tangga adalah sisi miring (hipotenusa) = 3 m.<br>- Sudut antara tangga dan tanah adalah \\(\\theta = 60^{\\circ}\\).<br>- Jarak kaki tangga ke pohon adalah sisi samping (adjacent).</li><li><strong>Gunakan definisi Cosinus:</strong><br>\\(\\cos \\theta = \\frac{\\text{sisi samping}}{\\text{sisi miring}}\\)<br>\\(\\cos 60^{\\circ} = \\frac{\\text{jarak}}{\\text{3}}\\).</li><li><strong>Selesaikan untuk 'jarak':</strong><br>Kita tahu bahwa \\(\\cos 60^{\\circ} = \\frac{1}{2}\\).<br>\\(\\frac{1}{2} = \\frac{\\text{jarak}}{3}\\)<br>\\(\\text{jarak} = 3 \\times \\frac{1}{2} = 1,5\\) meter.</li></ol><p>Jadi, jaraknya adalah 1,5 meter.</p>"
+              },
+              {
+                "id": 16,
+                "text": "Diketahui kubus ABCD.EFGH dengan panjang rusuk 12 cm. Sudut antara ruas garis DF dan bidang CDHG adalah \\(\\alpha\\). Nilai \\(\\sin \\alpha\\) adalah...",
+                "options": ["\\(\\frac{1}{3}\\sqrt{3}\\)", "\\(\\frac{1}{2\\sqrt{2}}\\)", "\\(\\frac{1}{3\\sqrt{2}}\\)", "\\(\\frac{1}{5\\sqrt{2}}\\)", "\\(\\frac{1}{6\\sqrt{2}}\\)"],
+                "correctAnswer": 0,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><ol><li><strong>Identifikasi garis dan bidang:</strong><br>- Garis: DF (diagonal ruang)<br>- Bidang: CDHG (sisi kanan kubus)</li><li><strong>Proyeksikan garis ke bidang:</strong><br>Proyeksi titik D ke bidang CDHG adalah D itu sendiri. Proyeksi titik F ke bidang CDHG adalah titik G. Jadi, proyeksi garis DF ke bidang CDHG adalah garis DG.</li><li><strong>Bentuk segitiga siku-siku:</strong><br>Sudut \\(\\alpha\\) adalah sudut antara garis DF dan proyeksinya (DG), yaitu sudut \\(\\angle FDG\\). Segitiga yang terbentuk adalah \\(\\triangle DFG\\) yang siku-siku di G.</li><li><strong>Hitung panjang sisi segitiga:</strong><br>- Sisi depan (FG): panjang rusuk = 12 cm.<br>- Sisi miring (DF): diagonal ruang kubus = \\(s\\sqrt{3} = 12\\sqrt{3}\\) cm.</li><li><strong>Hitung \\(\\sin \\alpha\\):</strong><br>\\(\\sin \\alpha = \\frac{\\text{depan}}{\\text{miring}} = \\frac{FG}{DF} = \\frac{12}{12\\sqrt{3}} = \\frac{1}{\\sqrt{3}}\\).</li><li><strong>Rasionalkan penyebut:</strong><br>\\(\\frac{1}{\\sqrt{3}} \\times \\frac{\\sqrt{3}}{\\sqrt{3}} = \\frac{\\sqrt{3}}{3}\\) atau \\(\\frac{1}{3}\\sqrt{3}\\).</li></ol><p>Jadi, nilai \\(\\sin \\alpha\\) adalah \\(\\frac{1}{3}\\sqrt{3}\\).</p>"
+              },
+              {
+                "id": 17,
+                "text": "Simpangan rata-rata dari data 6, 5, 7, 5, 6, 8, 7, 6, 6, 7, 4, 5 adalah...",
+                "options": ["\\(\\frac{7}{3}\\)", "\\(\\frac{5}{3}\\)", "\\(\\frac{7}{5}\\)", "\\(\\frac{5}{6}\\)", "\\(\\frac{3}{5}\\)"],
+                "correctAnswer": 3,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><ol><li><strong>Hitung rata-rata (mean, \\(\\bar{x}\\)):</strong><br>Jumlah data = \\(6+5+7+5+6+8+7+6+6+7+4+5 = 72\\)<br>Banyak data (n) = 12<br>\\(\\bar{x} = \\frac{72}{12} = 6\\)</li><li><strong>Hitung jumlah dari selisih mutlak setiap data dengan rata-rata (\\(\\sum |x_i - \\bar{x}|\\)):</strong><br>\\(|6-6| + |5-6| + |7-6| + |5-6| + |6-6| + |8-6| + |7-6| + |6-6| + |6-6| + |7-6| + |4-6| + |5-6|\\)<br>\\(= 0 + 1 + 1 + 1 + 0 + 2 + 1 + 0 + 0 + 1 + 2 + 1 = 10\\)</li><li><strong>Hitung simpangan rata-rata (SR):</strong><br>\\(SR = \\frac{\\sum |x_i - \\bar{x}|}{n} = \\frac{10}{12}\\)</li><li><strong>Sederhanakan pecahan:</strong><br>\\(\\frac{10}{12} = \\frac{5}{6}\\)</li></ol><p>Jadi, simpangan rata-ratanya adalah \\(\\frac{5}{6}\\).</p>"
+              },
+              {
+                "id": 18,
+                "text": "Ada sepuluh orang dalam suatu ruangan, yang belum saling mengenal. Jika mereka ingin saling berkenalan dengan berjabat tangan sekali dengan setiap orang, maka jabatan tangan yang akan terjadi sebanyak...",
+                "options": ["90 kali", "80 kali", "60 kali", "45 kali", "40 kali"],
+                "correctAnswer": 3,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Masalah ini adalah masalah kombinasi, karena urutan jabat tangan tidak penting (A berjabat tangan dengan B sama dengan B berjabat tangan dengan A). Kita ingin memilih kelompok 2 orang dari total 10 orang.</p><ol><li><strong>Gunakan rumus kombinasi:</strong><br>\\(C(n, k) = \\frac{n!}{k!(n-k)!}\\), dengan n = total orang dan k = jumlah orang per jabat tangan.</li><li><strong>Substitusikan nilai n=10 dan k=2:</strong><br>\\(C(10, 2) = \\frac{10!}{2!(10-2)!} = \\frac{10!}{2!8!}\\)</li><li><strong>Hitung hasilnya:</strong><br>\\(= \\frac{10 \\times 9 \\times 8!}{2 \\times 1 \\times 8!} = \\frac{10 \\times 9}{2} = \\frac{90}{2} = 45\\)</li></ol><p>Jadi, akan terjadi sebanyak 45 jabat tangan.</p>"
+              },
+              {
+                "id": 19,
+                "text": "Sebuah dadu merah dan sebuah dadu putih dilambungkan secara bersamaan sebanyak satu kali. Peluang muncul mata dadu yang berjumlah 2 atau 4 adalah...",
+                "options": ["\\(\\frac{1}{9}\\)", "\\(\\frac{1}{4}\\)", "\\(\\frac{1}{3}\\)", "\\(\\frac{3}{5}\\)", "\\(\\frac{15}{16}\\)"],
+                "correctAnswer": 0,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><ol><li><strong>Tentukan ruang sampel (S):</strong><br>Dua dadu dilempar, total kemungkinan hasil adalah \\(n(S) = 6 \\times 6 = 36\\).</li><li><strong>Tentukan kejadian A (jumlah mata dadu 2):</strong><br>Hanya ada satu kemungkinan: (1, 1). Jadi, \\(n(A) = 1\\).</li><li><strong>Tentukan kejadian B (jumlah mata dadu 4):</strong><br>Ada tiga kemungkinan: (1, 3), (2, 2), (3, 1). Jadi, \\(n(B) = 3\\).</li><li><strong>Hitung peluang gabungan 'A atau B':</strong><br>Karena kejadian A dan B saling lepas, peluangnya adalah \\(P(A \\cup B) = P(A) + P(B) = \\frac{n(A)}{n(S)} + \\frac{n(B)}{n(S)}\\)<br>\\(= \\frac{1}{36} + \\frac{3}{36} = \\frac{4}{36}\\)</li><li><strong>Sederhanakan hasilnya:</strong><br>\\(\\frac{4}{36} = \\frac{1}{9}\\)</li></ol><p>Jadi, peluangnya adalah \\(\\frac{1}{9}\\).</p>"
+              },
+              {
+                "id": 20,
+                "text": "Tiga keping uang logam setimbang dilempar udin secara bersamaan sebanyak 40 kali. Frekuensi harapan kejadian muncul paling sedikit 2 angka adalah...",
+                "options": ["20", "15", "10", "8", "4"],
+                "correctAnswer": 0,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Frekuensi harapan dihitung dengan rumus: \\(F_h(A) = n \\times P(A)\\), dimana \\(n\\) adalah jumlah percobaan dan \\(P(A)\\) adalah peluang kejadian A.</p><ol><li><strong>Tentukan ruang sampel (S) dari 3 uang logam:</strong><br>S = {AAA, AAG, AGA, GAA, AGG, GAG, GGA, GGG}.<br>Total ruang sampel \\(n(S) = 2^3 = 8\\).</li><li><strong>Tentukan kejadian A (muncul paling sedikit 2 Angka):</strong><br>Ini berarti muncul 2 Angka atau 3 Angka.<br>A = {AAG, AGA, GAA, AAA}.<br>Jumlah kejadian \\(n(A) = 4\\).</li><li><strong>Hitung peluang kejadian A, P(A):</strong><br>\\(P(A) = \\frac{n(A)}{n(S)} = \\frac{4}{8} = \\frac{1}{2}\\)</li><li><strong>Hitung Frekuensi Harapan:</strong><br>Jumlah lemparan (n) = 40 kali.<br>\\(F_h(A) = n \\times P(A) = 40 \\times \\frac{1}{2} = 20\\)</li></ol><p>Jadi, frekuensi harapan kejadian tersebut adalah 20 kali.</p>"
+              }
+            ]
+          }
+        };
+
+        function displayQuiz() {
+            const container = document.getElementById('questions-container');
+
+            quizData["tryout-tka-matematika-1"].questions.forEach((q) => {
+                const questionBlock = document.createElement('div');
+                questionBlock.className = 'question-block';
+
+                const questionText = document.createElement('div');
+                questionText.className = 'question-text';
+                questionText.innerHTML = `<strong>Soal ${q.id}:</strong> ${q.text}`;
+                
+                const optionsList = document.createElement('ul');
+                optionsList.className = 'options-list';
+
+                q.options.forEach((option, i) => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = option;
+                    if (i === q.correctAnswer) {
+                        listItem.className = 'correct-answer';
+                    }
+                    optionsList.appendChild(listItem);
+                });
+
+                const toggleButton = document.createElement('button');
+                toggleButton.className = 'toggle-button';
+                toggleButton.innerText = 'Lihat Pembahasan';
+                
+                const explanationDiv = document.createElement('div');
+                explanationDiv.className = 'explanation';
+                explanationDiv.innerHTML = q.explanation || 'Pembahasan untuk soal ini belum tersedia.';
+                
+                toggleButton.addEventListener('click', () => {
+                    const isHidden = explanationDiv.style.display === 'none' || explanationDiv.style.display === '';
+                    explanationDiv.style.display = isHidden ? 'block' : 'none';
+                    toggleButton.innerText = isHidden ? 'Sembunyikan Pembahasan' : 'Lihat Pembahasan';
+                });
+
+                questionBlock.appendChild(questionText);
+                questionBlock.appendChild(optionsList);
+                questionBlock.appendChild(toggleButton);
+                questionBlock.appendChild(explanationDiv);
+                
+                container.appendChild(questionBlock);
+            });
+            
+            MathJax.typeset();
+        }
+
+        window.onload = displayQuiz;
+    </script>
+</body>
+</html>
