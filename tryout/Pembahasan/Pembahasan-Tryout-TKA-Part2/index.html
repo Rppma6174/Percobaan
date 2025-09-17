@@ -102,6 +102,13 @@
     </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+        // SIMPAN LOKASI SEKARANG SEBELUM PINDAH HALAMAN
+        sessionStorage.setItem('redirectUrl', window.location.href); 
+        
+        // BARU ARAHKAN KE HALAMAN LOGIN
+        window.location.href = '../../login-pembahasan.html';
+    }
         const quizData = {
           "tryout-tka-matematika-2": {
             title: "Tryout Matematika TKA - Part 2",
