@@ -1220,7 +1220,7 @@ function renderQuizInterface() {
     ).join('');
 
     // [MODIFIKASI] Link WhatsApp sekarang dibuat juga di sini
-    const whatsappMessage = `Halo Mentor UMT, saya ingin bertanya mengenai soal dari paket '${encodeURIComponent(quiz.title)}'.\n\nPertanyaan: ${encodeURIComponent(question.questionText)}\n\nMohon bantuannya untuk penjelasan lebih lanjut.`;
+    const whatsappMessage = `Halo Mentor UMT, saya ingin bertanya mengenai soal dari paket '${encodeURIComponent(quiz.title)}'.\n\nPertanyaan: ${encodeURIComponent(question.questionText)}\n\n Mohon bantuannya untuk penjelasan lebih lanjut.`;
     const whatsappLink = `https://wa.me/6285961160545?text=${whatsappMessage}`;
 
     const quizHTML = `
@@ -1251,7 +1251,7 @@ function renderQuizInterface() {
                 <div class="mt-6 pt-5 border-t border-dashed border-gray-600">
                     <h4 class="font-bold text-lg text-amber-300 mb-2">Pembahasan Kurang Jelas?</h4>
                     <p class="text-gray-400 text-sm leading-relaxed mb-4">
-                        Merasa ada yang salah atau butuh penjelasan lebih detail dari mentor kami? Klik tombol di bawah untuk terhubung langsung via WhatsApp.
+                        Jika Anda yakin pembahasannya keliru atau kurang tepat, beri tahu mentor lewat WhatsApp. Fitur ini dibuat khusus untuk koreksi — Mohon dipakai hanya untuk perbaikan pembahasan, bukan pertanyaan umum. Klik tombol di bawah untuk terhubung langsung via WhatsApp.
                     </p>
                     <a href="${whatsappLink}" target="_blank" class="inline-block bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-5 rounded-lg text-sm transition-transform hover:scale-105">
                         <i class="fab fa-whatsapp mr-2"></i>Hubungi Mentor
