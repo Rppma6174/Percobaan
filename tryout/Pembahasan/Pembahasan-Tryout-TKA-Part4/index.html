@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembahasan Soal Tryout Matematika - Part 4</title>
+    <link rel="icon" type="image/png" href="UMT-Logo.png">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #141414;
+            color: white;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: transparent;
+            padding: 5px;
+            border-radius: 10px;
+        }
+        h1 {
+            text-align: center;
+            color: white;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background-color: #1f1f1f;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .question-text {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: white;
+        }
+        .options-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .options-list li {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            color: #ccc;
+        }
+        .correct-answer {
+            background-color: rgba(40, 167, 69, 0.2);
+            border-left: 5px solid #28a745;
+            color: #d4edda;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 5px;
+            overflow-x: auto;
+            color: #ccc;
+        }
+        .explanation h4 {
+            margin-top: 0;
+            color: #50e3c2;
+        }
+        .toggle-button {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .toggle-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 id="quiz-title"></h1>
+        <div id="questions-container"></div>
+    </div>
+
+    <script>
+      if (!sessionStorage.getItem('sessionToken')) {
+        // SIMPAN LOKASI SEKARANG SEBELUM PINDAH HALAMAN
+        sessionStorage.setItem('redirectUrl', window.location.href); 
+        
+        // BARU ARAHKAN KE HALAMAN LOGIN
+        window.location.href = '../../login-pembahasan.html';
+    }
+        const quizData = {
+          "tryout-tka-matematika-4": {
+            title: "Tryout Matematika TKA - Part 4",
+            questions: [
+              {
+                "id": 1,
+                "text": "Sebuah toko memberikan diskon 30% untuk sebuah kemeja. Jika harga kemeja setelah diskon adalah Rp140.000,00, maka harga asli kemeja tersebut adalah...",
+                "options": ["Rp170.000,00", "Rp182.000,00", "Rp200.000,00", "Rp466.000,00"],
+                "correctAnswer": 2,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Harga setelah diskon adalah harga asli dikurangi besar diskon.</p><ol><li><strong>Persentase harga setelah diskon:</strong><br>Jika diskonnya 30%, maka harga yang dibayar adalah \\(100\\% - 30\\% = 70\\%\\) dari harga asli.</li><li><strong>Buat persamaan:</strong><br>Misalkan Harga Asli = H. Maka,<br>\\(70\\% \\times H = Rp140.000,00\\)<br>\\(0.7 \\times H = 140.000\\)</li><li><strong>Selesaikan untuk H:</strong><br>\\(H = \\frac{140.000}{0.7} = 200.000\\).</li></ol><p>Jadi, harga asli kemeja tersebut adalah Rp200.000,00.</p>"
+              },
+              {
+                "id": 2,
+                "text": "Nilai \\(x\\) yang memenuhi persamaan \\(^{2}\\log(x+1) = 4\\) adalah...",
+                "options": ["7", "8", "15", "16"],
+                "correctAnswer": 2,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Gunakan definisi logaritma: jika \\(^{b}\\log a = c\\), maka \\(a = b^c\\).</p><ol><li><strong>Ubah bentuk logaritma ke bentuk eksponensial:</strong><br>Dari \\(^{2}\\log(x+1) = 4\\), kita dapatkan:<br>\\(x+1 = 2^4\\)</li><li><strong>Selesaikan untuk x:</strong><br>\\(x+1 = 16\\)<br>\\(x = 16 - 1 = 15\\).</li></ol><p>Jadi, nilai \\(x\\) yang memenuhi adalah 15.</p>"
+              },
+              {
+                "id": 3,
+                "text": "Himpunan penyelesaian dari pertidaksamaan \\(3x - 5 \\ge 10\\) adalah...",
+                "options": ["\\(\\{x | x \\le 5, x \\in \\mathbb{R}\\}\\)", "\\(\\{x | x \\ge 5, x \\in \\mathbb{R}\\}\\)", "\\(\\{x | x \\ge \\frac{5}{3}, x \\in \\mathbb{R}\\}\\)", "\\(\\{x | x \\le \\frac{5}{3}, x \\in \\mathbb{R}\\}\\)"],
+                "correctAnswer": 1,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Kita selesaikan pertidaksamaan linear ini dengan mengisolasi variabel x.</p><ol><li><strong>Tambahkan 5 ke kedua ruas:</strong><br>\\(3x - 5 + 5 \\ge 10 + 5\\)<br>\\(3x \\ge 15\\)</li><li><strong>Bagi kedua ruas dengan 3:</strong><br>\\(\\frac{3x}{3} \\ge \\frac{15}{3}\\)<br>\\(x \\ge 5\\)</li></ol><p>Jadi, himpunan penyelesaiannya adalah \\(\\{x | x \\ge 5, x \\in \\mathbb{R}\\}\\).</p>"
+              },
+              {
+                "id": 4,
+                "text": "Jika \\(f(x) = x^2+1\\) dengan daerah asal (domain) \\(\\{0, 1, 2\\}\\), maka daerah hasilnya (range) adalah...",
+                "options": ["\\(\\{0, 1, 2\\}\\)", "\\(\\{1, 2, 3\\}\\)", "\\(\\{1, 2, 5\\}\\)", "\\(\\{0, 1, 4\\}\\)"],
+                "correctAnswer": 2,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Daerah hasil (range) adalah kumpulan semua nilai output dari fungsi setelah memasukkan setiap anggota daerah asal (domain).</p><ol><li><strong>Substitusikan setiap elemen domain ke dalam fungsi:</strong><br><ul><li>Untuk \\(x=0\\): \\(f(0) = 0^2 + 1 = 1\\)</li><li>Untuk \\(x=1\\): \\(f(1) = 1^2 + 1 = 2\\)</li><li>Untuk \\(x=2\\): \\(f(2) = 2^2 + 1 = 4 + 1 = 5\\)</li></ul></li><li><strong>Kumpulkan semua hasil:</strong><br>Hasil yang didapat adalah 1, 2, dan 5.</li></ol><p>Jadi, daerah hasilnya adalah \\(\\{1, 2, 5\\}\\).</p>"
+              },
+              {
+                "id": 5,
+                "text": "Nilai diskriminan (D) dari persamaan kuadrat \\(2x^2 - 3x - 5 = 0\\) adalah...",
+                "options": ["-31", "-49", "49", "31"],
+                "correctAnswer": 2,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Rumus diskriminan untuk persamaan kuadrat \\(ax^2+bx+c=0\\) adalah \\(D = b^2 - 4ac\\).</p><ol><li><strong>Identifikasi koefisien a, b, dan c:</strong><br>a = 2, b = -3, c = -5.</li><li><strong>Substitusikan ke dalam rumus:</strong><br>\\(D = (-3)^2 - 4(2)(-5)\\)<br>\\(D = 9 - (-40)\\)<br>\\(D = 9 + 40 = 49\\).</li></ol><p>Jadi, nilai diskriminannya adalah 49.</p>"
+              },
+              {
+                "id": 6,
+                "text": "Diketahui \\(f(x) = x-4\\) dan \\(g(x) = x^2+1\\). Nilai dari \\((g \\circ f)(5)\\) adalah...",
+                "options": ["2", "5", "22", "26"],
+                "correctAnswer": 0,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Komposisi fungsi \\((g \\circ f)(5)\\) berarti \\(g(f(5))\\). Kita kerjakan dari fungsi yang paling dalam.</p><ol><li><strong>Hitung nilai \\(f(5)\\):</strong><br>\\(f(5) = 5 - 4 = 1\\).</li><li><strong>Gunakan hasilnya untuk menghitung \\(g(f(5))\\):</strong><br>Karena \\(f(5)=1\\), maka kita hitung \\(g(1)\\).<br>\\(g(1) = (1)^2 + 1 = 1 + 1 = 2\\).</li></ol><p>Jadi, nilai dari \\((g \\circ f)(5)\\) adalah 2.</p>"
+              },
+              {
+                "id": 7,
+                "text": "Rasio dari barisan geometri \\(\\frac{1}{4}, \\frac{1}{2}, 1, 2, \\dots\\) adalah...",
+                "options": ["\\(\\frac{1}{2}\\)", "2", "4", "\\(\\frac{1}{4}\\)"],
+                "correctAnswer": 1,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Rasio (r) dari barisan geometri ditemukan dengan membagi suku mana pun dengan suku sebelumnya.</p><ol><li><strong>Bagi suku kedua dengan suku pertama:</strong><br>\\(r = \\frac{U_2}{U_1} = \\frac{1/2}{1/4} = \\frac{1}{2} \\times \\frac{4}{1} = 2\\).</li><li><strong>Verifikasi dengan suku lain (opsional):</strong><br>\\(r = \\frac{U_3}{U_2} = \\frac{1}{1/2} = 2\\).</li></ol><p>Jadi, rasio barisan tersebut adalah 2.</p>"
+              },
+              {
+                "id": 8,
+                "text": "Suku tengah dari barisan aritmetika 5, 8, 11, \\dots, 53 adalah...",
+                "options": ["26", "27.5", "29", "32"],
+                "correctAnswer": 2,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Suku tengah (\\(U_t\\)) dari barisan aritmetika dapat ditemukan dengan rumus \\(U_t = \\frac{a + U_n}{2}\\), di mana \\(a\\) adalah suku pertama dan \\(U_n\\) adalah suku terakhir.</p><ol><li><strong>Identifikasi suku pertama dan terakhir:</strong><br>\\(a = 5\\)<br>\\(U_n = 53\\)</li><li><strong>Masukkan ke dalam rumus:</strong><br>\\(U_t = \\frac{5 + 53}{2} = \\frac{58}{2} = 29\\).</li></ol><p>Jadi, suku tengah dari barisan tersebut adalah 29.</p>"
+              },
+              {
+                "id": 9,
+                "text": "Hasil dari perkalian matriks \\(\\begin{pmatrix} 2 & 1 \\\\ 0 & 3 \\end{pmatrix} \\begin{pmatrix} 1 \\\\ 4 \\end{pmatrix}\\) adalah...",
+                "options": ["\\(\\begin{pmatrix} 6 \\\\ 12 \\end{pmatrix}\\)", "\\(\\begin{pmatrix} 2 \\\\ 12 \\end{pmatrix}\\)", "\\(\\begin{pmatrix} 6 & 4 \\end{pmatrix}\\)", "Tidak dapat dikalikan"],
+                "correctAnswer": 0,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Perkalian matriks dilakukan dengan mengalikan baris dari matriks pertama dengan kolom dari matriks kedua.</p><ol><li><strong>Hitung elemen hasil baris pertama:</strong><br>(Baris 1 Matriks 1) \\(\\times\\) (Kolom 1 Matriks 2)<br>\\((2)(1) + (1)(4) = 2 + 4 = 6\\).</li><li><strong>Hitung elemen hasil baris kedua:</strong><br>(Baris 2 Matriks 1) \\(\\times\\) (Kolom 1 Matriks 2)<br>\\((0)(1) + (3)(4) = 0 + 12 = 12\\).</li></ol><p>Jadi, hasilnya adalah matriks kolom \\(\\begin{pmatrix} 6 \\\\ 12 \\end{pmatrix}\\).</p>"
+              },
+              {
+                "id": 10,
+                "text": "Invers dari matriks \\(A = \\begin{pmatrix} 4 & 1 \\\\ 7 & 2 \\end{pmatrix}\\) adalah \\(A^{-1} = \\dots\\)",
+                "options": ["\\(\\begin{pmatrix} 2 & -1 \\\\ -7 & 4 \\end{pmatrix}\\)", "\\(\\begin{pmatrix} -4 & 1 \\\\ 7 & -2 \\end{pmatrix}\\)", "\\(\\begin{pmatrix} 2 & 1 \\\\ 7 & 4 \\end{pmatrix}\\)", "\\(\\begin{pmatrix} \\frac{1}{2} & -\\frac{1}{1} \\\\ -\\frac{1}{7} & \\frac{1}{4} \\end{pmatrix}\\)"],
+                "correctAnswer": 0,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Rumus invers matriks 2x2 \\(\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}\\) adalah \\(A^{-1} = \\frac{1}{ad-bc} \\begin{pmatrix} d & -b \\\\ -c & a \\end{pmatrix}\\).</p><ol><li><strong>Hitung determinan (ad-bc):</strong><br>det(A) = (4)(2) - (1)(7) = 8 - 7 = 1.</li><li><strong>Terapkan rumus invers:</strong><br>\\(A^{-1} = \\frac{1}{1} \\begin{pmatrix} 2 & -1 \\\\ -7 & 4 \\end{pmatrix}\\)<br>\\(A^{-1} = \\begin{pmatrix} 2 & -1 \\\\ -7 & 4 \\end{pmatrix}\\).</li></ol><p>Jadi, inversnya adalah \\(\\begin{pmatrix} 2 & -1 \\\\ -7 & 4 \\end{pmatrix}\\).</p>"
+              },
+              {
+                "id": 11,
+                "text": "Jangkauan (range) dari data: 12, 15, 8, 23, 10, 17, 5 adalah...",
+                "options": ["7", "12", "18", "23"],
+                "correctAnswer": 2,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Jangkauan (range) statistik adalah selisih antara nilai data terbesar dan nilai data terkecil.</p><ol><li><strong>Identifikasi nilai terbesar (maksimum):</strong> 23.</li><li><strong>Identifikasi nilai terkecil (minimum):</strong> 5.</li><li><strong>Hitung jangkauan:</strong><br>Jangkauan = Nilai terbesar - Nilai terkecil<br>Jangkauan = 23 - 5 = 18.</li></ol><p>Jadi, jangkauan dari data tersebut adalah 18.</p>"
+              },
+              {
+                "id": 12,
+                "text": "Budi memiliki 5 kemeja dan 3 celana panjang yang berbeda warna. Banyaknya cara Budi memasangkan kemeja dan celana yang dimilikinya adalah...",
+                "options": ["8", "15", "24", "30"],
+                "correctAnswer": 1,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Ini adalah penerapan aturan perkalian dalam kaidah pencacahan.</p><ol><li><strong>Jumlah pilihan kemeja:</strong> 5.</li><li><strong>Jumlah pilihan celana:</strong> 3.</li><li><strong>Total cara memasangkan:</strong><br>Untuk setiap 1 kemeja yang dipilih, ada 3 pilihan celana. Karena ada 5 kemeja, maka total cara adalah:<br>Total cara = (Banyak pilihan kemeja) \\(\\times\\) (Banyak pilihan celana)<br>Total cara = 5 \\(\\times\\) 3 = 15.</li></ol><p>Jadi, ada 15 cara berbeda untuk memasangkan kemeja dan celana.</p>"
+              },
+              {
+                "id": 13,
+                "text": "Dalam sebuah kantong terdapat 4 bola merah dan 6 bola biru. Jika diambil satu bola secara acak, peluang terambilnya bola merah adalah...",
+                "options": ["\\(\\frac{1}{4}\\)", "\\(\\frac{2}{3}\\)", "\\(\\frac{3}{5}\\)", "\\(\\frac{2}{5}\\)"],
+                "correctAnswer": 3,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Peluang suatu kejadian adalah perbandingan antara jumlah hasil yang diinginkan dengan jumlah total semua hasil yang mungkin.</p><ol><li><strong>Hitung jumlah total bola (ruang sampel):</strong><br>Total bola = 4 merah + 6 biru = 10 bola.</li><li><strong>Jumlah bola yang diinginkan (bola merah):</strong> 4.</li><li><strong>Hitung peluang:</strong><br>P(Merah) = \\(\\frac{\\text{Jumlah bola merah}}{\\text{Total bola}} = \\frac{4}{10}\\).</li><li><strong>Sederhanakan pecahan:</strong><br>\\(\\frac{4}{10} = \\frac{2}{5}\\).</li></ol><p>Jadi, peluang terambilnya bola merah adalah \\(\\frac{2}{5}\\).</p>"
+              },
+              {
+                "id": 14,
+                "text": "Nilai dari \\(\\lim_{x \\to \\infty} \\frac{6x^2 - 5x + 1}{2x^2 + 3x}\\) adalah...",
+                "options": ["0", "2", "3", "\\(\\infty\\)"],
+                "correctAnswer": 2,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Untuk limit tak hingga bentuk pecahan, kita bisa membandingkan pangkat tertinggi dari pembilang dan penyebut.</p><ol><li><strong>Identifikasi pangkat tertinggi:</strong><br>Pangkat tertinggi di pembilang adalah \\(x^2\\).<br>Pangkat tertinggi di penyebut adalah \\(x^2\\).</li><li><strong>Bandingkan pangkat:</strong><br>Karena pangkat tertinggi pembilang dan penyebut sama, nilai limitnya adalah rasio dari koefisien pangkat tertinggi tersebut.</li><li><strong>Hitung rasio koefisien:</strong><br>Koefisien \\(x^2\\) di pembilang adalah 6.<br>Koefisien \\(x^2\\) di penyebut adalah 2.<br>Nilai limit = \\(\\frac{6}{2} = 3\\).</li></ol><p>Jadi, nilai limitnya adalah 3.</p>"
+              },
+              {
+                "id": 15,
+                "text": "Gradien garis singgung kurva \\(y = x^2 - 4x + 2\\) di titik yang berabsis \\(x=3\\) adalah...",
+                "options": ["-1", "2", "3", "-2"],
+                "correctAnswer": 1,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Gradien garis singgung kurva di suatu titik adalah nilai turunan pertama fungsi di titik tersebut.</p><ol><li><strong>Cari turunan pertama dari fungsi y (y'):</strong><br>\\(y = x^2 - 4x + 2\\)<br>\\(y' = 2x - 4\\).</li><li><strong>Substitusikan nilai absis x = 3 ke dalam turunan:</strong><br>Gradien (m) = \\(y'(3) = 2(3) - 4\\)<br>\\(m = 6 - 4 = 2\\).</li></ol><p>Jadi, gradien garis singgungnya adalah 2.</p>"
+              },
+              {
+                "id": 16,
+                "text": "Luas daerah yang dibatasi oleh kurva \\(y = 2x\\), sumbu-x, dan garis \\(x=3\\) adalah...",
+                "options": ["6 satuan luas", "9 satuan luas", "12 satuan luas", "18 satuan luas"],
+                "correctAnswer": 1,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Luas daerah di bawah kurva \\(y=f(x)\\) dari \\(x=a\\) sampai \\(x=b\\) dihitung dengan integral tentu \\(\\int_{a}^{b} f(x) dx\\).</p><ol><li><strong>Tentukan batas integral:</strong><br>Daerah dibatasi oleh sumbu-x (berarti dari \\(x=0\\)) dan garis \\(x=3\\). Jadi, batasnya dari 0 sampai 3.</li><li><strong>Siapkan integralnya:</strong><br>Luas = \\(\\int_{0}^{3} 2x dx\\).</li><li><strong>Hitung integralnya:</strong><br>\\(\\left[ x^2 \\right]_{0}^{3} = (3)^2 - (0)^2 = 9 - 0 = 9\\).</li></ol><p>Jadi, luas daerah tersebut adalah 9 satuan luas.</p>"
+              },
+              {
+                "id": 17,
+                "text": "Jarak antara titik A(1, 2) dan B(4, 6) adalah...",
+                "options": ["3", "4", "5", "7"],
+                "correctAnswer": 2,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Gunakan rumus jarak antara dua titik \\((x_1, y_1)\\) dan \\((x_2, y_2)\\): \\(d = \\sqrt{(x_2-x_1)^2 + (y_2-y_1)^2}\\).</p><ol><li><strong>Substitusikan koordinat titik A dan B:</strong><br>\\(d = \\sqrt{(4-1)^2 + (6-2)^2}\\)</li><li><strong>Hitung hasilnya:</strong><br>\\(d = \\sqrt{(3)^2 + (4)^2}\\)<br>\\(d = \\sqrt{9 + 16} = \\sqrt{25} = 5\\).</li></ol><p>Jadi, jarak antara titik A dan B adalah 5.</p>"
+              },
+              {
+                "id": 18,
+                "text": "Pada segitiga ABC, diketahui panjang sisi \\(a=8\\), \\(\\angle A = 30^\\circ\\), dan \\(\\angle B = 45^\\circ\\). Panjang sisi \\(b\\) adalah...",
+                "options": ["4", "\\(4\\sqrt{2}\\)", "8", "\\(8\\sqrt{2}\\)"],
+                "correctAnswer": 3,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Gunakan Aturan Sinus yang menyatakan \\(\\frac{a}{\\sin A} = \\frac{b}{\\sin B}\\).</p><ol><li><strong>Susun perbandingan berdasarkan Aturan Sinus:</strong><br>\\(\\frac{8}{\\sin 30^\\circ} = \\frac{b}{\\sin 45^\\circ}\\).</li><li><strong>Selesaikan untuk b:</strong><br>\\(b = 8 \\times \\frac{\\sin 45^\\circ}{\\sin 30^\\circ}\\).</li><li><strong>Substitusikan nilai sinus sudut istimewa:</strong><br>\\(\\sin 45^\\circ = \\frac{\\sqrt{2}}{2}\\) dan \\(\\sin 30^\\circ = \\frac{1}{2}\\).<br>\\(b = 8 \\times \\frac{\\frac{\\sqrt{2}}{2}}{\\frac{1}{2}} = 8 \\times \\sqrt{2}\\).</li></ol><p>Jadi, panjang sisi \\(b\\) adalah \\(8\\sqrt{2}\\).</p>"
+              },
+              {
+                "id": 19,
+                "text": "Jika \\(\\cos(\\theta) = -\\frac{5}{13}\\) dan \\(\\theta\\) berada di kuadran II, maka nilai \\(\\sin(\\theta)\\) adalah...",
+                "options": ["\\(-\\frac{12}{13}\\)", "\\(\\frac{5}{12}\\)", "\\(\\frac{12}{13}\\)", "\\(-\\frac{5}{12}\\)"],
+                "correctAnswer": 2,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><ol><li><strong>Gunakan identitas Pythagoras \\(\\sin^2\\theta + \\cos^2\\theta = 1\\):</strong><br>\\(\\sin^2\\theta + (-\\frac{5}{13})^2 = 1\\)<br>\\(\\sin^2\\theta + \\frac{25}{169} = 1\\)<br>\\(\\sin^2\\theta = 1 - \\frac{25}{169} = \\frac{169-25}{169} = \\frac{144}{169}\\).</li><li><strong>Akarkan kedua sisi:</strong><br>\\(\\sin\\theta = \\pm\\sqrt{\\frac{144}{169}} = \\pm\\frac{12}{13}\\).</li><li><strong>Tentukan tanda berdasarkan kuadran:</strong><br>Di kuadran II, nilai sinus (y) adalah positif.</li></ol><p>Jadi, nilai \\(\\sin(\\theta)\\) adalah \\(\\frac{12}{13}\\).</p>"
+              },
+              {
+                "id": 20,
+                "text": "Sebuah kubus memiliki panjang rusuk 5 cm. Luas permukaan kubus tersebut adalah...",
+                "options": ["25 cm\\(^2\\)", "100 cm\\(^2\\)", "125 cm\\(^2\\)", "150 cm\\(^2\\)"],
+                "correctAnswer": 3,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Kubus memiliki 6 sisi yang identik berbentuk persegi.</p><ol><li><strong>Hitung luas satu sisi:</strong><br>Luas sisi = rusuk \\(\\times\\) rusuk = \\(s^2\\)<br>Luas sisi = \\(5^2 = 25\\) cm\\(^2\\).</li><li><strong>Hitung luas permukaan total:</strong><br>Luas Permukaan = 6 \\(\\times\\) Luas satu sisi<br>Luas Permukaan = 6 \\(\\times\\) 25 = 150 cm\\(^2\\).</li></ol><p>Jadi, luas permukaan kubus tersebut adalah 150 cm\\(^2\\).</p>"
+              }
+            ]
+          }
+        };
+
+        function displayQuiz() {
+            const quizKey = Object.keys(quizData)[0];
+            const data = quizData[quizKey];
+            
+            document.getElementById('quiz-title').innerText = data.title;
+            const container = document.getElementById('questions-container');
+
+            data.questions.forEach((q) => {
+                const questionBlock = document.createElement('div');
+                questionBlock.className = 'question-block';
+
+                const questionText = document.createElement('div');
+                questionText.className = 'question-text';
+                questionText.innerHTML = `<strong>Soal ${q.id}:</strong> ${q.text}`;
+                
+                const optionsList = document.createElement('ul');
+                optionsList.className = 'options-list';
+
+                q.options.forEach((option, i) => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = option;
+                    if (i === q.correctAnswer) {
+                        listItem.className = 'correct-answer';
+                    }
+                    optionsList.appendChild(listItem);
+                });
+
+                const toggleButton = document.createElement('button');
+                toggleButton.className = 'toggle-button';
+                toggleButton.innerText = 'Lihat Pembahasan';
+                
+                const explanationDiv = document.createElement('div');
+                explanationDiv.className = 'explanation';
+                explanationDiv.innerHTML = q.explanation || 'Pembahasan untuk soal ini belum tersedia.';
+                
+                toggleButton.addEventListener('click', () => {
+                    const isHidden = explanationDiv.style.display === 'none' || explanationDiv.style.display === '';
+                    explanationDiv.style.display = isHidden ? 'block' : 'none';
+                    toggleButton.innerText = isHidden ? 'Sembunyikan Pembahasan' : 'Lihat Pembahasan';
+                });
+
+                questionBlock.appendChild(questionText);
+                questionBlock.appendChild(optionsList);
+                questionBlock.appendChild(toggleButton);
+                questionBlock.appendChild(explanationDiv);
+                
+                container.appendChild(questionBlock);
+            });
+            
+            MathJax.typeset();
+        }
+
+        window.onload = displayQuiz;
+    </script>
+</body>
+</html>
