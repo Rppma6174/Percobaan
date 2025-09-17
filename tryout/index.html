@@ -2762,7 +2762,7 @@ kerjakanElements.forEach(button => {
         button.addEventListener('click', () => {
             const link = button.getAttribute('data-link');
             if (link && link !== '#') {
-                window.open(link, '_blank');
+                window.location.href = link; 
             } else {
                 alert('Link belum tersedia');
             }
@@ -3180,5 +3180,6 @@ initializeInteractiveElements();
     </script>
 </body>
 </html>
+
 
 
