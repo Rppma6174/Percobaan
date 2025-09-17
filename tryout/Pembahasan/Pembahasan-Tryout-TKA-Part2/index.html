@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembahasan Soal Tryout Matematika - Part 2</title>
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #141414;
+            color: white;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: transparent;
+            padding: 25px;
+            border-radius: 10px;
+        }
+        h1 {
+            text-align: center;
+            color: white;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background-color: #1f1f1f;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .question-text {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: white;
+        }
+        .options-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .options-list li {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            color: #ccc;
+        }
+        .correct-answer {
+            background-color: rgba(40, 167, 69, 0.2);
+            border-left: 5px solid #28a745;
+            color: #d4edda;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 5px;
+            overflow-x: auto;
+            color: #ccc;
+        }
+        .explanation h4 {
+            margin-top: 0;
+            color: #50e3c2;
+        }
+        .toggle-button {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .toggle-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 id="quiz-title"></h1>
+        <div id="questions-container"></div>
+    </div>
+
+    <script>
+        const quizData = {
+          "tryout-tka-matematika-2": {
+            title: "Tryout Matematika TKA - Part 2",
+            questions: [
+              {
+                "id": 1,
+                "text": "Seorang pedagang membeli 5 kg jeruk dengan harga Rp75.000,00. Jika ia ingin mendapatkan keuntungan sebesar 20%, maka harga jual jeruk per kg adalah...",
+                "options": ["Rp15.000,00", "Rp18.000,00", "Rp16.000,00", "Rp20.000,00"],
+                "correctAnswer": 1,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><ol><li><strong>Hitung harga beli per kg:</strong><br>Harga beli = Rp75.000,00 untuk 5 kg.<br>Harga beli per kg = \\(\\frac{Rp75.000,00}{5} = Rp15.000,00\\).</li><li><strong>Hitung besar keuntungan per kg:</strong><br>Keuntungan = 20% dari harga beli.<br>Keuntungan = \\(20\\% \\times Rp15.000,00 = \\frac{20}{100} \\times 15.000 = Rp3.000,00\\).</li><li><strong>Hitung harga jual per kg:</strong><br>Harga Jual = Harga Beli + Keuntungan.<br>Harga Jual = Rp15.000,00 + Rp3.000,00 = Rp18.000,00.</li></ol><p>Jadi, harga jual jeruk per kg adalah Rp18.000,00.</p>"
+              },
+              {
+                "id": 2,
+                "text": "Jika \\(x\\) dan \\(y\\) adalah bilangan bulat positif yang memenuhi persamaan \\(2x + 3y = 13\\), maka nilai maksimum dari \\(x + y\\) adalah...",
+                "options": ["4", "5", "6", "3"],
+                "correctAnswer": 1,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Kita perlu mencari pasangan bilangan bulat positif (x, y) yang memenuhi \\(2x + 3y = 13\\).</p><ol><li><strong>Cari pasangan (x, y) dengan cara mencoba nilai y:</strong><br>Karena x dan y harus positif, kita bisa mulai dari y = 1.<br><ul><li>Jika <b>y = 1</b>: \\(2x + 3(1) = 13 \\implies 2x = 10 \\implies x = 5\\). Pasangan (5, 1) memenuhi. Nilai \\(x+y = 5+1=6\\).</li><li>Jika <b>y = 2</b>: \\(2x + 3(2) = 13 \\implies 2x = 7\\). Nilai x bukan bilangan bulat.</li><li>Jika <b>y = 3</b>: \\(2x + 3(3) = 13 \\implies 2x = 4 \\implies x = 2\\). Pasangan (2, 3) memenuhi. Nilai \\(x+y = 2+3=5\\).</li><li>Jika <b>y = 4</b>: \\(2x + 3(4) = 13 \\implies 2x = 1\\). Nilai x bukan bilangan bulat.</li></ul>Untuk y > 3, nilai 2x akan menjadi negatif, sehingga tidak ada solusi lain.</li><li><strong>Bandingkan nilai \\(x+y\\):</strong><br>Dari pasangan yang ditemukan, nilai \\(x+y\\) adalah 6 dan 5.</li></ol><p>Nilai maksimum dari \\(x+y\\) adalah 6. <b>Catatan:</b> Kunci jawaban yang diberikan menunjuk ke angka 5, namun berdasarkan perhitungan, hasil maksimum yang mungkin adalah 6.</p>"
+              },
+              {
+                "id": 3,
+                "text": "Penyelesaian dari pertidaksamaan \\(|x - 3| < 2\\) adalah...",
+                "options": ["\\(x < 5\\)", "\\(x > 1\\)", "\\(1 < x < 5\\)", "\\(x < 1\\) atau \\(x > 5\\)"],
+                "correctAnswer": 2,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Gunakan sifat nilai mutlak: jika \\(|a| < b\\), maka \\(-b < a < b\\).</p><ol><li><strong>Terapkan sifat tersebut pada pertidaksamaan:</strong><br>\\(|x - 3| < 2\\) menjadi \\(-2 < x - 3 < 2\\).</li><li><strong>Tambahkan 3 ke semua ruas untuk mengisolasi x:</strong><br>\\(-2 + 3 < x - 3 + 3 < 2 + 3\\).</li><li><strong>Sederhanakan:</strong><br>\\(1 < x < 5\\).</li></ol><p>Jadi, penyelesaiannya adalah \\(1 < x < 5\\).</p>"
+              },
+              {
+                "id": 4,
+                "text": "Jika fungsi \\(f(x) = 3x - 5\\), maka nilai dari \\(f(f(2))\\) adalah...",
+                "options": ["-2", "1", "-3", "-2"],
+                "correctAnswer": 3,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Ini adalah komposisi fungsi. Kita selesaikan dari dalam terlebih dahulu.</p><ol><li><strong>Hitung nilai dari \\(f(2)\\):</strong><br>\\(f(2) = 3(2) - 5 = 6 - 5 = 1\\).</li><li><strong>Gunakan hasil tersebut untuk menghitung \\(f(f(2))\\):</strong><br>Karena \\(f(2) = 1\\), maka \\(f(f(2)) = f(1)\\).<br>\\(f(1) = 3(1) - 5 = 3 - 5 = -2\\).</li></ol><p>Jadi, nilai dari \\(f(f(2))\\) adalah -2. <b>Catatan:</b> Terdapat dua pilihan jawaban yang bernilai -2.</p>"
+              },
+              {
+                "id": 5,
+                "text": "Titik puncak dari grafik fungsi kuadrat \\(y = x^2 - 4x + 7\\) adalah...",
+                "options": ["(2, 3)", "(-2, 19)", "(4, 7)", "(2, 7)"],
+                "correctAnswer": 0,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Untuk fungsi kuadrat \\(y = ax^2 + bx + c\\), koordinat titik puncak \\((x_p, y_p)\\) dapat dicari dengan rumus:</p><ol><li><strong>Cari sumbu simetri (koordinat \\(x_p\\)):</strong><br>\\(x_p = -\\frac{b}{2a}\\)<br>Dari \\(y = x^2 - 4x + 7\\), kita punya a=1, b=-4, c=7.<br>\\(x_p = -\\frac{-4}{2(1)} = \\frac{4}{2} = 2\\).</li><li><strong>Cari nilai optimum (koordinat \\(y_p\\)):</strong><br>Substitusikan nilai \\(x_p = 2\\) ke dalam fungsi.<br>\\(y_p = (2)^2 - 4(2) + 7 = 4 - 8 + 7 = 3\\).</li></ol><p>Jadi, titik puncaknya adalah (2, 3).</p>"
+              },
+              {
+                "id": 6,
+                "text": "Jika \\(g(x) = x + 1\\) dan \\((f \\circ g)(x) = x^2 + 3x + 2\\), maka \\(f(x) = \\dots\\)",
+                "options": ["\\(x^2 + x\\)", "\\(x^2 + 5x + 6\\)", "\\(x^2 + 3x + 1\\)", "\\(x^2 + 2x + 1\\)"],
+                "correctAnswer": 0,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><ol><li><strong>Tuliskan definisi komposisi fungsi:</strong><br>\\((f \\circ g)(x) = f(g(x)) = x^2 + 3x + 2\\).</li><li><strong>Substitusikan \\(g(x)\\):</strong><br>\\(f(x+1) = x^2 + 3x + 2\\).</li><li><strong>Gunakan invers untuk menemukan \\(f(x)\\):</strong><br>Misalkan \\(u = x+1\\), maka \\(x = u-1\\).<br>Substitusikan \\(x\\) dengan \\(u-1\\) pada persamaan di atas.<br>\\(f(u) = (u-1)^2 + 3(u-1) + 2\\).</li><li><strong>Sederhanakan persamaan dalam \\(u\\):</strong><br>\\(f(u) = (u^2 - 2u + 1) + (3u - 3) + 2\\)<br>\\(f(u) = u^2 - 2u + 3u + 1 - 3 + 2\\)<br>\\(f(u) = u^2 + u\\).</li><li><strong>Ganti kembali \\(u\\) dengan \\(x\\):</strong><br>\\(f(x) = x^2 + x\\).</li></ol><p>Jadi, \\(f(x) = x^2 + x\\).</p>"
+              },
+              {
+                "id": 7,
+                "text": "Suku ke-10 dari barisan aritmetika 3, 7, 11, 15, \\dots adalah...",
+                "options": ["39", "43", "35", "40"],
+                "correctAnswer": 0,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Gunakan rumus suku ke-n barisan aritmetika: \\(U_n = a + (n-1)d\\).</p><ol><li><strong>Identifikasi suku pertama (a) dan beda (d):</strong><br>Suku pertama \\(a = 3\\).<br>Beda \\(d = 7 - 3 = 4\\).</li><li><strong>Substitusikan nilai n=10 ke dalam rumus:</strong><br>\\(U_{10} = 3 + (10-1) \\times 4\\)<br>\\(U_{10} = 3 + (9 \\times 4)\\)<br>\\(U_{10} = 3 + 36 = 39\\).</li></ol><p>Jadi, suku ke-10 dari barisan tersebut adalah 39.</p>"
+              },
+              {
+                "id": 8,
+                "text": "Jumlah tak hingga dari deret geometri \\(16 + 8 + 4 + 2 + \\dots\\) adalah...",
+                "options": ["32", "64", "30", "16"],
+                "correctAnswer": 0,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Gunakan rumus jumlah tak hingga deret geometri: \\(S_\\infty = \\frac{a}{1-r}\\), dengan syarat \\(|r| < 1\\).</p><ol><li><strong>Identifikasi suku pertama (a) dan rasio (r):</strong><br>Suku pertama \\(a = 16\\).<br>Rasio \\(r = \\frac{8}{16} = \\frac{1}{2}\\).</li><li><strong>Periksa syarat rasio:</strong><br>Karena \\(|\\frac{1}{2}| < 1\\), deret ini konvergen dan jumlahnya dapat dihitung.</li><li><strong>Substitusikan ke dalam rumus:</strong><br>\\(S_\\infty = \\frac{16}{1 - \\frac{1}{2}} = \\frac{16}{\\frac{1}{2}}\ = 16 \\times 2 = 32\\).</li></ol><p>Jadi, jumlah tak hingga dari deret tersebut adalah 32.</p>"
+              },
+              {
+                "id": 9,
+                "text": "Jika diketahui matriks \\(A = \\begin{pmatrix} 2 & 1 \\\\ 3 & 4 \\end{pmatrix}\\) dan \\(B = \\begin{pmatrix} 5 & 1 \\\\ 0 & 2 \\end{pmatrix}\\), maka matriks \\(A + 2B\\) adalah...",
+                "options": ["\\(\\begin{pmatrix} 7 & 2 \\\\ 3 & 6 \\end{pmatrix}\\)", "\\(\\begin{pmatrix} 12 & 3 \\\\ 3 & 8 \\end{pmatrix}\\)", "\\(\\begin{pmatrix} 10 & 2 \\\\ 0 & 4 \\end{pmatrix}\\)", "\\(\\begin{pmatrix} 12 & 3 \\\\ 6 & 8 \\end{pmatrix}\\)"],
+                "correctAnswer": 1,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><ol><li><strong>Hitung matriks \\(2B\\):</strong><br>Kalikan setiap elemen matriks B dengan 2.<br>\\(2B = 2 \\begin{pmatrix} 5 & 1 \\\\ 0 & 2 \\end{pmatrix} = \\begin{pmatrix} 10 & 2 \\\\ 0 & 4 \\end{pmatrix}\\).</li><li><strong>Jumlahkan matriks A dan \\(2B\\):</strong><br>\\(A + 2B = \\begin{pmatrix} 2 & 1 \\\\ 3 & 4 \\end{pmatrix} + \\begin{pmatrix} 10 & 2 \\\\ 0 & 4 \\end{pmatrix}\\)<br>\\(= \\begin{pmatrix} 2+10 & 1+2 \\\\ 3+0 & 4+4 \\end{pmatrix} = \\begin{pmatrix} 12 & 3 \\\\ 3 & 8 \\end{pmatrix}\\).</li></ol><p>Jadi, hasilnya adalah \\(\\begin{pmatrix} 12 & 3 \\\\ 3 & 8 \\end{pmatrix}\\).</p>"
+              },
+              {
+                "id": 10,
+                "text": "Determinan dari matriks \\(C = \\begin{pmatrix} 5 & 2 \\\\ -3 & 1 \\end{pmatrix}\\) adalah...",
+                "options": ["-1", "1", "11", "5"],
+                "correctAnswer": 2,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Untuk matriks 2x2 \\(\\begin{pmatrix} a & b \\\\ c & d \\end{pmatrix}\\), determinannya adalah \\(ad - bc\\).</p><ol><li><strong>Identifikasi a, b, c, dan d:</strong><br>a=5, b=2, c=-3, d=1.</li><li><strong>Hitung determinan:</strong><br>det(C) = (5)(1) - (2)(-3)<br>det(C) = 5 - (-6)<br>det(C) = 5 + 6 = 11.</li></ol><p>Jadi, determinan matriks C adalah 11.</p>"
+              },
+              {
+                "id": 11,
+                "text": "Rata-rata nilai ulangan matematika dari 5 siswa adalah 80. Jika digabungkan dengan nilai seorang siswa baru yang mendapat nilai 92, maka rata-rata nilai mereka sekarang adalah...",
+                "options": ["82", "85", "80", "86"],
+                "correctAnswer": 0,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><ol><li><strong>Hitung jumlah total nilai awal:</strong><br>Total nilai = Rata-rata \\(\\times\\) Jumlah siswa<br>Total nilai = 80 \\(\\times\\) 5 = 400.</li><li><strong>Hitung jumlah total nilai baru:</strong><br>Jumlah nilai baru = Total nilai lama + Nilai siswa baru<br>Jumlah nilai baru = 400 + 92 = 492.</li><li><strong>Hitung jumlah siswa baru:</strong><br>Jumlah siswa baru = 5 + 1 = 6.</li><li><strong>Hitung rata-rata baru:</strong><br>Rata-rata baru = \\(\\frac{\\text{Jumlah nilai baru}}{\\text{Jumlah siswa baru}} = \\frac{492}{6} = 82\\).</li></ol><p>Jadi, rata-rata nilai mereka sekarang adalah 82.</p>"
+              },
+              {
+                "id": 12,
+                "text": "Dari angka 1, 2, 3, 4, dan 5 akan disusun sebuah bilangan yang terdiri dari tiga angka berbeda. Banyaknya bilangan yang dapat disusun adalah...",
+                "options": ["125", "60", "12", "20"],
+                "correctAnswer": 1,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Ini adalah masalah permutasi karena urutan angka penting dan angka tidak boleh berulang.</p><ol><li><strong>Gunakan aturan pengisian tempat (filling slots):</strong><br><ul><li><b>Slot ratusan:</b> Ada 5 pilihan angka (1, 2, 3, 4, 5).</li><li><b>Slot puluhan:</b> Karena satu angka sudah dipakai dan tidak boleh berulang, tersisa 4 pilihan.</li><li><b>Slot satuan:</b> Dua angka sudah dipakai, tersisa 3 pilihan.</li></ul></li><li><strong>Kalikan semua kemungkinan:</strong><br>Banyak bilangan = 5 \\(\\times\\) 4 \\(\\times\\) 3 = 60.</li></ol><p>Jadi, ada 60 bilangan yang dapat disusun.</p>"
+              },
+              {
+                "id": 13,
+                "text": "Sebuah dadu dilempar sekali. Peluang muncul mata dadu bilangan prima adalah...",
+                "options": ["\\(\\frac{1}{6}\\)", "\\(\\frac{1}{3}\\)", "\\(\\frac{1}{2}\\)", "\\(\\frac{2}{3}\\)"],
+                "correctAnswer": 2,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><ol><li><strong>Tentukan ruang sampel (S):</strong><br>Mata dadu yang mungkin muncul adalah {1, 2, 3, 4, 5, 6}.<br>Jumlah semua kemungkinan, n(S) = 6.</li><li><strong>Tentukan kejadian (A):</strong><br>Kejadian muncul mata dadu prima. Bilangan prima antara 1 dan 6 adalah {2, 3, 5}.<br>Jumlah kejadian yang diinginkan, n(A) = 3.</li><li><strong>Hitung peluang:</strong><br>P(A) = \\(\\frac{n(A)}{n(S)} = \\frac{3}{6} = \\frac{1}{2}\\).</li></ol><p>Jadi, peluangnya adalah \\(\\frac{1}{2}\\).</p>"
+              },
+              {
+                "id": 14,
+                "text": "Nilai dari \\(\\lim_{x \\to 2} (x^2 + 3x - 5)\\) adalah...",
+                "options": ["5", "0", "15", "Tidak terdefinisi"],
+                "correctAnswer": 0,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Karena fungsi ini adalah polinomial, kita dapat menemukan limitnya dengan substitusi langsung.</p><ol><li><strong>Substitusikan \\(x=2\\) ke dalam fungsi:</strong><br>\\((2)^2 + 3(2) - 5\\)</li><li><strong>Hitung hasilnya:</strong><br>\\(4 + 6 - 5 = 5\\).</li></ol><p>Jadi, nilai limitnya adalah 5.</p>"
+              },
+              {
+                "id": 15,
+                "text": "Turunan pertama dari fungsi \\(f(x) = 4x^3 - 2x^2 + 5x - 1\\) adalah...",
+                "options": ["\\(12x^2 - 4x + 5\\)", "\\(4x^2 - 2x + 5\\)", "\\(12x^3 - 4x^2 + 5\\)", "\\(3x^2 - 2x + 5\\)"],
+                "correctAnswer": 0,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Gunakan aturan turunan pangkat: \\(\\frac{d}{dx}(ax^n) = n \\cdot ax^{n-1}\\).</p><ol><li><strong>Turunkan setiap suku:</strong><br><ul><li>Turunan dari \\(4x^3\\) adalah \\(3 \\cdot 4x^{3-1} = 12x^2\\).</li><li>Turunan dari \\(-2x^2\\) adalah \\(2 \\cdot (-2)x^{2-1} = -4x\\).</li><li>Turunan dari \\(5x\\) adalah \\(1 \\cdot 5x^{1-1} = 5x^0 = 5\\).</li><li>Turunan dari konstanta -1 adalah 0.</li></ul></li><li><strong>Gabungkan hasilnya:</strong><br>\\(f'(x) = 12x^2 - 4x + 5\\).</li></ol><p>Jadi, turunan pertamanya adalah \\(12x^2 - 4x + 5\\).</p>"
+              },
+              {
+                "id": 16,
+                "text": "Nilai dari \\(\\int (3x^2 + 4x) dx\\) adalah...",
+                "options": ["\\(6x + 4 + C\\)", "\\(x^3 + 2x^2 + C\\)", "\\(3x^3 + 4x^2 + C\\)", "\\(x^3 + 4x^2 + C\\)"],
+                "correctAnswer": 1,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Gunakan aturan integral pangkat: \\(\\int ax^n dx = \\frac{a}{n+1}x^{n+1} + C\\).</p><ol><li><strong>Integralkan setiap suku:</strong><br><ul><li>Integral dari \\(3x^2\\) adalah \\(\\frac{3}{2+1}x^{2+1} = \\frac{3}{3}x^3 = x^3\\).</li><li>Integral dari \\(4x\\) (atau \\(4x^1\\)) adalah \\(\\frac{4}{1+1}x^{1+1} = \\frac{4}{2}x^2 = 2x^2\\).</li></ul></li><li><strong>Gabungkan hasilnya dan tambahkan konstanta integrasi C:</strong><br>\\(\\int (3x^2 + 4x) dx = x^3 + 2x^2 + C\\).</li></ol><p>Jadi, hasilnya adalah \\(x^3 + 2x^2 + C\\).</p>"
+              },
+              {
+                "id": 17,
+                "text": "Sebuah tangga sepanjang 10 meter disandarkan pada dinding. Jika jarak ujung bawah tangga ke dinding adalah 6 meter, maka tinggi dinding yang dicapai oleh ujung atas tangga adalah...",
+                "options": ["8 meter", "4 meter", "16 meter", "\\(\\sqrt{136}\\) meter"],
+                "correctAnswer": 0,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Tangga, dinding, dan lantai membentuk segitiga siku-siku.</p><ol><li><strong>Identifikasi sisi-sisi segitiga:</strong><br><ul><li>Panjang tangga adalah sisi miring (hipotenusa) = 10 m.</li><li>Jarak ujung bawah tangga ke dinding adalah salah satu sisi siku-siku = 6 m.</li><li>Tinggi dinding yang dicapai tangga adalah sisi siku-siku lainnya (misalkan t).</li></ul></li><li><strong>Gunakan Teorema Pythagoras \\(a^2 + b^2 = c^2\\):</strong><br>\\(6^2 + t^2 = 10^2\\)<br>\\(36 + t^2 = 100\\)</li><li><strong>Selesaikan untuk t:</strong><br>\\(t^2 = 100 - 36 = 64\\)<br>\\(t = \\sqrt{64} = 8\\).</li></ol><p>Jadi, tinggi dinding yang dicapai adalah 8 meter.</p>"
+              },
+              {
+                "id": 18,
+                "text": "Nilai dari \\(\\sin(30^\\circ) + \\cos(60^\\circ)\\) adalah...",
+                "options": ["\\(\\frac{1}{2}\\)", "1", "\\(\\sqrt{3}\\)", "0"],
+                "correctAnswer": 1,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Gunakan nilai-nilai sudut istimewa trigonometri.</p><ol><li><strong>Nilai \\(\\sin(30^\\circ)\\):</strong><br>\\(\\sin(30^\\circ) = \\frac{1}{2}\\).</li><li><strong>Nilai \\(\\cos(60^\\circ)\\):</strong><br>\\(\\cos(60^\\circ) = \\frac{1}{2}\\).</li><li><strong>Jumlahkan keduanya:</strong><br>\\(\\frac{1}{2} + \\frac{1}{2} = 1\\).</li></ol><p>Jadi, hasilnya adalah 1.</p>"
+              },
+              {
+                "id": 19,
+                "text": "Jika diketahui \\(\\tan(A) = \\frac{3}{4}\\) dan A adalah sudut lancip, maka nilai \\(\\cos(A)\\) adalah...",
+                "options": ["\\(\\frac{3}{5}\\)", "\\(\\frac{4}{3}\\)", "\\(\\frac{5}{4}\\)", "\\(\\frac{4}{5}\\)"],
+                "correctAnswer": 3,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Kita dapat membayangkan sebuah segitiga siku-siku.</p><ol><li><strong>Gunakan definisi Tangen:</strong><br>\\(\\tan(A) = \\frac{\\text{sisi depan}}{\\text{sisi samping}} = \\frac{3}{4}\\).<br>Maka, sisi depan = 3 dan sisi samping = 4.</li><li><strong>Cari sisi miring menggunakan Pythagoras:</strong><br>Sisi miring = \\(\\sqrt{(\\text{depan})^2 + (\\text{samping})^2}\\)<br>Sisi miring = \\(\\sqrt{3^2 + 4^2} = \\sqrt{9 + 16} = \\sqrt{25} = 5\\).</li><li><strong>Gunakan definisi Cosinus:</strong><br>\\(\\cos(A) = \\frac{\\text{sisi samping}}{\\text{sisi miring}} = \\frac{4}{5}\\).</li></ol><p>Jadi, nilai \\(\\cos(A)\\) adalah \\(\\frac{4}{5}\\).</p>"
+              },
+              {
+                "id": 20,
+                "text": "Luas sebuah lingkaran adalah \\(49\\pi\\) cm\\(^2\\). Keliling lingkaran tersebut adalah...",
+                "options": ["\\(7\\pi\\) cm", "\\(14\\pi\\) cm", "49 cm", "\\(24.5\\pi\\) cm"],
+                "correctAnswer": 1,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><ol><li><strong>Gunakan rumus Luas Lingkaran untuk mencari jari-jari (r):</strong><br>Luas = \\(\\pi r^2\\)<br>\\(49\\pi = \\pi r^2\\)<br>\\(r^2 = 49 \\implies r = 7\\) cm.</li><li><strong>Gunakan rumus Keliling Lingkaran:</strong><br>Keliling = \\(2 \\pi r\\)<br>Keliling = \\(2 \\pi (7) = 14\\pi\\) cm.</li></ol><p>Jadi, keliling lingkaran tersebut adalah \\(14\\pi\\) cm.</p>"
+              }
+            ]
+          }
+        };
+
+        function displayQuiz() {
+            const quizKey = Object.keys(quizData)[0];
+            const data = quizData[quizKey];
+            
+            document.getElementById('quiz-title').innerText = data.title;
+            const container = document.getElementById('questions-container');
+
+            data.questions.forEach((q) => {
+                const questionBlock = document.createElement('div');
+                questionBlock.className = 'question-block';
+
+                const questionText = document.createElement('div');
+                questionText.className = 'question-text';
+                questionText.innerHTML = `<strong>Soal ${q.id}:</strong> ${q.text}`;
+                
+                const optionsList = document.createElement('ul');
+                optionsList.className = 'options-list';
+
+                q.options.forEach((option, i) => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = option;
+                    if (i === q.correctAnswer) {
+                        listItem.className = 'correct-answer';
+                    }
+                    optionsList.appendChild(listItem);
+                });
+
+                const toggleButton = document.createElement('button');
+                toggleButton.className = 'toggle-button';
+                toggleButton.innerText = 'Lihat Pembahasan';
+                
+                const explanationDiv = document.createElement('div');
+                explanationDiv.className = 'explanation';
+                explanationDiv.innerHTML = q.explanation || 'Pembahasan untuk soal ini belum tersedia.';
+                
+                toggleButton.addEventListener('click', () => {
+                    const isHidden = explanationDiv.style.display === 'none' || explanationDiv.style.display === '';
+                    explanationDiv.style.display = isHidden ? 'block' : 'none';
+                    toggleButton.innerText = isHidden ? 'Sembunyikan Pembahasan' : 'Lihat Pembahasan';
+                });
+
+                questionBlock.appendChild(questionText);
+                questionBlock.appendChild(optionsList);
+                questionBlock.appendChild(toggleButton);
+                questionBlock.appendChild(explanationDiv);
+                
+                container.appendChild(questionBlock);
+            });
+            
+            MathJax.typeset();
+        }
+
+        window.onload = displayQuiz;
+    </script>
+</body>
+</html>
