@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembahasan Soal Tryout Matematika - Part 3</title>
+    <link rel="icon" type="image/png" href="UMT-Logo.png">
+    
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #141414;
+            color: white;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: transparent;
+            padding: 25px;
+            border-radius: 10px;
+        }
+        h1 {
+            text-align: center;
+            color: white;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .question-block {
+            margin-bottom: 25px;
+            padding: 20px;
+            border: 1px solid #333;
+            border-radius: 8px;
+            background-color: #1f1f1f;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .question-text {
+            font-size: 1.1em;
+            margin-bottom: 15px;
+            font-weight: bold;
+            color: white;
+        }
+        .options-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .options-list li {
+            margin-bottom: 10px;
+            padding: 8px 12px;
+            border-radius: 5px;
+            color: #ccc;
+        }
+        .correct-answer {
+            background-color: rgba(40, 167, 69, 0.2);
+            border-left: 5px solid #28a745;
+            color: #d4edda;
+        }
+        .explanation {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background-color: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 5px;
+            overflow-x: auto;
+            color: #ccc;
+        }
+        .explanation h4 {
+            margin-top: 0;
+            color: #50e3c2;
+        }
+        .toggle-button {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 0.9em;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .toggle-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: translateY(-1px);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 id="quiz-title"></h1>
+        <div id="questions-container"></div>
+    </div>
+
+    <script>
+      if (!sessionStorage.getItem('sessionToken')) {
+        // SIMPAN LOKASI SEKARANG SEBELUM PINDAH HALAMAN
+        sessionStorage.setItem('redirectUrl', window.location.href); 
+        
+        // BARU ARAHKAN KE HALAMAN LOGIN
+        window.location.href = '../../login-pembahasan.html';
+    }
+        const quizData = {
+          "tryout-tka-matematika-3": {
+            title: "Tryout Matematika TKA - Part 3",
+            questions: [
+              {
+                "id": 1,
+                "text": "Lima tahun yang lalu, umur ayah adalah 6 kali umur Budi. Jika jumlah umur mereka sekarang adalah 52 tahun, maka umur Budi sekarang adalah...",
+                "options": ["8 tahun", "10 tahun", "11 tahun", "12 tahun"],
+                "correctAnswer": 2,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Misalkan umur Ayah sekarang = A dan umur Budi sekarang = B.</p><ol><li><strong>Buat persamaan dari informasi yang ada:</strong><br>1) Lima tahun lalu: \\((A-5) = 6 \\times (B-5) \\implies A - 5 = 6B - 30 \\implies A - 6B = -25\\)<br>2) Umur sekarang: \\(A + B = 52 \\implies A = 52 - B\\)</li><li><strong>Substitusikan persamaan (2) ke persamaan (1):</strong><br>\\((52 - B) - 6B = -25\\)</li><li><strong>Selesaikan untuk B:</strong><br>\\(52 - 7B = -25\\)<br>\\(7B = 52 + 25\\)<br>\\(7B = 77 \\implies B = 11\\)</li></ol><p>Jadi, umur Budi sekarang adalah 11 tahun.</p>"
+              },
+              {
+                "id": 2,
+                "text": "Akar-akar dari persamaan kuadrat \\(x^2 - 7x + 12 = 0\\) adalah \\(p\\) dan \\(q\\). Nilai dari \\(p+q\\) adalah...",
+                "options": ["-7", "12", "7", "-12"],
+                "correctAnswer": 2,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Untuk persamaan kuadrat bentuk \\(ax^2 + bx + c = 0\\), jumlah akar-akarnya (p+q) diberikan oleh rumus \\(-\\frac{b}{a}\\).</p><ol><li><strong>Identifikasi koefisien a, b, dan c:</strong><br>Dari \\(x^2 - 7x + 12 = 0\\), kita punya: a=1, b=-7, c=12.</li><li><strong>Hitung jumlah akar:</strong><br>\\(p + q = -\\frac{b}{a} = -\\frac{-7}{1} = 7\\).</li></ol><p>Jadi, nilai dari \\(p+q\\) adalah 7.</p>"
+              },
+              {
+                "id": 3,
+                "text": "Diketahui sistem persamaan linear \\(x + 2y = 8\\) dan \\(3x - y = 3\\). Nilai dari \\(x - y\\) adalah...",
+                "options": ["-1", "0", "1", "2"],
+                "correctAnswer": 0,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Kita dapat menggunakan metode eliminasi atau substitusi.</p><ol><li><strong>Gunakan metode eliminasi:</strong><br>1) \\(x + 2y = 8\\)<br>2) \\(3x - y = 3\\)<br>Kalikan persamaan (2) dengan 2 agar koefisien y sama.<br>\\(6x - 2y = 6\\)</li><li><strong>Jumlahkan persamaan (1) dengan persamaan baru:</strong><br>\\((x + 2y) + (6x - 2y) = 8 + 6\\)<br>\\(7x = 14 \\implies x = 2\\)</li><li><strong>Substitusikan nilai x=2 ke persamaan (1):</strong><br>\\(2 + 2y = 8 \\implies 2y = 6 \\implies y = 3\\)</li><li><strong>Hitung nilai \\(x - y\\):</strong><br>\\(x - y = 2 - 3 = -1\\)</li></ol><p>Jadi, nilai dari \\(x - y\\) adalah -1.</p>"
+              },
+              {
+                "id": 4,
+                "text": "Diberikan fungsi \\(h(x) = \\frac{x^2 - 1}{x+1}\\). Nilai dari \\(h(5)\\) adalah...",
+                "options": ["4", "5", "6", "24"],
+                "correctAnswer": 0,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Kita bisa menyederhanakan fungsi terlebih dahulu sebelum substitusi.</p><ol><li><strong>Sederhanakan fungsi \\(h(x)\\):</strong><br>Pembilang \\(x^2 - 1\\) adalah bentuk selisih dua kuadrat, yang dapat difaktorkan menjadi \\((x-1)(x+1)\\).<br>\\(h(x) = \\frac{(x-1)(x+1)}{x+1}\\)<br>Selama \\(x \\neq -1\\), kita bisa mencoret \\((x+1)\\), sehingga \\(h(x) = x - 1\\).</li><li><strong>Substitusikan x = 5 ke fungsi yang sudah disederhanakan:</strong><br>\\(h(5) = 5 - 1 = 4\\).</li></ol><p>Jadi, nilai dari \\(h(5)\\) adalah 4.</p>"
+              },
+              {
+                "id": 5,
+                "text": "Persamaan sumbu simetri dari grafik fungsi kuadrat \\(f(x) = 2x^2 + 8x - 5\\) adalah...",
+                "options": ["\\(x = 4\\)", "\\(x = 2\\)", "\\(x = -2\\)", "\\(x = -4\\)"],
+                "correctAnswer": 2,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Persamaan sumbu simetri dari fungsi kuadrat \\(f(x) = ax^2+bx+c\\) diberikan oleh rumus \\(x = -\\frac{b}{2a}\\).</p><ol><li><strong>Identifikasi koefisien a dan b:</strong><br>Dari \\(f(x) = 2x^2 + 8x - 5\\), kita punya a=2 dan b=8.</li><li><strong>Masukkan ke dalam rumus:</strong><br>\\(x = -\\frac{8}{2(2)} = -\\frac{8}{4} = -2\\).</li></ol><p>Jadi, persamaan sumbu simetrinya adalah \\(x = -2\\).</p>"
+              },
+              {
+                "id": 6,
+                "text": "Jika \\(f(x) = 2x - 3\\), maka fungsi inversnya, \\(f^{-1}(x)\\), adalah...",
+                "options": ["\\(\\frac{x+3}{2}\\)", "\\(\\frac{x-3}{2}\\)", "\\(2x+3\\)", "\\(3-2x\\)"],
+                "correctAnswer": 0,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><ol><li><strong>Ganti \\(f(x)\\) dengan y:</strong><br>\\(y = 2x - 3\\).</li><li><strong>Tukar posisi x dan y:</strong><br>\\(x = 2y - 3\\).</li><li><strong>Selesaikan persamaan untuk mendapatkan y:</strong><br>\\(x + 3 = 2y\\)<br>\\(y = \\frac{x+3}{2}\\).</li><li><strong>Ganti y dengan \\(f^{-1}(x)\\):</strong><br>\\(f^{-1}(x) = \\frac{x+3}{2}\\).</li></ol><p>Jadi, fungsi inversnya adalah \\(\\frac{x+3}{2}\\).</p>"
+              },
+              {
+                "id": 7,
+                "text": "Suku ke-6 dari barisan geometri 2, 6, 18, \\dots adalah...",
+                "options": ["162", "243", "486", "729"],
+                "correctAnswer": 2,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Rumus suku ke-n barisan geometri adalah \\(U_n = ar^{n-1}\\).</p><ol><li><strong>Identifikasi suku pertama (a) dan rasio (r):</strong><br>Suku pertama \\(a = 2\\).<br>Rasio \\(r = \\frac{6}{2} = 3\\).</li><li><strong>Substitusikan n=6 ke dalam rumus:</strong><br>\\(U_6 = 2 \\times (3)^{6-1} = 2 \\times 3^5\\)<br>\\(U_6 = 2 \\times 243 = 486\\).</li></ol><p>Jadi, suku ke-6 adalah 486.</p>"
+              },
+              {
+                "id": 8,
+                "text": "Jumlah 10 suku pertama dari deret aritmetika \\(5 + 8 + 11 + 14 + \\dots\\) adalah...",
+                "options": ["155", "185", "215", "320"],
+                "correctAnswer": 1,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Rumus jumlah n suku pertama deret aritmetika adalah \\(S_n = \\frac{n}{2}(2a + (n-1)d)\\).</p><ol><li><strong>Identifikasi a, d, dan n:</strong><br>Suku pertama \\(a = 5\\).<br>Beda \\(d = 8 - 5 = 3\\).<br>Jumlah suku yang dicari \\(n = 10\\).</li><li><strong>Masukkan ke dalam rumus:</strong><br>\\(S_{10} = \\frac{10}{2}(2(5) + (10-1)3)\\)<br>\\(S_{10} = 5(10 + 9 \\times 3)\\)<br>\\(S_{10} = 5(10 + 27) = 5(37) = 185\\).</li></ol><p>Jadi, jumlah 10 suku pertamanya adalah 185.</p>"
+              },
+              {
+                "id": 9,
+                "text": "Diberikan matriks \\(P = \\begin{pmatrix} 8 & 5 \\\\ 4 & 2 \\end{pmatrix}\\) dan \\(Q = \\begin{pmatrix} 3 & 1 \\\\ 3 & 0 \\end{pmatrix}\\). Matriks hasil dari \\(P - Q\\) adalah...",
+                "options": ["\\(\\begin{pmatrix} 5 & 4 \\\\ 1 & 2 \\end{pmatrix}\\)", "\\(\\begin{pmatrix} 11 & 6 \\\\ 7 & 2 \\end{pmatrix}\\)", "\\(\\begin{pmatrix} 5 & 4 \\\\ 7 & 2 \\end{pmatrix}\\)", "\\(\\begin{pmatrix} -5 & -4 \\\\ -1 & -2 \\end{pmatrix}\\)"],
+                "correctAnswer": 0,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Pengurangan matriks dilakukan dengan mengurangkan elemen-elemen yang bersesuaian.</p><ol><li><strong>Kurangkan elemen baris 1, kolom 1:</strong> 8 - 3 = 5</li><li><strong>Kurangkan elemen baris 1, kolom 2:</strong> 5 - 1 = 4</li><li><strong>Kurangkan elemen baris 2, kolom 1:</strong> 4 - 3 = 1</li><li><strong>Kurangkan elemen baris 2, kolom 2:</strong> 2 - 0 = 2</li></ol><p>Maka, \\(P - Q = \\begin{pmatrix} 5 & 4 \\\\ 1 & 2 \\end{pmatrix}\\).</p>"
+              },
+              {
+                "id": 10,
+                "text": "Transpose dari matriks \\(M = \\begin{pmatrix} 1 & 2 & 3 \\\\ 4 & 5 & 6 \\end{pmatrix}\\) adalah...",
+                "options": ["\\(\\begin{pmatrix} 1 & 4 \\\\ 2 & 5 \\\\ 3 & 6 \\end{pmatrix}\\)", "\\(\\begin{pmatrix} 4 & 5 & 6 \\\\ 1 & 2 & 3 \\end{pmatrix}\\)", "\\(\\begin{pmatrix} 3 & 6 \\\\ 2 & 5 \\\\ 1 & 4 \\end{pmatrix}\\)", "\\(\\begin{pmatrix} 6 & 3 \\\\ 5 & 2 \\\\ 4 & 1 \\end{pmatrix}\\)"],
+                "correctAnswer": 0,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Transpose matriks (dilambangkan dengan \\(M^T\\)) adalah operasi mengubah baris menjadi kolom dan kolom menjadi baris.</p><ol><li><strong>Baris pertama [1, 2, 3] menjadi kolom pertama.</strong></li><li><strong>Baris kedua [4, 5, 6] menjadi kolom kedua.</strong></li></ol><p>Sehingga, \\(M^T = \\begin{pmatrix} 1 & 4 \\\\ 2 & 5 \\\\ 3 & 6 \\end{pmatrix}\\).</p>"
+              },
+              {
+                "id": 11,
+                "text": "Median dari kumpulan data berikut: 7, 8, 4, 9, 5, 10, 6 adalah...",
+                "options": ["9", "8", "7", "6"],
+                "correctAnswer": 2,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Median adalah nilai tengah dari data yang telah diurutkan.</p><ol><li><strong>Urutkan data dari yang terkecil hingga terbesar:</strong><br>4, 5, 6, <b>7</b>, 8, 9, 10.</li><li><strong>Temukan nilai tengah:</strong><br>Karena jumlah data ganjil (7 data), median adalah data yang berada tepat di tengah, yaitu data ke-(\\( \\frac{7+1}{2} \\)) = data ke-4.</li></ol><p>Data ke-4 dalam urutan tersebut adalah 7. Jadi, mediannya adalah 7.</p>"
+              },
+              {
+                "id": 12,
+                "text": "Dari 8 siswa akan dipilih 3 siswa untuk mengikuti lomba cerdas cermat. Banyak cara pemilihan yang mungkin adalah...",
+                "options": ["24", "56", "336", "512"],
+                "correctAnswer": 1,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Karena urutan pemilihan siswa tidak penting, kita menggunakan rumus kombinasi \\(C(n, k) = \\frac{n!}{k!(n-k)!}\\).</p><ol><li><strong>Identifikasi n dan k:</strong><br>Total siswa \\(n = 8\\).<br>Siswa yang akan dipilih \\(k = 3\\).</li><li><strong>Masukkan ke dalam rumus:</strong><br>\\(C(8, 3) = \\frac{8!}{3!(8-3)!} = \\frac{8!}{3!5!}\\)</li><li><strong>Hitung hasilnya:</strong><br>\\(= \\frac{8 \\times 7 \\times 6 \\times 5!}{ (3 \\times 2 \\times 1) \\times 5!} = \\frac{8 \\times 7 \\times 6}{6} = 56\\).</li></ol><p>Jadi, ada 56 cara pemilihan yang mungkin.</p>"
+              },
+              {
+                "id": 13,
+                "text": "Dari satu set kartu bridge (remi), diambil sebuah kartu secara acak. Peluang terambilnya kartu King adalah...",
+                "options": ["\\(\\frac{1}{52}\\)", "\\(\\frac{1}{26}\\)", "\\(\\frac{1}{13}\\)", "\\(\\frac{1}{4}\\)"],
+                "correctAnswer": 2,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><ol><li><strong>Tentukan jumlah total kemungkinan (ruang sampel):</strong><br>Satu set kartu bridge berisi 52 kartu. Maka, n(S) = 52.</li><li><strong>Tentukan jumlah kejadian yang diinginkan:</strong><br>Ada 4 kartu King dalam satu set (King Hati, King Wajik, King Keriting, King Sekop). Maka, n(A) = 4.</li><li><strong>Hitung peluang:</strong><br>P(A) = \\(\\frac{n(A)}{n(S)} = \\frac{4}{52} = \\frac{1}{13}\\).</li></ol><p>Jadi, peluang terambilnya kartu King adalah \\(\\frac{1}{13}\\).</p>"
+              },
+              {
+                "id": 14,
+                "text": "Nilai dari \\(\\lim_{x \\to 4} \\frac{x^2 - 16}{x - 4}\\) adalah...",
+                "options": ["0", "4", "8", "Tidak terdefinisi"],
+                "correctAnswer": 2,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><ol><li><strong>Coba substitusi langsung:</strong><br>Jika kita masukkan \\(x=4\\), hasilnya adalah \\(\\frac{4^2 - 16}{4 - 4} = \\frac{0}{0}\\). Ini adalah bentuk tak tentu, jadi kita perlu menyederhanakan fungsinya.</li><li><strong>Faktorkan pembilang:</strong><br>\\(x^2 - 16 = (x-4)(x+4)\\).</li><li><strong>Sederhanakan fungsi dan hitung limitnya:</strong><br>\\(\\lim_{x \\to 4} \\frac{(x-4)(x+4)}{x-4} = \\lim_{x \\to 4} (x+4)\\).</li><li><strong>Substitusikan \\(x=4\\) ke fungsi yang sudah disederhanakan:</strong><br>\\(4+4 = 8\\).</li></ol><p>Jadi, nilai limitnya adalah 8.</p>"
+              },
+              {
+                "id": 15,
+                "text": "Jika \\(g(x) = \\frac{1}{3}x^3 + 2x^2 - 7x + 1\\), maka turunan pertamanya, \\(g'(x)\\), adalah...",
+                "options": ["\\(x^3 + 4x - 7\\)", "\\(x^2 + 4x - 7\\)", "\\(3x^2 + 4x - 7\\)", "\\(x^2 + 2x - 7\\)"],
+                "correctAnswer": 1,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Gunakan aturan turunan pangkat \\(\\frac{d}{dx}(ax^n) = n \\cdot ax^{n-1}\\) pada setiap suku.</p><ol><li><strong>Turunan dari \\(\\frac{1}{3}x^3\\):</strong> \\(3 \\cdot \\frac{1}{3}x^{3-1} = x^2\\)</li><li><strong>Turunan dari \\(2x^2\\):</strong> \\(2 \\cdot 2x^{2-1} = 4x\\)</li><li><strong>Turunan dari \\(-7x\\):</strong> \\(-7\\)</li><li><strong>Turunan dari \\(1\\):</strong> 0</li></ol><p>Gabungkan semua hasilnya: \\(g'(x) = x^2 + 4x - 7\\).</p>"
+              },
+              {
+                "id": 16,
+                "text": "Nilai dari \\(\\int_{0}^{2} (2x + 1) dx\\) adalah...",
+                "options": ["4", "5", "6", "8"],
+                "correctAnswer": 2,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><ol><li><strong>Cari integral tak tentu dari \\((2x+1)\\):</strong><br>\\(\\int (2x+1) dx = \\frac{2}{2}x^2 + x = x^2 + x\\).</li><li><strong>Gunakan Teorema Dasar Kalkulus dengan batas 0 sampai 2:</strong><br>\\(\\left[ x^2 + x \\right]_{0}^{2}\\)</li><li><strong>Substitusikan batas atas dan bawah:</strong><br>\\(= ((2)^2 + 2) - ((0)^2 + 0)\\)<br>\\(= (4 + 2) - 0 = 6\\).</li></ol><p>Jadi, nilai integralnya adalah 6.</p>"
+              },
+              {
+                "id": 17,
+                "text": "Sebuah tabung memiliki jari-jari alas 7 cm dan tinggi 10 cm. Volume tabung tersebut adalah... (gunakan \\(\\pi = \\frac{22}{7}\\))",
+                "options": ["770 cm\\(^3\\)", "1540 cm\\(^3\\)", "2200 cm\\(^3\\)", "440 cm\\(^3\\)"],
+                "correctAnswer": 1,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Rumus volume tabung adalah \\(V = \\pi r^2 h\\).</p><ol><li><strong>Substitusikan nilai yang diketahui:</strong><br>\\(r = 7\\) cm, \\(h = 10\\) cm, \\(\\pi = \\frac{22}{7}\\).</li><li><strong>Hitung volumenya:</strong><br>\\(V = \\frac{22}{7} \\times (7)^2 \\times 10\\)<br>\\(V = \\frac{22}{7} \\times 49 \\times 10\\)<br>\\(V = 22 \\times 7 \\times 10 = 154 \\times 10 = 1540\\).</li></ol><p>Jadi, volume tabung tersebut adalah 1540 cm\\(^3\\).</p>"
+              },
+              {
+                "id": 18,
+                "text": "Diketahui segitiga PQR dengan panjang sisi PQ = 8 cm, PR = 6 cm, dan besar sudut P = \\(30^\\circ\\). Luas segitiga PQR adalah...",
+                "options": ["\\(48\\) cm\\(^2\\)", "\\(24\\) cm\\(^2\\)", "\\(12\\sqrt{3}\\) cm\\(^2\\)", "\\(12\\) cm\\(^2\\)"],
+                "correctAnswer": 3,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Gunakan rumus luas segitiga jika diketahui dua sisi dan sudut yang diapitnya: \\(L = \\frac{1}{2}ab \\sin C\\).</p><ol><li><strong>Substitusikan nilai yang diketahui:</strong><br>sisi a = 8 cm, sisi b = 6 cm, sudut C = Sudut P = \\(30^\\circ\\).</li><li><strong>Hitung luasnya:</strong><br>\\(L = \\frac{1}{2} \\times 8 \\times 6 \\times \\sin(30^\\circ)\\)<br>Kita tahu \\(\\sin(30^\\circ) = \\frac{1}{2}\\).<br>\\(L = \\frac{1}{2} \\times 8 \\times 6 \\times \\frac{1}{2} = \\frac{1}{2} \\times 48 \\times \\frac{1}{2} = 12\\).</li></ol><p>Jadi, luas segitiga PQR adalah 12 cm\\(^2\\).</p>"
+              },
+              {
+                "id": 19,
+                "text": "Nilai dari \\(5\\sin^2(x) + 5\\cos^2(x)\\) adalah...",
+                "options": ["1", "5", "10", "Bergantung pada nilai \\(x\\)"],
+                "correctAnswer": 1,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><ol><li><strong>Faktorkan angka 5 dari ekspresi:</strong><br>\\(5\\sin^2(x) + 5\\cos^2(x) = 5(\\sin^2(x) + \\cos^2(x))\\).</li><li><strong>Gunakan identitas trigonometri dasar:</strong><br>Identitas Pythagoras dalam trigonometri menyatakan bahwa \\(\\sin^2(x) + \\cos^2(x) = 1\\) untuk setiap nilai x.</li><li><strong>Substitusikan identitas tersebut:</strong><br>\\(5(1) = 5\\).</li></ol><p>Jadi, nilainya adalah 5.</p>"
+              },
+              {
+                "id": 20,
+                "text": "Ukuran sudut \\(\\frac{2}{3}\\pi\\) radian sama dengan...",
+                "options": ["\\(60^\\circ\\)", "\\(90^\\circ\\)", "\\(120^\\circ\\)", "\\(150^\\circ\\)"],
+                "correctAnswer": 2,
+                "explanation": "<h4>Langkah-langkah Penyelesaian:</h4><p>Untuk mengubah radian ke derajat, gunakan konversi bahwa \\(\\pi\\) radian = \\(180^\\circ\\).</p><ol><li><strong>Gantikan \\(\\pi\\) dengan \\(180^\\circ\\) dalam ekspresi:</strong><br>\\(\\frac{2}{3} \\times 180^\\circ\\).</li><li><strong>Hitung hasilnya:</strong><br>\\(2 \\times \\frac{180^\\circ}{3} = 2 \\times 60^\\circ = 120^\\circ\\).</li></ol><p>Jadi, \\(\\frac{2}{3}\\pi\\) radian sama dengan \\(120^\\circ\\).</p>"
+              }
+            ]
+          }
+        };
+
+        function displayQuiz() {
+            const quizKey = Object.keys(quizData)[0];
+            const data = quizData[quizKey];
+            
+            document.getElementById('quiz-title').innerText = data.title;
+            const container = document.getElementById('questions-container');
+
+            data.questions.forEach((q) => {
+                const questionBlock = document.createElement('div');
+                questionBlock.className = 'question-block';
+
+                const questionText = document.createElement('div');
+                questionText.className = 'question-text';
+                questionText.innerHTML = `<strong>Soal ${q.id}:</strong> ${q.text}`;
+                
+                const optionsList = document.createElement('ul');
+                optionsList.className = 'options-list';
+
+                q.options.forEach((option, i) => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = option;
+                    if (i === q.correctAnswer) {
+                        listItem.className = 'correct-answer';
+                    }
+                    optionsList.appendChild(listItem);
+                });
+
+                const toggleButton = document.createElement('button');
+                toggleButton.className = 'toggle-button';
+                toggleButton.innerText = 'Lihat Pembahasan';
+                
+                const explanationDiv = document.createElement('div');
+                explanationDiv.className = 'explanation';
+                explanationDiv.innerHTML = q.explanation || 'Pembahasan untuk soal ini belum tersedia.';
+                
+                toggleButton.addEventListener('click', () => {
+                    const isHidden = explanationDiv.style.display === 'none' || explanationDiv.style.display === '';
+                    explanationDiv.style.display = isHidden ? 'block' : 'none';
+                    toggleButton.innerText = isHidden ? 'Sembunyikan Pembahasan' : 'Lihat Pembahasan';
+                });
+
+                questionBlock.appendChild(questionText);
+                questionBlock.appendChild(optionsList);
+                questionBlock.appendChild(toggleButton);
+                questionBlock.appendChild(explanationDiv);
+                
+                container.appendChild(questionBlock);
+            });
+            
+            MathJax.typeset();
+        }
+
+        window.onload = displayQuiz;
+    </script>
+</body>
+</html>
