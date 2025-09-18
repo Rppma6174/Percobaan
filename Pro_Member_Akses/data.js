@@ -639,6 +639,13 @@ const allContentData = {
             },
             { 
             id: 'materi_trigonometri_10', 
+            title: 'Fungsi Invers Trigonometri', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Fungsi Invers Trigonometri.html', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'materi_trigonometri_11', 
             title: 'Aplikasi Trigonometri', 
             type: 'HTML Document', 
             filePath: 'UMT_Learning/Aplikasi Trigonometri.html', 
