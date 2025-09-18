@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplikasi Trigonometri - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png"> 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+            --accent-purple: #8957e5; --accent-orange: #FF6B35;
+        }
+        body {
+            background-color: var(--bg-main); color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2, h3 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        h3 { color: #58a6ff; margin-top: 2rem; }
+        .hidden { display: none; }
+        .svg-container { 
+            text-align: center; margin: 1.5rem 0; 
+            background-color: #0D1117; padding: 1rem; 
+            border-radius: 8px; border: 1px solid var(--border-color);
+        }
+
+        .strategy-box {
+            background-color: rgba(57, 211, 83, 0.05);
+            border-left: 4px solid var(--accent-green);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        .explainer-button {
+            background: none; border: none; color: var(--accent-purple); font-size: 0.9em;
+            font-weight: bold; cursor: pointer; padding: 4px 8px; margin-top: 0.5rem;
+            border-radius: 6px; transition: background-color 0.2s; display: inline-flex; align-items: center;
+        }
+        .explainer-button:hover { background-color: rgba(137, 87, 229, 0.1); }
+        .explainer-button .fas { margin-left: 8px; transition: transform 0.3s ease; }
+        .explainer-button.active .fas { transform: rotate(90deg); }
+        .explainer-content {
+            margin-top: 1rem; padding: 1rem;
+            background-color: rgba(137, 87, 229, 0.05);
+            border-left: 4px solid var(--accent-purple);
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary); width: 100%; padding: 1rem;
+            text-align: left; font-size: 1.1rem; font-weight: 600; border: none; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.7; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        p, li, .quiz-explanation, .explainer-content, .strategy-box { overflow-x: auto; padding-bottom: 8px; }
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+
+        .diagram-title { text-align: center; font-size: 0.9em; color: var(--text-secondary); margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <h1>Aplikasi Trigonometri: Memecahkan Masalah Dunia Nyata</h1>
+        <p>
+            Inilah saatnya semua konsep yang telah kita pelajari—rasio, identitas, fungsi—digunakan untuk tujuan praktis. Aplikasi trigonometri memungkinkan kita mengukur hal-hal yang mustahil diukur secara langsung. Kunci utamanya adalah mampu memodelkan masalah nyata menjadi sebuah segitiga dan memilih aturan yang tepat untuk menyelesaikannya.
+        </p>
+        
+        <h2>Melampaui Siku-Siku: Aturan untuk Segitiga Sembarang</h2>
+        <p>
+            Di dunia nyata, kita tidak selalu menemukan segitiga siku-siku. Untuk segitiga sembarang (lancip atau tumpul), kita memerlukan dua aturan utama: <b>Aturan Sinus</b> dan <b>Aturan Cosinus</b>.
+        </p>
+
+        <div class="diagram-title">Segitiga ABC dengan Konvensi Penamaan Standar</div>
+        <div class="svg-container">
+            <svg width="450" height="280" viewBox="0 0 450 280" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background grid -->
+                <defs>
+                    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#30363D" stroke-width="0.5" opacity="0.3"/>
+                    </pattern>
+                </defs>
+                <rect width="450" height="280" fill="url(#grid)" />
+                
+                <!-- Triangle ABC -->
+                <polygon points="80,220 350,220 200,80" fill="rgba(47, 129, 247, 0.1)" stroke="#2F81F7" stroke-width="3"/>
+                
+                <!-- Vertices (points) with larger circles -->
+                <circle cx="80" cy="220" r="4" fill="#39D353"/>
+                <circle cx="350" cy="220" r="4" fill="#39D353"/>
+                <circle cx="200" cy="80" r="4" fill="#39D353"/>
+                
+                <!-- Vertex labels (points A, B, C) -->
+                <text x="65" y="235" font-size="24" fill="#39D353" font-weight="bold">A</text>
+                <text x="365" y="235" font-size="24" fill="#39D353" font-weight="bold">B</text>
+                <text x="185" y="70" font-size="24" fill="#39D353" font-weight="bold">C</text>
+                
+                <!-- Side labels (lowercase letters opposite to vertices) -->
+                <!-- Side a (opposite to vertex A): from B to C -->
+                <text x="280" y="155" font-size="20" fill="#F85149" font-weight="bold">a</text>
+                <!-- Side b (opposite to vertex B): from A to C -->
+                <text x="130" y="155" font-size="20" fill="#F85149" font-weight="bold">b</text>
+                <!-- Side c (opposite to vertex C): from A to B -->
+                <text x="215" y="245" font-size="20" fill="#F85149" font-weight="bold">c</text>
+                
+                <!-- Angle markers -->
+                <!-- Angle A -->
+                <path d="M 100 220 A 20 20 0 0 0 95 205" fill="none" stroke="#FF6B35" stroke-width="2"/>
+                <text x="110" y="210" font-size="16" fill="#FF6B35">A</text>
+                
+                <!-- Angle B -->
+                <path d="M 330 220 A 20 20 0 0 1 335 205" fill="none" stroke="#FF6B35" stroke-width="2"/>
+                <text x="320" y="210" font-size="16" fill="#FF6B35">B</text>
+                
+                <!-- Angle C -->
+                <path d="M 185 95 A 15 15 0 0 0 215 95" fill="none" stroke="#FF6B35" stroke-width="2"/>
+                <text x="195" y="105" font-size="16" fill="#FF6B35">C</text>
+                
+                <!-- Legend -->
+                <text x="50" y="50" font-size="12" fill="#39D353">Titik sudut: A, B, C</text>
+                <text x="50" y="35" font-size="12" fill="#F85149">Sisi: a, b, c</text>
+                <text x="50" y="20" font-size="12" fill="#FF6B35">Sudut: ∠A, ∠B, ∠C</text>
+            </svg>
+        </div>
+
+        <div class="strategy-box">
+            <b>Konvensi Penamaan Segitiga:</b>
+            <ul>
+                <li><b>Titik sudut</b> diberi label huruf besar: A, B, C</li>
+                <li><b>Sisi</b> diberi label huruf kecil: a (berhadapan dengan sudut A), b (berhadapan dengan sudut B), c (berhadapan dengan sudut C)</li>
+                <li><b>Sudut</b> di setiap titik memiliki nama yang sama dengan titik tersebut: sudut A di titik A, dll.</li>
+            </ul>
+        </div>
+
+        <h2>Visualisasi Masalah Dunia Nyata</h2>
+        <div class="diagram-title">Contoh: Mengukur Tinggi Menara</div>
+        <div class="svg-container">
+            <svg width="500" height="300" viewBox="0 0 500 300" xmlns="http://www.w3.org/2000/svg">
+                <!-- Background -->
+                <rect width="500" height="300" fill="url(#grid)" />
+                
+                <!-- Ground line -->
+                <line x1="50" y1="250" x2="450" y2="250" stroke="#8B949E" stroke-width="3"/>
+                
+                <!-- Tower -->
+                <rect x="380" y="100" width="15" height="150" fill="#F85149"/>
+                <text x="400" y="95" font-size="12" fill="#F85149">Menara</text>
+                
+                <!-- Observer positions -->
+                <circle cx="150" cy="245" r="5" fill="#39D353"/>
+                <circle cx="300" cy="245" r="5" fill="#39D353"/>
+                <text x="130" y="270" font-size="12" fill="#39D353">Posisi A</text>
+                <text x="280" y="270" font-size="12" fill="#39D353">Posisi B</text>
+                
+                <!-- Lines of sight -->
+                <line x1="150" y1="245" x2="387" y2="100" stroke="#2F81F7" stroke-width="2" stroke-dasharray="5,5"/>
+                <line x1="300" y1="245" x2="387" y2="100" stroke="#2F81F7" stroke-width="2" stroke-dasharray="5,5"/>
+                
+                <!-- Angle indicators -->
+                <path d="M 170 245 A 20 20 0 0 0 165 235" fill="none" stroke="#FF6B35" stroke-width="2"/>
+                <text x="175" y="235" font-size="12" fill="#FF6B35">30°</text>
+                
+                <path d="M 280 245 A 20 20 0 0 1 285 235" fill="none" stroke="#FF6B35" stroke-width="2"/>
+                <text x="265" y="235" font-size="12" fill="#FF6B35">60°</text>
+                
+                <!-- Distance measurement -->
+                <line x1="150" y1="260" x2="300" y2="260" stroke="#8957e5" stroke-width="2"/>
+                <text x="210" y="275" font-size="12" fill="#8957e5">100 m</text>
+                
+                <!-- Height indicator -->
+                <line x1="370" y1="100" x2="370" y2="250" stroke="#F85149" stroke-width="2"/>
+                <text x="340" y="175" font-size="12" fill="#F85149">h = ?</text>
+                
+                <!-- Triangle formation -->
+                <polygon points="150,245 300,245 387,100" fill="rgba(47, 129, 247, 0.05)" stroke="#2F81F7" stroke-width="2"/>
+            </svg>
+        </div>
+
+        <h2>1. Aturan Sinus</h2>
+        <p>Aturan Sinus menyatakan bahwa perbandingan antara panjang sebuah sisi dengan sinus sudut di hadapannya adalah konstan untuk semua sisi pada segitiga.</p>
+        $$ \frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C} $$
+        <div class="strategy-box">
+            <b>Kapan Menggunakan Aturan Sinus?</b>
+            Gunakan aturan ini jika Anda mengetahui "pasangan" sisi-sudut yang berhadapan. Secara spesifik, jika Anda memiliki:
+            <ul>
+                <li><b>Dua sudut dan satu sisi (AAS atau ASA):</b> Anda bisa mencari sudut ketiga ($180^\circ - A - B$), lalu menggunakan pasangan yang ada untuk mencari sisi lain.</li>
+                <li><b>Dua sisi dan sudut di hadapan salah satunya (SSA):</b> Ini dikenal sebagai kasus ambigu, tetapi biasanya Anda bisa menemukan sudut yang berhadapan dengan sisi lainnya.</li>
+            </ul>
+        </div>
+
+        <h2>2. Aturan Cosinus</h2>
+        <p>Aturan Cosinus adalah generalisasi dari Teorema Pythagoras untuk segitiga sembarang. Ini menghubungkan ketiga sisi dengan satu sudut.</p>
+        $$ c^2 = a^2 + b^2 - 2ab \cos C $$
+        <p>(Rumus ini bisa diatur ulang untuk sisi a dan b juga).</p>
+        <div class="strategy-box">
+            <b>Kapan Menggunakan Aturan Cosinus?</b>
+            Gunakan aturan ini jika Aturan Sinus tidak bisa dipakai, yaitu ketika:
+            <ul>
+                <li><b>Dua sisi dan sudut yang diapitnya diketahui (SAS):</b> Anda bisa langsung mencari panjang sisi ketiga.</li>
+                <li><b>Ketiga sisi diketahui (SSS):</b> Anda bisa mencari besar sudut manapun dengan mengatur ulang rumusnya.</li>
+            </ul>
+        </div>
+        
+        <h2>3. Luas Segitiga Menggunakan Trigonometri</h2>
+        <p>Jika Anda mengetahui dua sisi dan sudut yang diapitnya (SAS), Anda bisa mencari luas segitiga tanpa perlu mengetahui tingginya secara langsung.</p>
+        $$ \text{Luas} = \frac{1}{2}ab \sin C $$
+        <button class="explainer-button">Dari mana rumus luas ini berasal? <i class="fas fa-chevron-right"></i></button>
+        <div class="explainer-content hidden">
+            <p>Rumus ini berasal dari rumus dasar $\text{Luas} = \frac{1}{2} \times \text{alas} \times \text{tinggi}$.</p>
+            <p>Pada segitiga sembarang, jika kita mengambil sisi $a$ sebagai alas, maka tingginya ($t$) dapat dicari dengan membuat garis bantu. Dari sudut $C$, tinggi $t = b \sin C$.</p>
+            <p>Substitusikan ini ke rumus dasar: $\text{Luas} = \frac{1}{2} \cdot a \cdot (b \sin C) = \frac{1}{2}ab \sin C$.</p>
+        </div>
+
+        <h2>Aplikasi dalam Kehidupan Nyata</h2>
+        <p>Kemampuan untuk "menyelesaikan" segitiga (mencari semua sisi dan sudut) memiliki aplikasi yang sangat luas:</p>
+        <ul>
+            <li><b>Survei & Pemetaan:</b> Menghitung tinggi gunung, lebar sungai, atau batas tanah tanpa harus mengukurnya secara fisik.</li>
+            <li><b>Navigasi:</b> Pilot dan nahkoda kapal menggunakan trigonometri untuk menentukan posisi dan arah (vektor).</li>
+            <li><b>Astronomi:</b> Mengukur jarak bintang dan planet menggunakan teknik paralaks, yang pada dasarnya adalah triangulasi.</li>
+            <li><b>Fisika & Teknik:</b> Menganalisis gaya pada struktur, lintasan proyektil, dan fenomena gelombang.</li>
+            <li><b>Grafik Komputer & Game:</b> Menghitung rotasi objek 3D, perspektif kamera, dan simulasi fisika.</li>
+        </ul>
+
+        <h2>Uji Pemahaman</h2>
+        <p>Terapkan aturan sinus dan cosinus untuk memecahkan masalah-masalah berikut.</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+      if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+        const quizzes = [
+            { q: "Dalam segitiga ABC, diketahui sudut $A=30^\\circ$, sisi $a=10$, dan sisi $b=10\\sqrt{2}$. Berapakah besar sudut B?", options: ["$45^\\circ$", "$60^\\circ$", "$90^\\circ$", "$120^\\circ$"], correct: 0, explanation: "Ini adalah kondisi yang tepat untuk Aturan Sinus. $\\frac{a}{\\sin A} = \\frac{b}{\\sin B} \\Rightarrow \\frac{10}{\\sin 30^\\circ} = \\frac{10\\sqrt{2}}{\\sin B}$. Ini menyederhanakan menjadi $\\sin B = \\sqrt{2} \\cdot \\sin 30^\\circ = \\sqrt{2} \\cdot \\frac{1}{2} = \\frac{\\sqrt{2}}{2}$. Maka, sudut B adalah $45^\\circ$." },
+            { q: "Dua buah kapal meninggalkan pelabuhan pada saat yang sama. Kapal A berlayar dengan arah $045^\\circ$ dan kapal B dengan arah $105^\\circ$. Jika kecepatan kapal A adalah 10 km/jam dan kapal B 20 km/jam, berapa jarak antara kedua kapal setelah 1 jam?", options: ["$10\\sqrt{7}$ km", "$10\\sqrt{3}$ km", "$25$ km", "$30$ km"], correct: 1, explanation: "Setelah 1 jam, kapal A menempuh 10 km dan kapal B menempuh 20 km. Sudut yang dibentuk kedua arah adalah $105^\\circ - 45^\\circ = 60^\\circ$. Ini adalah kasus SAS, gunakan Aturan Cosinus: $c^2 = 10^2 + 20^2 - 2(10)(20)\\cos(60^\\circ) = 100 + 400 - 400(\\frac{1}{2}) = 300$. Maka $c = \\sqrt{300} = 10\\sqrt{3}$ km." },
+            { q: "Untuk mencari besar sebuah sudut dalam segitiga jika ketiga sisinya diketahui, aturan yang paling tepat untuk digunakan adalah...", options: ["Aturan Sinus", "Aturan Cosinus", "Teorema Pythagoras", "Rumus Luas"], correct: 1, explanation: "Kondisi di mana ketiga sisi diketahui (SSS) adalah salah satu dari dua skenario utama untuk menggunakan Aturan Cosinus. Aturan Sinus tidak bisa digunakan karena tidak ada sudut yang diketahui." },
+            { q: "Luas sebuah segitiga PQR adalah $12\\sqrt{3}$ cm$^2$. Jika panjang sisi $p=6$ cm dan $q=8$ cm, berapakah besar sudut R yang diapit kedua sisi tersebut?", options: ["$30^\\circ$", "$45^\\circ$", "$60^\\circ$", "$90^\\circ$"], correct: 2, explanation: "Gunakan rumus Luas $= \\frac{1}{2}pq \\sin R$. $12\\sqrt{3} = \\frac{1}{2}(6)(8) \\sin R \\Rightarrow 12\\sqrt{3} = 24 \\sin R$. Maka, $\\sin R = \\frac{12\\sqrt{3}}{24} = \\frac{\\sqrt{3}}{2}$. Sudut lancip yang memenuhi adalah $R=60^\\circ$." },
+            { q: "Sebuah menara diamati dari titik A dengan sudut elevasi $30^\\circ$. Pengamat berjalan lurus ke arah dasar menara sejauh 100 meter ke titik B, dan sudut elevasi menjadi $60^\\circ$. Berapa tinggi menara?", options: ["$50\\sqrt{3}$ m", "$100\\sqrt{3}$ m", "$50$ m", "$100$ m"], correct: 0, explanation: "Misalkan tinggi menara = h. Dari titik A: $\\tan 30^\\circ = \\frac{h}{x+100}$, sehingga $x+100 = \\frac{h}{\\tan 30^\\circ} = h\\sqrt{3}$. Dari titik B: $\\tan 60^\\circ = \\frac{h}{x}$, sehingga $x = \\frac{h}{\\sqrt{3}}$. Substitusi: $\\frac{h}{\\sqrt{3}} + 100 = h\\sqrt{3}$. Selesaikan: $h + 100\\sqrt{3} = 3h$, maka $2h = 100\\sqrt{3}$, jadi $h = 50\\sqrt{3}$ m." }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.explainer-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    button.classList.toggle('active');
+                    const content = button.nextElementSibling;
+                    const isOpening = content.classList.contains('hidden');
+                    content.classList.toggle('hidden');
+                    if (isOpening) { if(window.MathJax) { MathJax.typesetPromise([content]); } }
+                });
+            });
+
+            const quizContainer = document.getElementById("quiz-container");
+            if (!quizContainer) return;
+            quizzes.forEach((quiz, index) => {
+                const quizEl = document.createElement("div");
+                quizEl.className = "quiz-accordion";
+                const optionsHtml = quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("");
+                quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${optionsHtml}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+                quizContainer.appendChild(quizEl);
+            });
+
+            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+            accordionButtons.forEach(clickedButton => {
+                clickedButton.addEventListener('click', () => {
+                    const content = clickedButton.nextElementSibling;
+                    const isOpening = content.classList.contains('hidden');
+                    accordionButtons.forEach(button => {
+                        if (button !== clickedButton) {
+                            button.classList.remove('active');
+                            button.nextElementSibling.classList.add('hidden');
+                        }
+                    });
+                    clickedButton.classList.toggle('active');
+                    content.classList.toggle('hidden');
+                    if (isOpening) { if (window.MathJax) { MathJax.typesetPromise([content]); } }
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('wrong');
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) { correctOption.classList.add('correct'); }
+                    }
+                    if (window.MathJax) { MathJax.typesetPromise([explanation]); }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
