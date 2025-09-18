@@ -590,9 +590,58 @@ const allContentData = {
             },
             { 
             id: 'materi_trigonometri_3', 
-            title: 'Sudut & Pengukuran', 
+            title: 'Trigonometri pada Lingkaran Satuan', 
             type: 'HTML Document', 
             filePath: 'UMT_Learning/Trigonometri pada Lingkaran Satuan.html', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'materi_trigonometri_4', 
+            title: 'Identitas Trigonometri Dasar', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Identitas Trigonometri Dasar.html', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'materi_trigonometri_5', 
+            title: 'Identitas & Rumus Trigonometri Lanjutan', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Identitas & Rumus Trigonometri Lanjutan.html', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'materi_trigonometri_6', 
+            title: 'Nilai Trigonometri Sudut-Sudut Khusus', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Nilai Trigonometri Sudut-Sudut Khusus.html', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'materi_trigonometri_7', 
+            title: 'Persamaan Trigonometri', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Persamaan Trigonometri.html', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'materi_trigonometri_8', 
+            title: 'Pertidaksamaan Trigonometri', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Pertidaksamaan Trigonometri.html', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'materi_trigonometri_9', 
+            title: 'Fungsi Trigonometri', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Fungsi Trigonometri.html', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'materi_trigonometri_10', 
+            title: 'Aplikasi Trigonometri', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Aplikasi Trigonometri.html', 
             fileType: 'html' 
             },
         ],
