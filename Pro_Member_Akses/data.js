@@ -575,12 +575,19 @@ const allContentData = {
         ],
         "Trigonometri": [
             { 
-            id: 'materi_esensi_trigonometri', 
+            id: 'materi_trigonometri_1', 
             title: 'Esensi Trigonometri', 
             type: 'HTML Document', 
-            filePath: '#', 
+            filePath: 'UMT_Learning/Esensi Trigonometri.html', 
             fileType: 'html' 
-            }
+            },
+            { 
+            id: 'materi_trigonometri_2', 
+            title: 'Esensi Trigonometri', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Esensi Trigonometri.html', 
+            fileType: 'html' 
+            },
         ],
         "Limit Fungsi": [
             { 
