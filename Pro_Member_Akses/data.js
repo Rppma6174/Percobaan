@@ -588,6 +588,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Sudut Dan Pengukuran.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_trigonometri_3', 
+            title: 'Sudut & Pengukuran', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Sudut Dan Pengukuran.html', 
+            fileType: 'html' 
+            },
         ],
         "Limit Fungsi": [
             { 
