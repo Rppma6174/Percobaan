@@ -133,6 +133,9 @@
     </div>
 
     <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
         const quizzes = [
             { q: "Dalam sebuah segitiga siku-siku, sisi terpanjang yang berada di seberang sudut 90° disebut...", options: ["Sisi Depan", "Sisi Samping", "Sisi Miring", "Sisi Acuan"], correct: 2, explanation: "Sisi terpanjang pada segitiga siku-siku adalah <b>Sisi Miring</b> atau <b>Hypotenuse</b>. Posisinya selalu tetap, yaitu di seberang sudut siku-siku, tidak peduli sudut mana yang kita jadikan acuan." },
             { q: "Perbandingan antara sisi di <b>samping</b> sudut acuan dan sisi <b>miring</b> mendefinisikan rasio...", options: ["Sinus (sin)", "Cosinus (cos)", "Tangen (tan)", "Cosecan (csc)"], correct: 1, explanation: "Ini adalah definisi dasar dari Cosinus. Ingat jembatan keledai <b>'Cos-Sami'</b>: Cosinus adalah perbandingan antara sisi <b>Sa</b>mping dan <b>Mi</b>ring." },
