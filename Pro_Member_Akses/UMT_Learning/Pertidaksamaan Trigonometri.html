@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pertidaksamaan Trigonometri - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png"> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+            --accent-purple: #8957e5;
+        }
+        body {
+            background-color: var(--bg-main); color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2, h3 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        h3 { color: #58a6ff; margin-top: 2rem; }
+        .hidden { display: none; }
+        .svg-container { text-align: center; margin: 1.5rem 0; }
+        
+        .strategy-box {
+            background-color: rgba(57, 211, 83, 0.05);
+            border-left: 4px solid var(--accent-green);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        .explainer-button {
+            background: none; border: none; color: var(--accent-purple); font-size: 0.9em;
+            font-weight: bold; cursor: pointer; padding: 4px 8px; margin-top: 0.5rem;
+            border-radius: 6px; transition: background-color 0.2s; display: inline-flex; align-items: center;
+        }
+        .explainer-button:hover { background-color: rgba(137, 87, 229, 0.1); }
+        .explainer-button .fas { margin-left: 8px; transition: transform 0.3s ease; }
+        .explainer-button.active .fas { transform: rotate(90deg); }
+        .explainer-content {
+            margin-top: 1rem; padding: 1rem;
+            background-color: rgba(137, 87, 229, 0.05);
+            border-left: 4px solid var(--accent-purple);
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary); width: 100%; padding: 1rem;
+            text-align: left; font-size: 1.1rem; font-weight: 600; border: none; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.7; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        p, li, .quiz-explanation, .explainer-content, .strategy-box { overflow-x: auto; padding-bottom: 8px; }
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <h1>Pertidaksamaan Trigonometri</h1>
+        <p>
+            Setelah mahir menyelesaikan persamaan, kini kita naik level ke pertidaksamaan. Tujuannya bukan lagi mencari titik-titik sudut yang spesifik, melainkan mencari sebuah <strong>rentang atau interval sudut</strong> yang memenuhi suatu kondisi (misalnya, $\sin x > \frac{1}{2}$). Kunci utama dalam menyelesaikan pertidaksamaan adalah visualisasi, baik melalui <b>garis bilangan</b> maupun <b>sketsa grafik</b>.
+        </p>
+        
+        <h2>Metodologi Universal Penyelesaian</h2>
+        <p>
+            Hampir semua pertidaksamaan trigonometri dapat dipecahkan dengan 4 langkah sistematis berikut:
+        </p>
+        <ol>
+            <li><b>Ubah Jadi Persamaan:</b> Anggap pertidaksamaan sebagai persamaan (=) untuk menemukan titik-titik kritis atau "pembuat nol".</li>
+            <li><b>Gambarkan Garis Bilangan:</b> Letakkan titik-titik kritis tersebut pada garis bilangan sesuai interval yang diminta (misal: 0° sampai 360°).</li>
+            <li><b>Lakukan Uji Titik:</b> Ambil satu sampel sudut dari setiap interval yang terbentuk, lalu substitusikan ke pertidaksamaan <b>awal</b> untuk menentukan apakah interval tersebut positif (+) atau negatif (-).</li>
+            <li><b>Tentukan Himpunan Penyelesaian:</b> Pilih interval-interval yang sesuai dengan tanda pertidaksamaan (misal, pilih daerah (+) untuk soal `> 0`).</li>
+        </ol>
+
+        <h2>Contoh: Pertidaksamaan Dasar</h2>
+        <p><b>Soal:</b> Tentukan himpunan penyelesaian dari $\sin x > \frac{1}{2}$ untuk $0^\circ \leq x \leq 360^\circ$.</p>
+        <ol>
+            <li><b>Persamaan:</b> $\sin x = \frac{1}{2}$. Titik kritisnya adalah $x = 30^\circ$ dan $x = 150^\circ$.</li>
+            <li><b>Garis Bilangan:</b> Kita buat garis dari 0° sampai 360° dengan batas di 30° dan 150°. Ini menciptakan tiga interval.</li>
+            <li><b>Uji Titik:</b>
+                <ul>
+                    <li>Uji $x=0^\circ$: $\sin(0^\circ) = 0$. Apakah $0 > \frac{1}{2}$? Salah. (Daerah -)</li>
+                    <li>Uji $x=90^\circ$: $\sin(90^\circ) = 1$. Apakah $1 > \frac{1}{2}$? Benar. (Daerah +)</li>
+                    <li>Uji $x=180^\circ$: $\sin(180^\circ) = 0$. Apakah $0 > \frac{1}{2}$? Salah. (Daerah -)</li>
+                </ul>
+            </li>
+            <li><b>Solusi:</b> Karena soal meminta `>` (positif), kita ambil daerah (+). Jadi, solusinya adalah $30^\circ < x < 150^\circ$.</li>
+        </ol>
+
+        <h3>Pendekatan Alternatif: Metode Grafik</h3>
+        <p>
+            Cara paling intuitif untuk memahami solusi ini adalah dengan melihat grafik. Kita mencari di mana kurva $y = \sin x$ berada <b>di atas</b> garis $y = \frac{1}{2}$.
+        </p>
+        <div class="svg-container">
+            <svg width="500" height="250" viewBox="0 0 500 250" xmlns="http://www.w3.org/2000/svg">
+                <rect width="500" height="250" fill="#161B22"/>
+                <line x1="20" y1="125" x2="480" y2="125" stroke="#30363D" stroke-width="1"/>
+                <line x1="50" y1="20" x2="50" y2="230" stroke="#30363D" stroke-width="1"/>
+                <path d="M 50 125 C 150 25, 250 225, 410 125" fill="none" stroke="#2F81F7" stroke-width="3"/>
+                <line x1="50" y1="75" x2="410" y2="75" stroke="#F85149" stroke-width="2" stroke-dasharray="4"/>
+                <rect x="83" y="75" width="134" height="50" fill="#39D353" fill-opacity="0.2"/>
+                <line x1="83" y1="20" x2="83" y2="230" stroke="#C9D1D9" stroke-width="1" stroke-dasharray="2"/>
+                <line x1="217" y1="20" x2="217" y2="230" stroke="#C9D1D9" stroke-width="1" stroke-dasharray="2"/>
+                <text x="40" y="65" font-size="12" fill="#F85149">y=1/2</text>
+                <text x="80" y="245" font-size="12" fill="#C9D1D9">30°</text>
+                <text x="210" y="245" font-size="12" fill="#C9D1D9">150°</text>
+                <text x="400" y="140" font-size="12" fill="#C9D1D9">360°</text>
+                <text x="130" y="60" font-size="14" fill="#39D353">Solusi</text>
+            </svg>
+        </div>
+
+        <h2>Pertidaksamaan Bentuk Kuadrat & Kombinasi Identitas</h2>
+        <p>
+            Untuk bentuk yang lebih kompleks, seperti $2\sin^2 x - 3\sin x + 1 < 0$, strateginya tetap sama.
+        </p>
+        <ol>
+            <li><b>Sederhanakan & Faktorkan:</b> Ubah pertidaksamaan menjadi $(2\sin x - 1)(\sin x - 1) < 0$.</li>
+            <li><b>Cari Titik Kritis:</b> Selesaikan persamaannya. Pembuat nol-nya adalah saat $\sin x = \frac{1}{2}$ (yaitu $30^\circ, 150^\circ$) dan $\sin x = 1$ (yaitu $90^\circ$).</li>
+            <li><b>Garis Bilangan & Uji Titik:</b> Letakkan 30°, 90°, dan 150° pada garis bilangan dan uji setiap interval.</li>
+            <li><b>Tentukan Solusi:</b> Pilih interval yang menghasilkan nilai negatif (karena soalnya `< 0`).</li>
+        </ol>
+
+        <h2>Uji Pemahaman</h2>
+        <p>Terapkan metodologi garis bilangan dan uji titik untuk menyelesaikan pertidaksamaan berikut.</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+        const quizzes = [
+            { q: "Himpunan penyelesaian dari $2\\cos x + 1 > 0$ untuk $0^\\circ \\leq x \\leq 360^\\circ$ adalah...", options: ["$0^\\circ \\leq x < 120^\\circ$ atau $240^\\circ < x \\leq 360^\\circ$", "$120^\\circ < x < 240^\\circ$", "$0^\\circ \\leq x < 60^\\circ$ atau $300^\\circ < x \\leq 360^\\circ$", "$60^\\circ < x < 300^\\circ$"], correct: 0, explanation: "Pertidaksamaan menjadi $\\cos x > -\\frac{1}{2}$. Titik kritis dari $\\cos x = -\\frac{1}{2}$ adalah $120^\\circ$ dan $240^\\circ$. Dengan uji titik (misal, uji $x=0^\\circ$, $\\cos 0 = 1 > -1/2$), daerah yang memenuhi adalah sebelum $120^\\circ$ dan setelah $240^\\circ$." },
+            { q: "Himpunan penyelesaian dari $\\tan x \\geq \\sqrt{3}$ untuk $0^\\circ \\leq x \\leq 180^\\circ$ adalah...", options: ["$60^\\circ \\leq x \\leq 180^\\circ$", "$60^\\circ \\leq x < 90^\\circ$", "$0^\\circ \\leq x \\leq 60^\\circ$", "$90^\\circ < x \\leq 180^\\circ$"], correct: 1, explanation: "Titik kritis dari $\\tan x = \\sqrt{3}$ adalah $x = 60^\\circ$. Namun, kita juga harus mempertimbangkan asimtot tangen di $x=90^\\circ$. Dengan uji titik (misal, uji $x=75^\\circ$), kita menemukan bahwa interval yang memenuhi adalah antara $60^\\circ$ dan asimtot $90^\\circ$." },
+            { q: "Solusi dari $2\\sin^2 x - \\sin x - 1 < 0$ untuk $0^\\circ \\leq x \\leq 360^\\circ$ adalah...", options: ["$30^\\circ < x < 150^\\circ$", "$0^\\circ \\leq x < 30^\\circ$ atau $150^\\circ < x \\leq 360^\\circ$", "$0^\\circ \\leq x < 210^\\circ$ atau $330^\\circ < x \\leq 360^\\circ$, kecuali $90^\\circ$", "$210^\\circ < x < 330^\\circ$"], correct: 3, explanation: "Faktorkan menjadi $(2\\sin x + 1)(\\sin x - 1) < 0$. Titik kritisnya adalah $\\sin x = -\\frac{1}{2}$ (yaitu $210^\\circ, 330^\\circ$) dan $\\sin x = 1$ (yaitu $90^\\circ$). Uji interval pada garis bilangan menunjukkan daerah negatif berada di antara $210^\\circ$ dan $330^\\circ$." },
+            { q: "Langkah pertama yang paling tepat untuk menyelesaikan $\\cos(2x) - \sin x < 0$ adalah...", options: ["Menggambar grafik $\\cos(2x)$ dan $\\sin x$", "Mengubah $\\sin x$ menjadi $\\cos(90-x)$", "Mengubah $\\cos(2x)$ menjadi $1-2\\sin^2 x$", "Mencari titik potongnya langsung"], correct: 2, explanation: "Untuk menyelesaikan pertidaksamaan ini, kita perlu menyeragamkan fungsinya. Mengubah $\\cos(2x)$ menjadi $1 - 2\\sin^2 x$ akan menghasilkan pertidaksamaan kuadrat dalam sinus, yaitu $-2\\sin^2 x - \\sin x + 1 < 0$, yang dapat diselesaikan dengan metode garis bilangan." },
+            { q: "Himpunan penyelesaian dari $\\sqrt{3}\\sin x - \\cos x > 0$ untuk $0^\\circ \\leq x \\leq 180^\\circ$ adalah...", options: ["$30^\\circ < x < 180^\\circ$", "$60^\\circ < x < 180^\\circ$", "$30^\\circ < x < 150^\\circ$", "$30^\\circ < x < 90^\\circ$"], correct: 0, explanation: "Ubah bentuknya menjadi $\\sqrt{3}\\sin x > \\cos x$, lalu bagi dengan $\\cos x$ (dengan asumsi $\\cos x \\neq 0$) menjadi $\\sqrt{3}\\tan x > 1$, atau $\\tan x > \\frac{1}{\\sqrt{3}}$. Titik kritisnya adalah $30^\\circ$. Karena tangen positif di Kuadran I dan negatif di Kuadran II, solusi yang memenuhi adalah $30^\\circ < x < 180^\\circ$ (dengan memperhatikan asimtot di 90°)." }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.explainer-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    button.classList.toggle('active');
+                    const content = button.nextElementSibling;
+                    const isOpening = content.classList.contains('hidden');
+                    content.classList.toggle('hidden');
+                    if (isOpening) { if(window.MathJax) { MathJax.typesetPromise([content]); } }
+                });
+            });
+
+            const quizContainer = document.getElementById("quiz-container");
+            if (!quizContainer) return;
+            quizzes.forEach((quiz, index) => {
+                const quizEl = document.createElement("div");
+                quizEl.className = "quiz-accordion";
+                const optionsHtml = quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("");
+                quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${optionsHtml}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+                quizContainer.appendChild(quizEl);
+            });
+
+            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+            accordionButtons.forEach(clickedButton => {
+                clickedButton.addEventListener('click', () => {
+                    const content = clickedButton.nextElementSibling;
+                    const isOpening = content.classList.contains('hidden');
+                    accordionButtons.forEach(button => {
+                        if (button !== clickedButton) {
+                            button.classList.remove('active');
+                            button.nextElementSibling.classList.add('hidden');
+                        }
+                    });
+                    clickedButton.classList.toggle('active');
+                    content.classList.toggle('hidden');
+                    if (isOpening) { if (window.MathJax) { MathJax.typesetPromise([content]); } }
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('wrong');
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) { correctOption.classList.add('correct'); }
+                    }
+                    if (window.MathJax) { MathJax.typesetPromise([explanation]); }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
