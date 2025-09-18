@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esensi Trigonometri - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2, h3 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        h3 { color: #58a6ff; margin-top: 2rem; }
+        .hidden { display: none; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 0.5rem; }
+
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold;
+        }
+        .quiz-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1);
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        /* --- SOLUSI UNTUK LATEX OVERFLOW & SCROLLBAR --- */
+        p, li, .quiz-explanation {
+            overflow-x: auto; padding-bottom: 8px;
+        }
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <h1>Esensi Trigonometri: Memahami Bahasa Segitiga</h1>
+        <p>
+            Pernahkah Anda berpikir bagaimana cara mengukur tinggi sebuah gedung tanpa perlu memanjatnya? Atau bagaimana GPS menentukan lokasi Anda hanya dengan sinyal? Jawabannya ada pada <strong>trigonometri</strong>. Pada intinya, trigonometri adalah studi tentang hubungan antara <b>sudut</b> dan <b>sisi</b> pada segitiga. Ini adalah "bahasa" yang memungkinkan kita menerjemahkan informasi sudut menjadi informasi jarak, dan sebaliknya.
+        </p>
+        <p>
+            Perjalanan kita dimulai dari bentuk yang paling fundamental: segitiga siku-siku.
+        </p>
+
+        <h2>Anatomi Segitiga Siku-Siku: Kenali Alat Kerjamu</h2>
+        <p>
+            Sebelum kita bisa menggunakan "bahasa" trigonometri, kita harus kenal dulu dengan "aktor" utamanya. Dalam segitiga siku-siku, kita memiliki tiga sisi yang namanya ditentukan oleh posisinya terhadap sebuah <b>sudut acuan</b> (kita sebut saja sudut $\theta$ atau <i>theta</i>).
+        </p>
+        <ul>
+            <li><strong>Sisi Miring (Hypotenuse):</strong> Ini adalah sisi terpanjang dan selalu berada di seberang sudut siku-siku (90°). Namanya tidak pernah berubah, siapapun sudut acuannya.</li>
+            <li><strong>Sisi Depan (Opposite):</strong> Sisi yang berada tepat di <b>seberang</b> atau di <b>depan</b> sudut acuan $\theta$.</li>
+            <li><strong>Sisi Samping (Adjacent):</strong> Sisi yang berada di <b>samping</b> sudut acuan $\theta$ dan bukan sisi miring.</li>
+        </ul>
+        
+        <h2>Perbandingan Ajaib: Sin, Cos, dan Tan</h2>
+        <p>
+            Para matematikawan kuno menemukan bahwa untuk sudut $\theta$ yang sama, <b>rasio</b> atau <b>perbandingan</b> panjang antar sisi pada segitiga siku-siku akan selalu bernilai sama, tidak peduli seberapa besar atau kecil segitiga itu. Perbandingan inilah yang menjadi jantung trigonometri.
+        </p>
+        <ul>
+            <li><strong>Sinus (sin):</strong> $$ \sin(\theta) = \frac{\text{Depan}}{\text{Miring}} $$</li>
+            <li><strong>Cosinus (cos):</strong> $$ \cos(\theta) = \frac{\text{Samping}}{\text{Miring}} $$</li>
+            <li><strong>Tangen (tan):</strong> $$ \tan(\theta) = \frac{\text{Depan}}{\text{Samping}} $$</li>
+        </ul>
+
+        <h2>Kebalikannya Juga Penting: Cosecan, Secan, dan Cotangen</h2>
+        <ul>
+            <li><strong>Cosecan (csc):</strong> $$ \csc(\theta) = \frac{1}{\sin(\theta)} = \frac{\text{Miring}}{\text{Depan}} $$</li>
+            <li><strong>Secan (sec):</strong> $$ \sec(\theta) = \frac{1}{\cos(\theta)} = \frac{\text{Miring}}{\text{Samping}} $$</li>
+            <li><strong>Cotangen (cot):</strong> $$ \cot(\theta) = \frac{1}{\tan(\theta)} = \frac{\text{Samping}}{\text{Depan}} $$</li>
+        </ul>
+        
+        <h2>Hubungan Tersembunyi Antar Rasio</h2>
+        <p>
+            Salah satu hubungan yang paling fundamental adalah hubungan antara <b>sin, cos, dan tan</b>, yang dikenal sebagai identitas perbandingan:
+            $$ \tan(\theta) = \frac{\sin(\theta)}{\cos(\theta)} $$
+        </p>
+
+        <h2>Uji Pemahaman</h2>
+        <p>Pilih jawaban yang paling tepat untuk menguji pemahaman Anda tentang esensi perbandingan trigonometri.</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        const quizzes = [
+            { q: "Dalam sebuah segitiga siku-siku, sisi terpanjang yang berada di seberang sudut 90° disebut...", options: ["Sisi Depan", "Sisi Samping", "Sisi Miring", "Sisi Acuan"], correct: 2, explanation: "Sisi terpanjang pada segitiga siku-siku adalah <b>Sisi Miring</b> atau <b>Hypotenuse</b>. Posisinya selalu tetap, yaitu di seberang sudut siku-siku, tidak peduli sudut mana yang kita jadikan acuan." },
+            { q: "Perbandingan antara sisi di <b>samping</b> sudut acuan dan sisi <b>miring</b> mendefinisikan rasio...", options: ["Sinus (sin)", "Cosinus (cos)", "Tangen (tan)", "Cosecan (csc)"], correct: 1, explanation: "Ini adalah definisi dasar dari Cosinus. Ingat jembatan keledai <b>'Cos-Sami'</b>: Cosinus adalah perbandingan antara sisi <b>Sa</b>mping dan <b>Mi</b>ring." },
+            { q: "Jika diketahui $\\sin(\\theta) = \\frac{3}{5}$, berapakah nilai dari $\\csc(\\theta)$?", options: ["$\\frac{3}{5}$", "$\\frac{5}{3}$", "$\\frac{4}{5}$", "Tidak bisa ditentukan"], correct: 1, explanation: "Cosecan (csc) adalah kebalikan langsung dari Sinus (sin). Jadi, jika $\\sin(\\theta) = \\frac{3}{5}$, maka $\\csc(\\theta) = \\frac{1}{\\sin(\\theta)} = \\frac{5}{3}$. Anda hanya perlu membalik pecahannya." },
+            { q: "Manakah dari pernyataan berikut yang selalu benar?", options: ["$\\sin(\\theta) = \\cos(\\theta) \\cdot \\tan(\\theta)$", "$\\cot(\\theta) = \\frac{\\sin(\\theta)}{\\cos(\\theta)}$", "$\\sec(\\theta) = \\frac{1}{\\sin(\\theta)}$", "$\\tan(\\theta) \\cdot \\cot(\\theta) = 1$"], correct: 3, explanation: "Karena Cotangen adalah kebalikan dari Tangen ($\\cot(\\theta) = 1/\\tan(\\theta)$), maka perkalian keduanya akan saling menghilangkan dan menghasilkan 1. Ini adalah salah satu identitas resiprokal yang fundamental." },
+            { q: "Sebuah tangga disandarkan pada tembok. Jika sudut antara tangga dan lantai adalah $\\theta$, maka perbandingan antara <b>panjang tangga</b> dan <b>jarak ujung bawah tangga ke tembok</b> adalah...", options: ["$\\sin(\\theta)$", "$\\cos(\\theta)$", "$\\tan(\\theta)$", "$\\sec(\\theta)$"], correct: 3, explanation: "Dalam skenario ini, 'panjang tangga' adalah sisi <b>Miring</b>. 'Jarak ke tembok' adalah sisi <b>Samping</b> dari sudut $\\theta$. Perbandingan antara Miring dan Samping ($\\frac{Miring}{Samping}$) adalah definisi dari <b>Secan (sec)</b>, yang merupakan kebalikan dari Cosinus." }
+        ];
+
+        // --- SCRIPT KUIS INTERAKTIF YANG DIPERBAIKI ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const quizContainer = document.getElementById("quiz-container");
+            if (!quizContainer) return;
+
+            quizzes.forEach((quiz, index) => {
+                const quizEl = document.createElement("div");
+                quizEl.className = "quiz-accordion";
+
+                const optionsHtml = quiz.options.map((opt, i) => 
+                    `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                ).join("");
+
+                quizEl.innerHTML = `
+                    <button class="quiz-accordion-button">
+                        <span>Soal ${index + 1}</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="quiz-accordion-content hidden">
+                        <p class="question-text">${quiz.q}</p>
+                        <div class="options-container">${optionsHtml}</div>
+                        <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                    </div>`;
+                quizContainer.appendChild(quizEl);
+            });
+
+            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+            accordionButtons.forEach(clickedButton => {
+                clickedButton.addEventListener('click', () => {
+                    const content = clickedButton.nextElementSibling;
+                    const isOpening = content.classList.contains('hidden');
+
+                    // Tutup semua akordeon lain
+                    accordionButtons.forEach(button => {
+                        if (button !== clickedButton) {
+                            button.classList.remove('active');
+                            button.nextElementSibling.classList.add('hidden');
+                        }
+                    });
+
+                    // Buka/Tutup akordeon yang diklik
+                    clickedButton.classList.toggle('active');
+                    content.classList.toggle('hidden');
+
+                    // Render MathJax jika akordeon dibuka
+                    if (isOpening) {
+                        if (window.MathJax) {
+                            MathJax.typesetPromise([content]);
+                        }
+                    }
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden');
+
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('wrong');
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) {
+                            correctOption.classList.add('correct');
+                        }
+                    }
+                    if (window.MathJax) {
+                        MathJax.typesetPromise([explanation]);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
