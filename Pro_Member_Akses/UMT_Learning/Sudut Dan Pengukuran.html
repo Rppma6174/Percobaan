@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sudut dan Pengukuran - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png"> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+            --accent-purple: #8957e5;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2, h3 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        h3 { color: #58a6ff; margin-top: 2rem; }
+        .hidden { display: none; }
+        ul, ol { padding-left: 20px; }
+        li { margin-bottom: 0.5rem; }
+        .svg-container { text-align: center; margin: 1.5rem 0; }
+
+        /* --- STYLE UNTUK PENJELASAN RUMUS (BARU) --- */
+        .explainer-button {
+            background: none; border: none; color: var(--accent-purple); font-size: 0.9em;
+            font-weight: bold; cursor: pointer; padding: 4px 8px; margin-top: 0.5rem;
+            border-radius: 6px; transition: background-color 0.2s; display: inline-flex; align-items: center;
+        }
+        .explainer-button:hover { background-color: rgba(137, 87, 229, 0.1); }
+        .explainer-button .fas { margin-left: 8px; transition: transform 0.3s ease; }
+        .explainer-button.active .fas { transform: rotate(90deg); }
+        .explainer-content {
+            margin-top: 1rem; padding: 1rem;
+            background-color: rgba(137, 87, 229, 0.05);
+            border-left: 4px solid var(--accent-purple);
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        /* --- STYLE KUIS --- */
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary); width: 100%; padding: 1rem;
+            text-align: left; font-size: 1.1rem; font-weight: 600; border: none; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.7; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        p, li, .quiz-explanation, .explainer-content { overflow-x: auto; padding-bottom: 8px; }
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <h1>Sudut dan Pengukuran: Derajat dan Radian</h1>
+        <p>
+            Dalam trigonometri, sudut adalah "aktor utama". Namun, untuk mengukur dan bekerja dengan sudut, kita memerlukan satuan yang konsisten. Dua satuan yang paling fundamental adalah <b>derajat</b> dan <b>radian</b>.
+        </p>
+        
+        <h2>Satuan Derajat (°): Pembagian Sejak Zaman Kuno</h2>
+        <p>
+            Ini adalah satuan yang paling kita kenal. Satu lingkaran penuh didefinisikan sebagai <b>360 derajat (360°)</b>, sebuah warisan praktis dari peradaban kuno yang memudahkannya untuk dibagi-bagi.
+        </p>
+        
+        <h2>Satuan Radian (rad): Bahasa Asli Lingkaran</h2>
+        <p>
+            Radian adalah cara mengukur sudut berdasarkan properti intrinsik dari lingkaran itu sendiri, yaitu <b>jari-jarinya (radius)</b>.
+        </p>
+        <blockquote>
+            <b>Definisi 1 Radian:</b>
+            Satu radian adalah besar sudut yang terbentuk di pusat lingkaran ketika panjang busur di depannya <strong>sama dengan panjang jari-jari</strong> lingkaran tersebut.
+        </blockquote>
+        <div class="svg-container">
+             <svg width="250" height="150" viewBox="0 0 250 150" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="#161B22"/><path d="M 125 125 A 100 100 0 0 1 216.5 67.5" fill="none" stroke="#C9D1D9" stroke-width="2" stroke-dasharray="4"/><path d="M 125 125 L 225 125" fill="none" stroke="#C9D1D9" stroke-width="2"/><line x1="125" y1="125" x2="168.3" y2="43.5" stroke="#C9D1D9" stroke-width="2"/><path d="M 225 125 A 100 100 0 0 0 168.3 43.5" fill="none" stroke="#F85149" stroke-width="4"/><path d="M 155 125 A 30 30 0 0 1 146.5 96.5" fill="none" stroke="#2F81F7" stroke-width="2"/><text x="180" y="115" font-size="16" fill="#C9D1D9">r</text><text x="140" y="80" font-size="16" fill="#C9D1D9">r</text><text x="205" y="75" font-size="16" fill="#F85149">s = r</text><text x="120" y="110" font-size="16" fill="#2F81F7">1 rad</text></svg>
+        </div>
+        
+        <h2>Hubungan Derajat dan Radian: Kamus Penerjemah</h2>
+        <p>
+            Karena $180^\circ = \pi \text{ radian}$, kita bisa membuat dua "rumus konversi" utama:
+        </p>
+        <ol>
+            <li><b>Mengubah Derajat ke Radian:</b> $$ \text{radian} = \text{derajat} \times \frac{\pi}{180^\circ} $$</li>
+            <li><b>Mengubah Radian ke Derajat:</b> $$ \text{derajat} = \text{radian} \times \frac{180^\circ}{\pi} $$</li>
+        </ol>
+        <button class="explainer-button">Dari mana rumus konversi ini berasal? <i class="fas fa-chevron-right"></i></button>
+        <div class="explainer-content hidden">
+            <p>Rumus ini murni berasal dari hubungan dasar bahwa setengah lingkaran adalah $180^\circ$ dan juga $\pi$ radian.</p>
+            <p>$$180^\circ = \pi \text{ rad}$$</p>
+            <p>Untuk mencari nilai 1 derajat, kita bagi kedua sisi dengan 180: $$1^\circ = \frac{\pi}{180} \text{ rad}$$</p>
+            <p>Untuk mencari nilai 1 radian, kita bagi kedua sisi dengan $\pi$: $$\frac{180^\circ}{\pi} = 1 \text{ rad}$$</p>
+            <p>Kedua hasil inilah yang menjadi faktor pengali dalam konversi.</p>
+        </div>
+        
+        <h2>Aplikasi Radian: Panjang Busur dan Luas Juring</h2>
+        <p>
+            Keindahan radian terpancar saat kita menggunakannya dalam perhitungan geometris. Dengan sudut $\theta$ <b>harus dalam satuan radian</b>:
+        </p>
+        <div class="svg-container">
+            <svg width="250" height="150" viewBox="0 0 250 150" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="#161B22"/><path d="M 125 125 A 100 100 0 0 1 225 125" fill="#2F81F7" fill-opacity="0.2"/><path d="M 125 125 L 225 125 L 125 25 Z" fill="none" stroke="#C9D1D9" stroke-width="2"/><path d="M 225 125 A 100 100 0 0 0 125 25" fill="none" stroke="#F85149" stroke-width="4"/><path d="M 155 125 A 30 30 0 0 1 125 95" fill="none" stroke="#2F81F7" stroke-width="2"/><text x="180" y="115" font-size="16" fill="#C9D1D9">r</text><text x="110" y="80" font-size="16" fill="#C9D1D9">r</text><text x="180" y="65" font-size="16" fill="#F85149">s</text><text x="120" y="110" font-size="16" fill="#2F81F7">θ</text><text x="150" y="90" font-size="16" fill="#C9D1D9">A</text></svg>
+        </div>
+        <h3>Panjang Busur (s)</h3>
+        <p>$$ s = r \cdot \theta $$</p>
+        <button class="explainer-button">Dari mana rumus panjang busur ini berasal? <i class="fas fa-chevron-right"></i></button>
+        <div class="explainer-content hidden">
+            <p>Rumus ini berasal langsung dari definisi radian dan konsep perbandingan (proporsi).</p>
+            <ul>
+                <li>Menurut definisi, sudut <b>1 radian</b> menghasilkan panjang busur sepanjang <b>r</b>.</li>
+                <li>Maka, secara logis, sudut sebesar <b>$\theta$ radian</b> akan menghasilkan panjang busur sepanjang <b>$\theta \times r$</b>.</li>
+            </ul>
+            <p>Ini adalah hubungan proporsional yang sederhana dan elegan.</p>
+        </div>
+
+        <h3>Luas Juring (A)</h3>
+        <p>$$ A = \frac{1}{2} r^2 \theta $$</p>
+        <button class="explainer-button">Dari mana rumus luas juring ini berasal? <i class="fas fa-chevron-right"></i></button>
+        <div class="explainer-content hidden">
+            <p>Rumus ini juga berasal dari perbandingan. Luas sebuah juring terhadap luas total lingkaran sebanding dengan sudut juring tersebut terhadap sudut total lingkaran.</p>
+            <p>$$ \frac{\text{Luas Juring}}{\text{Luas Lingkaran}} = \frac{\text{Sudut Juring}}{\text{Sudut Total Lingkaran}} $$</p>
+            <p>Dalam notasi matematika (menggunakan radian):</p>
+            <p>$$ \frac{A}{\pi r^2} = \frac{\theta}{2\pi} $$</p>
+            <p>Sekarang, kita selesaikan untuk A dengan mengalikan kedua sisi dengan $\pi r^2$:</p>
+            <p>$$ A = \frac{\theta}{2\pi} \times \pi r^2 $$</p>
+            <p>Dengan mencoret $\pi$, kita mendapatkan rumus akhirnya:</p>
+            <p>$$ A = \frac{\theta}{2} r^2 \quad \text{atau} \quad A = \frac{1}{2} r^2 \theta $$</p>
+        </div>
+
+        <h2>Uji Pemahaman</h2>
+        <p>Uji pemahaman Anda tentang konsep pengukuran sudut dalam derajat dan radian.</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+        const quizzes = [
+            { q: "Apa definisi dari 1 radian?", options: ["Sudut yang besarnya 180/π derajat.", "Sudut yang panjang busurnya sama dengan diameternya.", "Sudut pusat yang panjang busur di depannya sama dengan jari-jari lingkaran.", "Seperenam dari keliling lingkaran."], correct: 2, explanation: "Ini adalah definisi inti dari radian. Satu radian adalah ukuran sudut yang 'memotong' busur sepanjang satu kali radius (jari-jari). Inilah yang membuatnya menjadi satuan yang 'natural' untuk lingkaran." },
+            { q: "Ubahlah sudut 45° ke dalam satuan radian.", options: ["$\\pi$ rad", "$\\frac{\\pi}{2}$ rad", "$\\frac{\\pi}{4}$ rad", "$\\frac{\\pi}{6}$ rad"], correct: 2, explanation: "Untuk mengubah derajat ke radian, kita kalikan dengan faktor konversi $\\frac{\\pi}{180^\\circ}$. Maka, $45^\\circ \\times \\frac{\\pi}{180^\\circ} = \\frac{45\\pi}{180} = \\frac{1\\pi}{4} = \\frac{\\pi}{4}$ radian." },
+            { q: "Sebuah lingkaran memiliki jari-jari 10 cm. Berapakah panjang busur yang dibentuk oleh sudut pusat sebesar $\\frac{\\pi}{5}$ radian?", options: ["2 cm", "5 cm", "10 cm", "2$\\pi$ cm"], correct: 3, explanation: "Rumus panjang busur adalah $s = r \\cdot \\theta$, dengan $\\theta$ dalam radian. Diketahui $r=10$ cm dan $\\theta = \\frac{\\pi}{5}$. Maka, $s = 10 \\times \\frac{\\pi}{5} = 2\\pi$ cm." },
+            { q: "Berapakah nilai dari $\\frac{2\\pi}{3}$ radian dalam satuan derajat?", options: ["60°", "90°", "120°", "150°"], correct: 2, explanation: "Untuk mengubah radian ke derajat, kita kalikan dengan faktor konversi $\\frac{180^\\circ}{\\pi}$. Maka, $\\frac{2\\pi}{3} \\times \\frac{180^\\circ}{\\pi} = \\frac{2 \\times 180^\\circ}{3} = 2 \\times 60^\\circ = 120^\\circ$." },
+            { q: "Sebuah 'potongan pizza' (juring) memiliki sudut $60^\\circ$ pada pizza berdiameter 14 inci. Berapakah luas juring tersebut?", options: ["$\\frac{49}{6}\\pi$ inci persegi", "$\\frac{49}{3}\\pi$ inci persegi", "$\\frac{7}{3}\\pi$ inci persegi", "14$\\pi$ inci persegi"], correct: 0, explanation: "Pertama, ubah semua satuan agar konsisten. Jari-jari (r) = diameter / 2 = 14 / 2 = 7 inci. Sudut ($\\theta$) harus dalam radian: $60^\\circ = \\frac{\\pi}{3}$ rad. Gunakan rumus luas juring $A = \\frac{1}{2}r^2\\theta$. Maka, $A = \\frac{1}{2}(7)^2(\\frac{\\pi}{3}) = \\frac{1}{2}(49)(\\frac{\\pi}{3}) = \\frac{49\\pi}{6}$ inci persegi." }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- SCRIPT UNTUK PENJELASAN RUMUS (BARU) ---
+            document.querySelectorAll('.explainer-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    button.classList.toggle('active');
+                    const content = button.nextElementSibling;
+                    const isOpening = !content.classList.contains('hidden');
+                    
+                    content.classList.toggle('hidden');
+
+                    // Panggil MathJax hanya saat konten ditampilkan
+                    if (!isOpening) {
+                        if(window.MathJax) {
+                            MathJax.typesetPromise([content]);
+                        }
+                    }
+                });
+            });
+
+            // --- SCRIPT KUIS INTERAKTIF ---
+            const quizContainer = document.getElementById("quiz-container");
+            if (!quizContainer) return;
+
+            quizzes.forEach((quiz, index) => {
+                const quizEl = document.createElement("div");
+                quizEl.className = "quiz-accordion";
+                const optionsHtml = quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("");
+                quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${optionsHtml}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+                quizContainer.appendChild(quizEl);
+            });
+
+            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+            accordionButtons.forEach(clickedButton => {
+                clickedButton.addEventListener('click', () => {
+                    const content = clickedButton.nextElementSibling;
+                    const isOpening = content.classList.contains('hidden');
+                    accordionButtons.forEach(button => {
+                        if (button !== clickedButton) {
+                            button.classList.remove('active');
+                            button.nextElementSibling.classList.add('hidden');
+                        }
+                    });
+                    clickedButton.classList.toggle('active');
+                    content.classList.toggle('hidden');
+                    if (isOpening) { if (window.MathJax) { MathJax.typesetPromise([content]); } }
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('wrong');
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) { correctOption.classList.add('correct'); }
+                    }
+                    if (window.MathJax) { MathJax.typesetPromise([explanation]); }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
