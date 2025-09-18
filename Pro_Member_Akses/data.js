@@ -592,7 +592,7 @@ const allContentData = {
             id: 'materi_trigonometri_3', 
             title: 'Sudut & Pengukuran', 
             type: 'HTML Document', 
-            filePath: 'UMT_Learning/Sudut Dan Pengukuran.html', 
+            filePath: 'UMT_Learning/Trigonometri pada Lingkaran Satuan.html', 
             fileType: 'html' 
             },
         ],
