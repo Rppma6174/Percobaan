@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fungsi & Grafik Trigonometri - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png"> 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+            --accent-purple: #8957e5;
+        }
+        body {
+            background-color: var(--bg-main); color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2, h3 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        h3 { color: #58a6ff; margin-top: 2rem; }
+        .hidden { display: none; }
+        .svg-container { 
+            text-align: center; margin: 1.5rem 0; background-color: #0D1117; 
+            padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color); 
+            overflow-x: auto;
+        }
+        
+        .strategy-box {
+            background-color: rgba(57, 211, 83, 0.05);
+            border-left: 4px solid var(--accent-green);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        .explainer-button {
+            background: none; border: none; color: var(--accent-purple); font-size: 0.9em;
+            font-weight: bold; cursor: pointer; padding: 4px 8px; margin-top: 0.5rem;
+            border-radius: 6px; transition: background-color 0.2s; display: inline-flex; align-items: center;
+        }
+        .explainer-button:hover { background-color: rgba(137, 87, 229, 0.1); }
+        .explainer-button .fas { margin-left: 8px; transition: transform 0.3s ease; }
+        .explainer-button.active .fas { transform: rotate(90deg); }
+        .explainer-content {
+            margin-top: 1rem; padding: 1rem;
+            background-color: rgba(137, 87, 229, 0.05);
+            border-left: 4px solid var(--accent-purple);
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary); width: 100%; padding: 1rem;
+            text-align: left; font-size: 1.1rem; font-weight: 600; border: none; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.7; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        p, li, .quiz-explanation, .explainer-content, .strategy-box { overflow-x: auto; padding-bottom: 8px; }
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <h1>Fungsi Trigonometri dan Grafiknya</h1>
+        <p>
+            Kita akan beralih dari memandang trigonometri sebagai perbandingan sisi-sisi segitiga menjadi sebuah <strong>fungsi</strong> yang memetakan suatu sudut ke sebuah nilai. Sudut menjadi input, dan rasio trigonometri menjadi output. Perspektif ini sangat kuat karena memungkinkan kita untuk memodelkan fenomena yang berulang secara periodik, seperti gelombang suara, getaran, atau pasang surut air laut.
+        </p>
+        
+        <h2>Definisi sebagai Fungsi: Domain & Range</h2>
+        <ul>
+            <li><b>Domain (Daerah Asal):</b> Himpunan semua input (sudut) yang valid. Untuk $\sin(x)$ dan $\cos(x)$, domainnya adalah semua bilangan real ($\mathbb{R}$), karena kita bisa memutar sudut berapapun. Untuk $\tan(x)$, domainnya adalah semua bilangan real kecuali di titik-titik di mana $\cos(x)=0$ (asimtot vertikal).</li>
+            <li><b>Range (Daerah Hasil):</b> Himpunan semua output (nilai) yang mungkin. Untuk $\sin(x)$ dan $\cos(x)$, nilainya tidak akan pernah lebih dari 1 atau kurang dari -1, sehingga range-nya adalah $[-1, 1]$. Untuk $\tan(x)$, nilainya bisa berapa saja, sehingga range-nya adalah semua bilangan real ($\mathbb{R}$).</li>
+        </ul>
+
+        <h2>Grafik Fungsi Dasar</h2>
+        <p>Grafik adalah cara kita memvisualisasikan perilaku sebuah fungsi. Untuk trigonometri, grafik ini menghasilkan bentuk gelombang yang khas.</p>
+        
+        <h3>1. Grafik $y = \sin(x)$</h3>
+        <p>Grafik sinus dimulai dari titik asal (0,0), naik ke puncaknya di 1, turun kembali ke 0, mencapai lembahnya di -1, dan kembali ke 0 dalam satu siklus.</p>
+        <div class="svg-container">
+            <svg width="600" height="240" viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg">
+                <!-- Grid lines -->
+                <defs>
+                    <pattern id="grid" width="40" height="20" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 20" fill="none" stroke="#30363D" stroke-width="0.5" opacity="0.3"/>
+                    </pattern>
+                </defs>
+                <rect width="600" height="240" fill="url(#grid)" />
+                
+                <!-- Axes -->
+                <line x1="50" y1="120" x2="550" y2="120" stroke="#8B949E" stroke-width="2"/>
+                <line x1="50" y1="30" x2="50" y2="210" stroke="#8B949E" stroke-width="2"/>
+                
+                <!-- Sine curve - mathematically accurate -->
+                <path d="M 50 120 
+                         C 90 45, 130 45, 170 120
+                         C 210 195, 250 195, 290 120
+                         C 330 45, 370 45, 410 120
+                         C 450 195, 490 195, 530 120" 
+                      fill="none" stroke="#2F81F7" stroke-width="3"/>
+                
+                <!-- Y-axis labels -->
+                <text x="35" y="40" font-size="14" fill="#C9D1D9" text-anchor="middle">1</text>
+                <text x="35" y="125" font-size="14" fill="#C9D1D9" text-anchor="middle">0</text>
+                <text x="35" y="205" font-size="14" fill="#C9D1D9" text-anchor="middle">-1</text>
+                
+                <!-- X-axis labels -->
+                <text x="50" y="235" font-size="12" fill="#C9D1D9" text-anchor="middle">0</text>
+                <text x="170" y="235" font-size="12" fill="#C9D1D9" text-anchor="middle">π/2</text>
+                <text x="290" y="235" font-size="12" fill="#C9D1D9" text-anchor="middle">π</text>
+                <text x="410" y="235" font-size="12" fill="#C9D1D9" text-anchor="middle">3π/2</text>
+                <text x="530" y="235" font-size="12" fill="#C9D1D9" text-anchor="middle">2π</text>
+                
+                <!-- Key points -->
+                <circle cx="50" cy="120" r="3" fill="#2F81F7"/>
+                <circle cx="170" cy="45" r="3" fill="#2F81F7"/>
+                <circle cx="290" cy="120" r="3" fill="#2F81F7"/>
+                <circle cx="410" cy="195" r="3" fill="#2F81F7"/>
+                <circle cx="530" cy="120" r="3" fill="#2F81F7"/>
+            </svg>
+        </div>
+
+        <h3>2. Grafik $y = \cos(x)$</h3>
+        <p>Grafik cosinus pada dasarnya identik dengan grafik sinus, tetapi "digeser" ke kiri sejauh $\frac{\pi}{2}$. Ia memulai siklusnya dari puncaknya di 1.</p>
+         <div class="svg-container">
+            <svg width="600" height="240" viewBox="0 0 600 240" xmlns="http://www.w3.org/2000/svg">
+                <!-- Grid lines -->
+                <rect width="600" height="240" fill="url(#grid)" />
+                
+                <!-- Axes -->
+                <line x1="50" y1="120" x2="550" y2="120" stroke="#8B949E" stroke-width="2"/>
+                <line x1="50" y1="30" x2="50" y2="210" stroke="#8B949E" stroke-width="2"/>
+                
+                <!-- Cosine curve - mathematically accurate -->
+                <path d="M 50 45
+                         C 90 45, 130 120, 170 195
+                         C 210 195, 250 120, 290 45
+                         C 330 45, 370 120, 410 195
+                         C 450 195, 490 120, 530 45" 
+                      fill="none" stroke="#39D353" stroke-width="3"/>
+                
+                <!-- Y-axis labels -->
+                <text x="35" y="40" font-size="14" fill="#C9D1D9" text-anchor="middle">1</text>
+                <text x="35" y="125" font-size="14" fill="#C9D1D9" text-anchor="middle">0</text>
+                <text x="35" y="205" font-size="14" fill="#C9D1D9" text-anchor="middle">-1</text>
+                
+                <!-- X-axis labels -->
+                <text x="50" y="235" font-size="12" fill="#C9D1D9" text-anchor="middle">0</text>
+                <text x="170" y="235" font-size="12" fill="#C9D1D9" text-anchor="middle">π/2</text>
+                <text x="290" y="235" font-size="12" fill="#C9D1D9" text-anchor="middle">π</text>
+                <text x="410" y="235" font-size="12" fill="#C9D1D9" text-anchor="middle">3π/2</text>
+                <text x="530" y="235" font-size="12" fill="#C9D1D9" text-anchor="middle">2π</text>
+                
+                <!-- Key points -->
+                <circle cx="50" cy="45" r="3" fill="#39D353"/>
+                <circle cx="170" cy="195" r="3" fill="#39D353"/>
+                <circle cx="290" cy="45" r="3" fill="#39D353"/>
+                <circle cx="410" cy="195" r="3" fill="#39D353"/>
+                <circle cx="530" cy="45" r="3" fill="#39D353"/>
+            </svg>
+        </div>
+
+        <h3>3. Grafik $y = \tan(x)$</h3>
+        <p>Grafik tangen memiliki karakteristik yang unik dengan asimtot vertikal di $x = \frac{\pi}{2} + n\pi$ (dimana $n$ adalah bilangan bulat). Fungsi ini tidak terbatas (unbounded) dan memiliki periode $\pi$.</p>
+        <div class="svg-container">
+            <svg width="600" height="300" viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                <!-- Grid lines -->
+                <defs>
+                    <pattern id="grid-tan" width="40" height="20" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 20" fill="none" stroke="#30363D" stroke-width="0.5" opacity="0.3"/>
+                    </pattern>
+                </defs>
+                <rect width="600" height="300" fill="url(#grid-tan)" />
+                
+                <!-- Axes -->
+                <line x1="50" y1="150" x2="550" y2="150" stroke="#8B949E" stroke-width="2"/>
+                <line x1="50" y1="30" x2="50" y2="270" stroke="#8B949E" stroke-width="2"/>
+                
+                <!-- Asymptotes -->
+                <line x1="170" y1="30" x2="170" y2="270" stroke="#F85149" stroke-width="2" stroke-dasharray="5,5" opacity="0.7"/>
+                <line x1="410" y1="30" x2="410" y2="270" stroke="#F85149" stroke-width="2" stroke-dasharray="5,5" opacity="0.7"/>
+                
+                <!-- Tangent curves -->
+                <!-- First period: -π/2 to π/2 -->
+                <path d="M 60 250 Q 110 180 160 60" fill="none" stroke="#8957e5" stroke-width="3"/>
+                
+                <!-- Second period: π/2 to 3π/2 -->
+                <path d="M 180 250 Q 230 180 280 150 Q 330 120 380 60" fill="none" stroke="#8957e5" stroke-width="3"/>
+                
+                <!-- Third period: 3π/2 to 5π/2 -->
+                <path d="M 420 250 Q 470 180 520 60" fill="none" stroke="#8957e5" stroke-width="3"/>
+                
+                <!-- Y-axis labels -->
+                <text x="35" y="70" font-size="14" fill="#C9D1D9" text-anchor="middle">2</text>
+                <text x="35" y="110" font-size="14" fill="#C9D1D9" text-anchor="middle">1</text>
+                <text x="35" y="155" font-size="14" fill="#C9D1D9" text-anchor="middle">0</text>
+                <text x="35" y="195" font-size="14" fill="#C9D1D9" text-anchor="middle">-1</text>
+                <text x="35" y="235" font-size="14" fill="#C9D1D9" text-anchor="middle">-2</text>
+                
+                <!-- X-axis labels -->
+                <text x="50" y="290" font-size="12" fill="#C9D1D9" text-anchor="middle">-π/2</text>
+                <text x="110" y="290" font-size="12" fill="#C9D1D9" text-anchor="middle">0</text>
+                <text x="170" y="290" font-size="12" fill="#C9D1D9" text-anchor="middle">π/2</text>
+                <text x="290" y="290" font-size="12" fill="#C9D1D9" text-anchor="middle">π</text>
+                <text x="410" y="290" font-size="12" fill="#C9D1D9" text-anchor="middle">3π/2</text>
+                <text x="530" y="290" font-size="12" fill="#C9D1D9" text-anchor="middle">2π</text>
+                
+                <!-- Key points -->
+                <circle cx="110" cy="150" r="3" fill="#8957e5"/>
+                <circle cx="290" cy="150" r="3" fill="#8957e5"/>
+                <circle cx="470" cy="150" r="3" fill="#8957e5"/>
+                
+                <!-- Legend for asymptotes -->
+                <text x="450" y="50" font-size="12" fill="#F85149">Asimtot Vertikal</text>
+            </svg>
+        </div>
+        
+        <h2>Transformasi Grafik: Membedah Bentuk $y = A\sin(B(x - C)) + D$</h2>
+        <p>Dengan memodifikasi fungsi dasar, kita bisa mengubah bentuk grafiknya. Memahami setiap komponen transformasi ini adalah kuncinya.</p>
+
+        <h3>1. Amplitudo ($A$)</h3>
+        <p>Amplitudo $|A|$ mengontrol "tinggi" gelombang dari sumbu tengahnya. Jika $A$ negatif, grafiknya akan terbalik.</p>
+        
+        <h3>2. Periode ($B$)</h3>
+        <p>Komponen $B$ mengontrol "kerapatan" atau frekuensi gelombang. Semakin besar nilai $B$, semakin rapat gelombangnya.
+        <br><b>Periode</b> = $\frac{2\pi}{|B|}$ untuk sin/cos dan $\frac{\pi}{|B|}$ untuk tan.
+        </p>
+
+        <h3>3. Pergeseran Fasa / Horizontal ($C$)</h3>
+        <p>Nilai $C$ menggeser seluruh grafik ke kiri atau ke kanan. Persamaan harus dalam bentuk $(x - C)$. Jadi, $y = \sin(2x + \pi)$ harus diubah menjadi $y = \sin(2(x + \frac{\pi}{2}))$, yang berarti digeser ke <b>kiri</b> sejauh $\frac{\pi}{2}$.</p>
+        
+        <h3>4. Pergeseran Vertikal ($D$)</h3>
+        <p>Nilai $D$ menggeser seluruh grafik ke atas atau ke bawah. Nilai $D$ menjadi sumbu tengah (garis kesetimbangan) yang baru.</p>
+
+        <div class="strategy-box">
+            <b>Langkah-langkah Menggambar Grafik:</b>
+            <ol>
+                <li><b>Identifikasi Parameter:</b> Tentukan nilai A, B, C, dan D dari persamaan.</li>
+                <li><b>Tentukan Sumbu Tengah & Range:</b> Sumbu tengah adalah $y=D$. Range-nya adalah dari $D-|A|$ hingga $D+|A|$.</li>
+                <li><b>Hitung Periode:</b> Gunakan rumus $\frac{2\pi}{|B|}$ untuk mengetahui panjang satu siklus.</li>
+                <li><b>Tentukan Titik Awal & Akhir:</b> Titik awal siklus adalah $x=C$ (pergeseran fasa). Titik akhirnya adalah $C + \text{Periode}$.</li>
+                <li><b>Gambar Poin-poin Kunci:</b> Bagi siklus menjadi 4 bagian untuk menemukan titik puncak, lembah, dan perpotongan dengan sumbu tengah, lalu hubungkan titik-titiknya.</li>
+            </ol>
+        </div>
+
+        <h2>Karakteristik Khusus Setiap Fungsi</h2>
+        <div class="strategy-box">
+            <b>Ringkasan Properti:</b>
+            <ul>
+                <li><b>$\sin(x)$:</b> Domain: $\mathbb{R}$, Range: $[-1,1]$, Periode: $2\pi$, Dimulai dari (0,0)</li>
+                <li><b>$\cos(x)$:</b> Domain: $\mathbb{R}$, Range: $[-1,1]$, Periode: $2\pi$, Dimulai dari (0,1)</li>
+                <li><b>$\tan(x)$:</b> Domain: $\mathbb{R} \setminus \{\frac{\pi}{2} + n\pi\}$, Range: $\mathbb{R}$, Periode: $\pi$, Asimtot vertikal</li>
+            </ul>
+        </div>
+
+        <h2>Uji Pemahaman</h2>
+        <p>Analisis parameter pada fungsi-fungsi berikut untuk memahami transformasinya.</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+      if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+        const quizzes = [
+            { q: "Berapakah amplitudo dari fungsi $f(x) = -4\\cos(3x) + 2$?", options: ["-4", "4", "2", "3"], correct: 1, explanation: "Amplitudo adalah nilai mutlak dari koefisien di depan fungsi trigonometri, yaitu $|A|$. Dalam kasus ini, $|-4| = 4$. Tanda negatif hanya menandakan bahwa grafiknya terbalik." },
+            { q: "Berapakah periode dari fungsi $g(x) = \\sin(2x - \\pi)$?", options: ["$2\\pi$", "$\\pi$", "$\\frac{\\pi}{2}$", "$4\\pi$"], correct: 1, explanation: "Periode untuk sinus adalah $\\frac{2\\pi}{|B|}$. Dalam fungsi ini, nilai $B$ adalah 2. Maka, periodenya adalah $\\frac{2\\pi}{2} = \\pi$." },
+            { q: "Fungsi $y = \\cos(x + \\frac{\\pi}{3})$ merupakan pergeseran dari grafik $y = \\cos(x)$ sejauh...", options: ["$\\frac{\\pi}{3}$ ke kanan", "$\\frac{\\pi}{3}$ ke kiri", "$\\frac{\\pi}{3}$ ke atas", "$\\frac{\\pi}{3}$ ke bawah"], correct: 1, explanation: "Bentuk standar pergeseran fasa adalah $(x - C)$. Karena persamaannya adalah $(x + \\frac{\\pi}{3})$, ini sama dengan $(x - (-\\frac{\\pi}{3}))$. Nilai $C$ adalah $-\\frac{\\pi}{3}$, yang berarti grafik digeser ke kiri." },
+            { q: "Manakah dari pernyataan berikut yang benar untuk fungsi $y = 3\\tan(\\frac{x}{2}) - 1$?", options: ["Amplitudonya 3", "Periodenya $\\pi/2$", "Sumbu tengahnya y=-1", "Grafik digeser ke kanan sejauh 2"], correct: 2, explanation: "Fungsi tangen tidak memiliki amplitudo. Periodenya adalah $\\frac{\\pi}{|B|} = \\frac{\\pi}{1/2} = 2\\pi$. Pergeseran vertikal (D) adalah -1, sehingga sumbu tengahnya adalah garis y=-1." },
+            { q: "Grafik $y=\\sin(x)$ direntangkan secara vertikal dengan faktor 5 dan digeser ke atas sejauh 2. Persamaan fungsi barunya adalah...", options: ["$y = 5\\sin(x) + 2$", "$y = \\sin(5x) + 2$", "$y = 5(\\sin(x) + 2)$", "$y = 2\\sin(x) + 5$"], correct: 0, explanation: "Merentangkan vertikal dengan faktor 5 berarti amplitudonya menjadi 5 ($A=5$). Menggeser ke atas sejauh 2 berarti pergeseran vertikalnya adalah +2 ($D=2$). Menggabungkan keduanya menghasilkan $y = 5\\sin(x) + 2$." },
+            { q: "Di mana asimtot vertikal dari fungsi $y = \\tan(x)$ berada?", options: ["$x = n\\pi$", "$x = \\frac{\\pi}{2} + n\\pi$", "$x = \\frac{\\pi}{4} + n\\pi$", "$x = 2n\\pi$"], correct: 1, explanation: "Asimtot vertikal terjadi ketika $\\cos(x) = 0$, karena $\\tan(x) = \\frac{\\sin(x)}{\\cos(x)}$. Cosinus bernilai nol di $x = \\frac{\\pi}{2} + n\\pi$, dimana $n$ adalah bilangan bulat." }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.explainer-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    button.classList.toggle('active');
+                    const content = button.nextElementSibling;
+                    const isOpening = content.classList.contains('hidden');
+                    content.classList.toggle('hidden');
+                    if (isOpening) { if(window.MathJax) { MathJax.typesetPromise([content]); } }
+                });
+            });
+
+            const quizContainer = document.getElementById("quiz-container");
+            if (!quizContainer) return;
+            quizzes.forEach((quiz, index) => {
+                const quizEl = document.createElement("div");
+                quizEl.className = "quiz-accordion";
+                const optionsHtml = quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("");
+                quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${optionsHtml}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+                quizContainer.appendChild(quizEl);
+            });
+
+            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+            accordionButtons.forEach(clickedButton => {
+                clickedButton.addEventListener('click', () => {
+                    const content = clickedButton.nextElementSibling;
+                    const isOpening = content.classList.contains('hidden');
+                    accordionButtons.forEach(button => {
+                        if (button !== clickedButton) {
+                            button.classList.remove('active');
+                            button.nextElementSibling.classList.add('hidden');
+                        }
+                    });
+                    clickedButton.classList.toggle('active');
+                    content.classList.toggle('hidden');
+                    if (isOpening) { if (window.MathJax) { MathJax.typesetPromise([content]); } }
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('wrong');
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) { correctOption.classList.add('correct'); }
+                    }
+                    if (window.MathJax) { MathJax.typesetPromise([explanation]); }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
