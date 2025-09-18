@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Persamaan Trigonometri - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png"> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+            --accent-purple: #8957e5;
+        }
+        body {
+            background-color: var(--bg-main); color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2, h3 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        h3 { color: #58a6ff; margin-top: 2rem; }
+        .hidden { display: none; }
+        
+        .strategy-box {
+            background-color: rgba(57, 211, 83, 0.05);
+            border-left: 4px solid var(--accent-green);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        .explainer-button {
+            background: none; border: none; color: var(--accent-purple); font-size: 0.9em;
+            font-weight: bold; cursor: pointer; padding: 4px 8px; margin-top: 0.5rem;
+            border-radius: 6px; transition: background-color 0.2s; display: inline-flex; align-items: center;
+        }
+        .explainer-button:hover { background-color: rgba(137, 87, 229, 0.1); }
+        .explainer-button .fas { margin-left: 8px; transition: transform 0.3s ease; }
+        .explainer-button.active .fas { transform: rotate(90deg); }
+        .explainer-content {
+            margin-top: 1rem; padding: 1rem;
+            background-color: rgba(137, 87, 229, 0.05);
+            border-left: 4px solid var(--accent-purple);
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary); width: 100%; padding: 1rem;
+            text-align: left; font-size: 1.1rem; font-weight: 600; border: none; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.7; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        p, li, .quiz-explanation, .explainer-content, .strategy-box { overflow-x: auto; padding-bottom: 8px; }
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <h1>Persamaan Trigonometri: Mencari Sudut Tersembunyi</h1>
+        <p>
+            Menyelesaikan persamaan trigonometri adalah puncak dari pemahaman Anda. Di sini, kita menggabungkan aljabar, identitas, dan pemahaman tentang sifat periodik fungsi untuk mencari nilai sudut yang memenuhi sebuah persamaan. Tujuannya bukan hanya menemukan satu solusi, tetapi <strong>semua solusi</strong> yang mungkin dalam interval tertentu.
+        </p>
+        
+        <h2>1. Persamaan Trigonometri Dasar</h2>
+        <p>
+            Ini adalah bentuk paling fundamental: $\sin x = a$, $\cos x = a$, dan $\tan x = a$. Prosesnya selalu dua langkah:
+        </p>
+        <ol>
+            <li><b>Temukan Sudut Dasar ($\alpha$):</b> Cari satu sudut (biasanya di Kuadran I) yang memenuhi persamaan.</li>
+            <li><b>Gunakan Rumus Solusi Umum:</b> Manfaatkan sifat periodik fungsi untuk menemukan semua solusi lainnya.</li>
+        </ol>
+        
+        <h3>Rumus Solusi Umum (untuk $k$ bilangan bulat)</h3>
+        <ul>
+            <li>Jika $\sin x = \sin \alpha$, maka:
+                <br>$x = \alpha + k \cdot 360^\circ$   ATAU   $x = (180^\circ - \alpha) + k \cdot 360^\circ$
+            </li>
+            <li>Jika $\cos x = \cos \alpha$, maka:
+                <br>$x = \alpha + k \cdot 360^\circ$   ATAU   $x = -\alpha + k \cdot 360^\circ$
+            </li>
+            <li>Jika $\tan x = \tan \alpha$, maka:
+                <br>$x = \alpha + k \cdot 180^\circ$
+            </li>
+        </ul>
+        <button class="explainer-button">Mengapa rumusnya berbeda-beda? <i class="fas fa-chevron-right"></i></button>
+        <div class="explainer-content hidden">
+            <p>Ini semua berasal dari simetri lingkaran satuan:</p>
+            <ul>
+                <li><b>Sinus (nilai y):</b> Dua sudut, $\alpha$ dan $(180^\circ - \alpha)$, memiliki nilai y yang sama.</li>
+                <li><b>Cosinus (nilai x):</b> Dua sudut, $\alpha$ dan $-\alpha$, memiliki nilai x yang sama.</li>
+                <li><b>Tangen (y/x):</b> Nilai tangen berulang setiap $180^\circ$ karena tanda y dan x sama-sama terbalik di kuadran yang berseberangan secara diagonal (misal: Kuadran I dan III).</li>
+            </ul>
+        </div>
+        
+        <h2>2. Persamaan Berbentuk Kuadrat</h2>
+        <p>
+            Persamaan seperti $2\cos^2 x + \cos x - 1 = 0$ terlihat rumit, tetapi sebenarnya ini adalah persamaan kuadrat yang "menyamar".
+        </p>
+        <p><b>Strategi:</b> Lakukan pemisalan. Misal $p = \cos x$, maka persamaan menjadi $2p^2 + p - 1 = 0$. Selesaikan untuk $p$ (faktorkan menjadi $(2p-1)(p+1)=0$), lalu kembalikan pemisalan untuk menyelesaikan $\cos x = \frac{1}{2}$ dan $\cos x = -1$.
+        </p>
+
+        <h2>3. Persamaan yang Membutuhkan Identitas</h2>
+        <p>
+            Jika persamaan memuat lebih dari satu jenis fungsi (misal: sin dan cos), langkah pertama Anda adalah <strong>menyeragamkannya</strong> menggunakan identitas.
+        </p>
+        <p><b>Contoh:</b> Selesaikan $2\sin^2 x - \cos x = 1$.</p>
+        <p>Gunakan identitas Pythagoras $\sin^2 x = 1 - \cos^2 x$. Persamaan menjadi $2(1 - \cos^2 x) - \cos x = 1$, yang setelah disederhanakan akan menjadi persamaan kuadrat dalam cosinus.</p>
+        
+        <h2>4. Persamaan dengan Sudut Berbeda</h2>
+        <p>
+            Jika Anda menemukan sudut yang berbeda dalam satu persamaan (misal: $2x$ dan $x$), gunakan rumus sudut ganda atau lanjutan untuk membuat semua argumen sudut menjadi sama.
+        </p>
+        <p><b>Contoh:</b> Selesaikan $\cos(2x) + \sin x = 0$.</p>
+        <p>Ganti $\cos(2x)$ dengan variasi yang sesuai. Karena ada $\sin x$, pilihan terbaik adalah $\cos(2x) = 1 - 2\sin^2 x$. Ini akan mengubah persamaan menjadi bentuk kuadrat dalam sinus.</p>
+
+        <div class="strategy-box">
+            <b>Peta Jalan Menyelesaikan Persamaan Trigonometri:</b>
+            <ol>
+                <li><b>Identifikasi Bentuk:</b> Apakah ini dasar, kuadrat, butuh identitas, atau sudutnya berbeda?</li>
+                <li><b>Seragamkan:</b> Gunakan identitas untuk membuat semua fungsi dan sudut dalam bentuk yang sama (misal: semua dalam $\sin x$).</li>
+                <li><b>Selesaikan Secara Aljabar:</b> Faktorkan, gunakan rumus abc, dll. untuk menemukan nilai fungsinya (misal: $\sin x = \frac{1}{2}$).</li>
+                <li><b>Cari Semua Solusi Sudut:</b> Gunakan rumus solusi umum untuk setiap nilai yang Anda dapatkan dan temukan semua jawaban dalam interval yang diminta.</li>
+            </ol>
+        </div>
+
+        <h2>Uji Pemahaman</h2>
+        <p>Terapkan berbagai strategi ini untuk menemukan himpunan penyelesaian dari persamaan berikut.</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+        const quizzes = [
+            { q: "Himpunan penyelesaian dari $2\\sin x - 1 = 0$ untuk $0^\\circ \\leq x \\leq 360^\\circ$ adalah...", options: ["$\\{30^\\circ, 150^\\circ\\}$", "$\\{30^\\circ, 330^\\circ\\}$", "$\\{60^\\circ, 120^\\circ\\}$", "$\\{30^\\circ\\}$"], correct: 0, explanation: "Persamaan menjadi $\\sin x = \\frac{1}{2}$. Sudut dasar $\\alpha = 30^\\circ$. Solusi sinus adalah $x=\\alpha$ dan $x=180^\\circ - \\alpha$. Jadi, solusinya adalah $30^\\circ$ dan $180^\\circ - 30^\\circ = 150^\\circ$." },
+            { q: "Salah satu solusi dari persamaan $2\\cos^2 x - 5\\cos x + 2 = 0$ adalah...", options: ["$30^\\circ$", "$45^\\circ$", "$60^\\circ$", "$90^\\circ$"], correct: 2, explanation: "Misalkan $p = \\cos x$, maka $2p^2 - 5p + 2 = 0$. Faktorkan menjadi $(2p-1)(p-2)=0$. Solusinya adalah $p=\\frac{1}{2}$ atau $p=2$. Jadi, $\\cos x = \\frac{1}{2}$ (memiliki solusi) atau $\\cos x = 2$ (tidak memiliki solusi). Dari $\\cos x = \\frac{1}{2}$, kita dapatkan $x=60^\\circ$ dan $x=300^\\circ$." },
+            { q: "Himpunan penyelesaian dari $\\tan^2 x = 1$ untuk $0^\\circ \\leq x \\leq 360^\\circ$ adalah...", options: ["$\\{45^\\circ, 135^\\circ\\}$", "$\\{45^\\circ, 225^\\circ\\}$", "$\\{45^\\circ, 135^\\circ, 225^\\circ, 315^\\circ\\}$", "$\\{135^\\circ, 315^\\circ\\}$"], correct: 2, explanation: "Dari $\\tan^2 x = 1$, kita dapatkan $\\tan x = 1$ atau $\\tan x = -1$. Untuk $\\tan x=1$, solusinya adalah $45^\\circ$ dan $45^\\circ+180^\\circ = 225^\\circ$. Untuk $\\tan x=-1$, solusinya adalah $135^\\circ$ dan $135^\\circ+180^\\circ = 315^\\circ$." },
+            { q: "Untuk menyelesaikan persamaan $\\cos(2x) - 3\\sin x + 1 = 0$, langkah pertama yang paling efektif adalah...", options: ["Menggunakan rumus $\\cos(2x)=2\\cos^2 x-1$", "Menggunakan rumus $\\cos(2x)=\\cos^2 x-\\sin^2 x$", "Menggunakan rumus $\\cos(2x)=1-2\\sin^2 x$", "Mencari nilai $\\cos(2x)$ dan $\\sin x$ secara terpisah"], correct: 2, explanation: "Karena persamaan sudah mengandung suku $\\sin x$, strategi terbaik adalah mengubah $\\cos(2x)$ menjadi bentuk yang hanya mengandung sinus juga. Rumus $\\cos(2x) = 1 - 2\\sin^2 x$ akan mengubah seluruh persamaan menjadi bentuk kuadrat dalam sinus." },
+            { q: "Himpunan penyelesaian dari $\\sin(2x) - \\cos x = 0$ untuk $0^\\circ \\leq x \\leq 180^\\circ$ adalah...", options: ["$\\{30^\\circ, 90^\\circ, 150^\\circ\\}$", "$\\{60^\\circ, 90^\\circ, 120^\\circ\\}$", "$\\{30^\\circ, 150^\\circ\\}$", "$\\{90^\\circ\\}$"], correct: 0, explanation: "Gunakan identitas sudut ganda: $2\\sin x \\cos x - \\cos x = 0$. Faktorkan: $\\cos x (2\\sin x - 1) = 0$. Ini memberikan dua persamaan dasar: $\\cos x = 0$ (solusinya $x=90^\\circ$) dan $2\\sin x - 1 = 0$ atau $\\sin x = \\frac{1}{2}$ (solusinya $x=30^\\circ$ dan $x=150^\\circ$)." }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.explainer-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    button.classList.toggle('active');
+                    const content = button.nextElementSibling;
+                    const isOpening = content.classList.contains('hidden');
+                    content.classList.toggle('hidden');
+                    if (isOpening) { if(window.MathJax) { MathJax.typesetPromise([content]); } }
+                });
+            });
+
+            const quizContainer = document.getElementById("quiz-container");
+            if (!quizContainer) return;
+            quizzes.forEach((quiz, index) => {
+                const quizEl = document.createElement("div");
+                quizEl.className = "quiz-accordion";
+                const optionsHtml = quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("");
+                quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${optionsHtml}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+                quizContainer.appendChild(quizEl);
+            });
+
+            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+            accordionButtons.forEach(clickedButton => {
+                clickedButton.addEventListener('click', () => {
+                    const content = clickedButton.nextElementSibling;
+                    const isOpening = content.classList.contains('hidden');
+                    accordionButtons.forEach(button => {
+                        if (button !== clickedButton) {
+                            button.classList.remove('active');
+                            button.nextElementSibling.classList.add('hidden');
+                        }
+                    });
+                    clickedButton.classList.toggle('active');
+                    content.classList.toggle('hidden');
+                    if (isOpening) { if (window.MathJax) { MathJax.typesetPromise([content]); } }
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('wrong');
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) { correctOption.classList.add('correct'); }
+                    }
+                    if (window.MathJax) { MathJax.typesetPromise([explanation]); }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
