@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fungsi Invers Trigonometri - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png"> 
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+            --accent-purple: #8957e5; --accent-orange: #FF6B35;
+        }
+        body {
+            background-color: var(--bg-main); color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2, h3 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        h3 { color: #58a6ff; margin-top: 2rem; }
+        .hidden { display: none; }
+        .svg-container { 
+            text-align: center; margin: 1.5rem 0; background-color: #0D1117; 
+            padding: 1rem; border-radius: 8px; border: 1px solid var(--border-color);
+            overflow-x: auto;
+        }
+        
+        .strategy-box {
+            background-color: rgba(57, 211, 83, 0.05);
+            border-left: 4px solid var(--accent-green);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        .explainer-button {
+            background: none; border: none; color: var(--accent-purple); font-size: 0.9em;
+            font-weight: bold; cursor: pointer; padding: 4px 8px; margin-top: 0.5rem;
+            border-radius: 6px; transition: background-color 0.2s; display: inline-flex; align-items: center;
+        }
+        .explainer-button:hover { background-color: rgba(137, 87, 229, 0.1); }
+        .explainer-button .fas { margin-left: 8px; transition: transform 0.3s ease; }
+        .explainer-button.active .fas { transform: rotate(90deg); }
+        .explainer-content {
+            margin-top: 1rem; padding: 1rem;
+            background-color: rgba(137, 87, 229, 0.05);
+            border-left: 4px solid var(--accent-purple);
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary); width: 100%; padding: 1rem;
+            text-align: left; font-size: 1.1rem; font-weight: 600; border: none; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.7; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        p, li, .quiz-explanation, .explainer-content, .strategy-box { overflow-x: auto; padding-bottom: 8px; }
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+
+        .graph-title { text-align: center; font-size: 0.9em; color: var(--text-secondary); margin-bottom: 0.5rem; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <h1>Fungsi Invers Trigonometri</h1>
+        <p>
+            Selama ini kita selalu bertanya, "Berapa nilai sinus dari sudut $30^\circ$?" Fungsi invers membalik pertanyaan tersebut menjadi: <strong>"Sudut berapakah yang nilai sinusnya $\frac{1}{2}$?"</strong>
+        </p>
+        <p>
+            Fungsi invers ditulis dengan notasi <b>arcsin, arccos, arctan</b> atau <b>$\sin^{-1}, \cos^{-1}, \tan^{-1}$</b>. Keduanya berarti sama. Penting untuk diingat, $\sin^{-1}(x)$ <strong>bukan</strong> berarti $\frac{1}{\sin(x)}$.
+        </p>
+        
+        <h2>Masalah Utama: Fungsi Periodik Tidak Satu-ke-Satu</h2>
+        <p>
+            Sebuah fungsi hanya bisa memiliki invers jika ia bersifat "satu-ke-satu" (setiap input punya output unik, dan setiap output berasal dari satu input unik). Namun, fungsi trigonometri bersifat periodik. Sebagai contoh, $\sin(30^\circ)$, $\sin(150^\circ)$, dan $\sin(390^\circ)$ semuanya menghasilkan nilai yang sama, yaitu $\frac{1}{2}$.
+        </p>
+        <p>
+            Untuk mengatasi ini, kita harus <strong>membatasi domain</strong> (daerah asal) fungsi trigonometri asli sehingga pada interval tersebut ia menjadi fungsi satu-ke-satu.
+        </p>
+
+        <div class="graph-title">Masalah: Sinus Gagal Uji Garis Horizontal</div>
+        <div class="svg-container">
+            <svg width="600" height="280" viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg">
+                <!-- Grid -->
+                <defs>
+                    <pattern id="grid" width="40" height="20" patternUnits="userSpaceOnUse">
+                        <path d="M 40 0 L 0 0 0 20" fill="none" stroke="#30363D" stroke-width="0.5" opacity="0.3"/>
+                    </pattern>
+                </defs>
+                <rect width="600" height="280" fill="url(#grid)" />
+                
+                <!-- Axes -->
+                <line x1="50" y1="140" x2="550" y2="140" stroke="#8B949E" stroke-width="2"/>
+                <line x1="50" y1="30" x2="50" y2="250" stroke="#8B949E" stroke-width="2"/>
+                
+                <!-- Full sine curve (multiple periods) -->
+                <path d="M 50 140 
+                         C 90 65, 130 65, 170 140
+                         C 210 215, 250 215, 290 140
+                         C 330 65, 370 65, 410 140
+                         C 450 215, 490 215, 530 140" 
+                      fill="none" stroke="#2F81F7" stroke-width="3" opacity="0.5"/>
+                
+                <!-- Horizontal line test at y = 0.5 -->
+                <line x1="40" y1="102.5" x2="540" y2="102.5" stroke="#F85149" stroke-width="2" stroke-dasharray="8,4"/>
+                
+                <!-- Intersection points -->
+                <circle cx="132" cy="102.5" r="4" fill="#F85149"/>
+                <circle cx="248" cy="102.5" r="4" fill="#F85149"/>
+                <circle cx="372" cy="102.5" r="4" fill="#F85149"/>
+                <circle cx="488" cy="102.5" r="4" fill="#F85149"/>
+                
+                <!-- Y-axis labels -->
+                <text x="35" y="70" font-size="12" fill="#C9D1D9" text-anchor="middle">1</text>
+                <text x="35" y="107" font-size="12" fill="#F85149" text-anchor="middle">0.5</text>
+                <text x="35" y="145" font-size="12" fill="#C9D1D9" text-anchor="middle">0</text>
+                <text x="35" y="220" font-size="12" fill="#C9D1D9" text-anchor="middle">-1</text>
+                
+                <!-- X-axis labels -->
+                <text x="50" y="265" font-size="11" fill="#C9D1D9" text-anchor="middle">-π</text>
+                <text x="130" y="265" font-size="11" fill="#C9D1D9" text-anchor="middle">-π/2</text>
+                <text x="210" y="265" font-size="11" fill="#C9D1D9" text-anchor="middle">0</text>
+                <text x="290" y="265" font-size="11" fill="#C9D1D9" text-anchor="middle">π/2</text>
+                <text x="370" y="265" font-size="11" fill="#C9D1D9" text-anchor="middle">π</text>
+                <text x="450" y="265" font-size="11" fill="#C9D1D9" text-anchor="middle">3π/2</text>
+                <text x="530" y="265" font-size="11" fill="#C9D1D9" text-anchor="middle">2π</text>
+                
+                <!-- Labels for intersection points -->
+                <text x="132" y="90" font-size="10" fill="#F85149" text-anchor="middle">30°</text>
+                <text x="248" y="90" font-size="10" fill="#F85149" text-anchor="middle">150°</text>
+                <text x="372" y="90" font-size="10" fill="#F85149" text-anchor="middle">210°</text>
+                <text x="488" y="90" font-size="10" fill="#F85149" text-anchor="middle">330°</text>
+                
+                <!-- Legend -->
+                <text x="70" y="50" font-size="12" fill="#F85149">Garis y = 0.5 memotong kurva di 4 titik!</text>
+            </svg>
+        </div>
+
+        <div class="graph-title">Solusi: Membatasi Domain untuk Arcsinus</div>
+        <div class="svg-container">
+            <svg width="600" height="280" viewBox="0 0 600 280" xmlns="http://www.w3.org/2000/svg">
+                <!-- Grid -->
+                <rect width="600" height="280" fill="url(#grid)" />
+                
+                <!-- Axes -->
+                <line x1="50" y1="140" x2="550" y2="140" stroke="#8B949E" stroke-width="2"/>
+                <line x1="50" y1="30" x2="50" y2="250" stroke="#8B949E" stroke-width="2"/>
+                
+                <!-- Faded full sine curve -->
+                <path d="M 50 140 
+                         C 90 65, 130 65, 170 140
+                         C 210 215, 250 215, 290 140
+                         C 330 65, 370 65, 410 140
+                         C 450 215, 490 215, 530 140" 
+                      fill="none" stroke="#2F81F7" stroke-width="2" opacity="0.3"/>
+                
+                <!-- Highlighted restricted domain [-π/2, π/2] -->
+                <path d="M 130 65 C 170 215, 210 215, 290 65" 
+                      fill="none" stroke="#39D353" stroke-width="4"/>
+                
+                <!-- Domain restriction indicators -->
+                <rect x="125" y="25" width="170" height="230" fill="rgba(57, 211, 83, 0.1)" stroke="rgba(57, 211, 83, 0.3)" stroke-width="2" stroke-dasharray="5,5"/>
+                
+                <!-- Horizontal line test -->
+                <line x1="40" y1="102.5" x2="540" y2="102.5" stroke="#F85149" stroke-width="2" stroke-dasharray="8,4"/>
+                
+                <!-- Only one intersection in restricted domain -->
+                <circle cx="172" cy="102.5" r="4" fill="#39D353"/>
+                
+                <!-- Y-axis labels -->
+                <text x="35" y="70" font-size="12" fill="#C9D1D9" text-anchor="middle">1</text>
+                <text x="35" y="107" font-size="12" fill="#F85149" text-anchor="middle">0.5</text>
+                <text x="35" y="145" font-size="12" fill="#C9D1D9" text-anchor="middle">0</text>
+                <text x="35" y="220" font-size="12" fill="#C9D1D9" text-anchor="middle">-1</text>
+                
+                <!-- X-axis labels -->
+                <text x="130" y="265" font-size="11" fill="#39D353" text-anchor="middle">-π/2</text>
+                <text x="210" y="265" font-size="11" fill="#C9D1D9" text-anchor="middle">0</text>
+                <text x="290" y="265" font-size="11" fill="#39D353" text-anchor="middle">π/2</text>
+                
+                <!-- Unique intersection point -->
+                <text x="172" y="90" font-size="10" fill="#39D353" text-anchor="middle">30°</text>
+                
+                <!-- Legend -->
+                <text x="320" y="50" font-size="12" fill="#39D353">Domain terbatas: [-π/2, π/2]</text>
+                <text x="320" y="70" font-size="12" fill="#39D353">Hanya 1 titik potong!</text>
+            </svg>
+        </div>
+
+        <h2>Grafik Fungsi Invers</h2>
+        <p>Setelah domain dibatasi, kita dapat membuat grafik fungsi inversnya dengan "membalik" sumbu x dan y.</p>
+
+        <div class="graph-title">Grafik y = arcsin(x)</div>
+        <div class="svg-container">
+            <svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                <!-- Grid -->
+                <defs>
+                    <pattern id="grid-small" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#30363D" stroke-width="0.5" opacity="0.3"/>
+                    </pattern>
+                </defs>
+                <rect width="400" height="400" fill="url(#grid-small)" />
+                
+                <!-- Axes -->
+                <line x1="200" y1="30" x2="200" y2="370" stroke="#8B949E" stroke-width="2"/>
+                <line x1="30" y1="200" x2="370" y2="200" stroke="#8B949E" stroke-width="2"/>
+                
+                <!-- Arcsin curve: domain [-1,1], range [-π/2, π/2] -->
+                <!-- Curve from (-1, -π/2) to (1, π/2) -->
+                <path d="M 100 280 Q 150 240 200 200 Q 250 160 300 120" 
+                      fill="none" stroke="#39D353" stroke-width="4"/>
+                
+                <!-- Domain boundaries -->
+                <line x1="100" y1="30" x2="100" y2="370" stroke="#F85149" stroke-width="2" stroke-dasharray="5,5" opacity="0.7"/>
+                <line x1="300" y1="30" x2="300" y2="370" stroke="#F85149" stroke-width="2" stroke-dasharray="5,5" opacity="0.7"/>
+                
+                <!-- Range boundaries -->
+                <line x1="30" y1="120" x2="370" y2="120" stroke="#F85149" stroke-width="2" stroke-dasharray="5,5" opacity="0.7"/>
+                <line x1="30" y1="280" x2="370" y2="280" stroke="#F85149" stroke-width="2" stroke-dasharray="5,5" opacity="0.7"/>
+                
+                <!-- Key points -->
+                <circle cx="100" cy="280" r="3" fill="#39D353"/>
+                <circle cx="200" cy="200" r="3" fill="#39D353"/>
+                <circle cx="300" cy="120" r="3" fill="#39D353"/>
+                
+                <!-- X-axis labels -->
+                <text x="100" y="390" font-size="12" fill="#C9D1D9" text-anchor="middle">-1</text>
+                <text x="200" y="390" font-size="12" fill="#C9D1D9" text-anchor="middle">0</text>
+                <text x="300" y="390" font-size="12" fill="#C9D1D9" text-anchor="middle">1</text>
+                
+                <!-- Y-axis labels -->
+                <text x="20" y="125" font-size="12" fill="#C9D1D9" text-anchor="middle">π/2</text>
+                <text x="20" y="205" font-size="12" fill="#C9D1D9" text-anchor="middle">0</text>
+                <text x="20" y="285" font-size="12" fill="#C9D1D9" text-anchor="middle">-π/2</text>
+                
+                <!-- Point labels -->
+                <text x="85" y="295" font-size="10" fill="#39D353">(-1,-π/2)</text>
+                <text x="215" y="195" font-size="10" fill="#39D353">(0,0)</text>
+                <text x="215" y="115" font-size="10" fill="#39D353">(1,π/2)</text>
+            </svg>
+        </div>
+
+        <div class="graph-title">Grafik y = arccos(x)</div>
+        <div class="svg-container">
+            <svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                <!-- Grid -->
+                <rect width="400" height="400" fill="url(#grid-small)" />
+                
+                <!-- Axes -->
+                <line x1="200" y1="30" x2="200" y2="370" stroke="#8B949E" stroke-width="2"/>
+                <line x1="30" y1="200" x2="370" y2="200" stroke="#8B949E" stroke-width="2"/>
+                
+                <!-- Arccos curve: domain [-1,1], range [0, π] -->
+                <path d="M 100 80 Q 150 100 200 160 Q 250 220 300 320" 
+                      fill="none" stroke="#FF6B35" stroke-width="4"/>
+                
+                <!-- Domain boundaries -->
+                <line x1="100" y1="30" x2="100" y2="370" stroke="#F85149" stroke-width="2" stroke-dasharray="5,5" opacity="0.7"/>
+                <line x1="300" y1="30" x2="300" y2="370" stroke="#F85149" stroke-width="2" stroke-dasharray="5,5" opacity="0.7"/>
+                
+                <!-- Range boundaries -->
+                <line x1="30" y1="80" x2="370" y2="80" stroke="#F85149" stroke-width="2" stroke-dasharray="5,5" opacity="0.7"/>
+                <line x1="30" y1="320" x2="370" y2="320" stroke="#F85149" stroke-width="2" stroke-dasharray="5,5" opacity="0.7"/>
+                
+                <!-- Key points -->
+                <circle cx="100" cy="80" r="3" fill="#FF6B35"/>
+                <circle cx="200" cy="160" r="3" fill="#FF6B35"/>
+                <circle cx="300" cy="320" r="3" fill="#FF6B35"/>
+                
+                <!-- X-axis labels -->
+                <text x="100" y="390" font-size="12" fill="#C9D1D9" text-anchor="middle">-1</text>
+                <text x="200" y="390" font-size="12" fill="#C9D1D9" text-anchor="middle">0</text>
+                <text x="300" y="390" font-size="12" fill="#C9D1D9" text-anchor="middle">1</text>
+                
+                <!-- Y-axis labels -->
+                <text x="20" y="85" font-size="12" fill="#C9D1D9" text-anchor="middle">π</text>
+                <text x="20" y="165" font-size="12" fill="#C9D1D9" text-anchor="middle">π/2</text>
+                <text x="20" y="325" font-size="12" fill="#C9D1D9" text-anchor="middle">0</text>
+                
+                <!-- Point labels -->
+                <text x="85" y="70" font-size="10" fill="#FF6B35">(-1,π)</text>
+                <text x="215" y="155" font-size="10" fill="#FF6B35">(0,π/2)</text>
+                <text x="215" y="335" font-size="10" fill="#FF6B35">(1,0)</text>
+            </svg>
+        </div>
+
+        <div class="graph-title">Grafik y = arctan(x)</div>
+        <div class="svg-container">
+            <svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                <!-- Grid -->
+                <rect width="400" height="400" fill="url(#grid-small)" />
+                
+                <!-- Axes -->
+                <line x1="200" y1="30" x2="200" y2="370" stroke="#8B949E" stroke-width="2"/>
+                <line x1="30" y1="200" x2="370" y2="200" stroke="#8B949E" stroke-width="2"/>
+                
+                <!-- Horizontal asymptotes -->
+                <line x1="30" y1="120" x2="370" y2="120" stroke="#F85149" stroke-width="2" stroke-dasharray="5,5" opacity="0.7"/>
+                <line x1="30" y1="280" x2="370" y2="280" stroke="#F85149" stroke-width="2" stroke-dasharray="5,5" opacity="0.7"/>
+                
+                <!-- Arctan curve: domain (-∞,∞), range (-π/2, π/2) -->
+                <path d="M 30 285 Q 100 250 150 220 Q 200 200 250 180 Q 300 150 370 115" 
+                      fill="none" stroke="#8957e5" stroke-width="4"/>
+                
+                <!-- Key points -->
+                <circle cx="200" cy="200" r="3" fill="#8957e5"/>
+                <circle cx="100" cy="240" r="3" fill="#8957e5"/>
+                <circle cx="300" cy="160" r="3" fill="#8957e5"/>
+                
+                <!-- X-axis labels -->
+                <text x="100" y="390" font-size="12" fill="#C9D1D9" text-anchor="middle">-1</text>
+                <text x="200" y="390" font-size="12" fill="#C9D1D9" text-anchor="middle">0</text>
+                <text x="300" y="390" font-size="12" fill="#C9D1D9" text-anchor="middle">1</text>
+                
+                <!-- Y-axis labels -->
+                <text x="20" y="125" font-size="12" fill="#F85149" text-anchor="middle">π/2</text>
+                <text x="20" y="205" font-size="12" fill="#C9D1D9" text-anchor="middle">0</text>
+                <text x="20" y="285" font-size="12" fill="#F85149" text-anchor="middle">-π/2</text>
+                
+                <!-- Point labels -->
+                <text x="85" y="255" font-size="10" fill="#8957e5">(-1,-π/4)</text>
+                <text x="215" y="195" font-size="10" fill="#8957e5">(0,0)</text>
+                <text x="215" y="155" font-size="10" fill="#8957e5">(1,π/4)</text>
+                
+                <!-- Asymptote labels -->
+                <text x="320" y="115" font-size="10" fill="#F85149">y = π/2</text>
+                <text x="320" y="295" font-size="10" fill="#F85149">y = -π/2</text>
+            </svg>
+        </div>
+
+        <h2>Fungsi Invers Utama: Domain & Range</h2>
+        <p>Hasil dari pembatasan domain ini adalah definisi standar untuk setiap fungsi invers, terutama pada <b>Range</b>-nya (daerah hasil), yang kini menjadi terbatas.</p>
+
+        <h3>1. Arcsinus: $y = \arcsin(x)$</h3>
+        <ul>
+            <li><b>Domain (Nilai):</b> $[-1, 1]$</li>
+            <li><b>Range (Sudut):</b> $[-\frac{\pi}{2}, \frac{\pi}{2}]$ atau $[-90^\circ, 90^\circ]$</li>
+        </ul>
+        
+        <h3>2. Arccosinus: $y = \arccos(x)$</h3>
+        <ul>
+            <li><b>Domain (Nilai):</b> $[-1, 1]$</li>
+            <li><b>Range (Sudut):</b> $[0, \pi]$ atau $[0^\circ, 180^\circ]$</li>
+        </ul>
+        
+        <h3>3. Arctangen: $y = \arctan(x)$</h3>
+        <ul>
+            <li><b>Domain (Nilai):</b> $(-\infty, \infty)$ atau $\mathbb{R}$</li>
+            <li><b>Range (Sudut):</b> $(-\frac{\pi}{2}, \frac{\pi}{2})$ atau $(-90^\circ, 90^\circ)$</li>
+        </ul>
+
+        <h2>Penerapan: Menyederhanakan Ekspresi Komposisi</h2>
+        <p>
+            Soal yang sering muncul adalah menyederhanakan bentuk seperti $\cos(\arcsin(x))$. Kunci untuk menyelesaikannya adalah dengan <strong>menggambar segitiga siku-siku</strong>.
+        </p>
+        <p><b>Contoh:</b> Sederhanakan $\cos(\arcsin(x))$.</p>
+        <ol>
+            <li><b>Misalkan:</b> Biarkan $\theta = \arcsin(x)$. Ini berarti $\sin(\theta) = x = \frac{x}{1}$.</li>
+            <li><b>Gambarkan Segitiga:</b> Buat segitiga siku-siku di mana sisi <b>Depan</b> adalah $x$ dan sisi <b>Miring</b> adalah 1.</li>
+            <li><b>Gunakan Pythagoras:</b> Sisi <b>Samping</b>-nya adalah $\sqrt{1^2 - x^2} = \sqrt{1-x^2}$.</li>
+            <li><b>Selesaikan:</b> Soal awal sekarang menjadi "hitung $\cos(\theta)$ dari segitiga tersebut".
+            <br>$\cos(\theta) = \frac{\text{Samping}}{\text{Miring}} = \frac{\sqrt{1-x^2}}{1} = \sqrt{1-x^2}$.
+            </li>
+        </ol>
+        
+        <div class="strategy-box">
+            <b>Pola Pikir Invers Trigonometri:</b>
+            <ol>
+                <li><b>Tanyakan "Sudut Berapa?":</b> Ingat, output dari fungsi invers adalah sebuah sudut.</li>
+                <li><b>Kunci Ada di Range:</b> Saat menghitung nilai seperti $\arccos(-\frac{1}{2})$, jawabannya harus berada dalam rentang $[0^\circ, 180^\circ]$. Jadi, jawabannya adalah $120^\circ$, bukan $240^\circ$ atau $-120^\circ$.</li>
+                <li><b>Jika Ada Variabel, Gambar Segitiga!:</b> Untuk soal komposisi yang melibatkan variabel (seperti $x$), menggambar segitiga siku-siku adalah cara paling intuitif untuk menyelesaikannya.</li>
+            </ol>
+        </div>
+
+        <h2>Uji Pemahaman</h2>
+        <p>Gunakan definisi dan batasan range untuk menyelesaikan soal-soal berikut.</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+        const quizzes = [
+            { q: "Berapakah nilai dari $\\arcsin(\\frac{\\sqrt{2}}{2})$ dalam derajat?", options: ["$45^\\circ$", "$135^\\circ$", "$225^\\circ$", "$315^\\circ$"], correct: 0, explanation: "Pertanyaannya adalah 'sudut berapa antara -90° dan 90° yang nilai sinusnya $\\frac{\\sqrt{2}}{2}$?'. Jawabannya adalah $45^\\circ$. Meskipun $\\sin(135^\\circ)$ juga $\\frac{\\sqrt{2}}{2}$, sudut $135^\\circ$ berada di luar rentang resmi Arcsin." },
+            { q: "Nilai dari $\\arccos(-\\frac{1}{2})$ dalam derajat adalah...", options: ["$-60^\\circ$", "$60^\\circ$", "$120^\\circ$", "$240^\\circ$"], correct: 2, explanation: "Pertanyaannya adalah 'sudut berapa antara 0° dan 180° yang nilai cosinusnya $-\\frac{1}{2}$?'. Sudut di Kuadran II yang berelasi dengan $60^\\circ$ adalah $180^\\circ - 60^\\circ = 120^\\circ$. Sudut ini berada dalam rentang Arccos." },
+            { q: "Manakah yang merupakan domain dari fungsi $y = \\arccos(x)$?", options: ["$[-1, 1]$", "$[0, \\pi]$", "Semua bilangan real", "$(-1, 1)$"], correct: 0, explanation: "Domain adalah himpunan input yang valid. Karena nilai output dari fungsi cosinus asli hanya berkisar dari -1 hingga 1, maka input untuk fungsi inversnya (arccosinus) juga terbatas pada interval $[-1, 1]$." },
+            { q: "Bentuk sederhana dari $\\tan(\\arccos(x))$ adalah...", options: ["$\\frac{x}{\\sqrt{1-x^2}}$", "$\\frac{\\sqrt{1-x^2}}{x}$", "$x$", "$\\frac{1}{x}$"], correct: 1, explanation: "Misalkan $\\theta = \\arccos(x)$, maka $\\cos(\\theta) = x = \\frac{x}{1}$. Gambar segitiga siku-siku dengan sisi Samping = $x$ dan Miring = 1. Sisi Depan = $\\sqrt{1^2 - x^2}$. Maka, $\\tan(\\theta) = \\frac{Depan}{Samping} = \\frac{\\sqrt{1-x^2}}{x}$." },
+            { q: "Nilai dari $\\cos(2\\arcsin(\\frac{3}{5}))$ adalah...", options: ["$\\frac{24}{25}$", "$\\frac{7}{25}$", "$\\frac{8}{5}$", "$\\frac{4}{5}$"], correct: 1, explanation: "Misalkan $\\theta = \\arcsin(\\frac{3}{5})$, maka $\\sin(\\theta) = \\frac{3}{5}$. Kita perlu mencari $\\cos(2\\theta)$. Gunakan identitas sudut ganda $\\cos(2\\theta) = 1 - 2\\sin^2(\\theta)$. Substitusi nilai sinus: $1 - 2(\\frac{3}{5})^2 = 1 - 2(\\frac{9}{25}) = 1 - \\frac{18}{25} = \\frac{7}{25}$." }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.explainer-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    button.classList.toggle('active');
+                    const content = button.nextElementSibling;
+                    const isOpening = content.classList.contains('hidden');
+                    content.classList.toggle('hidden');
+                    if (isOpening) { if(window.MathJax) { MathJax.typesetPromise([content]); } }
+                });
+            });
+
+            const quizContainer = document.getElementById("quiz-container");
+            if (!quizContainer) return;
+            quizzes.forEach((quiz, index) => {
+                const quizEl = document.createElement("div");
+                quizEl.className = "quiz-accordion";
+                const optionsHtml = quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("");
+                quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${optionsHtml}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+                quizContainer.appendChild(quizEl);
+            });
+
+            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+            accordionButtons.forEach(clickedButton => {
+                clickedButton.addEventListener('click', () => {
+                    const content = clickedButton.nextElementSibling;
+                    const isOpening = content.classList.contains('hidden');
+                    accordionButtons.forEach(button => {
+                        if (button !== clickedButton) {
+                            button.classList.remove('active');
+                            button.nextElementSibling.classList.add('hidden');
+                        }
+                    });
+                    clickedButton.classList.toggle('active');
+                    content.classList.toggle('hidden');
+                    if (isOpening) { if (window.MathJax) { MathJax.typesetPromise([content]); } }
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('wrong');
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) { correctOption.classList.add('correct'); }
+                    }
+                    if (window.MathJax) { MathJax.typesetPromise([explanation]); }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
