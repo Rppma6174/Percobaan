@@ -583,9 +583,9 @@ const allContentData = {
             },
             { 
             id: 'materi_trigonometri_2', 
-            title: 'Esensi Trigonometri', 
+            title: 'Sudut & Pengukuran', 
             type: 'HTML Document', 
-            filePath: 'UMT_Learning/Esensi Trigonometri.html', 
+            filePath: 'UMT_Learning/Sudut Dan Pengukuran.html', 
             fileType: 'html' 
             },
         ],
