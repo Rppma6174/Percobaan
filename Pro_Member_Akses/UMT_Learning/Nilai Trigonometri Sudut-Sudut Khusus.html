@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nilai Trigonometri Sudut Khusus (Lanjutan) - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png"> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+            --accent-purple: #8957e5;
+        }
+        body {
+            background-color: var(--bg-main); color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2, h3 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        h3 { color: #58a6ff; margin-top: 2rem; }
+        .hidden { display: none; }
+        
+        .strategy-box {
+            background-color: rgba(57, 211, 83, 0.05);
+            border-left: 4px solid var(--accent-green);
+            padding: 1rem; margin: 1.5rem 0; border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        .explainer-button {
+            background: none; border: none; color: var(--accent-purple); font-size: 0.9em;
+            font-weight: bold; cursor: pointer; padding: 4px 8px; margin-top: 0.5rem;
+            border-radius: 6px; transition: background-color 0.2s; display: inline-flex; align-items: center;
+        }
+        .explainer-button:hover { background-color: rgba(137, 87, 229, 0.1); }
+        .explainer-button .fas { margin-left: 8px; transition: transform 0.3s ease; }
+        .explainer-button.active .fas { transform: rotate(90deg); }
+        .explainer-content {
+            margin-top: 1rem; padding: 1rem;
+            background-color: rgba(137, 87, 229, 0.05);
+            border-left: 4px solid var(--accent-purple);
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary); width: 100%; padding: 1rem;
+            text-align: left; font-size: 1.1rem; font-weight: 600; border: none; cursor: pointer;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) { opacity: 0.7; cursor: not-allowed; }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct { border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold; }
+        .quiz-option.wrong { border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1); }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        p, li, .quiz-explanation, .explainer-content, .strategy-box { overflow-x: auto; padding-bottom: 8px; }
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <h1>Menghitung Nilai Sudut Non-Istimewa</h1>
+        <p>
+            Kita telah menguasai nilai-nilai untuk sudut istimewa (0°, 30°, 45°, 60°, 90°). Namun, bagaimana dengan sudut seperti 15°, 75°, atau bahkan 22.5°? Di sinilah identitas trigonometri lanjutan berperan sebagai "perkakas" kita. Tujuannya adalah <strong>mendekomposisi</strong> sudut yang tidak kita kenal menjadi kombinasi dari sudut-sudut yang sudah kita kenal.
+        </p>
+        
+        <h2>Strategi 1: Menggunakan Rumus Jumlah & Selisih Sudut</h2>
+        <p>
+            Ini adalah metode yang paling sering digunakan untuk sudut yang merupakan hasil penjumlahan atau pengurangan langsung dari sudut istimewa.
+        </p>
+        <h3>Contoh Penerapan: Menghitung $\cos(75^\circ)$</h3>
+        <ol>
+            <li><b>Dekonstruksi Sudut:</b> Pikirkan, bagaimana cara mendapatkan 75° dari 30°, 45°, atau 60°? Cara yang paling jelas adalah $75^\circ = 45^\circ + 30^\circ$.</li>
+            <li><b>Pilih Rumus:</b> Kita akan menggunakan rumus jumlah sudut untuk cosinus: $\cos(A+B) = \cos A \cos B - \sin A \sin B$.</li>
+            <li><b>Substitusi & Hitung:</b>
+                <p>$\cos(75^\circ) = \cos(45^\circ+30^\circ)$</p>
+                <p>$= \cos(45^\circ)\cos(30^\circ) - \sin(45^\circ)\sin(30^\circ)$</p>
+                <p>$= (\frac{\sqrt{2}}{2})(\frac{\sqrt{3}}{2}) - (\frac{\sqrt{2}}{2})(\frac{1}{2})$</p>
+                <p>$= \frac{\sqrt{6}}{4} - \frac{\sqrt{2}}{4} = \frac{\sqrt{6}-\sqrt{2}}{4}$</p>
+            </li>
+        </ol>
+
+        <h2>Strategi 2: Menggunakan Rumus Sudut Ganda & Setengah Sudut</h2>
+        <p>
+            Metode ini sangat efektif untuk sudut yang merupakan separuh dari sudut istimewa atau sudut yang sudah kita ketahui.
+        </p>
+        <h3>Contoh Penerapan: Menghitung $\sin(22.5^\circ)$</h3>
+        <ol>
+            <li><b>Dekonstruksi Sudut:</b> Kita lihat bahwa $22.5^\circ$ adalah setengah dari $45^\circ$.</li>
+            <li><b>Pilih Rumus:</b> Kita gunakan rumus setengah sudut untuk sinus: $\sin(\frac{A}{2}) = \pm \sqrt{\frac{1 - \cos A}{2}}$.</li>
+            <li><b>Substitusi & Hitung:</b> Dengan $A=45^\circ$:
+                <p>$\sin(22.5^\circ) = \sin(\frac{45^\circ}{2})$</p>
+                <p>$= \sqrt{\frac{1 - \cos(45^\circ)}{2}}$ <i>(Kita pilih tanda + karena 22.5° ada di Kuadran I)</i></p>
+                <p>$= \sqrt{\frac{1 - \frac{\sqrt{2}}{2}}{2}} = \sqrt{\frac{\frac{2-\sqrt{2}}{2}}{2}} = \sqrt{\frac{2-\sqrt{2}}{4}} = \frac{\sqrt{2-\sqrt{2}}}{2}$</p>
+            </li>
+        </ol>
+
+        <div class="strategy-box">
+            <b>Pola Pikir Memilih Strategi:</b>
+            <ul>
+                <li>Lihat sudut target. Apakah ia bisa dibentuk dari <b>penjumlahan/pengurangan</b> sudut istimewa (misal: $105^\circ = 60^\circ+45^\circ$)? Jika ya, gunakan <b>Rumus Jumlah/Selisih</b>.</li>
+                <li>Apakah sudut target adalah <b>setengah</b> dari sudut istimewa (misal: $15^\circ = 30^\circ/2$)? Jika ya, gunakan <b>Rumus Setengah Sudut</b>.</li>
+                <li>Terkadang kedua cara bisa digunakan. Pilihlah yang perhitungannya paling sederhana menurut Anda.</li>
+            </ul>
+        </div>
+        
+        <h2>Tantangan Lanjutan: Sudut yang Lebih Rumit</h2>
+        <p>
+            Bagaimana jika kita ingin mencari nilai untuk sudut seperti $3^\circ$? Ini adalah "puzzle" trigonometri yang membutuhkan kombinasi beberapa identitas. Prosesnya menunjukkan kekuatan sejati dari manipulasi aljabar, yaitu dengan mencari dua sudut yang selisihnya adalah $3^\circ$ dan nilainya bisa kita cari, misalnya $18^\circ$ dan $15^\circ$. Ini adalah contoh bagaimana semua rumus ini bekerja bersama untuk memecahkan masalah yang kompleks.
+        </p>
+
+        <h2>Uji Pemahaman</h2>
+        <p>Gunakan berbagai identitas yang telah dipelajari untuk menemukan nilai-nilai trigonometri berikut.</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+        const quizzes = [
+            { q: "Nilai eksak dari $\\cos(15^\\circ)$ adalah...", options: ["$\\frac{\\sqrt{6}-\\sqrt{2}}{4}$", "$\\frac{\\sqrt{2}-\\sqrt{6}}{4}$", "$\\frac{\\sqrt{6}+\\sqrt{2}}{4}$", "$\\frac{\\sqrt{3}-1}{2}$"], correct: 2, explanation: "Gunakan rumus selisih sudut: $\\cos(15^\\circ) = \\cos(45^\\circ-30^\\circ) = \\cos(45^\\circ)\\cos(30^\\circ) + \\sin(45^\\circ)\\sin(30^\\circ) = (\\frac{\\sqrt{2}}{2})(\\frac{\\sqrt{3}}{2}) + (\\frac{\\sqrt{2}}{2})(\\frac{1}{2}) = \\frac{\\sqrt{6}+\\sqrt{2}}{4}$." },
+            { q: "Ekspresi $\\sin(112.5^\\circ)$ paling efisien dihitung menggunakan...", options: ["Rumus Jumlah Sudut ($90^\\circ+22.5^\\circ$)", "Rumus Selisih Sudut ($135^\\circ-22.5^\\circ$)", "Rumus Setengah Sudut dari $225^\\circ$", "Rumus Sudut Ganda dari $56.25^\\circ$"], correct: 2, explanation: "Sudut $112.5^\\circ$ adalah setengah dari $225^\\circ$. Karena $225^\\circ$ adalah sudut berelasi dari $45^\\circ$ ($180^\\circ+45^\\circ$) yang nilainya kita ketahui, maka menggunakan rumus setengah sudut adalah strategi yang paling langsung dan efisien." },
+            { q: "Nilai dari $2\\cos^2(15^\\circ) - 1$ adalah...", options: ["$\\frac{1}{2}$", "$\\frac{\\sqrt{2}}{2}$", "$\\frac{\\sqrt{3}}{2}$", "1"], correct: 2, explanation: "Ini adalah soal mengenali pola. Ekspresi $2\\cos^2(A) - 1$ adalah salah satu bentuk dari rumus sudut ganda, $\\cos(2A)$. Dengan $A = 15^\\circ$, maka ekspresi ini sama dengan $\\cos(2 \\times 15^\\circ) = \\cos(30^\\circ) = \\frac{\\sqrt{3}}{2}$." },
+            { q: "Nilai dari $\\tan(75^\\circ)$ dapat dihitung dengan memecah $75^\\circ$ menjadi...", options: ["$45^\\circ + 30^\\circ$", "$120^\\circ - 45^\\circ$", "Setengah dari $150^\\circ$", "Semua benar"], correct: 3, explanation: "Semua pilihan benar dan akan menghasilkan nilai yang sama. (A) adalah yang paling umum. (B) menggunakan sudut berelasi. (C) menggunakan rumus setengah sudut. Ini menunjukkan fleksibilitas identitas trigonometri." },
+            { q: "Nilai dari $\\frac{2\\tan(22.5^\\circ)}{1-\\tan^2(22.5^\\circ)}$ adalah...", options: ["$\\frac{\\sqrt{2}}{2}$", "1", "$\\sqrt{3}$", "Tak terdefinisi"], correct: 1, explanation: "Ekspresi ini adalah bentuk asli dari rumus sudut ganda untuk tangen, $\\tan(2A) = \\frac{2\\tan(A)}{1-\\tan^2(A)}$. Dengan $A=22.5^\\circ$, maka ekspresi ini sama dengan $\\tan(2 \\times 22.5^\\circ) = \\tan(45^\\circ) = 1$." }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.explainer-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    button.classList.toggle('active');
+                    const content = button.nextElementSibling;
+                    const isOpening = content.classList.contains('hidden');
+                    content.classList.toggle('hidden');
+                    if (isOpening) { if(window.MathJax) { MathJax.typesetPromise([content]); } }
+                });
+            });
+
+            const quizContainer = document.getElementById("quiz-container");
+            if (!quizContainer) return;
+            quizzes.forEach((quiz, index) => {
+                const quizEl = document.createElement("div");
+                quizEl.className = "quiz-accordion";
+                const optionsHtml = quiz.options.map((opt, i) => `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`).join("");
+                quizEl.innerHTML = `<button class="quiz-accordion-button"><span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i></button><div class="quiz-accordion-content hidden"><p class="question-text">${quiz.q}</p><div class="options-container">${optionsHtml}</div><div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div></div>`;
+                quizContainer.appendChild(quizEl);
+            });
+
+            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+            accordionButtons.forEach(clickedButton => {
+                clickedButton.addEventListener('click', () => {
+                    const content = clickedButton.nextElementSibling;
+                    const isOpening = content.classList.contains('hidden');
+                    accordionButtons.forEach(button => {
+                        if (button !== clickedButton) {
+                            button.classList.remove('active');
+                            button.nextElementSibling.classList.add('hidden');
+                        }
+                    });
+                    clickedButton.classList.toggle('active');
+                    content.classList.toggle('hidden');
+                    if (isOpening) { if (window.MathJax) { MathJax.typesetPromise([content]); } }
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('wrong');
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) { correctOption.classList.add('correct'); }
+                    }
+                    if (window.MathJax) { MathJax.typesetPromise([explanation]); }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
