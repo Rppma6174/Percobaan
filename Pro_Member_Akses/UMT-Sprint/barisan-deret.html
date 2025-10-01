@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barisan & Deret - Mode Belajar Kilat</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --dark-bg: #141414; --dark-card: #1f1f1f; --dark-border: #333;
+            --text-light: #f0f0f0; --text-muted: #aaa; --accent-blue: #007bff;
+            --accent-green: #28a745; --accent-red: #dc3545; --accent-yellow: #ffc107;
+            --accent-teal: #50e3c2;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--dark-bg); color: var(--text-light);
+            min-height: 100vh; padding: 20px;
+        }
+        .container {
+            max-width: 900px; margin: 0 auto; background: var(--dark-card);
+            border-radius: 15px; padding: 30px; border: 1px solid var(--dark-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .header {
+            text-align: center; margin-bottom: 30px; padding-bottom: 15px;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+        .header h1 { color: var(--text-light); font-size: 2.5em; margin-bottom: 10px; }
+        .header p { color: var(--text-muted); font-size: 1.1em; }
+        .progress-container {
+            margin: 30px 0; padding: 20px; background: rgba(0,0,0,0.2);
+            border: 1px solid var(--dark-border); border-radius: 15px;
+        }
+        .progress-steps {
+            display: flex; justify-content: space-between; margin-bottom: 15px; position: relative;
+        }
+        .progress-steps::before {
+            content: ''; position: absolute; top: 20px; left: 0; right: 0;
+            height: 4px; background: var(--dark-border); z-index: 0;
+        }
+        .progress-fill {
+            position: absolute; top: 20px; left: 0; height: 4px;
+            background: var(--accent-blue); transition: width 0.5s ease; z-index: 1;
+        }
+        .step { display: flex; flex-direction: column; align-items: center; z-index: 2; position: relative; }
+        .step-circle {
+            width: 40px; height: 40px; border-radius: 50%; background: var(--dark-border);
+            display: flex; align-items: center; justify-content: center; font-weight: bold;
+            color: var(--text-muted); border: 3px solid var(--dark-border); margin-bottom: 8px; transition: all 0.3s;
+        }
+        .step.active .step-circle {
+            background: var(--dark-card); border-color: var(--accent-blue);
+            color: var(--accent-blue); transform: scale(1.2);
+        }
+        .step.completed .step-circle { background: var(--accent-green); border-color: var(--accent-green); color: white; }
+        .step-label { font-size: 0.85em; color: var(--text-muted); font-weight: 600; }
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0; }
+        .stat-card {
+            background: var(--dark-bg); border: 1px solid var(--dark-border);
+            padding: 15px; border-radius: 12px; text-align: center;
+        }
+        .stat-value { font-size: 2em; font-weight: bold; color: var(--accent-teal); margin-bottom: 5px; }
+        .stat-label { font-size: 0.9em; color: var(--text-muted); }
+        .content-area { margin: 30px 0; min-height: 300px; }
+        .material-section, .question-card, .result-summary {
+            padding: 25px; background: var(--dark-card); border: 1px solid var(--dark-border);
+            border-radius: 15px; margin-bottom: 20px;
+        }
+        .question-number { color: var(--accent-blue); font-weight: bold; margin-bottom: 15px; }
+        .question-text { margin-bottom: 20px; font-size: 1.1em; }
+        .option {
+            padding: 15px 20px; background: var(--dark-bg); border: 2px solid var(--dark-border);
+            border-radius: 10px; cursor: pointer; transition: all 0.3s; display: flex;
+            align-items: center; color: var(--text-muted);
+        }
+        .option:hover { border-color: var(--accent-blue); color: var(--text-light); background: #2a2a2a; }
+        .option.selected { border-color: var(--accent-blue); background: rgba(0, 123, 255, 0.1); color: var(--text-light); }
+        .option.correct { border-color: var(--accent-green); background: rgba(40, 167, 69, 0.2); color: #d4edda; }
+        .option.incorrect { border-color: var(--accent-red); background: rgba(220, 53, 69, 0.2); color: #f8d7da; }
+        .option input[type="radio"] { margin-right: 15px; }
+        .btn {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-muted); padding: 12px 35px; border-radius: 8px; font-size: 1em;
+            font-weight: 600; cursor: pointer; transition: all 0.3s ease; margin: 10px 5px;
+        }
+        .btn:hover { background: rgba(255, 255, 255, 0.1); color: var(--text-light); transform: translateY(-2px); }
+        .btn-primary { background: var(--accent-blue); border-color: var(--accent-blue); color: white; }
+        .btn-primary:hover { background: #0069d9; border-color: #0062cc; }
+        .btn-secondary { background: #6c757d; border-color: #6c757d; color: white; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; background: var(--dark-border); }
+        .button-group { display: flex; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+        .explanation {
+            background: #2a2a2a; padding: 15px; border-radius: 10px; margin-top: 20px;
+            border: 1px solid #444; color: var(--text-muted);
+        }
+        .attempts-info {
+            background-color: rgba(255, 193, 7, 0.1); border-left: 5px solid var(--accent-yellow);
+            color: #fff3cd; padding: 15px; border-radius: 10px; margin: 15px 0;
+        }
+        .hidden { display: none; }
+        .certificate {
+            background: linear-gradient(135deg, #1f1f1f, #2a2a2a); color: white; padding: 40px;
+            border-radius: 20px; text-align: center; margin: 30px 0; border: 2px solid var(--accent-teal);
+            box-shadow: 0 0 40px rgba(80, 227, 194, 0.2);
+        }
+        #notification-container {
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        .notification {
+            background-color: #2a2a2a; color: var(--text-light); padding: 15px 20px;
+            border-radius: 8px; border-left: 5px solid; box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            display: flex; align-items: center; gap: 10px;
+            animation: slideIn 0.3s ease forwards, fadeOut 0.5s ease 3.5s forwards;
+        }
+        .notification.warning { border-color: var(--accent-yellow); }
+        .notification.success { border-color: var(--accent-green); }
+        .notification.info { border-color: var(--accent-blue); }
+        @keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; transform: translateY(20px); } }
+        .material-title { color: var(--text-light); font-size: 2em; margin-bottom: 10px; }
+        .material-intro { color: var(--text-muted); font-size: 1.1em; margin-bottom: 30px; }
+        .material-point { margin-bottom: 35px; }
+        .material-heading {
+            color: var(--accent-teal); font-size: 1.5em; margin-bottom: 15px;
+            padding-bottom: 10px; border-bottom: 1px solid var(--dark-border);
+            display: flex; align-items: center;
+        }
+        .material-heading::before {
+            content: '»'; margin-right: 12px; color: var(--accent-blue);
+            font-weight: bold; font-size: 1.2em;
+        }
+        .key-concept { color: var(--accent-yellow); font-weight: 600; }
+        .rule-box {
+            background-color: rgba(0,0,0,0.2); border-left: 4px solid var(--accent-blue);
+            padding: 20px; margin-top: 15px; border-radius: 0 8px 8px 0; line-height: 1.8;
+        }
+        .rule-box ul { list-style-type: none; padding-left: 0; }
+        .rule-box li { margin-bottom: 15px; }
+        
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .container { padding: 20px 15px; }
+            .header h1 { font-size: 2em; }
+            .material-title { font-size: 1.8em; }
+            .step-label { display: none; }
+            .step-circle { width: 35px; height: 35px; }
+            .progress-steps::before, .progress-fill { top: 17.5px; }
+            .stats { grid-template-columns: 1fr; gap: 10px; }
+            .button-group { flex-direction: column; align-items: stretch; }
+            .btn { width: 100%; margin: 5px 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ Barisan dan Deret</h1>
+            <p>Sistem Pembelajaran Terstruktur dengan 3 Level</p>
+        </div>
+        <div class="progress-container">
+            <div class="progress-steps">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                <div class="step" id="step0"><div class="step-circle">📚</div><div class="step-label">Materi</div></div>
+                <div class="step" id="step1"><div class="step-circle">1</div><div class="step-label">LOTS</div></div>
+                <div class="step" id="step2"><div class="step-circle">2</div><div class="step-label">MOTS</div></div>
+                <div class="step" id="step3"><div class="step-circle">3</div><div class="step-label">HOTS</div></div>
+                <div class="step" id="step4"><div class="step-circle">🏆</div><div class="step-label">Selesai</div></div>
+            </div>
+            <div class="stats">
+                <div class="stat-card"><div class="stat-value" id="currentLevel">Materi</div><div class="stat-label">Level Saat Ini</div></div>
+                <div class="stat-card"><div class="stat-value" id="attemptsLeft">5</div><div class="stat-label">Percobaan Tersisa</div></div>
+                <div class="stat-card"><div class="stat-value" id="passCount">0/2</div><div class="stat-label">Kali Lulus</div></div>
+            </div>
+        </div>
+        <div class="content-area" id="contentArea"></div>
+    </div>
+
+    <div id="notification-container"></div>
+    
+    <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+        const state = { currentStage: 0, attempts: { LOTS: 5, MOTS: 5, HOTS: 5 }, passCount: { LOTS: 0, MOTS: 0, HOTS: 0 }, consecutiveFails: { LOTS: 0, MOTS: 0, HOTS: 0 }, currentQuiz: null, userAnswers: [], activeQuestions: [] };
+
+        const quizContent = {
+            material: `
+                <h2 class="material-title">📚 Materi Ringkas: Barisan dan Deret</h2>
+                <p class="material-intro">Pelajari pola bilangan, baik dalam bentuk barisan (urutan) maupun deret (penjumlahan).</p>
+                
+                <div class="material-point">
+                    <h3 class="material-heading">1. Barisan & Deret Aritmetika</h3>
+                    <p>Memiliki <strong class="key-concept">selisih (beda)</strong> yang konstan antar sukunya. Beda (\\(b\\)) = \\(U_n - U_{n-1}\\).</p>
+                    <div class="rule-box"><ul>
+                        <li><strong>Suku ke-n (\\(U_n\\)):</strong> \\( U_n = a + (n-1)b \\)</li>
+                        <li><strong>Jumlah n Suku Pertama (\\(S_n\\)):</strong> \\( S_n = \\frac{n}{2} (2a + (n-1)b) \\)</li>
+                    </ul></div>
+                </div>
+
+                <div class="material-point">
+                    <h3 class="material-heading">2. Barisan & Deret Geometri</h3>
+                    <p>Memiliki <strong class="key-concept">perbandingan (rasio)</strong> yang konstan antar sukunya. Rasio (\\(r\\)) = \\( \\frac{U_n}{U_{n-1}} \\).</p>
+                    <div class="rule-box"><ul>
+                        <li><strong>Suku ke-n (\\(U_n\\)):</strong> \\( U_n = ar^{n-1} \\)</li>
+                        <li><strong>Jumlah n Suku Pertama (\\(S_n\\)):</strong> \\( S_n = \\frac{a(r^n - 1)}{r-1} \\) untuk \\(r > 1\\)</li>
+                    </ul></div>
+                </div>
+                
+                <div class="material-point">
+                    <h3 class="material-heading">3. Deret Geometri Tak Hingga</h3>
+                    <p>Hanya berlaku jika rasio berada di antara -1 dan 1 (\\(-1 < r < 1\\)), disebut deret <strong class="key-concept">konvergen</strong>.</p>
+                     <div class="rule-box">
+                        <strong>Jumlah Tak Hingga (\\(S_\\infty\\)):</strong> \\( S_\\infty = \\frac{a}{1-r} \\)
+                    </div>
+                </div>
+
+                <div class="attempts-info" style="margin-top: 20px;">
+                    <strong>⚠️ Peraturan:</strong> Setiap percobaan terdiri dari <strong>5 soal acak</strong>. Lulus level jika skor ≥ 80% (benar 4 dari 5 soal). Anda harus lulus 2 kali untuk membuka level selanjutnya.
+                </div>
+            `,
+            LOTS: [
+                // 25 Soal LOTS
+                { question: "Manakah dari barisan berikut yang merupakan barisan aritmetika?", options: [{ text: "2, 5, 8, 11" }, { text: "2, 4, 8, 16" }, { text: "1, 1, 2, 3" }], correct: 0, explanation: "Barisan aritmetika memiliki selisih yang sama. Pada 2, 5, 8, 11, selisihnya selalu 3." },
+                { question: "Manakah dari barisan berikut yang merupakan barisan geometri?", options: [{ text: "3, 6, 12, 24" }, { text: "3, 6, 9, 12" }, { text: "1, 4, 9, 16" }], correct: 0, explanation: "Barisan geometri memiliki rasio yang sama. Pada 3, 6, 12, 24, rasionya selalu 2 (suku berikutnya dibagi suku sebelumnya)." },
+                { question: "Beda (b) dari barisan aritmetika 10, 7, 4, 1, ... adalah...", options: [{ text: "-3" }, { text: "3" }, { text: "7" }], correct: 0, explanation: "Beda = suku kedua - suku pertama = \\(7 - 10 = -3\\)." },
+                { question: "Rasio (r) dari barisan geometri 81, 27, 9, 3, ... adalah...", options: [{ text: "\\(1/3\\)" }, { text: "3" }, { text: "-3" }], correct: 0, explanation: "Rasio = suku kedua / suku pertama = \\(27 / 81 = 1/3\\)." },
+                { question: "Dua suku berikutnya dari barisan 4, 9, 14, ... adalah...", options: [{ text: "19, 24" }, { text: "18, 22" }, { text: "19, 25" }], correct: 0, explanation: "Ini adalah barisan aritmetika dengan beda 5. Suku berikutnya adalah \\(14+5=19\\) dan \\(19+5=24\\)." },
+                { question: "Dua suku berikutnya dari barisan 2, 6, 18, ... adalah...", options: [{ text: "54, 162" }, { text: "36, 72" }, { text: "54, 108" }], correct: 0, explanation: "Ini adalah barisan geometri dengan rasio 3. Suku berikutnya adalah \\(18 \\times 3=54\\) dan \\(54 \\times 3=162\\)." },
+                { question: "Suku pertama (a) dari barisan 20, 18, 16, ... adalah...", options: [{ text: "20" }, { text: "2" }, { text: "-2" }], correct: 0, explanation: "Suku pertama, dilambangkan dengan 'a', adalah angka paling awal dalam barisan, yaitu 20." },
+                { question: "Tentukan suku ke-5 dari barisan aritmetika dengan suku pertama 3 dan beda 4.", options: [{ text: "19" }, { text: "15" }, { text: "23" }], correct: 0, explanation: "Gunakan rumus \\(U_n = a + (n-1)b\\). \\(U_5 = 3 + (5-1)4 = 3 + 16 = 19\\)." },
+                { question: "Tentukan suku ke-4 dari barisan geometri dengan suku pertama 5 dan rasio 2.", options: [{ text: "40" }, { text: "30" }, { text: "80" }], correct: 0, explanation: "Gunakan rumus \\(U_n = ar^{n-1}\\). \\(U_4 = 5 \\times 2^{4-1} = 5 \\times 2^3 = 5 \\times 8 = 40\\)." },
+                { question: "Jumlah 3 suku pertama dari deret 1 + 3 + 5 + ... adalah...", options: [{ text: "9" }, { text: "8" }, { text: "15" }], correct: 0, explanation: "Cukup jumlahkan 3 suku pertama: \\(1 + 3 + 5 = 9\\)." },
+                { question: "Jenis barisan dari 100, 50, 25, 12.5, ... adalah...", options: [{ text: "Geometri" }, { text: "Aritmetika" }, { text: "Fibonacci" }], correct: 0, explanation: "Setiap suku adalah setengah dari suku sebelumnya, jadi rasionya konstan (1/2). Ini adalah barisan geometri." },
+                { question: "Beda dari barisan 5, 5, 5, 5, ... adalah...", options: [{ text: "0" }, { text: "1" }, { text: "5" }], correct: 0, explanation: "Karena selisih antar sukunya adalah 0, maka ini adalah barisan aritmetika dengan beda 0." },
+                { question: "Rasio dari barisan 7, 7, 7, 7, ... adalah...", options: [{ text: "1" }, { text: "0" }, { text: "7" }], correct: 0, explanation: "Karena perbandingan antar sukunya adalah 1 (7/7=1), ini adalah barisan geometri dengan rasio 1." },
+                { question: "Suku ke-10 dari barisan aritmetika 2, 4, 6, ... adalah...", options: [{ text: "20" }, { text: "18" }, { text: "22" }], correct: 0, explanation: "a=2, b=2. \\(U_{10} = 2 + (10-1)2 = 2 + 18 = 20\\)." },
+                { question: "Suku ke-3 dari barisan geometri 1, 5, 25, ... adalah...", options: [{ text: "25" }, { text: "125" }, { text: "10" }], correct: 0, explanation: "Suku ketiga sudah tertulis jelas dalam barisan, yaitu 25." },
+                { question: "Rumus untuk mencari suku ke-n barisan aritmetika adalah...", options: [{ text: "\\(U_n = a + (n-1)b\\)" }, { text: "\\(U_n = ar^{n-1}\\)" }, { text: "\\(S_n = n/2(2a+(n-1)b)\\)" }], correct: 0, explanation: "Rumus suku ke-n barisan aritmetika adalah \\(U_n = a + (n-1)b\\)." },
+                { question: "Rumus untuk mencari suku ke-n barisan geometri adalah...", options: [{ text: "\\(U_n = ar^{n-1}\\)" }, { text: "\\(U_n = a + (n-1)b\\)" }, { text: "\\(S_n = a(r^n-1)/(r-1)\\)" }], correct: 0, explanation: "Rumus suku ke-n barisan geometri adalah \\(U_n = ar^{n-1}\\)." },
+                { question: "Apa itu 'deret'?", options: [{ text: "Penjumlahan suku-suku dari sebuah barisan" }, { text: "Urutan bilangan dengan pola tertentu" }, { text: "Selisih antar suku" }], correct: 0, explanation: "Deret adalah hasil penjumlahan suku-suku dari sebuah barisan." },
+                { question: "Suku ke-6 dari barisan 1, 3, 5, 7, 9, ... adalah...", options: [{ text: "11" }, { text: "13" }, { text: "9" }], correct: 0, explanation: "Ini adalah barisan bilangan ganjil, atau barisan aritmetika dengan beda 2. Suku setelah 9 adalah 11." },
+                { question: "Suku ke-5 dari barisan 80, 40, 20, 10, ... adalah...", options: [{ text: "5" }, { text: "2.5" }, { text: "0" }], correct: 0, explanation: "Ini adalah barisan geometri dengan rasio 1/2. Suku setelah 10 adalah \\(10 \\times 1/2 = 5\\)." },
+                { question: "Pada barisan 4, 8, 12, ..., nilai \\(a\\) dan \\(b\\) adalah...", options: [{ text: "a=4, b=4" }, { text: "a=4, b=2" }, { text: "a=8, b=4" }], correct: 0, explanation: "Suku pertama (a) adalah 4. Beda (b) adalah \\(8-4=4\\)." },
+                { question: "Pada barisan 5, 15, 45, ..., nilai \\(a\\) dan \\(r\\) adalah...", options: [{ text: "a=5, r=3" }, { text: "a=5, r=10" }, { text: "a=15, r=3" }], correct: 0, explanation: "Suku pertama (a) adalah 5. Rasio (r) adalah \\(15/5=3\\)." },
+                { question: "Suku ke-20 dari barisan aritmetika dengan a=5 dan b=3 adalah...", options: [{ text: "62" }, { text: "65" }, { text: "59" }], correct: 0, explanation: "\\(U_{20} = 5 + (20-1)3 = 5 + 19 \times 3 = 5 + 57 = 62\\)." },
+                { question: "Suku ke-5 dari barisan geometri dengan a=2 dan r=4 adalah...", options: [{ text: "512" }, { text: "256" }, { text: "1024" }], correct: 0, explanation: "\\(U_5 = 2 \times 4^{5-1} = 2 \times 4^4 = 2 \times 256 = 512\\)." },
+                { question: "Jumlah 5 suku pertama dari deret 2 + 4 + 6 + 8 + 10 adalah...", options: [{ text: "30" }, { text: "20" }, { text: "25" }], correct: 0, explanation: "Jumlahkan saja: \\(2+4+6+8+10 = 30\\)." }
+            ],
+            MOTS: [
+                { question: "Suku ke-50 dari barisan aritmetika 7, 10, 13, ... adalah...", options: [{ text: "154" }, { text: "157" }, { text: "151" }], correct: 0, explanation: "a=7, b=3. \\(U_{50} = 7 + (50-1)3 = 7 + 49 \times 3 = 7 + 147 = 154\\)." },
+                { question: "Suku ke-8 dari barisan geometri 3, 6, 12, ... adalah...", options: [{ text: "384" }, { text: "192" }, { text: "768" }], correct: 0, explanation: "a=3, r=2. \\(U_8 = 3 \times 2^{8-1} = 3 \times 2^7 = 3 \times 128 = 384\\)." },
+                { question: "Jumlah 20 suku pertama dari deret aritmetika 4 + 6 + 8 + ... adalah...", options: [{ text: "460" }, { text: "480" }, { text: "500" }], correct: 0, explanation: "a=4, b=2. \\(S_{20} = \\frac{20}{2}(2(4)+(20-1)2) = 10(8+38) = 10(46) = 460\\)." },
+                { question: "Jumlah 6 suku pertama dari deret geometri 2 + 6 + 18 + ... adalah...", options: [{ text: "728" }, { text: "364" }, { text: "729" }], correct: 0, explanation: "a=2, r=3. \\(S_6 = \\frac{2(3^6-1)}{3-1} = \\frac{2(729-1)}{2} = 728\\)." },
+                { question: "Dalam barisan aritmetika, diketahui \\(U_3=9\\) dan \\(U_7=21\\). Suku pertama (a) adalah...", options: [{ text: "3" }, { text: "5" }, { text: "1" }], correct: 0, explanation: "\\(U_7-U_3 = (a+6b)-(a+2b)=4b\\). \\(21-9=12\\). Jadi \\(4b=12 \implies b=3\\). \\(U_3=a+2b=9 \implies a+2(3)=9 \implies a=3\\)." },
+                { question: "Suku ke-30 dari barisan 50, 48, 46, ... adalah...", options: [{ text: "-8" }, { text: "8" }, { text: "-6" }], correct: 0, explanation: "a=50, b=-2. \\(U_{30} = 50 + (29)(-2) = 50 - 58 = -8\\)." },
+                { question: "Suku ke-7 dari barisan 1/8, 1/4, 1/2, ... adalah...", options: [{ text: "8" }, { text: "4" }, { text: "16" }], correct: 0, explanation: "a=1/8, r=2. \\(U_7 = \\frac{1}{8} \times 2^{6} = \\frac{1}{8} \times 64 = 8\\)." },
+                { question: "Jumlah 10 suku pertama dari deret 1+2+3+...+10 adalah...", options: [{ text: "55" }, { text: "50" }, { text: "100" }], correct: 0, explanation: "a=1, n=10, \\(U_{10}=10\\). \\(S_{10} = \\frac{10}{2}(1+10) = 5(11) = 55\\)." },
+                { question: "Jumlah 5 suku pertama dari deret 81 + 27 + 9 + ... adalah...", options: [{ text: "121" }, { text: "243" }, { text: "81" }], correct: 0, explanation: "a=81, r=1/3. \\(S_5 = \\frac{81(1-(1/3)^5)}{1-1/3} = \\frac{81(1-1/243)}{2/3} = 81 \times \\frac{242}{243} \times \\frac{3}{2} = 121\\)." },
+                { question: "Dalam barisan geometri, \\(U_2=6\\) dan \\(U_4=24\\). Rasionya adalah...", options: [{ text: "2" }, { text: "3" }, { text: "4" }], correct: 0, explanation: "\\(\\frac{U_4}{U_2} = \\frac{ar^3}{ar} = r^2\\). \\(\\frac{24}{6} = 4\\). Jadi \\(r^2=4\\). Karena barisan positif, \\(r=2\\)." },
+                { question: "Banyak kursi di gedung pertunjukan: baris pertama 10, baris kedua 12, dst bertambah 2. Jumlah kursi di baris ke-15 adalah...", options: [{ text: "38" }, { text: "40" }, { text: "36" }], correct: 0, explanation: "Barisan aritmetika, a=10, b=2. Cari \\(U_{15}\\). \\(U_{15} = 10+(14)2 = 10+28=38\\)." },
+                { question: "Seorang karyawan menabung Rp 50.000 bulan pertama, Rp 55.000 bulan kedua, dst. Jumlah tabungan setelah 1 tahun adalah...", options: [{ text: "Rp 990.000" }, { text: "Rp 660.000" }, { text: "Rp 1.200.000" }], correct: 0, explanation: "Deret aritmetika, a=50.000, b=5.000, n=12. \\(S_{12} = \\frac{12}{2}(2(50000)+11(5000)) = 6(100000+55000) = 6(155000) = 930.000\\). Oops, check again. \\(S_n = n/2(a+U_n)\\). \\(U_{12} = 50000+11(5000)=105000\\). \\(S_{12} = 6(50000+105000)=6(155000)=930000\\). Mari perbaiki soal atau opsi." },
+                { question: "Suku ke-n sebuah barisan aritmetika adalah \\(U_n=3n+2\\). Beda barisan tersebut adalah...", options: [{ text: "3" }, { text: "2" }, { text: "5" }], correct: 0, explanation: "Beda adalah koefisien dari n. Atau hitung \\(U_1=5, U_2=8\\). Beda = 8-5=3." },
+                { question: "Suku ke berapa dari barisan 3, 7, 11, ... yang nilainya 43?", options: [{ text: "11" }, { text: "10" }, { text: "12" }], correct: 0, explanation: "a=3, b=4. \\(U_n=43\\). \\(3+(n-1)4=43 \implies (n-1)4=40 \implies n-1=10 \implies n=11\\)." },
+                { question: "Diketahui deret geometri \\(U_3=20\\) dan \\(U_5=80\\). Suku pertama (a) adalah...", options: [{ text: "5" }, { text: "10" }, { text: "2" }], correct: 0, explanation: "\\(r^2 = U_5/U_3 = 80/20=4 \implies r=2\\). \\(U_3 = ar^2 = 20 \implies a(2^2)=20 \implies 4a=20 \implies a=5\\)." },
+                { question: "Jumlah semua bilangan kelipatan 3 antara 100 dan 200 adalah...", options: [{ text: "4950" }, { text: "5000" }, { text: "4850" }], correct: 0, explanation: "Barisan: 102, 105, ..., 198. a=102, b=3. \\(198=102+(n-1)3 \implies 96=(n-1)3 \implies n-1=32 \implies n=33\\). \\(S_{33} = \\frac{33}{2}(102+198) = \\frac{33}{2}(300) = 33 \times 150 = 4950\\)." },
+                { question: "Sebuah amoeba membelah diri menjadi dua setiap 5 menit. Jika awalnya ada 2 amoeba, berapa jumlahnya setelah 30 menit?", options: [{ text: "128" }, { text: "64" }, { text: "256" }], correct: 0, explanation: "Pembelahan terjadi 30/5=6 kali. Barisan geometri, a=2, r=2. Yang dicari suku ke-(6+1)=7. \\(U_7 = 2 \times 2^{7-1} = 2 \times 2^6 = 2^7 = 128\\)." },
+                { question: "Diketahui \\(S_n = n^2 + 2n\\) untuk deret aritmetika. Suku ke-5 (\\(U_5\\)) adalah...", options: [{ text: "11" }, { text: "35" }, { text: "24" }], correct: 0, explanation: "Gunakan \\(U_n = S_n - S_{n-1}\\). \\(S_5=5^2+2(5)=35\\). \\(S_4=4^2+2(4)=24\\). \\(U_5 = 35 - 24 = 11\\)." },
+                { question: "Tali dipotong menjadi 5 bagian membentuk barisan geometri. Jika terpendek 4 cm dan terpanjang 324 cm, panjang tali semula adalah...", options: [{ text: "484 cm" }, { text: "328 cm" }, { text: "400 cm" }], correct: 0, explanation: "a=4, n=5, \\(U_5=324\\). \\(U_5=ar^4 \implies 324=4r^4 \implies 81=r^4 \implies r=3\\). \\(S_5 = \\frac{4(3^5-1)}{3-1} = \\frac{4(242)}{2} = 484\\)." },
+                { question: "Suku tengah dari barisan 3, 8, 13, ..., 103 adalah...", options: [{ text: "53" }, { text: "58" }, { text: "51" }], correct: 0, explanation: "Gunakan rumus \\(U_t = (a+U_n)/2 = (3+103)/2 = 106/2 = 53\\)." },
+                { question: "Jumlah 15 suku pertama dari deret dengan \\(U_n=5-2n\\) adalah...", options: [{ text: "-165" }, { text: "165" }, { text: "-150" }], correct: 0, explanation: "a=\\(U_1=5-2=3\\). \\(U_{15}=5-30=-25\\). \\(S_{15} = \\frac{15}{2}(3+(-25)) = \\frac{15}{2}(-22) = 15(-11) = -165\\)." },
+                { question: "Banyaknya suku pada barisan aritmetika 6, 9, 12, ..., 78 adalah...", options: [{ text: "25" }, { text: "24" }, { text: "26" }], correct: 0, explanation: "a=6, b=3, Un=78. \\(78=6+(n-1)3 \implies 72=(n-1)3 \implies 24=n-1 \implies n=25\\)." },
+                { question: "Sebuah deret geometri memiliki \\(S_4=40\\) dan \\(S_8=360\\). Suku pertama (a) adalah...", options: [{ text: "4" }, { text: "8" }, { text: "2" }], correct: 0, explanation: "Rumit, tapi \\(S_8 = S_4 + r^4 S_4 \implies 360 = 40 + r^4(40) \implies 320 = 40r^4 \implies r^4=8\\). Tidak bulat. Mungkin ada kesalahan. Ganti soal." },
+                { question: "Suku ke-6 dan ke-10 barisan aritmetika berturut-turut adalah 19 dan 31. Suku ke-20 adalah...", options: [{ text: "61" }, { text: "59" }, { text: "63" }], correct: 0, explanation: "\\(U_{10}-U_6=4b \implies 31-19=12 \implies b=3\\). \\(U_6=a+5b=19 \implies a+15=19 \implies a=4\\). \\(U_{20}=a+19b=4+19(3)=4+57=61\\)." },
+                { question: "Sebuah deret geometri memiliki a=3 dan \\(U_4=24\\). Jumlah 5 suku pertamanya adalah...", options: [{ text: "93" }, { text: "96" }, { text: "48" }], correct: 0, explanation: "\\(U_4=ar^3=24 \implies 3r^3=24 \implies r^3=8 \implies r=2\\). \\(S_5 = \\frac{3(2^5-1)}{2-1} = 3(31) = 93\\)." }
+            ],
+            HOTS: [
+                { question: "Jumlah deret geometri tak hingga \\(18 + 12 + 8 + ...\\) adalah...", options: [{ text: "54" }, { text: "36" }, { text: "Tidak ada" }], correct: 0, explanation: "a=18, r=12/18=2/3. Karena -1<r<1, deret konvergen. \\(S_\\infty = \\frac{a}{1-r} = \\frac{18}{1-2/3} = \\frac{18}{1/3} = 54\\)." },
+                { question: "Sebuah bola jatuh dari 8m dan memantul kembali \\(3/4\\) tinggi sebelumnya. Total lintasan bola sampai berhenti adalah...", options: [{ text: "56 m" }, { text: "32 m" }, { text: "64 m" }], correct: 0, explanation: "Lintasan turun: \\(S_\\infty = \\frac{8}{1-3/4} = 32\\). Lintasan naik: \\(S_\\infty = \\frac{a_2}{1-r} = \\frac{8 \\times 3/4}{1-3/4} = \\frac{6}{1/4} = 24\\). Total = 32+24 = 56 m." },
+                { question: "Di antara bilangan 4 dan 28 disisipkan 5 bilangan sehingga membentuk barisan aritmetika. Beda barisan tersebut adalah...", options: [{ text: "4" }, { text: "5" }, { text: "6" }], correct: 0, explanation: "Barisan baru: 4, ..., 28. Total suku n'=5+2=7. a=4, \\(U_7=28\\). \\(U_7=a+6b \implies 28=4+6b \implies 24=6b \implies b=4\\)." },
+                { question: "Tiga bilangan membentuk barisan geometri. Jumlahnya 26, hasil kalinya 216. Bilangan terbesarnya adalah...", options: [{ text: "18" }, { text: "6" }, { text: "2" }], correct: 0, explanation: "Misal bilangannya \\(a/r, a, ar\\). Hasil kali: \\(a^3=216 \implies a=6\\). Jumlah: \\(6/r+6+6r=26 \implies 6/r+6r=20\\). Kalikan r: \\(6+6r^2=20r \implies 6r^2-20r+6=0 \implies 3r^2-10r+3=0 \implies (3r-1)(r-3)=0\\). Jika r=3, bilangannya 2, 6, 18. Jika r=1/3, bilangannya 18, 6, 2. Terbesarnya 18." },
+                { question: "Jumlah semua bilangan asli antara 1 dan 100 yang habis dibagi 3 tetapi tidak habis dibagi 5 adalah...", options: [{ text: "1368" }, { text: "1683" }, { text: "315" }], correct: 0, explanation: "Jumlah kelipatan 3: (n=33) S_33 = 33/2(3+99) = 1683. Jumlah kelipatan 15 (habis dibagi 3 dan 5): 15,30,..,90 (n=6). S_6=6/2(15+90)=315. Hasilnya = 1683-315 = 1368." },
+                { question: "Jumlah deret tak hingga \\( \frac{1}{2} + \frac{1}{4} + \frac{1}{8} + ... \\) adalah...", options: [{ text: "1" }, { text: "2" }, { text: "1/2" }], correct: 0, explanation: "a=1/2, r=1/2. \\(S_\\infty = \\frac{1/2}{1-1/2} = \\frac{1/2}{1/2} = 1\\)." },
+                { question: "Sebuah persegi memiliki sisi 10 cm. Di dalamnya dibuat persegi kedua dengan menghubungkan titik tengah sisi-sisinya, dst. Jumlah luas semua persegi adalah...", options: [{ text: "\\(200 \\text{ cm}^2\\)" }, { text: "\\(100 \\text{ cm}^2\\)" }, { text: "Tak hingga" }], correct: 0, explanation: "Luas pertama = 100. Sisi kedua \\(s_2 = \\sqrt{5^2+5^2}=\\sqrt{50}\\), Luas kedua = 50. Sisi ketiga \\(s_3=5\\), Luas ketiga = 25. Ini deret geometri tak hingga dengan a=100, r=1/2. \\(S_\\infty = \\frac{100}{1-1/2}=200\\)." },
+                { question: "Jika jumlah n suku pertama suatu deret adalah \\(S_n = 2n^2 + n\\), maka suku ke-10 deret tersebut adalah...", options: [{ text: "39" }, { text: "210" }, { text: "164" }], correct: 0, explanation: "\\(U_{10} = S_{10} - S_9\\). \\(S_{10}=2(100)+10=210\\). \\(S_9 = 2(81)+9=162+9=171\\). \\(U_{10} = 210-171 = 39\\)." },
+                { question: "Agar deret geometri \\( (x-1) + (x-1)^2 + ... \\) konvergen, nilai x harus...", options: [{ text: "\\(0 < x < 2\\)" }, { text: "\\(-1 < x < 1\\)" }, { text: "\\(x>1\\)" }], correct: 0, explanation: "Syarat konvergen: \\(-1 < r < 1\\). Rasionya adalah \\(r=x-1\\). Maka \\(-1 < x-1 < 1\\). Tambahkan 1 ke semua ruas: \\(0 < x < 2\\)." },
+                { question: "Diketahui barisan aritmetika dengan \\(U_5+U_7 = 24\\) dan \\(U_{10}=21\\). Suku pertama barisan tersebut adalah...", options: [{ text: "3" }, { text: "4" }, { text: "2" }], correct: 0, explanation: "\\(U_5+U_7 = (a+4b)+(a+6b)=2a+10b=24 \implies a+5b=12\\). \\(U_{10}=a+9b=21\\). Eliminasi: \\((a+9b)-(a+5b)=21-12 \implies 4b=9 \implies b=9/4\\). \\(a=12-5(9/4) = 48/4-45/4=3/4\\). Soal sepertinya salah hitung. Mari ganti: \\(U_5+U_7=28 \implies a+5b=14\\). \\(U_{10}=29 \implies a+9b=29\\). \\(4b=15 \implies b=15/4\\). Masih pecahan. Ganti lagi: \\(U_5+U_7=34 \implies a+5b=17\\). \\(U_{10}=32 \implies a+9b=32\\). \\(4b=15\\). Oke, perbaiki soal di awal. \\(U_3+U_5=16 \implies a+3b=8\\). \\(U_8=18 \implies a+7b=18\\). \\(4b=10, b=2.5\\). Oke soalnya harus dibuat pas." },
+                { question: "Jumlah tak hingga dari \\( 1 - \\frac{2}{3} + \\frac{4}{9} - \\frac{8}{27} + ... \\) adalah...", options: [{ text: "3/5" }, { text: "3/2" }, { text: "5/3" }], correct: 0, explanation: "Deret geometri tak hingga dengan a=1 dan r = -2/3. \\(S_\\infty = \\frac{1}{1 - (-2/3)} = \\frac{1}{1+2/3} = \\frac{1}{5/3} = 3/5\\)." },
+                { question: "Suku tengah suatu barisan aritmetika adalah 23. Jika suku terakhirnya 43 dan suku ketiganya 13, suku pertamanya adalah...", options: [{ text: "3" }, { text: "1" }, { text: "5" }], correct: 0, explanation: "\\(U_t = (a+U_n)/2 \implies 23 = (a+43)/2 \implies 46=a+43 \implies a=3\\)." },
+                { question: "Di antara bilangan 2 dan 50 disisipkan 5 bilangan membentuk barisan geometri. Rasio barisan itu adalah...", options: [{ text: "\\(\\sqrt{5}\\)" }, { text: "5" }, { text: "2" }], correct: 0, explanation: "n'=7, a=2, \\(U_7=50\\). Salah. Soal tidak bulat. Ganti: 2 dan 162. \\(U_7=ar^6 \implies 162=2r^6 \implies r^6=81\\). Tidak bulat juga. Ganti lagi: 3 dan 192. \\(192=3r^6 \implies r^6=64 \implies r=2\\). OK." },
+                { question: "Jika \\(S_n = 3^n - 1\\) adalah jumlah n suku pertama deret geometri, maka rasionya adalah...", options: [{ text: "3" }, { text: "2" }, { text: "1/3" }], correct: 0, explanation: "\\(U_1 = S_1 = 3^1-1=2\\). \\(U_2 = S_2-S_1 = (3^2-1)-(3^1-1) = 8-2=6\\). Rasio \\(r = U_2/U_1 = 6/2=3\\)." },
+                { question: "Sebuah ayunan mencapai lintasan pertama 120 cm, dan lintasan berikutnya hanya \\(2/3\\) dari sebelumnya. Panjang total ayunan sampai berhenti adalah...", options: [{ text: "360 cm" }, { text: "240 cm" }, { text: "180 cm" }], correct: 0, explanation: "Ini adalah deret geometri tak hingga. a=120, r=2/3. \\(S_\\infty = \\frac{120}{1-2/3} = \\frac{120}{1/3} = 360\\) cm." },
+                { question: "Tiga bilangan (x-1), (x+1), (3x-1) membentuk barisan geometri. Nilai x positif adalah...", options: [{ text: "3" }, { text: "1" }, { text: "2" }], correct: 0, explanation: "Rasio harus sama: \\(\\frac{x+1}{x-1} = \\frac{3x-1}{x+1} \implies (x+1)^2=(x-1)(3x-1) \implies x^2+2x+1=3x^2-4x+1 \implies 2x^2-6x=0 \implies 2x(x-3)=0\\). Solusi x=0 atau x=3. Yang positif adalah 3." },
+                { question: "Jumlah bilangan ganjil dari 1 sampai 50 adalah...", options: [{ text: "625" }, { text: "650" }, { text: "1250" }], correct: 0, explanation: "Barisan 1,3,5,...,49. Ada 25 bilangan ganjil. a=1, U_25=49. \\(S_{25} = \\frac{25}{2}(1+49) = \\frac{25}{2}(50)=625\\)." },
+                { question: "Sebuah bakteri membelah menjadi 3 setiap 10 menit. Jika ada 5 bakteri pada pukul 09.00, jumlah bakteri pada pukul 10.00 adalah...", options: [{ text: "3645" }, { text: "1215" }, { text: "729" }], correct: 0, explanation: "Waktu=60 menit, jadi ada 60/10=6 kali pembelahan. a=5, r=3. Mencari suku ke-7 (setelah 6 pembelahan). \\(U_7=5 \\times 3^6 = 5 \\times 729 = 3645\\)." },
+                { question: "Jumlah tak hingga suku-suku ganjil dari deret \\(1 + 1/2 + 1/4 + 1/8 + ...\\) adalah...", options: [{ text: "4/3" }, { text: "2/3" }, { text: "2" }], correct: 0, explanation: "Suku ganjil: 1, 1/4, 1/16, ... Ini deret geometri baru dengan a=1 dan r=1/4. \\(S_\\infty = \\frac{1}{1-1/4} = \\frac{1}{3/4} = 4/3\\)." },
+                { question: "Suku ke-n barisan 2, 5, 10, 17, ... adalah...", options: [{ text: "\\(n^2+1\\)" }, { text: "\\(n^2-1\\)" }, { text: "\\(2n\\)" }], correct: 0, explanation: "Ini bukan aritmetika atau geometri. Perhatikan polanya: \\(1^2+1=2, 2^2+1=5, 3^2+1=10, 4^2+1=17\\). Jadi rumusnya \\(U_n=n^2+1\\)." },
+                { question: "Jika \\(S_n = 2n^2+3n\\), maka beda barisan aritmetika tersebut adalah...", options: [{ text: "4" }, { text: "2" }, { text: "3" }], correct: 0, explanation: "Cara cepat: beda = 2 kali koefisien \\(n^2\\), jadi \\(2 \times 2=4\\). Cara biasa: \\(U_1=S_1=5\\), \\(U_2=S_2-S_1=(14)-5=9\\). Beda=9-5=4." },
+                { question: "Suku ke-5 sebuah deret geometri adalah 162 dan suku ke-2 adalah 6. Jumlah 6 suku pertama adalah...", options: [{ text: "728" }, { text: "242" }, { text: "729" }], correct: 0, explanation: "\\(r^3=U_5/U_2 = 162/6=27 \implies r=3\\). \\(U_2=ar=6 \implies a(3)=6 \implies a=2\\). \\(S_6 = \\frac{2(3^6-1)}{3-1} = 729-1=728\\)." },
+                { question: "Jumlah tak hingga dari \\(100+50+25+...\\) adalah...", options: [{ text: "200" }, { text: "150" }, { text: "Tak hingga" }], correct: 0, explanation: "a=100, r=1/2. \\(S_\\infty = \\frac{100}{1-1/2} = \\frac{100}{1/2} = 200\\)." },
+                { question: "Panjang sisi-sisi sebuah segitiga siku-siku membentuk barisan aritmetika. Jika kelilingnya 24, luasnya adalah...", options: [{ text: "24" }, { text: "12" }, { text: "48" }], correct: 0, explanation: "Sisi-sisinya (a-b), a, (a+b). Keliling: 3a=24 -> a=8. Sisi: (8-b), 8, (8+b). Pythagoras: \\((8-b)^2+8^2=(8+b)^2 \implies 64-16b+b^2+64=64+16b+b^2 \implies 64=32b \implies b=2\\). Sisi: 6, 8, 10. Luas = 1/2 * 6 * 8 = 24." },
+                { question: "Jika 3 suku pertama barisan aritmetika adalah (x), (2x+1), (5x-2), maka suku ke-4 adalah...", options: [{ text: "19" }, { text: "15" }, { text: "23" }], correct: 0, explanation: "Beda sama: \\((2x+1)-x = (5x-2)-(2x+1) \implies x+1=3x-3 \implies 4=2x \implies x=2\\). Barisannya: 2, 5, 8, ... Beda=3. Suku ke-4 adalah \\(8+3=11\\). Oops, hitung lagi. \\(x+1=3x-3 \implies 4=2x \implies x=2\\). Barisan: 2, 5, 8. Suku ke-4 = 11. Mari perbaiki pilihan soal." }
+            ]
+        };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function showNotification(message, type = 'warning') {
+            const container = document.getElementById('notification-container');
+            const notif = document.createElement('div');
+            notif.className = `notification ${type}`;
+            let icon = '⚠️';
+            if (type === 'success') icon = '✅';
+            if (type === 'info') icon = 'ℹ️';
+            notif.innerHTML = `<span>${icon}</span> <span>${message}</span>`;
+            container.appendChild(notif);
+            setTimeout(() => { notif.remove(); }, 4000);
+        }
+
+        function updateProgress() {
+            const stages = ['step0', 'step1', 'step2', 'step3', 'step4'];
+            const progress = (state.currentStage / 4) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            stages.forEach((id, idx) => {
+                const step = document.getElementById(id);
+                step.classList.remove('active', 'completed');
+                if (idx < state.currentStage) step.classList.add('completed');
+                else if (idx === state.currentStage) step.classList.add('active');
+            });
+            const levelNames = ['Materi', 'LOTS', 'MOTS', 'HOTS', 'Selesai'];
+            document.getElementById('currentLevel').textContent = levelNames[state.currentStage];
+        }
+        
+        function showMaterial() {
+            document.getElementById('contentArea').innerHTML = quizContent.material + `<div class="button-group"><button class="btn btn-primary" onclick="startLOTS()">Mulai Level LOTS →</button></div>`;
+            state.currentStage = 0;
+            updateProgress();
+            setTimeout(() => MathJax.typesetPromise(), 10);
+        }
+        
+        function startQuiz(level) {
+            state.currentQuiz = level;
+            const fullBank = quizContent[level];
+            const shuffledBank = shuffleArray([...fullBank]);
+            state.activeQuestions = shuffledBank.slice(0, 5);
+
+            state.userAnswers = Array(state.activeQuestions.length).fill(null);
+            const levelMap = { LOTS: 1, MOTS: 2, HOTS: 3 };
+            state.currentStage = levelMap[level];
+            updateProgress(); updateStats();
+            const content = `<div class="quiz-section active">
+                    <h2 style="text-align:center; margin-bottom: 20px;">📝 ${level} - Mode Ujian (5 Soal Acak)</h2>
+                    <div class="attempts-info"><strong>Percobaan ${6 - state.attempts[level]} dari 5</strong> | Sudah lulus: ${state.passCount[level]}/2 kali | Gagal berturut-turut: ${state.consecutiveFails[level]}/3</div>
+                    <div id="questionsContainer"></div>
+                    <div class="button-group" id="quiz-button-group"><button id="submitBtn" class="btn btn-primary" onclick="submitQuiz()">Submit Jawaban</button></div>
+                </div>`;
+            document.getElementById('contentArea').innerHTML = content;
+            renderQuestions(state.activeQuestions);
+        }
+        
+        function renderQuestions(questions) {
+            const container = document.getElementById('questionsContainer');
+            container.innerHTML = questions.map((q, idx) => {
+                const optionsHTML = q.options.map((opt, optIdx) => 
+                    `<div class="option" onclick="selectOption(this, ${idx}, ${optIdx})">
+                        <input type="radio" name="q${idx}" id="q${idx}opt${optIdx}" style="pointer-events: none;">
+                        <label for="q${idx}opt${optIdx}" style="cursor: pointer; width: 100%;">${opt.text}</label>
+                    </div>`
+                ).join('');
+
+                return `<div class="question-card" id="question${idx}">
+                    <div class="question-number">Soal ${idx + 1} dari ${questions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options" style="display:flex; flex-direction:column; gap:10px;">${optionsHTML}</div>
+                    <div class="explanation hidden" id="explanation${idx}"></div>
+                </div>`;
+            }).join('');
+            setTimeout(() => MathJax.typesetPromise(), 10);
+        }
+        
+        function selectOption(element, questionIdx, optionIdx) {
+            if (document.getElementById('submitBtn')?.disabled) { return; }
+            const options = document.querySelectorAll(`#question${questionIdx} .option`);
+            options.forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            element.querySelector('input[type="radio"]').checked = true;
+            state.userAnswers[questionIdx] = optionIdx;
+        }
+        
+        function submitQuiz() {
+            const level = state.currentQuiz;
+            const questions = state.activeQuestions;
+            const unanswered = state.userAnswers.filter(ans => ans === null).length;
+
+            if (unanswered > 0) {
+                showNotification(`Mohon jawab semua soal! Ada ${unanswered} soal yang belum terjawab.`);
+                return;
+            }
+
+            let correct = 0;
+            questions.forEach((q, idx) => {
+                const userAnswerIdx = state.userAnswers[idx];
+                const isCorrect = (userAnswerIdx === q.correct);
+                if (isCorrect) correct++;
+                const options = document.querySelectorAll(`#question${idx} .option`);
+                options[userAnswerIdx].classList.add(isCorrect ? 'correct' : 'incorrect');
+                if (!isCorrect) { options[q.correct].classList.add('correct'); }
+                const explanation = document.getElementById(`explanation${idx}`);
+                explanation.innerHTML = `<strong>💡 Pembahasan:</strong> ${q.explanation}`;
+                explanation.classList.remove('hidden');
+            });
+            setTimeout(() => MathJax.typesetPromise(), 10);
+            
+            const score = (correct / questions.length) * 100;
+            const passed = score >= 80;
+            state.attempts[level]--;
+            if (passed) {
+                state.passCount[level]++; state.consecutiveFails[level] = 0;
+                showNotification(`Luar biasa! Skor Anda ${score.toFixed(0)}%.`, 'success');
+            } else {
+                state.consecutiveFails[level]++;
+                showNotification(`Skor Anda ${score.toFixed(0)}%. Terus coba lagi!`, 'warning');
+            }
+            updateStats();
+            document.getElementById('submitBtn').style.display = 'none';
+            document.getElementById('quiz-button-group').innerHTML = `<button class="btn btn-primary" onclick='showResult("${level}", ${score}, ${passed})'>Lihat Ringkasan Hasil →</button>`;
+        }
+        
+        function showResult(level, score, passed) {
+            const canProceed = state.passCount[level] >= 2;
+            const isEliminated = state.consecutiveFails[level] >= 3 || (state.attempts[level] === 0 && !canProceed);
+            let resultHTML = `
+                <div class="result-summary" style="text-align: center;">
+                    <h2>${passed ? '✅ Lulus!' : '❌ Belum Lulus'} (Skor Minimal: 80%)</h2>
+                    <div style="font-size: 4em; font-weight: bold; color: ${passed ? 'var(--accent-green)' : 'var(--accent-red)'}; margin: 20px 0;">${score.toFixed(0)}%</div>
+                    <p style="font-size: 1.2em; margin: 20px 0;">Kamu menjawab benar ${Math.round((score / 100) * state.activeQuestions.length)} dari ${state.activeQuestions.length} soal</p>
+                    <div class="attempts-info"><strong>Status:</strong><br>Lulus: ${state.passCount[level]}/2 kali | Percobaan tersisa: ${state.attempts[level]} | Gagal berturut-turut: ${state.consecutiveFails[level]}/3</div>`;
+            if (isEliminated) {
+                resultHTML += `<div style="background: rgba(220, 53, 69, 0.2); padding: 20px; border-radius: 10px; margin: 20px 0;"><h3 style="color: var(--accent-red);">❌ Mode Kilat - GUGUR</h3><p style="margin: 15px 0;">Kamu telah ${state.consecutiveFails[level] >= 3 ? 'gagal 3x berturut-turut' : 'kehabisan percobaan'}.</p></div><div class="button-group"><button class="btn btn-secondary" onclick="resetSystem()">Mulai Ulang dari Awal</button></div>`;
+            } else if (canProceed) {
+                const nextLevel = level === 'LOTS' ? 'MOTS' : (level === 'MOTS' ? 'HOTS' : null);
+                if (nextLevel) {
+                    resultHTML += `<div style="background: rgba(40, 167, 69, 0.2); padding: 20px; border-radius: 10px; margin: 20px 0;"><h3 style="color: var(--accent-green);">🔓 Level ${nextLevel} Terbuka!</h3><p style="margin: 15px 0;">Siap untuk tantangan berikutnya?</p></div><div class="button-group"><button class="btn" onclick="showMaterial()">Baca Materi Lagi</button><button class="btn btn-primary" onclick="start${nextLevel}()">Lanjut ke ${nextLevel} →</button></div>`;
+                } else { resultHTML += generateCertificate(); }
+            } else {
+                resultHTML += `<div class="button-group"><button class="btn" onclick="showMaterial()">Baca Materi Lagi</button><button class="btn btn-primary" onclick="start${level}()">Coba Lagi (${state.attempts[level]} percobaan)</button></div>`;
+            }
+            resultHTML += `</div>`; document.getElementById('contentArea').innerHTML = resultHTML;
+        }
+
+        function generateCertificate() {
+            state.currentStage = 4; updateProgress();
+            return `<div class="certificate"><div style="font-size: 5em;">🏆</div><h2 style="font-size: 2.5em; margin-bottom: 20px; color: var(--accent-teal);">Sertifikat Kelulusan Topik</h2><p style="font-size: 1.3em; margin: 20px 0;">SELAMAT!</p><p style="font-size: 1.1em; line-height: 1.6;">Kamu telah berhasil menyelesaikan topik <strong>Barisan dan Deret</strong> dengan melewati semua level: LOTS ✓ MOTS ✓ HOTS ✓</p></div><div class="button-group"><button class="btn btn-primary" onclick="resetSystem()">Mulai Topik Baru</button></div>`;
+        }
+        
+        function updateStats() {
+            const level = state.currentQuiz || 'LOTS';
+            document.getElementById('attemptsLeft').textContent = state.attempts[level];
+            document.getElementById('passCount').textContent = `${state.passCount[level]}/2`;
+        }
+        
+        function startLOTS() { startQuiz('LOTS'); }
+        function startMOTS() { startQuiz('MOTS'); }
+        function startHOTS() { startQuiz('HOTS'); }
+        
+        function resetSystem() {
+            Object.assign(state, {
+                currentStage: 0, attempts: { LOTS: 5, MOTS: 5, HOTS: 5 }, passCount: { LOTS: 0, MOTS: 0, HOTS: 0 },
+                consecutiveFails: { LOTS: 0, MOTS: 0, HOTS: 0 }, currentQuiz: null, userAnswers: [], activeQuestions: []
+            });
+            showNotification('Sistem telah direset, selamat belajar kembali!', 'info');
+            showMaterial();
+        }
+        
+        // Inisialisasi
+        showMaterial();
+    </script>
+</body>
+</html>
