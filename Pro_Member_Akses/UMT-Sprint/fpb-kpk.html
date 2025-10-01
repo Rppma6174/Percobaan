@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FPB & KPK - Mode Belajar Kilat</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --dark-bg: #141414; --dark-card: #1f1f1f; --dark-border: #333;
+            --text-light: #f0f0f0; --text-muted: #aaa; --accent-blue: #007bff;
+            --accent-green: #28a745; --accent-red: #dc3545; --accent-yellow: #ffc107;
+            --accent-teal: #50e3c2;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--dark-bg); color: var(--text-light);
+            min-height: 100vh; padding: 20px;
+        }
+        .container {
+            max-width: 900px; margin: 0 auto; background: var(--dark-card);
+            border-radius: 15px; padding: 30px; border: 1px solid var(--dark-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .header {
+            text-align: center; margin-bottom: 30px; padding-bottom: 15px;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+        .header h1 { color: var(--text-light); font-size: 2.5em; margin-bottom: 10px; }
+        .header p { color: var(--text-muted); font-size: 1.1em; }
+        .progress-container {
+            margin: 30px 0; padding: 20px; background: rgba(0,0,0,0.2);
+            border: 1px solid var(--dark-border); border-radius: 15px;
+        }
+        .progress-steps {
+            display: flex; justify-content: space-between; margin-bottom: 15px; position: relative;
+        }
+        .progress-steps::before {
+            content: ''; position: absolute; top: 20px; left: 0; right: 0;
+            height: 4px; background: var(--dark-border); z-index: 0;
+        }
+        .progress-fill {
+            position: absolute; top: 20px; left: 0; height: 4px;
+            background: var(--accent-blue); transition: width 0.5s ease; z-index: 1;
+        }
+        .step { display: flex; flex-direction: column; align-items: center; z-index: 2; position: relative; }
+        .step-circle {
+            width: 40px; height: 40px; border-radius: 50%; background: var(--dark-border);
+            display: flex; align-items: center; justify-content: center; font-weight: bold;
+            color: var(--text-muted); border: 3px solid var(--dark-border); margin-bottom: 8px; transition: all 0.3s;
+        }
+        .step.active .step-circle {
+            background: var(--dark-card); border-color: var(--accent-blue);
+            color: var(--accent-blue); transform: scale(1.2);
+        }
+        .step.completed .step-circle { background: var(--accent-green); border-color: var(--accent-green); color: white; }
+        .step-label { font-size: 0.85em; color: var(--text-muted); font-weight: 600; }
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0; }
+        .stat-card {
+            background: var(--dark-bg); border: 1px solid var(--dark-border);
+            padding: 15px; border-radius: 12px; text-align: center;
+        }
+        .stat-value { font-size: 2em; font-weight: bold; color: var(--accent-teal); margin-bottom: 5px; }
+        .stat-label { font-size: 0.9em; color: var(--text-muted); }
+        .content-area { margin: 30px 0; min-height: 300px; }
+        .material-section, .question-card, .result-summary {
+            padding: 25px; background: var(--dark-card); border: 1px solid var(--dark-border);
+            border-radius: 15px; margin-bottom: 20px;
+        }
+        .question-number { color: var(--accent-blue); font-weight: bold; margin-bottom: 15px; }
+        .question-text { margin-bottom: 20px; font-size: 1.1em; }
+        .option {
+            padding: 15px 20px; background: var(--dark-bg); border: 2px solid var(--dark-border);
+            border-radius: 10px; cursor: pointer; transition: all 0.3s; display: flex;
+            align-items: center; color: var(--text-muted);
+        }
+        .option:hover { border-color: var(--accent-blue); color: var(--text-light); background: #2a2a2a; }
+        .option.selected { border-color: var(--accent-blue); background: rgba(0, 123, 255, 0.1); color: var(--text-light); }
+        .option.correct { border-color: var(--accent-green); background: rgba(40, 167, 69, 0.2); color: #d4edda; }
+        .option.incorrect { border-color: var(--accent-red); background: rgba(220, 53, 69, 0.2); color: #f8d7da; }
+        .option input[type="radio"] { margin-right: 15px; }
+        .btn {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-muted); padding: 12px 35px; border-radius: 8px; font-size: 1em;
+            font-weight: 600; cursor: pointer; transition: all 0.3s ease; margin: 10px 5px;
+        }
+        .btn:hover { background: rgba(255, 255, 255, 0.1); color: var(--text-light); transform: translateY(-2px); }
+        .btn-primary { background: var(--accent-blue); border-color: var(--accent-blue); color: white; }
+        .btn-primary:hover { background: #0069d9; border-color: #0062cc; }
+        .btn-secondary { background: #6c757d; border-color: #6c757d; color: white; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; background: var(--dark-border); }
+        .button-group { display: flex; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+        .explanation {
+            background: #2a2a2a; padding: 15px; border-radius: 10px; margin-top: 20px;
+            border: 1px solid #444; color: var(--text-muted);
+        }
+        .attempts-info {
+            background-color: rgba(255, 193, 7, 0.1); border-left: 5px solid var(--accent-yellow);
+            color: #fff3cd; padding: 15px; border-radius: 10px; margin: 15px 0;
+        }
+        .hidden { display: none; }
+        .certificate {
+            background: linear-gradient(135deg, #1f1f1f, #2a2a2a); color: white; padding: 40px;
+            border-radius: 20px; text-align: center; margin: 30px 0; border: 2px solid var(--accent-teal);
+            box-shadow: 0 0 40px rgba(80, 227, 194, 0.2);
+        }
+        #notification-container {
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        .notification {
+            background-color: #2a2a2a; color: var(--text-light); padding: 15px 20px;
+            border-radius: 8px; border-left: 5px solid; box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            display: flex; align-items: center; gap: 10px;
+            animation: slideIn 0.3s ease forwards, fadeOut 0.5s ease 3.5s forwards;
+        }
+        .notification.warning { border-color: var(--accent-yellow); }
+        .notification.success { border-color: var(--accent-green); }
+        .notification.info { border-color: var(--accent-blue); }
+        @keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; transform: translateY(20px); } }
+        .material-title { color: var(--text-light); font-size: 2em; margin-bottom: 10px; }
+        .material-intro { color: var(--text-muted); font-size: 1.1em; margin-bottom: 30px; }
+        .material-point { margin-bottom: 35px; }
+        .material-heading {
+            color: var(--accent-teal); font-size: 1.5em; margin-bottom: 15px;
+            padding-bottom: 10px; border-bottom: 1px solid var(--dark-border);
+            display: flex; align-items: center;
+        }
+        .material-heading::before {
+            content: '»'; margin-right: 12px; color: var(--accent-blue);
+            font-weight: bold; font-size: 1.2em;
+        }
+        .key-concept { color: var(--accent-yellow); font-weight: 600; }
+        .rule-box {
+            background-color: rgba(0,0,0,0.2); border-left: 4px solid var(--accent-blue);
+            padding: 20px; margin-top: 15px; border-radius: 0 8px 8px 0; line-height: 1.8;
+        }
+        .rule-box ul { list-style-type: none; padding-left: 0; }
+        .rule-box li { margin-bottom: 15px; }
+        
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .container { padding: 20px 15px; }
+            .header h1 { font-size: 2em; }
+            .material-title { font-size: 1.8em; }
+            .step-label { display: none; }
+            .step-circle { width: 35px; height: 35px; }
+            .progress-steps::before, .progress-fill { top: 17.5px; }
+            .stats { grid-template-columns: 1fr; gap: 10px; }
+            .button-group { flex-direction: column; align-items: stretch; }
+            .btn { width: 100%; margin: 5px 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ FPB dan KPK</h1>
+            <p>Sistem Pembelajaran Terstruktur dengan 3 Level</p>
+        </div>
+        <div class="progress-container">
+            <div class="progress-steps">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                <div class="step" id="step0"><div class="step-circle">📚</div><div class="step-label">Materi</div></div>
+                <div class="step" id="step1"><div class="step-circle">1</div><div class="step-label">LOTS</div></div>
+                <div class="step" id="step2"><div class="step-circle">2</div><div class="step-label">MOTS</div></div>
+                <div class="step" id="step3"><div class="step-circle">3</div><div class="step-label">HOTS</div></div>
+                <div class="step" id="step4"><div class="step-circle">🏆</div><div class="step-label">Selesai</div></div>
+            </div>
+            <div class="stats">
+                <div class="stat-card"><div class="stat-value" id="currentLevel">Materi</div><div class="stat-label">Level Saat Ini</div></div>
+                <div class="stat-card"><div class="stat-value" id="attemptsLeft">5</div><div class="stat-label">Percobaan Tersisa</div></div>
+                <div class="stat-card"><div class="stat-value" id="passCount">0/2</div><div class="stat-label">Kali Lulus</div></div>
+            </div>
+        </div>
+        <div class="content-area" id="contentArea"></div>
+    </div>
+
+    <div id="notification-container"></div>
+    
+    <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+        const state = { currentStage: 0, attempts: { LOTS: 5, MOTS: 5, HOTS: 5 }, passCount: { LOTS: 0, MOTS: 0, HOTS: 0 }, consecutiveFails: { LOTS: 0, MOTS: 0, HOTS: 0 }, currentQuiz: null, userAnswers: [], activeQuestions: [] };
+
+        const quizContent = {
+            material: `
+                <h2 class="material-title">📚 Materi Ringkas: FPB & KPK</h2>
+                <p class="material-intro">FPB (Faktor Persekutuan Terbesar) dan KPK (Kelipatan Persekutuan Terkecil) adalah konsep dasar teori bilangan yang sangat berguna.</p>
+                
+                <div class="material-point">
+                    <h3 class="material-heading">1. Metode Faktorisasi Prima</h3>
+                    <p>Cara paling efektif untuk mencari FPB & KPK adalah dengan faktorisasi prima, yaitu menguraikan bilangan menjadi perkalian bilangan-bilangan prima.</p>
+                    <p>Contoh: \\(12 = 2^2 \\times 3\\) dan \\(18 = 2 \\times 3^2\\)</p>
+                </div>
+
+                <div class="material-point">
+                    <h3 class="material-heading">2. Aturan Mencari FPB & KPK</h3>
+                    <div class="rule-box"><ul>
+                        <li><strong>FPB (Faktor Persekutuan Terbesar):</strong><br>
+                        Ambil <strong class="key-concept">hanya faktor prima yang sama</strong> (persekutuan), lalu pilih <strong class="key-concept">pangkat terkecil</strong>. <br>
+                        Contoh FPB dari 12 dan 18: Faktor yang sama adalah 2 dan 3. Pangkat terkecil 2 adalah \\(2^1\\). Pangkat terkecil 3 adalah \\(3^1\\). Maka FPB = \\(2 \\times 3 = 6\\).</li>
+                        
+                        <li><strong>KPK (Kelipatan Persekutuan Terkecil):</strong><br>
+                        Ambil <strong class="key-concept">semua faktor prima</strong> yang ada. Jika ada faktor yang sama, pilih <strong class="key-concept">pangkat terbesar</strong>. <br>
+                        Contoh KPK dari 12 dan 18: Semua faktornya adalah 2 dan 3. Pangkat terbesar 2 adalah \\(2^2\\). Pangkat terbesar 3 adalah \\(3^2\\). Maka KPK = \\(2^2 \\times 3^2 = 4 \\times 9 = 36\\).</li>
+                    </ul></div>
+                </div>
+                
+                <div class="material-point">
+                    <h3 class="material-heading">3. Aplikasi Soal Cerita</h3>
+                    <p>Perhatikan kata kunci dalam soal:</p>
+                     <div class="rule-box"><ul>
+                        <li><strong>Soal FPB</strong> sering menanyakan: jumlah <strong class="key-concept">maksimal</strong>, <strong class="key-concept">pembagian sama rata</strong>, ukuran <strong class="key-concept">terbesar</strong>, jumlah kelompok, dsb.</li>
+                        <li><strong>Soal KPK</strong> sering menanyakan: kapan terjadi <strong class="key-concept">bersama-sama lagi</strong>, jadwal berulang, waktu pertemuan berikutnya, dsb.</li>
+                    </ul></div>
+                </div>
+
+                <div class="attempts-info" style="margin-top: 20px;">
+                    <strong>⚠️ Peraturan:</strong> Setiap percobaan terdiri dari <strong>5 soal acak</strong>. Lulus level jika skor ≥ 80% (benar 4 dari 5 soal). Anda harus lulus 2 kali untuk membuka level selanjutnya.
+                </div>
+            `,
+            LOTS: [
+                { question: "Faktorisasi prima dari 12 adalah...", options: [{ text: "\\(2^2 \\times 3\\)" }, { text: "\\(2 \\times 6\\)" }, { text: "\\(3 \\times 4\\)" }], correct: 0, explanation: "12 dibagi 2 hasilnya 6, 6 dibagi 2 hasilnya 3. Jadi, \\(12 = 2 \\times 2 \\times 3 = 2^2 \\times 3\\)." },
+                { question: "Manakah di bawah ini yang merupakan bilangan prima?", options: [{ text: "7" }, { text: "9" }, { text: "4" }], correct: 0, explanation: "Bilangan prima adalah bilangan yang hanya memiliki dua faktor, yaitu 1 dan dirinya sendiri. 7 hanya bisa dibagi 1 dan 7." },
+                { question: "FPB dari 8 dan 12 adalah...", options: [{ text: "4" }, { text: "2" }, { text: "8" }], correct: 0, explanation: "Faktor dari 8: {1,2,4,8}. Faktor dari 12: {1,2,3,4,6,12}. Faktor persekutuan terbesarnya adalah 4." },
+                { question: "KPK dari 4 dan 6 adalah...", options: [{ text: "12" }, { text: "24" }, { text: "2" }], correct: 0, explanation: "Kelipatan 4: {4,8,12,16,...}. Kelipatan 6: {6,12,18,...}. Kelipatan persekutuan terkecilnya adalah 12." },
+                { question: "Faktor dari 10 adalah...", options: [{ text: "1, 2, 5, 10" }, { text: "1, 10" }, { text: "2, 5" }], correct: 0, explanation: "Faktor adalah semua bilangan yang dapat membagi habis suatu bilangan. 10 bisa dibagi 1, 2, 5, dan 10." },
+                { question: "Kelipatan 3 yang pertama adalah...", options: [{ text: "3, 6, 9" }, { text: "1, 3, 6" }, { text: "3, 5, 7" }], correct: 0, explanation: "Kelipatan didapat dari mengalikan bilangan tersebut dengan bilangan asli (1, 2, 3, ...)." },
+                { question: "Faktorisasi prima dari 30 adalah...", options: [{ text: "\\(2 \\times 3 \\times 5\\)" }, { text: "\\(3 \\times 10\\)" }, { text: "\\(2 \\times 15\\)" }], correct: 0, explanation: "\\(30 = 2 \\times 15 = 2 \\times 3 \\times 5\\)." },
+                { question: "FPB dari 15 dan 25 adalah...", options: [{ text: "5" }, { text: "3" }, { text: "1" }], correct: 0, explanation: "\\(15=3 \\times 5\\), \\(25=5^2\\). Faktor prima yang sama adalah 5, pangkat terkecilnya \\(5^1\\). FPB = 5." },
+                { question: "KPK dari 5 dan 7 adalah...", options: [{ text: "35" }, { text: "1" }, { text: "12" }], correct: 0, explanation: "Karena 5 dan 7 keduanya bilangan prima, KPK-nya adalah hasil kali keduanya: \\(5 \\times 7 = 35\\)." },
+                { question: "Bilangan prima setelah 11 adalah...", options: [{ text: "13" }, { text: "12" }, { text: "15" }], correct: 0, explanation: "13 adalah bilangan selanjutnya yang hanya bisa dibagi 1 dan 13." },
+                { question: "FPB dari 18 dan 24 adalah...", options: [{ text: "6" }, { text: "3" }, { text: "2" }], correct: 0, explanation: "\\(18 = 2 \\times 3^2\\), \\(24 = 2^3 \\times 3\\). FPB = \\(2^1 \\times 3^1 = 6\\)." },
+                { question: "KPK dari 8 dan 10 adalah...", options: [{ text: "40" }, { text: "80" }, { text: "2" }], correct: 0, explanation: "\\(8 = 2^3\\), \\(10 = 2 \\times 5\\). KPK = \\(2^3 \\times 5 = 8 \\times 5 = 40\\)." },
+                { question: "Faktorisasi prima dari 45 adalah...", options: [{ text: "\\(3^2 \\times 5\\)" }, { text: "\\(5 \\times 9\\)" }, { text: "\\(3 \\times 15\\)" }], correct: 0, explanation: "\\(45 = 5 \\times 9 = 5 \\times 3 \\times 3 = 3^2 \\times 5\\)." },
+                { question: "FPB dari 7 dan 11 adalah...", options: [{ text: "1" }, { text: "77" }, { text: "0" }], correct: 0, explanation: "Karena 7 dan 11 adalah bilangan prima, satu-satunya faktor persekutuan mereka adalah 1." },
+                { question: "KPK dari 9 dan 12 adalah...", options: [{ text: "36" }, { text: "3" }, { text: "108" }], correct: 0, explanation: "\\(9=3^2\\), \\(12=2^2 \\times 3\\). KPK = \\(2^2 \\times 3^2 = 4 \\times 9 = 36\\)." },
+                { question: "Faktor persekutuan dari 10 dan 20 adalah...", options: [{ text: "1, 2, 5, 10" }, { text: "1, 2, 4, 5, 10, 20" }, { text: "1, 2, 5" }], correct: 0, explanation: "Faktor 10: {1,2,5,10}. Faktor 20: {1,2,4,5,10,20}. Yang sama adalah {1,2,5,10}." },
+                { question: "Kelipatan persekutuan pertama dari 4 dan 5 adalah...", options: [{ text: "20" }, { text: "10" }, { text: "40" }], correct: 0, explanation: "Kelipatan 4: {4,8,12,16,20,...}. Kelipatan 5: {5,10,15,20,...}. Yang pertama kali sama adalah 20." },
+                { question: "FPB dari 20 dan 30 adalah...", options: [{ text: "10" }, { text: "5" }, { text: "2" }], correct: 0, explanation: "\\(20 = 2^2 \\times 5\\), \\(30 = 2 \\times 3 \\times 5\\). FPB = \\(2 \\times 5 = 10\\)." },
+                { question: "KPK dari 6 dan 15 adalah...", options: [{ text: "30" }, { text: "90" }, { text: "3" }], correct: 0, explanation: "\\(6 = 2 \\times 3\\), \\(15 = 3 \\times 5\\). KPK = \\(2 \\times 3 \\times 5 = 30\\)." },
+                { question: "Faktorisasi prima dari 50 adalah...", options: [{ text: "\\(2 \\times 5^2\\)" }, { text: "\\(2 \\times 25\\)" }, { text: "\\(5 \\times 10\\)" }], correct: 0, explanation: "\\(50 = 2 \\times 25 = 2 \\times 5 \\times 5 = 2 \\times 5^2\\)." },
+                { question: "FPB dari 16 dan 40 adalah...", options: [{ text: "8" }, { text: "4" }, { text: "2" }], correct: 0, explanation: "\\(16=2^4\\), \\(40=2^3 \\times 5\\). FPB = \\(2^3 = 8\\)." },
+                { question: "KPK dari 2, 3, dan 5 adalah...", options: [{ text: "30" }, { text: "1" }, { text: "60" }], correct: 0, explanation: "Karena ketiganya bilangan prima, KPK-nya adalah hasil kali ketiganya: \\(2 \\times 3 \\times 5 = 30\\)." },
+                { question: "Apakah 1 merupakan bilangan prima?", options: [{ text: "Bukan" }, { text: "Ya" }, { text: "Kadang-kadang" }], correct: 0, explanation: "Bukan. Bilangan prima didefinisikan memiliki TEPAT dua faktor. Angka 1 hanya memiliki satu faktor, yaitu 1." },
+                { question: "FPB dari 100 dan 150 adalah...", options: [{ text: "50" }, { text: "25" }, { text: "10" }], correct: 0, explanation: "\\(100 = 2^2 \\times 5^2\\), \\(150 = 2 \\times 3 \\times 5^2\\). FPB = \\(2 \\times 5^2 = 50\\)." },
+                { question: "KPK dari 20 dan 25 adalah...", options: [{ text: "100" }, { text: "50" }, { text: "5" }], correct: 0, explanation: "\\(20 = 2^2 \\times 5\\), \\(25 = 5^2\\). KPK = \\(2^2 \\times 5^2 = 4 \\times 25 = 100\\)." }
+            ],
+            MOTS: [
+                { question: "FPB dari 48, 72, dan 96 adalah...", options: [{ text: "24" }, { text: "12" }, { text: "48" }], correct: 0, explanation: "\\(48=2^4 \\times 3\\), \\(72=2^3 \\times 3^2\\), \\(96=2^5 \\times 3\\). FPB = \\(2^3 \\times 3^1 = 8 \\times 3 = 24\\)." },
+                { question: "KPK dari 15, 20, dan 30 adalah...", options: [{ text: "60" }, { text: "120" }, { text: "5" }], correct: 0, explanation: "\\(15=3 \\times 5\\), \\(20=2^2 \\times 5\\), \\(30=2 \\times 3 \\times 5\\). KPK = \\(2^2 \\times 3 \\times 5 = 4 \\times 3 \\times 5 = 60\\)." },
+                { question: "Lampu A menyala setiap 6 detik, lampu B setiap 8 detik. Kapan keduanya menyala bersama lagi?", options: [{ text: "24 detik" }, { text: "48 detik" }, { text: "2 detik" }], correct: 0, explanation: "Soal 'bersama lagi' menandakan KPK. KPK dari 6 dan 8 adalah 24." },
+                { question: "Ibu punya 24 apel dan 30 jeruk. Akan dibagikan ke sebanyak mungkin anak dengan jumlah sama. Berapa anak yang akan menerima?", options: [{ text: "6 anak" }, { text: "5 anak" }, { text: "2 anak" }], correct: 0, explanation: "Soal 'sebanyak mungkin' dan 'jumlah sama' menandakan FPB. FPB dari 24 dan 30 adalah 6." },
+                { question: "FPB dari \\(2^3 \\times 3^2 \\times 5\\) dan \\(2^2 \\times 3^3 \\times 7\\) adalah...", options: [{ text: "\\(2^2 \\times 3^2\\)" }, { text: "\\(2^3 \\times 3^3\\)" }, { text: "\\(2^2 \\times 3^2 \\times 5 \\times 7\\)" }], correct: 0, explanation: "Ambil faktor yang sama (2 dan 3) dengan pangkat terkecil. Pangkat terkecil 2 adalah \\(2^2\\). Pangkat terkecil 3 adalah \\(3^2\\)." },
+                { question: "KPK dari \\(2^4 \\times 3\\) dan \\(2^2 \\times 3^2 \\times 5\\) adalah...", options: [{ text: "\\(2^4 \\times 3^2 \\times 5\\)" }, { text: "\\(2^2 \\times 3\\)" }, { text: "\\(2^6 \\times 3^3 \\times 5\\)" }], correct: 0, explanation: "Ambil semua faktor (2, 3, 5) dengan pangkat terbesar. Pangkat terbesar 2 adalah \\(2^4\\), 3 adalah \\(3^2\\), 5 adalah \\(5^1\\)." },
+                { question: "Ani, Budi, dan Cici les renang. Ani setiap 3 hari, Budi 4 hari, Cici 6 hari. Kapan mereka les bersama lagi?", options: [{ text: "12 hari" }, { text: "24 hari" }, { text: "72 hari" }], correct: 0, explanation: "Mencari KPK dari 3, 4, dan 6. \\(3=3\\), \\(4=2^2\\), \\(6=2 \\times 3\\). KPK = \\(2^2 \\times 3 = 12\\)." },
+                { question: "Panitia kurban memiliki 48 sapi dan 60 kambing. Hewan akan dibagi menjadi beberapa kelompok dengan jenis dan jumlah sama. Berapa kelompok maksimal yang bisa dibuat?", options: [{ text: "12 kelompok" }, { text: "6 kelompok" }, { text: "10 kelompok" }], correct: 0, explanation: "Mencari FPB dari 48 dan 60. \\(48=2^4 \\times 3\\), \\(60=2^2 \\times 3 \\times 5\\). FPB = \\(2^2 \\times 3 = 12\\)." },
+                { question: "FPB dari 100 dan 120 adalah...", options: [{ text: "20" }, { text: "10" }, { text: "4" }], correct: 0, explanation: "\\(100 = 2^2 \\times 5^2\\), \\(120 = 2^3 \\times 3 \\times 5\\). FPB = \\(2^2 \\times 5 = 20\\)." },
+                { question: "KPK dari 50 dan 75 adalah...", options: [{ text: "150" }, { text: "25" }, { text: "300" }], correct: 0, explanation: "\\(50 = 2 \\times 5^2\\), \\(75 = 3 \\times 5^2\\). KPK = \\(2 \\times 3 \\times 5^2 = 150\\)." },
+                { question: "Bus A berangkat setiap 15 menit, bus B setiap 25 menit. Jika keduanya berangkat bersama pukul 08.00, pukul berapa mereka berangkat bersama lagi?", options: [{ text: "09.15" }, { text: "09.00" }, { text: "08.40" }], correct: 0, explanation: "KPK dari 15 dan 25 adalah 75 menit. 75 menit = 1 jam 15 menit. 08.00 + 1 jam 15 menit = 09.15." },
+                { question: "Ada 36 pulpen merah dan 42 pulpen biru. Akan dimasukkan ke kotak kecil dengan isi sama. Berapa pulpen merah di setiap kotak?", options: [{ text: "6" }, { text: "7" }, { text: "12" }], correct: 0, explanation: "Pertama, cari jumlah kotak (FPB dari 36 dan 42), yaitu 6. Lalu, jumlah pulpen merah per kotak adalah \\(36 \div 6 = 6\\)." },
+                { question: "FPB dari 60, 84, dan 108 adalah...", options: [{ text: "12" }, { text: "6" }, { text: "4" }], correct: 0, explanation: "\\(60 = 2^2 \\times 3 \\times 5\\), \\(84=2^2 \\times 3 \\times 7\\), \\(108=2^2 \\times 3^3\\). FPB = \\(2^2 \\times 3 = 12\\)." },
+                { question: "KPK dari 18, 24, dan 36 adalah...", options: [{ text: "72" }, { text: "36" }, { text: "144" }], correct: 0, explanation: "\\(18=2 \\times 3^2\\), \\(24=2^3 \\times 3\\), \\(36=2^2 \\times 3^2\\). KPK = \\(2^3 \\times 3^2 = 8 \\times 9 = 72\\)." },
+                { question: "FPB dari 144 dan 180 adalah...", options: [{ text: "36" }, { text: "18" }, { text: "720" }], correct: 0, explanation: "\\(144 = 2^4 \\times 3^2\\), \\(180 = 2^2 \\times 3^2 \\times 5\\). FPB = \\(2^2 \\times 3^2 = 36\\)." },
+                { question: "KPK dari 42 dan 56 adalah...", options: [{ text: "168" }, { text: "14" }, { text: "112" }], correct: 0, explanation: "\\(42 = 2 \\times 3 \\times 7\\), \\(56 = 2^3 \\times 7\\). KPK = \\(2^3 \\times 3 \\times 7 = 168\\)." },
+                { question: "Jam dinding A berdentang tiap 30 menit, jam B tiap 45 menit. Jika jam 10.00 berdentang bersama, kapan selanjutnya mereka berdentang bersama?", options: [{ text: "11.30" }, { text: "11.00" }, { text: "10.45" }], correct: 0, explanation: "KPK dari 30 dan 45 adalah 90 menit (1.5 jam). 10.00 + 1.5 jam = 11.30." },
+                { question: "Berapa banyak ubin persegi ukuran terbesar yang bisa menutupi lantai 3m x 4.2m?", options: [{ text: "35 ubin" }, { text: "30 ubin" }, { text: "60 ubin" }], correct: 0, explanation: "Ubah ke cm: 300cm x 420cm. Ukuran ubin terbesar adalah FPB(300, 420)=60cm. Jumlah ubin = (300/60) x (420/60) = 5 x 7 = 35 ubin." },
+                { question: "FPB dari \\(2^2 \\times 3\\) dan \\(2 \\times 3^2\\) adalah...", options: [{ text: "6" }, { text: "12" }, { text: "36" }], correct: 0, explanation: "Faktor sama 2 dan 3. Pangkat terkecil 2 adalah \\(2^1\\). Pangkat terkecil 3 adalah \\(3^1\\). FPB = \\(2 \\times 3 = 6\\)." },
+                { question: "KPK dari \\(3^2 \\times 5\\) dan \\(2 \\times 3 \\times 5\\) adalah...", options: [{ text: "90" }, { text: "15" }, { text: "45" }], correct: 0, explanation: "Semua faktor 2,3,5. Pangkat terbesar 2 adalah \\(2^1\\), 3 adalah \\(3^2\\), 5 adalah \\(5^1\\). KPK = \\(2 \\times 9 \\times 5 = 90\\)." },
+                { question: "FPB dari 52 dan 91 adalah...", options: [{ text: "13" }, { text: "7" }, { text: "4" }], correct: 0, explanation: "52 dan 91 adalah kelipatan 13. \\(52 = 4 \\times 13\\), \\(91 = 7 \\times 13\\). FPB = 13." },
+                { question: "KPK dari 14 dan 21 adalah...", options: [{ text: "42" }, { text: "7" }, { text: "84" }], correct: 0, explanation: "\\(14 = 2 \\times 7\\), \\(21 = 3 \\times 7\\). KPK = \\(2 \\times 3 \\times 7 = 42\\)." },
+                { question: "Rina membeli 40 kue keju dan 60 kue coklat untuk teman-temannya. Jika setiap teman mendapat jumlah kue keju dan coklat yang sama, berapa jumlah maksimal teman yang bisa ia bagikan?", options: [{ text: "20 teman" }, { text: "10 teman" }, { text: "40 teman" }], correct: 0, explanation: "Mencari FPB dari 40 dan 60. \\(40=2^3 \\times 5\\), \\(60=2^2 \\times 3 \\times 5\\). FPB = \\(2^2 \\times 5 = 20\\)." },
+                { question: "Di sebuah terminal, bus jurusan X berangkat setiap 20 menit dan bus jurusan Y setiap 30 menit. Pukul 07.00 keduanya berangkat bersama. Kapan mereka akan berangkat bersama lagi?", options: [{ text: "08.00" }, { text: "07.50" }, { text: "08.30" }], correct: 0, explanation: "Mencari KPK dari 20 dan 30. KPK nya adalah 60 menit atau 1 jam. 07.00 + 1 jam = 08.00." },
+                { question: "FPB dari 250 dan 300 adalah...", options: [{ text: "50" }, { text: "25" }, { text: "10" }], correct: 0, explanation: "\\(250=2 \\times 5^3\\), \\(300=2^2 \\times 3 \\times 5^2\\). FPB = \\(2 \\times 5^2 = 50\\)." }
+            ],
+            HOTS: [
+                { question: "FPB dari \\(12a^2b\\) dan \\(18ab^3\\) adalah...", options: [{ text: "\\(6ab\\)" }, { text: "\\(36a^2b^3\\)" }, { text: "\\(6a^2b\\)" }], correct: 0, explanation: "FPB bilangan: FPB(12,18)=6. FPB variabel: ambil pangkat terkecil. \\(a^1\\) dan \\(b^1\\). Jadi FPB = \\(6ab\\)." },
+                { question: "KPK dari \\(8x^2y^3z\\) dan \\(6xy^4\\) adalah...", options: [{ text: "\\(24x^2y^4z\\)" }, { text: "\\(2xy^3\\)" }, { text: "\\(48x^3y^7z\\)" }], correct: 0, explanation: "KPK bilangan: KPK(8,6)=24. KPK variabel: ambil semua variabel dengan pangkat terbesar. \\(x^2, y^4, z^1\\). Jadi KPK = \\(24x^2y^4z\\)." },
+                { question: "FPB dari dua bilangan adalah 6 dan KPK nya 36. Jika salah satu bilangan 12, bilangan lainnya adalah...", options: [{ text: "18" }, { text: "24" }, { text: "6" }], correct: 0, explanation: "Gunakan rumus \\(a \\times b = FPB(a,b) \\times KPK(a,b)\\). \\(12 \\times b = 6 \\times 36 \implies 12b = 216 \implies b = 18\\)." },
+                { question: "Sebuah bilangan jika dibagi 4, 5, dan 6 selalu bersisa 1. Bilangan terkecil tersebut adalah...", options: [{ text: "61" }, { text: "60" }, { text: "121" }], correct: 0, explanation: "Cari KPK dari 4, 5, dan 6, yaitu 60. Karena selalu bersisa 1, maka bilangan tersebut adalah \\(KPK + 1 = 60 + 1 = 61\\)." },
+                { question: "Terdapat 54 bola merah, 72 bola biru, 90 bola hijau. Bola akan dimasukkan ke dalam keranjang dengan jumlah dan warna yang sama di tiap keranjang. Berapa total bola dalam satu keranjang?", options: [{ text: "12" }, { text: "18" }, { text: "216" }], correct: 0, explanation: "Jumlah keranjang = FPB(54,72,90) = 18. Isi per keranjang: Merah=54/18=3, Biru=72/18=4, Hijau=90/18=5. Total = 3+4+5=12 bola." },
+                { question: "KPK dari \\(15p^3q^2\\) dan \\(20p^2q^4r\\) adalah...", options: [{ text: "\\(60p^3q^4r\\)" }, { text: "\\(5p^2q^2\\)" }, { text: "\\(300p^5q^6r\\)" }], correct: 0, explanation: "KPK(15,20)=60. Variabel pangkat terbesar: \\(p^3, q^4, r^1\\). Jadi KPK = \\(60p^3q^4r\\)." },
+                { question: "FPB dari \\(16x^2y^3\\) dan \\(24x^3y^2\\) adalah...", options: [{ text: "\\(8x^2y^2\\)" }, { text: "\\(48x^3y^3\\)" }, { text: "\\(4x^2y^2\\)" }], correct: 0, explanation: "FPB(16,24)=8. Variabel pangkat terkecil: \\(x^2, y^2\\). Jadi FPB = \\(8x^2y^2\\)." },
+                { question: "Dua bilangan memiliki FPB 12 dan KPK 180. Pasangan bilangan yang mungkin adalah...", options: [{ text: "(36, 60)" }, { text: "(12, 180)" }, { text: "(24, 72)" }], correct: 0, explanation: "Gunakan rumus \\(a \\times b = 12 \\times 180 = 2160\\). Cek pilihan: \\(36 \\times 60 = 2160\\). Pilihan lain tidak cocok." },
+                { question: "Bilangan terkecil yang jika dibagi 5, 6, 7 akan bersisa 3 adalah...", options: [{ text: "213" }, { text: "210" }, { text: "108" }], correct: 0, explanation: "KPK(5,6,7) = 210. Bilangan tersebut adalah \\(KPK + sisa = 210 + 3 = 213\\)." },
+                { question: "Ada 3 lonceng berbunyi tiap 45, 60, dan 90 detik. Jika pukul 12.00 berbunyi bersama, pukul berapa mereka berbunyi bersama lagi?", options: [{ text: "12.03" }, { text: "12.02" }, { text: "12.05" }], correct: 0, explanation: "KPK(45,60,90) = 180 detik. 180 detik = 3 menit. Jadi mereka berbunyi bersama lagi pada pukul 12.03." },
+                { question: "KPK dari \\(a^2b, ab^2, abc\\) adalah...", options: [{ text: "\\(a^2b^2c\\)" }, { text: "\\(ab\\)" }, { text: "\\(a^3b^3c\\)" }], correct: 0, explanation: "Ambil semua variabel \\((a,b,c)\\) dengan pangkat tertinggi masing-masing: \\(a^2, b^2, c^1\\)." },
+                { question: "FPB dari \\(x^2-1\\) dan \\(x^2+2x+1\\) adalah...", options: [{ text: "\\(x+1\\)" }, { text: "1" }, { text: "\\((x-1)(x+1)^2\\)" }], correct: 0, explanation: "\\(x^2-1 = (x-1)(x+1)\\). \\(x^2+2x+1 = (x+1)^2\\). Faktor persekutuan dengan pangkat terkecil adalah \\((x+1)\\)." },
+                { question: "FPB dari dua bilangan adalah 9. KPK-nya 270. Jika satu bilangan 45, bilangan lainnya?", options: [{ text: "54" }, { text: "30" }, { text: "60" }], correct: 0, explanation: "\\(45 \\times b = 9 \\times 270 \implies 45b = 2430 \implies b = 2430 / 45 = 54\\)." },
+                { question: "Bilangan \\(N\\) jika dibagi 3 sisa 2, jika dibagi 4 sisa 3, jika dibagi 5 sisa 4. Nilai terkecil \\(N\\) adalah...", options: [{ text: "59" }, { text: "60" }, { text: "61" }], correct: 0, explanation: "Ini berarti \\(N+1\\) habis dibagi 3, 4, dan 5. Cari KPK(3,4,5) = 60. Maka \\(N+1=60 \implies N=59\\)." },
+                { question: "Sebuah lantai berukuran 6.4m x 4.8m akan dipasangi keramik persegi terbesar. Jika harga 1 keramik Rp 25.000, total biayanya adalah...", options: [{ text: "Rp 300.000" }, { text: "Rp 400.000" }, { text: "Rp 250.000" }], correct: 0, explanation: "Ubah ke cm: 640cm x 480cm. Ukuran keramik = FPB(640,480)=160cm. Jumlah keramik = (640/160)x(480/160) = 4x3 = 12 buah. Biaya = 12 x 25.000 = 300.000." },
+                { question: "KPK dari \\(12x^3y\\) dan \\(15x^2z\\) adalah...", options: [{ text: "\\(60x^3yz\\)" }, { text: "\\(3x^2\\)" }, { text: "\\(180x^5yz\\)" }], correct: 0, explanation: "KPK(12,15)=60. Variabel pangkat terbesar: \\(x^3, y^1, z^1\\). KPK = \\(60x^3yz\\)." },
+                { question: "FPB dari \\(50a^4b^2c\\) dan \\(75a^3b^3\\) adalah...", options: [{ text: "\\(25a^3b^2\\)" }, { text: "\\(150a^4b^3c\\)" }, { text: "\\(25abc\\)" }], correct: 0, explanation: "FPB(50,75)=25. Variabel pangkat terkecil: \\(a^3, b^2\\). FPB = \\(25a^3b^2\\)." },
+                { question: "FPB(A, B) = 4, KPK(A, B) = 24. A dan B > 4. Maka A+B=...", options: [{ text: "20" }, { text: "16" }, { text: "28" }], correct: 0, explanation: "A dan B adalah kelipatan 4, dan faktor dari 24. Pasangan yang mungkin: (8, 12). Cek: FPB(8,12)=4, KPK(8,12)=24. Cocok. Maka A+B = 8+12=20." },
+                { question: "Bilangan terkecil yang habis dibagi 8 dan 12, dan juga merupakan bilangan kuadrat sempurna adalah...", options: [{ text: "144" }, { text: "24" }, { text: "36" }], correct: 0, explanation: "KPK(8,12) = 24. Faktorisasi prima 24 adalah \\(2^3 \\times 3^1\\). Agar jadi kuadrat sempurna, semua pangkat harus genap. Kita perlu kalikan dengan \\(2^1 \\times 3^1 = 6\\). Jadi, \\(24 \\times 6 = 144\\)." },
+                { question: "Tiga pelari berlari di lintasan melingkar. A butuh 20 detik, B 30 detik, C 36 detik. Berapa putaran yang telah diselesaikan A saat mereka bertiga bertemu di garis start lagi?", options: [{ text: "9 putaran" }, { text: "6 putaran" }, { text: "5 putaran" }], correct: 0, explanation: "Waktu bertemu = KPK(20,30,36) = 180 detik. Jumlah putaran A = Waktu bertemu / Waktu A = 180 / 20 = 9 putaran." },
+                { question: "KPK dari \\(x^2-4\\) dan \\(x^2-x-6\\) adalah...", options: [{ text: "\\((x-2)(x+2)(x-3)\\)" }, { text: "\\(x-2\\)" }, { text: "\\(x+2\\)" }], correct: 0, explanation: "\\(x^2-4 = (x-2)(x+2)\\). \\(x^2-x-6=(x-3)(x+2)\\). KPK-nya adalah perkalian semua faktor unik dengan pangkat tertinggi: \\((x-2)(x+2)(x-3)\\)." },
+                { question: "Sebuah bilangan \\(X\\) jika dibagi 10 sisa 9, dibagi 9 sisa 8, dibagi 8 sisa 7. Bilangan terkecil \\(X\\) adalah...", options: [{ text: "359" }, { text: "360" }, { text: "361" }], correct: 0, explanation: "Ini berarti \\(X+1\\) habis dibagi 10, 9, dan 8. KPK(10,9,8)=360. Maka \\(X+1=360 \implies X=359\\)." },
+                { question: "Jika FPB(x, y) = 1, manakah pernyataan yang pasti benar?", options: [{ text: "KPK(x, y) = xy" }, { text: "x dan y adalah bilangan prima" }, { text: "x dan y adalah bilangan ganjil" }], correct: 0, explanation: "Jika dua bilangan tidak memiliki faktor persekutuan selain 1 (relatif prima), maka KPK-nya adalah hasil kali kedua bilangan tersebut." },
+                { question: "FPB dari \\(6(x+1)^2\\) dan \\(9(x^2-1))\\) adalah...", options: [{ text: "\\(3(x+1)\\)" }, { text: "\\(18(x+1)^2(x-1)\\)" }, { text: "\\(3(x-1)\\)" }], correct: 0, explanation: "FPB(6,9)=3. \\((x+1)^2\\) dan \\((x^2-1)=(x-1)(x+1)\\). Faktor sama adalah \\((x+1)\\) dengan pangkat terkecil 1. Jadi FPB = \\(3(x+1)\\)." },
+                { question: "KPK dari tiga bilangan prima berbeda \\(p, q, r\\) adalah...", options: [{ text: "\\(pqr\\)" }, { text: "1" }, { text: "\\(p+q+r\\)" }], correct: 0, explanation: "Karena ketiganya adalah bilangan prima yang berbeda, mereka tidak memiliki faktor persekutuan selain 1. Maka KPK-nya adalah hasil perkalian ketiganya." }
+            ]
+        };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function showNotification(message, type = 'warning') {
+            const container = document.getElementById('notification-container');
+            const notif = document.createElement('div');
+            notif.className = `notification ${type}`;
+            let icon = '⚠️';
+            if (type === 'success') icon = '✅';
+            if (type === 'info') icon = 'ℹ️';
+            notif.innerHTML = `<span>${icon}</span> <span>${message}</span>`;
+            container.appendChild(notif);
+            setTimeout(() => { notif.remove(); }, 4000);
+        }
+
+        function updateProgress() {
+            const stages = ['step0', 'step1', 'step2', 'step3', 'step4'];
+            const progress = (state.currentStage / 4) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            stages.forEach((id, idx) => {
+                const step = document.getElementById(id);
+                step.classList.remove('active', 'completed');
+                if (idx < state.currentStage) step.classList.add('completed');
+                else if (idx === state.currentStage) step.classList.add('active');
+            });
+            const levelNames = ['Materi', 'LOTS', 'MOTS', 'HOTS', 'Selesai'];
+            document.getElementById('currentLevel').textContent = levelNames[state.currentStage];
+        }
+        
+        function showMaterial() {
+            document.getElementById('contentArea').innerHTML = quizContent.material + `<div class="button-group"><button class="btn btn-primary" onclick="startLOTS()">Mulai Level LOTS →</button></div>`;
+            state.currentStage = 0;
+            updateProgress();
+            setTimeout(() => MathJax.typesetPromise(), 10);
+        }
+        
+        function startQuiz(level) {
+            state.currentQuiz = level;
+            const fullBank = quizContent[level];
+            const shuffledBank = shuffleArray([...fullBank]);
+            state.activeQuestions = shuffledBank.slice(0, 5);
+
+            state.userAnswers = Array(state.activeQuestions.length).fill(null);
+            const levelMap = { LOTS: 1, MOTS: 2, HOTS: 3 };
+            state.currentStage = levelMap[level];
+            updateProgress(); updateStats();
+            const content = `<div class="quiz-section active">
+                    <h2 style="text-align:center; margin-bottom: 20px;">📝 ${level} - Mode Ujian (5 Soal Acak)</h2>
+                    <div class="attempts-info"><strong>Percobaan ${6 - state.attempts[level]} dari 5</strong> | Sudah lulus: ${state.passCount[level]}/2 kali | Gagal berturut-turut: ${state.consecutiveFails[level]}/3</div>
+                    <div id="questionsContainer"></div>
+                    <div class="button-group" id="quiz-button-group"><button id="submitBtn" class="btn btn-primary" onclick="submitQuiz()">Submit Jawaban</button></div>
+                </div>`;
+            document.getElementById('contentArea').innerHTML = content;
+            renderQuestions(state.activeQuestions);
+        }
+        
+        function renderQuestions(questions) {
+            const container = document.getElementById('questionsContainer');
+            container.innerHTML = questions.map((q, idx) => {
+                const optionsHTML = q.options.map((opt, optIdx) => 
+                    `<div class="option" onclick="selectOption(this, ${idx}, ${optIdx})">
+                        <input type="radio" name="q${idx}" id="q${idx}opt${optIdx}" style="pointer-events: none;">
+                        <label for="q${idx}opt${optIdx}" style="cursor: pointer; width: 100%;">${opt.text}</label>
+                    </div>`
+                ).join('');
+
+                return `<div class="question-card" id="question${idx}">
+                    <div class="question-number">Soal ${idx + 1} dari ${questions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options" style="display:flex; flex-direction:column; gap:10px;">${optionsHTML}</div>
+                    <div class="explanation hidden" id="explanation${idx}"></div>
+                </div>`;
+            }).join('');
+            setTimeout(() => MathJax.typesetPromise(), 10);
+        }
+        
+        function selectOption(element, questionIdx, optionIdx) {
+            if (document.getElementById('submitBtn')?.disabled) { return; }
+            const options = document.querySelectorAll(`#question${questionIdx} .option`);
+            options.forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            element.querySelector('input[type="radio"]').checked = true;
+            state.userAnswers[questionIdx] = optionIdx;
+        }
+        
+        function submitQuiz() {
+            const level = state.currentQuiz;
+            const questions = state.activeQuestions;
+            const unanswered = state.userAnswers.filter(ans => ans === null).length;
+
+            if (unanswered > 0) {
+                showNotification(`Mohon jawab semua soal! Ada ${unanswered} soal yang belum terjawab.`);
+                return;
+            }
+
+            let correct = 0;
+            questions.forEach((q, idx) => {
+                const userAnswerIdx = state.userAnswers[idx];
+                const isCorrect = (userAnswerIdx === q.correct);
+                if (isCorrect) correct++;
+                const options = document.querySelectorAll(`#question${idx} .option`);
+                options[userAnswerIdx].classList.add(isCorrect ? 'correct' : 'incorrect');
+                if (!isCorrect) { options[q.correct].classList.add('correct'); }
+                const explanation = document.getElementById(`explanation${idx}`);
+                explanation.innerHTML = `<strong>💡 Pembahasan:</strong> ${q.explanation}`;
+                explanation.classList.remove('hidden');
+            });
+            setTimeout(() => MathJax.typesetPromise(), 10);
+            
+            const score = (correct / questions.length) * 100;
+            const passed = score >= 80;
+            state.attempts[level]--;
+            if (passed) {
+                state.passCount[level]++; state.consecutiveFails[level] = 0;
+                showNotification(`Luar biasa! Skor Anda ${score.toFixed(0)}%.`, 'success');
+            } else {
+                state.consecutiveFails[level]++;
+                showNotification(`Skor Anda ${score.toFixed(0)}%. Terus coba lagi!`, 'warning');
+            }
+            updateStats();
+            document.getElementById('submitBtn').style.display = 'none';
+            document.getElementById('quiz-button-group').innerHTML = `<button class="btn btn-primary" onclick='showResult("${level}", ${score}, ${passed})'>Lihat Ringkasan Hasil →</button>`;
+        }
+        
+        function showResult(level, score, passed) {
+            const canProceed = state.passCount[level] >= 2;
+            const isEliminated = state.consecutiveFails[level] >= 3 || (state.attempts[level] === 0 && !canProceed);
+            let resultHTML = `
+                <div class="result-summary" style="text-align: center;">
+                    <h2>${passed ? '✅ Lulus!' : '❌ Belum Lulus'} (Skor Minimal: 80%)</h2>
+                    <div style="font-size: 4em; font-weight: bold; color: ${passed ? 'var(--accent-green)' : 'var(--accent-red)'}; margin: 20px 0;">${score.toFixed(0)}%</div>
+                    <p style="font-size: 1.2em; margin: 20px 0;">Kamu menjawab benar ${Math.round((score / 100) * state.activeQuestions.length)} dari ${state.activeQuestions.length} soal</p>
+                    <div class="attempts-info"><strong>Status:</strong><br>Lulus: ${state.passCount[level]}/2 kali | Percobaan tersisa: ${state.attempts[level]} | Gagal berturut-turut: ${state.consecutiveFails[level]}/3</div>`;
+            if (isEliminated) {
+                resultHTML += `<div style="background: rgba(220, 53, 69, 0.2); padding: 20px; border-radius: 10px; margin: 20px 0;"><h3 style="color: var(--accent-red);">❌ Mode Kilat - GUGUR</h3><p style="margin: 15px 0;">Kamu telah ${state.consecutiveFails[level] >= 3 ? 'gagal 3x berturut-turut' : 'kehabisan percobaan'}.</p></div><div class="button-group"><button class="btn btn-secondary" onclick="resetSystem()">Mulai Ulang dari Awal</button></div>`;
+            } else if (canProceed) {
+                const nextLevel = level === 'LOTS' ? 'MOTS' : (level === 'MOTS' ? 'HOTS' : null);
+                if (nextLevel) {
+                    resultHTML += `<div style="background: rgba(40, 167, 69, 0.2); padding: 20px; border-radius: 10px; margin: 20px 0;"><h3 style="color: var(--accent-green);">🔓 Level ${nextLevel} Terbuka!</h3><p style="margin: 15px 0;">Siap untuk tantangan berikutnya?</p></div><div class="button-group"><button class="btn" onclick="showMaterial()">Baca Materi Lagi</button><button class="btn btn-primary" onclick="start${nextLevel}()">Lanjut ke ${nextLevel} →</button></div>`;
+                } else { resultHTML += generateCertificate(); }
+            } else {
+                resultHTML += `<div class="button-group"><button class="btn" onclick="showMaterial()">Baca Materi Lagi</button><button class="btn btn-primary" onclick="start${level}()">Coba Lagi (${state.attempts[level]} percobaan)</button></div>`;
+            }
+            resultHTML += `</div>`; document.getElementById('contentArea').innerHTML = resultHTML;
+        }
+
+        function generateCertificate() {
+            state.currentStage = 4; updateProgress();
+            return `<div class="certificate"><div style="font-size: 5em;">🏆</div><h2 style="font-size: 2.5em; margin-bottom: 20px; color: var(--accent-teal);">Sertifikat Kelulusan Topik</h2><p style="font-size: 1.3em; margin: 20px 0;">SELAMAT!</p><p style="font-size: 1.1em; line-height: 1.6;">Kamu telah berhasil menyelesaikan topik <strong>FPB dan KPK</strong> dengan melewati semua level: LOTS ✓ MOTS ✓ HOTS ✓</p></div><div class="button-group"><button class="btn btn-primary" onclick="resetSystem()">Mulai Topik Baru</button></div>`;
+        }
+        
+        function updateStats() {
+            const level = state.currentQuiz || 'LOTS';
+            document.getElementById('attemptsLeft').textContent = state.attempts[level];
+            document.getElementById('passCount').textContent = `${state.passCount[level]}/2`;
+        }
+        
+        function startLOTS() { startQuiz('LOTS'); }
+        function startMOTS() { startQuiz('MOTS'); }
+        function startHOTS() { startQuiz('HOTS'); }
+        
+        function resetSystem() {
+            Object.assign(state, {
+                currentStage: 0, attempts: { LOTS: 5, MOTS: 5, HOTS: 5 }, passCount: { LOTS: 0, MOTS: 0, HOTS: 0 },
+                consecutiveFails: { LOTS: 0, MOTS: 0, HOTS: 0 }, currentQuiz: null, userAnswers: [], activeQuestions: []
+            });
+            showNotification('Sistem telah direset, selamat belajar kembali!', 'info');
+            showMaterial();
+        }
+        
+        // Inisialisasi
+        showMaterial();
+    </script>
+</body>
+</html>
