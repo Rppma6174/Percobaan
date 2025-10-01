@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fungsi Kuadrat - Mode Belajar Kilat (Corrected)</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --dark-bg: #141414; --dark-card: #1f1f1f; --dark-border: #333;
+            --text-light: #f0f0f0; --text-muted: #aaa; --accent-blue: #007bff;
+            --accent-green: #28a745; --accent-red: #dc3545; --accent-yellow: #ffc107;
+            --accent-teal: #50e3c2;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--dark-bg); color: var(--text-light);
+            min-height: 100vh; padding: 20px;
+        }
+        .container {
+            max-width: 900px; margin: 0 auto; background: var(--dark-card);
+            border-radius: 15px; padding: 30px; border: 1px solid var(--dark-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .header {
+            text-align: center; margin-bottom: 30px; padding-bottom: 15px;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+        .header h1 { color: var(--text-light); font-size: 2.5em; margin-bottom: 10px; }
+        .header p { color: var(--text-muted); font-size: 1.1em; }
+        .progress-container {
+            margin: 30px 0; padding: 20px; background: rgba(0,0,0,0.2);
+            border: 1px solid var(--dark-border); border-radius: 15px;
+        }
+        .progress-steps {
+            display: flex; justify-content: space-between; margin-bottom: 15px; position: relative;
+        }
+        .progress-steps::before {
+            content: ''; position: absolute; top: 20px; left: 0; right: 0;
+            height: 4px; background: var(--dark-border); z-index: 0;
+        }
+        .progress-fill {
+            position: absolute; top: 20px; left: 0; height: 4px;
+            background: var(--accent-blue); transition: width 0.5s ease; z-index: 1;
+        }
+        .step { display: flex; flex-direction: column; align-items: center; z-index: 2; position: relative; }
+        .step-circle {
+            width: 40px; height: 40px; border-radius: 50%; background: var(--dark-border);
+            display: flex; align-items: center; justify-content: center; font-weight: bold;
+            color: var(--text-muted); border: 3px solid var(--dark-border); margin-bottom: 8px; transition: all 0.3s;
+        }
+        .step.active .step-circle {
+            background: var(--dark-card); border-color: var(--accent-blue);
+            color: var(--accent-blue); transform: scale(1.2);
+        }
+        .step.completed .step-circle { background: var(--accent-green); border-color: var(--accent-green); color: white; }
+        .step-label { font-size: 0.85em; color: var(--text-muted); font-weight: 600; }
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0; }
+        .stat-card {
+            background: var(--dark-bg); border: 1px solid var(--dark-border);
+            padding: 15px; border-radius: 12px; text-align: center;
+        }
+        .stat-value { font-size: 2em; font-weight: bold; color: var(--accent-teal); margin-bottom: 5px; }
+        .stat-label { font-size: 0.9em; color: var(--text-muted); }
+        .content-area { margin: 30px 0; min-height: 300px; }
+        .material-section, .question-card, .result-summary {
+            padding: 25px; background: var(--dark-card); border: 1px solid var(--dark-border);
+            border-radius: 15px; margin-bottom: 20px;
+        }
+        .question-number { color: var(--accent-blue); font-weight: bold; margin-bottom: 15px; }
+        .question-text { margin-bottom: 20px; font-size: 1.1em; }
+        .option {
+            padding: 15px 20px; background: var(--dark-bg); border: 2px solid var(--dark-border);
+            border-radius: 10px; cursor: pointer; transition: all 0.3s; display: flex;
+            align-items: center; color: var(--text-muted);
+        }
+        .option:hover { border-color: var(--accent-blue); color: var(--text-light); background: #2a2a2a; }
+        .option.selected { border-color: var(--accent-blue); background: rgba(0, 123, 255, 0.1); color: var(--text-light); }
+        .option.correct { border-color: var(--accent-green); background: rgba(40, 167, 69, 0.2); color: #d4edda; }
+        .option.incorrect { border-color: var(--accent-red); background: rgba(220, 53, 69, 0.2); color: #f8d7da; }
+        .option input[type="radio"] { margin-right: 15px; }
+        .btn {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-muted); padding: 12px 35px; border-radius: 8px; font-size: 1em;
+            font-weight: 600; cursor: pointer; transition: all 0.3s ease; margin: 10px 5px;
+        }
+        .btn:hover { background: rgba(255, 255, 255, 0.1); color: var(--text-light); transform: translateY(-2px); }
+        .btn-primary { background: var(--accent-blue); border-color: var(--accent-blue); color: white; }
+        .btn-primary:hover { background: #0069d9; border-color: #0062cc; }
+        .btn-secondary { background: #6c757d; border-color: #6c757d; color: white; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; background: var(--dark-border); }
+        .button-group { display: flex; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+        .explanation {
+            background: #2a2a2a; padding: 15px; border-radius: 10px; margin-top: 20px;
+            border: 1px solid #444; color: var(--text-muted);
+        }
+        .attempts-info {
+            background-color: rgba(255, 193, 7, 0.1); border-left: 5px solid var(--accent-yellow);
+            color: #fff3cd; padding: 15px; border-radius: 10px; margin: 15px 0;
+        }
+        .hidden { display: none; }
+        .certificate {
+            background: linear-gradient(135deg, #1f1f1f, #2a2a2a); color: white; padding: 40px;
+            border-radius: 20px; text-align: center; margin: 30px 0; border: 2px solid var(--accent-teal);
+            box-shadow: 0 0 40px rgba(80, 227, 194, 0.2);
+        }
+        #notification-container {
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        .notification {
+            background-color: #2a2a2a; color: var(--text-light); padding: 15px 20px;
+            border-radius: 8px; border-left: 5px solid; box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            display: flex; align-items: center; gap: 10px;
+            animation: slideIn 0.3s ease forwards, fadeOut 0.5s ease 3.5s forwards;
+        }
+        .notification.warning { border-color: var(--accent-yellow); }
+        .notification.success { border-color: var(--accent-green); }
+        .notification.info { border-color: var(--accent-blue); }
+        @keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; transform: translateY(20px); } }
+        .material-title { color: var(--text-light); font-size: 2em; margin-bottom: 10px; }
+        .material-intro { color: var(--text-muted); font-size: 1.1em; margin-bottom: 30px; }
+        .material-point { margin-bottom: 35px; }
+        .material-heading {
+            color: var(--accent-teal); font-size: 1.5em; margin-bottom: 15px;
+            padding-bottom: 10px; border-bottom: 1px solid var(--dark-border);
+            display: flex; align-items: center;
+        }
+        .material-heading::before {
+            content: '»'; margin-right: 12px; color: var(--accent-blue);
+            font-weight: bold; font-size: 1.2em;
+        }
+        .key-concept { color: var(--accent-yellow); font-weight: 600; }
+        .rule-box {
+            background-color: rgba(0,0,0,0.2); border-left: 4px solid var(--accent-blue);
+            padding: 20px; margin-top: 15px; border-radius: 0 8px 8px 0; line-height: 1.8;
+        }
+        .rule-box ul { list-style-type: none; padding-left: 0; }
+        .rule-box li { margin-bottom: 15px; }
+        
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .container { padding: 20px 15px; }
+            .header h1 { font-size: 2em; }
+            .material-title { font-size: 1.8em; }
+            .step-label { display: none; }
+            .step-circle { width: 35px; height: 35px; }
+            .progress-steps::before, .progress-fill { top: 17.5px; }
+            .stats { grid-template-columns: 1fr; gap: 10px; }
+            .button-group { flex-direction: column; align-items: stretch; }
+            .btn { width: 100%; margin: 5px 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ Fungsi Kuadrat</h1>
+            <p>Sistem Pembelajaran Terstruktur dengan 3 Level</p>
+        </div>
+        <div class="progress-container">
+            <div class="progress-steps">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                <div class="step" id="step0"><div class="step-circle">📚</div><div class="step-label">Materi</div></div>
+                <div class="step" id="step1"><div class="step-circle">1</div><div class="step-label">LOTS</div></div>
+                <div class="step" id="step2"><div class="step-circle">2</div><div class="step-label">MOTS</div></div>
+                <div class="step" id="step3"><div class="step-circle">3</div><div class="step-label">HOTS</div></div>
+                <div class="step" id="step4"><div class="step-circle">🏆</div><div class="step-label">Selesai</div></div>
+            </div>
+            <div class="stats">
+                <div class="stat-card"><div class="stat-value" id="currentLevel">Materi</div><div class="stat-label">Level Saat Ini</div></div>
+                <div class="stat-card"><div class="stat-value" id="attemptsLeft">5</div><div class="stat-label">Percobaan Tersisa</div></div>
+                <div class="stat-card"><div class="stat-value" id="passCount">0/2</div><div class="stat-label">Kali Lulus</div></div>
+            </div>
+        </div>
+        <div class="content-area" id="contentArea"></div>
+    </div>
+
+    <div id="notification-container"></div>
+    
+    <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+        const state = { currentStage: 0, attempts: { LOTS: 5, MOTS: 5, HOTS: 5 }, passCount: { LOTS: 0, MOTS: 0, HOTS: 0 }, consecutiveFails: { LOTS: 0, MOTS: 0, HOTS: 0 }, currentQuiz: null, userAnswers: [], activeQuestions: [] };
+
+        const quizContent = {
+            material: `
+                <h2 class="material-title">📚 Materi Ringkas: Fungsi Kuadrat</h2>
+                <p class="material-intro">Fungsi kuadrat adalah salah satu topik paling fundamental dalam matematika. Mari kita kuasai bersama!</p>
+                
+                <div class="material-point">
+                    <h3 class="material-heading">1. Definisi & Bentuk Umum</h3>
+                    <p>Fungsi kuadrat adalah fungsi polinomial dengan pangkat tertinggi variabelnya adalah 2. Bentuk umumnya adalah:</p>
+                    <div class="rule-box">\\( f(x) = ax^2 + bx + c \\) <br>dengan <strong class="key-concept">\\(a \\ne 0\\)</strong>. Grafiknya berbentuk <strong class="key-concept">parabola</strong>.</div>
+                </div>
+
+                <div class="material-point">
+                    <h3 class="material-heading">2. Karakteristik Grafik</h3>
+                    <div class="rule-box"><ul>
+                        <li>Jika <strong class="key-concept">a > 0</strong>, parabola terbuka ke <strong class="key-concept">atas</strong> (memiliki nilai minimum).</li>
+                        <li>Jika <strong class="key-concept">a < 0</strong>, parabola terbuka ke <strong class="key-concept">bawah</strong> (memiliki nilai maksimum).</li>
+                        <li>Titik potong sumbu-y adalah <strong class="key-concept">(0, c)</strong>.</li>
+                    </ul></div>
+                </div>
+
+                <div class="material-point">
+                    <h3 class="material-heading">3. Titik Puncak & Sumbu Simetri</h3>
+                    <p>Setiap parabola memiliki sebuah sumbu simetri dan titik puncak (verteks) yang merupakan titik ekstrem (minimum atau maksimum).</p>
+                    <div class="rule-box"><ul>
+                        <li><strong>Sumbu Simetri (\\(x_p\\)):</strong> \\( x_p = \\frac{-b}{2a} \\)</li>
+                        <li><strong>Nilai Ekstrem (\\(y_p\\)):</strong> \\( y_p = \\frac{D}{-4a} \\), dimana \\(D = b^2 - 4ac\\) (Diskriminan)</li>
+                        <li><strong>Koordinat Puncak:</strong> \\( (x_p, y_p) \\)</li>
+                    </ul></div>
+                </div>
+
+                <div class="material-point">
+                    <h3 class="material-heading">4. Menyusun Fungsi Kuadrat</h3>
+                     <div class="rule-box"><ul>
+                        <li><strong>Diketahui titik puncak \\((x_p, y_p)\\) dan 1 titik lain:</strong><br>\\( y = a(x - x_p)^2 + y_p \\)</li>
+                        <li><strong>Diketahui titik potong sumbu-x \\((x_1, 0), (x_2, 0)\\) dan 1 titik lain:</strong><br>\\( y = a(x - x_1)(x - x_2) \\)</li>
+                    </ul></div>
+                </div>
+                <div class="attempts-info" style="margin-top: 20px;">
+                    <strong>⚠️ Peraturan:</strong> Setiap percobaan terdiri dari <strong>5 soal acak</strong>. Lulus level jika skor ≥ 80% (benar 4 dari 5 soal). Anda harus lulus 2 kali untuk membuka level selanjutnya.
+                </div>
+            `,
+            LOTS: [
+                { question: "Dari fungsi \\(f(x) = 3x^2 - 7x + 4\\), manakah nilai koefisien \\(a, b, c\\) yang benar?", options: [{ text: "a=3, b=-7, c=4" }, { text: "a=3, b=7, c=4" }, { text: "a=4, b=-7, c=3" }], correct: 0, explanation: "Koefisien a adalah angka di depan \\(x^2\\), b di depan \\(x\\), dan c adalah konstanta." },
+                { question: "Grafik dari fungsi \\(f(x) = -2x^2 + 5x - 1\\) akan berbentuk parabola yang...", options: [{ text: "Terbuka ke bawah" }, { text: "Terbuka ke atas" }, { text: "Terbuka ke samping" }], correct: 0, explanation: "Karena nilai \\(a = -2\\) (negatif), maka parabola terbuka ke bawah." },
+                { question: "Titik potong grafik \\(f(x) = x^2 + 4x - 12\\) dengan sumbu-y adalah...", options: [{ text: "(0, -12)" }, { text: "(0, 12)" }, { text: "(-12, 0)" }], correct: 0, explanation: "Titik potong sumbu-y terjadi saat \\(x=0\\). \\(f(0) = 0^2 + 4(0) - 12 = -12\\). Jadi, titiknya adalah (0, -12)." },
+                { question: "Untuk fungsi \\(f(x) = x^2 - 3x + 5\\), nilai dari \\(f(2)\\) adalah...", options: [{ text: "3" }, { text: "15" }, { text: "5" }], correct: 0, explanation: "Substitusi \\(x=2\\): \\(f(2) = (2)^2 - 3(2) + 5 = 4 - 6 + 5 = 3\\)." },
+                { question: "Manakah di antara berikut ini yang BUKAN fungsi kuadrat?", options: [{ text: "\\(f(x) = x^3 + 2x - 1\\)" }, { text: "\\(f(x) = 5x^2\\)" }, { text: "\\(f(x) = (x-1)(x+2)\\)" }], correct: 0, explanation: "Fungsi kuadrat memiliki pangkat tertinggi 2. Fungsi \\(f(x) = x^3 + 2x - 1\\) memiliki pangkat tertinggi 3, sehingga bukan fungsi kuadrat." },
+                { question: "Pada fungsi \\(f(x) = -x^2 + 10\\), nilai \\(b\\) adalah...", options: [{ text: "0" }, { text: "1" }, { text: "10" }], correct: 0, explanation: "Fungsi ini bisa ditulis sebagai \\(f(x) = -1x^2 + 0x + 10\\). Jadi, nilai \\(b=0\\)." },
+                { question: "Grafik fungsi \\(y = 5x^2 - 1\\) memiliki...", options: [{ text: "Nilai minimum" }, { text: "Nilai maksimum" }, { text: "Tidak punya nilai ekstrem" }], correct: 0, explanation: "Karena \\(a = 5\\) (positif), parabola terbuka ke atas, sehingga memiliki nilai minimum." },
+                { question: "Titik potong grafik \\(y = 2x^2 - 8\\) dengan sumbu-y adalah...", options: [{ text: "(0, -8)" }, { text: "(0, 2)" }, { text: "(0, 8)" }], correct: 0, explanation: "Saat \\(x=0\\), \\(y = 2(0)^2 - 8 = -8\\). Titiknya (0, -8)." },
+                { question: "Nilai \\(f(-1)\\) untuk \\(f(x) = 2x^2 + 3x - 1\\) adalah...", options: [{ text: "-2" }, { text: "4" }, { text: "0" }], correct: 0, explanation: "\\(f(-1) = 2(-1)^2 + 3(-1) - 1 = 2(1) - 3 - 1 = 2 - 4 = -2\\)." },
+                { question: "Bentuk umum fungsi kuadrat adalah...", options: [{ text: "\\(ax^2+bx+c\\)" }, { text: "\\(ax+b\\)" }, { text: "\\(ax^3+bx^2+cx+d\\)" }], correct: 0, explanation: "Bentuk umum fungsi kuadrat memiliki variabel dengan pangkat tertinggi 2." },
+                { question: "Dari \\(f(x) = (x-3)(x+1)\\), jika dijabarkan menjadi bentuk \\(ax^2+bx+c\\), maka nilai \\(b\\) adalah...", options: [{ text: "-2" }, { text: "2" }, { text: "-3" }], correct: 0, explanation: "\\((x-3)(x+1) = x^2 + x - 3x - 3 = x^2 - 2x - 3\\). Jadi, \\(b=-2\\)." },
+                { question: "Grafik \\(y = 0.5x^2 + 10x - 1\\) terbuka ke...", options: [{ text: "Atas" }, { text: "Bawah" }, { text: "Kanan" }], correct: 0, explanation: "Nilai \\(a = 0.5\\) adalah positif, jadi parabola terbuka ke atas." },
+                { question: "Titik potong sumbu-y dari \\(f(x) = 9 - x^2\\) adalah...", options: [{ text: "(0, 9)" }, { text: "(9, 0)" }, { text: "(0, -1)" }], correct: 0, explanation: "Saat \\(x=0\\), \\(f(0) = 9 - 0^2 = 9\\). Titiknya (0, 9)." },
+                { question: "Nilai \\(f(10)\\) untuk \\(f(x) = x^2 - 100\\) adalah...", options: [{ text: "0" }, { text: "100" }, { text: "200" }], correct: 0, explanation: "\\(f(10) = (10)^2 - 100 = 100 - 100 = 0\\)." },
+                { question: "Apakah \\(y = 5x - 2\\) sebuah fungsi kuadrat?", options: [{ text: "Bukan" }, { text: "Ya" }, { text: "Mungkin" }], correct: 0, explanation: "Bukan, karena pangkat tertinggi variabel x adalah 1. Ini adalah fungsi linear." },
+                { question: "Pada \\(y = 7x^2 - x\\), nilai \\(c\\) adalah...", options: [{ text: "0" }, { text: "7" }, { text: "-1" }], correct: 0, explanation: "Fungsi ini bisa ditulis \\(y = 7x^2 - 1x + 0\\). Jadi, \\(c=0\\)." },
+                { question: "Fungsi \\(f(x) = (3-x)(2+x)\\) memiliki grafik yang terbuka ke...", options: [{ text: "Bawah" }, { text: "Atas" }, { text: "Kiri" }], correct: 0, explanation: "Jika dijabarkan, \\((3-x)(2+x) = 6+3x-2x-x^2 = -x^2+x+6\\). Karena \\(a=-1\\) (negatif), parabola terbuka ke bawah." },
+                { question: "Titik (1, 5) dilalui oleh fungsi kuadrat. Manakah di bawah ini yang mungkin?", options: [{ text: "\\(y = 2x^2+3\\)" }, { text: "\\(y = x^2+1\\)" }, { text: "\\(y=3x^2-1\\)" }], correct: 0, explanation: "Cek satu per satu. Untuk \\(y = 2x^2+3\\), jika \\(x=1\\), \\(y=2(1)^2+3=5\\). Cocok." },
+                { question: "Nilai \\(f(0)\\) untuk fungsi \\(f(x) = ax^2+bx+c\\) adalah...", options: [{ text: "c" }, { text: "a" }, { text: "b" }], correct: 0, explanation: "Jika \\(x=0\\), \\(f(0) = a(0)^2+b(0)+c = c\\)." },
+                { question: "Manakah yang merupakan titik?", options: [{ text: "(2, 4)" }, { text: "\\(x=2\\)" }, { text: "\\(y=4\\)" }], correct: 0, explanation: "Titik direpresentasikan oleh sepasang koordinat (x, y)." },
+                { question: "Pada fungsi \\(y=x^2-5x+6\\), nilai \\(a,b,c\\) berturut-turut adalah...", options: [{ text: "1, -5, 6" }, { text: "1, 5, 6" }, { text: "-5, 6, 1" }], correct: 0, explanation: "\\(a=1, b=-5, c=6\\)." },
+                { question: "Jika \\(a > 0\\) pada fungsi kuadrat, maka grafiknya memiliki...", options: [{ text: "Titik minimum" }, { text: "Titik maksimum" }, { text: "Dua puncak" }], correct: 0, explanation: "Parabola terbuka ke atas memiliki titik lembah, yang disebut titik minimum." },
+                { question: "Nilai dari \\(f(3)\\) jika \\(f(x) = x^2 - x - 6\\) adalah...", options: [{ text: "0" }, { text: "6" }, { text: "18" }], correct: 0, explanation: "\\(f(3) = (3)^2 - 3 - 6 = 9 - 3 - 6 = 0\\)." },
+                { question: "Nama lain dari nilai \\(y\\) di titik puncak adalah...", options: [{ text: "Nilai ekstrem" }, { text: "Sumbu simetri" }, { text: "Diskriminan" }], correct: 0, explanation: "Nilai y pada puncak disebut nilai ekstrem (bisa minimum atau maksimum)." },
+                { question: "Titik potong sumbu-y dari \\(y = -x^2 + 7x\\) adalah...", options: [{ text: "(0, 0)" }, { text: "(0, 7)" }, { text: "(7, 0)" }], correct: 0, explanation: "Saat \\(x=0\\), \\(y = -0^2 + 7(0) = 0\\). Titiknya (0,0)." }
+            ],
+            MOTS: [
+                { question: "Persamaan sumbu simetri dari grafik \\(f(x) = x^2 - 8x + 15\\) adalah...", options: [{ text: "\\(x=4\\)" }, { text: "\\(x=-4\\)" }, { text: "\\(x=8\\)" }], correct: 0, explanation: "Sumbu simetri \\(x = \\frac{-b}{2a} = \\frac{-(-8)}{2(1)} = \\frac{8}{2} = 4\\)." },
+                { question: "Nilai diskriminan (D) dari \\(f(x) = 2x^2 - 5x - 3\\) adalah...", options: [{ text: "49" }, { text: "1" }, { text: "-1" }], correct: 0, explanation: "\\(D = b^2 - 4ac = (-5)^2 - 4(2)(-3) = 25 - (-24) = 49\\)." },
+                { question: "Koordinat titik puncak dari \\(y = x^2 - 6x + 5\\) adalah...", options: [{ text: "(3, -4)" }, { text: "(-3, 4)" }, { text: "(3, 4)" }], correct: 0, explanation: "\\(x_p = \\frac{-(-6)}{2(1)} = 3\\). \\(y_p = (3)^2 - 6(3) + 5 = 9 - 18 + 5 = -4\\). Puncaknya (3, -4)." },
+                { question: "Titik potong sumbu-x dari \\(f(x) = x^2 - 7x + 10\\) adalah...", options: [{ text: "(2, 0) dan (5, 0)" }, { text: "(-2, 0) dan (-5, 0)" }, { text: "(2, 5)" }], correct: 0, explanation: "Cari akar dari \\(x^2 - 7x + 10 = 0 \\implies (x-2)(x-5)=0\\). Akarnya \\(x=2\\) dan \\(x=5\\). Titiknya (2,0) dan (5,0)." },
+                { question: "Nilai minimum dari fungsi \\(y = 2x^2 + 4x + 1\\) adalah...", options: [{ text: "-1" }, { text: "1" }, { text: "-2" }], correct: 0, explanation: "\\(x_p = \\frac{-4}{2(2)} = -1\\). Nilai minimumnya \\(y_p = 2(-1)^2 + 4(-1) + 1 = 2 - 4 + 1 = -1\\)." },
+                { question: "Persamaan sumbu simetri dari \\(y = -x^2 + 10x - 7\\) adalah...", options: [{ text: "\\(x=5\\)" }, { text: "\\(x=-5\\)" }, { text: "\\(x=10\\)" }], correct: 0, explanation: "\\(x_p = \\frac{-10}{2(-1)} = 5\\)." },
+                { question: "Fungsi \\(f(x) = x^2 + 2x + 5\\) memiliki diskriminan \\(D = -16\\). Artinya, grafiknya...", options: [{ text: "Tidak memotong sumbu-x" }, { text: "Memotong sumbu-x di dua titik" }, { text: "Menyinggung sumbu-x" }], correct: 0, explanation: "Jika \\(D < 0\\), grafik tidak memotong atau menyinggung sumbu-x." },
+                { question: "Koordinat titik puncak dari \\(y = -x^2 + 4x\\) adalah...", options: [{ text: "(2, 4)" }, { text: "(-2, -4)" }, { text: "(2, 0)" }], correct: 0, explanation: "\\(x_p = \\frac{-4}{2(-1)} = 2\\). \\(y_p = -(2)^2 + 4(2) = -4 + 8 = 4\\). Puncaknya (2, 4)." },
+                { question: "Akar-akar dari \\(f(x)=x^2-16=0\\) adalah...", options: [{ text: "x=4 dan x=-4" }, { text: "x=4" }, { text: "x=16" }], correct: 0, explanation: "\\(x^2=16 \\implies x = \\pm\\sqrt{16} = \\pm 4\\)." },
+                { question: "Nilai maksimum dari \\(y = 8x - x^2\\) adalah...", options: [{ text: "16" }, { text: "8" }, { text: "4" }], correct: 0, explanation: "\\(x_p = \\frac{-8}{2(-1)} = 4\\). Nilai maksimum \\(y_p = 8(4) - (4)^2 = 32 - 16 = 16\\)." },
+                { question: "Sumbu simetri dari \\(f(x) = 2(x-3)^2 + 5\\) adalah...", options: [{ text: "\\(x=3\\)" }, { text: "\\(x=-3\\)" }, { text: "\\(x=5\\)" }], correct: 0, explanation: "Fungsi dalam bentuk puncak \\(a(x-x_p)^2+y_p\\) memiliki sumbu simetri di \\(x=x_p\\). Di sini, \\(x_p=3\\)." },
+                { question: "Diskriminan dari \\(y = x^2 + 6x + 9\\) adalah...", options: [{ text: "0" }, { text: "36" }, { text: "72" }], correct: 0, explanation: "\\(D = 6^2 - 4(1)(9) = 36 - 36 = 0\\)." },
+                { question: "Titik puncak dari \\(y = (x+1)^2 - 2\\) adalah...", options: [{ text: "(-1, -2)" }, { text: "(1, -2)" }, { text: "(-1, 2)" }], correct: 0, explanation: "Dari bentuk \\(a(x-x_p)^2+y_p\\), puncaknya adalah \\((x_p, y_p)\\). \\(x+1 = x-(-1)\\), jadi \\(x_p=-1\\) dan \\(y_p=-2\\)." },
+                { question: "Titik potong sumbu-x dari \\(y = x^2 - 5x\\) adalah...", options: [{ text: "(0,0) dan (5,0)" }, { text: "(0,0) dan (-5,0)" }, { text: "(5,0)" }], correct: 0, explanation: "\\(x^2-5x=0 \\implies x(x-5)=0\\). Akarnya \\(x=0\\) dan \\(x=5\\)." },
+                { question: "Nilai ekstrem dari \\(f(x) = -x^2+2x+3\\) adalah...", options: [{ text: "Nilai maksimum 4" }, { text: "Nilai minimum 4" }, { text: "Nilai maksimum 1" }], correct: 0, explanation: "Karena a<0, nilainya maksimum. \\(x_p = -2/(2(-1))=1\\). \\(y_p = -(1)^2+2(1)+3 = -1+2+3=4\\)." },
+                { question: "Sumbu simetri \\(f(x)=3x^2+12x-1\\) adalah...", options: [{ text: "x=-2" }, { text: "x=2" }, { text: "x=4" }], correct: 0, explanation: "\\(x = -12 / (2*3) = -12/6 = -2\\)." },
+                { question: "Jika diskriminan suatu fungsi kuadrat adalah 25, maka grafiknya...", options: [{ text: "Memotong sumbu-x di dua titik berbeda" }, { text: "Menyinggung sumbu-x" }, { text: "Tidak memotong sumbu-x" }], correct: 0, explanation: "Jika D > 0, grafik memotong sumbu-x di dua titik." },
+                { question: "Titik puncak \\(y = 2x^2\\) adalah...", options: [{ text: "(0, 0)" }, { text: "(2, 0)" }, { text: "(0, 2)" }], correct: 0, explanation: "Fungsi ini adalah \\(y=2x^2+0x+0\\). \\(x_p = -0/(2*2)=0\\). \\(y_p=0\\)." },
+                { question: "Titik potong sumbu-x dari \\(y=x^2-x-12\\) adalah...", options: [{ text: "(4,0) dan (-3,0)" }, { text: "(-4,0) dan (3,0)" }, { text: "(4,-3)" }], correct: 0, explanation: "\\(x^2-x-12=0 \\implies (x-4)(x+3)=0\\). Solusinya x=4 dan x=-3." },
+                { question: "Nilai minimum \\(y=x^2+10x+21\\) adalah...", options: [{ text: "-4" }, { text: "-5" }, { text: "21" }], correct: 0, explanation: "\\(x_p=-10/(2*1)=-5\\). \\(y_p=(-5)^2+10(-5)+21=25-50+21=-4\\)." },
+                { question: "Sumbu simetri dari \\(y=x^2-9\\) adalah...", options: [{ text: "x=0" }, { text: "x=3" }, { text: "x=-3" }], correct: 0, explanation: "\\(b=0\\), maka \\(x_p = -0/(2*1)=0\\)." },
+                { question: "Diskriminan \\(f(x)=3x^2-x\\) adalah...", options: [{ text: "1" }, { text: "13" }, { text: "-11" }], correct: 0, explanation: "\\(D = (-1)^2 - 4(3)(0) = 1-0 = 1\\)." },
+                { question: "Titik balik dari \\(y=(x-5)^2\\) adalah...", options: [{ text: "(5, 0)" }, { text: "(-5, 0)" }, { text: "(0, 5)" }], correct: 0, explanation: "Titik puncaknya adalah \\((5,0)\\), yang juga disebut titik balik." },
+                { question: "Titik potong sumbu-x dari \\(y=4x^2-1\\) adalah...", options: [{ text: "(1/2,0) dan (-1/2,0)" }, { text: "(2,0) dan (-2,0)" }, { text: "(1,0) dan (-1,0)" }], correct: 0, explanation: "\\(4x^2-1=0 \\implies 4x^2=1 \\implies x^2=1/4 \\implies x=\\pm 1/2\\)." },
+                { question: "Nilai ekstrem \\(y=-2(x+3)^2-4\\) adalah...", options: [{ text: "Maksimum -4" }, { text: "Minimum -4" }, { text: "Maksimum -3" }], correct: 0, explanation: "Dari bentuk puncak, \\(a=-2\\) (maksimum) dan \\(y_p=-4\\)." }
+            ],
+            HOTS: [
+                { question: "Fungsi kuadrat yang grafiknya melalui titik puncak (1, -4) dan titik (2, -3) adalah...", options: [{ text: "\\(y = x^2 - 2x - 3\\)" }, { text: "\\(y = x^2 + 2x - 3\\)" }, { text: "\\(y = -x^2 - 2x + 3\\)" }], correct: 0, explanation: "Gunakan \\(y=a(x-x_p)^2+y_p\\) -> \\(y=a(x-1)^2-4\\). Substitusi (2,-3): \\(-3=a(2-1)^2-4 \\implies -3=a-4 \\implies a=1\\). Jadi, \\(y=(x-1)^2-4 = x^2-2x+1-4 = x^2-2x-3\\)." },
+                { question: "Fungsi kuadrat yang memotong sumbu-x di (3,0) dan (-1,0) serta melalui (1, -8) adalah...", options: [{ text: "\\(y=2x^2-4x-6\\)" }, { text: "\\(y=x^2-2x-3\\)" }, { text: "\\(y=-2x^2+4x+6\\)" }], correct: 0, explanation: "Gunakan \\(y=a(x-x_1)(x-x_2)\\) -> \\(y=a(x-3)(x+1)\\). Substitusi (1,-8): \\(-8=a(1-3)(1+1) \\implies -8=a(-2)(2) \\implies -8=-4a \\implies a=2\\). Jadi, \\(y=2(x-3)(x+1) = 2(x^2-2x-3) = 2x^2-4x-6\\)." },
+                { question: "Sebuah roket diluncurkan dengan ketinggian \\(h(t) = -5t^2 + 60t\\). Tinggi maksimum roket adalah...", options: [{ text: "180 meter" }, { text: "6 meter" }, { text: "360 meter" }], correct: 0, explanation: "Tinggi maksimum adalah nilai \\(y_p\\). Waktu puncak \\(t = -60/(2(-5)) = 6\\) detik. Tinggi maks \\(h(6) = -5(6)^2+60(6) = -180+360=180\\) meter." },
+                { question: "Agar grafik \\(y = x^2 - (k-1)x + 4\\) menyinggung sumbu-x, nilai \\(k\\) adalah...", options: [{ text: "5 atau -3" }, { text: "4 atau -4" }, { text: "3 atau -5" }], correct: 0, explanation: "Syarat menyinggung adalah \\(D=0\\). \\(D = (-(k-1))^2 - 4(1)(4) = 0 \\implies (k-1)^2 - 16 = 0 \\implies (k-1)^2 = 16 \\implies k-1 = \\pm 4\\). Jadi \\(k=1+4=5\\) atau \\(k=1-4=-3\\)." },
+                { question: "Garis \\(y=x+1\\) memotong parabola \\(y=x^2-3x+4\\) di titik...", options: [{ text: "(1, 2) dan (3, 4)" }, { text: "(1, 3)" }, { text: "Tidak memotong" }], correct: 0, explanation: "Samakan y: \\(x^2-3x+4 = x+1 \\implies x^2-4x+3=0 \\implies (x-1)(x-3)=0\\). Solusi \\(x=1\\) dan \\(x=3\\). Jika x=1, y=2. Jika x=3, y=4." },
+                { question: "Fungsi kuadrat yang melalui titik (0,5), (1,6), dan (-1,12) adalah...", options: [{ text: "\\(y=4x^2-3x+5\\)" }, { text: "\\(y=x^2+x+5\\)" }, { text: "\\(y=3x^2+4x+5\\)" }], correct: 0, explanation: "Dari (0,5), kita tahu c=5. Jadi \\(y=ax^2+bx+5\\). Substitusi (1,6): \\(6=a+b+5 \\implies a+b=1\\). Substitusi (-1,12): \\(12=a-b+5 \\implies a-b=7\\). Eliminasi: \\(2a=8 \\implies a=4\\). Maka \\(b=-3\\). Jadi \\(y=4x^2-3x+5\\)." },
+                { question: "Persegi panjang memiliki keliling 40 cm. Agar luasnya maksimum, ukurannya adalah...", options: [{ text: "10 cm x 10 cm" }, { text: "15 cm x 5 cm" }, { text: "12 cm x 8 cm" }], correct: 0, explanation: "\\(2(p+l)=40 \\implies p+l=20 \\implies l=20-p\\). Luas \\(L=p \\times l = p(20-p) = -p^2+20p\\). Luas maks terjadi di sumbu simetri \\(p = -20/(2(-1)) = 10\\). Maka \\(l=10\\)." },
+                { question: "Grafik \\(y=x^2\\) digeser 3 satuan ke kanan dan 2 satuan ke bawah. Persamaan barunya adalah...", options: [{ text: "\\(y=(x-3)^2-2\\)" }, { text: "\\(y=(x+3)^2-2\\)" }, { text: "\\(y=(x-3)^2+2\\)" }], correct: 0, explanation: "Geser ke kanan 3 -> \\((x-3)\\). Geser ke bawah 2 -> \\(-2\\). Jadi \\(y=(x-3)^2-2\\)." },
+                { question: "Agar grafik \\(y=kx^2-2x+1\\) definit positif, syarat nilai \\(k\\) adalah...", options: [{ text: "\\(k>1\\)" }, { text: "\\(k<1\\)" }, { text: "\\(k>0\\)" }], correct: 0, explanation: "Syarat definit positif: \\(a>0\\) dan \\(D<0\\). Syarat 1: \\(k>0\\). Syarat 2: \\(D=(-2)^2-4(k)(1)<0 \\implies 4-4k<0 \\implies 4<4k \\implies k>1\\). Irisan dari \\(k>0\\) dan \\(k>1\\) adalah \\(k>1\\)." },
+                { question: "Jika \\(x_1\\) dan \\(x_2\\) adalah akar dari \\(x^2-4x+1=0\\), maka nilai \\(x_1^2 + x_2^2\\) adalah...", options: [{ text: "14" }, { text: "16" }, { text: "18" }], correct: 0, explanation: "Ingat \\(x_1^2+x_2^2 = (x_1+x_2)^2 - 2x_1x_2\\). Dari persamaan, \\(x_1+x_2 = -b/a = 4\\) dan \\(x_1x_2 = c/a = 1\\). Maka \\(4^2 - 2(1) = 16-2=14\\)." },
+                { question: "Fungsi \\(f(x)=ax^2-4x+1\\) memiliki sumbu simetri \\(x=1\\). Nilai \\(a\\) adalah...", options: [{ text: "2" }, { text: "-2" }, { text: "1" }], correct: 0, explanation: "Sumbu simetri \\(x = \\frac{-b}{2a} \\implies 1 = \\frac{-(-4)}{2a} \\implies 1 = \\frac{4}{2a} \\implies 2a=4 \\implies a=2\\)." },
+                { question: "Sebuah fungsi kuadrat memiliki nilai maksimum 5 untuk \\(x=2\\) dan \\(f(4)=3\\). Fungsi tersebut adalah...", options: [{ text: "\\(y = -\\frac{1}{2}(x-2)^2+5\\)" }, { text: "\\(y = (x-2)^2+5\\)" }, { text: "\\(y = -2(x-2)^2+5\\)" }], correct: 0, explanation: "Puncak (2,5). \\(y=a(x-2)^2+5\\). Melalui (4,3): \\(3=a(4-2)^2+5 \\implies 3=4a+5 \implies -2=4a \implies a=-1/2\\)." },
+                { question: "Jika fungsi \\(y=x^2+px+7\\) memiliki nilai minimum -2, maka nilai \\(p\\) adalah...", options: [{ text: "\\(\\pm 6\\)" }, { text: "\\(\\pm 4\\)" }, { text: "\\(\\pm 2\\)" }], correct: 0, explanation: "Nilai minimum \\(y_p = \\frac{D}{-4a} = -2 \\implies \\frac{p^2-4(1)(7)}{-4} = -2 \\implies p^2-28 = 8 \\implies p^2=36 \\implies p=\\pm 6\\)." },
+                { question: "Grafik \\(y=x^2-5x+6\\) berada di bawah sumbu-x pada interval...", options: [{ text: "\\(2 < x < 3\\)" }, { text: "\\(x<2\\) atau \\(x>3\\)" }, { text: "\\(-3 < x < -2\\)" }], correct: 0, explanation: "Berada di bawah sumbu-x berarti \\(y<0\\). \\(x^2-5x+6 < 0 \\implies (x-2)(x-3)<0\\). Pembuat nol x=2, x=3. Solusi pertidaksamaan adalah \\(2<x<3\\)." },
+                { question: "Titik potong antara parabola \\(y=x^2\\) dan \\(y=x+2\\) adalah...", options: [{ text: "(2,4) dan (-1,1)" }, { text: "(-2,4) dan (1,1)" }, { text: "(2,4) dan (1,-1)" }], correct: 0, explanation: "\\(x^2 = x+2 \\implies x^2-x-2=0 \\implies (x-2)(x+1)=0\\). Solusi \\(x=2\\) dan \\(x=-1\\). Jika x=2, y=4. Jika x=-1, y=1." },
+                { question: "Fungsi kuadrat dengan akar-akar 2 dan 3 adalah...", options: [{ text: "\\(y=x^2-5x+6\\)" }, { text: "\\(y=x^2+5x+6\\)" }, { text: "\\(y=x^2-5x-6\\)" }], correct: 0, explanation: "Akar 2 dan 3 berarti faktornya (x-2) dan (x-3). \\(y = a(x-2)(x-3)\\). Dengan \\(a=1\\), hasilnya \\(y = x^2-5x+6\\)." },
+                { question: "Luas maksimum dari segitiga siku-siku yang jumlah kedua sisi siku-sikunya 20 adalah...", options: [{ text: "50" }, { text: "100" }, { text: "200" }], correct: 0, explanation: "\\(a+b=20 \\implies b=20-a\\). Luas \\(L=\\frac{1}{2} ab = \\frac{1}{2} a(20-a) = -\\frac{1}{2} a^2+10a\\). Luas maks di \\(a = \\frac{-10}{2(-1/2)} = 10\\). Maka \\(L = \\frac{1}{2}(10)(10)=50\\)." },
+                { question: "Jika grafik \\(y=x^2+mx+m\\) selalu di atas sumbu-x, maka...", options: [{ text: "\\(0 < m < 4\\)" }, { text: "\\(m<0\\) atau \\(m>4\\)" }, { text: "\\(-4 < m < 0\\)" }], correct: 0, explanation: "Definit positif: \\(a>0\\) (sudah terpenuhi, a=1) dan \\(D<0\\). \\(D=m^2-4(1)(m)<0 \implies m(m-4)<0\\). Pembuat nol m=0, m=4. Solusinya \\(0<m<4\\)." },
+                { question: "Fungsi \\(f(x)=x^2+4x-5\\) jika ditulis dalam bentuk puncak adalah...", options: [{ text: "\\(f(x)=(x+2)^2-9\\)" }, { text: "\\(f(x)=(x-2)^2-9\\)" }, { text: "\\(f(x)=(x+2)^2+9\\)" }], correct: 0, explanation: "\\(x_p = -4/2 = -2\\). \\(y_p = (-2)^2+4(-2)-5=4-8-5=-9\\). Bentuknya \\(y=1(x-(-2))^2-9\\)." },
+                { question: "Range dari fungsi \\(f(x)=-x^2+6x-5\\) adalah...", options: [{ text: "\\(y \\le 4\\)" }, { text: "\\(y \\ge 4\\)" }, { text: "Semua bilangan real" }], correct: 0, explanation: "Parabola terbuka ke bawah (a=-1), jadi rangenya adalah \\(y \\le y_p\\). \\(x_p=-6/(2(-1))=3\\). \\(y_p=-(3)^2+6(3)-5 = -9+18-5=4\\). Jadi, \\(y \\le 4\\)." },
+                { question: "Garis \\(y=2x+k\\) menyinggung parabola \\(y=x^2-2x+3\\). Nilai \\(k\\) adalah...", options: [{ text: "-1" }, { text: "1" }, { text: "0" }], correct: 0, explanation: "Syarat menyinggung D=0. \\(x^2-2x+3=2x+k \implies x^2-4x+(3-k)=0\\). \\(D=(-4)^2-4(1)(3-k)=0 \implies 16-12+4k=0 \implies 4+4k=0 \implies k=-1\\)." },
+                { question: "Nilai \\(a\\) pada \\(y=ax^2-8x+4\\) agar memiliki nilai minimum -4 adalah...", options: [{ text: "2" }, { text: "1" }, { text: "4/3" }], correct: 0, explanation: "Sumbu simetri \\(x_p = -(-8)/2a = 4/a\\). Substitusi ke y: \\(a(4/a)^2 - 8(4/a) + 4 = -4 \implies 16/a - 32/a + 4 = -4 \implies -16/a = -8 \implies 8a=16 \implies a=2\\)." },
+                { question: "Jika \\(f(x)=x^2-1\\), maka \\(f(f(1))\\) adalah...", options: [{ text: "-1" }, { text: "0" }, { text: "1" }], correct: 0, explanation: "\\(f(1) = 1^2-1=0\\). Maka \\(f(f(1)) = f(0) = 0^2-1=-1\\)." },
+                { question: "Sumbu simetri grafik \\(y=a(x-h)^2+k\\) adalah...", options: [{ text: "\\(x=h\\)" }, { text: "\\(x=k\\)" }, { text: "\\(x=a\\)" }], correct: 0, explanation: "Bentuk puncak \\(y=a(x-x_p)^2+y_p\\) secara definisi memiliki sumbu simetri di \\(x=x_p\\). Dalam notasi ini, itu adalah \\(x=h\\)." },
+                { question: "Fungsi kuadrat yang menyinggung sumbu-x di (2,0) dan melalui (0,4) adalah...", options: [{ text: "\\(y=(x-2)^2\\)" }, { text: "\\(y=2(x-2)^2\\)" }, { text: "\\(y=4(x-2)^2\\)" }], correct: 0, explanation: "Menyinggung di (2,0) berarti puncaknya di (2,0). \\(y=a(x-2)^2+0\\). Melalui (0,4): \\(4=a(0-2)^2 \implies 4=4a \implies a=1\\). Jadi \\(y=(x-2)^2\\)." }
+            ]
+        };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function showNotification(message, type = 'warning') {
+            const container = document.getElementById('notification-container');
+            const notif = document.createElement('div');
+            notif.className = `notification ${type}`;
+            let icon = '⚠️';
+            if (type === 'success') icon = '✅';
+            if (type === 'info') icon = 'ℹ️';
+            notif.innerHTML = `<span>${icon}</span> <span>${message}</span>`;
+            container.appendChild(notif);
+            setTimeout(() => { notif.remove(); }, 4000);
+        }
+
+        function updateProgress() {
+            const stages = ['step0', 'step1', 'step2', 'step3', 'step4'];
+            const progress = (state.currentStage / 4) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            stages.forEach((id, idx) => {
+                const step = document.getElementById(id);
+                step.classList.remove('active', 'completed');
+                if (idx < state.currentStage) step.classList.add('completed');
+                else if (idx === state.currentStage) step.classList.add('active');
+            });
+            const levelNames = ['Materi', 'LOTS', 'MOTS', 'HOTS', 'Selesai'];
+            document.getElementById('currentLevel').textContent = levelNames[state.currentStage];
+        }
+        
+        function showMaterial() {
+            document.getElementById('contentArea').innerHTML = quizContent.material + `<div class="button-group"><button class="btn btn-primary" onclick="startLOTS()">Mulai Level LOTS →</button></div>`;
+            state.currentStage = 0;
+            updateProgress();
+            setTimeout(() => MathJax.typesetPromise(), 10);
+        }
+        
+        function startQuiz(level) {
+            state.currentQuiz = level;
+            const fullBank = quizContent[level];
+            const shuffledBank = shuffleArray([...fullBank]);
+            state.activeQuestions = shuffledBank.slice(0, 5);
+
+            state.userAnswers = Array(state.activeQuestions.length).fill(null);
+            const levelMap = { LOTS: 1, MOTS: 2, HOTS: 3 };
+            state.currentStage = levelMap[level];
+            updateProgress(); updateStats();
+            const content = `<div class="quiz-section active">
+                    <h2 style="text-align:center; margin-bottom: 20px;">📝 ${level} - Mode Ujian (5 Soal Acak)</h2>
+                    <div class="attempts-info"><strong>Percobaan ${6 - state.attempts[level]} dari 5</strong> | Sudah lulus: ${state.passCount[level]}/2 kali | Gagal berturut-turut: ${state.consecutiveFails[level]}/3</div>
+                    <div id="questionsContainer"></div>
+                    <div class="button-group" id="quiz-button-group"><button id="submitBtn" class="btn btn-primary" onclick="submitQuiz()">Submit Jawaban</button></div>
+                </div>`;
+            document.getElementById('contentArea').innerHTML = content;
+            renderQuestions(state.activeQuestions);
+        }
+        
+        function renderQuestions(questions) {
+            const container = document.getElementById('questionsContainer');
+            container.innerHTML = questions.map((q, idx) => {
+                const optionsHTML = q.options.map((opt, optIdx) => 
+                    `<div class="option" onclick="selectOption(this, ${idx}, ${optIdx})">
+                        <input type="radio" name="q${idx}" id="q${idx}opt${optIdx}" style="pointer-events: none;">
+                        <label for="q${idx}opt${optIdx}" style="cursor: pointer; width: 100%;">${opt.text}</label>
+                    </div>`
+                ).join('');
+
+                return `<div class="question-card" id="question${idx}">
+                    <div class="question-number">Soal ${idx + 1} dari ${questions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options" style="display:flex; flex-direction:column; gap:10px;">${optionsHTML}</div>
+                    <div class="explanation hidden" id="explanation${idx}"></div>
+                </div>`;
+            }).join('');
+            setTimeout(() => MathJax.typesetPromise(), 10);
+        }
+        
+        function selectOption(element, questionIdx, optionIdx) {
+            if (document.getElementById('submitBtn')?.disabled) { return; }
+            const options = document.querySelectorAll(`#question${questionIdx} .option`);
+            options.forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            element.querySelector('input[type="radio"]').checked = true;
+            state.userAnswers[questionIdx] = optionIdx;
+        }
+        
+        function submitQuiz() {
+            const level = state.currentQuiz;
+            const questions = state.activeQuestions;
+            const unanswered = state.userAnswers.filter(ans => ans === null).length;
+
+            if (unanswered > 0) {
+                showNotification(`Mohon jawab semua soal! Ada ${unanswered} soal yang belum terjawab.`);
+                return;
+            }
+
+            let correct = 0;
+            questions.forEach((q, idx) => {
+                const userAnswerIdx = state.userAnswers[idx];
+                const isCorrect = (userAnswerIdx === q.correct);
+                if (isCorrect) correct++;
+                const options = document.querySelectorAll(`#question${idx} .option`);
+                options[userAnswerIdx].classList.add(isCorrect ? 'correct' : 'incorrect');
+                if (!isCorrect) { options[q.correct].classList.add('correct'); }
+                const explanation = document.getElementById(`explanation${idx}`);
+                explanation.innerHTML = `<strong>💡 Pembahasan:</strong> ${q.explanation}`;
+                explanation.classList.remove('hidden');
+            });
+            setTimeout(() => MathJax.typesetPromise(), 10);
+            
+            const score = (correct / questions.length) * 100;
+            const passed = score >= 80;
+            state.attempts[level]--;
+            if (passed) {
+                state.passCount[level]++; state.consecutiveFails[level] = 0;
+                showNotification(`Luar biasa! Skor Anda ${score.toFixed(0)}%.`, 'success');
+            } else {
+                state.consecutiveFails[level]++;
+                showNotification(`Skor Anda ${score.toFixed(0)}%. Terus coba lagi!`, 'warning');
+            }
+            updateStats();
+            document.getElementById('submitBtn').style.display = 'none';
+            document.getElementById('quiz-button-group').innerHTML = `<button class="btn btn-primary" onclick='showResult("${level}", ${score}, ${passed})'>Lihat Ringkasan Hasil →</button>`;
+        }
+        
+        function showResult(level, score, passed) {
+            const canProceed = state.passCount[level] >= 2;
+            const isEliminated = state.consecutiveFails[level] >= 3 || (state.attempts[level] === 0 && !canProceed);
+            let resultHTML = `
+                <div class="result-summary" style="text-align: center;">
+                    <h2>${passed ? '✅ Lulus!' : '❌ Belum Lulus'} (Skor Minimal: 80%)</h2>
+                    <div style="font-size: 4em; font-weight: bold; color: ${passed ? 'var(--accent-green)' : 'var(--accent-red)'}; margin: 20px 0;">${score.toFixed(0)}%</div>
+                    <p style="font-size: 1.2em; margin: 20px 0;">Kamu menjawab benar ${Math.round((score / 100) * state.activeQuestions.length)} dari ${state.activeQuestions.length} soal</p>
+                    <div class="attempts-info"><strong>Status:</strong><br>Lulus: ${state.passCount[level]}/2 kali | Percobaan tersisa: ${state.attempts[level]} | Gagal berturut-turut: ${state.consecutiveFails[level]}/3</div>`;
+            if (isEliminated) {
+                resultHTML += `<div style="background: rgba(220, 53, 69, 0.2); padding: 20px; border-radius: 10px; margin: 20px 0;"><h3 style="color: var(--accent-red);">❌ Mode Kilat - GUGUR</h3><p style="margin: 15px 0;">Kamu telah ${state.consecutiveFails[level] >= 3 ? 'gagal 3x berturut-turut' : 'kehabisan percobaan'}.</p></div><div class="button-group"><button class="btn btn-secondary" onclick="resetSystem()">Mulai Ulang dari Awal</button></div>`;
+            } else if (canProceed) {
+                const nextLevel = level === 'LOTS' ? 'MOTS' : (level === 'MOTS' ? 'HOTS' : null);
+                if (nextLevel) {
+                    resultHTML += `<div style="background: rgba(40, 167, 69, 0.2); padding: 20px; border-radius: 10px; margin: 20px 0;"><h3 style="color: var(--accent-green);">🔓 Level ${nextLevel} Terbuka!</h3><p style="margin: 15px 0;">Siap untuk tantangan berikutnya?</p></div><div class="button-group"><button class="btn" onclick="showMaterial()">Baca Materi Lagi</button><button class="btn btn-primary" onclick="start${nextLevel}()">Lanjut ke ${nextLevel} →</button></div>`;
+                } else { resultHTML += generateCertificate(); }
+            } else {
+                resultHTML += `<div class="button-group"><button class="btn" onclick="showMaterial()">Baca Materi Lagi</button><button class="btn btn-primary" onclick="start${level}()">Coba Lagi (${state.attempts[level]} percobaan)</button></div>`;
+            }
+            resultHTML += `</div>`; document.getElementById('contentArea').innerHTML = resultHTML;
+        }
+
+        function generateCertificate() {
+            state.currentStage = 4; updateProgress();
+            return `<div class="certificate"><div style="font-size: 5em;">🏆</div><h2 style="font-size: 2.5em; margin-bottom: 20px; color: var(--accent-teal);">Sertifikat Kelulusan Topik</h2><p style="font-size: 1.3em; margin: 20px 0;">SELAMAT!</p><p style="font-size: 1.1em; line-height: 1.6;">Kamu telah berhasil menyelesaikan topik <strong>Fungsi Kuadrat</strong> dengan melewati semua level: LOTS ✓ MOTS ✓ HOTS ✓</p></div><div class="button-group"><button class="btn btn-primary" onclick="resetSystem()">Mulai Topik Baru</button></div>`;
+        }
+        
+        function updateStats() {
+            const level = state.currentQuiz || 'LOTS';
+            document.getElementById('attemptsLeft').textContent = state.attempts[level];
+            document.getElementById('passCount').textContent = `${state.passCount[level]}/2`;
+        }
+        
+        function startLOTS() { startQuiz('LOTS'); }
+        function startMOTS() { startQuiz('MOTS'); }
+        function startHOTS() { startQuiz('HOTS'); }
+        
+        function resetSystem() {
+            Object.assign(state, {
+                currentStage: 0, attempts: { LOTS: 5, MOTS: 5, HOTS: 5 }, passCount: { LOTS: 0, MOTS: 0, HOTS: 0 },
+                consecutiveFails: { LOTS: 0, MOTS: 0, HOTS: 0 }, currentQuiz: null, userAnswers: [], activeQuestions: []
+            });
+            showNotification('Sistem telah direset, selamat belajar kembali!', 'info');
+            showMaterial();
+        }
+        
+        // Inisialisasi
+        showMaterial();
+    </script>
+</body>
+</html>
