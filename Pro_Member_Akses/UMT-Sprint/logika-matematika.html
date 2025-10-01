@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logika Matematika - Mode Belajar Kilat</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        :root {
+            --dark-bg: #141414; --dark-card: #1f1f1f; --dark-border: #333;
+            --text-light: #f0f0f0; --text-muted: #aaa; --accent-blue: #007bff;
+            --accent-green: #28a745; --accent-red: #dc3545; --accent-yellow: #ffc107;
+            --accent-teal: #50e3c2;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: var(--dark-bg); color: var(--text-light);
+            min-height: 100vh; padding: 20px;
+        }
+        .container {
+            max-width: 900px; margin: 0 auto; background: var(--dark-card);
+            border-radius: 15px; padding: 30px; border: 1px solid var(--dark-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        .header {
+            text-align: center; margin-bottom: 30px; padding-bottom: 15px;
+            border-bottom: 2px solid var(--accent-blue);
+        }
+        .header h1 { color: var(--text-light); font-size: 2.5em; margin-bottom: 10px; }
+        .header p { color: var(--text-muted); font-size: 1.1em; }
+        .progress-container {
+            margin: 30px 0; padding: 20px; background: rgba(0,0,0,0.2);
+            border: 1px solid var(--dark-border); border-radius: 15px;
+        }
+        .progress-steps {
+            display: flex; justify-content: space-between; margin-bottom: 15px; position: relative;
+        }
+        .progress-steps::before {
+            content: ''; position: absolute; top: 20px; left: 0; right: 0;
+            height: 4px; background: var(--dark-border); z-index: 0;
+        }
+        .progress-fill {
+            position: absolute; top: 20px; left: 0; height: 4px;
+            background: var(--accent-blue); transition: width 0.5s ease; z-index: 1;
+        }
+        .step { display: flex; flex-direction: column; align-items: center; z-index: 2; position: relative; }
+        .step-circle {
+            width: 40px; height: 40px; border-radius: 50%; background: var(--dark-border);
+            display: flex; align-items: center; justify-content: center; font-weight: bold;
+            color: var(--text-muted); border: 3px solid var(--dark-border); margin-bottom: 8px; transition: all 0.3s;
+        }
+        .step.active .step-circle {
+            background: var(--dark-card); border-color: var(--accent-blue);
+            color: var(--accent-blue); transform: scale(1.2);
+        }
+        .step.completed .step-circle { background: var(--accent-green); border-color: var(--accent-green); color: white; }
+        .step-label { font-size: 0.85em; color: var(--text-muted); font-weight: 600; }
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin: 20px 0; }
+        .stat-card {
+            background: var(--dark-bg); border: 1px solid var(--dark-border);
+            padding: 15px; border-radius: 12px; text-align: center;
+        }
+        .stat-value { font-size: 2em; font-weight: bold; color: var(--accent-teal); margin-bottom: 5px; }
+        .stat-label { font-size: 0.9em; color: var(--text-muted); }
+        .content-area { margin: 30px 0; min-height: 300px; }
+        .material-section, .question-card, .result-summary {
+            padding: 25px; background: var(--dark-card); border: 1px solid var(--dark-border);
+            border-radius: 15px; margin-bottom: 20px;
+        }
+        .question-number { color: var(--accent-blue); font-weight: bold; margin-bottom: 15px; }
+        .question-text { margin-bottom: 20px; font-size: 1.1em; line-height: 1.6; }
+        .option {
+            padding: 15px 20px; background: var(--dark-bg); border: 2px solid var(--dark-border);
+            border-radius: 10px; cursor: pointer; transition: all 0.3s; display: flex;
+            align-items: center; color: var(--text-muted);
+        }
+        .option:hover { border-color: var(--accent-blue); color: var(--text-light); background: #2a2a2a; }
+        .option.selected { border-color: var(--accent-blue); background: rgba(0, 123, 255, 0.1); color: var(--text-light); }
+        .option.correct { border-color: var(--accent-green); background: rgba(40, 167, 69, 0.2); color: #d4edda; }
+        .option.incorrect { border-color: var(--accent-red); background: rgba(220, 53, 69, 0.2); color: #f8d7da; }
+        .option input[type="radio"] { margin-right: 15px; }
+        .btn {
+            background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-muted); padding: 12px 35px; border-radius: 8px; font-size: 1em;
+            font-weight: 600; cursor: pointer; transition: all 0.3s ease; margin: 10px 5px;
+        }
+        .btn:hover { background: rgba(255, 255, 255, 0.1); color: var(--text-light); transform: translateY(-2px); }
+        .btn-primary { background: var(--accent-blue); border-color: var(--accent-blue); color: white; }
+        .btn-primary:hover { background: #0069d9; border-color: #0062cc; }
+        .btn-secondary { background: #6c757d; border-color: #6c757d; color: white; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; background: var(--dark-border); }
+        .button-group { display: flex; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+        .explanation {
+            background: #2a2a2a; padding: 15px; border-radius: 10px; margin-top: 20px;
+            border: 1px solid #444; color: var(--text-muted); line-height: 1.7;
+        }
+        .attempts-info {
+            background-color: rgba(255, 193, 7, 0.1); border-left: 5px solid var(--accent-yellow);
+            color: #fff3cd; padding: 15px; border-radius: 10px; margin: 15px 0;
+        }
+        .hidden { display: none; }
+        .certificate {
+            background: linear-gradient(135deg, #1f1f1f, #2a2a2a); color: white; padding: 40px;
+            border-radius: 20px; text-align: center; margin: 30px 0; border: 2px solid var(--accent-teal);
+            box-shadow: 0 0 40px rgba(80, 227, 194, 0.2);
+        }
+        #notification-container {
+            position: fixed; top: 20px; right: 20px; z-index: 1000;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+        .notification {
+            background-color: #2a2a2a; color: var(--text-light); padding: 15px 20px;
+            border-radius: 8px; border-left: 5px solid; box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            display: flex; align-items: center; gap: 10px;
+            animation: slideIn 0.3s ease forwards, fadeOut 0.5s ease 3.5s forwards;
+        }
+        .notification.warning { border-color: var(--accent-yellow); }
+        .notification.success { border-color: var(--accent-green); }
+        .notification.info { border-color: var(--accent-blue); }
+        @keyframes slideIn { from { transform: translateX(120%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; transform: translateY(20px); } }
+        .material-title { color: var(--text-light); font-size: 2em; margin-bottom: 10px; }
+        .material-intro { color: var(--text-muted); font-size: 1.1em; margin-bottom: 30px; }
+        .material-point { margin-bottom: 35px; }
+        .material-heading {
+            color: var(--accent-teal); font-size: 1.5em; margin-bottom: 15px;
+            padding-bottom: 10px; border-bottom: 1px solid var(--dark-border);
+            display: flex; align-items: center;
+        }
+        .material-heading::before {
+            content: '»'; margin-right: 12px; color: var(--accent-blue);
+            font-weight: bold; font-size: 1.2em;
+        }
+        .key-concept { color: var(--accent-yellow); font-weight: 600; }
+        .rule-box {
+            background-color: rgba(0,0,0,0.2); border-left: 4px solid var(--accent-blue);
+            padding: 20px; margin-top: 15px; border-radius: 0 8px 8px 0; line-height: 1.8;
+        }
+        .rule-box ul { list-style-type: none; padding-left: 0; }
+        .rule-box li { margin-bottom: 15px; }
+        
+        @media (max-width: 600px) {
+            body { padding: 10px; }
+            .container { padding: 20px 15px; }
+            .header h1 { font-size: 2em; }
+            .material-title { font-size: 1.8em; }
+            .step-label { display: none; }
+            .step-circle { width: 35px; height: 35px; }
+            .progress-steps::before, .progress-fill { top: 17.5px; }
+            .stats { grid-template-columns: 1fr; gap: 10px; }
+            .button-group { flex-direction: column; align-items: stretch; }
+            .btn { width: 100%; margin: 5px 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>⚡ Logika Matematika</h1>
+            <p>Sistem Pembelajaran Terstruktur dengan 3 Level</p>
+        </div>
+        <div class="progress-container">
+            <div class="progress-steps">
+                <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                <div class="step" id="step0"><div class="step-circle">📚</div><div class="step-label">Materi</div></div>
+                <div class="step" id="step1"><div class="step-circle">1</div><div class="step-label">LOTS</div></div>
+                <div class="step" id="step2"><div class="step-circle">2</div><div class="step-label">MOTS</div></div>
+                <div class="step" id="step3"><div class="step-circle">3</div><div class="step-label">HOTS</div></div>
+                <div class="step" id="step4"><div class="step-circle">🏆</div><div class="step-label">Selesai</div></div>
+            </div>
+            <div class="stats">
+                <div class="stat-card"><div class="stat-value" id="currentLevel">Materi</div><div class="stat-label">Level Saat Ini</div></div>
+                <div class="stat-card"><div class="stat-value" id="attemptsLeft">5</div><div class="stat-label">Percobaan Tersisa</div></div>
+                <div class="stat-card"><div class="stat-value" id="passCount">0/2</div><div class="stat-label">Kali Lulus</div></div>
+            </div>
+        </div>
+        <div class="content-area" id="contentArea"></div>
+    </div>
+
+    <div id="notification-container"></div>
+    
+    <script>
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+        const state = { currentStage: 0, attempts: { LOTS: 5, MOTS: 5, HOTS: 5 }, passCount: { LOTS: 0, MOTS: 0, HOTS: 0 }, consecutiveFails: { LOTS: 0, MOTS: 0, HOTS: 0 }, currentQuiz: null, userAnswers: [], activeQuestions: [] };
+
+        const quizContent = {
+            material: `
+                <h2 class="material-title">📚 Materi Ringkas: Logika Matematika</h2>
+                <p class="material-intro">Logika adalah fondasi dari penalaran matematis. Topik ini melatih cara berpikir yang terstruktur dan valid.</p>
+                
+                <div class="material-point">
+                    <h3 class="material-heading">1. Pernyataan & Operator Logika</h3>
+                    <p>Sebuah <strong class="key-concept">pernyataan (proposisi)</strong> adalah kalimat yang memiliki nilai kebenaran, yaitu <strong class="key-concept">Benar (B)</strong> atau <strong class="key-concept">Salah (S)</strong>, tetapi tidak keduanya.</p>
+                    <div class="rule-box"><ul>
+                        <li><strong>Negasi (\\(\\sim p\\)):</strong> TIDAK p. (Membalik nilai kebenaran)</li>
+                        <li><strong>Konjungsi (\\(p \\land q\\)):</strong> p DAN q. (Benar hanya jika keduanya benar)</li>
+                        <li><strong>Disjungsi (\\(p \\lor q\\)):</strong> p ATAU q. (Salah hanya jika keduanya salah)</li>
+                        <li><strong>Implikasi (\\(p \\rightarrow q\\)):</strong> JIKA p MAKA q. (Salah hanya jika B → S)</li>
+                        <li><strong>Biimplikasi (\\(p \\leftrightarrow q\\)):</strong> p JIKA DAN HANYA JIKA q. (Benar jika keduanya punya nilai kebenaran yang sama)</li>
+                    </ul></div>
+                </div>
+
+                <div class="material-point">
+                    <h3 class="material-heading">2. Kuantor & Ekuivalensi</h3>
+                    <p>Kuantor digunakan untuk pernyataan yang melibatkan variabel.</p>
+                    <div class="rule-box"><ul>
+                        <li><strong>Kuantor Universal (\\(\\forall x\\)):</strong> "Untuk semua" atau "Setiap". Negasinya: \\(\\sim(\\forall x, P(x)) \\equiv \\exists x, \\sim P(x)\\).</li>
+                        <li><strong>Kuantor Eksistensial (\\(\\exists x\\)):</strong> "Ada" atau "Beberapa". Negasinya: \\(\\sim(\\exists x, P(x)) \\equiv \\forall x, \\sim P(x)\\).</li>
+                        <li><strong>Ekuivalensi Penting:</strong> \\((p \\rightarrow q) \\equiv (\\sim q \\rightarrow \\sim p) \\equiv (\\sim p \\lor q)\\)</li>
+                    </ul></div>
+                </div>
+                
+                <div class="material-point">
+                    <h3 class="material-heading">3. Penarikan Kesimpulan</h3>
+                    <p>Tiga aturan dasar untuk menarik kesimpulan yang sah (valid):</p>
+                     <div class="rule-box"><ul>
+                        <li><strong>Modus Ponens:</strong> Premis 1: \\(p \\rightarrow q\\), Premis 2: \\(p\\). Kesimpulan: \\(q\\).</li>
+                        <li><strong>Modus Tollens:</strong> Premis 1: \\(p \\rightarrow q\\), Premis 2: \\(\\sim q\\). Kesimpulan: \\(\\sim p\\).</li>
+                        <li><strong>Silogisme:</strong> Premis 1: \\(p \\rightarrow q\\), Premis 2: \\(q \\rightarrow r\\). Kesimpulan: \\(p \\rightarrow r\\).</li>
+                    </ul></div>
+                </div>
+
+                <div class="attempts-info" style="margin-top: 20px;">
+                    <strong>⚠️ Peraturan:</strong> Setiap percobaan terdiri dari <strong>5 soal acak</strong>. Lulus level jika skor ≥ 80% (benar 4 dari 5 soal). Anda harus lulus 2 kali untuk membuka level selanjutnya.
+                </div>
+            `,
+            LOTS: [
+                // 25 Soal LOTS
+                { question: "Manakah di antara kalimat berikut yang merupakan pernyataan (proposisi)?", options: [{ text: "Jakarta adalah ibukota Indonesia." }, { text: "Tolong ambilkan buku itu!" }, { text: "Siapa nama kamu?" }], correct: 0, explanation: "Pernyataan adalah kalimat yang memiliki nilai kebenaran (benar atau salah). 'Jakarta adalah ibukota Indonesia' adalah pernyataan yang bernilai benar." },
+                { question: "Negasi dari pernyataan 'Hari ini hujan' adalah...", options: [{ text: "Tidak benar bahwa hari ini hujan." }, { text: "Hari ini cerah." }, { text: "Kemarin hujan." }], correct: 0, explanation: "Negasi (ingkaran) secara harfiah berarti 'tidak benar bahwa...'. Meskipun 'Hari ini cerah' bisa menjadi lawan katanya, negasi yang paling tepat adalah 'Tidak benar bahwa hari ini hujan' atau 'Hari ini tidak hujan'." },
+                { question: "Simbol \\(\\land\\) dalam logika matematika dibaca sebagai...", options: [{ text: "dan" }, { text: "atau" }, { text: "jika...maka..." }], correct: 0, explanation: "Simbol \\(\\land\\) adalah operator konjungsi, yang berarti 'dan'." },
+                { question: "Simbol \\(\\lor\\) dalam logika matematika dibaca sebagai...", options: [{ text: "atau" }, { text: "dan" }, { text: "tidak" }], correct: 0, explanation: "Simbol \\(\\lor\\) adalah operator disjungsi, yang berarti 'atau'." },
+                { question: "Jika pernyataan \\(p\\) bernilai Benar dan \\(q\\) bernilai Salah, maka \\(p \\land q\\) bernilai...", options: [{ text: "Salah" }, { text: "Benar" }, { text: "Bisa Benar atau Salah" }], correct: 0, explanation: "Konjungsi (dan) hanya bernilai Benar jika kedua pernyataan komponennya Benar. Karena \\(q\\) Salah, maka hasilnya Salah." },
+                { question: "Jika pernyataan \\(p\\) bernilai Benar dan \\(q\\) bernilai Salah, maka \\(p \\lor q\\) bernilai...", options: [{ text: "Benar" }, { text: "Salah" }, { text: "Bisa Benar atau Salah" }], correct: 0, explanation: "Disjungsi (atau) bernilai Benar selama salah satu komponennya Benar. Karena \\(p\\) Benar, maka hasilnya Benar." },
+                { question: "Negasi dari '2 + 3 = 5' adalah...", options: [{ text: "\\(2 + 3 \\ne 5\\)" }, { text: "\\(2 + 3 > 5\\)" }, { text: "\\(2 + 3 < 5\\)" }], correct: 0, explanation: "Negasi dari 'sama dengan' (=) adalah 'tidak sama dengan' (≠)." },
+                { question: "Kalimat 'Semoga kamu berhasil' adalah...", options: [{ text: "Bukan pernyataan" }, { text: "Pernyataan Benar" }, { text: "Pernyataan Salah" }], correct: 0, explanation: "Kalimat tersebut adalah kalimat harapan dan tidak memiliki nilai kebenaran, sehingga bukan pernyataan." },
+                { question: "Simbol \\(\\rightarrow\\) dalam logika matematika berarti...", options: [{ text: "Implikasi (jika...maka...)" }, { text: "Konjungsi (dan)" }, { text: "Biimplikasi (jika dan hanya jika)" }], correct: 0, explanation: "Simbol \\(\\rightarrow\\) adalah operator implikasi." },
+                { question: "Pada implikasi \\(p \\rightarrow q\\), \\(p\\) disebut sebagai...", options: [{ text: "Hipotesis/Anteseden" }, { text: "Konklusi/Konsekuen" }, { text: "Negasi" }], correct: 0, explanation: "Bagian 'jika' dari implikasi disebut hipotesis atau anteseden." },
+                { question: "Negasi dari 'Semua kucing adalah mamalia' adalah...", options: [{ text: "Ada kucing yang bukan mamalia." }, { text: "Semua kucing bukan mamalia." }, { text: "Tidak ada kucing yang mamalia." }], correct: 0, explanation: "Negasi dari kuantor universal 'semua' adalah kuantor eksistensial 'ada/beberapa' dengan predikat yang dinegasikan." },
+                { question: "Manakah yang merupakan kalimat terbuka?", options: [{ text: "\\(x + 5 = 7\\)" }, { text: "\\(2 + 5 = 7\\)" }, { text: "Tutup pintunya!" }], correct: 0, explanation: "Kalimat terbuka adalah kalimat yang nilai kebenarannya bergantung pada nilai variabel di dalamnya." },
+                { question: "Pernyataan '2 adalah bilangan genap' memiliki nilai kebenaran...", options: [{ text: "Benar" }, { text: "Salah" }, { text: "Tidak keduanya" }], correct: 0, explanation: "Ini adalah fakta matematika yang benar." },
+                { question: "Pernyataan 'Bulan terbuat dari keju' memiliki nilai kebenaran...", options: [{ text: "Salah" }, { text: "Benar" }, { text: "Tidak keduanya" }], correct: 0, explanation: "Ini adalah pernyataan yang jelas salah." },
+                { question: "Negasi dari pernyataan \\(p\\) dilambangkan dengan...", options: [{ text: "\\(\\sim p\\)" }, { text: "\\(p'\\)" }, { text: "\\(-p\\)" }], correct: 0, explanation: "Simbol yang umum digunakan untuk negasi adalah tilde (\\(\\sim\\))." },
+                { question: "Jika \\(p\\): 'Matahari terbit dari timur' (Benar), maka \\(\\sim p\\) adalah...", options: [{ text: "Matahari tidak terbit dari timur (Salah)" }, { text: "Matahari terbenam di barat (Benar)" }, { text: "Matahari terbit dari timur (Benar)" }], correct: 0, explanation: "Negasi membalik nilai kebenaran. Pernyataan yang benar menjadi salah." },
+                { question: "Konjungsi dari \\(p\\): 'Saya lapar' dan \\(q\\): 'Saya haus' adalah...", options: [{ text: "Saya lapar dan saya haus" }, { text: "Saya lapar atau saya haus" }, { text: "Jika saya lapar maka saya haus" }], correct: 0, explanation: "Konjungsi adalah penggabungan dua pernyataan dengan kata 'dan'." },
+                { question: "Disjungsi dari \\(p\\): 'Dia belajar' dan \\(q\\): 'Dia bermain' adalah...", options: [{ text: "Dia belajar atau dia bermain" }, { text: "Dia belajar dan dia bermain" }, { text: "Dia tidak belajar" }], correct: 0, explanation: "Disjungsi adalah penggabungan dua pernyataan dengan kata 'atau'." },
+                { question: "Jika \\(p\\) Salah dan \\(q\\) Salah, maka \\(p \\lor q\\) bernilai...", options: [{ text: "Salah" }, { text: "Benar" }, { text: "Tidak tentu" }], correct: 0, explanation: "Disjungsi (atau) hanya bernilai Salah jika kedua komponennya Salah." },
+                { question: "Jika \\(p\\) Benar, maka \\(p \\lor q\\) pasti bernilai...", options: [{ text: "Benar" }, { text: "Salah" }, { text: "Tergantung nilai q" }], correct: 0, explanation: "Disjungsi (atau) akan selalu Benar jika salah satu komponennya Benar, tidak peduli nilai kebenaran komponen lainnya." },
+                { question: "Simbol \\(\\leftrightarrow\\) dibaca sebagai...", options: [{ text: "jika dan hanya jika" }, { text: "jika...maka..." }, { text: "dan/atau" }], correct: 0, explanation: "Simbol \\(\\leftrightarrow\\) adalah operator biimplikasi." },
+                { question: "Negasi dari 'beberapa' adalah...", options: [{ text: "semua" }, { text: "tidak ada" }, { text: "beberapa tidak" }], correct: 0, explanation: "Negasi dari kuantor eksistensial 'beberapa' (ada) adalah kuantor universal 'semua' (dengan predikat dinegasikan)." },
+                { question: "Kata lain untuk 'ingkaran' adalah...", options: [{ text: "Negasi" }, { text: "Konjungsi" }, { text: "Implikasi" }], correct: 0, explanation: "Ingkaran adalah istilah lain untuk negasi dalam bahasa Indonesia." },
+                { question: "Premis adalah...", options: [{ text: "Pernyataan yang dianggap benar sebagai dasar argumen" }, { text: "Kesimpulan dari argumen" }, { text: "Lawan dari pernyataan" }], correct: 0, explanation: "Premis adalah pernyataan-pernyataan awal yang menjadi dasar untuk penarikan kesimpulan." },
+                { question: "Jika p Benar, maka \\(\\sim p\\) bernilai...", options: [{ text: "Salah" }, { text: "Benar" }, { text: "Tidak tentu" }], correct: 0, explanation: "Negasi selalu membalik nilai kebenaran. Benar menjadi Salah." }
+            ],
+            MOTS: [
+                { question: "Jika \\(p\\) Benar dan \\(q\\) Salah, maka pernyataan \\(p \\rightarrow q\\) bernilai...", options: [{ text: "Salah" }, { text: "Benar" }, { text: "Tidak dapat ditentukan" }], correct: 0, explanation: "Implikasi hanya bernilai Salah jika anteseden (p) Benar dan konsekuen (q) Salah (B → S)." },
+                { question: "Jika \\(p\\) Salah dan \\(q\\) Benar, maka pernyataan \\(p \\leftrightarrow q\\) bernilai...", options: [{ text: "Salah" }, { text: "Benar" }, { text: "Tidak dapat ditentukan" }], correct: 0, explanation: "Biimplikasi hanya bernilai Benar jika kedua komponen memiliki nilai kebenaran yang sama. Karena berbeda (S ↔ B), maka hasilnya Salah." },
+                { question: "Negasi dari pernyataan 'Hari ini cerah dan saya pergi ke pantai' adalah...", options: [{ text: "Hari ini tidak cerah atau saya tidak pergi ke pantai" }, { text: "Hari ini tidak cerah dan saya tidak pergi ke pantai" }, { text: "Jika hari ini cerah, maka saya pergi ke pantai" }], correct: 0, explanation: "Ini menggunakan Hukum De Morgan: \\(\\sim(p \\land q) \\equiv \\sim p \\lor \\sim q\\)." },
+                { question: "Negasi dari pernyataan 'Jika harga naik, maka permintaan turun' adalah...", options: [{ text: "Harga naik dan permintaan tidak turun" }, { text: "Jika harga tidak naik, maka permintaan tidak turun" }, { text: "Harga tidak naik atau permintaan turun" }], correct: 0, explanation: "Negasi dari implikasi \\(p \\rightarrow q\\) adalah \\(p \\land \\sim q\\)." },
+                { question: "Premis 1: Jika belajar, maka lulus. Premis 2: Saya belajar. Kesimpulan yang sah adalah...", options: [{ text: "Saya lulus" }, { text: "Saya tidak lulus" }, { text: "Saya tidak belajar" }], correct: 0, explanation: "Ini adalah contoh Modus Ponens. \\(p \\rightarrow q\\), \\(p\\), maka \\(q\\)." },
+                { question: "Premis 1: Jika lampu merah, maka mobil berhenti. Premis 2: Mobil tidak berhenti. Kesimpulan yang sah adalah...", options: [{ text: "Lampu tidak merah" }, { text: "Lampu merah" }, { text: "Mobil rusak" }], correct: 0, explanation: "Ini adalah contoh Modus Tollens. \\(p \\rightarrow q\\), \\(\\sim q\\), maka \\(\\sim p\\)." },
+                { question: "Negasi dari pernyataan 'Ada siswa yang tidak mengerjakan PR' adalah...", options: [{ text: "Semua siswa mengerjakan PR" }, { text: "Semua siswa tidak mengerjakan PR" }, { text: "Ada siswa yang mengerjakan PR" }], correct: 0, explanation: "Negasi dari 'Ada...tidak...' (\\(\\exists x, \\sim P(x)\\)) adalah 'Semua...' (\\(\\forall x, P(x)\\))." },
+                { question: "Konvers dari 'Jika hujan, maka jalanan basah' adalah...", options: [{ text: "Jika jalanan basah, maka hujan" }, { text: "Jika tidak hujan, maka jalanan tidak basah" }, { text: "Jika jalanan tidak basah, maka tidak hujan" }], correct: 0, explanation: "Konvers dari \\(p \\rightarrow q\\) adalah \\(q \\rightarrow p\\)." },
+                { question: "Invers dari 'Jika saya lapar, maka saya makan' adalah...", options: [{ text: "Jika saya tidak lapar, maka saya tidak makan" }, { text: "Jika saya makan, maka saya lapar" }, { text: "Saya lapar dan saya tidak makan" }], correct: 0, explanation: "Invers dari \\(p \\rightarrow q\\) adalah \\(\\sim p \\rightarrow \\sim q\\)." },
+                { question: "Kontraposisi dari 'Jika segitiga sama sisi, maka semua sudutnya sama' adalah...", options: [{ text: "Jika ada sudut yang tidak sama, maka segitiga itu bukan sama sisi" }, { text: "Jika semua sudutnya sama, maka segitiga itu sama sisi" }, { text: "Jika segitiga bukan sama sisi, maka ada sudut yang tidak sama" }], correct: 0, explanation: "Kontraposisi dari \\(p \\rightarrow q\\) adalah \\(\\sim q \\rightarrow \\sim p\\), yang nilainya selalu ekuivalen dengan pernyataan awal." },
+                { question: "Jika \\(p\\) Salah, maka \\(p \\rightarrow q\\) akan selalu bernilai...", options: [{ text: "Benar" }, { text: "Salah" }, { text: "Tergantung q" }], correct: 0, explanation: "Implikasi hanya salah jika B → S. Jika anteseden (p) sudah Salah, maka implikasi pasti Benar, apapun nilai konsekuennya (q)." },
+                { question: "Pernyataan \\(p \\lor \\sim p\\) akan selalu bernilai...", options: [{ text: "Benar (Tautologi)" }, { text: "Salah (Kontradiksi)" }, { text: "Kontingensi" }], correct: 0, explanation: "Sebuah pernyataan atau negasinya pasti benar. Contoh: 'Hari ini hujan atau hari ini tidak hujan'. Ini adalah contoh Tautologi." },
+                { question: "Pernyataan \\(p \\land \\sim p\\) akan selalu bernilai...", options: [{ text: "Salah (Kontradiksi)" }, { text: "Benar (Tautologi)" }, { text: "Kontingensi" }], correct: 0, explanation: "Sebuah pernyataan dan negasinya tidak mungkin benar bersamaan. Contoh: 'Saya lulus DAN saya tidak lulus'. Ini adalah contoh Kontradiksi." },
+                { question: "Premis 1: Jika saya ke Jakarta, saya naik kereta. Premis 2: Jika saya naik kereta, saya tiba di stasiun Gambir. Kesimpulannya?", options: [{ text: "Jika saya ke Jakarta, saya tiba di stasiun Gambir" }, { text: "Saya ke Jakarta" }, { text: "Saya tiba di stasiun Gambir" }], correct: 0, explanation: "Ini adalah contoh Silogisme. \\((p \\rightarrow q) \\land (q \\rightarrow r) \implies (p \\rightarrow r)\\)." },
+                { question: "Pernyataan yang ekuivalen dengan \\(p \\rightarrow q\\) adalah...", options: [{ text: "\\(\\sim p \\lor q\\)" }, { text: "\\(p \\land \\sim q\\)" }, { text: "\\(p \\lor \\sim q\\)" }], correct: 0, explanation: "Ini adalah salah satu ekuivalensi logika yang paling penting: \\((p \\rightarrow q) \\equiv (\\sim p \\lor q)\\)." },
+                { question: "Negasi dari 'Semua bilangan prima adalah ganjil' adalah...", options: [{ text: "Ada bilangan prima yang tidak ganjil" }, { text: "Semua bilangan prima adalah genap" }, { text: "Tidak ada bilangan prima yang ganjil" }], correct: 0, explanation: "Pernyataan ini salah (karena ada angka 2). Negasinya haruslah benar, yaitu 'Ada bilangan prima yang tidak ganjil' (yaitu angka 2)." },
+                { question: "Diketahui \\(p \\lor q\\) bernilai Salah. Pernyataan yang pasti benar adalah...", options: [{ text: "\\(p \\land q\\) Salah" }, { text: "\\(p \\rightarrow q\\) Benar" }, { text: "\\(\\sim p\\) Salah" }], correct: 0, explanation: "Jika \\(p \\lor q\\) Salah, maka \\(p\\) harus Salah dan \\(q\\) harus Salah. Dari pilihan yang ada, \\(p \\land q\\) (S ∧ S) adalah Salah." },
+                { question: "Pernyataan 'Jika 2x2=4, maka Jakarta ada di Jawa Barat' bernilai...", options: [{ text: "Salah" }, { text: "Benar" }, { text: "Tidak punya nilai kebenaran" }], correct: 0, explanation: "p: '2x2=4' (Benar). q: 'Jakarta ada di Jawa Barat' (Salah). Pernyataan ini adalah B → S, yang bernilai Salah." },
+                { question: "Pernyataan 'Jika 1+1=3, maka kuda bisa terbang' bernilai...", options: [{ text: "Benar" }, { text: "Salah" }, { text: "Tidak punya nilai kebenaran" }], correct: 0, explanation: "p: '1+1=3' (Salah). q: 'kuda bisa terbang' (Salah). Pernyataan ini adalah S → S, yang bernilai Benar." },
+                { question: "Invers, konvers, dan kontraposisi adalah istilah yang berhubungan dengan...", options: [{ text: "Implikasi" }, { text: "Disjungsi" }, { text: "Konjungsi" }], correct: 0, explanation: "Ketiga istilah tersebut adalah variasi dari pernyataan implikasi \\(p \\rightarrow q\\)." },
+                { question: "Jika \\(\\sim (p \\land q)\\) benar, maka...", options: [{ text: "Minimal salah satu dari p atau q adalah salah" }, { text: "p dan q keduanya salah" }, { text: "p benar dan q salah" }], correct: 0, explanation: "\\(\\sim (p \\land q)\\) benar berarti \\(p \\land q\\) salah. Agar konjungsi salah, cukup salah satu komponennya salah." },
+                { question: "Tabel kebenaran untuk \\(p \\leftrightarrow q\\) memiliki berapa banyak baris yang bernilai 'Benar'?", options: [{ text: "2" }, { text: "1" }, { text: "3" }], correct: 0, explanation: "Biimplikasi benar saat kedua komponen sama nilainya, yaitu pada baris B-B dan S-S. Jadi ada 2 baris." },
+                { question: "Tentukan argumen berikut: 'Jika kamu di Manado, maka kamu di Indonesia. Kamu tidak di Indonesia.' Kesimpulannya?", options: [{ text: "Kamu tidak di Manado" }, { text: "Kamu di Manado" }, { text: "Tidak bisa disimpulkan" }], correct: 0, explanation: "Modus Tollens: \\(p \\rightarrow q, \\sim q \implies \\sim p\\)." },
+                { question: "Negasi dari 'Saya akan datang jika diundang' adalah...", options: [{ text: "Saya diundang tetapi saya tidak datang" }, { text: "Saya tidak diundang dan saya tidak datang" }, { text: "Saya akan datang walaupun tidak diundang" }], correct: 0, explanation: "Kalimat tersebut sama dengan 'Jika saya diundang, maka saya akan datang' (p → q). Negasinya adalah \\(p \\land \\sim q\\)." },
+                { question: "Pernyataan 'Segitiga memiliki 3 sisi atau lingkaran memiliki 4 sisi' bernilai...", options: [{ text: "Benar" }, { text: "Salah" }, { text: "Tidak keduanya" }], correct: 0, explanation: "p: 'Segitiga memiliki 3 sisi' (Benar). q: 'lingkaran memiliki 4 sisi' (Salah). Pernyataan ini adalah B ∨ S, yang bernilai Benar." }
+            ],
+            HOTS: [
+                { question: "Manakah yang ekuivalen secara logis dengan \\(\\sim(p \\rightarrow q)\\)?", options: [{ text: "\\(p \\land \\sim q\\)" }, { text: "\\(\\sim p \\lor q\\)" }, { text: "\\(q \\rightarrow p\\)" }], correct: 0, explanation: "Ekuivalensi dari \\(p \\rightarrow q\\) adalah \\(\\sim p \\lor q\\). Maka negasinya adalah \\(\\sim(\\sim p \\lor q)\\), yang menurut De Morgan menjadi \\(p \\land \\sim q\\)." },
+                { question: "Kontraposisi dari 'Jika semua bilangan prima ganjil, maka 2 bukan bilangan prima' adalah...", options: [{ text: "Jika 2 adalah bilangan prima, maka ada bilangan prima yang tidak ganjil" }, { text: "Jika 2 bukan bilangan prima, maka semua bilangan prima ganjil" }, { text: "Jika ada bilangan prima yang tidak ganjil, maka 2 adalah bilangan prima" }], correct: 0, explanation: "p: 'semua bil. prima ganjil'. q: '2 bukan bil. prima'. Kontraposisi: \\(\\sim q \\rightarrow \\sim p\\). \\(\\sim q\\): '2 adalah bil. prima'. \\(\\sim p\\): 'Ada bil. prima yang tidak ganjil'." },
+                { question: "Pernyataan \\( (p \\rightarrow q) \\lor (q \\rightarrow p) \\) merupakan...", options: [{ text: "Tautologi" }, { text: "Kontradiksi" }, { text: "Kontingensi" }], correct: 0, explanation: "Buat tabel kebenaran. Satu-satunya cara agar disjungsi salah adalah jika keduanya salah. \\(p \\rightarrow q\\) salah hanya jika B→S. \\(q \\rightarrow p\\) salah hanya jika S→B. Tidak mungkin kedua kondisi ini terjadi bersamaan di satu baris tabel. Jadi, pernyataan ini tidak pernah salah, alias Tautologi." },
+                { question: "Diberikan premis: 1) Jika saya rajin, maka saya pintar. 2) Jika saya pintar, maka saya lulus ujian. 3) Saya tidak lulus ujian. Kesimpulannya?", options: [{ text: "Saya tidak rajin" }, { text: "Saya rajin" }, { text: "Saya pintar" }], correct: 0, explanation: "Dari premis 1 dan 2 (Silogisme), didapat 'Jika saya rajin, maka saya lulus ujian' (p→r). Dengan premis 3 (\\(\\sim r\\)), gunakan Modus Tollens, hasilnya \\(\\sim p\\) atau 'Saya tidak rajin'." },
+                { question: "Negasi dari \\(\\forall x, x+1 > x\\) adalah...", options: [{ text: "\\(\\exists x, x+1 \\le x\\)" }, { text: "\\(\\exists x, x+1 < x\\)" }, { text: "\\(\\forall x, x+1 \\le x\\)" }], correct: 0, explanation: "Negasi dari \\(\\forall x, P(x)\\) adalah \\(\\exists x, \\sim P(x)\\). Negasi dari > adalah ≤." },
+                { question: "Jika pernyataan \\((p \\lor q) \\rightarrow r\\) bernilai Salah, maka nilai kebenaran p, q, dan r adalah...", options: [{ text: "p dan q minimal satu Benar, r Salah" }, { text: "p, q, r semua Salah" }, { text: "p dan q Salah, r Benar" }], correct: 0, explanation: "Implikasi bernilai Salah hanya jika B → S. Maka \\(p \\lor q\\) harus Benar, dan \\(r\\) harus Salah. Agar \\(p \\lor q\\) Benar, cukup salah satu dari p atau q bernilai Benar (atau keduanya)." },
+                { question: "Manakah yang merupakan kontradiksi?", options: [{ text: "\\((p \\lor q) \\land (\\sim p \\land \\sim q)\\)" }, { text: "\\(p \\rightarrow (p \\lor q)\\)" }, { text: "\\(p \\lor (p \\rightarrow q)\\)" }], correct: 0, explanation: "Menurut De Morgan, \\((\\sim p \\land \\sim q)\\) ekuivalen dengan \\(\\sim(p \\lor q)\\). Jadi pernyataan tersebut menjadi \\(A \\land \\sim A\\) dimana \\(A = p \\lor q\\), yang pasti selalu Salah (Kontradiksi)." },
+                { question: "Premis 1: Semua mamalia menyusui. Premis 2: Kucing adalah mamalia. Kesimpulannya?", options: [{ text: "Kucing menyusui" }, { text: "Semua yang menyusui adalah kucing" }, { text: "Tidak ada kesimpulan" }], correct: 0, explanation: "Ini adalah bentuk Silogisme Universal. Jika semua A adalah B, dan C adalah A, maka C adalah B." },
+                { question: "Konvers dari kontraposisi sebuah implikasi \\(p \\rightarrow q\\) adalah...", options: [{ text: "Invers (\\(\\sim p \\rightarrow \\sim q\\))" }, { text: "Konvers (\\(q \\rightarrow p\\))" }, { text: "Implikasi itu sendiri (\\(p \\rightarrow q\\))" }], correct: 0, explanation: "Kontraposisi adalah \\(\\sim q \\rightarrow \\sim p\\). Konvers dari ini adalah menukar posisi: \\(\\sim p \\rightarrow \\sim q\\), yang merupakan Invers dari implikasi awal." },
+                { question: "Pernyataan 'Tidak ada korupsi atau negara makmur' ekuivalen dengan...", options: [{ text: "Jika ada korupsi, maka negara makmur" }, { text: "Jika tidak ada korupsi, maka negara makmur" }, { text: "Ada korupsi dan negara tidak makmur" }], correct: 0, explanation: "Bentuknya \\(\\sim p \\lor q\\), dimana p: 'Ada korupsi'. Ini ekuivalen dengan implikasi \\(p \\rightarrow q\\)." },
+                { question: "Jika \\(p \\leftrightarrow q\\) Salah, manakah yang pasti Benar?", options: [{ text: "\\(p \\lor q\\) bisa Benar" }, { text: "\\(p \\land q\\) Benar" }, { text: "\\(p \\rightarrow q\\) Salah" }], correct: 0, explanation: "Jika \\(p \\leftrightarrow q\\) Salah, maka nilai p dan q berbeda. Bisa B dan S, atau S dan B. Jika B dan S, \\(p \\lor q\\) Benar. Jadi \\(p \\lor q\\) bisa Benar." },
+                { question: "Tentukan kesimpulan dari: 'Jika saya belajar, maka nilai saya bagus. Nilai saya tidak bagus.'", options: [{ text: "Saya tidak belajar" }, { text: "Saya belajar" }, { text: "Saya malas" }], correct: 0, explanation: "Modus Tollens: \\(p \\rightarrow q, \\sim q \implies \\sim p\\)." },
+                { question: "Negasi dari 'Beberapa siswa suka matematika dan fisika' adalah...", options: [{ text: "Semua siswa tidak suka matematika atau tidak suka fisika" }, { text: "Beberapa siswa tidak suka matematika dan fisika" }, { text: "Semua siswa tidak suka matematika dan fisika" }], correct: 0, explanation: "Negasi dari \\(\\exists x, (P(x) \\land Q(x))\\) adalah \\(\\forall x, \\sim(P(x) \\land Q(x))\\), yang ekuivalen dengan \\(\\forall x, (\\sim P(x) \\lor \\sim Q(x))\\)." },
+                { question: "Argumen: 'Jika n bilangan ganjil, maka n^2 ganjil. n^2 adalah ganjil.' Kesimpulan: 'n adalah bilangan ganjil'. Argumen ini...", options: [{ text: "Tidak valid" }, { text: "Valid (Modus Ponens)" }, { text: "Valid (Modus Tollens)" }], correct: 0, explanation: "Bentuknya \\(p \\rightarrow q, q \implies p\\). Ini adalah kesalahan logika yang disebut 'Affirming the Consequent'. Argumen ini tidak valid. Contoh: \\(n^2 = 9\\) (ganjil) bisa berasal dari \\(n=3\\) atau \\(n=-3\\)." },
+                { question: "Pernyataan \\((p \\land q) \\rightarrow p\\) adalah sebuah...", options: [{ text: "Tautologi" }, { text: "Kontradiksi" }, { text: "Kontingensi" }], correct: 0, explanation: "Jika anteseden \\((p \\land q)\\) Benar, maka p pasti Benar. Jadi tidak mungkin terjadi B → S. Maka pernyataan ini selalu Benar (Tautologi)." },
+                { question: "Kesimpulan dari 'Semua ikan bisa berenang' dan 'Nemo adalah ikan' adalah...", options: [{ text: "Nemo bisa berenang" }, { text: "Semua yang berenang adalah Nemo" }, { text: "Nemo bukan ikan" }], correct: 0, explanation: "Ini adalah penerapan langsung dari kuantor universal (Silogisme)." },
+                { question: "Jika \\(p\\) adalah 'x < 5' dan \\(q\\) adalah 'x > 1', maka \\(p \\land q\\) dapat ditulis sebagai...", options: [{ text: "\\(1 < x < 5\\)" }, { text: "\\(x > 5\\)" }, { text: "\\(x < 1\\)" }], correct: 0, explanation: "Kalimat tersebut berarti 'x lebih kecil dari 5 DAN x lebih besar dari 1', yang merupakan interval \\(1 < x < 5\\)." },
+                { question: "Kontraposisi dari \\(\\sim p \\rightarrow q\\) adalah...", options: [{ text: "\\(\\sim q \\rightarrow p\\)" }, { text: "\\(p \\rightarrow \\sim q\\)" }, { text: "\\(q \\rightarrow \\sim p\\)" }], correct: 0, explanation: "Kontraposisi dari \\(A \\rightarrow B\\) adalah \\(\\sim B \\rightarrow \\sim A\\). Di sini \\(A=\\sim p, B=q\\). Jadi \\(\\sim q \\rightarrow \\sim(\\sim p)\\), yang menjadi \\(\\sim q \\rightarrow p\\)." },
+                { question: "Buktikan validitas argumen: 'Jika \\(p \\lor q\\) dan \\(\\sim p\\), maka \\(q\\)'. Argumen ini disebut...", options: [{ text: "Silogisme Disjungtif" }, { text: "Modus Ponens" }, { text: "Silogisme Hipotetis" }], correct: 0, explanation: "Argumen \\([(p \\lor q) \\land \\sim p] \\rightarrow q\\) adalah bentuk standar dari Silogisme Disjungtif. 'P atau Q benar. P tidak benar. Maka Q pasti benar'." },
+                { question: "Negasi dari 'Jika saya tidak belajar, maka saya tidak lulus' adalah...", options: [{ text: "Saya tidak belajar dan saya lulus" }, { text: "Saya belajar dan saya lulus" }, { text: "Jika saya belajar, maka saya lulus" }], correct: 0, explanation: "Bentuknya \\(\\sim p \\rightarrow \\sim q\\). Negasinya adalah \\(\\sim p \\land \\sim(\\sim q)\\), yang menjadi \\(\\sim p \\land q\\). 'Saya tidak belajar DAN saya lulus'." },
+                { question: "Jika \\(p \rightarrow (q \land r))\\) bernilai Salah, maka...", options: [{ text: "p Benar, q atau r Salah" }, { text: "p Salah" }, { text: "p, q, r semua Benar" }], correct: 0, explanation: "Implikasi Salah hanya jika B → S. Jadi \\(p\\) harus Benar, dan \\((q \\land r)\\) harus Salah. Agar konjungsi salah, cukup salah satu dari q atau r yang salah." },
+                { question: "Pernyataan \\(p \leftrightarrow q\\) ekuivalen dengan...", options: [{ text: "\\((p \\rightarrow q) \\land (q \\rightarrow p)\\)" }, { text: "\\((p \\rightarrow q) \\lor (q \rightarrow p)\\)" }, { text: "\\(p \\land q\\)" }], correct: 0, explanation: "Biimplikasi ('jika dan hanya jika') secara definisi berarti implikasi yang berlaku dua arah." },
+                { question: "Manakah yang bukan merupakan penarikan kesimpulan yang valid?", options: [{ text: "Invers" }, { text: "Modus Ponens" }, { text: "Modus Tollens" }], correct: 0, explanation: "Mengambil kesimpulan berdasarkan Invers (\\(p \\rightarrow q, \\sim p \implies \\sim q\\)) atau Konvers (\\(p \\rightarrow q, q \implies p\\)) adalah kesalahan logika. Hanya Kontraposisi yang ekuivalen." },
+                { question: "Tentukan kesimpulan dari: 'Semua mahasiswa membawa laptop. Tidak ada yang membawa laptop yang seorang dosen.'", options: [{ text: "Tidak ada mahasiswa yang seorang dosen" }, { text: "Semua dosen membawa laptop" }, { text: "Beberapa mahasiswa adalah dosen" }], correct: 0, explanation: "Bentuknya Silogisme. Premis 1: Jika mahasiswa (A) maka membawa laptop (B). Premis 2: Jika membawa laptop (B) maka bukan dosen (\\(\\sim C\\)). Kesimpulan: Jika mahasiswa (A) maka bukan dosen (\\(\\sim C\\))." },
+                { question: "Negasi dari pernyataan 'Jika \\(x^2=4\\), maka \\(x=2\\)' adalah...", options: [{ text: "\\(x^2=4\\) dan \\(x \ne 2\\)" }, { text: "Jika \\(x^2 \ne 4\\), maka \\(x \ne 2\\)" }, { text: "\\(x^2=4\\) atau \\(x \ne 2\\)" }], correct: 0, explanation: "Pernyataan ini sebenarnya Salah (karena x bisa -2). Negasinya harus Benar. Bentuk negasi \\(p \\land \\sim q\\) adalah '\\(x^2=4\\) DAN \\(x \ne 2\\)'. Ini benar, karena ada nilai \\(x=-2\\) yang memenuhi kondisi ini." }
+            ]
+        };
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
+
+        function showNotification(message, type = 'warning') {
+            const container = document.getElementById('notification-container');
+            const notif = document.createElement('div');
+            notif.className = `notification ${type}`;
+            let icon = '⚠️';
+            if (type === 'success') icon = '✅';
+            if (type === 'info') icon = 'ℹ️';
+            notif.innerHTML = `<span>${icon}</span> <span>${message}</span>`;
+            container.appendChild(notif);
+            setTimeout(() => { notif.remove(); }, 4000);
+        }
+
+        function updateProgress() {
+            const stages = ['step0', 'step1', 'step2', 'step3', 'step4'];
+            const progress = (state.currentStage / 4) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+            stages.forEach((id, idx) => {
+                const step = document.getElementById(id);
+                step.classList.remove('active', 'completed');
+                if (idx < state.currentStage) step.classList.add('completed');
+                else if (idx === state.currentStage) step.classList.add('active');
+            });
+            const levelNames = ['Materi', 'LOTS', 'MOTS', 'HOTS', 'Selesai'];
+            document.getElementById('currentLevel').textContent = levelNames[state.currentStage];
+        }
+        
+        function showMaterial() {
+            document.getElementById('contentArea').innerHTML = quizContent.material + `<div class="button-group"><button class="btn btn-primary" onclick="startLOTS()">Mulai Level LOTS →</button></div>`;
+            state.currentStage = 0;
+            updateProgress();
+            setTimeout(() => MathJax.typesetPromise(), 10);
+        }
+        
+        function startQuiz(level) {
+            state.currentQuiz = level;
+            const fullBank = quizContent[level];
+            const shuffledBank = shuffleArray([...fullBank]);
+            state.activeQuestions = shuffledBank.slice(0, 5);
+
+            state.userAnswers = Array(state.activeQuestions.length).fill(null);
+            const levelMap = { LOTS: 1, MOTS: 2, HOTS: 3 };
+            state.currentStage = levelMap[level];
+            updateProgress(); updateStats();
+            const content = `<div class="quiz-section active">
+                    <h2 style="text-align:center; margin-bottom: 20px;">📝 ${level} - Mode Ujian (5 Soal Acak)</h2>
+                    <div class="attempts-info"><strong>Percobaan ${6 - state.attempts[level]} dari 5</strong> | Sudah lulus: ${state.passCount[level]}/2 kali | Gagal berturut-turut: ${state.consecutiveFails[level]}/3</div>
+                    <div id="questionsContainer"></div>
+                    <div class="button-group" id="quiz-button-group"><button id="submitBtn" class="btn btn-primary" onclick="submitQuiz()">Submit Jawaban</button></div>
+                </div>`;
+            document.getElementById('contentArea').innerHTML = content;
+            renderQuestions(state.activeQuestions);
+        }
+        
+        function renderQuestions(questions) {
+            const container = document.getElementById('questionsContainer');
+            container.innerHTML = questions.map((q, idx) => {
+                const optionsHTML = q.options.map((opt, optIdx) => 
+                    `<div class="option" onclick="selectOption(this, ${idx}, ${optIdx})">
+                        <input type="radio" name="q${idx}" id="q${idx}opt${optIdx}" style="pointer-events: none;">
+                        <label for="q${idx}opt${optIdx}" style="cursor: pointer; width: 100%;">${opt.text}</label>
+                    </div>`
+                ).join('');
+
+                return `<div class="question-card" id="question${idx}">
+                    <div class="question-number">Soal ${idx + 1} dari ${questions.length}</div>
+                    <div class="question-text">${q.question}</div>
+                    <div class="options" style="display:flex; flex-direction:column; gap:10px;">${optionsHTML}</div>
+                    <div class="explanation hidden" id="explanation${idx}"></div>
+                </div>`;
+            }).join('');
+            setTimeout(() => MathJax.typesetPromise(), 10);
+        }
+        
+        function selectOption(element, questionIdx, optionIdx) {
+            if (document.getElementById('submitBtn')?.disabled) { return; }
+            const options = document.querySelectorAll(`#question${questionIdx} .option`);
+            options.forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            element.querySelector('input[type="radio"]').checked = true;
+            state.userAnswers[questionIdx] = optionIdx;
+        }
+        
+        function submitQuiz() {
+            const level = state.currentQuiz;
+            const questions = state.activeQuestions;
+            const unanswered = state.userAnswers.filter(ans => ans === null).length;
+
+            if (unanswered > 0) {
+                showNotification(`Mohon jawab semua soal! Ada ${unanswered} soal yang belum terjawab.`);
+                return;
+            }
+
+            let correct = 0;
+            questions.forEach((q, idx) => {
+                const userAnswerIdx = state.userAnswers[idx];
+                const isCorrect = (userAnswerIdx === q.correct);
+                if (isCorrect) correct++;
+                const options = document.querySelectorAll(`#question${idx} .option`);
+                options[userAnswerIdx].classList.add(isCorrect ? 'correct' : 'incorrect');
+                if (!isCorrect) { options[q.correct].classList.add('correct'); }
+                const explanation = document.getElementById(`explanation${idx}`);
+                explanation.innerHTML = `<strong>💡 Pembahasan:</strong> ${q.explanation}`;
+                explanation.classList.remove('hidden');
+            });
+            setTimeout(() => MathJax.typesetPromise(), 10);
+            
+            const score = (correct / questions.length) * 100;
+            const passed = score >= 80;
+            state.attempts[level]--;
+            if (passed) {
+                state.passCount[level]++; state.consecutiveFails[level] = 0;
+                showNotification(`Luar biasa! Skor Anda ${score.toFixed(0)}%.`, 'success');
+            } else {
+                state.consecutiveFails[level]++;
+                showNotification(`Skor Anda ${score.toFixed(0)}%. Terus coba lagi!`, 'warning');
+            }
+            updateStats();
+            document.getElementById('submitBtn').style.display = 'none';
+            document.getElementById('quiz-button-group').innerHTML = `<button class="btn btn-primary" onclick='showResult("${level}", ${score}, ${passed})'>Lihat Ringkasan Hasil →</button>`;
+        }
+        
+        function showResult(level, score, passed) {
+            const canProceed = state.passCount[level] >= 2;
+            const isEliminated = state.consecutiveFails[level] >= 3 || (state.attempts[level] === 0 && !canProceed);
+            let resultHTML = `
+                <div class="result-summary" style="text-align: center;">
+                    <h2>${passed ? '✅ Lulus!' : '❌ Belum Lulus'} (Skor Minimal: 80%)</h2>
+                    <div style="font-size: 4em; font-weight: bold; color: ${passed ? 'var(--accent-green)' : 'var(--accent-red)'}; margin: 20px 0;">${score.toFixed(0)}%</div>
+                    <p style="font-size: 1.2em; margin: 20px 0;">Kamu menjawab benar ${Math.round((score / 100) * state.activeQuestions.length)} dari ${state.activeQuestions.length} soal</p>
+                    <div class="attempts-info"><strong>Status:</strong><br>Lulus: ${state.passCount[level]}/2 kali | Percobaan tersisa: ${state.attempts[level]} | Gagal berturut-turut: ${state.consecutiveFails[level]}/3</div>`;
+            if (isEliminated) {
+                resultHTML += `<div style="background: rgba(220, 53, 69, 0.2); padding: 20px; border-radius: 10px; margin: 20px 0;"><h3 style="color: var(--accent-red);">❌ Mode Kilat - GUGUR</h3><p style="margin: 15px 0;">Kamu telah ${state.consecutiveFails[level] >= 3 ? 'gagal 3x berturut-turut' : 'kehabisan percobaan'}.</p></div><div class="button-group"><button class="btn btn-secondary" onclick="resetSystem()">Mulai Ulang dari Awal</button></div>`;
+            } else if (canProceed) {
+                const nextLevel = level === 'LOTS' ? 'MOTS' : (level === 'MOTS' ? 'HOTS' : null);
+                if (nextLevel) {
+                    resultHTML += `<div style="background: rgba(40, 167, 69, 0.2); padding: 20px; border-radius: 10px; margin: 20px 0;"><h3 style="color: var(--accent-green);">🔓 Level ${nextLevel} Terbuka!</h3><p style="margin: 15px 0;">Siap untuk tantangan berikutnya?</p></div><div class="button-group"><button class="btn" onclick="showMaterial()">Baca Materi Lagi</button><button class="btn btn-primary" onclick="start${nextLevel}()">Lanjut ke ${nextLevel} →</button></div>`;
+                } else { resultHTML += generateCertificate(); }
+            } else {
+                resultHTML += `<div class="button-group"><button class="btn" onclick="showMaterial()">Baca Materi Lagi</button><button class="btn btn-primary" onclick="start${level}()">Coba Lagi (${state.attempts[level]} percobaan)</button></div>`;
+            }
+            resultHTML += `</div>`; document.getElementById('contentArea').innerHTML = resultHTML;
+        }
+
+        function generateCertificate() {
+            state.currentStage = 4; updateProgress();
+            return `<div class="certificate"><div style="font-size: 5em;">🏆</div><h2 style="font-size: 2.5em; margin-bottom: 20px; color: var(--accent-teal);">Sertifikat Kelulusan Topik</h2><p style="font-size: 1.3em; margin: 20px 0;">SELAMAT!</p><p style="font-size: 1.1em; line-height: 1.6;">Kamu telah berhasil menyelesaikan topik <strong>Logika Matematika</strong> dengan melewati semua level: LOTS ✓ MOTS ✓ HOTS ✓</p></div><div class="button-group"><button class="btn btn-primary" onclick="resetSystem()">Mulai Topik Baru</button></div>`;
+        }
+        
+        function updateStats() {
+            const level = state.currentQuiz || 'LOTS';
+            document.getElementById('attemptsLeft').textContent = state.attempts[level];
+            document.getElementById('passCount').textContent = `${state.passCount[level]}/2`;
+        }
+        
+        function startLOTS() { startQuiz('LOTS'); }
+        function startMOTS() { startQuiz('MOTS'); }
+        function startHOTS() { startQuiz('HOTS'); }
+        
+        function resetSystem() {
+            Object.assign(state, {
+                currentStage: 0, attempts: { LOTS: 5, MOTS: 5, HOTS: 5 }, passCount: { LOTS: 0, MOTS: 0, HOTS: 0 },
+                consecutiveFails: { LOTS: 0, MOTS: 0, HOTS: 0 }, currentQuiz: null, userAnswers: [], activeQuestions: []
+            });
+            showNotification('Sistem telah direset, selamat belajar kembali!', 'info');
+            showMaterial();
+        }
+        
+        // Inisialisasi
+        showMaterial();
+    </script>
+</body>
+</html>
