@@ -1639,7 +1639,21 @@ function renderSprintDetailPage(sprintId) {
                     <span class="block text-xs text-gray-400">${item.type}</span>
                 </li>
             `).join('');
-            accordionHTML += `<div class="accordion-item border-b border-gray-700" data-accordion-group><h2><button type="button" class="accordion-button flex items-center justify-between w-full p-4 font-semibold text-left text-purple-300"><span>${subCategory}</span><i class="accordion-icon fa-solid fa-chevron-down shrink-0 transition-transform duration-200"></i></button></h2><div class="accordion-content hidden p-2"><ul class="space-y-2">${itemsHTML}</ul></div></div>`;
+            
+            // --- PERUBAHAN DI SINI ---
+            accordionHTML += `
+                <div class="accordion-item border-b border-gray-700" data-accordion-group>
+                    <h2>
+                        <button type="button" class="accordion-button flex items-center justify-between w-full p-4 font-semibold text-left text-purple-300">
+                            <span>${subCategory}</span>
+                            <i class="accordion-icon fa-solid fa-chevron-down shrink-0 transition-transform duration-200 rotate-180"></i> 
+                        </button>
+                    </h2>
+                    <div class="accordion-content p-2"> 
+                        <ul class="space-y-2">${itemsHTML}</ul>
+                    </div>
+                </div>`;
+            // --- AKHIR PERUBAHAN ---
         }
     }
 
@@ -1673,7 +1687,3 @@ function openSprintLatihan(itemId, filePath) {
 </script>
 </body>
 </html>
-
-
-
-
