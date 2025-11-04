@@ -206,6 +206,171 @@
             background-color: #39D35330;
             border-color: var(--accent-green);
         }
+/* Mengunci scroll body saat modal kamus terbuka */
+        body.kamus-modal-open {
+            overflow: hidden;
+        }
+
+        /* Search & Filter Kamus */
+        #kamus-search {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            background-color: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        .filter-group {
+            margin-bottom: 2rem;
+        }
+        .filter-group label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        #kamus-filter {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            font-size: 1rem;
+            background-color: var(--bg-main);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            color: var(--text-primary);
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%238B949E' class='bi bi-chevron-down'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1em;
+            padding-right: 2.5rem;
+        }
+
+        /* Hasil Pencarian Kamus */
+        #kamus-results-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 1rem;
+        }
+        .result-item {
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .result-item:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-3px);
+            background-color: #2a3038;
+        }
+        .result-item h3 { margin: 0 0 5px 0; color: var(--text-primary); }
+        .result-item p { margin: 0; color: var(--text-secondary); font-size: 0.9rem; }
+
+        /* Modal Kamus (Sudah di-namespaced agar tidak konflik) */
+        .kamus-modal-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .kamus-modal-overlay.active {
+            display: flex;
+            opacity: 1;
+        }
+        .kamus-modal-content {
+            position: relative; 
+            background-color: var(--bg-panel);
+            border: 1px solid var(--border-color);
+            border-radius: 0.75rem;
+            padding: 30px;
+            width: 90%;
+            max-width: 700px;
+            max-height: 80vh; 
+            overflow-y: auto;   
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+        .kamus-modal-overlay.active .kamus-modal-content {
+            transform: scale(1);
+        }
+        .kamus-modal-content h2 { 
+            margin-top: 0; 
+            padding-right: 30px; 
+            color: var(--accent-cyan);
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        .kamus-modal-content h3 {
+             color: var(--text-primary);
+             font-size: 1.25rem;
+             margin-top: 2rem;
+             margin-bottom: 0.5rem;
+        }
+        .kamus-modal-content p, .kamus-modal-content li { color: var(--text-secondary); }
+        
+        /* Tombol Close Modal Kamus */
+        .kamus-modal-close-btn {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            font-size: 2.2rem;
+            font-weight: 300;
+            line-height: 1;
+            cursor: pointer;
+            padding: 0;
+            transition: color 0.2s ease;
+            z-index: 10;
+        }
+        .kamus-modal-close-btn:hover {
+            color: var(--text-primary);
+        }
+        
+        /* Konten di dalam Modal Kamus */
+        #kamus-modal-intuition {
+            background-color: rgba(47, 129, 247, 0.1); 
+            border-left: 4px solid var(--accent-cyan);
+            padding: 1rem; 
+            margin: 1.5rem 0; 
+            border-radius: 0 0.5rem 0.5rem 0;
+            font-size: 1.1rem;
+            font-style: italic;
+            color: var(--text-primary);
+        }
+        .kamus-knowledge-network { margin-top: 2rem; }
+        .kamus-knowledge-network h4 { color: var(--text-secondary); }
+        
+        .kamus-nav-link {
+            display: inline-block;
+            background: var(--bg-main);
+            border: 1px solid var(--border-color);
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin: 5px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .kamus-nav-link:hover {
+            border-color: var(--accent-cyan);
+            color: var(--text-primary);
+        }
     </style>
 </head>
 <body class="text-white">
@@ -249,6 +414,9 @@
                     </a>
                     <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('pengaturan', this)">
                         <i class="fa-solid fa-user-gear text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Pengaturan</span>
+                    </a>
+                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('kamus', this)">
+                        <i class="fa-solid fa-spell-check text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Kamus</span>
                     </a>
                 </div>
             </nav>
@@ -395,6 +563,59 @@ if (typeof allContentData !== 'undefined') {
     ];
 }
 
+const kamusData = {
+    'logaritma': {
+        term: "Logaritma",
+        category: "aljabar",
+        intuition: "Logaritma adalah sebuah PERTANYAAN. Ia bertanya: 'Pangkat berapa?'",
+        penjelasan: "$^2\\log 8$ secara harfiah bertanya, '2 harus dipangkatkan berapa agar hasilnya 8?'. Jawabannya adalah 3. Ini adalah alat untuk 'membuka' atau mencari pangkat dalam operasi eksponensial.",
+        formal: "Secara formal, jika $a^c = b$, maka $^a\\log b = c$. Dimana $a$ adalah basis, $b$ adalah numerus, dan $c$ adalah hasilnya (pangkat).",
+        prerequisites: ['eksponen'],
+        related: ['persamaan_log', 'skala_ph']
+    },
+    'eksponen': {
+        term: "Eksponen (Pangkat)",
+        category: "aljabar",
+        intuition: "Eksponen adalah cara singkat menulis perkalian berulang.",
+        penjelasan: "$3^4$ berarti $3 \\times 3 \\times 3 \\times 3$. Ini adalah 'gembok' yang 'dikunci' oleh logaritma.",
+        formal: "Bentuk $a^n$ (dibaca 'a pangkat n') adalah operasi di mana $a$ (basis) dikalikan dengan dirinya sendiri sebanyak $n$ kali (eksponen).",
+        prerequisites: [],
+        related: ['logaritma', 'persamaan_eksponen']
+    },
+    'limit': {
+        term: "Limit",
+        category: "kalkulus",
+        intuition: "Limit adalah tentang NILAI TUJUAN. Ia tidak bertanya 'ada di mana?', tapi 'menuju ke mana?'",
+        penjelasan: "Bayangkan Anda berjalan mendekati sebuah titik di grafik. Limit adalah nilai Y yang Anda dekati, tidak peduli apakah titik itu sendiri berlubang atau tidak. Kuncinya adalah pendekatan dari kiri dan kanan harus bertemu.",
+        formal: "Notasi $\\lim_{x \\to c} f(x) = L$ berarti nilai $f(x)$ dapat dibuat sedekat mungkin ke $L$ dengan membuat $x$ cukup dekat (tetapi tidak sama dengan) $c$.",
+        prerequisites: ['fungsi'],
+        related: ['turunan', 'kontinuitas']
+    },
+    'turunan': {
+        term: "Turunan (Derivative)",
+        category: "kalkulus",
+        intuition: "Alat untuk mengukur KEMIRINGAN SESAAT atau laju perubahan instan.",
+        penjelasan: "Jika Anda melihat grafik, turunan memberi tahu Anda seberapa curam grafik itu di TITIK MANAPUN. Ini dihitung dengan mengambil limit dari gradien antara dua titik yang dibuat sangat dekat.",
+        formal: "Turunan dari $f(x)$ adalah $f'(x) = \\lim_{h \\to 0} \\frac{f(x+h) - f(x)}{h}$.",
+        prerequisites: ['limit', 'fungsi', 'gradien'],
+        related: ['integral', 'laju_perubahan', 'optimasi']
+    },
+    'pythagoras': {
+        term: "Teorema Pythagoras",
+        category: "geometri",
+        intuition: "Aturan khusus untuk menemukan panjang sisi miring dari segitiga siku-siku.",
+        penjelasan: "Pada segitiga siku-siku, kuadrat dari sisi miring (sisi terpanjang) sama dengan jumlah dari kuadrat dua sisi lainnya. Ini adalah fondasi dari hampir semua perhitungan jarak dalam geometri.",
+        formal: "Jika $a$ dan $b$ adalah sisi siku-siku dan $c$ adalah sisi miring, maka $a^2 + b^2 = c^2$.",
+        prerequisites: [],
+        related: ['jarak_titik', 'lingkaran_satuan', 'trigonometri']
+    },
+    'kalkulus': { term: "Kalkulus", category: "kalkulus", intuition: "Studi tentang perubahan.", penjelasan: "Kalkulus adalah cabang matematika yang berfokus pada limit, turunan, integral, dan deret tak hingga. Ini adalah bahasa untuk mendeskripsikan gerakan dan perubahan.", formal: "-", prerequisites: ['aljabar', 'fungsi'], related: ['limit', 'turunan', 'integral'] },
+    'integral': { term: "Integral", category: "kalkulus", intuition: "Alat untuk menghitung LUAS di bawah kurva.", penjelasan: "Jika turunan adalah tentang memecah sesuatu (kemiringan), integral adalah tentang menggabungkannya kembali (luas).", formal: "-", prerequisites: ['turunan'], related: ['luas_area', 'volume_benda_putar'] },
+    'fungsi': { term: "Fungsi", category: "aljabar", intuition: "Sebuah 'mesin' matematika.", penjelasan: "Anda memasukkan 'input' (x), dan mesin 'fungsi' (f) memberi Anda satu 'output' (y) yang unik.", formal: "-", prerequisites: [], related: ['limit', 'turunan'] },
+    'gradien': { term: "Gradien (Kemiringan)", category: "geometri", intuition: "Ukuran kecuraman sebuah garis.", penjelasan: "Dihitung sebagai 'perubahan vertikal (rise) dibagi perubahan horizontal (run)'.", formal: "$m = \\frac{y_2 - y_1}{x_2 - x_1}$", prerequisites: [], related: ['turunan'] },
+    'kontinuitas': { term: "Kontinuitas", category: "kalkulus", intuition: "Artinya grafik 'tersambung' dan tidak putus.", penjelasan: "Sebuah fungsi kontinu di suatu titik jika Anda bisa menggambar grafiknya melewati titik itu tanpa mengangkat pensil Anda. Secara teknis, nilai limitnya harus sama dengan nilai fungsinya.", formal: "Fungsi $f$ kontinu di $c$ jika $\\lim_{x \\to c} f(x) = f(c)$", prerequisites: ['limit'], related: ['limit'] }
+};
+
 const CONFIG = {
     API_URL: 'https://script.google.com/macros/s/AKfycbyP3jpWgs6ikQcA-9MsInRZYbLFQsshjxgo22twwXrzpACSPV9BREogrKUd-60crXV_mg/exec',
     LOGIN_PAGE: '../Login/',
@@ -479,6 +700,7 @@ const appContent = document.getElementById('app-content');
 const pageRenderers = {
     'dashboard': renderDashboardPage,
     'materi': renderMateriPage,
+    'kamus': renderKamusPage,
     'perpustakaan': renderPerpustakaanPage,
     'bank_soal': renderBankSoalPage,
     'snbt_tka': renderSnbtTkaPage,
@@ -1142,6 +1364,201 @@ function renderPerpustakaanPage() {
     `;
     appContent.innerHTML = pageHTML;
 }
+
+function renderKamusPage() {
+    // 1. Buat HTML untuk Kamus
+    // Kita gunakan kelas 'panel' dari SPA, bukan 'container' dari kamus
+    // Kita juga memberi ID unik (namespaced) untuk modal
+    appContent.innerHTML = `
+        <div class="panel">
+            <h1 class="text-2xl font-bold text-cyan-400 mb-6 text-center">
+                <i class="fa-solid fa-spell-check"></i> Kamus Matematika UMT
+            </h1>
+            
+            <input type="search" id="kamus-search" placeholder="🔍 Cari istilah... (misal: limit, pangkat, gradien)">
+            
+            <div class="filter-group">
+                <label for="kamus-filter">Pilih Topik:</label>
+                <select id="kamus-filter">
+                    <option value="all" selected>Semua Topik</option>
+                    <option value="aljabar">Aljabar</option>
+                    <option value="kalkulus">Kalkulus</option>
+                    <option value="geometri">Geometri</option>
+                </select>
+            </div>
+
+            <h2 class="text-xl font-semibold mb-4 text-cyan-300">
+                <i class="fas fa-list-ul"></i> Daftar Istilah
+            </h2>
+            <div id="kamus-results-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                </div>
+        </div>
+
+        <div id="kamus-term-modal" class="kamus-modal-overlay">
+            <div class="kamus-modal-content">
+                <button id="kamus-modal-close-btn" class="kamus-modal-close-btn" aria-label="Tutup">&times;</button>
+                
+                <h2 id="kamus-modal-title"></h2>
+                <p id="kamus-modal-intuition"></p>
+                
+                <h3><i class="fas fa-brain"></i> Penjelasan Lanjut (UMT)</h3>
+                <p id="kamus-modal-penjelasan"></p>
+                
+                <h3><i class="fas fa-book-open"></i> Definisi Formal</h3>
+                <div id="kamus-modal-formal"></div>
+
+                <div class="kamus-knowledge-network">
+                    <h4>Prasyarat (Pahami Ini Dulu):</h4>
+                    <div id="kamus-modal-prasyarat"></div>
+                    
+                    <h4 style="margin-top: 1rem;">Konsep Terkait (Jelajahi Selanjutnya):</h4>
+                    <div id="kamus-modal-terkait"></div>
+                </div>
+            </div>
+        </div>
+    `;
+
+    // 2. Jalankan JavaScript khusus untuk halaman kamus
+    initializeKamusPageLogic();
+}
+
+function initializeKamusPageLogic() {
+    // --- Variabel dan Elemen DOM (Namespaced) ---
+    // Semua selector BUKAN lagi variabel global, tapi lokal di dalam fungsi ini
+    const searchInput = document.getElementById('kamus-search');
+    const filterSelect = document.getElementById('kamus-filter');
+    const resultsList = document.getElementById('kamus-results-list');
+    const modal = document.getElementById('kamus-term-modal'); // ID unik
+    const modalTitle = document.getElementById('kamus-modal-title');
+    const modalIntuition = document.getElementById('kamus-modal-intuition');
+    const modalPenjelasan = document.getElementById('kamus-modal-penjelasan');
+    const modalFormal = document.getElementById('kamus-modal-formal');
+    const modalPrasyarat = document.getElementById('kamus-modal-prasyarat');
+    const modalTerkait = document.getElementById('kamus-modal-terkait');
+    const modalCloseBtn = document.getElementById('kamus-modal-close-btn'); // ID unik
+
+    // Pastikan elemen ada sebelum menambah listener
+    if (!searchInput) {
+        console.error("Kamus JS: Elemen tidak ditemukan. Berhenti.");
+        return;
+    }
+
+    let currentFilter = 'all';
+    let currentSearch = '';
+
+    // --- Fungsi Internal Kamus ---
+
+    function renderTerms() {
+        resultsList.innerHTML = '';
+        const searchTerm = currentSearch.toLowerCase();
+        
+        for (const key in kamusData) {
+            const termData = kamusData[key];
+            const categoryMatch = currentFilter === 'all' || termData.category === currentFilter;
+            const searchMatch = termData.term.toLowerCase().includes(searchTerm) || termData.intuition.toLowerCase().includes(searchTerm);
+            
+            if (categoryMatch && searchMatch) {
+                const item = document.createElement('div');
+                item.className = 'result-item'; // Class ini dari CSS yg kita tambahkan
+                item.setAttribute('data-id', key);
+                item.innerHTML = `
+                    <h3>${termData.term}</h3>
+                    <p>${termData.intuition}</p>
+                `;
+                // 'showKamusTermDetail' BUKAN fungsi global, tapi didefinisikan di bawah
+                item.addEventListener('click', () => showKamusTermDetail(key));
+                resultsList.appendChild(item);
+            }
+        }
+    }
+
+    function openKamusModal() { // Nama fungsi di-namespaced
+        const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+        document.body.style.paddingRight = `${scrollbarWidth}px`;
+        document.body.classList.add('kamus-modal-open'); // Class CSS unik
+        modal.classList.add('active'); // Class CSS unik
+    }
+
+    function closeKamusModal() { // Nama fungsi di-namespaced
+        document.body.classList.remove('kamus-modal-open');
+        document.body.style.paddingRight = '';
+        modal.classList.remove('active');
+    }
+
+    function showKamusTermDetail(termId) {
+        const data = kamusData[termId];
+        if (!data) return;
+
+        const isModalAlreadyOpen = modal.classList.contains('active');
+
+        modalTitle.textContent = data.term;
+        modalIntuition.textContent = `"${data.intuition}"`;
+        modalPenjelasan.textContent = data.penjelasan;
+        modalFormal.innerHTML = `<p>${data.formal}</p>`;
+        
+        if (window.MathJax) {
+            MathJax.typesetPromise([modalPenjelasan, modalFormal]).catch(err => console.log(err));
+        }
+
+        modalPrasyarat.innerHTML = '';
+        if (data.prerequisites.length > 0) {
+            data.prerequisites.forEach(key => {
+                const term = kamusData[key];
+                if (term) {
+                    // Gunakan class .kamus-nav-link
+                    const link = document.createElement('span');
+                    link.className = 'kamus-nav-link';
+                    link.textContent = term.term;
+                    link.onclick = () => showKamusTermDetail(key); // Panggil fungsi ini lagi
+                    modalPrasyarat.appendChild(link);
+                }
+            });
+        } else {
+            modalPrasyarat.innerHTML = `<span style="color: var(--text-secondary); font-size: 0.9rem;">Tidak ada prasyarat dasar.</span>`;
+        }
+
+        modalTerkait.innerHTML = '';
+        data.related.forEach(key => {
+            const term = kamusData[key];
+            if (term) {
+                const link = document.createElement('span');
+                link.className = 'kamus-nav-link';
+                link.textContent = term.term;
+                link.onclick = () => showKamusTermDetail(key); // Panggil fungsi ini lagi
+                modalTerkait.appendChild(link);
+            }
+        });
+
+        if (!isModalAlreadyOpen) {
+            openKamusModal();
+        }
+    }
+
+    // --- Event Listeners ---
+    searchInput.addEventListener('input', (e) => {
+        currentSearch = e.target.value;
+        renderTerms();
+    });
+
+    filterSelect.addEventListener('change', (e) => {
+        currentFilter = e.target.value;
+        renderTerms();
+    });
+
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) {
+            closeKamusModal();
+        }
+    });
+    
+    modalCloseBtn.addEventListener('click', () => {
+        closeKamusModal();
+    });
+
+    // --- Render Awal ---
+    renderTerms();
+}
+
 function getTotalItemCount() {
     const totalMateri = Object.values(allContentData.materi).flat().length;
     const totalVideo = allContentData.video.length;
@@ -1731,8 +2148,3 @@ function openSprintLatihan(itemId, filePath) {
 </script>
 </body>
 </html>
-
-
-
-
-
