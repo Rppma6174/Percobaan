@@ -652,6 +652,43 @@ const allContentData = {
             fileType: 'html' 
             },
         ],
+        "Vektor": [
+            { 
+            id: 'materi_vektor_01', 
+            title: 'Esensi Vektor', 
+            type: 'HTML Document', 
+            filePath: '#', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'materi_vektor_02', 
+            title: 'Esensi Vektor', 
+            type: 'HTML Document', 
+            filePath: '#', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'materi_vektor_03', 
+            title: 'Esensi Vektor', 
+            type: 'HTML Document', 
+            filePath: '#', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'materi_vektor_04', 
+            title: 'Esensi Vektor', 
+            type: 'HTML Document', 
+            filePath: '#', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'materi_vektor_05', 
+            title: 'Esensi Vektor', 
+            type: 'HTML Document', 
+            filePath: '#', 
+            fileType: 'html' 
+            },
+        ],
         "Limit Fungsi": [
             { 
             id: 'materi_esensi_limit', 
