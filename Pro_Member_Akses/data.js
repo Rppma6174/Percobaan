@@ -655,7 +655,7 @@ const allContentData = {
         "Vektor": [
             { 
             id: 'materi_vektor_01', 
-            title: 'Esensi Vektor', 
+            title: 'Esensi & Operasi Vektor 1', 
             type: 'HTML Document', 
             filePath: 'UMT_Learning/Esensi Vektor.html', 
             fileType: 'html' 
