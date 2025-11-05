@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vektor Posisi - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png"> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { 
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } 
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2, h3 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        h3 { color: #58a6ff; margin-top: 2rem; }
+        .hidden { display: none; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 0.5rem; }
+        .diagram-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-main);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            margin-top: 1rem;
+            overflow-x: auto;
+        }
+        .diagram-container svg { max-width: 100%; }
+        .diagram-container svg text { font-size: 14px; fill: var(--text-primary); }
+        .diagram-container p { font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem; }
+
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold;
+        }
+        .quiz-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1);
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        p, li, .quiz-explanation {
+            overflow-x: auto; padding-bottom: 8px;
+        }
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <h1>Vektor Posisi: "Alamat" dalam Ruang</h1>
+        <p>
+            Kita tahu bahwa vektor $\vec{v}$ dan $\vec{w}$ bisa "sama" meskipun letaknya berbeda (seperti pada materi esensi vektor). Ini sangat fleksibel, tapi terkadang kita butuh cara untuk "menstandarisasi" lokasi vektor.
+        </p>
+        <p>
+            Bagaimana jika kita sepakat bahwa semua vektor harus dimulai dari satu titik acuan yang sama? Titik acuan universal dalam matematika adalah <strong>Titik Asal (Origin)</strong>, yaitu $O(0, 0)$ di 2D atau $O(0, 0, 0)$ di 3D.
+        </p>
+
+        <h2>Apa itu Vektor Posisi?</h2>
+        <p>
+            <strong>Vektor Posisi</strong> adalah sebuah vektor yang titik pangkalnya <strong>selalu</strong> berada di Titik Asal (O) dan titik ujungnya berada di suatu titik yang kita tuju (misalnya, titik P).
+        </p>
+        <p>
+            Vektor posisi dari titik P sering ditulis sebagai $\vec{p}$ atau $\vec{OP}$.
+        </p>
+        <div class="diagram-container">
+            <svg width="300" height="250" viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrow-pos" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#2F81F7"/>
+                    </marker>
+                </defs>
+                <line x1="50" y1="200" x2="280" y2="200" stroke="#8B949E" stroke-width="2"/>
+                <text x="285" y="205" fill="#8B949E">x</text>
+                <line x1="50" y1="200" x2="50" y2="20" stroke="#8B949E" stroke-width="2"/>
+                <text x="45" y="15" fill="#8B949E">y</text>
+                
+                <circle cx="50" cy="200" r="3" fill="#f0f0f0" />
+                <text x="35" y="215" font-size="14" fill="#f0f0f0">O(0,0)</text>
+
+                <circle cx="200" cy="80" r="4" fill="#f0f0f0" />
+                <text x="210" y="50" font-size="14" fill="#f0f0f0">P(x, y)</text>
+                
+                <line x1="50" y1="200" x2="200" y2="80" stroke="#2F81F7" stroke-width="3" marker-end="url(#arrow-pos)" />
+                <foreignObject x="110" y="120" width="50" height="40">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="color: #58a6ff; font-size: 16px; font-weight: bold;">
+                        $\vec{p}$
+                    </div>
+                </foreignObject>
+            </svg>
+            <p>Vektor posisi $\vec{p}$ adalah "alamat" untuk titik P dari Titik Asal O.</p>
+        </div>
+        
+        <h3>Notasi Vektor Posisi (Aljabar)</h3>
+        <p>
+            Karena titik pangkalnya selalu $O(0,0)$, kita tidak perlu menuliskannya lagi. Kita bisa merepresentasikan vektor posisi $\vec{p}$ hanya dengan menuliskan koordinat titik ujungnya dalam bentuk <strong>vektor kolom</strong>.
+        </p>
+        <p>
+            Jika $P = (x, y)$, maka vektor posisi $\vec{p}$ (atau $\vec{OP}$) adalah:
+            $$ \vec{p} = \begin{pmatrix} x \\ y \end{pmatrix} $$
+            Ini adalah jembatan antara geometri (titik) dan aljabar (vektor kolom).
+        </p>
+
+        <h2>Kegunaan Terbesar: Vektor Antara Dua Titik</h2>
+        <p>
+            Vektor posisi sangat berguna untuk menemukan vektor yang menghubungkan dua titik sembarang, misalnya vektor dari titik A ke titik B ($\vec{AB}$).
+        </p>
+        <p>
+            Secara intuitif (gaya UMT), untuk "berjalan" dari A ke B, kita bisa mengambil rute "resmi" melalui titik asal O:
+        </p>
+        <ol>
+            <li>Berjalan dari A kembali ke O (yaitu $\vec{AO}$).</li>
+            <li>Berjalan dari O menuju ke B (yaitu $\vec{OB}$).</li>
+        </ol>
+        <p>Jadi, secara matematis:</p>
+        $$ \vec{AB} = \vec{AO} + \vec{OB} $$
+        <p>
+            Kita tahu bahwa $\vec{AO}$ adalah vektor yang berlawanan arah dengan $\vec{OA}$. Maka, $\vec{AO} = -\vec{OA}$.
+        </p>
+        <p>Substitusikan ini ke persamaan kita:</p>
+        $$ \vec{AB} = -\vec{OA} + \vec{OB} $$
+        <p>Yang jika ditulis ulang menjadi rumus yang sangat terkenal:</p>
+        $$ \vec{AB} = \vec{OB} - \vec{OA} $$
+        <p>Jika $\vec{a}$ adalah vektor posisi A dan $\vec{b}$ adalah vektor posisi B, maka rumusnya menjadi:</p>
+        <blockquote>
+            $\vec{AB} = \vec{b} - \vec{a}$   (Posisi <strong>Ujung</strong> dikurangi Posisi <strong>Pangkal</strong>)
+        </blockquote>
+        
+        <div class="diagram-container">
+            <svg width="350" height="300" viewBox="0 0 350 300" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrow-a-pos" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto"><polygon points="0 0, 7 2.5, 0 5" fill="#39D353"/></marker>
+                    <marker id="arrow-b-pos" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto"><polygon points="0 0, 7 2.5, 0 5" fill="#F85149"/></marker>
+                    <marker id="arrow-ab-pos" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto"><polygon points="0 0, 7 2.5, 0 5" fill="#2F81F7"/></marker>
+                </defs>
+                <line x1="20" y1="280" x2="330" y2="280" stroke="#8B949E" stroke-width="1"/>
+                <line x1="20" y1="280" x2="20" y2="20" stroke="#8B949E" stroke-width="1"/>
+                <text x="5" y="290" font-size="14" fill="#f0f0f0">O</text>
+
+                <line x1="20" y1="280" x2="100" y2="150" stroke="#39D353" stroke-width="2.5" marker-end="url(#arrow-a-pos)" />
+                <foreignObject x="50" y="190" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #39D353; font-size: 16px;">$\vec{a}$</div></foreignObject>
+                <text x="105" y="130" font-size="14" fill="#f0f0f0">A</text>
+
+                <line x1="20" y1="280" x2="250" y2="80" stroke="#F85149" stroke-width="2.5" marker-end="url(#arrow-b-pos)" />
+                <foreignObject x="120" y="160" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #F85149; font-size: 16px;">$\vec{b}$</div></foreignObject>
+                <text x="255" y="60" font-size="14" fill="#f0f0f0">B</text>
+                
+                <line x1="100" y1="150" x2="250" y2="80" stroke="#2F81F7" stroke-width="3" marker-end="url(#arrow-ab-pos)" />
+                <foreignObject x="120" y="70" width="100" height="40">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="color: #58a6ff; font-size: 16px; font-weight: bold;">
+                        $\vec{AB} = \vec{b} - \vec{a}$
+                    </div>
+                </foreignObject>
+            </svg>
+            <p>Vektor $\vec{AB}$ didapat dari $\vec{OB} - \vec{OA}$ (Ujung - Pangkal).</p>
+        </div>
+
+        <h2>Uji Pemahaman</h2>
+        <p>Pilih jawaban yang paling tepat untuk menguji pemahaman Anda tentang Vektor Posisi.</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Cek session, sesuaikan dengan sistem login Anda
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+
+        const quizzes = [
+            { q: "Apa definisi paling tepat dari Vektor Posisi?", options: ["Vektor yang menghubungkan dua titik sembarang.", "Vektor yang memiliki panjang 1 satuan.", "Vektor yang pangkalnya selalu di titik asal (Origin).", "Vektor yang selalu sejajar dengan sumbu-x."], correct: 2, explanation: "Keunikan vektor posisi adalah titik pangkalnya yang selalu tetap di O(0,0), sehingga ia bisa mewakili 'alamat' sebuah titik." },
+            { q: "Jika titik P memiliki koordinat (5, -2), maka vektor posisi $\\vec{p}$ adalah...", options: ["$\\begin{pmatrix} -5 \\\\ 2 \\end{pmatrix}$", "$\\begin{pmatrix} 5 \\\\ -2 \\end{pmatrix}$", "$\\begin{pmatrix} 0 \\\\ 0 \\end{pmatrix}$", "$\\begin{pmatrix} 5 \\\\ 2 \\end{pmatrix}$"], correct: 1, explanation: "Vektor posisi $\\vec{p} = \\vec{OP} = P - O = (5 - 0, -2 - 0)$. Nilainya selalu sama dengan koordinat titiknya, ditulis sebagai vektor kolom." },
+            { q: "Vektor $\\vec{AB}$ dapat dihitung menggunakan vektor posisi $\\vec{a}$ (posisi A) dan $\\vec{b}$ (posisi B) dengan rumus...", options: ["$\\vec{a} - \\vec{b}$ (Pangkal - Ujung)", "$\\vec{b} - \\vec{a}$ (Ujung - Pangkal)", "$\\vec{a} + \\vec{b}$", "$\\frac{\\vec{a} + \\vec{b}}{2}$"], correct: 1, explanation: "Rumus dasarnya adalah $\\vec{AB} = \\vec{OB} - \\vec{OA} = \\vec{b} - \\vec{a}$. Selalu ingat: UJUNG dikurangi PANGKAL." },
+            { q: "Diketahui A(1, 2) dan B(5, 7). Tentukan vektor $\\vec{AB}$!", options: ["$\\begin{pmatrix} 6 \\\\ 9 \\end{pmatrix}$", "$\\begin{pmatrix} 4 \\\\ 5 \\end{pmatrix}$", "$\\begin{pmatrix} -4 \\\\ -5 \\end{pmatrix}$", "$\\begin{pmatrix} 5 \\\\ 4 \\end{pmatrix}$"], correct: 1, explanation: "Gunakan rumus Ujung - Pangkal: $\\vec{AB} = \\vec{b} - \\vec{a} = \\begin{pmatrix} 5 \\\\ 7 \\end{pmatrix} - \\begin{pmatrix} 1 \\\\ 2 \\end{pmatrix} = \\begin{pmatrix} 5-1 \\\\ 7-2 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 5 \\end{pmatrix}$." },
+            { q: "Jika $\\vec{MN} = \\begin{pmatrix} 3 \\\\ -2 \\end{pmatrix}$ dan titik M(-1, 4), maka koordinat titik N adalah...", options: ["(2, 2)", "(4, -6)", "(-4, 6)", "(2, 6)"], correct: 0, explanation: "Kita tahu $\\vec{MN} = \\vec{n} - \\vec{m}$. Maka $\\vec{n} = \\vec{MN} + \\vec{m} = \\begin{pmatrix} 3 \\\\ -2 \\end{pmatrix} + \\begin{pmatrix} -1 \\\\ 4 \\end{pmatrix} = \\begin{pmatrix} 3-1 \\\\ -2+4 \\end{pmatrix} = \\begin{pmatrix} 2 \\\\ 2 \\end{pmatrix}$. Jadi, koordinat N adalah (2, 2)." }
+        ];
+
+        // --- SCRIPT KUIS INTERAKTIF ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const quizContainer = document.getElementById("quiz-container");
+            if (!quizContainer) return;
+
+            quizzes.forEach((quiz, index) => {
+                const quizEl = document.createElement("div");
+                quizEl.className = "quiz-accordion";
+                const optionsHtml = quiz.options.map((opt, i) => 
+                    `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                ).join("");
+                quizEl.innerHTML = `
+                    <button class="quiz-accordion-button">
+                        <span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="quiz-accordion-content hidden">
+                        <p class="question-text">${quiz.q}</p>
+                        <div class="options-container">${optionsHtml}</div>
+                        <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                    </div>`;
+                quizContainer.appendChild(quizEl);
+            });
+
+            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+            accordionButtons.forEach(clickedButton => {
+                clickedButton.addEventListener('click', () => {
+                    const content = clickedButton.nextElementSibling;
+                    const isOpening = content.classList.contains('hidden');
+
+                    accordionButtons.forEach(button => {
+                        if (button !== clickedButton) {
+                            button.classList.remove('active');
+                            button.nextElementSibling.classList.add('hidden');
+                        }
+                    });
+
+                    clickedButton.classList.toggle('active');
+                    content.classList.toggle('hidden');
+
+                    if (isOpening && window.MathJax) {
+                        MathJax.typesetPromise([content]);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('wrong');
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) {
+                            correctOption.classList.add('correct');
+                        }
+                    }
+                    if (window.MathJax) {
+                        MathJax.typesetPromise([explanation]);
+                    }
+                });
+            });
+            
+            // Panggil MathJax untuk pertama kali memuat semua label di foreignObjects
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        });
+    </script>
+</body>
+</html>
