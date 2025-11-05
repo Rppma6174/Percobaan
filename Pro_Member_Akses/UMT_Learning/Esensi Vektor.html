@@ -41,7 +41,6 @@
         .hidden { display: none; }
         ul { padding-left: 20px; }
         li { margin-bottom: 0.5rem; }
-        
         .diagram-container {
             display: flex;
             flex-direction: column;
@@ -55,9 +54,7 @@
             overflow-x: auto;
         }
         .diagram-container svg { max-width: 100%; }
-        /* Teks biasa di dalam SVG */
         .diagram-container svg text { font-size: 14px; fill: var(--text-primary); }
-        /* Caption di bawah SVG */
         .diagram-container p { font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem; }
 
         .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
@@ -109,24 +106,14 @@
             Dalam fisika dan matematika, ada dua jenis besaran yang sering kita temui. Memahami perbedaannya adalah kunci untuk memahami "mengapa" vektor itu ada.
         </p>
         <ul>
-            <li>
-                <strong>Skalar:</strong> Besaran yang cukup dinyatakan dengan <strong>satu angka (nilai)</strong> saja.
-                <br>Contoh: Suhu (30°C), Massa (60 kg), Jarak (10 km), Laju (80 km/jam).
-            </li>
-            <li>
-                <strong>Vektor:</strong> Besaran yang baru lengkap jika memiliki <strong>dua informasi: nilai (besaran) dan arah.</strong>
-                <br>Contoh: Perpindahan (10 km <strong>ke Timur</strong>), Kecepatan (80 km/jam <strong>ke Utara</strong>), Gaya (20 Newton <strong>ke bawah</strong>).
-            </li>
+            <li><strong>Skalar:</strong> Besaran yang hanya memiliki <strong>nilai</strong>. (Contoh: Massa 60 kg, Suhu 30°C).</li>
+            <li><strong>Vektor:</strong> Besaran yang memiliki <strong>nilai dan arah</strong>. (Contoh: Kecepatan 80 km/jam <strong>ke Utara</strong>).</li>
         </ul>
 
         <h2>Representasi Geometris & Notasi</h2>
         <p>
-            Secara geometris, cara termudah untuk merepresentasikan vektor adalah dengan <strong>ruas garis berarah</strong> (panah).
+            Secara geometris, vektor direpresentasikan sebagai <strong>ruas garis berarah</strong> (panah).
         </p>
-        <ul>
-            <li><strong>Besaran (Magnitudo):</strong> Diwakili oleh <strong>panjang</strong> panah.</li>
-            <li><strong>Arah:</strong> Diwakili oleh <strong>ujung panah</strong> menunjuk ke mana.</li>
-        </ul>
         <div class="diagram-container">
             <svg width="300" height="150" viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -139,7 +126,6 @@
                 <text x="45" y="120" font-size="14" fill="#f0f0f0">A (Pangkal)</text>
                 <circle cx="250" cy="50" r="4" fill="#f0f0f0" />
                 <text x="245" y="40" font-size="14" fill="#f0f0f0">B (Ujung)</text>
-                
                 <foreignObject x="140" y="55" width="50" height="40">
                     <div xmlns="http://www.w3.org/1999/xhtml" style="color: #58a6ff; font-size: 16px; font-weight: bold;">
                         $\vec{u}$
@@ -148,15 +134,10 @@
             </svg>
             <p>Vektor $\vec{u}$ atau $\vec{AB}$ dari titik pangkal A ke titik ujung B.</p>
         </div>
-        <p>Notasi vektor bisa ditulis dengan beberapa cara:</p>
-        <ul>
-            <li>Huruf kecil bercetak tebal: $\mathbf{u}$ (Sering di buku cetak)</li>
-            <li>Huruf kecil dengan panah di atas: $\vec{u}$ (Umum dalam tulisan tangan)</li>
-            <li>Menyebutkan titik pangkal dan ujung: $\vec{AB}$ (Artinya "dari A ke B")</li>
-        </ul>
+        <p>Notasi vektor bisa ditulis sebagai $\mathbf{u}$, $\vec{u}$, atau $\vec{AB}$.</p>
 
         <h2>Kesamaan Dua Vektor</h2>
-        <p>Dua vektor dikatakan <strong>sama</strong> jika dan hanya jika keduanya memiliki <strong>BESARAN yang sama</strong> dan <strong>ARAH yang sama</strong>. Posisi (titik pangkal) tidak menjadi masalah.</p>
+        <p>Dua vektor dikatakan <strong>sama</strong> jika keduanya memiliki <strong>BESARAN yang sama</strong> dan <strong>ARAH yang sama</strong>. Posisi tidak menjadi masalah.</p>
         <div class="diagram-container">
             <svg width="300" height="150" viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
                 <defs>
@@ -165,36 +146,29 @@
                     </marker>
                 </defs>
                 <line x1="50" y1="50" x2="200" y2="50" stroke="#39D353" stroke-width="3" marker-end="url(#arrowhead-green-v)" />
-                <foreignObject x="115" y="20" width="50" height="40">
-                     <div xmlns="http://www.w3.org/1999/xhtml" style="color: #39D353; font-size: 16px; font-weight: bold;">$\vec{v}$</div>
-                </foreignObject>
+                <foreignObject x="115" y="20" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #39D353; font-size: 16px; font-weight: bold;">$\vec{v}$</div></foreignObject>
                 <line x1="80" y1="100" x2="230" y2="100" stroke="#39D353" stroke-width="3" marker-end="url(#arrowhead-green-v)" />
-                <foreignObject x="145" y="70" width="50" height="40">
-                     <div xmlns="http://www.w3.org/1999/xhtml" style="color: #39D353; font-size: 16px; font-weight: bold;">$\vec{w}$</div>
-                </foreignObject>
+                <foreignObject x="145" y="70" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #39D353; font-size: 16px; font-weight: bold;">$\vec{w}$</div></foreignObject>
             </svg>
             <p>$\vec{v} = \vec{w}$ (Panjang & Arah Sama, Posisi Berbeda)</p>
         </div>
 
         <h2>Operasi Geometris Vektor</h2>
-        <p>Kita bisa menjumlahkan, mengurangi, dan mengalikan vektor dengan skalar (angka) secara visual.</p>
         
         <h3>Penjumlahan Vektor (Metode Segitiga)</h3>
-        <p>Untuk menghitung $\vec{a} + \vec{b}$, kita "menyambungkan" perjalanannya. Letakkan pangkal vektor $\vec{b}$ di ujung vektor $\vec{a}$. Hasilnya (resultan) adalah vektor baru dari pangkal $\vec{a}$ ke ujung $\vec{b}$.</p>
+        <p>Untuk menghitung $\vec{a} + \vec{b}$, kita "menyambungkan" perjalanannya. Letakkan pangkal $\vec{b}$ di ujung $\vec{a}$. Hasilnya adalah vektor dari pangkal $\vec{a}$ ke ujung $\vec{b}$.</p>
         <div class="diagram-container">
             <svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
                 <defs>
-                    <marker id="arrow-a" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#2F81F7"/></marker>
-                    <marker id="arrow-b" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#39D353"/></marker>
-                    <marker id="arrow-c" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#F85149"/></marker>
+                    <marker id="arrow-a-sum" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#2F81F7"/></marker>
+                    <marker id="arrow-b-sum" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#39D353"/></marker>
+                    <marker id="arrow-c-sum" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#F85149"/></marker>
                 </defs>
-                <line x1="50" y1="150" x2="180" y2="150" stroke="#2F81F7" stroke-width="3" marker-end="url(#arrow-a)" />
+                <line x1="50" y1="150" x2="180" y2="150" stroke="#2F81F7" stroke-width="3" marker-end="url(#arrow-a-sum)" />
                 <foreignObject x="105" y="155" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #2F81F7; font-size: 16px;">$\vec{a}$</div></foreignObject>
-                
-                <line x1="180" y1="150" x2="230" y2="80" stroke="#39D353" stroke-width="3" marker-end="url(#arrow-b)" />
+                <line x1="180" y1="150" x2="230" y2="80" stroke="#39D353" stroke-width="3" marker-end="url(#arrow-b-sum)" />
                 <foreignObject x="210" y="105" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #39D353; font-size: 16px;">$\vec{b}$</div></foreignObject>
-                
-                <line x1="50" y1="150" x2="230" y2="80" stroke="#F85149" stroke-width="3" marker-end="url(#arrow-c)" stroke-dasharray="4"/>
+                <line x1="50" y1="150" x2="230" y2="80" stroke="#F85149" stroke-width="3" marker-end="url(#arrow-c-sum)" stroke-dasharray="4"/>
                 <foreignObject x="120" y="95" width="100" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #F85149; font-size: 16px; font-weight: bold;">$\vec{a} + \vec{b}$</div></foreignObject>
             </svg>
         </div>
@@ -202,6 +176,30 @@
         <h3>Pengurangan Vektor</h3>
         <p>Pengurangan $\vec{a} - \vec{b}$ sama artinya dengan $\vec{a} + (-\vec{b})$. Vektor $-\vec{b}$ adalah vektor yang besarnya sama dengan $\vec{b}$ namun arahnya berlawanan 180°.</p>
         
+        <div class="diagram-container">
+            <svg width="300" height="250" viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrow-a-sub" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#2F81F7"/></marker>
+                    <marker id="arrow-b-sub" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#39D353"/></marker>
+                    <marker id="arrow-negb-sub" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#F85149"/></marker>
+                    <marker id="arrow-res-sub" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#58a6ff"/></marker>
+                </defs>
+
+                <line x1="50" y1="150" x2="180" y2="150" stroke="#2F81F7" stroke-width="3" marker-end="url(#arrow-a-sub)" />
+                <foreignObject x="105" y="155" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #2F81F7; font-size: 16px;">$\vec{a}$</div></foreignObject>
+                
+                <line x1="180" y1="150" x2="130" y2="80" stroke="#F85149" stroke-width="3" marker-end="url(#arrow-negb-sub)" />
+                <foreignObject x="155" y="95" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #F85149; font-size: 16px;">$-\vec{b}$</div></foreignObject>
+
+                <line x1="180" y1="150" x2="230" y2="220" stroke="#39D353" stroke-width="2" marker-end="url(#arrow-b-sub)" stroke-dasharray="4"/>
+                <foreignObject x="210" y="170" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #39D353; font-size: 16px;">$\vec{b}$</div></foreignObject>
+
+                <line x1="50" y1="150" x2="130" y2="80" stroke="#58a6ff" stroke-width="3" marker-end="url(#arrow-res-sub)" stroke-dasharray="4"/>
+                <foreignObject x="50" y="90" width="100" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #58a6ff; font-size: 16px; font-weight: bold;">$\vec{a} - \vec{b}$</div></foreignObject>
+            </svg>
+             <p>Pengurangan $\vec{a} - \vec{b}$ sama dengan $\vec{a} + (-\vec{b})$.</p>
+        </div>
+
         <h3>Perkalian Skalar</h3>
         <p>Mengalikan vektor $\vec{v}$ dengan skalar (angka) $k$ akan menghasilkan vektor baru:</p>
         <ul>
@@ -239,7 +237,7 @@
             { q: "Manakah dari berikut ini yang merupakan besaran skalar?", options: ["Kecepatan (80 km/jam ke utara)", "Perpindahan (10 meter ke timur)", "Massa (75 kg)", "Gaya (10 Newton ke bawah)"], correct: 2, explanation: "Massa hanya memiliki nilai (75 kg) dan tidak memiliki arah. Besaran lain seperti kecepatan, perpindahan, dan gaya adalah vektor karena mereka memiliki nilai dan arah." },
             { q: "Vektor $\\vec{PQ}$ memiliki...", options: ["Titik pangkal P dan titik ujung Q", "Titik pangkal Q dan titik ujung P", "Panjang P dan arah Q", "Panjang Q dan arah P"], correct: 0, explanation: "Notasi $\\vec{PQ}$ selalu dibaca sebagai vektor yang dimulai dari titik P (pangkal) dan berakhir di titik Q (ujung)." },
             { q: "Dua vektor dikatakan sama jika...", options: ["Titik pangkalnya sama", "Panjangnya sama, walau arah berbeda", "Arahnya sama, walau panjang berbeda", "Panjang dan arahnya sama, walau posisinya berbeda"], correct: 3, explanation: "Kesamaan vektor hanya bergantung pada besaran (panjang) dan arah. Vektor yang sama bisa digambar di mana saja." },
-            { q: "Secara geometris, $\\vec{u} - \\vec{v}$ ekuivalen dengan...", options: ["$\\vec{u} + (\\vec{v})$", "$\\vec{v} - \\vec{u}$", "$\\vec{u} + (-\\vec{v})$", "$-(\\vec{u} + \\vec{v})$"], correct: 2, explanation: "Pengurangan vektor adalah operasi penjumlahan dengan vektor negatifnya. Vektor negatif $(-\\vec{v})$ adalah vektor yang sama panjang dengan $\\vec{v}$ namun arahnya berlawanan." },
+            { q: "Secara geometris, $\\vec{u} - \\vec{v}$ ekuivalen dengan...", options: ["$\\vec{u} + (\\vec{v})$", "$\\vec{v} - \\vec{u}$", "$\\vec{u} + (-\\vec{v})$", "$-(\\vec{u} + \\vec{v})$"], correct: 2, explanation: "Pengurangan vektor adalah operasi penjumlahan dengan vektor negatifnya. Vektor negatif (-\\vec{v}) adalah vektor yang sama panjang dengan \\vec{v} namun arahnya berlawanan." },
             { q: "Jika $\\vec{a}$ adalah vektor ke atas sepanjang 5 cm, maka $-2\\vec{a}$ adalah...", options: ["Vektor ke atas sepanjang 10 cm", "Vektor ke bawah sepanjang 5 cm", "Vektor ke bawah sepanjang 10 cm", "Vektor ke kiri sepanjang 10 cm"], correct: 2, explanation: "Angka 2 membuatnya 2x lebih panjang (menjadi 10 cm). Tanda negatif membalik arahnya (dari atas menjadi ke bawah)." }
         ];
 
@@ -309,6 +307,11 @@
                     }
                 });
             });
+            
+            // Panggil MathJax untuk pertama kali memuat semua label di foreignObjects
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
         });
     </script>
 </body>
