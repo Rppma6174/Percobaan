@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esensi Vektor - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png"> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { 
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } 
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2, h3 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        h3 { color: #58a6ff; margin-top: 2rem; }
+        .hidden { display: none; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 0.5rem; }
+        
+        .diagram-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-main);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            margin-top: 1rem;
+            overflow-x: auto;
+        }
+        .diagram-container svg { max-width: 100%; }
+        /* Teks biasa di dalam SVG */
+        .diagram-container svg text { font-size: 14px; fill: var(--text-primary); }
+        /* Caption di bawah SVG */
+        .diagram-container p { font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem; }
+
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold;
+        }
+        .quiz-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1);
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        p, li, .quiz-explanation {
+            overflow-x: auto; padding-bottom: 8px;
+        }
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <h1>Esensi Vektor: Besaran & Arah</h1>
+        <p>
+            Dalam fisika dan matematika, ada dua jenis besaran yang sering kita temui. Memahami perbedaannya adalah kunci untuk memahami "mengapa" vektor itu ada.
+        </p>
+        <ul>
+            <li>
+                <strong>Skalar:</strong> Besaran yang cukup dinyatakan dengan <strong>satu angka (nilai)</strong> saja.
+                <br>Contoh: Suhu (30°C), Massa (60 kg), Jarak (10 km), Laju (80 km/jam).
+            </li>
+            <li>
+                <strong>Vektor:</strong> Besaran yang baru lengkap jika memiliki <strong>dua informasi: nilai (besaran) dan arah.</strong>
+                <br>Contoh: Perpindahan (10 km <strong>ke Timur</strong>), Kecepatan (80 km/jam <strong>ke Utara</strong>), Gaya (20 Newton <strong>ke bawah</strong>).
+            </li>
+        </ul>
+
+        <h2>Representasi Geometris & Notasi</h2>
+        <p>
+            Secara geometris, cara termudah untuk merepresentasikan vektor adalah dengan <strong>ruas garis berarah</strong> (panah).
+        </p>
+        <ul>
+            <li><strong>Besaran (Magnitudo):</strong> Diwakili oleh <strong>panjang</strong> panah.</li>
+            <li><strong>Arah:</strong> Diwakili oleh <strong>ujung panah</strong> menunjuk ke mana.</li>
+        </ul>
+        <div class="diagram-container">
+            <svg width="300" height="150" viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrowhead-cyan" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#2F81F7"/>
+                    </marker>
+                </defs>
+                <line x1="50" y1="100" x2="250" y2="50" stroke="#2F81F7" stroke-width="3" marker-end="url(#arrowhead-cyan)" />
+                <circle cx="50" cy="100" r="4" fill="#f0f0f0" />
+                <text x="45" y="120" font-size="14" fill="#f0f0f0">A (Pangkal)</text>
+                <circle cx="250" cy="50" r="4" fill="#f0f0f0" />
+                <text x="245" y="40" font-size="14" fill="#f0f0f0">B (Ujung)</text>
+                
+                <foreignObject x="140" y="55" width="50" height="40">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="color: #58a6ff; font-size: 16px; font-weight: bold;">
+                        $\vec{u}$
+                    </div>
+                </foreignObject>
+            </svg>
+            <p>Vektor $\vec{u}$ atau $\vec{AB}$ dari titik pangkal A ke titik ujung B.</p>
+        </div>
+        <p>Notasi vektor bisa ditulis dengan beberapa cara:</p>
+        <ul>
+            <li>Huruf kecil bercetak tebal: $\mathbf{u}$ (Sering di buku cetak)</li>
+            <li>Huruf kecil dengan panah di atas: $\vec{u}$ (Umum dalam tulisan tangan)</li>
+            <li>Menyebutkan titik pangkal dan ujung: $\vec{AB}$ (Artinya "dari A ke B")</li>
+        </ul>
+
+        <h2>Kesamaan Dua Vektor</h2>
+        <p>Dua vektor dikatakan <strong>sama</strong> jika dan hanya jika keduanya memiliki <strong>BESARAN yang sama</strong> dan <strong>ARAH yang sama</strong>. Posisi (titik pangkal) tidak menjadi masalah.</p>
+        <div class="diagram-container">
+            <svg width="300" height="150" viewBox="0 0 300 150" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrowhead-green-v" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                        <polygon points="0 0, 10 3.5, 0 7" fill="#39D353"/>
+                    </marker>
+                </defs>
+                <line x1="50" y1="50" x2="200" y2="50" stroke="#39D353" stroke-width="3" marker-end="url(#arrowhead-green-v)" />
+                <foreignObject x="115" y="20" width="50" height="40">
+                     <div xmlns="http://www.w3.org/1999/xhtml" style="color: #39D353; font-size: 16px; font-weight: bold;">$\vec{v}$</div>
+                </foreignObject>
+                <line x1="80" y1="100" x2="230" y2="100" stroke="#39D353" stroke-width="3" marker-end="url(#arrowhead-green-v)" />
+                <foreignObject x="145" y="70" width="50" height="40">
+                     <div xmlns="http://www.w3.org/1999/xhtml" style="color: #39D353; font-size: 16px; font-weight: bold;">$\vec{w}$</div>
+                </foreignObject>
+            </svg>
+            <p>$\vec{v} = \vec{w}$ (Panjang & Arah Sama, Posisi Berbeda)</p>
+        </div>
+
+        <h2>Operasi Geometris Vektor</h2>
+        <p>Kita bisa menjumlahkan, mengurangi, dan mengalikan vektor dengan skalar (angka) secara visual.</p>
+        
+        <h3>Penjumlahan Vektor (Metode Segitiga)</h3>
+        <p>Untuk menghitung $\vec{a} + \vec{b}$, kita "menyambungkan" perjalanannya. Letakkan pangkal vektor $\vec{b}$ di ujung vektor $\vec{a}$. Hasilnya (resultan) adalah vektor baru dari pangkal $\vec{a}$ ke ujung $\vec{b}$.</p>
+        <div class="diagram-container">
+            <svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrow-a" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#2F81F7"/></marker>
+                    <marker id="arrow-b" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#39D353"/></marker>
+                    <marker id="arrow-c" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#F85149"/></marker>
+                </defs>
+                <line x1="50" y1="150" x2="180" y2="150" stroke="#2F81F7" stroke-width="3" marker-end="url(#arrow-a)" />
+                <foreignObject x="105" y="155" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #2F81F7; font-size: 16px;">$\vec{a}$</div></foreignObject>
+                
+                <line x1="180" y1="150" x2="230" y2="80" stroke="#39D353" stroke-width="3" marker-end="url(#arrow-b)" />
+                <foreignObject x="210" y="105" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #39D353; font-size: 16px;">$\vec{b}$</div></foreignObject>
+                
+                <line x1="50" y1="150" x2="230" y2="80" stroke="#F85149" stroke-width="3" marker-end="url(#arrow-c)" stroke-dasharray="4"/>
+                <foreignObject x="120" y="95" width="100" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #F85149; font-size: 16px; font-weight: bold;">$\vec{a} + \vec{b}$</div></foreignObject>
+            </svg>
+        </div>
+
+        <h3>Pengurangan Vektor</h3>
+        <p>Pengurangan $\vec{a} - \vec{b}$ sama artinya dengan $\vec{a} + (-\vec{b})$. Vektor $-\vec{b}$ adalah vektor yang besarnya sama dengan $\vec{b}$ namun arahnya berlawanan 180°.</p>
+        
+        <h3>Perkalian Skalar</h3>
+        <p>Mengalikan vektor $\vec{v}$ dengan skalar (angka) $k$ akan menghasilkan vektor baru:</p>
+        <ul>
+            <li>Jika $k > 0$ (misal $2\vec{v}$), arahnya sama, panjangnya menjadi $k$ kali lipat.</li>
+            <li>Jika $k < 0$ (misal $-\vec{v}$), arahnya berlawanan, panjangnya menjadi $|k|$ kali lipat.</li>
+        </ul>
+        <div class="diagram-container">
+            <svg width="350" height="150" viewBox="0 0 350 150" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrow-k" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#58a6ff"/></marker>
+                </defs>
+                <line x1="20" y1="30" x2="120" y2="30" stroke="#58a6ff" stroke-width="2" marker-end="url(#arrow-k)" />
+                <foreignObject x="60" y="0" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #ccc; font-size: 14px;">$\vec{v}$</div></foreignObject>
+                
+                <line x1="20" y1="75" x2="220" y2="75" stroke="#58a6ff" stroke-width="2" marker-end="url(#arrow-k)" />
+                <foreignObject x="110" y="45" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #ccc; font-size: 14px;">$2\vec{v}$</div></foreignObject>
+                
+                <line x1="120" y1="120" x2="20" y2="120" stroke="#58a6ff" stroke-width="2" marker-end="url(#arrow-k)" />
+                <foreignObject x="60" y="125" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #ccc; font-size: 14px;">$-\vec{v}$</div></foreignObject>
+            </svg>
+        </div>
+
+        <h2>Uji Pemahaman</h2>
+        <p>Pilih jawaban yang paling tepat untuk menguji pemahaman Anda tentang esensi vektor.</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Cek session, sesuaikan dengan sistem login Anda
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+
+        const quizzes = [
+            { q: "Manakah dari berikut ini yang merupakan besaran skalar?", options: ["Kecepatan (80 km/jam ke utara)", "Perpindahan (10 meter ke timur)", "Massa (75 kg)", "Gaya (10 Newton ke bawah)"], correct: 2, explanation: "Massa hanya memiliki nilai (75 kg) dan tidak memiliki arah. Besaran lain seperti kecepatan, perpindahan, dan gaya adalah vektor karena mereka memiliki nilai dan arah." },
+            { q: "Vektor $\\vec{PQ}$ memiliki...", options: ["Titik pangkal P dan titik ujung Q", "Titik pangkal Q dan titik ujung P", "Panjang P dan arah Q", "Panjang Q dan arah P"], correct: 0, explanation: "Notasi $\\vec{PQ}$ selalu dibaca sebagai vektor yang dimulai dari titik P (pangkal) dan berakhir di titik Q (ujung)." },
+            { q: "Dua vektor dikatakan sama jika...", options: ["Titik pangkalnya sama", "Panjangnya sama, walau arah berbeda", "Arahnya sama, walau panjang berbeda", "Panjang dan arahnya sama, walau posisinya berbeda"], correct: 3, explanation: "Kesamaan vektor hanya bergantung pada besaran (panjang) dan arah. Vektor yang sama bisa digambar di mana saja." },
+            { q: "Secara geometris, $\\vec{u} - \\vec{v}$ ekuivalen dengan...", options: ["$\\vec{u} + (\\vec{v})$", "$\\vec{v} - \\vec{u}$", "$\\vec{u} + (-\\vec{v})$", "$-(\\vec{u} + \\vec{v})$"], correct: 2, explanation: "Pengurangan vektor adalah operasi penjumlahan dengan vektor negatifnya. Vektor negatif $(-\\vec{v})$ adalah vektor yang sama panjang dengan $\\vec{v}$ namun arahnya berlawanan." },
+            { q: "Jika $\\vec{a}$ adalah vektor ke atas sepanjang 5 cm, maka $-2\\vec{a}$ adalah...", options: ["Vektor ke atas sepanjang 10 cm", "Vektor ke bawah sepanjang 5 cm", "Vektor ke bawah sepanjang 10 cm", "Vektor ke kiri sepanjang 10 cm"], correct: 2, explanation: "Angka 2 membuatnya 2x lebih panjang (menjadi 10 cm). Tanda negatif membalik arahnya (dari atas menjadi ke bawah)." }
+        ];
+
+        // --- SCRIPT KUIS INTERAKTIF ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const quizContainer = document.getElementById("quiz-container");
+            if (!quizContainer) return;
+
+            quizzes.forEach((quiz, index) => {
+                const quizEl = document.createElement("div");
+                quizEl.className = "quiz-accordion";
+                const optionsHtml = quiz.options.map((opt, i) => 
+                    `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                ).join("");
+                quizEl.innerHTML = `
+                    <button class="quiz-accordion-button">
+                        <span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="quiz-accordion-content hidden">
+                        <p class="question-text">${quiz.q}</p>
+                        <div class="options-container">${optionsHtml}</div>
+                        <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                    </div>`;
+                quizContainer.appendChild(quizEl);
+            });
+
+            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+            accordionButtons.forEach(clickedButton => {
+                clickedButton.addEventListener('click', () => {
+                    const content = clickedButton.nextElementSibling;
+                    const isOpening = content.classList.contains('hidden');
+
+                    accordionButtons.forEach(button => {
+                        if (button !== clickedButton) {
+                            button.classList.remove('active');
+                            button.nextElementSibling.classList.add('hidden');
+                        }
+                    });
+
+                    clickedButton.classList.toggle('active');
+                    content.classList.toggle('hidden');
+
+                    if (isOpening && window.MathJax) {
+                        MathJax.typesetPromise([content]);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('wrong');
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) {
+                            correctOption.classList.add('correct');
+                        }
+                    }
+                    if (window.MathJax) {
+                        MathJax.typesetPromise([explanation]);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
