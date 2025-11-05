@@ -664,7 +664,7 @@ const allContentData = {
             id: 'materi_vektor_02', 
             title: 'Vektor Posisi', 
             type: 'HTML Document', 
-            filePath: 'UMT_Learning/Vektor Posisi.hthml', 
+            filePath: 'UMT_Learning/Vektor Posisi.html', 
             fileType: 'html' 
             },
             { 
