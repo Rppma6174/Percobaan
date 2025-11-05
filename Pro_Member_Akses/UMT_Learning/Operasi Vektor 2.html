@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operasi Vektor: Perkalian Skalar - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png"> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { 
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } 
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2, h3 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        h3 { color: #58a6ff; margin-top: 2rem; }
+        .hidden { display: none; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 0.5rem; }
+        .diagram-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-main);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            margin-top: 1rem;
+            overflow-x: auto;
+        }
+        .diagram-container svg { max-width: 100%; }
+        .diagram-container svg text { font-size: 14px; fill: var(--text-primary); }
+        .diagram-container p { font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem; }
+
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold;
+        }
+        .quiz-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1);
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        p, li, .quiz-explanation {
+            overflow-x: auto; padding-bottom: 8px;
+        }
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <h1>Operasi Vektor: Perkalian Skalar</h1>
+        <p>
+            Selain menjumlahkan dan mengurangi vektor, kita juga dapat mengubah skala sebuah vektor. Operasi ini disebut <strong>Perkalian Skalar</strong>, yaitu perkalian sebuah vektor (besaran dan arah) dengan sebuah skalar (angka biasa).
+        </p>
+        <p>
+            Operasi ini secara intuitif berarti: "Ambil sebuah vektor, lalu perpanjang, perpendek, atau balik arahnya."
+        </p>
+
+        <h2>Definisi Geometris dan Aljabar</h2>
+        <p>
+            Jika $\vec{v}$ adalah sebuah vektor dan $k$ adalah sebuah skalar (angka real), maka $k\vec{v}$ adalah sebuah vektor baru di mana:
+        </p>
+        <ul>
+            <li><strong>Besarnya (Panjangnya):</strong> $|k|$ (nilai mutlak $k$) dikali panjang $\vec{v}$.</li>
+            <li><strong>Arahnya:</strong>
+                <ul>
+                    <li>Sama dengan $\vec{v}$ jika $k > 0$ (positif).</li>
+                    <li>Berlawanan 180° dengan $\vec{v}$ jika $k < 0$ (negatif).</li>
+                    <li>Menjadi vektor nol ($\vec{0}$) jika $k = 0$.</li>
+                </ul>
+            </li>
+        </ul>
+        <div class="diagram-container">
+            <svg width="350" height="200" viewBox="0 0 350 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrow-k" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#58a6ff"/></marker>
+                    <marker id="arrow-k-neg" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#F85149"/></marker>
+                </defs>
+                <line x1="20" y1="30" x2="120" y2="30" stroke="#58a6ff" stroke-width="2" marker-end="url(#arrow-k)" />
+                <foreignObject x="60" y="0" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #ccc; font-size: 14px;">$\vec{v}$</div></foreignObject>
+                
+                <line x1="20" y1="75" x2="220" y2="75" stroke="#58a6ff" stroke-width="2" marker-end="url(#arrow-k)" />
+                <foreignObject x="110" y="45" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #ccc; font-size: 14px;">$2\vec{v}$</div></foreignObject>
+                
+                <line x1="120" y1="120" x2="20" y2="120" stroke="#F85149" stroke-width="2" marker-end="url(#arrow-k-neg)" />
+                <foreignObject x="60" y="125" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #ccc; font-size: 14px;">$-\vec{v}$</div></foreignObject>
+
+                <line x1="170" y1="170" x2="20" y2="170" stroke="#F85149" stroke-width="2" marker-end="url(#arrow-k-neg)" />
+                <foreignObject x="85" y="175" width="60" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #ccc; font-size: 14px;">$-1.5\vec{v}$</div></foreignObject>
+            </svg>
+            <p>Visualisasi perkalian skalar: $2\vec{v}$ (searah, 2x panjang), $-\vec{v}$ (berlawanan arah, 1x panjang).</p>
+        </div>
+
+        <h3>Secara Aljabar (Vektor Kolom)</h3>
+        <p>
+            Jika kita bekerja dengan vektor posisi atau komponen, operasinya menjadi sangat mudah. Cukup kalikan setiap komponen vektor dengan skalar $k$.
+        </p>
+        <p>Jika $\vec{v} = \begin{pmatrix} x \\ y \end{pmatrix}$, maka:</p>
+        $$ k\vec{v} = k \begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} kx \\ ky \end{pmatrix} $$
+        <p>Ini juga berlaku untuk vektor di R³ (3 Dimensi):</p>
+        $$ k \begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} kx \\ ky \\ kz \end{pmatrix} $$
+
+        <h2>Sifat-Sifat Perkalian Skalar</h2>
+        <p>
+            Sifat-sifat ini sangat intuitif dan mirip dengan aljabar biasa, di mana $k$ dan $m$ adalah skalar, sementara $\vec{u}$ dan $\vec{v}$ adalah vektor:
+        </p>
+        <ul>
+            <li><strong>Sifat Distributif 1:</strong> $k(\vec{u} + \vec{v}) = k\vec{u} + k\vec{v}$</li>
+            <li><strong>Sifat Distributif 2:</strong> $(k + m)\vec{u} = k\vec{u} + m\vec{u}$</li>
+            <li><strong>Sifat Asosiatif:</strong> $(km)\vec{u} = k(m\vec{u})$</li>
+            <li><strong>Sifat Identitas:</strong> $1 \cdot \vec{u} = \vec{u}$</li>
+        </ul>
+
+        <h2>Penerapan Penting: Vektor Kolinear (Segaris)</h2>
+        <p>
+            Perkalian skalar adalah alat utama untuk menentukan apakah dua vektor segaris (kolinear).
+        </p>
+        <blockquote>
+            Dua vektor $\vec{a}$ dan $\vec{b}$ (yang bukan vektor nol) adalah <strong>segaris atau sejajar</strong> jika dan hanya jika $\vec{a}$ adalah kelipatan skalar dari $\vec{b}$.
+            $$ \vec{a} = k \cdot \vec{b} \quad \text{(untuk suatu skalar } k \neq 0 \text{)} $$
+        </blockquote>
+        <p>
+            Jika $k$ positif, mereka searah. Jika $k$ negatif, mereka berlawanan arah.
+        </p>
+        <p>
+            Ini juga berlaku untuk tiga titik: Titik A, B, dan C segaris (kolinear) jika $\vec{AB} = k \cdot \vec{BC}$ (atau $\vec{AC} = k \cdot \vec{AB}$, dll).
+        </p>
+
+        <h2>Konsep Penting: Vektor Nol ($\vec{0}$)</h2>
+        <p>
+            Anda melihat pada aturan di atas bahwa jika skalar $k=0$, hasilnya adalah $\vec{0}$. Ini adalah <strong>Vektor Nol</strong>, sebuah konsep yang sangat penting.
+        </p>
+        <p>
+            Sama seperti angka '0' dalam aljabar biasa, vektor nol adalah <strong>identitas untuk penjumlahan vektor</strong>. Artinya, vektor apapun yang ditambah dengan vektor nol tidak akan berubah:
+        </p>
+        $$ \vec{v} + \vec{0} = \vec{v} $$
+        
+        <h3>Apa Sebenarnya Vektor Nol Itu?</h3>
+        <p>
+            Secara intuitif (gaya UMT), jika vektor adalah "perpindahan", maka vektor nol adalah <strong>"perpindahan nol"</strong>. Ini adalah instruksi untuk "tidak bergerak sama sekali".
+        </p>
+        <p>
+            Dari sini, kita bisa menyimpulkan dua sifat uniknya:
+        </p>
+        <ul>
+            <li><strong>Besaran (Panjang):</strong> Vektor nol memiliki panjang <strong>nol</strong>.</li>
+            <li><strong>Arah:</strong> Karena tidak ada pergerakan, vektor nol <strong>tidak memiliki arah yang terdefinisi</strong>.</li>
+        </ul>
+        
+        <h3>Notasi Aljabar</h3>
+        <p>
+            Secara aljabar, vektor nol adalah vektor yang semua komponennya adalah nol.
+        </p>
+        <p>
+            Di R² (2D): $\vec{0} = \begin{pmatrix} 0 \\ 0 \end{pmatrix}$
+            <span style="margin: 0 20px;"></span>
+            Di R³ (3D): $\vec{0} = \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}$
+        </p>
+        
+        <h3>Bagaimana Vektor Nol Terbentuk?</h3>
+        <ul>
+            <li><strong>Perkalian Skalar:</strong> $0 \cdot \vec{v} = \vec{0}$ (Angka 0 dikali vektor apapun).</li>
+            <li><strong>Pengurangan:</strong> $\vec{v} - \vec{v} = \vec{0}$ (Vektor dikurangi dirinya sendiri).</li>
+            <li><strong>Vektor Posisi:</strong> $\vec{AA} = \vec{0}$ (Vektor dari titik A kembali ke titik A).</li>
+        </ul>
+        <p>Memahami vektor nol sangat penting karena ia berfungsi sama seperti angka '0' dalam memecahkan persamaan aljabar vektor.</p>
+
+        <h2>Uji Pemahaman</h2>
+        <p>Pilih jawaban yang paling tepat untuk menguji pemahaman Anda tentang perkalian skalar.</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Cek session, sesuaikan dengan sistem login Anda
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+
+        const quizzes = [
+            { q: "Jika $\\vec{v} = \\begin{pmatrix} 3 \\\\ -1 \\end{pmatrix}$, maka nilai dari $4\\vec{v}$ adalah...", options: ["$\\begin{pmatrix} 12 \\\\ -4 \\end{pmatrix}$", "$\\begin{pmatrix} 7 \\\\ 3 \\end{pmatrix}$", "$\\begin{pmatrix} 12 \\\\ -1 \\end{pmatrix}$", "$\\begin{pmatrix} 3 \\\\ -4 \\end{pmatrix}$"], correct: 0, explanation: "Kalikan setiap komponen di dalam vektor dengan skalar 4. $4 \\times 3 = 12$ dan $4 \\times -1 = -4$." },
+            { q: "Jika $\\vec{a}$ adalah sebuah vektor, maka vektor $-3\\vec{a}$ memiliki...", options: ["Arah yang sama dengan $\\vec{a}$, panjang 3 kali lipat.", "Arah yang berlawanan dengan $\\vec{a}$, panjang 3 kali lipat.", "Arah yang sama dengan $\\vec{a}$, panjang 1/3 kali lipat.", "Arah yang berlawanan dengan $\\vec{a}$, panjang 1/3 kali lipat."], correct: 1, explanation: "Tanda negatif (-) membalikkan arah (180°). Angka 3 membuat panjangnya menjadi 3 kali lipat." },
+            { q: "Dua vektor $\\vec{u}$ dan $\\vec{v}$ dikatakan kolinear (segaris) jika...", options: ["$\\vec{u} + \\vec{v} = 0$", "$\\vec{u} = k \\cdot \\vec{v}$ untuk suatu skalar $k$", "Keduanya memiliki titik pangkal yang sama", "Panjangnya sama"], correct: 1, explanation: "Kolinearitas (atau kesejajaran) secara formal didefinisikan sebagai satu vektor yang merupakan kelipatan skalar dari vektor lainnya." },
+            { q: "Manakah dari sifat berikut yang TIDAK berlaku untuk perkalian skalar?", options: ["$k(\\vec{u} + \\vec{v}) = k\\vec{u} + k\\vec{v}$", "$k + \\vec{u} = \\vec{u} + k$", "$(k + m)\\vec{u} = k\\vec{u} + m\\vec{u}$", "$1 \\cdot \\vec{u} = \\vec{u}$"], correct: 1, explanation: "Pilihan $k + \\vec{u}$ (penjumlahan skalar dengan vektor) adalah operasi yang tidak terdefinisi. Kita tidak bisa menambahkan 'angka biasa' dengan 'panah'." },
+            { q: "Diketahui $\\vec{p} = \\begin{pmatrix} 2 \\\\ -4 \\end{pmatrix}$ dan $\\vec{q} = \\begin{pmatrix} -1 \\\\ 2 \\end{pmatrix}$. Bagaimana hubungan antara $\\vec{p}$ dan $\\vec{q}$?", options: ["$\\vec{p} = 2\\vec{q}$", "$\\vec{p} = -2\\vec{q}$", "$\\vec{p} = -\\frac{1}{2}\\vec{q}$", "Tidak ada hubungan"], correct: 1, explanation: "Perhatikan bahwa $\\begin{pmatrix} 2 \\\\ -4 \\end{pmatrix} = -2 \\cdot \\begin{pmatrix} -1 \\\\ 2 \\end{pmatrix}$. Karena $\\vec{p} = k\\vec{q}$ dengan $k = -2$, maka kedua vektor ini kolinear dan berlawanan arah." }
+        ];
+
+        // --- SCRIPT KUIS INTERAKTIF ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const quizContainer = document.getElementById("quiz-container");
+            if (!quizContainer) return;
+
+            quizzes.forEach((quiz, index) => {
+                const quizEl = document.createElement("div");
+                quizEl.className = "quiz-accordion";
+                const optionsHtml = quiz.options.map((opt, i) => 
+                    `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                ).join("");
+                quizEl.innerHTML = `
+                    <button class="quiz-accordion-button">
+                        <span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="quiz-accordion-content hidden">
+                        <p class="question-text">${quiz.q}</p>
+                        <div class="options-container">${optionsHtml}</div>
+                        <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                    </div>`;
+                quizContainer.appendChild(quizEl);
+            });
+
+            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+            accordionButtons.forEach(clickedButton => {
+                clickedButton.addEventListener('click', () => {
+                    const content = clickedButton.nextElementSibling;
+                    const isOpening = content.classList.contains('hidden');
+
+                    accordionButtons.forEach(button => {
+                        if (button !== clickedButton) {
+                            button.classList.remove('active');
+                            button.nextElementSibling.classList.add('hidden');
+                        }
+                    });
+
+                    clickedButton.classList.toggle('active');
+                    content.classList.toggle('hidden');
+
+                    if (isOpening && window.MathJax) {
+                        MathJax.typesetPromise([content]);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('wrong');
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) {
+                            correctOption.classList.add('correct');
+                        }
+                    }
+                    if (window.MathJax) {
+                        MathJax.typesetPromise([explanation]);
+                    }
+                });
+            });
+            
+            // Panggil MathJax untuk pertama kali memuat semua label di foreignObjects
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        });
+    </script>
+</body>
+</html>
