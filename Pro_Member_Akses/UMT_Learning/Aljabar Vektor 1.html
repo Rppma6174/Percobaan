@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aljabar Vektor 1: R² dan R³ - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png"> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { 
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } 
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2, h3 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        h3 { color: #58a6ff; margin-top: 2rem; }
+        .hidden { display: none; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 0.5rem; }
+        .diagram-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-main);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            margin-top: 1rem;
+            overflow-x: auto;
+        }
+        .diagram-container svg { max-width: 100%; }
+        .diagram-container svg text { font-size: 14px; fill: var(--text-primary); }
+        .diagram-container p { font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem; }
+
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold;
+        }
+        .quiz-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1);
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        p, li, .quiz-explanation {
+            overflow-x: auto; padding-bottom: 8px;
+        }
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <h1>Aljabar Vektor 1: Komponen di R² dan R³</h1>
+        <p>
+            Setelah memahami esensi vektor secara geometris (panah dengan panjang dan arah), kita sekarang beralih ke aljabar. Aljabar vektor adalah cara kita menerjemahkan "gambar" panah tersebut menjadi "angka" yang bisa dihitung.
+        </p>
+        <p>
+            Kuncinya adalah menggunakan sistem koordinat Kartesius (sumbu x, y, dan z).
+        </p>
+
+        <h2>Vektor di Bidang (R²)</h2>
+        <p>
+            Di bidang 2D, setiap vektor dapat dipecah menjadi dua komponen yang saling tegak lurus: komponen horizontal (sepanjang sumbu-x) dan komponen vertikal (sepanjang sumbu-y).
+        </p>
+        
+        <h3>Komponen dan Notasi</h3>
+        <p>
+            Vektor $\vec{v}$ yang dimulai dari $O(0,0)$ ke titik $P(x,y)$ dapat ditulis dalam tiga cara:
+        </p>
+        <ol>
+            <li><strong>Vektor Kolom:</strong> $\vec{v} = \begin{pmatrix} x \\ y \end{pmatrix}$</li>
+            <li><strong>Vektor Baris:</strong> $\vec{v} = (x, y)$</li>
+            <li><strong>Vektor Basis:</strong> $\vec{v} = x\vec{i} + y\vec{j}$</li>
+        </ul>
+        <p>
+            $\vec{i}$ adalah <strong>vektor satuan</strong> (panjangnya 1) searah sumbu-x, dan $\vec{j}$ adalah vektor satuan searah sumbu-y.
+        </p>
+        <div class="diagram-container">
+            <svg width="300" height="250" viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrow-v" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#2F81F7"/></marker>
+                    <marker id="arrow-i" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#39D353"/></marker>
+                    <marker id="arrow-j" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#F85149"/></marker>
+                </defs>
+                <line x1="20" y1="230" x2="280" y2="230" stroke="#8B949E" stroke-width="2"/>
+                <text x="285" y="235" fill="#8B949E">x</text>
+                <line x1="20" y1="230" x2="20" y2="20" stroke="#8B949E" stroke-width="2"/>
+                <text x="15" y="15" fill="#8B949E">y</text>
+                <text x="5" y="245" font-size="14" fill="#f0f0f0">O</text>
+
+                <line x1="20" y1="230" x2="200" y2="80" stroke="#2F81F7" stroke-width="3" marker-end="url(#arrow-v)" />
+                <foreignObject x="90" y="130" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #58a6ff; font-size: 16px;">$\vec{v}$</div></foreignObject>
+                <text x="210" y="80" font-size="14" fill="#f0f0f0">P(x, y)</text>
+                
+                <line x1="20" y1="230" x2="200" y2="230" stroke="#39D353" stroke-width="2.5" marker-end="url(#arrow-i)" stroke-dasharray="4"/>
+                <foreignObject x="100" y="200" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #39D353; font-size: 16px;">$x\vec{i}$</div></foreignObject>
+                
+                <line x1="200" y1="230" x2="200" y2="80" stroke="#F85149" stroke-width="2.5" marker-end="url(#arrow-j)" stroke-dasharray="4"/>
+                <foreignObject x="205" y="140" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #F85149; font-size: 16px;">$y\vec{j}$</div></foreignObject>
+            </svg>
+            <p>Vektor $\vec{v}$ adalah hasil penjumlahan komponennya: $\vec{v} = x\vec{i} + y\vec{j}$</p>
+        </div>
+
+        <h3>Operasi Vektor Kolom di R²</h3>
+        <p>Bekerja dengan vektor kolom sangat intuitif. Kita hanya mengoperasikan komponen yang seletak.</p>
+        <ul>
+            <li><strong>Penjumlahan:</strong> $\vec{a} + \vec{b} = \begin{pmatrix} a_x \\ a_y \end{pmatrix} + \begin{pmatrix} b_x \\ b_y \end{pmatrix} = \begin{pmatrix} a_x + b_x \\ a_y + b_y \end{pmatrix}$</li>
+            <li><strong>Pengurangan:</strong> $\vec{a} - \vec{b} = \begin{pmatrix} a_x \\ a_y \end{pmatrix} - \begin{pmatrix} b_x \\ b_y \end{pmatrix} = \begin{pmatrix} a_x - b_x \\ a_y - b_y \end{pmatrix}$</li>
+            <li><strong>Perkalian Skalar:</strong> $k\vec{a} = k \begin{pmatrix} a_x \\ a_y \end{pmatrix} = \begin{pmatrix} ka_x \\ ka_y \end{pmatrix}$</li>
+        </ul>
+
+        <h3>Vektor Satuan di R²</h3>
+        <p>Vektor satuan (ditulis $\hat{v}$) adalah vektor yang memiliki <strong>arah yang sama</strong> dengan $\vec{v}$ tetapi <strong>panjangnya 1</strong>.</p>
+        <p>Kita mendapatkannya dengan membagi vektor tersebut dengan panjangnya sendiri.</p>
+        $$ \hat{v} = \frac{\vec{v}}{|\vec{v}|} $$
+        <p>Dimana <strong>panjang (modulus) vektor</strong> $\vec{v} = \begin{pmatrix} x \\ y \end{pmatrix}$ dihitung menggunakan Pythagoras:</p>
+        $$ |\vec{v}| = \sqrt{x^2 + y^2} $$
+        
+        <h2>Persamaan Vektor Garis Lurus di R²</h2>
+        <p>Sebuah garis lurus dapat didefinisikan oleh dua hal: satu titik yang dilewatinya dan arah yang ditujunya.</p>
+        <ul>
+            <li>$\vec{a}$ = vektor posisi dari <strong>titik awal</strong> (titik yang diketahui di garis).</li>
+            <li>$\vec{d}$ = <strong>vektor arah</strong> (vektor yang sejajar dengan garis).</li>
+            <li>$\vec{r}$ = vektor posisi dari <strong>setiap titik $(x,y)$</strong> yang ada di garis itu.</li>
+        </ul>
+        <p>Persamaan vektornya adalah:</p>
+        $$ \vec{r} = \vec{a} + t\vec{d} $$
+        <p>Dimana $t$ adalah skalar yang bisa diubah-ubah untuk mendapatkan semua titik di sepanjang garis.</p>
+
+        <h3>Kedudukan Dua Garis</h3>
+        <p>Diberikan dua garis: $g_1: \vec{r} = \vec{a} + t\vec{d_1}$ dan $g_2: \vec{r} = \vec{b} + s\vec{d_2}$.</p>
+        <ul>
+            <li><strong>Sejajar:</strong> Jika vektor arahnya kelipatan: $\vec{d_1} = k\vec{d_2}$.</li>
+            <li><strong>Berimpit:</strong> Jika sejajar ($\vec{d_1} = k\vec{d_2}$) DAN satu titik di $g_1$ (misal A) juga ada di $g_2$.</li>
+            <li><strong>Berpotongan:</strong> Jika tidak sejajar DAN ada solusi untuk $\vec{a} + t\vec{d_1} = \vec{b} + s\vec{d_2}$.</li>
+        </ul>
+
+        <h2>Vektor di Ruang (R³)</h2>
+        <p>Konsep di R³ persis sama dengan di R², hanya saja kita menambahkan satu komponen lagi: sumbu-z.</p>
+        <ul>
+            <li><strong>Vektor Basis:</strong> $\vec{v} = x\vec{i} + y\vec{j} + z\vec{k}$</li>
+            <li><strong>Vektor Kolom:</strong> $\vec{v} = \begin{pmatrix} x \\ y \\ z \end{pmatrix}$</li>
+        </ul>
+        <div class="diagram-container">
+            <svg width="300" height="250" viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrow-r3" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto"><polygon points="0 0, 7 2.5, 0 5" fill="#2F81F7"/></marker>
+                </defs>
+                <line x1="50" y1="200" x2="250" y2="200" stroke="#8B949E" stroke-width="1.5" marker-end="url(#arrow-r3)"/>
+                <text x="255" y="205" fill="#8B949E">x</text>
+                <line x1="50" y1="200" x2="50" y2="20" stroke="#8B949E" stroke-width="1.5" marker-end="url(#arrow-r3)"/>
+                <text x="45" y="15" fill="#8B949E">z</text>
+                <line x1="50" y1="200" x2="10" y2="230" stroke="#8B949E" stroke-width="1.5" marker-end="url(#arrow-r3)"/>
+                <text x="5" y="240" fill="#8B949E">y</text>
+
+                <line x1="50" y1="200" x2="140" y2="110" stroke="#2F81F7" stroke-width="3" marker-end="url(#arrow-r3)" />
+                <foreignObject x="100" y="120" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #58a6ff; font-size: 16px;">$\vec{p}$</div></foreignObject>
+                <text x="125" y="80" font-size="14" fill="#f0f0f0">P(x,y,z)</text>
+                
+                <line x1="180" y1="80" x2="180" y2="200" stroke="#8B949E" stroke-width="1" stroke-dasharray="3"/>
+                <line x1="180" y1="200" x2="140" y2="230" stroke="#8B949E" stroke-width="1" stroke-dasharray="3"/>
+                <line x1="180" y1="80" x2="140" y2="110" stroke="#8B949E" stroke-width="1" stroke-dasharray="3"/>
+                <line x1="140" y1="110" x2="140" y2="230" stroke="#8B949E" stroke-width="1" stroke-dasharray="3"/>
+                <line x1="140" y1="230" x2="50" y2="200" stroke="#8B949E" stroke-width="1" stroke-dasharray="3"/>
+            </svg>
+        </div>
+        
+        <h3>Panjang dan Vektor Satuan di R³</h3>
+        <p>Pythagoras di R³ adalah perluasan dari R². Bayangkan ini sebagai diagonal ruang sebuah balok.</p>
+        $$ |\vec{v}| = \sqrt{x^2 + y^2 + z^2} $$
+        <p>Vektor satuan $\hat{v}$ memiliki rumus yang sama:</p>
+        $$ \hat{v} = \frac{\vec{v}}{|\vec{v}|} = \frac{1}{\sqrt{x^2 + y^2 + z^2}} \begin{pmatrix} x \\ y \\ z \end{pmatrix} $$
+        
+        <h3>Persamaan Vektor Garis Lurus di R³</h3>
+        <p>Rumusnya <strong>persis sama</strong> dengan di R², namun setiap vektor sekarang memiliki tiga komponen.</p>
+        $$ \vec{r} = \vec{a} + t\vec{d} \quad \text{atau} \quad \begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} a_x \\ a_y \\ a_z \end{pmatrix} + t \begin{pmatrix} d_x \\ d_y \\ d_z \end{pmatrix} $$
+
+        <h2>Uji Pemahaman</h2>
+        <p>Pilih jawaban yang paling tepat untuk menguji pemahaman Anda tentang aljabar vektor.</p>
+        <div id="quiz-container"></div>
+    </div>
+
+<script>
+        // Cek session (jika perlu)
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+
+        const quizzes = [
+            { 
+                q: "Jika $\\vec{a} = \\begin{pmatrix} 2 \\\\ 5 \\end{pmatrix}$ dan $\\vec{b} = \\begin{pmatrix} -1 \\\\ 3 \\end{pmatrix}$, berapakah $2\\vec{a} - \\vec{b}$?", 
+                options: [
+                    "$\\begin{pmatrix} 5 \\\\ 7 \\end{pmatrix}$", 
+                    "$\\begin{pmatrix} 3 \\\\ 2 \\end{pmatrix}$", 
+                    "$\\begin{pmatrix} 5 \\\\ 13 \\end{pmatrix}$", 
+                    "$\\begin{pmatrix} 4 \\\\ 7 \\end{pmatrix}$"
+                ], 
+                correct: 0, 
+                explanation: "Pertama, $2\\vec{a} = 2\\begin{pmatrix} 2 \\\\ 5 \\end{pmatrix} = \\begin{pmatrix} 4 \\\\ 10 \\end{pmatrix}$. Kemudian, $2\\vec{a} - \\vec{b} = \\begin{pmatrix} 4 \\\\ 10 \\end{pmatrix} - \\begin{pmatrix} -1 \\\\ 3 \\end{pmatrix} = \\begin{pmatrix} 4 - (-1) \\\\ 10 - 3 \\end{pmatrix} = \\begin{pmatrix} 5 \\\\ 7 \\end{pmatrix}$." 
+            },
+            { 
+                q: "Tentukan panjang (modulus) dari vektor $\\vec{v} = 3\\vec{i} - 4\\vec{j}$.", 
+                options: ["5", "7", "25", "1"], 
+                correct: 0, 
+                explanation: "Panjang vektor dihitung dengan Pythagoras: $|\vec{v}| = \\sqrt{x^2 + y^2} = \\sqrt{3^2 + (-4)^2} = \\sqrt{9+16} = \\sqrt{25} = 5$." 
+            },
+            { 
+                q: "Tentukan vektor satuan dari $\\vec{u} = \\begin{pmatrix} 0 \\\\ 6 \\\\ 8 \\end{pmatrix}$", 
+                options: [
+                    "$\\begin{pmatrix} 0 \\\\ 0.6 \\\\ 0.8 \\end{pmatrix}$", 
+                    "$\\begin{pmatrix} 0 \\\\ 3 \\\\ 4 \\end{pmatrix}$", 
+                    "$\\begin{pmatrix} 0 \\\\ 60 \\\\ 80 \\end{pmatrix}$", 
+                    "$\\begin{pmatrix} 0 \\\\ 0.8 \\\\ 0.6 \\end{pmatrix}$"
+                ], 
+                correct: 0, 
+                explanation: "Langkah 1: Cari panjang $|\vec{u}| = \\sqrt{0^2 + 6^2 + 8^2} = \\sqrt{0+36+64} = \\sqrt{100} = 10$. Langkah 2: Bagi vektor dengan panjangnya: $\\hat{u} = \\frac{\\vec{u}}{10} = \\begin{pmatrix} 0/10 \\\\ 6/10 \\\\ 8/10 \\end{pmatrix} = \\begin{pmatrix} 0 \\\\ 0.6 \\\\ 0.8 \\end{pmatrix}$." 
+            },
+            { 
+                q: "Vektor $\\vec{i}$ dalam R³ paling tepat ditulis sebagai...", 
+                options: [
+                    "$\\begin{pmatrix} 1 \\\\ 0 \\\\ 0 \\end{pmatrix}$", 
+                    "$\\begin{pmatrix} 1 \\end{pmatrix}$", 
+                    "$\\begin{pmatrix} 1 \\\\ 1 \\\\ 1 \\end{pmatrix}$", 
+                    "$\\begin{pmatrix} 0 \\\\ 1 \\\\ 0 \\end{pmatrix}$"
+                ], 
+                correct: 0, 
+                explanation: "Vektor basis $\\vec{i}$ adalah vektor satuan yang hanya bergerak 1 unit searah sumbu-x positif, dan 0 unit di sumbu y dan z. Maka, $\\vec{i} = \\begin{pmatrix} 1 \\\\ 0 \\\\ 0 \\end{pmatrix}$." 
+            },
+            { 
+                q: "Manakah dari berikut ini yang merupakan persamaan vektor dari sebuah garis?", 
+                options: [
+                    "$y = 2x + 3$", 
+                    "$\\vec{r} = \\begin{pmatrix} 1 \\\\ 5 \\end{pmatrix} + t\\begin{pmatrix} 2 \\\\ 3 \\end{pmatrix}$", 
+                    "$\\vec{r} = \\begin{pmatrix} 2 \\\\ 4 \\end{pmatrix}$", 
+                    "$2x + 3y - z = 4$"
+                ], 
+                correct: 1, 
+                explanation: "Persamaan vektor garis lurus selalu memiliki bentuk $\\vec{r} = \\vec{a} + t\\vec{d}$, di mana $\\vec{a}$ adalah vektor posisi titik awal dan $\\vec{d}$ adalah vektor arah." 
+            }
+        ];
+
+        // --- SCRIPT KUIS INTERAKTIF ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const quizContainer = document.getElementById("quiz-container");
+            if (!quizContainer) return;
+
+            quizzes.forEach((quiz, index) => {
+                const quizEl = document.createElement("div");
+                quizEl.className = "quiz-accordion";
+                const optionsHtml = quiz.options.map((opt, i) => 
+                    `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                ).join("");
+                quizEl.innerHTML = `
+                    <button class="quiz-accordion-button">
+                        <span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="quiz-accordion-content hidden">
+                        <p class="question-text">${quiz.q}</p>
+                        <div class="options-container">${optionsHtml}</div>
+                        <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                    </div>`;
+                quizContainer.appendChild(quizEl);
+            });
+
+            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+            accordionButtons.forEach(clickedButton => {
+                clickedButton.addEventListener('click', () => {
+                    const content = clickedButton.nextElementSibling;
+                    const isOpening = content.classList.contains('hidden');
+
+                    accordionButtons.forEach(button => {
+                        if (button !== clickedButton) {
+                            button.classList.remove('active');
+                            button.nextElementSibling.classList.add('hidden');
+                        }
+                    });
+
+                    clickedButton.classList.toggle('active');
+                    content.classList.toggle('hidden');
+
+                    if (isOpening && window.MathJax) {
+                        MathJax.typesetPromise([content]);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('wrong');
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) {
+                            correctOption.classList.add('correct');
+                        }
+                    }
+                    if (window.MathJax) {
+                        MathJax.typesetPromise([explanation]);
+                    }
+                });
+            });
+            
+            // Panggil MathJax untuk pertama kali memuat semua label di foreignObjects
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        });
+    </script>
+</body>
+</html>
