@@ -683,9 +683,23 @@ const allContentData = {
             },
             { 
             id: 'materi_vektor_05', 
-            title: 'Esensi Vektor', 
+            title: 'Aljabar Vektor 1', 
             type: 'HTML Document', 
-            filePath: '#', 
+            filePath: 'UMT_Learning/Aljabar Vektor 1.html', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'materi_vektor_06', 
+            title: 'Aljabar Vektor 2', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Aljabar Vektor 2.html', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'materi_vektor_07', 
+            title: 'Aljabar Vektor 3', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Aljabar Vektor 3.html', 
             fileType: 'html' 
             },
         ],
