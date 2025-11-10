@@ -99,9 +99,15 @@
             margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
             background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
         }
-        p, li, .quiz-explanation {
-            overflow-x: auto; padding-bottom: 8px;
+        
+        /* --- [PERBAIKAN] SOLUSI UNTUK LATEX OVERFLOW --- */
+        p, li, .info-box, .quiz-explanation, .question-text, .quiz-option {
+            overflow-x: auto;       /* Tambahkan scroll horizontal JIKA perlu */
+            padding-bottom: 8px;   /* Beri sedikit ruang untuk scrollbar */
+            overscroll-behavior-x: contain; /* Mencegah scroll diagonal */
         }
+        
+        /* --- [PERBAIKAN] STYLING SCROLLBAR AGAR SESUAI TEMA --- */
         ::-webkit-scrollbar { height: 8px; width: 8px; }
         ::-webkit-scrollbar-track { background: var(--bg-panel); }
         ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
@@ -156,13 +162,13 @@
             <p>Contoh Aturan Tangan Kanan: $\vec{i} \times \vec{j} = \vec{k}$</p>
         </div>
         <p>Implikasi penting: $\vec{b} \times \vec{a}$ (jari dari $\vec{b}$ ke $\vec{a}$) akan menghasilkan ibu jari yang menunjuk ke arah berlawanan. Ini membuktikan sifat <strong>anti-komutatif</strong>:</p>
-        $$ \vec{a} \times \vec{b} = -(\vec{b} \times \vec{a}) $$
+        <p>$$ \vec{a} \times \vec{b} = -(\vec{b} \times \vec{a}) $$</p>
 
         <h2>Definisi Geometris 2: Besaran Vektor Hasil</h2>
         <p>
             Panjang (besaran) dari vektor hasil $\vec{a} \times \vec{b}$ juga memiliki makna yang sangat penting:
         </p>
-        $$ |\vec{a} \times \vec{b}| = |\vec{a}| |\vec{b}| \sin \theta $$
+        <p>$$ |\vec{a} \times \vec{b}| = |\vec{a}| |\vec{b}| \sin \theta $$</p>
         <p>
             Rumus ini tidak lain adalah rumus untuk <strong>Luas Jajaran Genjang</strong> yang dibentuk oleh $\vec{a}$ dan $\vec{b}$.
         </p>
@@ -189,12 +195,12 @@
         <p>
             Jika $\vec{a} = \begin{pmatrix} a_1 \\ a_2 \\ a_3 \end{pmatrix}$ dan $\vec{b} = \begin{pmatrix} b_1 \\ b_2 \\ b_3 \end{pmatrix}$, maka:
         </p>
-        $$ \vec{a} \times \vec{b} = \begin{vmatrix} \vec{i} & \vec{j} & \vec{k} \\ a_1 & a_2 & a_3 \\ b_1 & b_2 & b_3 \end{vmatrix} $$
+        <p>$$ \vec{a} \times \vec{b} = \begin{vmatrix} \vec{i} & \vec{j} & \vec{k} \\ a_1 & a_2 & a_3 \\ b_1 & b_2 & b_3 \end{vmatrix} $$</p>
         <p>
             Cara menghitungnya (menggunakan ekspansi kofaktor):
         </p>
-        $$ = \vec{i} \begin{vmatrix} a_2 & a_3 \\ b_2 & b_3 \end{vmatrix} - \vec{j} \begin{vmatrix} a_1 & a_3 \\ b_1 & b_3 \end{vmatrix} + \vec{k} \begin{vmatrix} a_1 & a_2 \\ b_1 & b_2 \end{vmatrix} $$
-        $$ = (a_2b_3 - a_3b_2)\vec{i} - (a_1b_3 - a_3b_1)\vec{j} + (a_1b_2 - a_2b_1)\vec{k} $$
+        <p>$$ = \vec{i} \begin{vmatrix} a_2 & a_3 \\ b_2 & b_3 \end{vmatrix} - \vec{j} \begin{vmatrix} a_1 & a_3 \\ b_1 & b_3 \end{vmatrix} + \vec{k} \begin{vmatrix} a_1 & a_2 \\ b_1 & b_2 \end{vmatrix} $$</p>
+        <p>$$ = (a_2b_3 - a_3b_2)\vec{i} - (a_1b_3 - a_3b_1)\vec{j} + (a_1b_2 - a_2b_1)\vec{k} $$</p>
         
         <div class="info-box">
             <strong>Contoh Perhitungan:</strong>
