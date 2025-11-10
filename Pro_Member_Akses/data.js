@@ -697,7 +697,7 @@ const allContentData = {
             },
             { 
             id: 'materi_vektor_07', 
-            title: 'Aljabar Vektor 3', 
+            title: 'Proyeksi Ortogonal Skalar', 
             type: 'HTML Document', 
             filePath: 'UMT_Learning/Aljabar Vektor 3.html', 
             fileType: 'html' 
