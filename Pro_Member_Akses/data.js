@@ -702,6 +702,13 @@ const allContentData = {
             filePath: 'UMT_Learning/Aljabar Vektor 3.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'materi_vektor_08', 
+            title: 'Perkalian Silang Vektor (Cross Product)', 
+            type: 'HTML Document', 
+            filePath: 'UMT_Learning/Perkalian Silang Vektor.html', 
+            fileType: 'html' 
+            },
         ],
         "Limit Fungsi": [
             { 
