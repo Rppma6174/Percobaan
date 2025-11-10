@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aljabar Vektor 4: Cross Product - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png"> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { 
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } 
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2, h3 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        h3 { color: #58a6ff; margin-top: 2rem; }
+        .hidden { display: none; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 0.5rem; }
+        .diagram-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-main);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            margin-top: 1rem;
+            overflow-x: auto;
+        }
+        .diagram-container svg { max-width: 100%; }
+        .diagram-container svg text { font-size: 14px; fill: var(--text-primary); }
+        .diagram-container p { font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem; }
+        
+        /* Kotak info khusus */
+        .info-box {
+            background-color: rgba(47, 129, 247, 0.1);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .info-box.red {
+            background-color: rgba(248, 81, 73, 0.1);
+            border-left-color: var(--accent-red);
+        }
+
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold;
+        }
+        .quiz-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1);
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        p, li, .quiz-explanation {
+            overflow-x: auto; padding-bottom: 8px;
+        }
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <h1>Hasil Kali Vektor (Cross Product)</h1>
+        <p>
+            Kita telah membahas Dot Product ($\vec{a} \cdot \vec{b}$), yang hasilnya adalah sebuah **skalar (angka)**. Sekarang, kita akan membahas jenis perkalian kedua, yaitu **Cross Product** (Hasil Kali Vektor), yang dinotasikan $\vec{a} \times \vec{b}$.
+        </p>
+        <div class="info-box red">
+            <strong>Perbedaan Kunci:</strong> Hasil dari Cross Product ($\vec{a} \times \vec{b}$) adalah sebuah <strong>VEKTOR BARU</strong>, bukan skalar. Operasi ini juga <strong>hanya terdefinisi di R³ (3 Dimensi)</strong>.
+        </div>
+        <p>
+            Vektor baru yang dihasilkan ini memiliki dua properti unik: **arah** dan **besaran** (panjang).
+        </p>
+
+        <h2>Definisi Geometris 1: Arah Vektor Hasil</h2>
+        <p>
+            Arah dari vektor hasil $\vec{c} = \vec{a} \times \vec{b}$ selalu <strong>tegak lurus (ortogonal)</strong> terhadap kedua vektor asalnya ($\vec{a}$ dan $\vec{b}$).
+        </p>
+        <p>
+            Ini berarti $\vec{c}$ tegak lurus terhadap bidang yang dibentuk oleh $\vec{a}$ dan $\vec{b}$. Untuk menentukan arahnya (ke "atas" atau ke "bawah" bidang), kita menggunakan <strong>Aturan Tangan Kanan</strong>.
+        </p>
+        
+        <h3>Aturan Tangan Kanan</h3>
+        <ol>
+            <li>Arahkan jari-jari tangan kanan Anda searah dengan vektor pertama ($\vec{a}$).</li>
+            <li>Tekuk jari-jari Anda menuju arah vektor kedua ($\vec{b}$).</li>
+            <li>Arah <strong>Ibu Jari</strong> Anda adalah arah dari $\vec{a} \times \vec{b}$.</li>
+        </ol>
+        <div class="diagram-container">
+            <svg width="300" height="250" viewBox="0 0 300 250" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrow-i" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto"><polygon points="0 0, 7 2.5, 0 5" fill="#F85149"/></marker>
+                    <marker id="arrow-j" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto"><polygon points="0 0, 7 2.5, 0 5" fill="#39D353"/></marker>
+                    <marker id="arrow-k" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto"><polygon points="0 0, 7 2.5, 0 5" fill="#2F81F7"/></marker>
+                </defs>
+                <line x1="150" y1="200" x2="250" y2="200" stroke="#39D353" stroke-width="3" marker-end="url(#arrow-j)" />
+                <foreignObject x="200" y="205" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #39D353; font-size: 16px;">$\vec{j}$</div></foreignObject>
+                <line x1="150" y1="200" x2="100" y2="230" stroke="#F85149" stroke-width="3" marker-end="url(#arrow-i)" />
+                <foreignObject x="70" y="215" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #F85149; font-size: 16px;">$\vec{i}$</div></foreignObject>
+                <line x1="150" y1="200" x2="150" y2="50" stroke="#2F81F7" stroke-width="3" marker-end="url(#arrow-k)" />
+                <foreignObject x="155" y="100" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #2F81F7; font-size: 16px;">$\vec{k}$</div></foreignObject>
+            </svg>
+            <p>Contoh Aturan Tangan Kanan: $\vec{i} \times \vec{j} = \vec{k}$</p>
+        </div>
+        <p>Implikasi penting: $\vec{b} \times \vec{a}$ (jari dari $\vec{b}$ ke $\vec{a}$) akan menghasilkan ibu jari yang menunjuk ke arah berlawanan. Ini membuktikan sifat <strong>anti-komutatif</strong>:</p>
+        $$ \vec{a} \times \vec{b} = -(\vec{b} \times \vec{a}) $$
+
+        <h2>Definisi Geometris 2: Besaran Vektor Hasil</h2>
+        <p>
+            Panjang (besaran) dari vektor hasil $\vec{a} \times \vec{b}$ juga memiliki makna yang sangat penting:
+        </p>
+        $$ |\vec{a} \times \vec{b}| = |\vec{a}| |\vec{b}| \sin \theta $$
+        <p>
+            Rumus ini tidak lain adalah rumus untuk <strong>Luas Jajaran Genjang</strong> yang dibentuk oleh $\vec{a}$ dan $\vec{b}$.
+        </p>
+        <div class="diagram-container">
+            <svg width="350" height="200" viewBox="0 0 350 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrow-a-area" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto"><polygon points="0 0, 7 2.5, 0 5" fill="#2F81F7"/></marker>
+                    <marker id="arrow-b-area" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto"><polygon points="0 0, 7 2.5, 0 5" fill="#39D353"/></marker>
+                </defs>
+                <polygon points="50,150 250,150 300,80 100,80" fill="rgba(47,129,247,0.1)" stroke="#8B949E" stroke-width="1"/>
+                <line x1="50" y1="150" x2="250" y2="150" stroke="#2F81F7" stroke-width="3" marker-end="url(#arrow-a-area)" />
+                <foreignObject x="140" y="155" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #2F81F7; font-size: 16px;">$\vec{a}$</div></foreignObject>
+                <line x1="50" y1="150" x2="100" y2="80" stroke="#39D353" stroke-width="3" marker-end="url(#arrow-b-area)" />
+                <foreignObject x="65" y="95" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #39D353; font-size: 16px;">$\vec{b}$</div></foreignObject>
+                <text x="170" y="120" font-size="14" fill="#C9D1D9">Luas = $|\vec{a} \times \vec{b}|$</text>
+            </svg>
+            <p>Besaran (panjang) dari $\vec{a} \times \vec{b}$ sama dengan luas jajaran genjang ini.</p>
+        </div>
+
+        <h2>Definisi Aljabar (Cara Menghitung)</h2>
+        <p>
+            Untuk menghitung $\vec{a} \times \vec{b}$ secara aljabar, kita menggunakan metode <strong>Determinan Matriks</strong>.
+        </p>
+        <p>
+            Jika $\vec{a} = \begin{pmatrix} a_1 \\ a_2 \\ a_3 \end{pmatrix}$ dan $\vec{b} = \begin{pmatrix} b_1 \\ b_2 \\ b_3 \end{pmatrix}$, maka:
+        </p>
+        $$ \vec{a} \times \vec{b} = \begin{vmatrix} \vec{i} & \vec{j} & \vec{k} \\ a_1 & a_2 & a_3 \\ b_1 & b_2 & b_3 \end{vmatrix} $$
+        <p>
+            Cara menghitungnya (menggunakan ekspansi kofaktor):
+        </p>
+        $$ = \vec{i} \begin{vmatrix} a_2 & a_3 \\ b_2 & b_3 \end{vmatrix} - \vec{j} \begin{vmatrix} a_1 & a_3 \\ b_1 & b_3 \end{vmatrix} + \vec{k} \begin{vmatrix} a_1 & a_2 \\ b_1 & b_2 \end{vmatrix} $$
+        $$ = (a_2b_3 - a_3b_2)\vec{i} - (a_1b_3 - a_3b_1)\vec{j} + (a_1b_2 - a_2b_1)\vec{k} $$
+        
+        <div class="info-box">
+            <strong>Contoh Perhitungan:</strong>
+            <br>
+            Hitung $\vec{a} \times \vec{b}$ jika $\vec{a} = \begin{pmatrix} 1 \\ 2 \\ 3 \end{pmatrix}$ dan $\vec{b} = \begin{pmatrix} 4 \\ 5 \\ 6 \end{pmatrix}$.
+            <br>
+            $\vec{a} \times \vec{b} = \begin{vmatrix} \vec{i} & \vec{j} & \vec{k} \\ 1 & 2 & 3 \\ 4 & 5 & 6 \end{vmatrix}$
+            <br>
+            $= \vec{i}(2 \cdot 6 - 3 \cdot 5) - \vec{j}(1 \cdot 6 - 3 \cdot 4) + \vec{k}(1 \cdot 5 - 2 \cdot 4)$
+            <br>
+            $= \vec{i}(12 - 15) - \vec{j}(6 - 12) + \vec{k}(5 - 8)$
+            <br>
+            $= -3\vec{i} - (-6)\vec{j} - 3\vec{k}$
+            <br>
+            $= \begin{pmatrix} -3 \\ 6 \\ -3 \end{pmatrix}$
+        </div>
+
+        <h2>Uji Pemahaman</h2>
+        <p>Pilih jawaban yang paling tepat untuk menguji pemahaman Anda tentang Cross Product.</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Cek session (jika perlu)
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+
+        const quizzes = [
+            { 
+                q: "Apa hasil dari operasi Cross Product ($\vec{a} \times \vec{b}$)?", 
+                options: ["Sebuah skalar (angka)", "Sebuah vektor baru", "Sebuah sudut", "Sebuah bidang"], 
+                correct: 1, 
+                explanation: "Hasil kali vektor (cross product) selalu menghasilkan sebuah VEKTOR baru, yang arahnya tegak lurus terhadap kedua vektor asalnya." 
+            },
+            { 
+                q: "Jika $\vec{a}$ dan $\vec{b}$ adalah dua vektor pada lantai (bidang xy), ke manakah arah dari $\vec{a} \times \vec{b}$?", 
+                options: [
+                    "Ikut di lantai (bidang xy)", 
+                    "Menunjuk lurus ke atas atau ke bawah (searah sumbu-z)", 
+                    "Searah dengan $\vec{a}$", 
+                    "Searah dengan $\vec{b}$"
+                ], 
+                correct: 1, 
+                explanation: "Hasil cross product selalu tegak lurus (ortogonal) terhadap bidang yang dibentuk oleh dua vektor asalnya. Jika $\vec{a}$ dan $\vec{b}$ ada di bidang xy, maka hasilnya pasti menunjuk searah sumbu-z (atau -z)." 
+            },
+            { 
+                q: "Besaran (panjang) dari vektor $\vec{a} \times \vec{b}$, yaitu $|\vec{a} \times \vec{b}|$, secara geometris mewakili...", 
+                options: [
+                    "Panjang proyeksi $\vec{a}$ pada $\vec{b}$", 
+                    "Keliling jajaran genjang oleh $\vec{a}$ dan $\vec{b}$", 
+                    "Luas jajaran genjang oleh $\vec{a}$ dan $\vec{b}$", 
+                    "Sudut antara $\vec{a}$ dan $\vec{b}$"
+                ], 
+                correct: 2, 
+                explanation: "Definisi geometris dari besaran cross product adalah $|\vec{a}| |\vec{b}| \sin \theta$, yang merupakan rumus untuk luas jajaran genjang yang dibentuk oleh kedua vektor tersebut." 
+            },
+            { 
+                q: "Manakah dari pernyataan berikut yang benar mengenai sifat cross product?", 
+                options: [
+                    "$\\vec{a} \times \vec{b} = \vec{b} \times \vec{a}$ (Komutatif)", 
+                    "$\\vec{a} \times \vec{a} = |\vec{a}|^2$", 
+                    "$\\vec{a} \times \vec{b} = -(\\vec{b} \times \vec{a})$ (Anti-Komutatif)", 
+                    "Jika $\\vec{a} \cdot \vec{b} = 0$, maka $\\vec{a} \times \vec{b} = 0$"
+                ], 
+                correct: 2, 
+                explanation: "Cross product bersifat anti-komutatif. Mengubah urutan perkalian akan membalik arah vektor hasilnya (sesuai Aturan Tangan Kanan)." 
+            },
+            { 
+                q: "Jika $\vec{a}$ dan $\vec{b}$ adalah dua vektor yang sejajar (kolinear), berapakah hasil dari $\vec{a} \times \vec{b}$?", 
+                options: [
+                    "$|\vec{a}| |\vec{b}|$", 
+                    "$\\vec{0}$ (Vektor Nol)", 
+                    "1", 
+                    "Tidak dapat dihitung"
+                ], 
+                correct: 1, 
+                explanation: "Jika sejajar, sudut $\theta$ di antara keduanya adalah $0^\\circ$ atau $180^\\circ$. Dalam kedua kasus, $\sin(0^\\circ) = 0$ dan $\sin(180^\\circ) = 0$. Maka, $|\vec{a} \times \vec{b}| = |\vec{a}| |\vec{b}| \sin \theta = 0$. Vektor yang memiliki panjang 0 adalah Vektor Nol ($\\vec{0}$)." 
+            }
+        ];
+
+        // --- SCRIPT KUIS INTERAKTIF ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const quizContainer = document.getElementById("quiz-container");
+            if (!quizContainer) return;
+
+            quizzes.forEach((quiz, index) => {
+                const quizEl = document.createElement("div");
+                quizEl.className = "quiz-accordion";
+                const optionsHtml = quiz.options.map((opt, i) => 
+                    `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                ).join("");
+                quizEl.innerHTML = `
+                    <button class="quiz-accordion-button">
+                        <span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="quiz-accordion-content hidden">
+                        <p class="question-text">${quiz.q}</p>
+                        <div class="options-container">${optionsHtml}</div>
+                        <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                    </div>`;
+                quizContainer.appendChild(quizEl);
+            });
+
+            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+            accordionButtons.forEach(clickedButton => {
+                clickedButton.addEventListener('click', () => {
+                    const content = clickedButton.nextElementSibling;
+                    const isOpening = content.classList.contains('hidden');
+
+                    accordionButtons.forEach(button => {
+                        if (button !== clickedButton) {
+                            button.classList.remove('active');
+                            button.nextElementSibling.classList.add('hidden');
+                        }
+                    });
+
+                    clickedButton.classList.toggle('active');
+                    content.classList.toggle('hidden');
+
+                    if (isOpening && window.MathJax) {
+                        MathJax.typesetPromise([content]);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('wrong');
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) {
+                            correctOption.classList.add('correct');
+                        }
+                    }
+                    if (window.MathJax) {
+                        MathJax.typesetPromise([explanation]);
+                    }
+                });
+            });
+            
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        });
+    </script>
+</body>
+</html>
