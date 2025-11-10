@@ -690,7 +690,7 @@ const allContentData = {
             },
             { 
             id: 'materi_vektor_06', 
-            title: 'Aljabar Vektor 2', 
+            title: 'Hasil Kali Skalar (Dot Product)', 
             type: 'HTML Document', 
             filePath: 'UMT_Learning/Aljabar Vektor 2.html', 
             fileType: 'html' 
