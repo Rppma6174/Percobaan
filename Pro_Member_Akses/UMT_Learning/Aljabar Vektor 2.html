@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aljabar Vektor: Hasil Kali Skalar (Dot Product) - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png"> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { 
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } 
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2, h3 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        h3 { color: #58a6ff; margin-top: 2rem; }
+        .hidden { display: none; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 0.5rem; }
+        .diagram-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-main);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            margin-top: 1rem;
+            overflow-x: auto;
+        }
+        .diagram-container svg { max-width: 100%; }
+        .diagram-container svg text { font-size: 14px; fill: var(--text-primary); }
+        .diagram-container p { font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem; }
+        
+        /* Kotak info khusus */
+        .info-box {
+            background-color: rgba(47, 129, 247, 0.1);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold;
+        }
+        .quiz-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1);
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        p, li, .quiz-explanation {
+            overflow-x: auto; padding-bottom: 8px;
+        }
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <h1>Hasil Kali Skalar (Dot Product)</h1>
+        <p>
+            Kita telah belajar menjumlahkan, mengurangi, dan mengalikan vektor dengan skalar (angka). Sekarang, kita akan belajar cara "mengalikan" dua vektor. Ada dua jenis perkalian antar vektor, dan yang pertama kita pelajari adalah **Hasil Kali Skalar** atau **Dot Product**.
+        </p>
+        <p>
+            Nama "Hasil Kali Skalar" sudah memberi petunjuk: ini adalah operasi perkalian antara dua vektor ($\vec{a}$ dan $\vec{b}$) yang hasilnya adalah sebuah <strong>SKALAR</strong> (angka biasa), bukan vektor baru.
+        </p>
+        <p>Notasi: $\vec{a} \cdot \vec{b}$ (dibaca "a dot b")</p>
+
+        <h2>Definisi 1: Aljabar (Cara Menghitung)</h2>
+        <p>
+            Secara aljabar, dot product adalah cara termudah untuk menghitung perkalian ini. Kita cukup mengalikan komponen-komponen yang seletak, lalu menjumlahkan semua hasilnya.
+        </p>
+        
+        <h3>Di R² (Bidang 2D)</h3>
+        <p>Jika $\vec{a} = \begin{pmatrix} a_1 \\ a_2 \end{pmatrix}$ dan $\vec{b} = \begin{pmatrix} b_1 \\ b_2 \end{pmatrix}$, maka:</p>
+        $$ \vec{a} \cdot \vec{b} = a_1b_1 + a_2b_2 $$
+        
+        <h3>Di R³ (Ruang 3D)</h3>
+        <p>Jika $\vec{a} = \begin{pmatrix} a_1 \\ a_2 \\ a_3 \end{pmatrix}$ dan $\vec{b} = \begin{pmatrix} b_1 \\ b_2 \\ b_3 \end{pmatrix}$, maka:</p>
+        $$ \vec{a} \cdot \vec{b} = a_1b_1 + a_2b_2 + a_3b_3 $$
+        <div class="info-box">
+            <strong>Contoh Perhitungan:</strong>
+            <br>
+            Jika $\vec{p} = \begin{pmatrix} 2 \\ 5 \end{pmatrix}$ dan $\vec{q} = \begin{pmatrix} 3 \\ -1 \end{pmatrix}$,
+            <br>
+            maka $\vec{p} \cdot \vec{q} = (2)(3) + (5)(-1) = 6 - 5 = 1$.
+            <br>
+            Perhatikan, hasilnya adalah <strong>1</strong> (skalar), bukan $\begin{pmatrix} 6 \\ -5 \end{pmatrix}$.
+        </div>
+
+        <h2>Definisi 2: Geometris (Makna Intuitif UMT)</h2>
+        <p>
+            Secara geometris, dot product adalah alat yang sangat kuat untuk mengukur "seberapa searah" dua vektor. Ia menghubungkan panjang kedua vektor dengan sudut $\theta$ yang terbentuk di antara keduanya.
+        </p>
+        $$ \vec{a} \cdot \vec{b} = |\vec{a}| |\vec{b}| \cos \theta $$
+        <p>
+            Di mana $|\vec{a}|$ adalah panjang vektor $\vec{a}$, dan $|\vec{b}|$ adalah panjang vektor $\vec{b}$.
+        </p>
+        <div class="diagram-container">
+            <svg width="300" height="200" viewBox="0 0 300 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrow-dot-a" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto"><polygon points="0 0, 7 2.5, 0 5" fill="#2F81F7"/></marker>
+                    <marker id="arrow-dot-b" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto"><polygon points="0 0, 7 2.5, 0 5" fill="#39D353"/></marker>
+                </defs>
+                <line x1="50" y1="150" x2="250" y2="150" stroke="#2F81F7" stroke-width="3" marker-end="url(#arrow-dot-a)" />
+                <foreignObject x="140" y="155" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #2F81F7; font-size: 16px;">$\vec{a}$</div></foreignObject>
+                
+                <line x1="50" y1="150" x2="180" y2="50" stroke="#39D353" stroke-width="3" marker-end="url(#arrow-dot-b)" />
+                <foreignObject x="100" y="80" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #39D353; font-size: 16px;">$\vec{b}$</div></foreignObject>
+                
+                <path d="M 90 150 A 30 30 0 0 0 80 125" fill="none" stroke="#C9D1D9" stroke-width="2"/>
+                <foreignObject x="75" y="125" width="30" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #C9D1D9; font-size: 16px;">$\theta$</div></foreignObject>
+            </svg>
+            <p>Dot product menghubungkan panjang $\vec{a}$, $\vec{b}$, dan sudut $\theta$ di antara keduanya.</p>
+        </div>
+        
+        <h3>Memahami $\cos \theta$ dalam Dot Product:</h3>
+        <ul>
+            <li><strong>Jika $\theta = 0^\circ$ (Searah):</strong> $\cos(0^\circ) = 1$. Maka $\vec{a} \cdot \vec{b} = |\vec{a}| |\vec{b}|$ (hasilnya positif maksimal).</li>
+            <li><strong>Jika $\theta = 90^\circ$ (Tegak Lurus):</strong> $\cos(90^\circ) = 0$. Maka $\vec{a} \cdot \vec{b} = 0$.</li>
+            <li><strong>Jika $\theta = 180^\circ$ (Berlawanan Arah):</strong> $\cos(180^\circ) = -1$. Maka $\vec{a} \cdot \vec{b} = -|\vec{a}| |\vec{b}|$ (hasilnya negatif maksimal).</li>
+        </ul>
+        <p>
+            Jadi, dot product secara intuitif adalah <strong>proyeksi</strong> satu vektor ke vektor lainnya, dikalikan dengan panjang vektor tersebut.
+        </p>
+
+                <h2>Pembuktian: Menghubungkan Definisi Geometri dan Aljabar</h2>
+        <p>
+            Bagaimana kita tahu bahwa $|\vec{a}| |\vec{b}| \cos \theta$ (geometri) sama dengan $a_1b_1 + a_2b_2$ (aljabar)? Kita bisa membuktikannya menggunakan <strong>Aturan Cosinus</strong> dari trigonometri.
+        </p>
+        <ol>
+            <li>Perhatikan diagram di atas. Jika kita menggambar vektor $\vec{c} = \vec{a} - \vec{b}$ (dari ujung $\vec{b}$ ke ujung $\vec{a}$), kita akan mendapatkan sebuah segitiga.</li>
+            <li>Menurut Aturan Cosinus pada segitiga tersebut:
+                $$ |\vec{c}|^2 = |\vec{a}|^2 + |\vec{b}|^2 - 2|\vec{a}| |\vec{b}| \cos \theta $$
+            </li>
+            <li>Kita tahu dari definisi geometris bahwa $|\vec{a}| |\vec{b}| \cos \theta$ adalah $\vec{a} \cdot \vec{b}$. Jadi:
+                $$ |\vec{c}|^2 = |\vec{a}|^2 + |\vec{b}|^2 - 2(\vec{a} \cdot \vec{b}) $$
+            </li>
+            <li>Sekarang, mari kita selesaikan untuk $\vec{a} \cdot \vec{b}$:
+                $$ 2(\vec{a} \cdot \vec{b}) = |\vec{a}|^2 + |\vec{b}|^2 - |\vec{c}|^2 $$
+            </li>
+            <li>Mari kita hitung setiap bagian menggunakan aljabar (di R² untuk kesederhanaan):
+                <ul>
+                    <li>$\vec{a} = \begin{pmatrix} a_1 \\ a_2 \end{pmatrix} \implies |\vec{a}|^2 = a_1^2 + a_2^2$</li>
+                    <li>$\vec{b} = \begin{pmatrix} b_1 \\ b_2 \end{pmatrix} \implies |\vec{b}|^2 = b_1^2 + b_2^2$</li>
+                    <li>$\vec{c} = \vec{a} - \vec{b} = \begin{pmatrix} a_1 - b_1 \\ a_2 - b_2 \end{pmatrix} \implies |\vec{c}|^2 = (a_1 - b_1)^2 + (a_2 - b_2)^2$</li>
+                </ul>
+            </li>
+            <li>Substitusikan semua ke persamaan di langkah 4:
+                $$ 2(\vec{a} \cdot \vec{b}) = (a_1^2 + a_2^2) + (b_1^2 + b_2^2) - \left[ (a_1 - b_1)^2 + (a_2 - b_2)^2 \right] $$
+            </li>
+            <li>Jabarkan bagian kanan:
+                $$ 2(\vec{a} \cdot \vec{b}) = (a_1^2 + a_2^2) + (b_1^2 + b_2^2) - [ (a_1^2 - 2a_1b_1 + b_1^2) + (a_2^2 - 2a_2b_2 + b_2^2) ] $$
+            </li>
+            <li>Saat kita buka kurung, semua suku kuadrat ($a_1^2, a_2^2, b_1^2, b_2^2$) akan saling menghilangkan:
+                $$ 2(\vec{a} \cdot \vec{b}) = 2a_1b_1 + 2a_2b_2 $$
+            </li>
+            <li>Bagi kedua sisi dengan 2, kita mendapatkan buktinya:
+                $$ \vec{a} \cdot \vec{b} = a_1b_1 + a_2b_2 $$
+            </li>
+        </ol>
+        <p>Ini membuktikan bahwa rumus aljabar adalah konsekuensi logis dari rumus geometris.</p>
+
+        <h2>Aplikasi Utama: Menemukan Sudut Antara Dua Vektor</h2>
+        <p>
+            Inilah kegunaan terbesar dot product. Karena kedua definisi di atas sama-sama menghitung $\vec{a} \cdot \vec{b}$, kita dapat menggabungkan keduanya:
+        </p>
+        $$ |\vec{a}| |\vec{b}| \cos \theta = a_1b_1 + a_2b_2 + a_3b_3 $$
+        <p>Dengan mengisolasi $\cos \theta$, kita mendapatkan rumus untuk mencari sudut:</p>
+        <div class="info-box" style="text-align: center; font-size: 1.1em; background-color: rgba(248, 81, 73, 0.1); border-left-color: var(--accent-red);">
+            <strong>Rumus Mencari Sudut:</strong>
+            $$ \cos \theta = \frac{\vec{a} \cdot \vec{b}}{|\vec{a}| |\vec{b}|} $$
+        </div>
+        
+        <h3>Implikasi Penting: Tes Vektor Tegak Lurus (Ortogonal)</h3>
+        <p>
+            Dari definisi geometris, jika $\vec{a}$ dan $\vec{b}$ saling tegak lurus, maka $\theta = 90^\circ$. Karena $\cos(90^\circ) = 0$, maka seluruh hasil dot product-nya pasti nol.
+        </p>
+        <blockquote>
+            <strong>Tes Tegak Lurus:</strong>
+            Dua vektor (bukan nol) saling tegak lurus jika dan hanya jika <strong>dot product-nya adalah nol</strong>.
+            $$ \vec{a} \perp \vec{b} \iff \vec{a} \cdot \vec{b} = 0 $$
+        </blockquote>
+
+        <h2>Uji Pemahaman</h2>
+        <p>Pilih jawaban yang paling tepat untuk menguji pemahaman Anda tentang Dot Product.</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Cek session (jika perlu)
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+
+        const quizzes = [
+            { 
+                q: "Apa hasil dari operasi Dot Product antara dua vektor?", 
+                options: ["Vektor baru", "Skalar (angka)", "Bisa vektor, bisa skalar", "Vektor satuan"], 
+                correct: 1, 
+                explanation: "Nama lainnya adalah 'Hasil Kali Skalar'. Operasi ini selalu menghasilkan sebuah angka (skalar), bukan vektor baru." 
+            },
+            { 
+                q: "Diketahui $\\vec{a} = \\begin{pmatrix} 4 \\\\ 1 \\end{pmatrix}$ dan $\\vec{b} = \\begin{pmatrix} 2 \\\\ 5 \\end{pmatrix}$. Nilai dari $\\vec{a} \\cdot \\vec{b}$ adalah...", 
+                options: ["13", "8", "5", "$\\begin{pmatrix} 8 \\\\ 5 \\end{pmatrix}$"], 
+                correct: 0, 
+                explanation: "Gunakan rumus aljabar: $\\vec{a} \\cdot \\vec{b} = a_1b_1 + a_2b_2 = (4)(2) + (1)(5) = 8 + 5 = 13$." 
+            },
+            { 
+                q: "Diketahui $|\vec{u}| = 10$, $|\vec{v}| = 5$, dan sudut antara keduanya adalah $60^\\circ$. Berapakah nilai $\\vec{u} \\cdot \\vec{v}$?", 
+                options: ["50", "100", "25", "0.5"], 
+                correct: 2, 
+                explanation: "Gunakan rumus geometris: $\\vec{u} \\cdot \\vec{v} = |\\vec{u}| |\\vec{v}| \\cos \\theta = (10)(5) \\cos(60^\\circ) = 50 \\times (0.5) = 25$." 
+            },
+            { 
+                q: "Jika $\\vec{p} \cdot \\vec{q} = 0$, dan kita tahu $\\vec{p}$ dan $\\vec{q}$ bukan vektor nol, apa kesimpulan yang paling tepat?", 
+                options: [
+                    "Vektor $\\vec{p}$ dan $\\vec{q}$ searah.", 
+                    "Vektor $\\vec{p}$ dan $\\vec{q}$ berlawanan arah.", 
+                    "Vektor $\\vec{p}$ dan $\\vec{q}$ saling tegak lurus.", 
+                    "Vektor $\\vec{p}$ atau $\\vec{q}$ pasti vektor nol."
+                ], 
+                correct: 2, 
+                explanation: "Jika dot product dua vektor (bukan nol) adalah 0, itu berarti $\\cos \\theta = 0$. Ini hanya terjadi jika sudut $\\theta = 90^\\circ$, yang berarti kedua vektor saling tegak lurus." 
+            },
+            { 
+                q: "Manakah rumus yang benar untuk mencari $\\cos \\theta$ (sudut antara $\\vec{a}$ dan $\\vec{b}$)?", 
+                options: [
+                    "$\\frac{\\vec{a} \\cdot \\vec{b}}{|\vec{a}| |\vec{b}|}$", 
+                    "$\\vec{a} \\cdot \\vec{b} - |\vec{a}| |\vec{b}|$", 
+                    "$\\frac{|\vec{a}| |\vec{b}|}{\\vec{a} \\cdot \\vec{b}}$", 
+                    "$|\vec{a}| |\vec{b}|$"
+                ], 
+                correct: 0, 
+                explanation: "Rumus ini didapat dari menggabungkan dua definisi dot product: $a_1b_1+... = |\\vec{a}| |\\vec{b}| \\cos \\theta$. Dengan mengisolasi $\\cos \\theta$, kita mendapatkan $\\cos \\theta = \\frac{\\vec{a} \\cdot \\vec{b}}{|\vec{a}| |\vec{b}|}$." 
+            }
+        ];
+
+        // --- SCRIPT KUIS INTERAKTIF ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const quizContainer = document.getElementById("quiz-container");
+            if (!quizContainer) return;
+
+            quizzes.forEach((quiz, index) => {
+                const quizEl = document.createElement("div");
+                quizEl.className = "quiz-accordion";
+                const optionsHtml = quiz.options.map((opt, i) => 
+                    `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                ).join("");
+                quizEl.innerHTML = `
+                    <button class="quiz-accordion-button">
+                        <span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="quiz-accordion-content hidden">
+                        <p class="question-text">${quiz.q}</p>
+                        <div class="options-container">${optionsHtml}</div>
+                        <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                    </div>`;
+                quizContainer.appendChild(quizEl);
+            });
+
+            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+            accordionButtons.forEach(clickedButton => {
+                clickedButton.addEventListener('click', () => {
+                    const content = clickedButton.nextElementSibling;
+                    const isOpening = content.classList.contains('hidden');
+
+                    accordionButtons.forEach(button => {
+                        if (button !== clickedButton) {
+                            button.classList.remove('active');
+                            button.nextElementSibling.classList.add('hidden');
+                        }
+                    });
+
+                    clickedButton.classList.toggle('active');
+                    content.classList.toggle('hidden');
+
+                    if (isOpening && window.MathJax) {
+                        MathJax.typesetPromise([content]);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('wrong');
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) {
+                            correctOption.classList.add('correct');
+                        }
+                    }
+                    if (window.MathJax) {
+                        MathJax.typesetPromise([explanation]);
+                    }
+                });
+            });
+            
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        });
+    </script>
+</body>
+</html>
