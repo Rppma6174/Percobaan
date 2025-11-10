@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aljabar Vektor 3: Proyeksi Ortogonal Skalar - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png"> <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { 
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } 
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2, h3 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        h3 { color: #58a6ff; margin-top: 2rem; }
+        .hidden { display: none; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 0.5rem; }
+        .diagram-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-main);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            margin-top: 1rem;
+            overflow-x: auto;
+        }
+        .diagram-container svg { max-width: 100%; }
+        .diagram-container svg text { font-size: 14px; fill: var(--text-primary); }
+        .diagram-container p { font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem; }
+        
+        /* Kotak info khusus */
+        .info-box {
+            background-color: rgba(47, 129, 247, 0.1);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+        .info-box.red {
+            background-color: rgba(248, 81, 73, 0.1);
+            border-left-color: var(--accent-red);
+        }
+
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold;
+        }
+        .quiz-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1);
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        p, li, .quiz-explanation {
+            overflow-x: auto; padding-bottom: 8px;
+        }
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <h1>Aljabar Vektor 3: Proyeksi Ortogonal Skalar</h1>
+        <p>
+            Kita telah membahas Dot Product dan bagaimana ia menghubungkan panjang vektor dengan sudut di antaranya. Sekarang, kita akan menggunakan Dot Product untuk menjawab pertanyaan yang sangat spesifik:
+        </p>
+        <blockquote>
+            "Seberapa panjang 'bayangan' dari satu vektor jika disinari tegak lurus ke vektor lainnya?"
+        </blockquote>
+        <p>
+            Proses ini disebut <strong>Proyeksi Ortogonal</strong>. Hasil yang kita cari adalah <strong>Proyeksi Skalar</strong>, yang pada dasarnya adalah <strong>panjang dari bayangan tersebut</strong>.
+        </p>
+
+        <h2>Esensi Geometris: Bayangan Tegak Lurus</h2>
+        <p>
+            Bayangkan Anda memiliki vektor $\vec{a}$ dan vektor $\vec{b}$. Anda ingin mencari "proyeksi skalar $\vec{a}$ pada $\vec{b}$".
+        </p>
+        <p>
+            bayangkan $\vec{b}$ adalah tanah dan $\vec{a}$ adalah sebuah tiang. Jika matahari berada tepat di atas (menyinari secara tegak lurus ke $\vec{b}$), panjang bayangan tiang $\vec{a}$ yang jatuh di tanah $\vec{b}$ itulah yang kita sebut proyeksi skalar.
+        </p>
+
+        <div class="diagram-container">
+            <svg width="350" height="200" viewBox="0 0 350 200" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrow-proj-a" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto"><polygon points="0 0, 7 2.5, 0 5" fill="#2F81F7"/></marker>
+                    <marker id="arrow-proj-b" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto"><polygon points="0 0, 7 2.5, 0 5" fill="#39D353"/></marker>
+                </defs>
+                <line x1="50" y1="150" x2="300" y2="150" stroke="#39D353" stroke-width="3" marker-end="url(#arrow-proj-b)" />
+                <foreignObject x="160" y="155" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #39D353; font-size: 16px;">$\vec{b}$</div></foreignObject>
+                
+                <line x1="50" y1="150" x2="200" y2="50" stroke="#2F81F7" stroke-width="3" marker-end="url(#arrow-proj-a)" />
+                <foreignObject x="110" y="80" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #58a6ff; font-size: 16px;">$\vec{a}$</div></foreignObject>
+                
+                <line x1="200" y1="50" x2="200" y2="150" stroke="#8B949E" stroke-width="2" stroke-dasharray="4"/>
+                <rect x="190" y="140" width="10" height="10" fill="none" stroke="#8B949E" stroke-width="1.5"/>
+                
+                <line x1="50" y1="145" x2="200" y2="145" stroke="#F85149" stroke-width="3" marker-end="url(#arrow-proj-b)" />
+                <foreignObject x="115" y="115" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #F85149; font-size: 16px;">$\vec{c}$</div></foreignObject>
+
+                <path d="M 105 150 A 30 30 0 0 0 100 120" fill="none" stroke="#C9D1D9" stroke-width="2"/>
+                <foreignObject x="80" y="125" width="30" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #C9D1D9; font-size: 16px;">$\theta$</div></foreignObject>
+            </svg>
+            <p>Vektor $\vec{c}$ adalah proyeksi vektor $\vec{a}$ pada $\vec{b}$.<br>Panjang dari $\vec{c}$ adalah proyeksi skalar $\vec{a}$ pada $\vec{b}$.</p>
+        </div>
+
+        <h2>Penurunan Rumus (Menggunakan Dot Product)</h2>
+        <p>
+            Bagaimana kita menghitung panjang $\vec{c}$ (kita sebut $L$)?
+        </p>
+        <ol>
+            <li>Dari diagram di atas, kita membentuk segitiga siku-siku. Menggunakan trigonometri dasar :
+                $$ \cos \theta = \frac{\text{Samping}}{\text{Miring}} = \frac{L}{|\vec{a}|} $$
+            </li>
+            <li>Jika kita susun ulang, panjang bayangan $L$ adalah:
+                $$ L = |\vec{a}| \cos \theta $$
+            </li>
+            <li>Sekarang, ingat kembali definisi geometris dari Dot Product:
+                $$ \vec{a} \cdot \vec{b} = |\vec{a}| |\vec{b}| \cos \theta $$
+            </li>
+            <li>Lihat! Bagian $|\vec{a}| \cos \theta$ sudah ada di dalam rumus Dot Product. Mari kita substitusikan:
+                $$ \vec{a} \cdot \vec{b} = (L) \cdot |\vec{b}| $$
+            </li>
+            <li>Sekarang, kita bisa selesaikan untuk $L$:
+                <div class="info-box" style="text-align: center; font-size: 1.1em;">
+                    <strong>Proyeksi Skalar $\vec{a}$ pada $\vec{b}$ = $L = \frac{\vec{a} \cdot \vec{b}}{|\vec{b}|}$</strong>
+                </div>
+            </li>
+        </ol>
+        <p>
+            Secara intuitif (UMT), proyeksi skalar adalah "dot product yang dinormalisasi". Kita membagi $\vec{a} \cdot \vec{b}$ dengan panjang $\vec{b}$ untuk "membatalkan" kontribusi panjang $\vec{b}$ dari rumus, menyisakan murni "panjang proyeksi $\vec{a}$".
+        </p>
+
+        <h3>Catatan Penting: Proyeksi Bisa Negatif</h3>
+        <p>
+            "Panjang" bayangan ini bisa bernilai negatif. Apa artinya?
+        </p>
+        <ul>
+            <li>Jika $\theta < 90^\circ$ (lancip), $\cos \theta$ positif, maka hasil proyeksi <strong>positif</strong> (bayangan searah dengan $\vec{b}$).</li>
+            <li>Jika $\theta > 90^\circ$ (tumpul), $\cos \theta$ negatif, maka hasil proyeksi <strong>negatif</strong> (bayangan berlawanan arah dengan $\vec{b}$).</li>
+        </ul>
+        <div class="diagram-container">
+            <svg width="350" height="150" viewBox="0 0 350 150" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <marker id="arrow-obtuse-a" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto"><polygon points="0 0, 7 2.5, 0 5" fill="#2F81F7"/></marker>
+                    <marker id="arrow-obtuse-b" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto"><polygon points="0 0, 7 2.5, 0 5" fill="#39D353"/></marker>
+                    <marker id="arrow-obtuse-c" markerWidth="7" markerHeight="5" refX="0" refY="2.5" orient="auto"><polygon points="0 0, 7 2.5, 0 5" fill="#F85149"/></marker>
+                </defs>
+                <line x1="100" y1="100" x2="300" y2="100" stroke="#39D353" stroke-width="3" marker-end="url(#arrow-obtuse-b)" />
+                <foreignObject x="190" y="105" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #39D353; font-size: 16px;">$\vec{b}$</div></foreignObject>
+                <line x1="100" y1="100" x2="150" y2="30" stroke="#2F81F7" stroke-width="3" marker-end="url(#arrow-obtuse-a)" />
+                <foreignObject x="115" y="45" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #58a6ff; font-size: 16px;">$\vec{a}$</div></foreignObject>
+                <line x1="150" y1="30" x2="150" y2="100" stroke="#8B949E" stroke-width="2" stroke-dasharray="4"/>
+                <rect x="140" y="90" width="10" height="10" fill="none" stroke="#8B949E" stroke-width="1.5"/>
+                <line x1="100" y1="95" x2="150" y2="95" stroke="#F85149" stroke-width="3" marker-end="url(#arrow-obtuse-c)" />
+                <foreignObject x="115" y="65" width="50" height="40"><div xmlns="http://www.w3.org/1999/xhtml" style="color: #F85149; font-size: 16px;">$\vec{c}$</div></foreignObject>
+            </svg>
+            <p>Jika sudut $\theta$ tumpul, proyeksi $\vec{c}$ akan berlawanan arah dengan $\vec{b}$, sehingga nilainya negatif.</p>
+        </div>
+
+        <h2>Uji Pemahaman</h2>
+        <p>Pilih jawaban yang paling tepat untuk menguji pemahaman Anda tentang Proyeksi Skalar.</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Cek session (jika perlu)
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+
+        const quizzes = [
+            { 
+                q: "Apa yang dimaksud dengan 'proyeksi skalar' dari $\\vec{a}$ pada $\\vec{b}$?", 
+                options: [
+                    "Sebuah vektor baru yang searah $\\vec{b}$", 
+                    "Sebuah angka (skalar) yang mewakili panjang bayangan $\\vec{a}$ pada $\\vec{b}$", 
+                    "Sudut antara $\\vec{a}$ dan $\\vec{b}$", 
+                    "Hasil kali silang (cross product)"
+                ], 
+                correct: 1, 
+                explanation: "Proyeksi skalar adalah sebuah nilai (angka), bukan vektor. Nilai ini mewakili panjang bayangan yang bisa positif atau negatif tergantung arahnya." 
+            },
+            { 
+                q: "Manakah rumus yang tepat untuk proyeksi skalar $\\vec{u}$ pada $\\vec{v}$?", 
+                options: [
+                    "$\\frac{\\vec{u} \\cdot \\vec{v}}{|\vec{v}|}$", 
+                    "$\\frac{\\vec{u} \\cdot \\vec{v}}{|\vec{u}|}$", 
+                    "$\\frac{\\vec{u}}{|\vec{v}|}$", 
+                    "$|\\vec{u}| |\\vec{v}| \\cos \\theta$"
+                ], 
+                correct: 0, 
+                explanation: "Rumusnya adalah dot product dibagi dengan panjang vektor 'lantai' atau 'tujuan proyeksi'. Karena $\\vec{u}$ diproyeksikan PADA $\\vec{v}$, maka kita bagi dengan panjang $\\vec{v}$." 
+            },
+            { 
+                q: "Diketahui $\\vec{a} = \\begin{pmatrix} 4 \\\\ 0 \\end{pmatrix}$ dan $\\vec{b} = \\begin{pmatrix} 5 \\\\ 2 \\end{pmatrix}$. Tentukan proyeksi skalar $\\vec{b}$ pada $\\vec{a}$!", 
+                options: ["4", "5", "10", "20"], 
+                correct: 1, 
+                explanation: "Kita mencari proyeksi $\\vec{b}$ PADA $\\vec{a}$. Rumusnya: $\\frac{\\vec{b} \\cdot \\vec{a}}{|\vec{a}|}$. $\\vec{b} \\cdot \\vec{a} = (5)(4) + (2)(0) = 20$. Panjang $|\vec{a}| = \\sqrt{4^2 + 0^2} = 4$. Maka, proyeksinya adalah $\\frac{20}{4} = 5$." 
+            },
+            { 
+                q: "Jika proyeksi skalar $\\vec{a}$ pada $\\vec{b}$ bernilai 0 (dan $\\vec{a}, \\vec{b}$ bukan vektor nol), apa artinya?", 
+                options: [
+                    "$\\vec{a}$ dan $\\vec{b}$ searah", 
+                    "$\\vec{a}$ dan $\\vec{b}$ berlawanan arah", 
+                    "$\\vec{a}$ dan $\\vec{b}$ tegak lurus", 
+                    "Panjang $\\vec{a}$ adalah nol"
+                ], 
+                correct: 2, 
+                explanation: "Jika proyeksi skalar $\\frac{\\vec{a} \\cdot \\vec{b}}{|\vec{b}|} = 0$, ini berarti $\\vec{a} \\cdot \\vec{b} = 0$. Ini adalah syarat dua vektor saling tegak lurus (ortogonal)." 
+            },
+            { 
+                q: "Jika proyeksi skalar $\\vec{u}$ pada $\\vec{v}$ bernilai negatif, apa yang dapat kita simpulkan?", 
+                options: [
+                    "Sudut antara $\\vec{u}$ dan $\\vec{v}$ lancip ($< 90^\\circ$)", 
+                    "Sudut antara $\\vec{u}$ dan $\\vec{v}$ tumpul ($> 90^\\circ$)", 
+                    "Panjang $\\vec{u}$ negatif", 
+                    "Perhitungan salah, proyeksi tidak bisa negatif"
+                ], 
+                correct: 1, 
+                explanation: "Proyeksi skalar bisa negatif. Ini terjadi jika $\\cos \\theta$ bernilai negatif, yang hanya terjadi jika sudut $\\theta$ tumpul (antara 90° dan 180°). Ini berarti 'bayangan' jatuh berlawanan arah dengan $\\vec{v}$." 
+            }
+        ];
+
+        // --- SCRIPT KUIS INTERAKTIF ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const quizContainer = document.getElementById("quiz-container");
+            if (!quizContainer) return;
+
+            quizzes.forEach((quiz, index) => {
+                const quizEl = document.createElement("div");
+                quizEl.className = "quiz-accordion";
+                const optionsHtml = quiz.options.map((opt, i) => 
+                    `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                ).join("");
+                quizEl.innerHTML = `
+                    <button class="quiz-accordion-button">
+                        <span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="quiz-accordion-content hidden">
+                        <p class="question-text">${quiz.q}</p>
+                        <div class="options-container">${optionsHtml}</div>
+                        <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                    </div>`;
+                quizContainer.appendChild(quizEl);
+            });
+
+            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+            accordionButtons.forEach(clickedButton => {
+                clickedButton.addEventListener('click', () => {
+                    const content = clickedButton.nextElementSibling;
+                    const isOpening = content.classList.contains('hidden');
+
+                    accordionButtons.forEach(button => {
+                        if (button !== clickedButton) {
+                            button.classList.remove('active');
+                            button.nextElementSibling.classList.add('hidden');
+                        }
+                    });
+
+                    clickedButton.classList.toggle('active');
+                    content.classList.toggle('hidden');
+
+                    if (isOpening && window.MathJax) {
+                        MathJax.typesetPromise([content]);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('wrong');
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) {
+                            correctOption.classList.add('correct');
+                        }
+                    }
+                    if (window.MathJax) {
+                        MathJax.typesetPromise([explanation]);
+                    }
+                });
+            });
+            
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        });
+    </script>
+</body>
+</html>
