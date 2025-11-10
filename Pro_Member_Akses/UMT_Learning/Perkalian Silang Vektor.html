@@ -225,54 +225,54 @@
 
         const quizzes = [
             { 
-                q: "Apa hasil dari operasi Cross Product ($\vec{a} \times \vec{b}$)?", 
+                q: "Apa hasil dari operasi Cross Product ($\\vec{a} \\times \\vec{b}$)?", 
                 options: ["Sebuah skalar (angka)", "Sebuah vektor baru", "Sebuah sudut", "Sebuah bidang"], 
                 correct: 1, 
                 explanation: "Hasil kali vektor (cross product) selalu menghasilkan sebuah VEKTOR baru, yang arahnya tegak lurus terhadap kedua vektor asalnya." 
             },
             { 
-                q: "Jika $\vec{a}$ dan $\vec{b}$ adalah dua vektor pada lantai (bidang xy), ke manakah arah dari $\vec{a} \times \vec{b}$?", 
+                q: "Jika $\\vec{a}$ dan $\\vec{b}$ adalah dua vektor pada lantai (bidang xy), ke manakah arah dari $\\vec{a} \\times \\vec{b}$?", 
                 options: [
                     "Ikut di lantai (bidang xy)", 
                     "Menunjuk lurus ke atas atau ke bawah (searah sumbu-z)", 
-                    "Searah dengan $\vec{a}$", 
-                    "Searah dengan $\vec{b}$"
+                    "Searah dengan $\\vec{a}$", 
+                    "Searah dengan $\\vec{b}$"
                 ], 
                 correct: 1, 
-                explanation: "Hasil cross product selalu tegak lurus (ortogonal) terhadap bidang yang dibentuk oleh dua vektor asalnya. Jika $\vec{a}$ dan $\vec{b}$ ada di bidang xy, maka hasilnya pasti menunjuk searah sumbu-z (atau -z)." 
+                explanation: "Hasil cross product selalu tegak lurus (ortogonal) terhadap bidang yang dibentuk oleh dua vektor asalnya. Jika $\\vec{a}$ dan $\\vec{b}$ ada di bidang xy, maka hasilnya pasti menunjuk searah sumbu-z (atau -z)." 
             },
             { 
-                q: "Besaran (panjang) dari vektor $\vec{a} \times \vec{b}$, yaitu $|\vec{a} \times \vec{b}|$, secara geometris mewakili...", 
+                q: "Besaran (panjang) dari vektor $\\vec{a} \\times \\vec{b}$, yaitu $|\\vec{a} \\times \\vec{b}|$, secara geometris mewakili...", 
                 options: [
-                    "Panjang proyeksi $\vec{a}$ pada $\vec{b}$", 
-                    "Keliling jajaran genjang oleh $\vec{a}$ dan $\vec{b}$", 
-                    "Luas jajaran genjang oleh $\vec{a}$ dan $\vec{b}$", 
-                    "Sudut antara $\vec{a}$ dan $\vec{b}$"
+                    "Panjang proyeksi $\\vec{a}$ pada $\\vec{b}$", 
+                    "Keliling jajaran genjang oleh $\\vec{a}$ dan $\\vec{b}$", 
+                    "Luas jajaran genjang oleh $\\vec{a}$ dan $\\vec{b}$", 
+                    "Sudut antara $\\vec{a}$ dan $\\vec{b}$"
                 ], 
                 correct: 2, 
-                explanation: "Definisi geometris dari besaran cross product adalah $|\vec{a}| |\vec{b}| \sin \theta$, yang merupakan rumus untuk luas jajaran genjang yang dibentuk oleh kedua vektor tersebut." 
+                explanation: "Definisi geometris dari besaran cross product adalah $|\\vec{a}| |\\vec{b}| \\sin \\theta$, yang merupakan rumus untuk luas jajaran genjang yang dibentuk oleh kedua vektor tersebut." 
             },
             { 
                 q: "Manakah dari pernyataan berikut yang benar mengenai sifat cross product?", 
                 options: [
-                    "$\\vec{a} \times \vec{b} = \vec{b} \times \vec{a}$ (Komutatif)", 
-                    "$\\vec{a} \times \vec{a} = |\vec{a}|^2$", 
-                    "$\\vec{a} \times \vec{b} = -(\\vec{b} \times \vec{a})$ (Anti-Komutatif)", 
-                    "Jika $\\vec{a} \cdot \vec{b} = 0$, maka $\\vec{a} \times \vec{b} = 0$"
+                    "$\\vec{a} \\times \\vec{b} = \\vec{b} \\times \\vec{a}$ (Komutatif)", 
+                    "$\\vec{a} \\times \\vec{a} = |\\vec{a}|^2$", 
+                    "$\\vec{a} \\times \\vec{b} = -(\\vec{b} \\times \\vec{a})$ (Anti-Komutatif)", 
+                    "Jika $\\vec{a} \\cdot \\vec{b} = 0$, maka $\\vec{a} \\times \\vec{b} = 0$"
                 ], 
                 correct: 2, 
                 explanation: "Cross product bersifat anti-komutatif. Mengubah urutan perkalian akan membalik arah vektor hasilnya (sesuai Aturan Tangan Kanan)." 
             },
             { 
-                q: "Jika $\vec{a}$ dan $\vec{b}$ adalah dua vektor yang sejajar (kolinear), berapakah hasil dari $\vec{a} \times \vec{b}$?", 
+                q: "Jika $\\vec{a}$ dan $\\vec{b}$ adalah dua vektor yang sejajar (kolinear), berapakah hasil dari $\\vec{a} \\times \\vec{b}$?", 
                 options: [
-                    "$|\vec{a}| |\vec{b}|$", 
+                    "$|\\vec{a}| |\\vec{b}|$", 
                     "$\\vec{0}$ (Vektor Nol)", 
                     "1", 
                     "Tidak dapat dihitung"
                 ], 
                 correct: 1, 
-                explanation: "Jika sejajar, sudut $\theta$ di antara keduanya adalah $0^\\circ$ atau $180^\\circ$. Dalam kedua kasus, $\sin(0^\\circ) = 0$ dan $\sin(180^\\circ) = 0$. Maka, $|\vec{a} \times \vec{b}| = |\vec{a}| |\vec{b}| \sin \theta = 0$. Vektor yang memiliki panjang 0 adalah Vektor Nol ($\\vec{0}$)." 
+                explanation: "Jika sejajar, sudut $\\theta$ di antara keduanya adalah $0^\\circ$ atau $180^\\circ$. Dalam kedua kasus, $\\sin(0^\\circ) = 0$ dan $\\sin(180^\\circ) = 0$. Maka, $|\\vec{a} \\times \\vec{b}| = |\\vec{a}| |\\vec{b}| \\sin \\theta = 0$. Vektor yang memiliki panjang 0 adalah Vektor Nol ($\\vec{0}$)." 
             }
         ];
 
