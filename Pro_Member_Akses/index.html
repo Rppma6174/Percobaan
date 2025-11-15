@@ -41,11 +41,11 @@
         .sidebar-link.active { background-color: #30363D; color: white; }
         .card-item { background-color: #21262D; transition: transform 0.2s; cursor: pointer; }
         .card-item:hover { transform: translateY(-4px); background-color: #30363D; }
-        .quiz-option {border: 2px solid var(--border-color);transition: border-color 0.2s, background-color 0.2s;}
-        .quiz-option:hover {border-color: var(--accent-cyan);}
-        .quiz-option.selected {border-color: var(--accent-cyan) !important; border-width: 3px !important;}
-        .correct-answer {background-color: rgba(57, 211, 83, 0.1);border: 2px solid var(--accent-green) !important;border-left-width: 4px !important;padding: 1rem; border-radius: 0.75rem; }
-        .wrong-answer {background-color: rgba(248, 81, 73, 0.1);border: 2px solid var(--accent-red) !important;border-left-width: 4px !important;padding: 1rem;border-radius: 0.75rem; }
+        .quiz-option { border: 2px solid var(--border-color); }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.selected { border-color: var(--accent-cyan); background-color: rgba(47, 129, 247, 0.2); }
+        .correct-answer { background-color: rgba(57, 211, 83, 0.1); border-left: 4px solid var(--accent-green); }
+        .wrong-answer { background-color: rgba(248, 81, 73, 0.1); border-left: 4px solid var(--accent-red); }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .nav-btn:disabled { background-color: #30363D; color: #8B949E; cursor: not-allowed; }
@@ -1778,73 +1778,51 @@ function renderQuizInterface() {
         activeNavItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
     }
 }
-
 function showAnswerAndExplanation(isRestoringState = false) {
-    const quiz = currentQuizData;
-    const question = quiz.questions[currentQuestionIndex];
-    const selectedAnswer = userAnswers[currentQuestionIndex];
+    const quiz = currentQuizData;
+    const question = quiz.questions[currentQuestionIndex];
+    const selectedAnswer = userAnswers[currentQuestionIndex];
 
-    const optionsContainer = document.getElementById('quiz-options');
-    const allOptions = optionsContainer.children;
+    const optionsContainer = document.getElementById('quiz-options');
+    const allOptions = optionsContainer.children;
 
-    optionsContainer.classList.add('pointer-events-none');
+    optionsContainer.classList.add('pointer-events-none');
 
-    for (let i = 0; i < allOptions.length; i++) {
-        const optionEl = allOptions[i];
-        const optionText = question.options[i];
+    for (let i = 0; i < allOptions.length; i++) {
+        const optionEl = allOptions[i];
+        const optionText = question.options[i];
 
-        if (optionText === question.correctAnswer) {
-            // === PERUBAHAN DI SINI ===
-            // optionEl.classList.remove('quiz-option'); // JANGAN HAPUS INI
-            optionEl.classList.add('correct-answer'); // CUKUP TAMBAHKAN
-        }
+        if (optionText === question.correctAnswer) {
+            optionEl.classList.remove('quiz-option');
+            optionEl.classList.add('correct-answer');
+        }
 
-        // Saat memuat ulang (navigasi), pastikan jawaban salah tetap merah
-        if (isRestoringState && optionText === selectedAnswer && selectedAnswer !== question.correctAnswer) {
-            // === PERUBAHAN DI SINI ===
-            // optionEl.classList.remove('quiz-option'); // JANGAN HAPUS INI
-            optionEl.classList.add('wrong-answer'); // CUKUP TAMBAHKAN
-        }
-        // Saat baru memilih (bukan memuat ulang)
-        else if (!isRestoringState && optionText === selectedAnswer && selectedAnswer !== question.correctAnswer) {
-            // === PERUBAHAN DI SINI ===
-       // optionEl.classList.remove('quiz-option'); // JANGAN HAPUS INI
-            optionEl.classList.add('wrong-answer'); // CUKUP TAMBAHKAN
-        }
-    }
+        if (!isRestoringState && optionText === selectedAnswer && selectedAnswer !== question.correctAnswer) {
+            optionEl.classList.remove('quiz-option');
+            optionEl.classList.add('wrong-answer');
+        }
+    }
 
-    document.getElementById('explanation-container').classList.remove('hidden');
+    document.getElementById('explanation-container').classList.remove('hidden');
 
-    if (window.MathJax) {
-        const explanationText = document.querySelector('.explanation-content-inner');
-        MathJax.typesetPromise([explanationText]).catch(err => console.log('MathJax error:', err));
-    }
+    if (window.MathJax) {
+        const explanationText = document.querySelector('.explanation-content-inner');
+        MathJax.typesetPromise([explanationText]).catch(err => console.log('MathJax error:', err));
+    }
 }
-
 function selectAnswer(answer, element) {
-    if (userAnswers[currentQuestionIndex] !== null) {
-        return;
-    }
-    userAnswers[currentQuestionIndex] = answer;
-    
-    // === INI TAMBAHANNYA ===
-    // 1. Ambil semua opsi
-    const allOptions = document.querySelectorAll('#quiz-options .quiz-option');
-    // 2. Hapus .selected dari SEMUA opsi
-    allOptions.forEach(opt => opt.classList.remove('selected'));
-    // 3. Tambahkan .selected HANYA ke yang diklik
-    element.classList.add('selected');
-    // === AKHIR TAMBAHAN ===
+    if (userAnswers[currentQuestionIndex] !== null) {
+        return;
+    }
+    userAnswers[currentQuestionIndex] = answer;
 
-    const navItem = document.querySelector(`.quiz-nav-item:nth-child(${currentQuestionIndex + 1})`);
-    if (navItem) {
-        navItem.classList.add('answered');
-    }
+    const navItem = document.querySelector(`.quiz-nav-item:nth-child(${currentQuestionIndex + 1})`);
+    if (navItem) {
+        navItem.classList.add('answered');
+    }
 
-    // Tetap panggil showAnswerAndExplanation seperti kode asli Anda
-    showAnswerAndExplanation();
+    showAnswerAndExplanation();
 }
-
 function nextQuestion() {
     if (currentQuestionIndex < currentQuizData.questions.length - 1) {
         currentQuestionIndex++;
