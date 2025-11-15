@@ -1694,145 +1694,135 @@ function startQuiz(quizId) {
     userAnswers = new Array(currentQuizData.questions.length).fill(null);
     renderQuizInterface();
 }
-
 function renderQuizInterface() {
-    const quiz = currentQuizData;
-    const question = quiz.questions[currentQuestionIndex];
+    const quiz = currentQuizData;
+    const question = quiz.questions[currentQuestionIndex];
 
-    const questionNavHTML = quiz.questions.map((_, index) => {
-        let classes = 'quiz-nav-item';
-        if (index === currentQuestionIndex) {
-            classes += ' current';
-        } else if (userAnswers[index] !== null) {
-            classes += ' answered';
-        }
-        return `<div class="${classes}" onclick="jumpToQuestion(${index})">${index + 1}</div>`;
-    }).join('');
+    const questionNavHTML = quiz.questions.map((_, index) => {
+        let classes = 'quiz-nav-item';
+        if (index === currentQuestionIndex) {
+            classes += ' current';
+        } else if (userAnswers[index] !== null) {
+            classes += ' answered';
+        }
+        return `<div class="${classes}" onclick="jumpToQuestion(${index})">${index + 1}</div>`;
+    }).join('');
 
-    const optionsHTML = question.options.map((opt, index) =>
-        // Baris ini sudah benar dari langkah kita sebelumnya
-        `<div id="option-${index}" class="quiz-option p-4 rounded-lg cursor-pointer transition-colors" onclick="selectAnswer(${index}, this)">
-            ${opt}
-        </div>`
-    ).join('');
+    const optionsHTML = question.options.map((opt, index) =>
+        `<div id="option-${index}" class="quiz-option p-4 rounded-lg cursor-pointer transition-colors" onclick="selectAnswer('${opt.replace(/'/g, "\\'")}', this)">
+            ${opt}
+        </div>`
+    ).join('');
 
-    const whatsappMessage = `Halo Mentor UMT, saya ingin bertanya mengenai soal dari paket '${encodeURIComponent(quiz.title)}'.\n\nPertanyaan: ${encodeURIComponent(question.questionText)}\n\n Mohon bantuannya untuk penjelasan lebih lanjut.`;
-    const whatsappLink = `https://wa.me/6285961160545?text=${whatsappMessage}`;
+    const whatsappMessage = `Halo Mentor UMT, saya ingin bertanya mengenai soal dari paket '${encodeURIComponent(quiz.title)}'.\n\nPertanyaan: ${encodeURIComponent(question.questionText)}\n\n Mohon bantuannya untuk penjelasan lebih lanjut.`;
+    const whatsappLink = `https://wa.me/6285961160545?text=${whatsappMessage}`;
 
-    const quizHTML = `
-        <div class="panel max-w-4xl mx-auto">
-            <div class="flex justify-between items-start mb-4">
-                <div>
-                    <h2 class="text-xl font-bold text-cyan-400">${quiz.title}</h2>
-                    <p class="text-sm text-gray-400">Soal ${currentQuestionIndex + 1} dari ${quiz.questions.length}</p>
-              n </div>
-                <button onclick="navigateTo('bank_soal', document.querySelector('.sidebar-link[onclick*=\\'bank_soal\\']'))" class="text-gray-400 hover:text-white text-2xl leading-none">&times;</button>
-            </div>
-            
-            <div class="quiz-nav-container no-scrollbar">${questionNavHTML}</div>
+    const quizHTML = `
+        <div class="panel max-w-4xl mx-auto">
+            <div class="flex justify-between items-start mb-4">
+                <div>
+                    <h2 class="text-xl font-bold text-cyan-400">${quiz.title}</h2>
+                    <p class="text-sm text-gray-400">Soal ${currentQuestionIndex + 1} dari ${quiz.questions.length}</p>
+                </div>
+                <button onclick="navigateTo('bank_soal', document.querySelector('.sidebar-link[onclick*=\\'bank_soal\\']'))" class="text-gray-400 hover:text-white text-2xl leading-none">&times;</button>
+            </div>
+            
+            <div class="quiz-nav-container no-scrollbar">${questionNavHTML}</div>
 
-            <div class="mb-6 min-h-[60px] text-lg text-gray-200">${question.questionText}</div>
-            
-                        <div id="quiz-options">${optionsHTML}</div>
-                        <div id="explanation-container" class="hidden mt-6">
-                <hr class="border-gray-700 my-5"/>
-                <div>
-                    <h4 class="font-bold text-lg text-cyan-300 mb-2">Pembahasan:</h4>
-                    <div class="text-gray-300 leading-relaxed">
-                        <div class="explanation-container-vertical">
-                            <div class="explanation-content-inner">${question.explanation}</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-6 pt-5 border-t border-dashed border-gray-600">
-                    <h4 class="font-bold text-lg text-amber-300 mb-2">Pembahasan Kurang Jelas?</h4>
-                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
-                        Jika Anda yakin pembahasannya keliru atau kurang tepat, beri tahu mentor lewat WhatsApp. Fitur ini dibuat khusus untuk koreksi — Mohon dipakai hanya untuk perbaikan pembahasan, bukan pertanyaan umum. Klik tombol di bawah untuk terhubung langsung via WhatsApp.
-                    </p>
-                    <a href="${whatsappLink}" target="_blank" class="inline-block bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-5 rounded-lg text-sm transition-transform hover:scale-105">
-                        <i class="fab fa-whatsapp mr-2"></i>Hubungi Mentor
-                    </a>
-                </div>
-            </div>
+            <div class="mb-6 min-h-[60px] text-lg text-gray-200">${question.questionText}</div>
+            <div id="quiz-options" class="space-y-3">${optionsHTML}</div>
 
-            <hr class="border-gray-700 my-6"/>
-            <div class="flex justify-between items-center">
-                <button id="prev-btn" onclick="previousQuestion()" class="nav-btn bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-6 rounded-lg">Sebelumnya</button>
-                ${currentQuestionIndex === quiz.questions.length - 1 ? 
-              B       `<button onclick="renderQuizResults()" class="nav-btn bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-6 rounded-lg">Lihat Hasil</button>` :
-                    `<button id="next-btn" onclick="nextQuestion()" class="nav-btn bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-6 rounded-lg">Selanjutnya</button>`
-                }
-            </div>
-        </div>
-    `;
+            <div id="explanation-container" class="hidden mt-6">
+                <hr class="border-gray-700 my-5"/>
+                <div>
+                    <h4 class="font-bold text-lg text-cyan-300 mb-2">Pembahasan:</h4>
+                    <div class="text-gray-300 leading-relaxed">
+                        <div class="explanation-container-vertical">
+                            <div class="explanation-content-inner">${question.explanation}</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-6 pt-5 border-t border-dashed border-gray-600">
+                    <h4 class="font-bold text-lg text-amber-300 mb-2">Pembahasan Kurang Jelas?</h4>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                        Jika Anda yakin pembahasannya keliru atau kurang tepat, beri tahu mentor lewat WhatsApp. Fitur ini dibuat khusus untuk koreksi — Mohon dipakai hanya untuk perbaikan pembahasan, bukan pertanyaan umum. Klik tombol di bawah untuk terhubung langsung via WhatsApp.
+                    </p>
+                    <a href="${whatsappLink}" target="_blank" class="inline-block bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-5 rounded-lg text-sm transition-transform hover:scale-105">
+                        <i class="fab fa-whatsapp mr-2"></i>Hubungi Mentor
+                    </a>
+                </div>
+            </div>
 
-    appContent.innerHTML = quizHTML;
-    if (window.MathJax) { MathJax.typeset(); }
+            <hr class="border-gray-700 my-6"/>
+            <div class="flex justify-between items-center">
+                <button id="prev-btn" onclick="previousQuestion()" class="nav-btn bg-gray-600 hover:bg-gray-500 text-white font-bold py-2 px-6 rounded-lg">Sebelumnya</button>
+                ${currentQuestionIndex === quiz.questions.length - 1 ? 
+                    `<button onclick="renderQuizResults()" class="nav-btn bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-6 rounded-lg">Lihat Hasil</button>` :
+                    `<button id="next-btn" onclick="nextQuestion()" class="nav-btn bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-2 px-6 rounded-lg">Selanjutnya</button>`
+                }
+            </div>
+        </div>
+    `;
 
-    if (userAnswers[currentQuestionIndex] !== null) {
-        showAnswerAndExplanation(true);
-    }
+    appContent.innerHTML = quizHTML;
+    if (window.MathJax) { MathJax.typeset(); }
 
-    document.getElementById('prev-btn').disabled = (currentQuestionIndex === 0);
-    
-    const activeNavItem = document.querySelector('.quiz-nav-item.current');
-    if (activeNavItem) {
-        activeNavItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-    }
+    if (userAnswers[currentQuestionIndex] !== null) {
+        showAnswerAndExplanation(true);
+    }
+
+    document.getElementById('prev-btn').disabled = (currentQuestionIndex === 0);
+    
+    const activeNavItem = document.querySelector('.quiz-nav-item.current');
+    if (activeNavItem) {
+        activeNavItem.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+    }
 }
 function showAnswerAndExplanation(isRestoringState = false) {
-    const quiz = currentQuizData;
-    const question = quiz.questions[currentQuestionIndex];
-    
-    // === PERUBAHAN DI SINI ===
-    const selectedIndex = userAnswers[currentQuestionIndex];
-    const correctIndex = question.options.indexOf(question.correctAnswer);
-    // === AKHIR PERUBAHAN ===
+    const quiz = currentQuizData;
+    const question = quiz.questions[currentQuestionIndex];
+    const selectedAnswer = userAnswers[currentQuestionIndex];
 
-    const optionsContainer = document.getElementById('quiz-options');
-    const allOptions = optionsContainer.children;
+    const optionsContainer = document.getElementById('quiz-options');
+    const allOptions = optionsContainer.children;
 
-    optionsContainer.classList.add('pointer-events-none');
+    optionsContainer.classList.add('pointer-events-none');
 
-    for (let i = 0; i < allOptions.length; i++) {
-        const optionEl = allOptions[i];
-        
-        // === PERUBAHAN LOGIKA DI SINI ===
-        // Tandai jawaban yang benar (selalu)
-        if (i === correctIndex) {
-            optionEl.classList.remove('quiz-option');
-            optionEl.classList.add('correct-answer');
-        }
+    for (let i = 0; i < allOptions.length; i++) {
+        const optionEl = allOptions[i];
+        const optionText = question.options[i];
 
-        // Tandai jawaban yang salah (jika dipilih dan tidak benar)
-        if (i === selectedIndex && selectedIndex !== correctIndex) {
-            optionEl.classList.remove('quiz-option');
-            optionEl.classList.add('wrong-answer');
-        }
-        // === AKHIR PERUBAHAN ===
-    }
+        if (optionText === question.correctAnswer) {
+            optionEl.classList.remove('quiz-option');
+            optionEl.classList.add('correct-answer');
+        }
 
-    document.getElementById('explanation-container').classList.remove('hidden');
+        if (!isRestoringState && optionText === selectedAnswer && selectedAnswer !== question.correctAnswer) {
+            optionEl.classList.remove('quiz-option');
+            optionEl.classList.add('wrong-answer');
+        }
+    }
 
-    if (window.MathJax) {
-        const explanationText = document.querySelector('.explanation-content-inner');
-        MathJax.typesetPromise([explanationText]).catch(err => console.log('MathJax error:', err));
-    }
+    document.getElementById('explanation-container').classList.remove('hidden');
+
+    if (window.MathJax) {
+        const explanationText = document.querySelector('.explanation-content-inner');
+        MathJax.typesetPromise([explanationText]).catch(err => console.log('MathJax error:', err));
+    }
 }
-function selectAnswer(selectedIndex, element) {
-    if (userAnswers[currentQuestionIndex] !== null) {
-        return;
-    }
-    userAnswers[currentQuestionIndex] = selectedIndex;
+function selectAnswer(answer, element) {
+    if (userAnswers[currentQuestionIndex] !== null) {
+        return;
+    }
+    userAnswers[currentQuestionIndex] = answer;
 
-    const navItem = document.querySelector(`.quiz-nav-item:nth-child(${currentQuestionIndex + 1})`);
-    if (navItem) {
-        navItem.classList.add('answered');
-    }
+    const navItem = document.querySelector(`.quiz-nav-item:nth-child(${currentQuestionIndex + 1})`);
+    if (navItem) {
+        navItem.classList.add('answered');
+    }
 
-    showAnswerAndExplanation();
+    showAnswerAndExplanation();
 }
-
 function nextQuestion() {
     if (currentQuestionIndex < currentQuizData.questions.length - 1) {
         currentQuestionIndex++;
@@ -1899,69 +1889,56 @@ function renderQuizResults() {
     currentExplanationIndex = 0;
     renderSingleExplanation(currentExplanationIndex);
 }
-
 function renderSingleExplanation(index) {
-    const container = document.getElementById('single-explanation-container');
-    const quiz = currentQuizData;
-    const q = quiz.questions[index];
+    const container = document.getElementById('single-explanation-container');
+    const quiz = currentQuizData;
+    const q = quiz.questions[index];
 
-    const whatsappMessage = `Halo Mentor UMT, saya ingin bertanya mengenai soal dari paket '${encodeURIComponent(quiz.title)}'.\n\nPertanyaan: ${encodeURIComponent(q.questionText)}\n\nMohon bantuannya untuk penjelasan lebih lanjut.`;
-    const whatsappLink = `https://wa.me/6285961160545?text=${whatsappMessage}`;
+    const whatsappMessage = `Halo Mentor UMT, saya ingin bertanya mengenai soal dari paket '${encodeURIComponent(quiz.title)}'.\n\nPertanyaan: ${encodeURIComponent(q.questionText)}\n\nMohon bantuannya untuk penjelasan lebih lanjut.`;
+    const whatsappLink = `https://wa.me/6285961160545?text=${whatsappMessage}`;
 
-    // === PERUBAHAN DI SINI ===
-    // 1. Dapatkan index jawaban yang tersimpan (angka)
-    const selectedIndex = userAnswers[index];
-    // 2. Ubah index itu kembali ke TEKS untuk ditampilkan
-    const selectedAnswerText = (selectedIndex !== null && selectedIndex >= 0) ? quiz.questions[index].options[selectedIndex] : 'Tidak dijawab';
-    // 3. Dapatkan index jawaban yang benar
-    const correctIndex = quiz.questions[index].options.indexOf(q.correctAnswer);
-    // === AKHIR PERUBAHAN ===
+    container.innerHTML = `
+    <div class="panel">
+        <p class="text-sm text-gray-400 mb-4">Pertanyaan ${index + 1} dari ${quiz.questions.length}</p>
+        <div class="mb-5 text-gray-200 text-lg">${q.questionText}</div>
+        <div class="space-y-3 text-base">
+            <p class="${userAnswers[index] === q.correctAnswer ? 'correct-answer' : 'wrong-answer'} p-3 rounded-lg">
+                <span class="font-bold block">Jawaban Anda:</span>
+                ${userAnswers[index] || 'Tidak dijawab'}
+            </p>
+            <p class="correct-answer p-3 rounded-lg">
+                <span class="font-bold block">Jawaban Benar:</span>
+                ${q.correctAnswer}
+            </p>
+        </div>
+        <hr class="border-gray-700 my-5"/>
+        <div>
+            <h4 class="font-bold text-lg text-cyan-300 mb-2">Pembahasan:</h4>
+            <div class="text-gray-300 leading-relaxed">
+                <div class="explanation-container-vertical">
+                    <div class="explanation-content-inner">${q.explanation}</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="mt-6 pt-5 border-t border-dashed border-gray-600">
+            <h4 class="font-bold text-lg text-amber-300 mb-2">Pembahasan Kurang Jelas?</h4>
+            <p class="text-gray-400 text-sm leading-relaxed mb-4">
+                Merasa ada yang salah atau butuh penjelasan lebih detail dari mentor kami? Jangan ragu untuk bertanya! Klik tombol di bawah untuk terhubung langsung dengan Mentor UMT via WhatsApp.
+            </p>
+            <a href="${whatsappLink}" target="_blank" class="inline-block bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-5 rounded-lg text-sm transition-transform hover:scale-105">
+                <i class="fab fa-whatsapp mr-2"></i>Hubungi Mentor
+            </a>
+        </div>
+    </div>`;
 
-    container.innerHTML = `
-    <div class="panel">
-        <p class="text-sm text-gray-400 mb-4">Pertanyaan ${index + 1} dari ${quiz.questions.length}</p>
-        <div class="mb-5 text-gray-200 text-lg">${q.questionText}</div>
-        <div class="space-y-3 text-base">
-            
-                        <p class="${selectedIndex === correctIndex ? 'correct-answer' : 'wrong-answer'} p-3 rounded-lg">
-                <span class="font-bold block">Jawaban Anda:</span>
-                ${selectedAnswerText}
-            </p>
-                        
-            <p class="correct-answer p-3 rounded-lg">
-                <span class="font-bold block">Jawaban Benar:</span>
-                ${q.correctAnswer}
-            </p>
-        </div>
-        <hr class="border-gray-700 my-5"/>
-        <div>
-            <h4 class="font-bold text-lg text-cyan-300 mb-2">Pembahasan:</h4>
-            <div class="text-gray-300 leading-relaxed">
-                <div class="explanation-container-vertical">
-                    <div class="explanation-content-inner">${q.explanation}</div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="mt-6 pt-5 border-t border-dashed border-gray-600">
-            <h4 class="font-bold text-lg text-amber-300 mb-2">Pembahasan Kurang Jelas?</h4>
-            <p class="text-gray-400 text-sm leading-relaxed mb-4">
-                Merasa ada yang salah atau butuh penjelasan lebih detail dari mentor kami? Jangan ragu untuk bertanya! Klik tombol di bawah untuk terhubung langsung dengan Mentor UMT via WhatsApp.
-            </p>
-            <a href="${whatsappLink}" target="_blank" class="inline-block bg-green-600 hover:bg-green-500 text-white font-bold py-2 px-5 rounded-lg text-sm transition-transform hover:scale-105">
-                <i class="fab fa-whatsapp mr-2"></i>Hubungi Mentor
-            </a>
-        </div>
-    </div>`;
+    document.getElementById('prev-explanation-btn').disabled = (index === 0);
+    document.getElementById('next-explanation-btn').disabled = (index === quiz.questions.length - 1);
 
-    document.getElementById('prev-explanation-btn').disabled = (index === 0);
-    document.getElementById('next-explanation-btn').disabled = (index === quiz.questions.length - 1);
-
-    if (window.MathJax) {
-        MathJax.typesetPromise([container]).catch(err => console.log('MathJax error: ', err.message));
-    }
+    if (window.MathJax) {
+        MathJax.typesetPromise([container]).catch(err => console.log('MathJax error: ', err.message));
+    }
 }
-
 function nextExplanation() { if (currentExplanationIndex < currentQuizData.questions.length - 1) { currentExplanationIndex++; renderSingleExplanation(currentExplanationIndex); } }
 function prevExplanation() { if (currentExplanationIndex > 0) { currentExplanationIndex--; renderSingleExplanation(currentExplanationIndex); } }
 function showToast(message, type = 'info') {
