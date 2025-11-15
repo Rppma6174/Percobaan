@@ -41,11 +41,31 @@
         .sidebar-link.active { background-color: #30363D; color: white; }
         .card-item { background-color: #21262D; transition: transform 0.2s; cursor: pointer; }
         .card-item:hover { transform: translateY(-4px); background-color: #30363D; }
-        .quiz-option { border: 2px solid var(--border-color); }
-        .quiz-option:hover { border-color: var(--accent-cyan); }
-        .quiz-option.selected { border-color: var(--accent-cyan); background-color: rgba(47, 129, 247, 0.2); }
-        .correct-answer { background-color: rgba(57, 211, 83, 0.1); border-left: 4px solid var(--accent-green); }
-        .wrong-answer { background-color: rgba(248, 81, 73, 0.1); border-left: 4px solid var(--accent-red); }
+.quiz-option {
+            border: 2px solid var(--border-color);
+            transition: border-color 0.2s, background-color 0.2s; /* Transisi lebih mulus */
+            /* Pastikan padding Anda ada di sini, misal: padding: 1rem; */
+        }
+        .quiz-option:hover {
+            border-color: var(--accent-cyan);
+        }
+        .quiz-option.selected {
+            border-color: var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.2);
+        }
+
+        /* Ini adalah perubahannya: */
+        /* Kita MENAMBAHKAN style ke .quiz-option, bukan menggantinya */
+        .quiz-option.correct-answer {
+            background-color: rgba(57, 211, 83, 0.1);
+            border-color: var(--accent-green);
+            border-left-width: 4px; /* Hanya tebalkan border kiri */
+        }
+        .quiz-option.wrong-answer {
+            background-color: rgba(248, 81, 73, 0.1);
+            border-color: var(--accent-red);
+            border-left-width: 4px; /* Hanya tebalkan border kiri */
+        }
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         .nav-btn:disabled { background-color: #30363D; color: #8B949E; cursor: not-allowed; }
@@ -2152,3 +2172,4 @@ function openSprintLatihan(itemId, filePath) {
 </script>
 </body>
 </html>
+
