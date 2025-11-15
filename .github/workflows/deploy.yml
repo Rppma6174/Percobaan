@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Deploy Static Website
 
 on:
   push:
@@ -6,28 +6,17 @@ on:
       - main
 
 jobs:
-  build-and-deploy:
+  deploy:
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Install Node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build
-        run: npm run build
-
-      - name: Deploy to GitHub Pages Repo
+      - name: Deploy to Public Repo
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: main
-          folder: dist   # ganti jika output build kamu bukan dist
-          repository-name: USERNAME/mywebsite-public
+          folder: .           # <-- titik artinya deploy seluruh repo
+          repository-name: Rppma6174/UMTWeb
           token: ${{ secrets.GITHUB_TOKEN }}
