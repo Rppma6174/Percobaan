@@ -6764,3 +6764,15 @@ dialog :link{
     display:none;
   }
 }
+
+#outerContainer {
+  overflow-x: hidden;
+}
+
+#fileNameField {
+  white-space: nowrap;       /* Mencegah ganti baris */
+  overflow: hidden;          /* Menyembunyikan teks yang berlebih */
+  text-overflow: ellipsis;   /* Menampilkan "..." di akhir */
+  display: block;            /* Memastikan properti di atas berfungsi */
+  max-width: 450px;          /* Atur lebar maksimum (bisa Anda sesuaikan) */
+}
