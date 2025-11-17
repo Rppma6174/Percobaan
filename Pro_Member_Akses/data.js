@@ -742,7 +742,7 @@ const allContentData = {
             id: 'kombinatorika_permutasi_1', 
             title: 'Esensi Permutasi', 
             type: 'HTML Document', 
-            filePath: 'Esensi Permutasi.html', 
+            filePath: 'UMT_Learning/Esensi Permutasi.html', 
             fileType: 'html' 
             },
         ],
