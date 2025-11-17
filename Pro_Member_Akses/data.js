@@ -715,7 +715,7 @@ const allContentData = {
             id: 'kombinatorika_1', 
             title: 'Esensi Kombinatorika', 
             type: 'HTML Document', 
-            filePath: 'Esensi Kombinatorika.html', 
+            filePath: 'UMT_Learning/Esensi Kombinatorika.html', 
             fileType: 'html' 
             },
         ],
