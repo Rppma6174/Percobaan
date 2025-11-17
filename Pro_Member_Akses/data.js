@@ -710,6 +710,51 @@ const allContentData = {
             fileType: 'html' 
             },
         ],
+        "Kombinatorika : Esensi (Part 0)": [
+            { 
+            id: 'kombinatorika_1', 
+            title: 'Esensi Kombinatorika', 
+            type: 'HTML Document', 
+            filePath: 'Esensi Kombinatorika.html', 
+            fileType: 'html' 
+            },
+        ],
+        "Kombinatorika : Aturan Pencacahan (Part 1)": [
+            { 
+            id: 'kombinatorika_aturanpencacahan_1', 
+            title: 'Esensi Aturan Pencacahan', 
+            type: 'HTML Document', 
+            filePath: '#', 
+            fileType: 'html' 
+            },
+        ],
+        "Kombinatorika : Aturan Penjumlahan dan Aturan Perkalian (Part 2)": [
+            { 
+            id: 'kombinatorika_AturanPP_1', 
+            title: 'Esensi Aturan Penjumlahan', 
+            type: 'HTML Document', 
+            filePath: '#', 
+            fileType: 'html' 
+            },
+        ],
+        "Kombinatorika : Permutasi (Part 3)": [
+            { 
+            id: 'kombinatorika_permutasi_1', 
+            title: 'Esensi Permutasi', 
+            type: 'HTML Document', 
+            filePath: 'Esensi Permutasi.html', 
+            fileType: 'html' 
+            },
+        ],
+        "Kombinatorika : Kombinasi (Part 4)": [
+            { 
+            id: 'kombinatorika_kombinasi_1', 
+            title: 'Esensi Kombinasi', 
+            type: 'HTML Document', 
+            filePath: '#', 
+            fileType: 'html' 
+            },
+        ],
         "Limit Fungsi": [
             { 
             id: 'materi_esensi_limit', 
