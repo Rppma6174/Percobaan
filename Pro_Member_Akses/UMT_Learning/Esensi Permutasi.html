@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esensi Permutasi - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { 
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } 
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2, h3 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        h3 { color: #58a6ff; margin-top: 2rem; }
+        .hidden { display: none; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 0.5rem; }
+        
+        .diagram-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-main);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            margin-top: 1rem;
+            overflow-x: auto;
+        }
+        .diagram-container svg { max-width: 100%; }
+        .diagram-container svg text { font-size: 14px; fill: var(--text-primary); }
+        .diagram-container p { font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem; }
+        
+        /* Kotak info khusus */
+        .info-box {
+            background-color: rgba(47, 129, 247, 0.1);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold;
+        }
+        .quiz-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1);
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* Scroll Horizontal & Pencegah Scroll Diagonal */
+        p, li, .info-box, .quiz-explanation, .question-text, .quiz-option {
+            overflow-x: auto;
+            padding-bottom: 10px;
+            overscroll-behavior-x: contain;
+        }
+        
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <h1>Esensi Permutasi: Mengapa Urutan Itu Penting?</h1>
+        <p>
+            Seringkali kita mendengar kata "kombinasi" dalam kehidupan sehari-hari, seperti "kunci kombinasi" brankas. Namun, tahukah Anda bahwa secara matematis, istilah itu sebenarnya kurang tepat?
+        </p>
+        <p>
+            Jika kode brankas Anda adalah <strong>1-2-3</strong>, apakah brankas akan terbuka jika Anda memasukkan <strong>3-2-1</strong>? Tentu tidak. Meskipun angkanya sama, <strong>urutan penempatannya berbeda</strong>, sehingga maknanya pun berbeda.
+        </p>
+        <div class="info-box">
+            Inilah inti dari <strong>Permutasi</strong>: Sebuah cara menyusun objek di mana <strong>URUTAN (POSISI) SANGAT MENENTUKAN HASIL</strong>.
+        </div>
+
+        <h2>Visualisasi: Kursi Jabatan (Konsep Posisi)</h2>
+        <p>
+            Bayangkan ada 2 orang sahabat: <strong>Ali (A)</strong> dan <strong>Budi (B)</strong>. Mereka sedang dicalonkan untuk 2 kursi jabatan di kelas: <strong>Ketua</strong> dan <strong>Wakil Ketua</strong>.
+        </p>
+        <p>
+            Apakah susunan "Ali dan Budi" sama dengan "Budi dan Ali"? Mari kita lihat.
+        </p>
+
+        <div class="diagram-container">
+            <svg width="350" height="200" viewBox="0 0 350 200" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="40" width="140" height="120" fill="#1c1c1c" stroke="#30363D" rx="10"/>
+                <text x="90" y="30" fill="#C9D1D9" text-anchor="middle" font-weight="bold">Skenario 1</text>
+                
+                <rect x="40" y="60" width="100" height="30" fill="#2F81F7" />
+                <text x="90" y="80" fill="#fff" text-anchor="middle" font-size="12">KETUA: Ali</text>
+                
+                <rect x="40" y="100" width="100" height="30" fill="#30363D" stroke="#2F81F7" />
+                <text x="90" y="120" fill="#fff" text-anchor="middle" font-size="12">WAKIL: Budi</text>
+
+                <rect x="190" y="40" width="140" height="120" fill="#1c1c1c" stroke="#30363D" rx="10"/>
+                <text x="260" y="30" fill="#C9D1D9" text-anchor="middle" font-weight="bold">Skenario 2</text>
+                
+                <rect x="210" y="60" width="100" height="30" fill="#F85149" />
+                <text x="260" y="80" fill="#fff" text-anchor="middle" font-size="12">KETUA: Budi</text>
+                
+                <rect x="210" y="100" width="100" height="30" fill="#30363D" stroke="#F85149" />
+                <text x="260" y="120" fill="#fff" text-anchor="middle" font-size="12">WAKIL: Ali</text>
+
+                <text x="175" y="180" fill="#C9D1D9" text-anchor="middle" font-style="italic">Orangnya sama, tapi maknanya BEDA.</text>
+            </svg>
+            <p>Di dunia permutasi, AB $\neq$ BA.</p>
+        </div>
+        <p>
+            Meskipun kelompok orangnya sama (Ali dan Budi), <strong>posisi mereka memberikan makna yang berbeda</strong>. Skenario 1 (Ali berkuasa) adalah kejadian yang sama sekali berbeda dengan Skenario 2 (Budi berkuasa).
+        </p>
+
+        <h2>Logika "Pengisian Tempat" (Filling Slots)</h2>
+        <p>
+            Bagaimana cara kita menghitung banyaknya kemungkinan susunan tanpa harus mendaftar satu per satu? Kita menggunakan logika intuitif yang disebut <strong>Filling Slots (Pengisian Tempat)</strong>.
+        </p>
+        <p>
+            Misalkan kita ingin menyusun 3 huruf (A, B, C) ke dalam 3 kotak kosong.
+        </p>
+        <div class="diagram-container">
+            <svg width="350" height="150" viewBox="0 0 350 150" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="50" width="80" height="60" fill="none" stroke="#2F81F7" stroke-width="2"/>
+                <foreignObject x="20" y="20" width="80" height="30">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="color:#ccc; text-align:center; font-size:12px;">Kotak 1</div>
+                </foreignObject>
+                <foreignObject x="20" y="65" width="80" height="40">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="color:#2F81F7; text-align:center; font-weight:bold; font-size:20px;">3</div>
+                </foreignObject>
+                <foreignObject x="20" y="115" width="80" height="30">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="color:#8B949E; text-align:center; font-size:10px;">(A/B/C)</div>
+                </foreignObject>
+
+                <text x="115" y="90" fill="#fff" font-size="24">×</text>
+
+                <rect x="135" y="50" width="80" height="60" fill="none" stroke="#39D353" stroke-width="2"/>
+                <foreignObject x="135" y="20" width="80" height="30">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="color:#ccc; text-align:center; font-size:12px;">Kotak 2</div>
+                </foreignObject>
+                <foreignObject x="135" y="65" width="80" height="40">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="color:#39D353; text-align:center; font-weight:bold; font-size:20px;">2</div>
+                </foreignObject>
+                <foreignObject x="135" y="115" width="80" height="30">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="color:#8B949E; text-align:center; font-size:10px;">(Sisa)</div>
+                </foreignObject>
+
+                <text x="230" y="90" fill="#fff" font-size="24">×</text>
+
+                <rect x="250" y="50" width="80" height="60" fill="none" stroke="#F85149" stroke-width="2"/>
+                <foreignObject x="250" y="20" width="80" height="30">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="color:#ccc; text-align:center; font-size:12px;">Kotak 3</div>
+                </foreignObject>
+                <foreignObject x="250" y="65" width="80" height="40">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="color:#F85149; text-align:center; font-weight:bold; font-size:20px;">1</div>
+                </foreignObject>
+                <foreignObject x="250" y="115" width="80" height="30">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="color:#8B949E; text-align:center; font-size:10px;">(Terakhir)</div>
+                </foreignObject>
+            </svg>
+        </div>
+        <p>
+            Cara kerjanya sangat alami:
+        </p>
+        <ul>
+            <li><strong>Langkah 1 (Kotak Pertama):</strong> Anda punya <strong>3 pilihan</strong> huruf (A, B, atau C). Anda pilih satu, misalnya A.</li>
+            <li><strong>Langkah 2 (Kotak Kedua):</strong> Karena A sudah dipakai, Anda hanya punya sisa <strong>2 pilihan</strong> (B atau C).</li>
+            <li><strong>Langkah 3 (Kotak Ketiga):</strong> Anda hanya punya sisa <strong>1 pilihan</strong> terakhir.</li>
+        </ul>
+        <p>
+            Dalam matematika, jika satu kejadian memiliki $m$ cara dan kejadian berikutnya memiliki $n$ cara, maka total caranya adalah $m \times n$.
+        </p>
+        <p>
+            Jadi, total susunan = $3 \times 2 \times 1 = 6$ cara.
+        </p>
+        <p>
+            Pola perkalian mundur inilah ($n \times (n-1) \times (n-2) \dots$) yang menjadi dasar dari konsep <strong>Faktorial (!)</strong> dan rumus permutasi.
+        </p>
+
+        <h2>Kapan Kita Menggunakan Konsep Ini?</h2>
+        <p>
+            Gunakan pola pikir Permutasi jika Anda menemukan situasi yang menyiratkan adanya <strong>posisi, jabatan, urutan, ranking, atau susunan</strong>.
+        </p>
+        <ul>
+            <li>Menyusun jadwal pelajaran (Urutan jam menentukan pelajaran).</li>
+            <li>Menentukan juara lomba (Urutan masuk garis finis menentukan medali).</li>
+            <li>Membuat kata sandi (Urutan angka/huruf menentukan kebenaran sandi).</li>
+            <li>Mengatur antrean (Siapa yang dilayani duluan).</li>
+        </ul>
+
+        <h2>Uji Pemahaman Konsep</h2>
+        <p>Mari kita cek apakah Anda sudah menangkap "rasa" dari permutasi sebelum lanjut ke perhitungan formal.</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Cek session (jika perlu)
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+
+        const quizzes = [
+            { 
+                q: "Manakah dari situasi berikut yang urutannya PENTING (Permutasi)?", 
+                options: [
+                    "Memilih 3 siswa untuk membersihkan kelas bersama-sama", 
+                    "Memilih Ketua, Sekretaris, dan Bendahara kelas", 
+                    "Mengambil 2 warna cat untuk dicampur", 
+                    "Membeli 5 jenis buah di pasar"
+                ], 
+                correct: 1, 
+                explanation: "Dalam pemilihan pengurus inti (Ketua, Sekretaris, Bendahara), posisi menentukan tugas. A jadi Ketua berbeda dengan A jadi Bendahara. Kasus lain (membersihkan kelas, cat, buah) urutannya tidak mengubah hasil akhir." 
+            },
+            { 
+                q: "Pada konsep 'Filling Slots', mengapa jumlah pilihan di slot kedua berkurang?", 
+                options: [
+                    "Karena rumusnya mengharuskan pengurangan", 
+                    "Karena satu objek sudah digunakan di slot pertama dan tidak boleh dipakai lagi", 
+                    "Karena slot kedua ukurannya lebih kecil", 
+                    "Karena kita membagi jumlah total"
+                ], 
+                correct: 1, 
+                explanation: "Logika dasarnya adalah ketersediaan. Jika kita menyusun objek yang berbeda (tanpa pengembalian), setelah satu objek dipakai di posisi pertama, objek tersebut tidak tersedia lagi untuk posisi kedua." 
+            },
+            { 
+                q: "Apa makna dari 123 $\\neq$ 321 dalam konteks permutasi?", 
+                options: [
+                    "Angkanya berbeda", 
+                    "Urutan penempatan mengubah identitas atau makna dari susunan tersebut", 
+                    "Jumlah digitnya sama", 
+                    "Ini adalah kesalahan matematika"
+                ], 
+                correct: 1, 
+                explanation: "Ini adalah contoh klasik bahwa posisi (ratusan, puluhan, satuan) memberikan nilai yang berbeda. Sama seperti urutan juara lomba, posisi menentukan hasil." 
+            },
+            { 
+                q: "Jika kita menyusun huruf A, B, C. Berapa banyak susunan yang mungkin terjadi?", 
+                options: ["3", "4", "6", "9"], 
+                correct: 2, 
+                explanation: "Menggunakan logika pengisian tempat: $3 \\times 2 \\times 1 = 6$. Susunannya adalah: ABC, ACB, BAC, BCA, CAB, CBA." 
+            },
+            { 
+                q: "Mengapa kita menggunakan operasi perkalian ($3 \\times 2 \\times 1$) dalam pengisian tempat?", 
+                options: [
+                    "Karena setiap pilihan di tahap pertama 'bercabang' dengan pilihan di tahap berikutnya", 
+                    "Agar hasilnya lebih besar", 
+                    "Karena penjumlahan hanya untuk benda yang sama", 
+                    "Itu hanya kebetulan"
+                ], 
+                correct: 0, 
+                explanation: "Ini adalah 'Aturan Perkalian'. Untuk setiap 1 pilihan di kotak pertama (misal A), ia bisa berpasangan dengan 2 pilihan di kotak kedua (B atau C). Jadi kita mengalikannya untuk mendapatkan total cabang kemungkinan." 
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const quizContainer = document.getElementById("quiz-container");
+            if (quizContainer) {
+                quizzes.forEach((quiz, index) => {
+                    const quizEl = document.createElement("div");
+                    quizEl.className = "quiz-accordion";
+                    const optionsHtml = quiz.options.map((opt, i) => 
+                        `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                    ).join("");
+                    quizEl.innerHTML = `
+                        <button class="quiz-accordion-button">
+                            <span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="quiz-accordion-content hidden">
+                            <p class="question-text">${quiz.q}</p>
+                            <div class="options-container">${optionsHtml}</div>
+                            <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                        </div>`;
+                    quizContainer.appendChild(quizEl);
+                });
+
+                const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+                accordionButtons.forEach(clickedButton => {
+                    clickedButton.addEventListener('click', () => {
+                        const content = clickedButton.nextElementSibling;
+                        const isOpening = content.classList.contains('hidden');
+                        accordionButtons.forEach(btn => {
+                            if(btn !== clickedButton) { 
+                                btn.classList.remove('active'); 
+                                btn.nextElementSibling.classList.add('hidden'); 
+                            }
+                        });
+                        clickedButton.classList.toggle('active');
+                        content.classList.toggle('hidden');
+                        if (isOpening && window.MathJax) MathJax.typesetPromise([content]);
+                    });
+                });
+
+                document.querySelectorAll('.quiz-option').forEach(option => {
+                    option.addEventListener('click', () => {
+                        const optionsContainer = option.parentElement;
+                        if (optionsContainer.classList.contains('answered')) return;
+                        optionsContainer.classList.add('answered');
+                        const explanation = optionsContainer.nextElementSibling;
+                        explanation.classList.remove('hidden');
+                        if (option.dataset.correct === 'true') {
+                            option.classList.add('correct');
+                        } else {
+                            option.classList.add('wrong');
+                            const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                            if (correctOption) correctOption.classList.add('correct');
+                        }
+                        if (window.MathJax) MathJax.typesetPromise([explanation]);
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
