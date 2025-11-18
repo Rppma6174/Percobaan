@@ -718,17 +718,7 @@ const allContentData = {
             filePath: 'UMT_Learning/Esensi Kombinatorika.html', 
             fileType: 'html' 
             },
-        ],
-        "Kombinatorika : Aturan Pencacahan (Part 1)": [
-            { 
-            id: 'kombinatorika_aturanpencacahan_1', 
-            title: 'Esensi Aturan Pencacahan', 
-            type: 'HTML Document', 
-            filePath: '#', 
-            fileType: 'html' 
-            },
-        ],
-        "Kombinatorika : Aturan Penjumlahan dan Aturan Perkalian (Part 2)": [
+        "Kombinatorika : Aturan Penjumlahan dan Aturan Perkalian (Part 1)": [
             { 
             id: 'kombinatorika_AturanPP_1', 
             title: 'Esensi Aturan Penjumlahan', 
@@ -737,7 +727,7 @@ const allContentData = {
             fileType: 'html' 
             },
         ],
-        "Kombinatorika : Permutasi (Part 3)": [
+        "Kombinatorika : Permutasi (Part 2)": [
             { 
             id: 'kombinatorika_permutasi_1', 
             title: 'Esensi Permutasi', 
@@ -746,7 +736,7 @@ const allContentData = {
             fileType: 'html' 
             },
         ],
-        "Kombinatorika : Kombinasi (Part 4)": [
+        "Kombinatorika : Kombinasi (Part 3)": [
             { 
             id: 'kombinatorika_kombinasi_1', 
             title: 'Esensi Kombinasi', 
