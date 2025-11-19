@@ -750,9 +750,9 @@ const allContentData = {
             { 
             id: 'materi_esensi_limit', 
             title: 'Esensi Limit Fungsi', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: '#', 
-            fileType: 'UMT-Learning' 
+            fileType: 'html' 
             },
         ],
         // Anda bisa tambahkan "Kelas 9 SMP", "Kelas 11 SMA", dst. di sini
