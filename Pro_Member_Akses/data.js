@@ -178,63 +178,63 @@ const allContentData = {
             { 
             id: 'materi_nilai_mutlak_1', 
             title: 'Esensi Nilai Mutlak', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/esensi-nilai-mutlak.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_nilai_mutlak_2', 
             title: 'Definisi Nilai Mutlak', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/definisi-nilai-mutlak.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_nilai_mutlak_3', 
             title: 'Representasi Geometri Dari Nilai Mutlak', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/representasi-geometri-dari-nilai-mutlak.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_nilai_mutlak_4', 
             title: 'Sifat - Sifat Dasar Nilai Mutlak', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/sifat_dasar_nilai_mutlak.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_nilai_mutlak_5', 
             title: 'Operasi Aljabar dengan Nilai Mutlak', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Operasi Aljabar dengan Nilai Mutlak.html', 
             fileType: 'html' 
             },
             {
             id: 'materi_nilai_mutlak_6', 
             title: 'Transformasi Grafik Nilai Mutlak', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Transformasi Grafik Nilai Mutlak.html', 
             fileType: 'html' 
             },
             {
             id: 'materi_nilai_mutlak_7', 
             title: 'Persamaan Nilai Mutlak', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Persamaan Nilai Mutlak.html', 
             fileType: 'html' 
             },
             {
             id: 'materi_nilai_mutlak_8', 
             title: 'Pertidaksamaan Nilai Mutlak', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Pertidaksamaan Nilai Mutlak.html', 
             fileType: 'html' 
             },
             {
             id: 'materi_nilai_mutlak_9', 
             title: 'Aplikasi & Pemodelan Nilai Mutlak', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Aplikasi & Pemodelan Nilai Mutlak.html', 
             fileType: 'html' 
             },
@@ -243,77 +243,77 @@ const allContentData = {
             { 
             id: 'materi_relasi_dan_fungsi_1', 
             title: 'Esensi Relasi', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Esensi Relasi.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_relasi_dan_fungsi_2', 
             title: 'Definisi Relasi', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Definisi Relasi.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_relasi_dan_fungsi_3', 
             title: 'Sifat Dan Jenis Relasi', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Sifat dan Jenis Relasi.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_relasi_dan_fungsi_4', 
             title: 'Esensi Fungsi', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Esensi Fungsi.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_relasi_dan_fungsi_5', 
             title: 'Definisi Fungsi', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Definisi Fungsi.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_relasi_dan_fungsi_6', 
             title: 'Unsur - Unsur Fungsi', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Unsur-Unsur Fungsi.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_relasi_dan_fungsi_7', 
             title: 'Cara Menyatakan Fungsi', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Cara Menyatakan Fungsi.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_relasi_dan_fungsi_8', 
             title: 'Jenis - Jenis Fungsi', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Jenis-Jenis Fungsi.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_relasi_dan_fungsi_9', 
             title: 'Operasi Pada Fungsi dan Komposisi Fungsi', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Operasi pada Fungsi.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_relasi_dan_fungsi_10', 
             title: 'Fungsi Invers', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Fungsi Invers.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_relasi_dan_fungsi_11', 
             title: 'Aplikasi Relasi Dan Fungsi', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Aplikasi Relasi dan Fungsi.html', 
             fileType: 'html' 
             },
@@ -322,28 +322,28 @@ const allContentData = {
             { 
             id: 'materi_bentuk_akar_1', 
             title: 'Esensi Bentuk Akar', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Esensi Bentuk Akar.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_bentuk_akar_2', 
             title: 'Memahami Penyederhanaan Bentuk Akar', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Penyederhanaan Bentuk Akar.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_bentuk_akar_3', 
             title: 'Operasi Aljabar Pada Bentuk Akar', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Operasi Aljabar Bentuk Akar.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_bentuk_akar_4', 
             title: 'Merasionalkan Bentuk Akar', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Merasionalkan Bentuk Akar.html', 
             fileType: 'html' 
             }
@@ -352,77 +352,77 @@ const allContentData = {
             { 
             id: 'materi_barisan_dan_deret_1', 
             title: 'Esensi Barisan Dan Deret', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Esensi Barisan Dan Deret.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_barisan_dan_deret_2', 
             title: 'Definisi Dan Jenis Barisan', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Definisi dan Jenis Barisan.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_barisan_dan_deret_3', 
             title: 'Barisan Aritmetika', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Barisan Aritmetika.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_barisan_dan_deret_4', 
             title: 'Barisan Aritmetika Bertingkat', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Aritmetika Bertingkat.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_barisan_dan_deret_5', 
             title: 'Deret Aritmetika', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Deret Aritmetika.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_barisan_dan_deret_6', 
             title: 'Barisan Geometri', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Barisan Geometri.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_barisan_dan_deret_7', 
             title: 'Deret Geometri', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Deret Geometri.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_barisan_dan_deret_8', 
             title: 'Aplikasi Barisan Dan Deret', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Aplikasi Barisan dan Deret.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_barisan_dan_deret_9', 
             title: 'Barisan Rekursif', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Barisan Rekursif.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_barisan_dan_deret_10', 
             title: 'Barisan Fibonacci', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Barisan Fibonacci.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_barisan_dan_deret_11', 
             title: 'Limit & Deret Tak Hingga', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Limit dan Deret Tak Hingga.html', 
             fileType: 'html' 
             },
@@ -431,56 +431,56 @@ const allContentData = {
             { 
             id: 'materi_fpb_kpk_1', 
             title: 'Esensi FPB Dan KPK', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Esensi FPB dan KPK.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_fpb_kpk_2', 
             title: 'Definisi Formal FPB Dan KPK', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Definisi Formal FPB & KPK.html', 
             fileType: 'html' 
             }, 
             { 
             id: 'materi_fpb_kpk_3', 
             title: 'Cara Menentukan FPB Dan KPK', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Cara Menentukan FPB dan KPK.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_fpb_kpk_4', 
             title: 'Hubungan FPB Dan KPK', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Hubungan FPB dan KPK.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_fpb_kpk_5', 
             title: 'Sifat - Sifat FPB Dan KPK', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Sifat-Sifat FPB dan KPK.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_fpb_kpk_6', 
             title: 'Pengaplikasian FPB', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Aplikasi FPB.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_fpb_kpk_7', 
             title: 'Pengaplikasian KPK', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Aplikasi KPK.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_fpb_kpk_8', 
             title: 'Variasi Soal FPB dan KPK', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Variasi Soal FPB dan KPK.html', 
             fileType: 'html' 
             },
@@ -489,56 +489,56 @@ const allContentData = {
             { 
             id: 'materi_logika_matematika_1', 
             title: 'Esensi Logika Matematika', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Esensi Logika Matematika.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_logika_matematika_2', 
             title: 'Operator Logika & Tabel Kebenaran', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Operator Logika & Tabel Kebenaran.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_logika_matematika_3', 
             title: 'Konvers, Invers Dan Kontraposisi', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Konvers_Invers_Kontraposisi.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_logika_matematika_4', 
             title: 'Ekuivalensi Logika', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Ekuivalensi Logika.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_logika_matematika_5', 
             title: 'Hukum - Hukum Logika Matematika', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Hukum-Hukum Logika Matematika.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_logika_matematika_6', 
             title: 'Argumen & Penarikan Kesimpulan', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Argumen & Penarikan Kesimpulan.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_logika_matematika_7', 
             title: 'Kuantor Universal & Eksistensial', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Kuantor Universal & Eksistensial.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_logika_matematika_8', 
             title: 'Teknik Pembuktian Logis', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Teknik Pembuktian Logis.html', 
             fileType: 'html' 
             },
@@ -547,28 +547,28 @@ const allContentData = {
             { 
             id: 'materi_peluang_1', 
             title: 'Esensi Peluang', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Esensi Peluang.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_peluang_2', 
             title: 'Aturan Dasar Peluang', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Aturan Dasar Peluang.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_peluang_3', 
             title: 'Peluang Teoretis & Frekuensi Relatif', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Peluang Teoretis & Frekuensi Relatif.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_peluang_4', 
             title: 'Peluang Kejadian Majemuk', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Peluang Kejadian Majemuk.html', 
             fileType: 'html' 
             },
@@ -577,77 +577,77 @@ const allContentData = {
             { 
             id: 'materi_trigonometri_1', 
             title: 'Esensi Trigonometri', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Esensi Trigonometri.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_trigonometri_2', 
             title: 'Sudut & Pengukuran', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Sudut Dan Pengukuran.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_trigonometri_3', 
             title: 'Trigonometri pada Lingkaran Satuan', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Trigonometri pada Lingkaran Satuan.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_trigonometri_4', 
             title: 'Identitas Trigonometri Dasar', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Identitas Trigonometri Dasar.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_trigonometri_5', 
             title: 'Identitas & Rumus Trigonometri Lanjutan', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Identitas & Rumus Trigonometri Lanjutan.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_trigonometri_6', 
             title: 'Nilai Trigonometri Sudut-Sudut Khusus', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Nilai Trigonometri Sudut-Sudut Khusus.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_trigonometri_7', 
             title: 'Persamaan Trigonometri', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Persamaan Trigonometri.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_trigonometri_8', 
             title: 'Pertidaksamaan Trigonometri', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Pertidaksamaan Trigonometri.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_trigonometri_9', 
             title: 'Fungsi Trigonometri', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Fungsi Trigonometri.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_trigonometri_10', 
             title: 'Fungsi Invers Trigonometri', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Fungsi Invers Trigonometri.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_trigonometri_11', 
             title: 'Aplikasi Trigonometri', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Aplikasi Trigonometri.html', 
             fileType: 'html' 
             },
@@ -656,56 +656,56 @@ const allContentData = {
             { 
             id: 'materi_vektor_01', 
             title: 'Esensi & Operasi Vektor 1', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Esensi Vektor.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_vektor_02', 
             title: 'Vektor Posisi', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Vektor Posisi.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_vektor_03', 
             title: 'Operasi Vektor 2', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Operasi Vektor 2.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_vektor_04', 
             title: 'Kedudukan Vektor (Vektor Posisi Lanjutan)', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Kedudukan Vektor.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_vektor_05', 
             title: 'Aljabar Vektor 1', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Aljabar Vektor 1.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_vektor_06', 
             title: 'Hasil Kali Skalar (Dot Product)', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Aljabar Vektor 2.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_vektor_07', 
             title: 'Proyeksi Ortogonal Skalar', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Aljabar Vektor 3.html', 
             fileType: 'html' 
             },
             { 
             id: 'materi_vektor_08', 
             title: 'Perkalian Silang Vektor (Cross Product)', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Perkalian Silang Vektor.html', 
             fileType: 'html' 
             },
@@ -714,7 +714,7 @@ const allContentData = {
             { 
             id: 'kombinatorika_1', 
             title: 'Esensi Kombinatorika', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Esensi Kombinatorika.html', 
             fileType: 'html' 
             },
@@ -723,7 +723,7 @@ const allContentData = {
             { 
             id: 'kombinatorika_AturanPP_1', 
             title: 'Esensi Aturan Penjumlahan', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: '#', 
             fileType: 'html' 
             },
@@ -732,7 +732,7 @@ const allContentData = {
             { 
             id: 'kombinatorika_permutasi_1', 
             title: 'Esensi Permutasi', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Esensi Permutasi.html', 
             fileType: 'html' 
             },
@@ -741,7 +741,7 @@ const allContentData = {
             { 
             id: 'kombinatorika_kombinasi_1', 
             title: 'Esensi Kombinasi', 
-            type: 'HTML Document', 
+            type: 'UMT - Learning', 
             filePath: '#', 
             fileType: 'html' 
             },
