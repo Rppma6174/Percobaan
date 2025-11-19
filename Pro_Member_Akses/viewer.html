@@ -7,25 +7,29 @@
     <link rel="icon" type="image/png" href="UMT-Logo - Copy.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     <style>
-        /* Gaya dasar agar konsisten dengan halaman utama */
+        /* --- VARIABLE & RESET --- */
         :root {
             --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
             --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --dropdown-bg: #21262d;
         }
         body {
             background-color: var(--bg-main);
             color: var(--text-primary);
             font-family: sans-serif;
             margin: 0;
-            overflow: hidden; /* Mencegah scroll di body */
+            overflow: hidden; /* Mencegah scroll halaman utama */
         }
-        /* Layout Utama */
+
+        /* --- LAYOUT UTAMA --- */
         .viewer-container {
             display: flex;
             flex-direction: column;
             height: 100vh;
+            width: 100vw; /* Pastikan lebar fit layar */
         }
-        /* Toolbar di bagian atas */
+
+        /* --- TOOLBAR --- */
         .toolbar {
             display: flex;
             justify-content: space-between;
@@ -34,19 +38,104 @@
             padding: 0.5rem 1rem;
             border-bottom: 1px solid var(--border-color);
             flex-shrink: 0;
+            gap: 10px; /* Jarak antar section */
         }
+
         .toolbar-section {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 0.5rem;
         }
+
+        /* Section Tengah (Judul) - KUNCI PERBAIKAN LAYOUT */
+        .toolbar-section.title-section {
+            flex: 1; /* Mengambil sisa ruang yang ada */
+            min-width: 0; /* Penting! Agar text-overflow bekerja di flexbox */
+            justify-content: center;
+            position: relative; /* Untuk patokan posisi dropdown */
+        }
+
+        /* --- TITLE CONTAINER & DROPDOWN --- */
+        .title-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            max-width: 100%; /* Agar tidak menembus layar */
+            padding: 4px 8px;
+            border-radius: 6px;
+            transition: background 0.2s;
+        }
+
+        .title-wrapper:hover {
+            background-color: var(--border-color);
+        }
+
         .toolbar-title {
             font-size: 1rem;
             font-weight: bold;
+            margin: 0;
+            
+            /* CSS untuk memotong teks panjang jadi "..." */
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
+            max-width: 400px; /* Batas maksimal lebar judul sebelum titik-titik */
         }
+
+        /* Responsif untuk HP: Judul lebih pendek */
+        @media (max-width: 768px) {
+            .toolbar-title {
+                max-width: 150px; 
+                font-size: 0.9rem;
+            }
+        }
+
+        .title-icon {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            flex-shrink: 0; /* Ikon jangan gepeng */
+        }
+
+        /* Tampilan Dropdown Judul Lengkap */
+        .title-dropdown {
+            display: none; /* Default sembunyi */
+            position: absolute;
+            top: 120%; /* Muncul sedikit di bawah judul */
+            left: 50%;
+            transform: translateX(-50%);
+            width: max-content;
+            max-width: 80vw; /* Maksimal 80% lebar layar */
+            background-color: var(--dropdown-bg);
+            border: 1px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .title-dropdown.show {
+            display: block;
+            animation: fadeIn 0.2s ease-in-out;
+        }
+
+        /* Teks di dalam dropdown: BISA WRAPPING (TURUN KE BAWAH) */
+        .full-title-text {
+            color: var(--text-primary);
+            font-size: 1rem;
+            font-weight: bold;
+            white-space: normal; /* Ini yang bikin teks turun ke bawah */
+            line-height: 1.5;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translate(-50%, -10px); }
+            to { opacity: 1; transform: translate(-50%, 0); }
+        }
+
+        /* --- BUTTON STYLES --- */
         .toolbar-button {
             background: none;
             border: 1px solid transparent;
@@ -54,6 +143,9 @@
             cursor: pointer;
             padding: 0.5rem;
             border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .toolbar-button:hover:not(:disabled) {
             background-color: var(--border-color);
@@ -62,21 +154,20 @@
             color: var(--text-secondary);
             cursor: not-allowed;
         }
-        #page-info {
-            font-size: 0.9rem;
-        }
-        /* Area untuk menampilkan PDF */
+
+        /* --- PDF VIEWER AREA --- */
         .pdf-viewer {
             flex-grow: 1;
-            overflow: auto; /* Memungkinkan scroll jika halaman PDF panjang */
+            overflow: auto;
             text-align: center;
             padding: 1rem;
+            background-color: #0d1117;
         }
         #pdf-canvas {
             border: 1px solid var(--border-color);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
-        /* Loading & Error State */
+        
         .status-message {
             position: absolute;
             top: 50%;
@@ -98,12 +189,24 @@
                 <button id="prev-materi" class="toolbar-button" title="Materi Sebelumnya">
                     <i class="fa-solid fa-angles-left"></i>
                 </button>
-                <h1 id="materi-title" class="toolbar-title">Memuat materi...</h1>
+            </div>
+
+            <div class="toolbar-section title-section">
+                <div class="title-wrapper" id="title-trigger" title="Klik untuk lihat judul lengkap">
+                    <h1 id="materi-title-short" class="toolbar-title">Memuat...</h1>
+                    <i class="fa-solid fa-chevron-down title-icon"></i>
+                </div>
+                
+                <div id="title-dropdown" class="title-dropdown">
+                    <div id="materi-title-full" class="full-title-text">Memuat materi...</div>
+                </div>
+            </div>
+
+            <div class="toolbar-section">
                 <button id="next-materi" class="toolbar-button" title="Materi Selanjutnya">
                     <i class="fa-solid fa-angles-right"></i>
                 </button>
-            </div>
-            <div class="toolbar-section">
+                <div style="width: 1px; height: 20px; background: var(--border-color); margin: 0 5px;"></div>
                 <button id="zoom-out" class="toolbar-button" title="Perkecil">
                     <i class="fa-solid fa-search-minus"></i>
                 </button>
@@ -114,7 +217,6 @@
         </div>
 
         <div id="pdf-viewer" class="pdf-viewer">
-            <canvas id="pdf-canvas"></canvas>
             <div id="status-message" class="status-message">Memuat PDF, mohon tunggu...</div>
         </div>
     </div>
@@ -125,14 +227,11 @@
 <script type="module">
     import * as pdfjsLib from '/Pro_Member_Akses/pdfjs/build/pdf.mjs';
 
-    // --- PENJAGA KEAMANAN ---
     const token = sessionStorage.getItem('sessionToken');
     if (!token) {
         window.location.href = '../Login/';
     }
 
-    // --- FUNGSI PEMBANTU (HELPER FUNCTIONS) ---
-    // [PERBAIKAN] Menambahkan fungsi yang hilang agar bisa dipanggil
     function markAsCompleted(itemId) {
         const key = 'userCompletedItems';
         let completed = JSON.parse(localStorage.getItem(key)) || [];
@@ -153,21 +252,44 @@
         };
         localStorage.setItem(key, JSON.stringify(lastActivity));
     }
-    // Akhir Perbaikan
 
-    // --- MENGAMBIL ELEMEN DARI HALAMAN ---
-    const materiTitleEl = document.getElementById('materi-title');
+    // --- DOM ELEMENTS ---
+    const titleShortEl = document.getElementById('materi-title-short');
+    const titleFullEl = document.getElementById('materi-title-full');
+    const titleTrigger = document.getElementById('title-trigger');
+    const titleDropdown = document.getElementById('title-dropdown');
     const statusMessageEl = document.getElementById('status-message');
     const viewerEl = document.getElementById('pdf-viewer');
     
-    // --- MENGATUR PDF.JS ---
     pdfjsLib.GlobalWorkerOptions.workerSrc = '/Pro_Member_Akses/pdfjs/build/pdf.worker.mjs';
 
-    // --- VARIABEL STATE UNTUK VIEWER ---
     let pdfDoc = null;
-    let scale = 1.5;
+    let scale = 1.5; // Tetap HD
 
-    // --- FUNGSI-FUNGSI VIEWER ---
+    // --- DROPDOWN LOGIC ---
+    // Klik judul untuk buka/tutup dropdown
+    titleTrigger.addEventListener('click', (e) => {
+        e.stopPropagation(); // Mencegah event bubble
+        titleDropdown.classList.toggle('show');
+        
+        // Ubah icon panah
+        const icon = titleTrigger.querySelector('.title-icon');
+        if(titleDropdown.classList.contains('show')){
+            icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
+        } else {
+            icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
+        }
+    });
+
+    // Klik di mana saja di luar dropdown untuk menutupnya
+    document.addEventListener('click', (e) => {
+        if (!titleTrigger.contains(e.target) && !titleDropdown.contains(e.target)) {
+            titleDropdown.classList.remove('show');
+            const icon = titleTrigger.querySelector('.title-icon');
+            icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
+        }
+    });
+
     const renderAllPages = async () => {
         statusMessageEl.textContent = `Memuat ${pdfDoc.numPages} halaman...`;
         statusMessageEl.style.display = 'block';
@@ -184,9 +306,11 @@
                 
                 canvas.height = viewport.height;
                 canvas.width = viewport.width;
+                
                 canvas.style.width = `${viewport.width / devicePixelRatio}px`;
                 canvas.style.height = `${viewport.height / devicePixelRatio}px`;
                 canvas.style.marginBottom = '1rem';
+                canvas.style.maxWidth = 'none'; 
 
                 const renderContext = { canvasContext: ctx, viewport };
                 viewerEl.appendChild(canvas);
@@ -200,91 +324,71 @@
     };
 
     const onZoom = (newScale) => {
-        if (!pdfDoc || newScale < 0.5 || newScale > 3.0) return;
+        if (!pdfDoc || newScale < 0.5 || newScale > 5.0) return;
         scale = newScale;
         renderAllPages();
     };
 
-// === TAMBAHKAN FUNGSI BARU INI ===
-    /**
-     * Mencari konten berdasarkan ID di semua kategori dalam allContentData.
-     * @param {string} contentId - ID dari konten yang dicari.
-     * @returns {object|null} - Mengembalikan objek berisi {contentItem, prevItem, nextItem, type} atau null jika tidak ditemukan.
-     */
     function findContentDetails(contentId) {
-        // Loop melalui semua kategori utama: 'materi', 'umtLab', 'perpustakaan', dll.
         for (const key in allContentData) {
             const categoryData = allContentData[key];
-            
-            // Mengubah semua data menjadi satu array datar agar mudah dicari
             const flatList = Array.isArray(categoryData) ? categoryData : Object.values(categoryData).flat();
-            
             const currentIndex = flatList.findIndex(item => item.id === contentId);
 
-            // Jika item ditemukan di kategori ini
             if (currentIndex !== -1) {
                 return {
                     contentItem: flatList[currentIndex],
                     prevItem: currentIndex > 0 ? flatList[currentIndex - 1] : null,
                     nextItem: currentIndex < flatList.length - 1 ? flatList[currentIndex + 1] : null,
-                    type: key // Mengembalikan nama kategori (misal: 'perpustakaan')
+                    type: key 
                 };
             }
         }
-        return null; // Tidak ditemukan di kategori manapun
+        return null; 
     }
-// === AKHIR DARI FUNGSI BARU ===
 
-    // --- LOGIKA SAAT HALAMAN DIBUKA ---
     document.addEventListener('DOMContentLoaded', async () => {
         const urlParams = new URLSearchParams(window.location.search);
         const contentId = urlParams.get('id');
 
         if (!contentId) {
-            materiTitleEl.textContent = 'Error: Konten tidak ditemukan.';
+            titleShortEl.textContent = 'Error';
+            titleFullEl.textContent = 'Error: ID Konten tidak ditemukan.';
             statusMessageEl.textContent = 'ID Konten tidak ada di URL.';
             return;
         }
         
-// === TAMBAHKAN KODE BARU INI (Sebagai pengganti kode yang dihapus) ===
         const result = findContentDetails(contentId);
 
-        if (!result) {
-            materiTitleEl.textContent = 'Error: Konten tidak ditemukan.';
-            statusMessageEl.textContent = `Konten dengan ID "${contentId}" tidak ditemukan.`;
+        if (!result || !result.contentItem) {
+            titleShortEl.textContent = 'Tidak Ditemukan';
+            titleFullEl.textContent = `Konten dengan ID "${contentId}" tidak ditemukan.`;
+            statusMessageEl.textContent = 'Konten tidak ditemukan.';
             return;
         }
 
         const { contentItem, prevItem, nextItem, type } = result;
-// === AKHIR DARI KODE BARU ===
-
-        if (!contentItem) {
-            materiTitleEl.textContent = 'Error: Konten tidak ditemukan.';
-            statusMessageEl.textContent = `Konten dengan ID "${contentId}" tidak ditemukan.`;
-            return;
-        }
         
-        // Menandai progres dan aktivitas terakhir
         markAsCompleted(contentItem.id); 
         updateLastActivity(type, contentItem);
 
-        materiTitleEl.textContent = contentItem.title;
+        // === SET JUDUL ===
+        // Di toolbar (akan otomatis "..." jika panjang)
+        titleShortEl.textContent = contentItem.title;
+        // Di dalam dropdown (akan terlihat lengkap dan wrapping)
+        titleFullEl.textContent = contentItem.title;
 
         try {
             pdfDoc = await pdfjsLib.getDocument(contentItem.filePath).promise;
-            const firstPage = await pdfDoc.getPage(1);
-            const pageWidth = firstPage.getViewport({ scale: 1 }).width;
-            const containerWidth = viewerEl.clientWidth - 32; 
-            scale = containerWidth / pageWidth; 
             renderAllPages();
         } catch (err) {
-            console.error("Error saat memuat PDF:", err);
-            statusMessageEl.textContent = `Gagal memuat file PDF. Pastikan path file benar.`;
+            console.error("Error:", err);
+            statusMessageEl.textContent = `Gagal memuat file PDF.`;
         }
         
-        // Mengatur tombol navigasi antar-konten
         const prevMateriBtn = document.getElementById('prev-materi');
         const nextMateriBtn = document.getElementById('next-materi');
+        
         if (prevItem) {
             prevMateriBtn.disabled = false;
             prevMateriBtn.addEventListener('click', () => window.location.href = `viewer.html?id=${prevItem.id}`);
@@ -298,7 +402,6 @@
             nextMateriBtn.disabled = true;
         }
 
-        // Pasang event listener ke tombol zoom
         document.getElementById('zoom-in').addEventListener('click', () => onZoom(scale + 0.25));
         document.getElementById('zoom-out').addEventListener('click', () => onZoom(scale - 0.25));
     });
