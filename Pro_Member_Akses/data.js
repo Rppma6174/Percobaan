@@ -752,7 +752,7 @@ const allContentData = {
             title: 'Esensi Limit Fungsi', 
             type: 'HTML Document', 
             filePath: '#', 
-            fileType: 'html' 
+            fileType: 'UMT-Learning' 
             },
         ],
         // Anda bisa tambahkan "Kelas 9 SMP", "Kelas 11 SMA", dst. di sini
