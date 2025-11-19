@@ -18,8 +18,8 @@
             color: var(--text-primary);
             font-family: sans-serif;
             margin: 0;
-            overflow: hidden; /* Penting: Mencegah scroll body native */
-            touch-action: none; /* Mencegah browser melakukan zoom default */
+            overflow: hidden;
+            touch-action: none;
         }
 
         /* --- LAYOUT UTAMA --- */
@@ -40,64 +40,29 @@
             border-bottom: 1px solid var(--border-color);
             flex-shrink: 0;
             gap: 10px;
-            z-index: 10; /* Pastikan toolbar di atas */
+            z-index: 10;
         }
 
-        .toolbar-section {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .toolbar-section.title-section {
-            flex: 1;
-            min-width: 0;
-            justify-content: center;
-            position: relative;
-        }
+        .toolbar-section { display: flex; align-items: center; gap: 0.5rem; }
+        .toolbar-section.title-section { flex: 1; min-width: 0; justify-content: center; position: relative; }
 
         /* --- TITLE & DROPDOWN --- */
         .title-wrapper {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            cursor: pointer;
-            max-width: 100%;
-            padding: 4px 8px;
-            border-radius: 6px;
-            transition: background 0.2s;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            cursor: pointer; max-width: 100%; padding: 4px 8px; border-radius: 6px; transition: background 0.2s;
         }
         .title-wrapper:hover { background-color: var(--border-color); }
-
         .toolbar-title {
-            font-size: 1rem;
-            font-weight: bold;
-            margin: 0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            max-width: 400px;
+            font-size: 1rem; font-weight: bold; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 400px;
         }
         @media (max-width: 768px) { .toolbar-title { max-width: 150px; font-size: 0.9rem; } }
-
         .title-icon { font-size: 0.8rem; color: var(--text-secondary); flex-shrink: 0; }
 
         .title-dropdown {
-            display: none;
-            position: absolute;
-            top: 120%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: max-content;
-            max-width: 80vw;
-            background-color: var(--dropdown-bg);
-            border: 1px solid var(--border-color);
-            padding: 1rem;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.5);
-            z-index: 1000;
-            text-align: center;
+            display: none; position: absolute; top: 120%; left: 50%; transform: translateX(-50%);
+            width: max-content; max-width: 80vw; background-color: var(--dropdown-bg);
+            border: 1px solid var(--border-color); padding: 1rem; border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000; text-align: center;
         }
         .title-dropdown.show { display: block; animation: fadeIn 0.2s ease-in-out; }
         .full-title-text { color: var(--text-primary); font-size: 1rem; font-weight: bold; white-space: normal; line-height: 1.5; }
@@ -105,15 +70,8 @@
 
         /* --- BUTTONS --- */
         .toolbar-button {
-            background: none;
-            border: 1px solid transparent;
-            color: var(--text-primary);
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            background: none; border: 1px solid transparent; color: var(--text-primary);
+            cursor: pointer; padding: 0.5rem; border-radius: 4px; display: flex; align-items: center; justify-content: center;
         }
         .toolbar-button:hover:not(:disabled) { background-color: var(--border-color); }
         .toolbar-button:disabled { color: var(--text-secondary); cursor: not-allowed; }
@@ -123,33 +81,36 @@
             flex-grow: 1;
             overflow: auto;
             text-align: center;
-            padding: 1rem;
+            padding: 1rem; /* Padding agar PDF tidak nempel pinggir */
             background-color: #0d1117;
             position: relative;
-            /* Enable touch scrolling but handle zoom manually */
             touch-action: pan-x pan-y; 
+            display: flex;             /* Flex agar canvas di tengah */
+            justify-content: center;
+            align-items: flex-start;   /* Align top */
         }
         
-        /* Wrapper untuk canvas agar transformasi CSS halus saat dicubit */
         #canvas-container {
-            display: inline-block;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             transform-origin: top center;
-            transition: transform 0.1s ease-out; /* Transisi halus saat gesture */
+            transition: transform 0.1s ease-out;
+            width: 100%; /* Container mengambil lebar penuh */
         }
 
         #pdf-canvas {
             border: 1px solid var(--border-color);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            display: block; /* Hilangkan gap bawah */
+            display: block; 
+            /* Max-width 100% memastikan canvas tidak overflow container saat mode fit */
+            max-width: 100%; 
+            height: auto;
         }
         
         .status-message {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 1.2rem;
-            color: var(--text-secondary);
+            position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            font-size: 1.2rem; color: var(--text-secondary);
         }
     </style>
 </head>
@@ -205,6 +166,7 @@
     const token = sessionStorage.getItem('sessionToken');
     if (!token) { window.location.href = '../Login/'; }
 
+    // --- Helper Functions ---
     function markAsCompleted(itemId) {
         const key = 'userCompletedItems';
         let completed = JSON.parse(localStorage.getItem(key)) || [];
@@ -213,7 +175,6 @@
             localStorage.setItem(key, JSON.stringify(completed));
         }
     }
-
     function updateLastActivity(type, item) {
         const key = 'userLastActivity';
         let lastActivity = JSON.parse(localStorage.getItem(key)) || {};
@@ -221,33 +182,33 @@
         localStorage.setItem(key, JSON.stringify(lastActivity));
     }
 
-    // --- DOM ELEMENTS ---
+    // --- DOM Elements ---
     const titleShortEl = document.getElementById('materi-title-short');
     const titleFullEl = document.getElementById('materi-title-full');
     const titleTrigger = document.getElementById('title-trigger');
     const titleDropdown = document.getElementById('title-dropdown');
     const statusMessageEl = document.getElementById('status-message');
     const viewerEl = document.getElementById('pdf-viewer');
-    const canvasContainer = document.getElementById('canvas-container'); // Container Canvas
+    const canvasContainer = document.getElementById('canvas-container');
     
     pdfjsLib.GlobalWorkerOptions.workerSrc = '/Pro_Member_Akses/pdfjs/build/pdf.worker.mjs';
 
     let pdfDoc = null;
-    let scale = 1.5; 
-    
-    // --- VARIABLE UNTUK PINCH ZOOM ---
+    let currentScale = 1.0; // Akan dihitung otomatis nanti
+    let autoFitScale = 1.0; // Menyimpan nilai scale "Fit to Screen"
+
+    // --- Pinch Zoom Variables ---
     let initialPinchDistance = 0;
-    let initialScale = 1.5;
+    let initialScale = 1;
     let isPinching = false;
 
-    // --- DROPDOWN LOGIC ---
+    // --- Dropdown Logic ---
     titleTrigger.addEventListener('click', (e) => {
         e.stopPropagation();
         titleDropdown.classList.toggle('show');
         const icon = titleTrigger.querySelector('.title-icon');
         icon.classList.replace(titleDropdown.classList.contains('show') ? 'fa-chevron-down' : 'fa-chevron-up', titleDropdown.classList.contains('show') ? 'fa-chevron-up' : 'fa-chevron-down');
     });
-
     document.addEventListener('click', (e) => {
         if (!titleTrigger.contains(e.target) && !titleDropdown.contains(e.target)) {
             titleDropdown.classList.remove('show');
@@ -255,32 +216,60 @@
         }
     });
 
-    // --- RENDER FUNGSI ---
+    // --- FUNGSI UTAMA: Hitung Scale agar Fit Layar & Tetap HD ---
+    const calculateAutoFitScale = async () => {
+        if (!pdfDoc) return 1.0;
+        
+        // Ambil halaman pertama untuk referensi ukuran
+        const page = await pdfDoc.getPage(1);
+        const unscaledViewport = page.getViewport({ scale: 1.0 });
+        
+        // Ambil lebar container (dikurangi padding 32px agar ada jarak)
+        const containerWidth = viewerEl.clientWidth - 32;
+        
+        // Hitung rasio agar pas di layar
+        const fitScale = containerWidth / unscaledViewport.width;
+        
+        return fitScale;
+    };
+
     const renderAllPages = async () => {
         statusMessageEl.textContent = `Memuat...`;
         statusMessageEl.style.display = 'block';
         canvasContainer.innerHTML = ''; 
-        canvasContainer.style.transform = `scale(1)`; // Reset CSS transform setelah render ulang
+        canvasContainer.style.transform = `scale(1)`; 
 
         const pagePromises = [];
         for (let num = 1; num <= pdfDoc.numPages; num++) {
             const promise = pdfDoc.getPage(num).then(page => {
-                const devicePixelRatio = window.devicePixelRatio || 1;
-                const viewport = page.getViewport({ scale: scale * devicePixelRatio });
+                // --- RAHASIA HD DI LAYAR FIT ---
+                // Kita gunakan devicePixelRatio (DPR)
+                // Jika layar retina (HP/Mac), DPR biasanya 2 atau 3.
+                // Kita kalikan scale fit dengan DPR untuk resolusi render.
+                const dpr = window.devicePixelRatio || 1;
+                
+                // Viewport untuk rendering (Pixel fisik) -> DIKALIKAN DPR
+                const renderViewport = page.getViewport({ scale: currentScale * dpr });
+                
+                // Viewport untuk CSS (Ukuran tampilan) -> TANPA DPR (karena CSS otomatis handle)
+                // Tapi kita butuh aspek rasionya
                 
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
                 
-                canvas.height = viewport.height;
-                canvas.width = viewport.width;
+                // Set ukuran canvas ke resolusi tinggi (HD)
+                canvas.height = renderViewport.height;
+                canvas.width = renderViewport.width;
                 
-                canvas.style.width = `${viewport.width / devicePixelRatio}px`;
-                canvas.style.height = `${viewport.height / devicePixelRatio}px`;
+                // Paksa ukuran tampilan CSS agar sesuai layout (Fit Screen)
+                // Kita bagi kembali dengan DPR agar ukurannya pas di layar web
+                canvas.style.width = `${renderViewport.width / dpr}px`;
+                canvas.style.height = `${renderViewport.height / dpr}px`;
+                
                 canvas.style.marginBottom = '1rem';
-                canvas.style.maxWidth = 'none'; 
-                canvas.id = 'pdf-canvas';
+                canvas.id = `page-${num}`;
 
-                const renderContext = { canvasContext: ctx, viewport };
+                const renderContext = { canvasContext: ctx, viewport: renderViewport };
                 canvasContainer.appendChild(canvas);
                 return page.render(renderContext).promise;
             });
@@ -292,45 +281,29 @@
     };
 
     const onZoom = (newScale) => {
-        if (!pdfDoc || newScale < 0.5 || newScale > 5.0) return;
-        scale = newScale;
+        // Limit zoom
+        if (!pdfDoc || newScale < (autoFitScale * 0.5) || newScale > 5.0) return;
+        currentScale = newScale;
         renderAllPages();
     };
 
-    // --- LOGIKA PINCH TO ZOOM (Dua Jari) ---
-    
+    // --- Pinch Zoom Handlers ---
     viewerEl.addEventListener('touchstart', (e) => {
         if (e.touches.length === 2) {
             isPinching = true;
-            // Hitung jarak awal antara dua jari
-            initialPinchDistance = Math.hypot(
-                e.touches[0].pageX - e.touches[1].pageX,
-                e.touches[0].pageY - e.touches[1].pageY
-            );
-            initialScale = scale;
+            initialPinchDistance = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
+            initialScale = currentScale;
         }
     });
 
     viewerEl.addEventListener('touchmove', (e) => {
         if (isPinching && e.touches.length === 2) {
-            e.preventDefault(); // Mencegah scroll saat pinch
-            
-            // Hitung jarak saat ini
-            const currentDistance = Math.hypot(
-                e.touches[0].pageX - e.touches[1].pageX,
-                e.touches[0].pageY - e.touches[1].pageY
-            );
-
-            // Hitung rasio perbesaran
+            e.preventDefault(); 
+            const currentDistance = Math.hypot(e.touches[0].pageX - e.touches[1].pageX, e.touches[0].pageY - e.touches[1].pageY);
             const pinchRatio = currentDistance / initialPinchDistance;
-            
-            // Hitung preview scale (hanya CSS visual, belum render ulang)
-            // Ini agar gerakan terasa mulus/smooth di jari
             const previewScale = pinchRatio;
-            
-            // Terapkan transformasi CSS sementara
             canvasContainer.style.transform = `scale(${previewScale})`;
-            canvasContainer.style.transition = 'none'; // Matikan transisi saat drag agar responsif
+            canvasContainer.style.transition = 'none'; 
         }
     });
 
@@ -339,32 +312,36 @@
             isPinching = false;
             canvasContainer.style.transition = 'transform 0.1s ease-out';
             
-            // Ambil nilai transform terakhir untuk update skala asli
-            // Kita perlu menghitung skala baru berdasarkan transformasi CSS terakhir
-            // Namun untuk simplifikasi yang akurat, kita hitung ulang berdasarkan jarak terakhir (jika disimpan) 
-            // atau kita biarkan user melepas dan kita render ulang berdasarkan 'previewScale' terakhir.
-            
-            // Cara yang lebih aman: Baca style transform atau gunakan rasio terakhir
-            // Di sini kita hitung scale baru secara kasar dari matrix atau estimasi manual.
-            // Agar lebih simpel dan akurat:
-            // Kita render ulang dengan scale baru.
-            
-            // Dapatkan nilai scale dari matrix CSS
             const style = window.getComputedStyle(canvasContainer);
             const matrix = new WebKitCSSMatrix(style.transform);
-            const cssScale = matrix.a; // Mengambil nilai scale X
+            const cssScale = matrix.a; 
 
             let newScale = initialScale * cssScale;
-            
-            // Batasi Limit
-            if (newScale < 0.5) newScale = 0.5;
+            if (newScale < (autoFitScale * 0.5)) newScale = (autoFitScale * 0.5);
             if (newScale > 5.0) newScale = 5.0;
             
-            scale = newScale;
-            renderAllPages(); // Render ulang agar HD
+            currentScale = newScale;
+            renderAllPages(); 
         }
     });
 
+    // --- Resize Handler ---
+    // Jika user memutar layar (rotate HP), hitung ulang fit scale
+    window.addEventListener('resize', async () => {
+        if (pdfDoc) {
+            // Simpan scale lama
+            const oldFitScale = autoFitScale;
+            // Hitung scale baru berdasarkan lebar baru
+            autoFitScale = await calculateAutoFitScale();
+            
+            // Jika user belum melakukan zoom manual (masih di posisi default),
+            // maka ikuti perubahan lebar layar (responsif)
+            if (Math.abs(currentScale - oldFitScale) < 0.1) {
+                currentScale = autoFitScale;
+                renderAllPages();
+            }
+        }
+    });
 
     // --- INIT ---
     function findContentDetails(contentId) {
@@ -373,12 +350,7 @@
             const flatList = Array.isArray(categoryData) ? categoryData : Object.values(categoryData).flat();
             const currentIndex = flatList.findIndex(item => item.id === contentId);
             if (currentIndex !== -1) {
-                return {
-                    contentItem: flatList[currentIndex],
-                    prevItem: currentIndex > 0 ? flatList[currentIndex - 1] : null,
-                    nextItem: currentIndex < flatList.length - 1 ? flatList[currentIndex + 1] : null,
-                    type: key 
-                };
+                return { contentItem: flatList[currentIndex], prevItem: currentIndex > 0 ? flatList[currentIndex - 1] : null, nextItem: currentIndex < flatList.length - 1 ? flatList[currentIndex + 1] : null, type: key };
             }
         }
         return null; 
@@ -392,13 +364,10 @@
         
         const result = findContentDetails(contentId);
         if (!result || !result.contentItem) {
-            titleShortEl.textContent = 'Error';
-            titleFullEl.textContent = `Tidak ditemukan.`;
-            return;
+            titleShortEl.textContent = 'Error'; titleFullEl.textContent = `Tidak ditemukan.`; return;
         }
 
         const { contentItem, prevItem, nextItem, type } = result;
-        
         markAsCompleted(contentItem.id); 
         updateLastActivity(type, contentItem);
 
@@ -407,6 +376,11 @@
 
         try {
             pdfDoc = await pdfjsLib.getDocument(contentItem.filePath).promise;
+            
+            // [STEP PENTING] Hitung scale agar pas di layar
+            autoFitScale = await calculateAutoFitScale();
+            currentScale = autoFitScale; // Set tampilan awal ke Fit Screen
+
             renderAllPages();
         } catch (err) {
             console.error("Error:", err);
@@ -416,17 +390,11 @@
         const prevMateriBtn = document.getElementById('prev-materi');
         const nextMateriBtn = document.getElementById('next-materi');
         
-        if (prevItem) {
-            prevMateriBtn.disabled = false;
-            prevMateriBtn.addEventListener('click', () => window.location.href = `viewer.html?id=${prevItem.id}`);
-        } else { prevMateriBtn.disabled = true; }
-        if (nextItem) {
-            nextMateriBtn.disabled = false;
-            nextMateriBtn.addEventListener('click', () => window.location.href = `viewer.html?id=${nextItem.id}`);
-        } else { nextMateriBtn.disabled = true; }
+        if (prevItem) { prevMateriBtn.disabled = false; prevMateriBtn.addEventListener('click', () => window.location.href = `viewer.html?id=${prevItem.id}`); } else { prevMateriBtn.disabled = true; }
+        if (nextItem) { nextMateriBtn.disabled = false; nextMateriBtn.addEventListener('click', () => window.location.href = `viewer.html?id=${nextItem.id}`); } else { nextMateriBtn.disabled = true; }
 
-        document.getElementById('zoom-in').addEventListener('click', () => onZoom(scale + 0.25));
-        document.getElementById('zoom-out').addEventListener('click', () => onZoom(scale - 0.25));
+        document.getElementById('zoom-in').addEventListener('click', () => onZoom(currentScale + 0.25));
+        document.getElementById('zoom-out').addEventListener('click', () => onZoom(currentScale - 0.25));
     });
 </script>
 </body>
