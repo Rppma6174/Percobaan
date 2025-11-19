@@ -718,6 +718,7 @@ const allContentData = {
             filePath: 'UMT_Learning/Esensi Kombinatorika.html', 
             fileType: 'html' 
             },
+        ],
         "Kombinatorika : Aturan Penjumlahan dan Aturan Perkalian (Part 1)": [
             { 
             id: 'kombinatorika_AturanPP_1', 
