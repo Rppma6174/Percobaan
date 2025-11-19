@@ -20,6 +20,11 @@
             margin: 0;
             overflow: hidden;
             touch-action: none;
+            /* [BARU] Mencegah seleksi teks/gambar */
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
         }
 
         /* --- LAYOUT UTAMA --- */
@@ -63,6 +68,8 @@
             width: max-content; max-width: 80vw; background-color: var(--dropdown-bg);
             border: 1px solid var(--border-color); padding: 1rem; border-radius: 8px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5); z-index: 1000; text-align: center;
+            /* [BARU] Izinkan select teks hanya di dalam dropdown jika perlu copy judul */
+            user-select: text; 
         }
         .title-dropdown.show { display: block; animation: fadeIn 0.2s ease-in-out; }
         .full-title-text { color: var(--text-primary); font-size: 1rem; font-weight: bold; white-space: normal; line-height: 1.5; }
@@ -81,13 +88,13 @@
             flex-grow: 1;
             overflow: auto;
             text-align: center;
-            padding: 1rem; /* Padding agar PDF tidak nempel pinggir */
+            padding: 1rem;
             background-color: #0d1117;
             position: relative;
             touch-action: pan-x pan-y; 
-            display: flex;             /* Flex agar canvas di tengah */
+            display: flex;             
             justify-content: center;
-            align-items: flex-start;   /* Align top */
+            align-items: flex-start;   
         }
         
         #canvas-container {
@@ -96,16 +103,18 @@
             align-items: center;
             transform-origin: top center;
             transition: transform 0.1s ease-out;
-            width: 100%; /* Container mengambil lebar penuh */
+            width: 100%; 
         }
 
         #pdf-canvas {
             border: 1px solid var(--border-color);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             display: block; 
-            /* Max-width 100% memastikan canvas tidak overflow container saat mode fit */
             max-width: 100%; 
             height: auto;
+            /* [BARU] Mencegah gambar di-drag ke desktop */
+            pointer-events: auto; 
+            -webkit-user-drag: none;
         }
         
         .status-message {
@@ -114,7 +123,7 @@
         }
     </style>
 </head>
-<body>
+<body oncontextmenu="return false;">
 
     <div class="viewer-container">
         <div class="toolbar">
@@ -194,13 +203,24 @@
     pdfjsLib.GlobalWorkerOptions.workerSrc = '/Pro_Member_Akses/pdfjs/build/pdf.worker.mjs';
 
     let pdfDoc = null;
-    let currentScale = 1.0; // Akan dihitung otomatis nanti
-    let autoFitScale = 1.0; // Menyimpan nilai scale "Fit to Screen"
+    let currentScale = 1.0; 
+    let autoFitScale = 1.0; 
 
     // --- Pinch Zoom Variables ---
     let initialPinchDistance = 0;
     let initialScale = 1;
     let isPinching = false;
+
+    // --- [BARU] EVENT LISTENER ANTI KLIK KANAN ---
+    // Memastikan klik kanan mati total di halaman ini
+    document.addEventListener('contextmenu', event => event.preventDefault());
+
+    // [BARU] Mencegah shortcut keyboard umum untuk save (Ctrl+S, Ctrl+P)
+    document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'p' || e.key === 'u')) {
+            e.preventDefault();
+        }
+    });
 
     // --- Dropdown Logic ---
     titleTrigger.addEventListener('click', (e) => {
@@ -216,20 +236,13 @@
         }
     });
 
-    // --- FUNGSI UTAMA: Hitung Scale agar Fit Layar & Tetap HD ---
+    // --- FUNGSI UTAMA ---
     const calculateAutoFitScale = async () => {
         if (!pdfDoc) return 1.0;
-        
-        // Ambil halaman pertama untuk referensi ukuran
         const page = await pdfDoc.getPage(1);
         const unscaledViewport = page.getViewport({ scale: 1.0 });
-        
-        // Ambil lebar container (dikurangi padding 32px agar ada jarak)
         const containerWidth = viewerEl.clientWidth - 32;
-        
-        // Hitung rasio agar pas di layar
         const fitScale = containerWidth / unscaledViewport.width;
-        
         return fitScale;
     };
 
@@ -242,27 +255,15 @@
         const pagePromises = [];
         for (let num = 1; num <= pdfDoc.numPages; num++) {
             const promise = pdfDoc.getPage(num).then(page => {
-                // --- RAHASIA HD DI LAYAR FIT ---
-                // Kita gunakan devicePixelRatio (DPR)
-                // Jika layar retina (HP/Mac), DPR biasanya 2 atau 3.
-                // Kita kalikan scale fit dengan DPR untuk resolusi render.
                 const dpr = window.devicePixelRatio || 1;
-                
-                // Viewport untuk rendering (Pixel fisik) -> DIKALIKAN DPR
                 const renderViewport = page.getViewport({ scale: currentScale * dpr });
-                
-                // Viewport untuk CSS (Ukuran tampilan) -> TANPA DPR (karena CSS otomatis handle)
-                // Tapi kita butuh aspek rasionya
                 
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d');
                 
-                // Set ukuran canvas ke resolusi tinggi (HD)
                 canvas.height = renderViewport.height;
                 canvas.width = renderViewport.width;
                 
-                // Paksa ukuran tampilan CSS agar sesuai layout (Fit Screen)
-                // Kita bagi kembali dengan DPR agar ukurannya pas di layar web
                 canvas.style.width = `${renderViewport.width / dpr}px`;
                 canvas.style.height = `${renderViewport.height / dpr}px`;
                 
@@ -281,7 +282,6 @@
     };
 
     const onZoom = (newScale) => {
-        // Limit zoom
         if (!pdfDoc || newScale < (autoFitScale * 0.5) || newScale > 5.0) return;
         currentScale = newScale;
         renderAllPages();
@@ -326,16 +326,10 @@
     });
 
     // --- Resize Handler ---
-    // Jika user memutar layar (rotate HP), hitung ulang fit scale
     window.addEventListener('resize', async () => {
         if (pdfDoc) {
-            // Simpan scale lama
             const oldFitScale = autoFitScale;
-            // Hitung scale baru berdasarkan lebar baru
             autoFitScale = await calculateAutoFitScale();
-            
-            // Jika user belum melakukan zoom manual (masih di posisi default),
-            // maka ikuti perubahan lebar layar (responsif)
             if (Math.abs(currentScale - oldFitScale) < 0.1) {
                 currentScale = autoFitScale;
                 renderAllPages();
@@ -376,11 +370,8 @@
 
         try {
             pdfDoc = await pdfjsLib.getDocument(contentItem.filePath).promise;
-            
-            // [STEP PENTING] Hitung scale agar pas di layar
             autoFitScale = await calculateAutoFitScale();
-            currentScale = autoFitScale; // Set tampilan awal ke Fit Screen
-
+            currentScale = autoFitScale; 
             renderAllPages();
         } catch (err) {
             console.error("Error:", err);
