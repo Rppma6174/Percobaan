@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>UMT Pro - Materi Viewer</title>
     <link rel="icon" type="image/png" href="UMT-Logo - Copy.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
@@ -18,7 +18,8 @@
             color: var(--text-primary);
             font-family: sans-serif;
             margin: 0;
-            overflow: hidden; /* Mencegah scroll halaman utama */
+            overflow: hidden; /* Penting: Mencegah scroll body native */
+            touch-action: none; /* Mencegah browser melakukan zoom default */
         }
 
         /* --- LAYOUT UTAMA --- */
@@ -26,7 +27,7 @@
             display: flex;
             flex-direction: column;
             height: 100vh;
-            width: 100vw; /* Pastikan lebar fit layar */
+            width: 100vw;
         }
 
         /* --- TOOLBAR --- */
@@ -38,7 +39,8 @@
             padding: 0.5rem 1rem;
             border-bottom: 1px solid var(--border-color);
             flex-shrink: 0;
-            gap: 10px; /* Jarak antar section */
+            gap: 10px;
+            z-index: 10; /* Pastikan toolbar di atas */
         }
 
         .toolbar-section {
@@ -47,66 +49,48 @@
             gap: 0.5rem;
         }
 
-        /* Section Tengah (Judul) - KUNCI PERBAIKAN LAYOUT */
         .toolbar-section.title-section {
-            flex: 1; /* Mengambil sisa ruang yang ada */
-            min-width: 0; /* Penting! Agar text-overflow bekerja di flexbox */
+            flex: 1;
+            min-width: 0;
             justify-content: center;
-            position: relative; /* Untuk patokan posisi dropdown */
+            position: relative;
         }
 
-        /* --- TITLE CONTAINER & DROPDOWN --- */
+        /* --- TITLE & DROPDOWN --- */
         .title-wrapper {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
             cursor: pointer;
-            max-width: 100%; /* Agar tidak menembus layar */
+            max-width: 100%;
             padding: 4px 8px;
             border-radius: 6px;
             transition: background 0.2s;
         }
-
-        .title-wrapper:hover {
-            background-color: var(--border-color);
-        }
+        .title-wrapper:hover { background-color: var(--border-color); }
 
         .toolbar-title {
             font-size: 1rem;
             font-weight: bold;
             margin: 0;
-            
-            /* CSS untuk memotong teks panjang jadi "..." */
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            max-width: 400px; /* Batas maksimal lebar judul sebelum titik-titik */
+            max-width: 400px;
         }
+        @media (max-width: 768px) { .toolbar-title { max-width: 150px; font-size: 0.9rem; } }
 
-        /* Responsif untuk HP: Judul lebih pendek */
-        @media (max-width: 768px) {
-            .toolbar-title {
-                max-width: 150px; 
-                font-size: 0.9rem;
-            }
-        }
+        .title-icon { font-size: 0.8rem; color: var(--text-secondary); flex-shrink: 0; }
 
-        .title-icon {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            flex-shrink: 0; /* Ikon jangan gepeng */
-        }
-
-        /* Tampilan Dropdown Judul Lengkap */
         .title-dropdown {
-            display: none; /* Default sembunyi */
+            display: none;
             position: absolute;
-            top: 120%; /* Muncul sedikit di bawah judul */
+            top: 120%;
             left: 50%;
             transform: translateX(-50%);
             width: max-content;
-            max-width: 80vw; /* Maksimal 80% lebar layar */
+            max-width: 80vw;
             background-color: var(--dropdown-bg);
             border: 1px solid var(--border-color);
             padding: 1rem;
@@ -115,27 +99,11 @@
             z-index: 1000;
             text-align: center;
         }
+        .title-dropdown.show { display: block; animation: fadeIn 0.2s ease-in-out; }
+        .full-title-text { color: var(--text-primary); font-size: 1rem; font-weight: bold; white-space: normal; line-height: 1.5; }
+        @keyframes fadeIn { from { opacity: 0; transform: translate(-50%, -10px); } to { opacity: 1; transform: translate(-50%, 0); } }
 
-        .title-dropdown.show {
-            display: block;
-            animation: fadeIn 0.2s ease-in-out;
-        }
-
-        /* Teks di dalam dropdown: BISA WRAPPING (TURUN KE BAWAH) */
-        .full-title-text {
-            color: var(--text-primary);
-            font-size: 1rem;
-            font-weight: bold;
-            white-space: normal; /* Ini yang bikin teks turun ke bawah */
-            line-height: 1.5;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translate(-50%, -10px); }
-            to { opacity: 1; transform: translate(-50%, 0); }
-        }
-
-        /* --- BUTTON STYLES --- */
+        /* --- BUTTONS --- */
         .toolbar-button {
             background: none;
             border: 1px solid transparent;
@@ -147,13 +115,8 @@
             align-items: center;
             justify-content: center;
         }
-        .toolbar-button:hover:not(:disabled) {
-            background-color: var(--border-color);
-        }
-        .toolbar-button:disabled {
-            color: var(--text-secondary);
-            cursor: not-allowed;
-        }
+        .toolbar-button:hover:not(:disabled) { background-color: var(--border-color); }
+        .toolbar-button:disabled { color: var(--text-secondary); cursor: not-allowed; }
 
         /* --- PDF VIEWER AREA --- */
         .pdf-viewer {
@@ -162,10 +125,22 @@
             text-align: center;
             padding: 1rem;
             background-color: #0d1117;
+            position: relative;
+            /* Enable touch scrolling but handle zoom manually */
+            touch-action: pan-x pan-y; 
         }
+        
+        /* Wrapper untuk canvas agar transformasi CSS halus saat dicubit */
+        #canvas-container {
+            display: inline-block;
+            transform-origin: top center;
+            transition: transform 0.1s ease-out; /* Transisi halus saat gesture */
+        }
+
         #pdf-canvas {
             border: 1px solid var(--border-color);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: block; /* Hilangkan gap bawah */
         }
         
         .status-message {
@@ -183,27 +158,26 @@
     <div class="viewer-container">
         <div class="toolbar">
             <div class="toolbar-section">
-                <a href="index.html" class="toolbar-button" title="Kembali ke Daftar Materi">
+                <a href="index.html" class="toolbar-button" title="Kembali">
                     <i class="fa-solid fa-arrow-left"></i>
                 </a>
-                <button id="prev-materi" class="toolbar-button" title="Materi Sebelumnya">
+                <button id="prev-materi" class="toolbar-button" title="Sebelumnya">
                     <i class="fa-solid fa-angles-left"></i>
                 </button>
             </div>
 
             <div class="toolbar-section title-section">
-                <div class="title-wrapper" id="title-trigger" title="Klik untuk lihat judul lengkap">
+                <div class="title-wrapper" id="title-trigger" title="Lihat Judul">
                     <h1 id="materi-title-short" class="toolbar-title">Memuat...</h1>
                     <i class="fa-solid fa-chevron-down title-icon"></i>
                 </div>
-                
                 <div id="title-dropdown" class="title-dropdown">
                     <div id="materi-title-full" class="full-title-text">Memuat materi...</div>
                 </div>
             </div>
 
             <div class="toolbar-section">
-                <button id="next-materi" class="toolbar-button" title="Materi Selanjutnya">
+                <button id="next-materi" class="toolbar-button" title="Selanjutnya">
                     <i class="fa-solid fa-angles-right"></i>
                 </button>
                 <div style="width: 1px; height: 20px; background: var(--border-color); margin: 0 5px;"></div>
@@ -217,7 +191,8 @@
         </div>
 
         <div id="pdf-viewer" class="pdf-viewer">
-            <div id="status-message" class="status-message">Memuat PDF, mohon tunggu...</div>
+            <div id="canvas-container"></div>
+            <div id="status-message" class="status-message">Memuat PDF...</div>
         </div>
     </div>
 
@@ -228,9 +203,7 @@
     import * as pdfjsLib from '/Pro_Member_Akses/pdfjs/build/pdf.mjs';
 
     const token = sessionStorage.getItem('sessionToken');
-    if (!token) {
-        window.location.href = '../Login/';
-    }
+    if (!token) { window.location.href = '../Login/'; }
 
     function markAsCompleted(itemId) {
         const key = 'userCompletedItems';
@@ -244,12 +217,7 @@
     function updateLastActivity(type, item) {
         const key = 'userLastActivity';
         let lastActivity = JSON.parse(localStorage.getItem(key)) || {};
-        lastActivity[type] = {
-            id: item.id,
-            title: item.title,
-            filePath: item.filePath, 
-            videoId: item.videoId
-        };
+        lastActivity[type] = { id: item.id, title: item.title, filePath: item.filePath, videoId: item.videoId };
         localStorage.setItem(key, JSON.stringify(lastActivity));
     }
 
@@ -260,40 +228,39 @@
     const titleDropdown = document.getElementById('title-dropdown');
     const statusMessageEl = document.getElementById('status-message');
     const viewerEl = document.getElementById('pdf-viewer');
+    const canvasContainer = document.getElementById('canvas-container'); // Container Canvas
     
     pdfjsLib.GlobalWorkerOptions.workerSrc = '/Pro_Member_Akses/pdfjs/build/pdf.worker.mjs';
 
     let pdfDoc = null;
-    let scale = 1.5; // Tetap HD
+    let scale = 1.5; 
+    
+    // --- VARIABLE UNTUK PINCH ZOOM ---
+    let initialPinchDistance = 0;
+    let initialScale = 1.5;
+    let isPinching = false;
 
     // --- DROPDOWN LOGIC ---
-    // Klik judul untuk buka/tutup dropdown
     titleTrigger.addEventListener('click', (e) => {
-        e.stopPropagation(); // Mencegah event bubble
+        e.stopPropagation();
         titleDropdown.classList.toggle('show');
-        
-        // Ubah icon panah
         const icon = titleTrigger.querySelector('.title-icon');
-        if(titleDropdown.classList.contains('show')){
-            icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
-        } else {
-            icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
-        }
+        icon.classList.replace(titleDropdown.classList.contains('show') ? 'fa-chevron-down' : 'fa-chevron-up', titleDropdown.classList.contains('show') ? 'fa-chevron-up' : 'fa-chevron-down');
     });
 
-    // Klik di mana saja di luar dropdown untuk menutupnya
     document.addEventListener('click', (e) => {
         if (!titleTrigger.contains(e.target) && !titleDropdown.contains(e.target)) {
             titleDropdown.classList.remove('show');
-            const icon = titleTrigger.querySelector('.title-icon');
-            icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
+            titleTrigger.querySelector('.title-icon').classList.replace('fa-chevron-up', 'fa-chevron-down');
         }
     });
 
+    // --- RENDER FUNGSI ---
     const renderAllPages = async () => {
-        statusMessageEl.textContent = `Memuat ${pdfDoc.numPages} halaman...`;
+        statusMessageEl.textContent = `Memuat...`;
         statusMessageEl.style.display = 'block';
-        viewerEl.innerHTML = ''; 
+        canvasContainer.innerHTML = ''; 
+        canvasContainer.style.transform = `scale(1)`; // Reset CSS transform setelah render ulang
 
         const pagePromises = [];
         for (let num = 1; num <= pdfDoc.numPages; num++) {
@@ -311,9 +278,10 @@
                 canvas.style.height = `${viewport.height / devicePixelRatio}px`;
                 canvas.style.marginBottom = '1rem';
                 canvas.style.maxWidth = 'none'; 
+                canvas.id = 'pdf-canvas';
 
                 const renderContext = { canvasContext: ctx, viewport };
-                viewerEl.appendChild(canvas);
+                canvasContainer.appendChild(canvas);
                 return page.render(renderContext).promise;
             });
             pagePromises.push(promise);
@@ -329,12 +297,81 @@
         renderAllPages();
     };
 
+    // --- LOGIKA PINCH TO ZOOM (Dua Jari) ---
+    
+    viewerEl.addEventListener('touchstart', (e) => {
+        if (e.touches.length === 2) {
+            isPinching = true;
+            // Hitung jarak awal antara dua jari
+            initialPinchDistance = Math.hypot(
+                e.touches[0].pageX - e.touches[1].pageX,
+                e.touches[0].pageY - e.touches[1].pageY
+            );
+            initialScale = scale;
+        }
+    });
+
+    viewerEl.addEventListener('touchmove', (e) => {
+        if (isPinching && e.touches.length === 2) {
+            e.preventDefault(); // Mencegah scroll saat pinch
+            
+            // Hitung jarak saat ini
+            const currentDistance = Math.hypot(
+                e.touches[0].pageX - e.touches[1].pageX,
+                e.touches[0].pageY - e.touches[1].pageY
+            );
+
+            // Hitung rasio perbesaran
+            const pinchRatio = currentDistance / initialPinchDistance;
+            
+            // Hitung preview scale (hanya CSS visual, belum render ulang)
+            // Ini agar gerakan terasa mulus/smooth di jari
+            const previewScale = pinchRatio;
+            
+            // Terapkan transformasi CSS sementara
+            canvasContainer.style.transform = `scale(${previewScale})`;
+            canvasContainer.style.transition = 'none'; // Matikan transisi saat drag agar responsif
+        }
+    });
+
+    viewerEl.addEventListener('touchend', (e) => {
+        if (isPinching && e.touches.length < 2) {
+            isPinching = false;
+            canvasContainer.style.transition = 'transform 0.1s ease-out';
+            
+            // Ambil nilai transform terakhir untuk update skala asli
+            // Kita perlu menghitung skala baru berdasarkan transformasi CSS terakhir
+            // Namun untuk simplifikasi yang akurat, kita hitung ulang berdasarkan jarak terakhir (jika disimpan) 
+            // atau kita biarkan user melepas dan kita render ulang berdasarkan 'previewScale' terakhir.
+            
+            // Cara yang lebih aman: Baca style transform atau gunakan rasio terakhir
+            // Di sini kita hitung scale baru secara kasar dari matrix atau estimasi manual.
+            // Agar lebih simpel dan akurat:
+            // Kita render ulang dengan scale baru.
+            
+            // Dapatkan nilai scale dari matrix CSS
+            const style = window.getComputedStyle(canvasContainer);
+            const matrix = new WebKitCSSMatrix(style.transform);
+            const cssScale = matrix.a; // Mengambil nilai scale X
+
+            let newScale = initialScale * cssScale;
+            
+            // Batasi Limit
+            if (newScale < 0.5) newScale = 0.5;
+            if (newScale > 5.0) newScale = 5.0;
+            
+            scale = newScale;
+            renderAllPages(); // Render ulang agar HD
+        }
+    });
+
+
+    // --- INIT ---
     function findContentDetails(contentId) {
         for (const key in allContentData) {
             const categoryData = allContentData[key];
             const flatList = Array.isArray(categoryData) ? categoryData : Object.values(categoryData).flat();
             const currentIndex = flatList.findIndex(item => item.id === contentId);
-
             if (currentIndex !== -1) {
                 return {
                     contentItem: flatList[currentIndex],
@@ -351,19 +388,12 @@
         const urlParams = new URLSearchParams(window.location.search);
         const contentId = urlParams.get('id');
 
-        if (!contentId) {
-            titleShortEl.textContent = 'Error';
-            titleFullEl.textContent = 'Error: ID Konten tidak ditemukan.';
-            statusMessageEl.textContent = 'ID Konten tidak ada di URL.';
-            return;
-        }
+        if (!contentId) return;
         
         const result = findContentDetails(contentId);
-
         if (!result || !result.contentItem) {
-            titleShortEl.textContent = 'Tidak Ditemukan';
-            titleFullEl.textContent = `Konten dengan ID "${contentId}" tidak ditemukan.`;
-            statusMessageEl.textContent = 'Konten tidak ditemukan.';
+            titleShortEl.textContent = 'Error';
+            titleFullEl.textContent = `Tidak ditemukan.`;
             return;
         }
 
@@ -372,10 +402,7 @@
         markAsCompleted(contentItem.id); 
         updateLastActivity(type, contentItem);
 
-        // === SET JUDUL ===
-        // Di toolbar (akan otomatis "..." jika panjang)
         titleShortEl.textContent = contentItem.title;
-        // Di dalam dropdown (akan terlihat lengkap dan wrapping)
         titleFullEl.textContent = contentItem.title;
 
         try {
@@ -383,7 +410,7 @@
             renderAllPages();
         } catch (err) {
             console.error("Error:", err);
-            statusMessageEl.textContent = `Gagal memuat file PDF.`;
+            statusMessageEl.textContent = `Gagal memuat PDF.`;
         }
         
         const prevMateriBtn = document.getElementById('prev-materi');
@@ -392,15 +419,11 @@
         if (prevItem) {
             prevMateriBtn.disabled = false;
             prevMateriBtn.addEventListener('click', () => window.location.href = `viewer.html?id=${prevItem.id}`);
-        } else {
-            prevMateriBtn.disabled = true;
-        }
+        } else { prevMateriBtn.disabled = true; }
         if (nextItem) {
             nextMateriBtn.disabled = false;
             nextMateriBtn.addEventListener('click', () => window.location.href = `viewer.html?id=${nextItem.id}`);
-        } else {
-            nextMateriBtn.disabled = true;
-        }
+        } else { nextMateriBtn.disabled = true; }
 
         document.getElementById('zoom-in').addEventListener('click', () => onZoom(scale + 0.25));
         document.getElementById('zoom-out').addEventListener('click', () => onZoom(scale - 0.25));
