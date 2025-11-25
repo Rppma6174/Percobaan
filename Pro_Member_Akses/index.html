@@ -2109,7 +2109,10 @@ function setupMobileNavScroll() {
     });
 }
 
-document.addEventListener('DOMContentLoaded', initializeApp);
+document.addEventListener('DOMContentLoaded', () => {
+    initializeApp();       // Menjalankan aplikasi utama
+    setupMobileNavScroll(); // <--- INI PENTING: Menjalankan logika panah navigasi
+});
 
 // Fungsi-fungsi baru untuk Sprint Materi
 function openSprintCategory(sprintId) {
