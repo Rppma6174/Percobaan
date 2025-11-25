@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Esensi Kombinatorika - UMT Learning</title>
-    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png"> 
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
     
     <script>
@@ -109,6 +109,12 @@
         ::-webkit-scrollbar-track { background: var(--bg-panel); }
         ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
         ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+        
+        /* Style khusus untuk gambar di dalam soal */
+        .quiz-image {
+            display: flex; justify-content: center; margin-bottom: 1rem;
+            padding: 10px; background: var(--bg-main); border-radius: 8px; border: 1px solid var(--border-color);
+        }
     </style>
 </head>
 <body>
@@ -247,33 +253,78 @@
     </div>
 
     <script>
-        // Cek session (jika perlu)
         if (!sessionStorage.getItem('sessionToken')) {
             window.location.href = '../../Login/';
         }
 
+        // KODE UNTUK MEMBANGUN KUIS
         const quizzes = [
             { 
-                q: "Andi ingin pergi ke kota B. Ada 3 jalan darat dan 2 jalur udara. Berapa banyak cara Andi bisa pergi ke kota B?", 
+                q: "Andi ingin pergi dari Kota A ke Kota C, tetapi harus lewat Kota B dulu. Ada 3 jalan dari A ke B, dan 2 jalan dari B ke C. Berapa banyak variasi rute yang bisa diambil?", 
+                image: `<svg width="300" height="100" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="30" cy="50" r="15" fill="#2F81F7"/><text x="30" y="55" text-anchor="middle" fill="white" font-size="12">A</text>
+                    <circle cx="150" cy="50" r="15" fill="#2F81F7"/><text x="150" y="55" text-anchor="middle" fill="white" font-size="12">B</text>
+                    <circle cx="270" cy="50" r="15" fill="#2F81F7"/><text x="270" y="55" text-anchor="middle" fill="white" font-size="12">C</text>
+                    <path d="M 45,50 Q 90,20 135,50" fill="none" stroke="#C9D1D9" stroke-width="2"/>
+                    <path d="M 45,50 Q 90,50 135,50" fill="none" stroke="#C9D1D9" stroke-width="2"/>
+                    <path d="M 45,50 Q 90,80 135,50" fill="none" stroke="#C9D1D9" stroke-width="2"/>
+                    <text x="90" y="90" text-anchor="middle" fill="#C9D1D9" font-size="10">3 Jalan</text>
+                    <path d="M 165,50 Q 217,30 255,50" fill="none" stroke="#39D353" stroke-width="2"/>
+                    <path d="M 165,50 Q 217,70 255,50" fill="none" stroke="#39D353" stroke-width="2"/>
+                    <text x="210" y="90" text-anchor="middle" fill="#39D353" font-size="10">2 Jalan</text>
+                </svg>`,
                 options: [
-                    "6 cara (3 × 2), karena ada jalan dan udara", 
-                    "5 cara (3 + 2), karena Andi harus memilih satu jalur saja", 
-                    "1 cara, yang penting sampai", 
-                    "Tidak ada cara yang mungkin"
+                    "5 Rute (3 + 2)", 
+                    "6 Rute (3 × 2)", 
+                    "1 Rute saja", 
+                    "Tidak ada rute"
                 ], 
                 correct: 1, 
-                explanation: "Ini adalah pilihan alternatif. Andi tidak bisa lewat darat DAN udara secara bersamaan untuk satu perjalanan. Ia harus memilih salah satu (Darat ATAU Udara). Maka kita jumlahkan: 3 + 2 = 5." 
+                explanation: "Karena perjalanan ini berantai (A ke B <strong>LALU</strong> B ke C), kita menggunakan aturan perkalian. Setiap 1 jalan dari A ke B bisa dilanjutkan dengan 2 pilihan jalan ke C. Total: 3 × 2 = 6." 
             },
             { 
-                q: "Sebuah restoran menyediakan paket makan siang. Anda harus memilih 1 makanan dari 4 menu dan 1 minuman dari 3 menu. Berapa banyak variasi paket yang bisa dibuat?", 
+                q: "Sebuah restoran menawarkan Paket Makan Siang. Anda harus memilih 1 Makanan (dari 2 pilihan) DAN 1 Minuman (dari 2 pilihan). Berapa banyak kombinasi paket yang mungkin?", 
+                image: `<svg width="300" height="120" viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg">
+                     <rect x="10" y="10" width="100" height="80" rx="5" fill="#1c1c1c" stroke="#F85149"/>
+                     <text x="60" y="30" text-anchor="middle" fill="#F85149" font-weight="bold">MAKANAN</text>
+                     <text x="60" y="50" text-anchor="middle" fill="#ccc" font-size="10">- Nasi Goreng</text>
+                     <text x="60" y="65" text-anchor="middle" fill="#ccc" font-size="10">- Mie Goreng</text>
+                     
+                     <text x="150" y="55" text-anchor="middle" fill="#fff" font-weight="bold">&</text>
+
+                     <rect x="190" y="10" width="100" height="80" rx="5" fill="#1c1c1c" stroke="#58a6ff"/>
+                     <text x="240" y="30" text-anchor="middle" fill="#58a6ff" font-weight="bold">MINUMAN</text>
+                     <text x="240" y="50" text-anchor="middle" fill="#ccc" font-size="10">- Es Teh</text>
+                     <text x="240" y="65" text-anchor="middle" fill="#ccc" font-size="10">- Es Jeruk</text>
+                </svg>`,
                 options: [
-                    "7 variasi (4 + 3)", 
-                    "12 variasi (4 × 3)", 
-                    "4 variasi (hanya makanan yang penting)", 
-                    "3 variasi (hanya minuman yang penting)"
+                    "2 Kombinasi", 
+                    "4 Kombinasi (2 × 2)", 
+                    "3 Kombinasi", 
+                    "1 Kombinasi"
                 ], 
                 correct: 1, 
-                explanation: "Untuk membuat satu paket lengkap, Anda harus memilih makanan DAN minuman. Ini adalah proses bertahap/berpasangan. Maka kita kalikan: 4 × 3 = 12 variasi." 
+                explanation: "Anda harus memilih Makanan <strong>DAN</strong> Minuman. Nasi Goreng bisa dengan Es Teh atau Es Jeruk (2 cara). Mie Goreng juga bisa dengan Es Teh atau Es Jeruk (2 cara). Total: 2 × 2 = 4 kombinasi." 
+            },
+            { 
+                q: "Di perpustakaan, Anda ingin meminjam SATU buku saja untuk dibaca. Ada rak Fiksi (5 judul) dan rak Non-Fiksi (4 judul). Berapa banyak pilihan buku yang bisa Anda pinjam?", 
+                image: `<svg width="300" height="100" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="20" y="20" width="100" height="60" fill="#2F81F7" fill-opacity="0.2" stroke="#2F81F7"/>
+                    <text x="70" y="55" text-anchor="middle" fill="#2F81F7" font-size="12">FIKSI (5)</text>
+                    
+                    <text x="150" y="55" text-anchor="middle" fill="#fff" font-weight="bold">ATAU</text>
+
+                    <rect x="180" y="20" width="100" height="60" fill="#39D353" fill-opacity="0.2" stroke="#39D353"/>
+                    <text x="230" y="55" text-anchor="middle" fill="#39D353" font-size="12">NON-FIKSI (4)</text>
+                </svg>`,
+                options: [
+                    "20 Pilihan (5 × 4)", 
+                    "9 Pilihan (5 + 4)", 
+                    "1 Pilihan", 
+                    "Tidak ada pilihan"
+                ], 
+                correct: 1, 
+                explanation: "Anda hanya boleh meminjam SATU buku. Pilihan Anda adalah Fiksi <strong>ATAU</strong> Non-Fiksi. Anda tidak mengambil keduanya sekaligus. Maka gunakan aturan penjumlahan: 5 + 4 = 9 pilihan." 
             },
             { 
                 q: "Apa kata kunci utama yang biasanya mengindikasikan penggunaan Aturan Perkalian?", 
@@ -284,19 +335,13 @@
                     "TETAPI / Namun"
                 ], 
                 correct: 1, 
-                explanation: "Aturan perkalian digunakan untuk kejadian yang terjadi berurutan atau simultan (Kejadian A dilanjutkan Kejadian B)." 
+                explanation: "Aturan perkalian digunakan untuk kejadian yang terjadi berurutan atau simultan (Kejadian A DAN Kejadian B)." 
             },
             { 
                 q: "Budi punya 2 pasang sepatu dan 5 pasang kaos kaki. Hari ini Budi ingin memakai sepatu dan kaos kaki. Ada berapa cara Budi berpenampilan?", 
                 options: ["7", "3", "10", "25"], 
                 correct: 2, 
                 explanation: "Budi harus memakai sepatu DAN kaos kaki agar lengkap. Setiap pasang sepatu bisa dipasangkan dengan 5 kaos kaki berbeda (bercabang). 2 × 5 = 10 cara." 
-            },
-            { 
-                q: "Di sebuah toko buku, ada rak Komik (berisi 10 judul) dan rak Novel (berisi 8 judul). Ibu menyuruh Adik membeli SATU buku saja (bebas komik atau novel). Ada berapa pilihan buku yang bisa dibeli Adik?", 
-                options: ["80 pilihan", "18 pilihan", "2 pilihan", "10 pilihan"], 
-                correct: 1, 
-                explanation: "Adik hanya boleh membeli SATU buku. Pilihannya adalah Komik ATAU Novel. Tidak bisa keduanya. Maka kita jumlahkan: 10 + 8 = 18 pilihan." 
             }
         ];
 
@@ -306,14 +351,23 @@
                 quizzes.forEach((quiz, index) => {
                     const quizEl = document.createElement("div");
                     quizEl.className = "quiz-accordion";
+                    
+                    // Render gambar jika ada
+                    let imageHTML = '';
+                    if(quiz.image) {
+                        imageHTML = `<div class="quiz-image">${quiz.image}</div>`;
+                    }
+
                     const optionsHtml = quiz.options.map((opt, i) => 
                         `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
                     ).join("");
+                    
                     quizEl.innerHTML = `
                         <button class="quiz-accordion-button">
                             <span>Soal ${index + 1}</span><i class="fas fa-chevron-down"></i>
                         </button>
                         <div class="quiz-accordion-content hidden">
+                            ${imageHTML}
                             <p class="question-text">${quiz.q}</p>
                             <div class="options-container">${optionsHtml}</div>
                             <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
@@ -321,6 +375,7 @@
                     quizContainer.appendChild(quizEl);
                 });
 
+                // Logic for accordion and selection (Standard UMT)
                 const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
                 accordionButtons.forEach(btn => {
                     btn.addEventListener('click', () => {
