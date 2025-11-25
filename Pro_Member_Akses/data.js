@@ -745,7 +745,7 @@ const allContentData = {
             id: 'kombinatorika_AturanPP_4', 
             title: 'Aturan Penjumlahan', 
             type: 'UMT - Learning', 
-            filePath: '#', 
+            filePath: 'UMT_Learning/Aturan penjumlahan.html', 
             fileType: 'html' 
             },
             { 
