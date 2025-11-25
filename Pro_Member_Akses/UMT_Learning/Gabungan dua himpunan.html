@@ -78,6 +78,18 @@
         .quiz-accordion-button .fas { transition: transform 0.3s ease; }
         .quiz-accordion-button.active .fas { transform: rotate(180deg); }
         .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        
+        /* CSS BARU: Untuk gambar di dalam soal kuis */
+        .quiz-image-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--bg-main);
+            border-radius: 8px;
+            border: 1px dashed var(--border-color);
+        }
+        
         .question-text { font-weight: 500; margin-bottom: 1.5rem; }
         .quiz-option {
             border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
@@ -117,7 +129,7 @@
             <i class="fas fa-arrow-left"></i>
         </a>
         
-        <h1>Pengantar Kombinatorika: Konsep Gabungan Himpunan</h1>
+        <h1>Pengantar Kombinatorika: Konsep Gabungan Dua Himpunan</h1>
         <p>
             Sebelum kita belajar cara menghitung "banyaknya cara" (Aturan Perkalian & Penjumlahan), kita harus memahami dulu logika dasarnya. Logika ini berakar pada konsep <strong>Himpunan</strong>.
         </p>
@@ -234,6 +246,32 @@
             window.location.href = '../../Login/';
         }
 
+        // SVG untuk Soal 3 (Overlap)
+        const svgSoal3 = `
+        <svg viewBox="0 0 320 180" xmlns="http://www.w3.org/2000/svg" style="max-width:70%;">
+            <circle cx="110" cy="90" r="60" fill="rgba(255, 165, 0, 0.2)" stroke="orange" stroke-width="2" />
+            <text x="60" y="95" fill="#fff" font-size="14">Teh (15)</text>
+            
+            <circle cx="190" cy="90" r="60" fill="rgba(139, 69, 19, 0.4)" stroke="#8B4513" stroke-width="2" />
+            <text x="180" y="95" fill="#fff" font-size="14">Kopi (10)</text>
+            
+            <text x="150" y="95" fill="#fff" font-weight="bold" font-size="12" text-anchor="middle">5</text>
+             <text x="150" y="115" fill="#ccc" font-size="10" text-anchor="middle">(Suka Keduanya)</text>
+        </svg>`;
+
+        // SVG untuk Soal 4 (Saling Lepas)
+        const svgSoal4 = `
+        <svg viewBox="0 0 320 150" xmlns="http://www.w3.org/2000/svg" style="max-width:70%;">
+            <circle cx="80" cy="75" r="45" fill="none" stroke="#F85149" stroke-width="2" stroke-dasharray="5,5"/>
+            <text x="80" y="80" fill="#F85149" text-anchor="middle" font-weight="bold">Himpunan A</text>
+            
+            <circle cx="240" cy="75" r="45" fill="none" stroke="#F85149" stroke-width="2" stroke-dasharray="5,5"/>
+            <text x="240" y="80" fill="#F85149" text-anchor="middle" font-weight="bold">Himpunan B</text>
+            
+            <line x1="140" y1="75" x2="180" y2="75" stroke="#8B949E" stroke-width="2" marker-end="url(#arrow)" />
+            <text x="160" y="60" fill="#8B949E" text-anchor="middle" font-size="12">Terpisah</text>
+        </svg>`;
+
         const quizzes = [
             { 
                 q: "Apa arti dari simbol $A \\cup B$?", 
@@ -258,13 +296,15 @@
                 explanation: "Jika A dan B memiliki irisan (anggota yang sama), rumus penjumlahan langsung akan menyebabkan 'Double Counting' (penghitungan ganda) pada anggota irisan tersebut." 
             },
             { 
-                q: "Di sebuah kelas, 15 siswa suka Teh, 10 siswa suka Kopi, dan 5 siswa suka Keduanya. Berapa banyak siswa yang suka Teh ATAU Kopi?", 
+                q: "Di sebuah kelas, 15 siswa suka Teh, 10 siswa suka Kopi, dan 5 siswa suka Keduanya (lihat gambar). Berapa banyak siswa yang suka Teh ATAU Kopi?", 
+                image: svgSoal3, // Menambahkan gambar disini
                 options: ["25", "20", "30", "5"], 
                 correct: 1, 
-                explanation: "Gunakan prinsip inklusi-eksklusi: $n(T \\cup K) = n(T) + n(K) - n(T \\cap K) = 15 + 10 - 5 = 20$ orang." 
+                explanation: "Gunakan prinsip inklusi-eksklusi: $n(T \\cup K) = n(T) + n(K) - n(T \\cap K) = 15 + 10 - 5 = 20$ orang. <br>Secara visual: Area Teh saja (10) + Area Kopi saja (5) + Irisan (5) = 20." 
             },
             { 
-                q: "Dua himpunan dikatakan 'Saling Lepas' (Disjoint) jika...", 
+                q: "Dua himpunan dikatakan 'Saling Lepas' (Disjoint) seperti gambar di atas jika...", 
+                image: svgSoal4, // Menambahkan gambar disini
                 options: [
                     "Jumlah anggotanya sama", 
                     "Irisan keduanya kosong ($n(A \\cap B) = 0$)", 
@@ -272,7 +312,7 @@
                     "Gabungannya kosong"
                 ], 
                 correct: 1, 
-                explanation: "Saling lepas berarti tidak ada tumpang tindih. Tidak ada anggota yang dimiliki bersama. Secara visual, kedua lingkaran terpisah." 
+                explanation: "Saling lepas berarti tidak ada tumpang tindih. Tidak ada anggota yang dimiliki bersama. Secara visual, kedua lingkaran terpisah total." 
             },
             { 
                 q: "Dalam konteks pencacahan, notasi $n(A)$ merepresentasikan...", 
@@ -295,14 +335,20 @@
             quizzes.forEach((quiz, index) => {
                 const quizEl = document.createElement("div");
                 quizEl.className = "quiz-accordion";
+                
+                // Render gambar jika properti 'image' ada
+                const imageHtml = quiz.image ? `<div class="quiz-image-container">${quiz.image}</div>` : '';
+
                 const optionsHtml = quiz.options.map((opt, i) => 
                     `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
                 ).join("");
+                
                 quizEl.innerHTML = `
                     <button class="quiz-accordion-button">
                         <span>Soal Konsep ${index + 1}</span><i class="fas fa-chevron-down"></i>
                     </button>
                     <div class="quiz-accordion-content hidden">
+                        ${imageHtml}
                         <p class="question-text">${quiz.q}</p>
                         <div class="options-container">${optionsHtml}</div>
                         <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
