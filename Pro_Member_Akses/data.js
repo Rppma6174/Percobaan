@@ -735,6 +735,13 @@ const allContentData = {
             fileType: 'html' 
             },
             { 
+            id: 'kombinatorika_AturanPP_5', 
+            title: 'Pengantar Aturan Penjulahan dan Aturan Perkalian : Kejadian saling bebas', 
+            type: 'UMT - Learning', 
+            filePath: 'UMT_Learning/Kejadian saling bebas.html', 
+            fileType: 'html' 
+            },
+            { 
             id: 'kombinatorika_AturanPP_3', 
             title: 'Pengantar Aturan Penjulahan dan Aturan Perkalian : Himpunan saling lepas', 
             type: 'UMT - Learning', 
@@ -742,17 +749,17 @@ const allContentData = {
             fileType: 'html' 
             },
             { 
+            id: 'kombinatorika_AturanPP_5', 
+            title: 'Kejadian saling bebas Vs Kejadian saling lepas', 
+            type: 'UMT - Learning', 
+            filePath: 'UMT_Learning/saling bebas dan saling lepas.html', 
+            fileType: 'html' 
+            },
+            { 
             id: 'kombinatorika_AturanPP_4', 
             title: 'Aturan Penjumlahan', 
             type: 'UMT - Learning', 
             filePath: 'UMT_Learning/Aturan penjumlahan.html', 
-            fileType: 'html' 
-            },
-            { 
-            id: 'kombinatorika_AturanPP_5', 
-            title: 'Pengantar Aturan Penjulahan dan Aturan Perkalian : Kejadian saling bebas', 
-            type: 'UMT - Learning', 
-            filePath: '#', 
             fileType: 'html' 
             },
             { 
