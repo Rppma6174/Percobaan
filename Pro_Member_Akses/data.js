@@ -724,7 +724,7 @@ const allContentData = {
             id: 'kombinatorika_AturanPP_1', 
             title: 'Pengantar Aturan Penjulahan dan Aturan Perkalian : Gabungan dua himpunan', 
             type: 'UMT - Learning', 
-            filePath: 'Gabungan dua himpunan.html', 
+            filePath: 'UMT_Learning/Gabungan dua himpunan.html', 
             fileType: 'html' 
             },
             { 
