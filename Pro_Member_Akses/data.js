@@ -731,14 +731,14 @@ const allContentData = {
             id: 'kombinatorika_AturanPP_2', 
             title: 'Pengantar Aturan Penjulahan dan Aturan Perkalian : Gabungan tiga himpunan', 
             type: 'UMT - Learning', 
-            filePath: '#', 
+            filePath: 'UMT_Learning/Gabungan tiga himpunan.html', 
             fileType: 'html' 
             },
             { 
             id: 'kombinatorika_AturanPP_3', 
             title: 'Pengantar Aturan Penjulahan dan Aturan Perkalian : Himpunan saling lepas', 
             type: 'UMT - Learning', 
-            filePath: '#', 
+            filePath: 'UMT_Learning/Himpunan saling lepas.html', 
             fileType: 'html' 
             },
             { 
