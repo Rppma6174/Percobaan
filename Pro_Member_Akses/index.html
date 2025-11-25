@@ -371,60 +371,82 @@
             border-color: var(--accent-cyan);
             color: var(--text-primary);
         }
+        /* Navigasi Mobile Scroll Button */
+.nav-scroll-btn-active {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+/* Memastikan scroll smooth */
+#sidebar-nav {
+    scroll-behavior: smooth;
+}
     </style>
 </head>
 <body class="text-white">
 
     <div class="flex min-h-screen">
-        <aside class="fixed bottom-0 left-0 z-50 w-full h-16 bg-[var(--bg-panel)] border-t border-[var(--border-color)] md:relative md:w-64 md:h-screen md:flex md:flex-col md:border-t-0 md:border-r md:p-6">
-            <h1 class="hidden text-xl font-bold mb-10 text-cyan-400 md:block md:text-2xl">UMT Pro</h1>
-            <nav id="sidebar-nav" class="no-scrollbar flex overflow-x-auto h-full md:flex-col md:space-y-4 md:h-auto">
-                <div class="flex flex-nowrap items-center justify-start gap-2 px-2 md:flex-col md:items-stretch md:gap-0 md:px-0">
-                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('dashboard', this)">
-                        <i class="fa-solid fa-chart-pie text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Dashboard</span>
-                    </a>
-                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('materi', this)">
-                        <i class="fa-solid fa-book text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Materi</span>
-                    </a>
-                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('perpustakaan', this)">
-                        <i class="fa-solid fa-book-atlas text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Perpustakaan</span>
-                    </a>
-                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('bank_soal', this)">
-                        <i class="fa-solid fa-list-check text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Bank Soal</span>
-                    </a>
-                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('snbt_tka', this)">
-                        <i class="fa-solid fa-graduation-cap text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">SNBT & TKA</span>
-                    </a>
-                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('sprint_materi', this)">
-                        <i class="fa-solid fa-bolt text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Sprint Materi</span>
-                    </a>
-                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('umt_lab', this)">
-                        <i class="fa-solid fa-flask-vial text-lg md:w-6"></i>
-                        <span class="hidden md:inline md:text-base md:mt-0">UMT Lab</span>
-                        <span class="text-xs mt-1 md:hidden">Lab</span>
-                    </a>
-                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('video', this)">
-                        <i class="fa-solid fa-video text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Video</span>
-                    </a>
-                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('forum', this)">
-                        <i class="fa-solid fa-comments text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Forum</span>
-                    </a>
-                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('informasi', this)">
-                        <i class="fa-solid fa-info-circle text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Informasi</span>
-                    </a>
-                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('pengaturan', this)">
-                        <i class="fa-solid fa-user-gear text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Pengaturan</span>
-                    </a>
-                    <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-20 flex flex-col items-center justify-center p-2 text-center text-gray-400 rounded-lg hover:text-white md:w-full md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700" onclick="event.preventDefault(); navigateTo('kamus', this)">
-                        <i class="fa-solid fa-spell-check text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0">Kamus</span>
-                    </a>
-                </div>
-            </nav>
-            <div class="hidden mt-auto md:block">
-                <button onclick="logout()" class="w-full bg-red-800 hover:bg-red-700 text-white py-2 px-3 rounded">
-                    <i class="fa-solid fa-right-from-bracket"></i><span class="md:inline"> Logout</span>
-                </button>
+        <aside class="fixed bottom-0 left-0 z-50 w-full bg-[var(--bg-panel)] border-t border-[var(--border-color)] md:relative md:w-64 md:h-screen md:flex md:flex-col md:border-t-0 md:border-r md:p-6">
+    <h1 class="hidden text-xl font-bold mb-10 text-cyan-400 md:block md:text-2xl">UMT Pro</h1>
+    
+    <div class="relative w-full h-16 md:h-auto">
+        
+        <button id="nav-scroll-left" class="md:hidden absolute left-0 top-0 bottom-0 z-20 w-8 flex items-center justify-center bg-gradient-to-r from-gray-900 to-transparent text-white opacity-0 pointer-events-none transition-opacity duration-300">
+            <i class="fa-solid fa-chevron-left drop-shadow-md"></i>
+        </button>
+
+        <nav id="sidebar-nav" class="no-scrollbar flex overflow-x-auto h-full scroll-smooth md:flex-col md:space-y-4 md:h-auto md:overflow-visible">
+            <div class="flex flex-nowrap items-center h-full w-full md:flex-col md:items-stretch md:gap-0 md:px-0 md:w-auto">
+                
+                <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-[25vw] md:w-full flex flex-col items-center justify-center p-2 text-center text-gray-400 hover:text-white md:rounded-lg md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700 transition-colors" onclick="event.preventDefault(); navigateTo('dashboard', this)">
+                    <i class="fa-solid fa-chart-pie text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0 truncate w-full">Dash</span>
+                </a>
+                <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-[25vw] md:w-full flex flex-col items-center justify-center p-2 text-center text-gray-400 hover:text-white md:rounded-lg md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700 transition-colors" onclick="event.preventDefault(); navigateTo('materi', this)">
+                    <i class="fa-solid fa-book text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0 truncate w-full">Materi</span>
+                </a>
+                <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-[25vw] md:w-full flex flex-col items-center justify-center p-2 text-center text-gray-400 hover:text-white md:rounded-lg md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700 transition-colors" onclick="event.preventDefault(); navigateTo('perpustakaan', this)">
+                    <i class="fa-solid fa-book-atlas text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0 truncate w-full">Perpus</span>
+                </a>
+                <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-[25vw] md:w-full flex flex-col items-center justify-center p-2 text-center text-gray-400 hover:text-white md:rounded-lg md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700 transition-colors" onclick="event.preventDefault(); navigateTo('bank_soal', this)">
+                    <i class="fa-solid fa-list-check text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0 truncate w-full">Soal</span>
+                </a>
+                <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-[25vw] md:w-full flex flex-col items-center justify-center p-2 text-center text-gray-400 hover:text-white md:rounded-lg md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700 transition-colors" onclick="event.preventDefault(); navigateTo('snbt_tka', this)">
+                    <i class="fa-solid fa-graduation-cap text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0 truncate w-full">SNBT</span>
+                </a>
+                <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-[25vw] md:w-full flex flex-col items-center justify-center p-2 text-center text-gray-400 hover:text-white md:rounded-lg md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700 transition-colors" onclick="event.preventDefault(); navigateTo('sprint_materi', this)">
+                    <i class="fa-solid fa-bolt text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0 truncate w-full">Sprint</span>
+                </a>
+                <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-[25vw] md:w-full flex flex-col items-center justify-center p-2 text-center text-gray-400 hover:text-white md:rounded-lg md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700 transition-colors" onclick="event.preventDefault(); navigateTo('umt_lab', this)">
+                    <i class="fa-solid fa-flask-vial text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0 truncate w-full">Lab</span>
+                </a>
+                <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-[25vw] md:w-full flex flex-col items-center justify-center p-2 text-center text-gray-400 hover:text-white md:rounded-lg md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700 transition-colors" onclick="event.preventDefault(); navigateTo('video', this)">
+                    <i class="fa-solid fa-video text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0 truncate w-full">Video</span>
+                </a>
+                <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-[25vw] md:w-full flex flex-col items-center justify-center p-2 text-center text-gray-400 hover:text-white md:rounded-lg md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700 transition-colors" onclick="event.preventDefault(); navigateTo('forum', this)">
+                    <i class="fa-solid fa-comments text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0 truncate w-full">Forum</span>
+                </a>
+                <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-[25vw] md:w-full flex flex-col items-center justify-center p-2 text-center text-gray-400 hover:text-white md:rounded-lg md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700 transition-colors" onclick="event.preventDefault(); navigateTo('informasi', this)">
+                    <i class="fa-solid fa-info-circle text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0 truncate w-full">Info</span>
+                </a>
+                <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-[25vw] md:w-full flex flex-col items-center justify-center p-2 text-center text-gray-400 hover:text-white md:rounded-lg md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700 transition-colors" onclick="event.preventDefault(); navigateTo('pengaturan', this)">
+                    <i class="fa-solid fa-user-gear text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0 truncate w-full">Akun</span>
+                </a>
+                <a href="#" class="sidebar-link bottom-nav-link flex-shrink-0 w-[25vw] md:w-full flex flex-col items-center justify-center p-2 text-center text-gray-400 hover:text-white md:rounded-lg md:flex-row md:justify-start md:gap-4 md:hover:bg-gray-700 transition-colors" onclick="event.preventDefault(); navigateTo('kamus', this)">
+                    <i class="fa-solid fa-spell-check text-lg md:w-6"></i><span class="text-xs mt-1 md:text-base md:mt-0 truncate w-full">Kamus</span>
+                </a>
             </div>
+        </nav>
+
+        <button id="nav-scroll-right" class="md:hidden absolute right-0 top-0 bottom-0 z-20 w-8 flex items-center justify-center bg-gradient-to-l from-gray-900 to-transparent text-white opacity-0 pointer-events-none transition-opacity duration-300">
+            <i class="fa-solid fa-chevron-right drop-shadow-md"></i>
+        </button>
+
+    </div>
+
+    <div class="hidden mt-auto md:block">
+        <button onclick="logout()" class="w-full bg-red-800 hover:bg-red-700 text-white py-2 px-3 rounded">
+            <i class="fa-solid fa-right-from-bracket"></i><span class="md:inline"> Logout</span>
+        </button>
+    </div>
         </aside>
 
         <main id="app-content" class="flex-1 p-4 md:p-6 space-y-6 pb-24 md:pb-6 overflow-x-hidden"></main>
@@ -2042,6 +2064,50 @@ function initializeApp() {
         });
     }
 }
+function setupMobileNavScroll() {
+    const nav = document.getElementById('sidebar-nav');
+    const btnLeft = document.getElementById('nav-scroll-left');
+    const btnRight = document.getElementById('nav-scroll-right');
+
+    if (!nav || !btnLeft || !btnRight) return;
+
+    // Fungsi untuk update visibilitas tombol
+    const updateButtons = () => {
+        // Toleransi 1px untuk perhitungan desimal
+        const isAtStart = nav.scrollLeft <= 1; 
+        const isAtEnd = Math.abs(nav.scrollWidth - nav.clientWidth - nav.scrollLeft) <= 1;
+
+        if (isAtStart) {
+            btnLeft.classList.remove('nav-scroll-btn-active');
+        } else {
+            btnLeft.classList.add('nav-scroll-btn-active');
+        }
+
+        if (isAtEnd) {
+            btnRight.classList.remove('nav-scroll-btn-active');
+        } else {
+            btnRight.classList.add('nav-scroll-btn-active');
+        }
+    };
+
+    // Event Listener Scroll
+    nav.addEventListener('scroll', updateButtons);
+    
+    // Panggil sekali saat load
+    updateButtons();
+    window.addEventListener('resize', updateButtons);
+
+    // Fungsi Klik Tombol (Geser 1 Item)
+    const scrollAmount = () => window.innerWidth * 0.25; // 25vw (sesuai lebar item)
+
+    btnLeft.addEventListener('click', () => {
+        nav.scrollBy({ left: -scrollAmount(), behavior: 'smooth' });
+    });
+
+    btnRight.addEventListener('click', () => {
+        nav.scrollBy({ left: scrollAmount(), behavior: 'smooth' });
+    });
+}
 
 document.addEventListener('DOMContentLoaded', initializeApp);
 
@@ -2145,6 +2211,7 @@ function openSprintLatihan(itemId, filePath) {
     }
     window.location.href = filePath;
 }
+
 </script>
 </body>
 </html>
