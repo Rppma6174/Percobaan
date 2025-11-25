@@ -722,7 +722,42 @@ const allContentData = {
         "Kombinatorika : Aturan Penjumlahan dan Aturan Perkalian (Part 1)": [
             { 
             id: 'kombinatorika_AturanPP_1', 
-            title: 'Esensi Aturan Penjumlahan', 
+            title: 'Pengantar Aturan Penjulahan dan Aturan Perkalian : Gabungan dua himpunan', 
+            type: 'UMT - Learning', 
+            filePath: 'Gabungan dua himpunan.html', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'kombinatorika_AturanPP_2', 
+            title: 'Pengantar Aturan Penjulahan dan Aturan Perkalian : Gabungan tiga himpunan', 
+            type: 'UMT - Learning', 
+            filePath: '#', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'kombinatorika_AturanPP_3', 
+            title: 'Pengantar Aturan Penjulahan dan Aturan Perkalian : Himpunan saling lepas', 
+            type: 'UMT - Learning', 
+            filePath: '#', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'kombinatorika_AturanPP_4', 
+            title: 'Aturan Penjumlahan', 
+            type: 'UMT - Learning', 
+            filePath: '#', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'kombinatorika_AturanPP_5', 
+            title: 'Pengantar Aturan Penjulahan dan Aturan Perkalian : Kejadian saling bebas', 
+            type: 'UMT - Learning', 
+            filePath: '#', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'kombinatorika_AturanPP_6', 
+            title: 'Aturan Perkalian', 
             type: 'UMT - Learning', 
             filePath: '#', 
             fileType: 'html' 
