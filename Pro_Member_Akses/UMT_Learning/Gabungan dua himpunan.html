@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengantar Kombinatorika: Gabungan Himpunan - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { 
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } 
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2, h3 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        h3 { color: #58a6ff; margin-top: 2rem; }
+        .hidden { display: none; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 0.5rem; }
+        
+        .diagram-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-main);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            margin-top: 1rem;
+            overflow-x: auto;
+        }
+        .diagram-container svg { max-width: 100%; }
+        .diagram-container svg text { font-size: 14px; fill: var(--text-primary); }
+        .diagram-container p { font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem; }
+        
+        /* Kotak info khusus */
+        .info-box {
+            background-color: rgba(47, 129, 247, 0.1);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold;
+        }
+        .quiz-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1);
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* Scroll Horizontal & Pencegah Scroll Diagonal */
+        p, li, .info-box, .quiz-explanation, .question-text, .quiz-option {
+            overflow-x: auto;
+            padding-bottom: 10px;
+            overscroll-behavior-x: contain;
+        }
+        
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <h1>Pengantar Kombinatorika: Konsep Gabungan Himpunan</h1>
+        <p>
+            Sebelum kita belajar cara menghitung "banyaknya cara" (Aturan Perkalian & Penjumlahan), kita harus memahami dulu logika dasarnya. Logika ini berakar pada konsep <strong>Himpunan</strong>.
+        </p>
+        <p>
+            Dalam Kombinatorika, "Kejadian" sebenarnya adalah sebuah "Himpunan". Dan "Banyaknya Cara" sebenarnya adalah "Jumlah Anggota Himpunan" tersebut.
+        </p>
+
+        <h2>Logika "ATAU" = Gabungan ($\cup$)</h2>
+        <p>
+            Ketika kita mengatakan "Kejadian A <strong>ATAU</strong> Kejadian B", dalam bahasa matematika, kita sedang membicarakan <strong>Gabungan (Union)</strong> dari dua himpunan.
+        </p>
+        <div class="info-box">
+            Notasi: $A \cup B$
+            <br>Artinya: Kumpulan semua anggota yang ada di A, ada di B, atau ada di keduanya.
+        </div>
+
+        <h2>Masalah "Double Counting" (Perhitungan Ganda)</h2>
+        <p>
+            Ini adalah konsep paling krusial yang sering menjebak siswa. Bayangkan sebuah kelas:
+        </p>
+        <ul>
+            <li>Himpunan A: Siswa yang suka Matematika (10 orang).</li>
+            <li>Himpunan B: Siswa yang suka Fisika (8 orang).</li>
+        </ul>
+        <p>
+            Jika ditanya: <em>"Berapa banyak siswa yang suka Matematika <strong>ATAU</strong> Fisika?"</em>
+        </p>
+        <p>
+            Apakah jawabannya $10 + 8 = 18$? <strong>Belum tentu!</strong>
+        </p>
+        <p>
+            Bagaimana jika ada siswa yang suka <strong>keduanya</strong>? Jika kita langsung menjumlahkan, siswa yang suka keduanya akan terhitung dua kali (sekali di Matematika, sekali di Fisika).
+        </p>
+
+        <div class="diagram-container">
+            <svg width="350" height="200" viewBox="0 0 350 200" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="120" cy="100" r="70" fill="rgba(47, 129, 247, 0.3)" stroke="#2F81F7" stroke-width="2"/>
+                <text x="80" y="105" fill="#fff" font-weight="bold">A (Mat)</text>
+                
+                <circle cx="200" cy="100" r="70" fill="rgba(57, 211, 83, 0.3)" stroke="#39D353" stroke-width="2"/>
+                <text x="240" y="105" fill="#fff" font-weight="bold">B (Fis)</text>
+
+                <path d="M 160,45 Q 190,100 160,155 Q 130,100 160,45" fill="rgba(248, 81, 73, 0.5)" />
+                <text x="160" y="105" fill="#fff" font-size="12" text-anchor="middle">Irisan</text>
+                <text x="160" y="120" fill="#fff" font-size="10" text-anchor="middle">(A ∩ B)</text>
+
+                <foreignObject x="20" y="170" width="310" height="30">
+                    <div xmlns="http://www.w3.org/1999/xhtml" style="color:#ccc; text-align:center; font-size:12px;">
+                        Irisan (tengah) terhitung 2x jika kita hanya menjumlahkan A + B.
+                    </div>
+                </foreignObject>
+            </svg>
+        </div>
+
+        <h3>Rumus Gabungan (Prinsip Inklusi-Eksklusi)</h3>
+        <p>
+            Untuk mendapatkan jumlah yang benar, kita harus mengurangi bagian yang terhitung ganda (irisan).
+        </p>
+        <div class="info-box">
+            $$ n(A \cup B) = n(A) + n(B) - n(A \cap B) $$
+        </div>
+        <p>
+            Di mana:
+            <br> $n(A \cup B)$ = Banyak anggota gabungan (A atau B).
+            <br> $n(A \cap B)$ = Banyak anggota irisan (A dan B).
+        </p>
+
+        <h2>Kasus Khusus: Saling Lepas (Disjoint)</h2>
+        <p>
+            Bagaimana jika tidak ada irisan? Contohnya: Himpunan Siswa Pria dan Himpunan Siswa Wanita. Tidak ada siswa yang merupakan keduanya secara bersamaan.
+        </p>
+        <p>
+            Dalam kasus ini, $n(A \cap B) = 0$. Himpunan ini disebut <strong>Saling Lepas</strong>.
+        </p>
+        <div class="diagram-container">
+            <svg width="350" height="150" viewBox="0 0 350 150" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="80" cy="75" r="50" fill="rgba(47, 129, 247, 0.3)" stroke="#2F81F7" stroke-width="2"/>
+                <text x="80" y="80" fill="#fff" text-anchor="middle" font-weight="bold">A</text>
+                
+                <circle cx="240" cy="75" r="50" fill="rgba(57, 211, 83, 0.3)" stroke="#39D353" stroke-width="2"/>
+                <text x="240" y="80" fill="#fff" text-anchor="middle" font-weight="bold">B</text>
+
+                <text x="160" y="80" fill="#C9D1D9" text-anchor="middle" font-size="12">Tidak ada irisan</text>
+            </svg>
+        </div>
+        <p>
+            Karena irisannya nol, rumusnya menjadi sangat sederhana:
+        </p>
+        <div class="info-box">
+            $$ n(A \cup B) = n(A) + n(B) $$
+        </div>
+        <p>
+            Inilah asal mula <strong>Aturan Penjumlahan</strong> yang akan kita pelajari di bab selanjutnya. Aturan penjumlahan murni hanya berlaku jika kejadiannya saling lepas!
+        </p>
+
+        <h2>Hubungan dengan Kombinatorika</h2>
+        <p>
+            Di bab-bab selanjutnya (Permutasi & Kombinasi), kita sering menggunakan istilah "Banyaknya Cara". Ingatlah selalu:
+        </p>
+        <ul>
+            <li><strong>"Banyaknya Cara"</strong> sama dengan $n(A)$ atau Kardinalitas Himpunan.</li>
+            <li>Jika Anda mendengar kata <strong>"ATAU"</strong>, pikirkan <strong>Gabungan ($\cup$)</strong>. Hati-hati dengan irisan!</li>
+            <li>Jika Anda mendengar kata <strong>"DAN"</strong>, pikirkan <strong>Irisan ($\cap$)</strong> atau pasangan berurut (yang nanti mengarah ke Aturan Perkalian).</li>
+        </ul>
+
+        <h2>Uji Pemahaman</h2>
+        <p>Pilih jawaban yang paling tepat untuk menguji intuisi Anda tentang himpunan.</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Cek session (jika perlu)
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+
+        const quizzes = [
+            { 
+                q: "Apa arti dari simbol $A \\cup B$?", 
+                options: [
+                    "Anggota yang ada di A DAN juga ada di B (Irisan)", 
+                    "Anggota yang ada di A ATAU di B ATAU keduanya (Gabungan)", 
+                    "Anggota A dikurangi anggota B", 
+                    "Anggota yang tidak ada di A maupun B"
+                ], 
+                correct: 1, 
+                explanation: "Simbol $\\cup$ (Union/Gabungan) mewakili logika 'ATAU'. Ini mencakup semua area di dalam lingkaran A dan semua area di dalam lingkaran B." 
+            },
+            { 
+                q: "Mengapa rumus $n(A \\cup B) = n(A) + n(B)$ tidak selalu benar?", 
+                options: [
+                    "Karena kita harus selalu mengalikan, bukan menjumlahkan", 
+                    "Karena rumus itu hanya berlaku jika himpunan A dan B saling lepas (tidak beririsan)", 
+                    "Karena nilai himpunan tidak bisa dijumlahkan", 
+                    "Karena itu adalah rumus peluang, bukan pencacahan"
+                ], 
+                correct: 1, 
+                explanation: "Jika A dan B memiliki irisan (anggota yang sama), rumus penjumlahan langsung akan menyebabkan 'Double Counting' (penghitungan ganda) pada anggota irisan tersebut." 
+            },
+            { 
+                q: "Di sebuah kelas, 15 siswa suka Teh, 10 siswa suka Kopi, dan 5 siswa suka Keduanya. Berapa banyak siswa yang suka Teh ATAU Kopi?", 
+                options: ["25", "20", "30", "5"], 
+                correct: 1, 
+                explanation: "Gunakan prinsip inklusi-eksklusi: $n(T \\cup K) = n(T) + n(K) - n(T \\cap K) = 15 + 10 - 5 = 20$ orang." 
+            },
+            { 
+                q: "Dua himpunan dikatakan 'Saling Lepas' (Disjoint) jika...", 
+                options: [
+                    "Jumlah anggotanya sama", 
+                    "Irisan keduanya kosong ($n(A \\cap B) = 0$)", 
+                    "Salah satu adalah himpunan bagian dari yang lain", 
+                    "Gabungannya kosong"
+                ], 
+                correct: 1, 
+                explanation: "Saling lepas berarti tidak ada tumpang tindih. Tidak ada anggota yang dimiliki bersama. Secara visual, kedua lingkaran terpisah." 
+            },
+            { 
+                q: "Dalam konteks pencacahan, notasi $n(A)$ merepresentasikan...", 
+                options: [
+                    "Nama dari himpunan A", 
+                    "Banyaknya anggota atau 'banyaknya cara' terjadinya A", 
+                    "Peluang terjadinya A", 
+                    "Kebalikan dari A"
+                ], 
+                correct: 1, 
+                explanation: "$n(A)$ adalah kardinalitas, yaitu jumlah elemen dalam himpunan A. Dalam kombinatorika, ini diterjemahkan sebagai 'berapa banyak cara kejadian A bisa terjadi'." 
+            }
+        ];
+
+        // --- SCRIPT KUIS INTERAKTIF ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const quizContainer = document.getElementById("quiz-container");
+            if (!quizContainer) return;
+
+            quizzes.forEach((quiz, index) => {
+                const quizEl = document.createElement("div");
+                quizEl.className = "quiz-accordion";
+                const optionsHtml = quiz.options.map((opt, i) => 
+                    `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                ).join("");
+                quizEl.innerHTML = `
+                    <button class="quiz-accordion-button">
+                        <span>Soal Konsep ${index + 1}</span><i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="quiz-accordion-content hidden">
+                        <p class="question-text">${quiz.q}</p>
+                        <div class="options-container">${optionsHtml}</div>
+                        <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                    </div>`;
+                quizContainer.appendChild(quizEl);
+            });
+
+            const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+            accordionButtons.forEach(clickedButton => {
+                clickedButton.addEventListener('click', () => {
+                    const content = clickedButton.nextElementSibling;
+                    const isOpening = content.classList.contains('hidden');
+
+                    accordionButtons.forEach(button => {
+                        if (button !== clickedButton) {
+                            button.classList.remove('active');
+                            button.nextElementSibling.classList.add('hidden');
+                        }
+                    });
+
+                    clickedButton.classList.toggle('active');
+                    content.classList.toggle('hidden');
+
+                    if (isOpening && window.MathJax) {
+                        MathJax.typesetPromise([content]);
+                    }
+                });
+            });
+
+            document.querySelectorAll('.quiz-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    const optionsContainer = option.parentElement;
+                    if (optionsContainer.classList.contains('answered')) return;
+                    optionsContainer.classList.add('answered');
+                    const explanation = optionsContainer.nextElementSibling;
+                    explanation.classList.remove('hidden');
+                    if (option.dataset.correct === 'true') {
+                        option.classList.add('correct');
+                    } else {
+                        option.classList.add('wrong');
+                        const correctOption = optionsContainer.querySelector('[data-correct="true"]');
+                        if (correctOption) {
+                            correctOption.classList.add('correct');
+                        }
+                    }
+                    if (window.MathJax) {
+                        MathJax.typesetPromise([explanation]);
+                    }
+                });
+            });
+            
+            if (window.MathJax) {
+                MathJax.typesetPromise();
+            }
+        });
+    </script>
+</body>
+</html>
