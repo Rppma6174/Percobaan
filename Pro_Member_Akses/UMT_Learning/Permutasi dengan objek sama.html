@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Permutasi Unsur Sama - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { 
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } 
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+            --accent-yellow: #D29922;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2, h3 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        h3 { color: #58a6ff; margin-top: 2rem; }
+        .hidden { display: none; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 0.5rem; }
+        
+        .diagram-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-main);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            margin-top: 1rem;
+            overflow-x: auto;
+        }
+        .diagram-container svg { max-width: 100%; }
+        .diagram-container svg text { font-size: 14px; fill: var(--text-primary); }
+        .diagram-container p { font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem; }
+        
+        /* Kotak info khusus */
+        .info-box {
+            background-color: rgba(47, 129, 247, 0.1);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+
+        /* Container Gambar Kuis */
+        .quiz-image-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--bg-main);
+            border-radius: 8px;
+            border: 1px dashed var(--border-color);
+        }
+
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold;
+        }
+        .quiz-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1);
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* Scroll Horizontal */
+        p, li, .info-box, .quiz-explanation, .question-text, .quiz-option {
+            overflow-x: auto;
+            padding-bottom: 10px;
+            overscroll-behavior-x: contain;
+        }
+        
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <h1>Permutasi dengan Objek yang Sama</h1>
+        
+        <p>
+            Sebelumnya kita menyusun objek yang semuanya berbeda (seperti A, B, C, D). 
+            Namun, bagaimana jika ada objek yang <strong>kembar</strong> atau identik? 
+            Misalnya menyusun huruf dari kata <strong>"APA"</strong> atau menyusun bendera yang warnanya sama?
+        </p>
+
+        <h2>Masalah "Overcounting" (Hitung Ganda)</h2>
+        <p>
+            Jika kita menggunakan rumus permutasi biasa ($n!$), kita akan menghitung susunan yang terlihat sama sebagai susunan yang berbeda. Ini salah.
+        </p>
+
+        <div class="diagram-container">
+            <svg width="350" height="180" viewBox="0 0 350 180" xmlns="http://www.w3.org/2000/svg">
+                <text x="175" y="30" fill="#fff" text-anchor="middle" font-size="12">Menyusun Huruf: M, A, M, A</text>
+                
+                <g transform="translate(50, 50)">
+                    <rect x="0" y="0" width="30" height="30" fill="#2F81F7" stroke="#fff"/>
+                    <text x="15" y="20" fill="#fff" text-anchor="middle" font-weight="bold">M</text>
+                    <text x="25" y="25" fill="#ccc" font-size="8">1</text>
+                    
+                    <rect x="35" y="0" width="30" height="30" fill="#39D353" stroke="#fff"/>
+                    <text x="50" y="20" fill="#fff" text-anchor="middle" font-weight="bold">A</text>
+                    
+                    <rect x="70" y="0" width="30" height="30" fill="#2F81F7" stroke="#fff"/>
+                    <text x="85" y="20" fill="#fff" text-anchor="middle" font-weight="bold">M</text>
+                    <text x="95" y="25" fill="#ccc" font-size="8">2</text>
+                    
+                    <rect x="105" y="0" width="30" height="30" fill="#39D353" stroke="#fff"/>
+                    <text x="120" y="20" fill="#fff" text-anchor="middle" font-weight="bold">A</text>
+                    
+                    <text x="67" y="50" fill="#8B949E" font-size="10" text-anchor="middle">Susunan 1</text>
+                </g>
+
+                <g transform="translate(50, 110)">
+                    <rect x="0" y="0" width="30" height="30" fill="#2F81F7" stroke="#fff"/>
+                    <text x="15" y="20" fill="#fff" text-anchor="middle" font-weight="bold">M</text>
+                    <text x="25" y="25" fill="#ccc" font-size="8">2</text> <rect x="35" y="0" width="30" height="30" fill="#39D353" stroke="#fff"/>
+                    <text x="50" y="20" fill="#fff" text-anchor="middle" font-weight="bold">A</text>
+                    
+                    <rect x="70" y="0" width="30" height="30" fill="#2F81F7" stroke="#fff"/>
+                    <text x="85" y="20" fill="#fff" text-anchor="middle" font-weight="bold">M</text>
+                    <text x="95" y="25" fill="#ccc" font-size="8">1</text> <rect x="105" y="0" width="30" height="30" fill="#39D353" stroke="#fff"/>
+                    <text x="120" y="20" fill="#fff" text-anchor="middle" font-weight="bold">A</text>
+                    
+                    <text x="67" y="50" fill="#8B949E" font-size="10" text-anchor="middle">Susunan 2 (M ditukar)</text>
+                </g>
+
+                <path d="M 200,65 Q 220,95 200,125" fill="none" stroke="#F85149" stroke-width="2"/>
+                <text x="225" y="90" fill="#F85149" font-weight="bold" font-size="14">TERLIHAT</text>
+                <text x="225" y="105" fill="#F85149" font-weight="bold" font-size="14">SAMA!</text>
+            </svg>
+            <p>Jika kita menukar posisi "M" yang identik, susunannya tetap terbaca "MAMA". Kita harus membuang duplikasi ini.</p>
+        </div>
+
+        <h2>Rumus: Membagi Pengulangannya</h2>
+        <p>
+            Untuk menghilangkan hitungan ganda tersebut, kita harus <strong>MEMBAGI</strong> total faktorial dengan faktorial dari jumlah benda yang sama.
+        </p>
+
+        <div class="info-box">
+            $$ P = \frac{n!}{k_1! \cdot k_2! \cdot \dots \cdot k_m!} $$
+            <br>
+            Keterangan:
+            <br>• $n$ = Total seluruh objek.
+            <br>• $k_1, k_2, \dots$ = Jumlah objek yang sama untuk setiap jenis.
+        </div>
+
+        <h2>Contoh Kasus: "MAMA"</h2>
+        <p>
+            Berapa banyak susunan huruf berbeda dari kata "MAMA"?
+        </p>
+        <ul>
+            <li>Total huruf ($n$) = 4</li>
+            <li>Huruf M ada 2 ($k_1 = 2$)</li>
+            <li>Huruf A ada 2 ($k_2 = 2$)</li>
+        </ul>
+        <p>
+            $$ P = \frac{4!}{2! \cdot 2!} = \frac{24}{2 \cdot 2} = \frac{24}{4} = 6 \ \text{Susunan} $$
+        </p>
+
+        <h2>Contoh Kasus: Bendera</h2>
+        <p>
+            Ada 5 bendera: <strong>3 Merah</strong> dan <strong>2 Biru</strong>. Berapa banyak cara menyusunnya dalam satu baris?
+        </p>
+        <ul>
+            <li>Total bendera ($n$) = 5</li>
+            <li>Merah ($k_1$) = 3</li>
+            <li>Biru ($k_2$) = 2</li>
+        </ul>
+        <p>
+            $$ P = \frac{5!}{3! \cdot 2!} = \frac{5 \cdot 4 \cdot 3!}{3! \cdot (2 \cdot 1)} $$
+            $$ = \frac{20}{2} = 10 \ \text{Susunan} $$
+        </p>
+
+        <h2>Uji Pemahaman</h2>
+        <p>Kerjakan 5 soal berikut. Hati-hati dalam menghitung jumlah huruf yang kembar!</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Cek session (jika perlu)
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+
+        // --- SVG DATA ---
+        
+        // SVG Quiz 2: Kata APA
+        const svgApa = `
+        <svg viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+            <rect x="20" y="10" width="40" height="40" fill="#161B22" stroke="#2F81F7" rx="5"/>
+            <text x="40" y="38" fill="#fff" font-weight="bold" font-size="20" text-anchor="middle">A</text>
+            
+            <rect x="70" y="10" width="40" height="40" fill="#161B22" stroke="#39D353" rx="5"/>
+            <text x="90" y="38" fill="#fff" font-weight="bold" font-size="20" text-anchor="middle">P</text>
+            
+            <rect x="120" y="10" width="40" height="40" fill="#161B22" stroke="#2F81F7" rx="5"/>
+            <text x="140" y="38" fill="#fff" font-weight="bold" font-size="20" text-anchor="middle">A</text>
+        </svg>`;
+
+        // SVG Quiz 3: Kata KATAK
+        const svgKatak = `
+        <svg viewBox="0 0 250 60" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+            <g transform="translate(10,0)">
+                <rect x="0" y="10" width="40" height="40" fill="#161B22" stroke="#F85149"/>
+                <text x="20" y="38" fill="#fff" font-weight="bold" font-size="20" text-anchor="middle">K</text>
+            </g>
+            <g transform="translate(55,0)">
+                <rect x="0" y="10" width="40" height="40" fill="#161B22" stroke="#2F81F7"/>
+                <text x="20" y="38" fill="#fff" font-weight="bold" font-size="20" text-anchor="middle">A</text>
+            </g>
+            <g transform="translate(100,0)">
+                <rect x="0" y="10" width="40" height="40" fill="#161B22" stroke="#39D353"/>
+                <text x="20" y="38" fill="#fff" font-weight="bold" font-size="20" text-anchor="middle">T</text>
+            </g>
+            <g transform="translate(145,0)">
+                <rect x="0" y="10" width="40" height="40" fill="#161B22" stroke="#2F81F7"/>
+                <text x="20" y="38" fill="#fff" font-weight="bold" font-size="20" text-anchor="middle">A</text>
+            </g>
+             <g transform="translate(190,0)">
+                <rect x="0" y="10" width="40" height="40" fill="#161B22" stroke="#F85149"/>
+                <text x="20" y="38" fill="#fff" font-weight="bold" font-size="20" text-anchor="middle">K</text>
+            </g>
+        </svg>`;
+
+        // SVG Quiz 4: Balls
+        const svgBalls = `
+        <svg viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+            <circle cx="30" cy="40" r="15" fill="#e74c3c"/>
+            <circle cx="65" cy="40" r="15" fill="#e74c3c"/>
+            
+            <line x1="90" y1="20" x2="90" y2="60" stroke="#555"/>
+            
+            <circle cx="115" cy="40" r="15" fill="#3498db"/>
+            <circle cx="150" cy="40" r="15" fill="#3498db"/>
+            <circle cx="185" cy="40" r="15" fill="#3498db"/>
+            
+            <text x="240" y="45" fill="#fff" font-size="12">Total 5 Bola</text>
+        </svg>`;
+
+        const quizzes = [
+            { 
+                q: "Mengapa pada permutasi unsur yang sama, kita harus membagi dengan faktorial dari jumlah unsur yang kembar?", 
+                options: [
+                    "Agar hasilnya lebih besar", 
+                    "Untuk menghilangkan hitungan ganda (overcounting) karena pertukaran unsur kembar tidak mengubah susunan", 
+                    "Karena rumusnya memang begitu", 
+                    "Untuk mempermudah perkalian"
+                ], 
+                correct: 1, 
+                explanation: "Jika kita menukar posisi dua objek yang identik, susunannya terlihat sama persis. Pembagian dilakukan untuk membuang duplikasi semu ini." 
+            },
+            { 
+                q: "Berapa banyak susunan huruf berbeda yang dapat dibentuk dari kata 'APA'?", 
+                image: svgApa,
+                options: [
+                    "6", 
+                    "3", 
+                    "2", 
+                    "1"
+                ], 
+                correct: 1, 
+                explanation: "$n=3$. Huruf A ada 2. Maka $P = \\frac{3!}{2!} = \\frac{6}{2} = 3$ susunan (APA, AAP, PAA)." 
+            },
+            { 
+                q: "Hitunglah banyaknya susunan huruf dari kata 'KATAK'.", 
+                image: svgKatak,
+                options: [
+                    "120", 
+                    "60", 
+                    "30", 
+                    "20"
+                ], 
+                correct: 2, 
+                explanation: "$n=5$. Huruf K=2, A=2, T=1. Maka $P = \\frac{5!}{2! \\cdot 2!} = \\frac{120}{4} = 30$." 
+            },
+            { 
+                q: "Ada 2 Bola Merah dan 3 Bola Biru yang identik. Berapa banyak cara menyusun kelima bola tersebut secara berderet?", 
+                image: svgBalls,
+                options: [
+                    "10", 
+                    "5", 
+                    "20", 
+                    "120"
+                ], 
+                correct: 0, 
+                explanation: "$n=5$. Merah=2, Biru=3. $P = \\frac{5!}{2! \\cdot 3!} = \\frac{5 \\cdot 4 \\cdot 3!}{2 \\cdot 1 \\cdot 3!} = \\frac{20}{2} = 10$." 
+            },
+            { 
+                q: "Tantangan: Berapa banyak susunan dari kata 'MATEMATIKA'?", 
+                options: [
+                    "151.200", 
+                    "3.628.800", 
+                    "302.400", 
+                    "50.400"
+                ], 
+                correct: 0, 
+                explanation: "$n=10$. M=2, A=3, T=2, E=1, I=1, K=1. <br> $P = \\frac{10!}{2! \\cdot 3! \\cdot 2!} = \\frac{3.628.800}{2 \\cdot 6 \\cdot 2} = \\frac{3.628.800}{24} = 151.200$." 
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const quizContainer = document.getElementById("quiz-container");
+            if (quizContainer) {
+                quizzes.forEach((quiz, index) => {
+                    const quizEl = document.createElement("div");
+                    quizEl.className = "quiz-accordion";
+                    
+                    const imageHtml = quiz.image ? `<div class="quiz-image-container">${quiz.image}</div>` : '';
+
+                    const optionsHtml = quiz.options.map((opt, i) => 
+                        `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                    ).join("");
+                    
+                    quizEl.innerHTML = `
+                        <button class="quiz-accordion-button">
+                            <span>Soal Latihan ${index + 1}</span><i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="quiz-accordion-content hidden">
+                            ${imageHtml}
+                            <p class="question-text">${quiz.q}</p>
+                            <div class="options-container">${optionsHtml}</div>
+                            <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                        </div>`;
+                    quizContainer.appendChild(quizEl);
+                });
+
+                const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+                accordionButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const content = btn.nextElementSibling;
+                        const isOpening = content.classList.contains('hidden');
+                        accordionButtons.forEach(b => {
+                            if(b !== btn) { b.classList.remove('active'); b.nextElementSibling.classList.add('hidden'); }
+                        });
+                        btn.classList.toggle('active');
+                        content.classList.toggle('hidden');
+                        if (isOpening && window.MathJax) MathJax.typesetPromise([content]);
+                    });
+                });
+
+                document.querySelectorAll('.quiz-option').forEach(opt => {
+                    opt.addEventListener('click', () => {
+                        const container = opt.parentElement;
+                        if (container.classList.contains('answered')) return;
+                        container.classList.add('answered');
+                        const expl = container.nextElementSibling;
+                        expl.classList.remove('hidden');
+                        if (opt.dataset.correct === 'true') opt.classList.add('correct');
+                        else {
+                            opt.classList.add('wrong');
+                            container.querySelector('[data-correct="true"]').classList.add('correct');
+                        }
+                        if (window.MathJax) MathJax.typesetPromise([expl]);
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
