@@ -778,6 +778,41 @@ const allContentData = {
             filePath: 'UMT_Learning/Esensi Permutasi.html', 
             fileType: 'html' 
             },
+            { 
+            id: 'kombinatorika_permutasi_1', 
+            title: 'Permutasi Dasar', 
+            type: 'UMT - Learning', 
+            filePath: 'UMT_Learning/Permutasi dasar.html', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'kombinatorika_permutasi_1', 
+            title: 'Permutasi Dengan Objek Sama', 
+            type: 'UMT - Learning', 
+            filePath: 'UMT_Learning/Permutasi dengan objek sama.html', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'kombinatorika_permutasi_1', 
+            title: 'Permutasi siklis', 
+            type: 'UMT - Learning', 
+            filePath: 'UMT_Learning/Permutasi siklis.html', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'kombinatorika_permutasi_1', 
+            title: 'Permutasi Dengan Syarat', 
+            type: 'UMT - Learning', 
+            filePath: 'UMT_Learning/Permutasi dengan syarat.html', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'kombinatorika_permutasi_1', 
+            title: 'Permutasi Dengan Pengulangan', 
+            type: 'UMT - Learning', 
+            filePath: 'UMT_Learning/Permutasi dengan pengulangan.html', 
+            fileType: 'html' 
+            },
         ],
         "Kombinatorika : Kombinasi (Part 3)": [
             { 
