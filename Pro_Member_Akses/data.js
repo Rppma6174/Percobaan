@@ -817,9 +817,23 @@ const allContentData = {
         "Kombinatorika : Kombinasi (Part 3)": [
             { 
             id: 'kombinatorika_kombinasi_1', 
-            title: 'Esensi Kombinasi', 
+            title: 'Kombinasi Dasar', 
             type: 'UMT - Learning', 
-            filePath: '#', 
+            filePath: 'UMT_Learning/Esensi kombinasi.html', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'kombinatorika_kombinasi_1', 
+            title: 'Kombinasi Dengan Syarat', 
+            type: 'UMT - Learning', 
+            filePath: 'UMT_Learning/Kombinasi dengan syarat.html', 
+            fileType: 'html' 
+            },
+            { 
+            id: 'kombinatorika_kombinasi_1', 
+            title: 'Kombinasi Dengan Pengulangan', 
+            type: 'UMT - Learning', 
+            filePath: 'UMT_Learning/Kombinasi dengan pengulangan.html', 
             fileType: 'html' 
             },
         ],
