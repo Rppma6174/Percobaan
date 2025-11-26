@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Permutasi dengan Syarat - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { 
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } 
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+            --accent-purple: #A371F7;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2, h3 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        h3 { color: #58a6ff; margin-top: 2rem; }
+        .hidden { display: none; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 0.5rem; }
+        
+        .diagram-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-main);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            margin-top: 1rem;
+            overflow-x: auto;
+        }
+        .diagram-container svg { max-width: 100%; }
+        .diagram-container svg text { font-size: 14px; fill: var(--text-primary); }
+        .diagram-container p { font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem; }
+        
+        /* Kotak info khusus */
+        .info-box {
+            background-color: rgba(47, 129, 247, 0.1);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+
+        /* Container Gambar Kuis */
+        .quiz-image-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--bg-main);
+            border-radius: 8px;
+            border: 1px dashed var(--border-color);
+        }
+
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold;
+        }
+        .quiz-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1);
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* Scroll Horizontal */
+        p, li, .info-box, .quiz-explanation, .question-text, .quiz-option {
+            overflow-x: auto;
+            padding-bottom: 10px;
+            overscroll-behavior-x: contain;
+        }
+        
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <h1>Permutasi dengan Syarat (Restricted Permutations)</h1>
+        
+        <p>
+            Dalam kehidupan nyata, menyusun objek seringkali tidak bebas. Ada aturan mainnya.
+            Kita akan mempelajari 3 strategi utama untuk menangani aturan-aturan ini.
+        </p>
+
+        <h2>1. Syarat "Harus Berdampingan" (Teknik Ikat)</h2>
+        <p>
+            Jika ada beberapa objek yang <strong>harus selalu bersama</strong>, anggaplah mereka sebagai <strong>SATU PAKET</strong> (satu kesatuan).
+        </p>
+        <div class="info-box">
+            <strong>Langkah-langkah:</strong>
+            <ol>
+                <li>Hitung paket tersebut sebagai 1 objek.</li>
+                <li>Lakukan permutasi total.</li>
+                <li><strong>JANGAN LUPA:</strong> Kalikan dengan permutasi internal di dalam paket tersebut (karena posisi di dalam paket bisa bertukar).</li>
+            </ol>
+        </div>
+
+        <div class="diagram-container">
+            <svg width="350" height="120" viewBox="0 0 350 120" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="20" width="110" height="80" rx="10" fill="rgba(47, 129, 247, 0.2)" stroke="#2F81F7" stroke-width="2" stroke-dasharray="5,5"/>
+                <circle cx="50" cy="60" r="20" fill="#2F81F7"><title>A</title></circle>
+                <text x="50" y="65" fill="#fff" text-anchor="middle" font-weight="bold">A</text>
+                <circle cx="100" cy="60" r="20" fill="#39D353"><title>B</title></circle>
+                <text x="100" y="65" fill="#fff" text-anchor="middle" font-weight="bold">B</text>
+                
+                <text x="75" y="110" fill="#2F81F7" font-size="10" text-anchor="middle">Dianggap 1 Objek</text>
+
+                <circle cx="180" cy="60" r="20" fill="#F85149"><title>C</title></circle>
+                <text x="180" y="65" fill="#fff" text-anchor="middle" font-weight="bold">C</text>
+                
+                <circle cx="230" cy="60" r="20" fill="#D29922"><title>D</title></circle>
+                <text x="230" y="65" fill="#fff" text-anchor="middle" font-weight="bold">D</text>
+
+                <text x="250" y="60" fill="#fff" font-size="12">Total = 3 Objek</text>
+            </svg>
+            <p>A dan B diikat. Maka kita menyusun (AB), C, dan D. (Total 3 faktorial). Lalu dikali 2! (tukar A-B).</p>
+        </div>
+
+        <h2>2. Syarat "Tidak Boleh Berdampingan"</h2>
+        <p>
+            Menghitung kondisi "terpisah" secara langsung itu sulit. Lebih mudah menggunakan logika terbalik (Komplemen).
+        </p>
+        <div class="info-box">
+            $$ \text{Tidak Berdampingan} = \text{Total Semesta} - \text{Kejadian Berdampingan} $$
+        </div>
+        <p>
+            Contoh: Menyusun A, B, C, D di mana A dan B <strong>JANGAN</strong> sebelah-sebelahan.
+            <br>1. Hitung Total (4!).
+            <br>2. Hitung A & B nempel (3! $\times$ 2!).
+            <br>3. Kurangi hasilnya.
+        </p>
+
+        <h2>3. Syarat "Posisi Tertentu" (Teknik Kunci)</h2>
+        <p>
+            Jika ada objek yang harus menempati posisi tertentu (misal: "Ketua harus duduk di kursi pertama"), maka:
+            <br>1. Masukkan objek tersebut ke slotnya (Kunci).
+            <br>2. Abaikan slot itu, hitung permutasi sisa objek di sisa slot.
+        </p>
+
+        <div class="diagram-container">
+            <svg width="300" height="100" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="20" width="50" height="50" fill="#161B22" stroke="#F85149" stroke-width="3"/>
+                <text x="45" y="50" fill="#F85149" text-anchor="middle" font-weight="bold" font-size="20">1</text>
+                <text x="45" y="85" fill="#F85149" text-anchor="middle" font-size="10">Wajib Angka 1</text>
+
+                <rect x="80" y="20" width="50" height="50" fill="#161B22" stroke="#fff"/>
+                <text x="105" y="50" fill="#8B949E" text-anchor="middle" font-size="20">?</text>
+                
+                <rect x="140" y="20" width="50" height="50" fill="#161B22" stroke="#fff"/>
+                <text x="165" y="50" fill="#8B949E" text-anchor="middle" font-size="20">?</text>
+                
+                <rect x="200" y="20" width="50" height="50" fill="#161B22" stroke="#fff"/>
+                <text x="225" y="50" fill="#8B949E" text-anchor="middle" font-size="20">?</text>
+                
+                <text x="140" y="100" fill="#fff" text-anchor="middle" font-size="10">Sisa 3 slot disusun bebas</text>
+            </svg>
+        </div>
+
+        <h2>Uji Pemahaman</h2>
+        <p>Terapkan strategi yang tepat untuk setiap kasus di bawah ini.</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Cek session (jika perlu)
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+
+        // --- SVG DATA ---
+        
+        // SVG Quiz 2: Books Tied
+        const svgBooksTied = `
+        <svg viewBox="0 0 250 100" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+            <rect x="10" y="10" width="70" height="80" fill="none" stroke="#F85149" stroke-width="2" stroke-dasharray="4"/>
+            <rect x="20" y="20" width="20" height="60" fill="#F85149" stroke="#fff"/>
+            <text x="30" y="50" fill="#fff" font-size="8" text-anchor="middle" transform="rotate(-90, 30, 50)">Math</text>
+            <rect x="50" y="20" width="20" height="60" fill="#F85149" stroke="#fff"/>
+            <text x="60" y="50" fill="#fff" font-size="8" text-anchor="middle" transform="rotate(-90, 60, 50)">Fisika</text>
+            
+            <rect x="100" y="20" width="20" height="60" fill="#2F81F7" stroke="#fff"/>
+            <rect x="130" y="20" width="20" height="60" fill="#39D353" stroke="#fff"/>
+            <rect x="160" y="20" width="20" height="60" fill="#D29922" stroke="#fff"/>
+            
+            <text x="45" y="95" fill="#F85149" font-size="10" text-anchor="middle">1 Paket</text>
+            <text x="140" y="95" fill="#fff" font-size="10" text-anchor="middle">3 Buku Lain</text>
+        </svg>`;
+
+        // SVG Quiz 3: Separated
+        const svgSeparated = ``;
+
+        const quizzes = [
+            { 
+                q: "Apa langkah terpenting yang sering dilupakan siswa saat menggunakan 'Teknik Ikat' (Bundling)?", 
+                options: [
+                    "Menghitung jumlah total objek", 
+                    "Mengalikan dengan permutasi internal (tukar posisi) di dalam paket ikatan", 
+                    "Menambah 1 ke total objek", 
+                    "Membagi dengan 2"
+                ], 
+                correct: 1, 
+                explanation: "Ini kesalahan fatal. Setelah menganggap paket sebagai 1 objek, Anda WAJIB mengalikannya dengan susunan di dalam paket itu sendiri (misal: $AB \\neq BA$). " 
+            },
+            { 
+                q: "Ada 5 buku: Matematika, Fisika, Biologi, Kimia, Sejarah. Buku Matematika dan Fisika harus selalu berdampingan. Berapa susunannya?", 
+                image: svgBooksTied,
+                options: [
+                    "120", 
+                    "48", 
+                    "24", 
+                    "60"
+                ], 
+                correct: 1, 
+                explanation: "1. Ikat (Mat, Fis) = 1 objek. Sisa 3 buku. Total objek = 4. <br>2. Permutasi 4 objek = $4! = 24$. <br>3. Internal Mat-Fis = $2! = 2$. <br>4. Total = $24 \\times 2 = 48$." 
+            },
+            { 
+                q: "4 Sahabat (A, B, C, D) berfoto bersama. A dan B sedang bermusuhan dan TIDAK BOLEH berdiri berdampingan. Berapa posisinya?", 
+                image: svgSeparated,
+                options: [
+                    "12", 
+                    "24", 
+                    "10", 
+                    "14"
+                ], 
+                correct: 0, 
+                explanation: "Total (4!) = 24. <br>Kejadian A-B Nempel (hitung sebagai 1 paket): 3 objek ($3!$) $\\times$ internal ($2!$) = $6 \\times 2 = 12$. <br>A-B Pisah = Total - Nempel = $24 - 12 = 12$." 
+            },
+            { 
+                q: "Berapa banyak bilangan 3 digit yang dapat dibentuk dari angka 1, 2, 3, 4, 5 jika angka pertama HARUS Ganjil? (Angka tidak boleh berulang)", 
+                options: [
+                    "36", 
+                    "60", 
+                    "125", 
+                    "20"
+                ], 
+                correct: 0, 
+                explanation: "Digit 1 (Ganjil: 1,3,5) = 3 opsi. <br>Digit 2 (Sisa 4 angka) = 4 opsi. <br>Digit 3 (Sisa 3 angka) = 3 opsi. <br>Total = $3 \\times 4 \\times 3 = 36$." 
+            },
+            { 
+                q: "5 orang duduk melingkar. Ayah harus duduk tepat di sebelah kanan Ibu (posisi tetap relatif). Berapa susunannya?", 
+                options: [
+                    "24", 
+                    "6", 
+                    "12", 
+                    "120"
+                ], 
+                correct: 1, 
+                explanation: "Karena posisi Ayah 'terkunci' di kanan Ibu, mereka dihitung 1 paket DAN tidak ada tukar posisi internal (karena arah ditentukan). <br>Objek = (AyahIbu) + 3 Anak = 4 Objek. <br>Permutasi Siklis = $(4-1)! = 3! = 6$. (Tidak dikali 2!)." 
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const quizContainer = document.getElementById("quiz-container");
+            if (quizContainer) {
+                quizzes.forEach((quiz, index) => {
+                    const quizEl = document.createElement("div");
+                    quizEl.className = "quiz-accordion";
+                    
+                    const imageHtml = quiz.image ? `<div class="quiz-image-container">${quiz.image}</div>` : '';
+
+                    const optionsHtml = quiz.options.map((opt, i) => 
+                        `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                    ).join("");
+                    
+                    quizEl.innerHTML = `
+                        <button class="quiz-accordion-button">
+                            <span>Soal Latihan ${index + 1}</span><i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="quiz-accordion-content hidden">
+                            ${imageHtml}
+                            <p class="question-text">${quiz.q}</p>
+                            <div class="options-container">${optionsHtml}</div>
+                            <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                        </div>`;
+                    quizContainer.appendChild(quizEl);
+                });
+
+                const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+                accordionButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const content = btn.nextElementSibling;
+                        const isOpening = content.classList.contains('hidden');
+                        accordionButtons.forEach(b => {
+                            if(b !== btn) { b.classList.remove('active'); b.nextElementSibling.classList.add('hidden'); }
+                        });
+                        btn.classList.toggle('active');
+                        content.classList.toggle('hidden');
+                        if (isOpening && window.MathJax) MathJax.typesetPromise([content]);
+                    });
+                });
+
+                document.querySelectorAll('.quiz-option').forEach(opt => {
+                    opt.addEventListener('click', () => {
+                        const container = opt.parentElement;
+                        if (container.classList.contains('answered')) return;
+                        container.classList.add('answered');
+                        const expl = container.nextElementSibling;
+                        expl.classList.remove('hidden');
+                        if (opt.dataset.correct === 'true') opt.classList.add('correct');
+                        else {
+                            opt.classList.add('wrong');
+                            container.querySelector('[data-correct="true"]').classList.add('correct');
+                        }
+                        if (window.MathJax) MathJax.typesetPromise([expl]);
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
