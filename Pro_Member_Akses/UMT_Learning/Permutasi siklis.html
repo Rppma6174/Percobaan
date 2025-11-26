@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Permutasi Siklis - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { 
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } 
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+            --accent-orange: #D29922;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2, h3 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        h3 { color: #58a6ff; margin-top: 2rem; }
+        .hidden { display: none; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 0.5rem; }
+        
+        .diagram-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-main);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            margin-top: 1rem;
+            overflow-x: auto;
+        }
+        .diagram-container svg { max-width: 100%; }
+        .diagram-container svg text { font-size: 14px; fill: var(--text-primary); }
+        .diagram-container p { font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem; }
+        
+        /* Kotak info khusus */
+        .info-box {
+            background-color: rgba(47, 129, 247, 0.1);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+
+        /* Container Gambar Kuis */
+        .quiz-image-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--bg-main);
+            border-radius: 8px;
+            border: 1px dashed var(--border-color);
+        }
+
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold;
+        }
+        .quiz-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1);
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* Scroll Horizontal */
+        p, li, .info-box, .quiz-explanation, .question-text, .quiz-option {
+            overflow-x: auto;
+            padding-bottom: 10px;
+            overscroll-behavior-x: contain;
+        }
+        
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <h1>Permutasi Siklis (Melingkar)</h1>
+        
+        <p>
+            Permutasi siklis adalah cara menyusun objek-objek dalam bentuk <strong>lingkaran</strong> (seperti duduk di meja bundar atau menyusun manik-manik gelang).
+        </p>
+
+        <h2>Mengapa Berbeda dengan Barisan Lurus?</h2>
+        <p>
+            Pada barisan lurus (Linear), urutan <strong>ABC</strong> berbeda dengan <strong>BCA</strong>.
+            <br>Namun pada lingkaran, jika semua orang bergeser satu kursi ke kanan, susunan relatifnya <strong>TIDAK BERUBAH</strong>. Posisi kiri dan kanan mereka masih ditempati orang yang sama.
+        </p>
+
+        <div class="diagram-container">
+            <svg width="400" height="200" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="60" fill="none" stroke="#30363D" stroke-width="2"/>
+                <circle cx="100" cy="40" r="15" fill="#2F81F7"/><text x="100" y="45" fill="#fff" text-anchor="middle" font-size="12">A</text>
+                <circle cx="160" cy="100" r="15" fill="#39D353"/><text x="160" y="105" fill="#fff" text-anchor="middle" font-size="12">B</text>
+                <circle cx="100" cy="160" r="15" fill="#F85149"/><text x="100" y="165" fill="#fff" text-anchor="middle" font-size="12">C</text>
+                <circle cx="40" cy="100" r="15" fill="#D29922"/><text x="40" y="105" fill="#fff" text-anchor="middle" font-size="12">D</text>
+                
+                <path d="M 180,100 L 220,100" stroke="#fff" stroke-width="2" marker-end="url(#arrow)"/>
+                <text x="200" y="90" fill="#8B949E" font-size="10" text-anchor="middle">DIPUTAR</text>
+
+                <circle cx="300" cy="100" r="60" fill="none" stroke="#30363D" stroke-width="2"/>
+                <circle cx="300" cy="40" r="15" fill="#D29922"/><text x="300" y="45" fill="#fff" text-anchor="middle" font-size="12">D</text>
+                <circle cx="360" cy="100" r="15" fill="#2F81F7"/><text x="360" y="105" fill="#fff" text-anchor="middle" font-size="12">A</text>
+                <circle cx="300" cy="160" r="15" fill="#39D353"/><text x="300" y="165" fill="#fff" text-anchor="middle" font-size="12">B</text>
+                <circle cx="240" cy="100" r="15" fill="#F85149"/><text x="240" y="105" fill="#fff" text-anchor="middle" font-size="12">C</text>
+                
+                <text x="200" y="190" fill="#F85149" font-weight="bold" font-size="14" text-anchor="middle">INI DIHITUNG 1 SUSUNAN SAMA</text>
+            </svg>
+            <p>Karena tidak ada "ujung" kiri atau kanan, rotasi dianggap sama.</p>
+        </div>
+
+        <h2>Strategi: "Kunci Satu Posisi"</h2>
+        <p>
+            Agar bisa dihitung, kita harus memecah siklus putaran tersebut. Caranya adalah dengan <strong>memaku (mengunci) satu objek</strong> agar diam di tempat.
+        </p>
+        <p>
+            Jika 1 orang diam, maka sisa orang lainnya ($n-1$) bisa disusun secara linear (biasa) relatif terhadap orang yang diam tadi.
+        </p>
+        
+        <div class="info-box">
+            <strong>Rumus Permutasi Siklis:</strong>
+            $$ P_{siklis} = (n - 1)! $$
+        </div>
+
+        <div class="diagram-container">
+            <svg width="200" height="150" viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="80" r="50" fill="none" stroke="#30363D" stroke-width="2"/>
+                
+                <rect x="85" y="10" width="30" height="30" fill="#2F81F7"/>
+                <path d="M 100,40 L 100,60" stroke="#2F81F7" stroke-width="3"/>
+                <circle cx="100" cy="60" r="3" fill="#2F81F7"/>
+                <text x="100" y="30" fill="#fff" text-anchor="middle" font-weight="bold">A</text>
+                <text x="145" y="30" fill="#2F81F7" font-size="10">DIKUNCI</text>
+
+                <circle cx="150" cy="80" r="12" fill="#30363D" stroke="#8B949E" stroke-dasharray="2"/>
+                <circle cx="100" cy="130" r="12" fill="#30363D" stroke="#8B949E" stroke-dasharray="2"/>
+                <circle cx="50" cy="80" r="12" fill="#30363D" stroke="#8B949E" stroke-dasharray="2"/>
+                
+                <text x="100" y="145" fill="#8B949E" font-size="10" text-anchor="middle">Sisa (n-1) orang bertukar tempat</text>
+            </svg>
+        </div>
+
+        <h3>Contoh Soal 1 (Dasar)</h3>
+        <p>
+            6 orang pengurus OSIS mengadakan rapat di meja bundar. Berapa banyak posisi duduk yang mungkin?
+        </p>
+        <p>
+            <strong>Jawab:</strong>
+            <br>$$ P = (6 - 1)! = 5! $$
+            <br>$$ P = 5 \times 4 \times 3 \times 2 \times 1 = 120 \ \text{Cara} $$
+        </p>
+
+        <h3>Contoh Soal 2 (Syarat Berdampingan)</h3>
+        <p>
+            5 orang duduk melingkar. Namun, <strong>Ayah dan Ibu harus selalu duduk berdampingan</strong>. Berapa caranya?
+        </p>
+        <p>
+            <strong>Analisis:</strong>
+            <br>1. Ikat Ayah dan Ibu jadi 1 paket. Sekarang hitung objeknya: (AyahIbu) + 3 Anak = 4 Objek.
+            <br>2. Permutasi Siklis 4 Objek: $(4-1)! = 3! = 6$.
+            <br>3. Permutasi Internal (Ayah & Ibu bisa tukar posisi): $2! = 2$.
+            <br>4. Total: $6 \times 2 = 12$ Cara.
+        </p>
+
+
+        <h2>Uji Pemahaman</h2>
+        <p>Kerjakan 5 soal berikut untuk menguji pemahaman konsep melingkar Anda.</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Cek session (jika perlu)
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+
+        // --- SVG DATA ---
+        
+        // SVG Quiz 2: 4 People
+        const svgFourSeats = `
+        <svg viewBox="0 0 200 150" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+            <ellipse cx="100" cy="80" rx="60" ry="40" fill="#161B22" stroke="#D29922" stroke-width="2"/>
+            <circle cx="100" cy="30" r="10" fill="#2F81F7"/>
+            <circle cx="100" cy="130" r="10" fill="#39D353"/>
+            <circle cx="30" cy="80" r="10" fill="#F85149"/>
+            <circle cx="170" cy="80" r="10" fill="#A371F7"/>
+            <text x="100" y="85" fill="#fff" text-anchor="middle" font-size="12">4 Kursi</text>
+        </svg>`;
+
+        // SVG Quiz 3: Necklace (Beads)
+        const svgNecklace = `
+        <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+            <path d="M 50,50 Q 100,100 150,50 Q 100,0 50,50" fill="none" stroke="#fff" stroke-width="2"/>
+            <circle cx="50" cy="50" r="8" fill="red"/>
+            <circle cx="80" cy="20" r="8" fill="blue"/>
+            <circle cx="120" cy="20" r="8" fill="green"/>
+            <circle cx="150" cy="50" r="8" fill="yellow"/>
+            <circle cx="120" cy="80" r="8" fill="purple"/>
+            <circle cx="80" cy="80" r="8" fill="orange"/>
+            <text x="100" y="55" fill="#8B949E" font-size="10" text-anchor="middle">Gelang Manik</text>
+        </svg>`;
+
+        const quizzes = [
+            { 
+                q: "Mengapa rumus permutasi siklis adalah $(n-1)!$ dan bukan $n!$?", 
+                options: [
+                    "Karena ada satu orang yang tidak dihitung", 
+                    "Karena rotasi susunan dianggap sama, sehingga kita perlu mengunci 1 posisi sebagai acuan", 
+                    "Karena lingkarannya kecil", 
+                    "Karena satu posisi dikosongkan"
+                ], 
+                correct: 1, 
+                explanation: "Dalam lingkaran, tidak ada 'awal' dan 'akhir'. Susunan ABCD, BCDA, CDAB, DABC dianggap satu susunan yang sama. Kita membagi $n!$ dengan $n$ (jumlah rotasi), hasilnya $(n-1)!$." 
+            },
+            { 
+                q: "Ada 4 orang sahabat sedang makan malam di meja bundar. Berapa banyak susunan tempat duduk yang mungkin?", 
+                image: svgFourSeats,
+                options: [
+                    "24", 
+                    "12", 
+                    "6", 
+                    "4"
+                ], 
+                correct: 2, 
+                explanation: "$n=4$. Rumus $(n-1)! = 3! = 3 \\times 2 \\times 1 = 6$ cara." 
+            },
+            { 
+                q: "7 orang ketua partai politik duduk berunding di meja bundar. Berapa banyak kemungkinan posisi duduk?", 
+                options: [
+                    "5040", 
+                    "720", 
+                    "120", 
+                    "7"
+                ], 
+                correct: 1, 
+                explanation: "$n=7$. Permutasi siklis = $(7-1)! = 6! = 720$ cara." 
+            },
+            { 
+                q: "Dalam sebuah gelang, 6 manik-manik warna-warni disusun melingkar. (Catatan: Gelang bisa dibalik, sehingga urutan searah & berlawanan jarum jam dianggap sama). Berapa susunannya?", 
+                image: svgNecklace,
+                options: [
+                    "120", 
+                    "60", 
+                    "720", 
+                    "360"
+                ], 
+                correct: 1, 
+                explanation: "Untuk benda yang bisa dibalik (seperti gelang/kunci), rumusnya adalah $\\frac{(n-1)!}{2}$. <br> $(6-1)! / 2 = 120 / 2 = 60$ cara." 
+            },
+            { 
+                q: "5 orang duduk melingkar. Jika A dan B TIDAK BOLEH duduk berdampingan, berapa caranya?", 
+                options: [
+                    "12", 
+                    "24", 
+                    "48", 
+                    "6"
+                ], 
+                correct: 0, 
+                explanation: "Total cara (tanpa syarat) = $4! = 24$. <br>Cara jika A & B berdampingan = $(4-1)! \\times 2! = 6 \\times 2 = 12$. <br>Cara TIDAK berdampingan = Total - Berdampingan = $24 - 12 = 12$." 
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const quizContainer = document.getElementById("quiz-container");
+            if (quizContainer) {
+                quizzes.forEach((quiz, index) => {
+                    const quizEl = document.createElement("div");
+                    quizEl.className = "quiz-accordion";
+                    
+                    const imageHtml = quiz.image ? `<div class="quiz-image-container">${quiz.image}</div>` : '';
+
+                    const optionsHtml = quiz.options.map((opt, i) => 
+                        `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                    ).join("");
+                    
+                    quizEl.innerHTML = `
+                        <button class="quiz-accordion-button">
+                            <span>Soal Latihan ${index + 1}</span><i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="quiz-accordion-content hidden">
+                            ${imageHtml}
+                            <p class="question-text">${quiz.q}</p>
+                            <div class="options-container">${optionsHtml}</div>
+                            <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                        </div>`;
+                    quizContainer.appendChild(quizEl);
+                });
+
+                const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+                accordionButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const content = btn.nextElementSibling;
+                        const isOpening = content.classList.contains('hidden');
+                        accordionButtons.forEach(b => {
+                            if(b !== btn) { b.classList.remove('active'); b.nextElementSibling.classList.add('hidden'); }
+                        });
+                        btn.classList.toggle('active');
+                        content.classList.toggle('hidden');
+                        if (isOpening && window.MathJax) MathJax.typesetPromise([content]);
+                    });
+                });
+
+                document.querySelectorAll('.quiz-option').forEach(opt => {
+                    opt.addEventListener('click', () => {
+                        const container = opt.parentElement;
+                        if (container.classList.contains('answered')) return;
+                        container.classList.add('answered');
+                        const expl = container.nextElementSibling;
+                        expl.classList.remove('hidden');
+                        if (opt.dataset.correct === 'true') opt.classList.add('correct');
+                        else {
+                            opt.classList.add('wrong');
+                            container.querySelector('[data-correct="true"]').classList.add('correct');
+                        }
+                        if (window.MathJax) MathJax.typesetPromise([expl]);
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
