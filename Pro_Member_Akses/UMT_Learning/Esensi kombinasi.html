@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esensi Kombinasi - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { 
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } 
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+            --accent-orange: #D29922;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2, h3 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        h3 { color: #58a6ff; margin-top: 2rem; }
+        .hidden { display: none; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 0.5rem; }
+        
+        .diagram-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-main);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            margin-top: 1rem;
+            overflow-x: auto;
+        }
+        .diagram-container svg { max-width: 100%; }
+        .diagram-container svg text { font-size: 14px; fill: var(--text-primary); }
+        .diagram-container p { font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem; }
+        
+        /* Kotak info khusus */
+        .info-box {
+            background-color: rgba(47, 129, 247, 0.1);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+
+        /* Container Gambar Kuis */
+        .quiz-image-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--bg-main);
+            border-radius: 8px;
+            border: 1px dashed var(--border-color);
+        }
+
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold;
+        }
+        .quiz-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1);
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* Scroll Horizontal */
+        p, li, .info-box, .quiz-explanation, .question-text, .quiz-option {
+            overflow-x: auto;
+            padding-bottom: 10px;
+            overscroll-behavior-x: contain;
+        }
+        
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <h1>Esensi Kombinasi: Urutan Tidak Penting</h1>
+        
+        <p>
+            Kita telah menguasai Permutasi, di mana urutan adalah segalanya (Password 123 $\neq$ 321). 
+            Sekarang, kita masuk ke dunia <strong>Kombinasi</strong>, di mana urutan <strong>SAMA SEKALI TIDAK PENTING</strong>.
+        </p>
+
+        <h2>Perbandingan Visual</h2>
+        <p>
+            Cara terbaik memahami Kombinasi adalah dengan menyandingkannya langsung dengan Permutasi.
+        </p>
+
+        <div class="diagram-container">
+            <svg width="400" height="200" viewBox="0 0 400 200" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="20" width="160" height="160" rx="10" fill="#161B22" stroke="#2F81F7"/>
+                <text x="100" y="45" fill="#2F81F7" text-anchor="middle" font-weight="bold">PERMUTASI</text>
+                
+                <rect x="50" y="60" width="100" height="40" fill="#0D1117" stroke="#2F81F7"/>
+                <text x="100" y="85" fill="#fff" text-anchor="middle" font-family="monospace" font-size="20">1 - 2</text>
+                
+                <rect x="50" y="110" width="100" height="40" fill="#0D1117" stroke="#F85149"/>
+                <text x="100" y="135" fill="#fff" text-anchor="middle" font-family="monospace" font-size="20">2 - 1</text>
+                
+                <text x="100" y="170" fill="#F85149" font-size="10" text-anchor="middle">BEDA! (Gembok tidak terbuka)</text>
+
+                <rect x="220" y="20" width="160" height="160" rx="10" fill="#161B22" stroke="#39D353"/>
+                <text x="300" y="45" fill="#39D353" text-anchor="middle" font-weight="bold">KOMBINASI</text>
+                
+                <path d="M 240,130 Q 300,180 360,130" fill="none" stroke="#fff" stroke-width="2"/>
+                <circle cx="280" cy="110" r="15" fill="#e74c3c"/> <circle cx="320" cy="110" r="15" fill="#f1c40f"/> <text x="300" y="80" fill="#fff" font-size="10" text-anchor="middle">Apel + Pisang</text>
+                <text x="300" y="95" fill="#fff" font-size="10" text-anchor="middle">ATAU</text>
+                <text x="300" y="160" fill="#39D353" font-size="10" text-anchor="middle">SAMA SAJA! (Jadi Jus)</text>
+            </svg>
+            <p>
+                Permutasi itu seperti <strong>Password</strong> (Urutan fatal).
+                <br>Kombinasi itu seperti <strong>Jus Buah</strong> (Urutan masuk blender tidak mengubah rasa).
+            </p>
+        </div>
+
+        <h2>Definisi Formal</h2>
+        <div class="info-box">
+            <strong>Kombinasi</strong> adalah cara memilih $r$ objek dari $n$ objek yang tersedia <strong>TANPA</strong> memperhatikan urutan.
+            <br><br>
+            Notasi: $C(n, r)$ atau $^nC_r$ atau $\binom{n}{r}$.
+        </div>
+
+        <h2>Logika Rumus: "Membagi Kekacauan"</h2>
+        <p>
+            Kenapa rumus kombinasi mirip permutasi tapi ada pembagian tambahan?
+        </p>
+        <p>
+            $$ C(n, r) = \frac{n!}{r!(n-r)!} $$
+        </p>
+        <p>
+            Logikanya sederhana:
+            <br>1. Kita hitung dulu seolah-olah urutan penting (Permutasi: $\frac{n!}{(n-r)!}$).
+            <br>2. Tapi karena urutan <strong>AB</strong> dan <strong>BA</strong> itu sama, kita telah menghitung ganda (overcounting).
+            <br>3. Maka, kita harus <strong>MEMBAGI</strong> dengan jumlah susunan internalnya ($r!$) untuk membuang duplikasi tersebut.
+        </p>
+        <div class="info-box" style="border-left-color: var(--accent-orange);">
+            $$ \text{Kombinasi} = \frac{\text{Permutasi}}{\text{Susunan Internal (r!)}} $$
+        </div>
+
+        <h2>Contoh Nyata: Jabat Tangan</h2>
+        <div class="diagram-container">
+            <svg width="300" height="100" viewBox="0 0 300 100" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="20" fill="#2F81F7"/><text x="50" y="55" fill="#fff" text-anchor="middle">A</text>
+                <circle cx="250" cy="50" r="20" fill="#39D353"/><text x="250" y="55" fill="#fff" text-anchor="middle">B</text>
+                
+                <line x1="70" y1="50" x2="230" y2="50" stroke="#fff" stroke-width="2" stroke-dasharray="5,5"/>
+                
+                <text x="150" y="40" fill="#8B949E" font-size="10" text-anchor="middle">A jabat tangan B</text>
+                <text x="150" y="60" fill="#8B949E" font-size="10" text-anchor="middle">B jabat tangan A</text>
+                <text x="150" y="80" fill="#D29922" font-weight="bold" font-size="12" text-anchor="middle">Itu 1 Kejadian yang Sama!</text>
+            </svg>
+        </div>
+        <p>
+            Jika ada 5 orang saling berjabat tangan, kita menggunakan Kombinasi $C(5, 2)$. Karena "A menyalami B" adalah kejadian yang sama dengan "B menyalami A". Tidak ada "Ketua Salaman" atau "Wakil Salaman".
+        </p>
+
+        <h2>Uji Pemahaman Konsep</h2>
+        <p>Apakah Anda bisa membedakan kapan pakai Permutasi dan kapan pakai Kombinasi? Ini adalah skill terpenting.</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Cek session (jika perlu)
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+
+        // --- SVG DATA ---
+        
+        // SVG Quiz 1: Team
+        const svgTeam = ``;
+
+        // SVG Quiz 4: Cards
+        const svgCards = ``;
+
+        const quizzes = [
+            { 
+                q: "Apa perbedaan paling mendasar antara Kombinasi dan Permutasi?", 
+                options: [
+                    "Kombinasi untuk benda mati, Permutasi untuk orang", 
+                    "Kombinasi urutan TIDAK penting, Permutasi urutan PENTING", 
+                    "Rumus Kombinasi lebih panjang", 
+                    "Kombinasi hasilnya selalu lebih besar"
+                ], 
+                correct: 1, 
+                explanation: "Ini adalah inti materinya. Permutasi peduli urutan (Juara 1 vs 2). Kombinasi tidak peduli urutan (Anggota Tim)." 
+            },
+            { 
+                q: "Dari 10 siswa, akan dipilih 3 orang untuk mewakili sekolah dalam lomba Cerdas Cermat. Apakah ini Permutasi atau Kombinasi?", 
+                image: svgTeam,
+                options: [
+                    "Permutasi, karena orangnya berbeda", 
+                    "Kombinasi, karena tidak ada jabatan (Ketua/Wakil) dalam tim tersebut", 
+                    "Permutasi Siklis", 
+                    "Bukan keduanya"
+                ], 
+                correct: 1, 
+                explanation: "Karena hanya disebutkan 'mewakili sekolah' tanpa jabatan spesifik, maka Tim {A, B, C} sama saja dengan Tim {C, B, A}. Urutan tidak penting -> Kombinasi." 
+            },
+            { 
+                q: "Hitunglah nilai dari $C(5, 2)$.", 
+                options: [
+                    "20", 
+                    "10", 
+                    "60", 
+                    "5"
+                ], 
+                correct: 1, 
+                explanation: "$$ C(5, 2) = \\frac{5!}{2!(5-2)!} = \\frac{5 \\times 4}{2 \\times 1} = 10 $$" 
+            },
+            { 
+                q: "Dalam permainan poker, Anda mendapat 5 kartu dari 52 kartu yang ada. Urutan Anda memegang kartu di tangan tidak berpengaruh pada nilai kartu. Ini adalah contoh...", 
+                image: svgCards,
+                options: [
+                    "Permutasi", 
+                    "Kombinasi", 
+                    "Filling Slots", 
+                    "Peluang"
+                ], 
+                correct: 1, 
+                explanation: "Urutan kartu di tangan tidak mengubah jenis 'Hand' yang Anda miliki (misal: Royal Flush tetap Royal Flush walau kartunya diacak posisinya). Maka ini Kombinasi." 
+            },
+            { 
+                q: "Dari 4 warna cat (Merah, Kuning, Hijau, Biru), kita ingin mencampur 2 warna untuk menghasilkan warna baru. Berapa banyak warna baru yang bisa tercipta?", 
+                options: [
+                    "12", 
+                    "6", 
+                    "24", 
+                    "8"
+                ], 
+                correct: 1, 
+                explanation: "Mencampur Merah+Kuning hasilnya SAMA dengan Kuning+Merah. Urutan tidak penting. Gunakan $C(4, 2) = 6$ warna baru." 
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const quizContainer = document.getElementById("quiz-container");
+            if (quizContainer) {
+                quizzes.forEach((quiz, index) => {
+                    const quizEl = document.createElement("div");
+                    quizEl.className = "quiz-accordion";
+                    
+                    const imageHtml = quiz.image ? `<div class="quiz-image-container">${quiz.image}</div>` : '';
+
+                    const optionsHtml = quiz.options.map((opt, i) => 
+                        `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                    ).join("");
+                    
+                    quizEl.innerHTML = `
+                        <button class="quiz-accordion-button">
+                            <span>Soal Konsep ${index + 1}</span><i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="quiz-accordion-content hidden">
+                            ${imageHtml}
+                            <p class="question-text">${quiz.q}</p>
+                            <div class="options-container">${optionsHtml}</div>
+                            <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                        </div>`;
+                    quizContainer.appendChild(quizEl);
+                });
+
+                const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+                accordionButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const content = btn.nextElementSibling;
+                        const isOpening = content.classList.contains('hidden');
+                        accordionButtons.forEach(b => {
+                            if(b !== btn) { b.classList.remove('active'); b.nextElementSibling.classList.add('hidden'); }
+                        });
+                        btn.classList.toggle('active');
+                        content.classList.toggle('hidden');
+                        if (isOpening && window.MathJax) MathJax.typesetPromise([content]);
+                    });
+                });
+
+                document.querySelectorAll('.quiz-option').forEach(opt => {
+                    opt.addEventListener('click', () => {
+                        const container = opt.parentElement;
+                        if (container.classList.contains('answered')) return;
+                        container.classList.add('answered');
+                        const expl = container.nextElementSibling;
+                        expl.classList.remove('hidden');
+                        if (opt.dataset.correct === 'true') opt.classList.add('correct');
+                        else {
+                            opt.classList.add('wrong');
+                            container.querySelector('[data-correct="true"]').classList.add('correct');
+                        }
+                        if (window.MathJax) MathJax.typesetPromise([expl]);
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
