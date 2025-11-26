@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kombinasi dengan Pengulangan - UMT Learning</title>
+    <link rel="icon" type="image/png" href="../UMT-Logo - Copy.png">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <script>
+      MathJax = { 
+        tex: { inlineMath: [['$', '$'], ['\\(', '\\)']] } 
+      };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+    <style>
+        :root {
+            --bg-main: #0D1117; --bg-panel: #161B22; --border-color: #30363D;
+            --text-primary: #C9D1D9; --text-secondary: #8B949E; --accent-cyan: #2F81F7;
+            --accent-green: #39D353; --accent-red: #F85149;
+            --accent-pink: #DB61A2;
+        }
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            line-height: 1.6;
+        }
+        .container { max-width: 800px; margin: 2rem auto; padding: 1rem 2rem; background-color: var(--bg-panel); border: 1px solid var(--border-color); border-radius: 0.75rem; }
+        .back-link {
+            position: fixed; bottom: 2rem; right: 2rem; z-index: 1000;
+            background-color: var(--accent-cyan); color: white; width: 50px; height: 50px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; text-decoration: none; box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            transition: transform 0.2s ease;
+        }
+        .back-link:hover { transform: scale(1.1); }
+        h1, h2, h3 { color: var(--accent-cyan); }
+        h1 { font-size: 2rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem; margin-bottom: 1.5rem; }
+        h2 { font-size: 1.5rem; margin-top: 2.5rem; margin-bottom: 1rem; border-left: 4px solid var(--accent-cyan); padding-left: 1rem; }
+        h3 { color: #58a6ff; margin-top: 2rem; }
+        .hidden { display: none; }
+        ul { padding-left: 20px; }
+        li { margin-bottom: 0.5rem; }
+        
+        .diagram-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: var(--bg-main);
+            padding: 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid var(--border-color);
+            margin-top: 1rem;
+            overflow-x: auto;
+        }
+        .diagram-container svg { max-width: 100%; }
+        .diagram-container svg text { font-size: 14px; fill: var(--text-primary); }
+        .diagram-container p { font-size: 0.9em; color: var(--text-secondary); margin-top: 0.5rem; }
+        
+        /* Kotak info khusus */
+        .info-box {
+            background-color: rgba(47, 129, 247, 0.1);
+            border-left: 4px solid var(--accent-cyan);
+            padding: 1rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+
+        .quiz-accordion { border: 1px solid var(--border-color); border-radius: 0.5rem; margin-bottom: 1rem; overflow: hidden; }
+        .quiz-accordion-button {
+            background-color: var(--bg-panel); color: var(--text-primary);
+            width: 100%; padding: 1rem; text-align: left; font-size: 1.1rem; font-weight: 600;
+            border: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+        }
+        .quiz-accordion-button:hover { background-color: #2a3038; }
+        .quiz-accordion-button .fas { transition: transform 0.3s ease; }
+        .quiz-accordion-button.active .fas { transform: rotate(180deg); }
+        .quiz-accordion-content { padding: 0 1rem 1rem 1rem; }
+
+        /* Container Gambar Kuis */
+        .quiz-image-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: var(--bg-main);
+            border-radius: 8px;
+            border: 1px dashed var(--border-color);
+        }
+
+        .question-text { font-weight: 500; margin-bottom: 1.5rem; }
+        .quiz-option {
+            border: 2px solid var(--border-color); border-radius: 0.5rem; padding: 0.75rem;
+            margin-bottom: 0.5rem; cursor: pointer; transition: all 0.2s ease;
+        }
+        .options-container.answered .quiz-option:not(.correct):not(.wrong) {
+            opacity: 0.7; cursor: not-allowed;
+        }
+        .quiz-option:hover { border-color: var(--accent-cyan); }
+        .quiz-option.correct {
+            border-color: var(--accent-green); background-color: rgba(57, 211, 83, 0.1); font-weight: bold;
+        }
+        .quiz-option.wrong {
+            border-color: var(--accent-red); background-color: rgba(248, 81, 73, 0.1);
+        }
+        .quiz-explanation {
+            margin-top: 1.5rem; padding: 1rem; border-left: 4px solid var(--accent-cyan);
+            background-color: rgba(47, 129, 247, 0.1); border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        /* Scroll Horizontal */
+        p, li, .info-box, .quiz-explanation, .question-text, .quiz-option {
+            overflow-x: auto;
+            padding-bottom: 10px;
+            overscroll-behavior-x: contain;
+        }
+        
+        ::-webkit-scrollbar { height: 8px; width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--bg-panel); }
+        ::-webkit-scrollbar-thumb { background-color: #30363D; border-radius: 4px; border: 2px solid var(--bg-panel); }
+        ::-webkit-scrollbar-thumb:hover { background-color: #49525e; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="../index.html" class="back-link" title="Kembali ke Daftar">
+            <i class="fas fa-arrow-left"></i>
+        </a>
+        
+        <h1>Kombinasi dengan Pengulangan (Multiset)</h1>
+        
+        <p>
+            Apa yang terjadi jika kita ingin memilih objek di mana:
+            <br>1. <strong>Urutan TIDAK penting</strong> (Konsep Kombinasi).
+            <br>2. <strong>Objek boleh dipilih berkali-kali</strong> (Konsep Pengulangan).
+        </p>
+        <p>
+            Contoh klasik: Membeli es krim.
+            <br>Toko punya 3 Rasa: Coklat, Vanila, Stroberi.
+            <br>Anda ingin beli 2 sekop. Anda boleh memilih (Coklat, Coklat) atau (Coklat, Vanila). Urutan (Vanila, Coklat) dianggap sama dengan (Coklat, Vanila) karena masuk ke mangkuk yang sama.
+        </p>
+
+        <h2>Visualisasi: Teorema Bintang dan Sekat (Stars and Bars)</h2>
+        <p>
+            Untuk menghitung ini, matematikawan mengubah masalah "memilih rasa" menjadi masalah "menyusun kode".
+        </p>
+        <p>
+            Bayangkan kita punya <strong>3 Rasa</strong>. Untuk memisahkan 3 rasa dalam wadah, kita butuh <strong>2 Sekat (Bars)</strong>.
+            <br>Dan kita punya <strong>2 Sekop Es Krim (Stars)</strong> yang akan kita beli.
+        </p>
+
+        <div class="diagram-container">
+            <svg width="350" height="180" viewBox="0 0 350 180" xmlns="http://www.w3.org/2000/svg">
+                <text x="50" y="20" fill="#fff" font-size="10" text-anchor="middle">Rasa 1 (Coklat)</text>
+                <text x="175" y="20" fill="#fff" font-size="10" text-anchor="middle">Rasa 2 (Vanila)</text>
+                <text x="300" y="20" fill="#fff" font-size="10" text-anchor="middle">Rasa 3 (Stroberi)</text>
+
+                <line x1="115" y1="30" x2="115" y2="100" stroke="#8B949E" stroke-width="4"/>
+                <line x1="235" y1="30" x2="235" y2="100" stroke="#8B949E" stroke-width="4"/>
+                <text x="115" y="120" fill="#8B949E" font-weight="bold" text-anchor="middle">SEKAT (|)</text>
+                <text x="235" y="120" fill="#8B949E" font-weight="bold" text-anchor="middle">SEKAT (|)</text>
+
+                <circle cx="35" cy="65" r="15" fill="#D29922"><title>Scoop</title></circle>
+                <circle cx="75" cy="65" r="15" fill="#D29922"><title>Scoop</title></circle>
+                
+                <text x="175" y="150" fill="#fff" text-anchor="middle" font-family="monospace" font-size="16">
+                    ★ ★ | | 
+                </text>
+                <text x="175" y="170" fill="#8B949E" font-size="10" text-anchor="middle">
+                    Artinya: 2 Coklat, 0 Vanila, 0 Stroberi
+                </text>
+            </svg>
+            <p>
+                Masalahnya berubah menjadi: Berapa cara menyusun 2 Bintang ($\star$) dan 2 Sekat ($|$)?
+                <br>Total posisi = 4. Kita harus memilih 2 posisi untuk Bintang.
+            </p>
+        </div>
+
+        <h2>Rumus</h2>
+        <div class="info-box">
+            $$ C(n + r - 1, r) $$
+            <br>
+            Keterangan:
+            <br>• $n$ = Jumlah Jenis/Kategori yang tersedia.
+            <br>• $r$ = Jumlah item yang ingin diambil/dibeli.
+            <br>• $(n-1)$ = Jumlah sekat yang dibutuhkan.
+        </div>
+
+        <h3>Contoh Penerapan</h3>
+        <p>
+            <strong>Toko Donat menjual 4 jenis donat (Coklat, Keju, Kacang, Gula). Budi ingin membeli 10 donat. Berapa banyak variasi kotak donat yang bisa dibawa pulang Budi?</strong>
+        </p>
+        <p>
+            <strong>Analisis:</strong>
+            <br>• $n = 4$ (Jenis donat). Maka butuh $4-1 = 3$ sekat.
+            <br>• $r = 10$ (Jumlah yang dibeli).
+            <br>• Total posisi = $10 \ (\text{donat}) + 3 \ (\text{sekat}) = 13$.
+        </p>
+        <p>
+            <strong>Hitungan:</strong>
+            $$ C(4 + 10 - 1, 10) = C(13, 10) $$
+            $$ = \frac{13!}{10! \cdot 3!} = \frac{13 \times 12 \times 11}{3 \times 2 \times 1} $$
+            $$ = 13 \times 2 \times 11 = 286 \ \text{Variasi} $$
+        </p>
+
+        <h2>Uji Pemahaman</h2>
+        <p>Tentukan $n$ dan $r$ dengan tepat, lalu hitung.</p>
+        <div id="quiz-container"></div>
+    </div>
+
+    <script>
+        // Cek session (jika perlu)
+        if (!sessionStorage.getItem('sessionToken')) {
+            window.location.href = '../../Login/';
+        }
+
+        // --- SVG DATA ---
+        
+        // SVG Quiz 1: Ice Cream
+        const svgIceCream = `
+        <svg viewBox="0 0 200 100" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+            <path d="M 30,50 L 50,90 L 70,50" fill="#D2B48C"/>
+            <circle cx="50" cy="40" r="20" fill="#F85149"/>
+            <text x="50" y="45" fill="#fff" font-size="8" text-anchor="middle">Rasa 1</text>
+            
+            <path d="M 90,50 L 110,90 L 130,50" fill="#D2B48C"/>
+            <circle cx="110" cy="40" r="20" fill="#39D353"/>
+            <text x="110" y="45" fill="#fff" font-size="8" text-anchor="middle">Rasa 2</text>
+            
+            <path d="M 150,50 L 170,90 L 190,50" fill="#D2B48C"/>
+            <circle cx="170" cy="40" r="20" fill="#2F81F7"/>
+            <text x="170" y="45" fill="#fff" font-size="8" text-anchor="middle">Rasa 3</text>
+        </svg>`;
+
+        // SVG Quiz 3: Equation
+        const svgEquation = `
+        <svg viewBox="0 0 300 60" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;">
+            <rect x="10" y="10" width="280" height="40" rx="5" fill="#161B22" stroke="#DB61A2"/>
+            <text x="150" y="38" fill="#fff" font-family="monospace" font-size="20" text-anchor="middle">
+                x + y + z = 10
+            </text>
+            <text x="150" y="60" fill="#8B949E" font-size="8" text-anchor="middle">Solusi Bulat Non-Negatif</text>
+        </svg>`;
+
+        const quizzes = [
+            { 
+                q: "Dalam konsep 'Bintang dan Sekat' (Stars and Bars), apa yang diwakili oleh 'Sekat' ($n-1$)?", 
+                options: [
+                    "Jumlah benda yang ingin diambil ($r$)", 
+                    "Pemisah antar kategori/jenis ($n$)", 
+                    "Total permutasi", 
+                    "Objek yang tidak terpilih"
+                ], 
+                correct: 1, 
+                explanation: "Sekat berfungsi untuk memisahkan jenis-jenis barang. Jika ada 3 jenis, kita butuh 2 sekat untuk membuat 3 ruang." 
+            },
+            { 
+                q: "Sebuah kedai es krim memiliki 3 rasa. Anda ingin membeli 2 sekop es krim (boleh rasa yang sama). Berapa kombinasinya?", 
+                image: svgIceCream,
+                options: [
+                    "3", 
+                    "6", 
+                    "9", 
+                    "12"
+                ], 
+                correct: 1, 
+                explanation: "$n=3$ (Rasa), $r=2$ (Sekop). <br>Rumus: $C(3+2-1, 2) = C(4, 2) = 6$ kombinasi." 
+            },
+            { 
+                q: "Toko roti menjual 4 jenis roti (Coklat, Keju, Sosis, Polos). Ibu ingin membeli 5 roti. Berapa variasi belanjaan Ibu?", 
+                options: [
+                    "56", 
+                    "20", 
+                    "120", 
+                    "126"
+                ], 
+                correct: 0, 
+                explanation: "$n=4$ (Jenis), $r=5$ (Beli). <br>Rumus: $C(4+5-1, 5) = C(8, 5)$. <br>$C(8,5) = C(8,3) = \\frac{8 \times 7 \times 6}{3 \times 2 \times 1} = 56$." 
+            },
+            { 
+                q: "Berapa banyak solusi bilangan bulat non-negatif untuk persamaan $x + y + z = 10$?", 
+                image: svgEquation,
+                options: [
+                    "66", 
+                    "1000", 
+                    "30", 
+                    "12"
+                ], 
+                correct: 0, 
+                explanation: "Ini sama dengan membagi 10 koin ($r=10$) ke dalam 3 kotak variabel ($n=3$). <br>$C(3+10-1, 10) = C(12, 10) = C(12, 2) = \\frac{12 \times 11}{2} = 66$." 
+            },
+            { 
+                q: "Apa perbedaan utama antara soal ini dengan Permutasi Berulang (seperti PIN ATM)?", 
+                options: [
+                    "Pada soal ini urutan PENTING, pada PIN tidak", 
+                    "Pada soal ini urutan TIDAK PENTING, pada PIN urutan PENTING", 
+                    "Tidak ada bedanya", 
+                    "Soal ini menggunakan faktorial, PIN tidak"
+                ], 
+                correct: 1, 
+                explanation: "Di sini, membeli (Coklat, Vanila) SAMA dengan (Vanila, Coklat). Sedangkan PIN '12' BEDA dengan '21'. Itulah bedanya Kombinasi vs Permutasi." 
+            }
+        ];
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const quizContainer = document.getElementById("quiz-container");
+            if (quizContainer) {
+                quizzes.forEach((quiz, index) => {
+                    const quizEl = document.createElement("div");
+                    quizEl.className = "quiz-accordion";
+                    
+                    const imageHtml = quiz.image ? `<div class="quiz-image-container">${quiz.image}</div>` : '';
+
+                    const optionsHtml = quiz.options.map((opt, i) => 
+                        `<div class="quiz-option" data-correct="${i === quiz.correct}">${opt}</div>`
+                    ).join("");
+                    
+                    quizEl.innerHTML = `
+                        <button class="quiz-accordion-button">
+                            <span>Soal Latihan ${index + 1}</span><i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="quiz-accordion-content hidden">
+                            ${imageHtml}
+                            <p class="question-text">${quiz.q}</p>
+                            <div class="options-container">${optionsHtml}</div>
+                            <div class="quiz-explanation hidden"><b>Pembahasan:</b> ${quiz.explanation}</div>
+                        </div>`;
+                    quizContainer.appendChild(quizEl);
+                });
+
+                const accordionButtons = document.querySelectorAll('.quiz-accordion-button');
+                accordionButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        const content = btn.nextElementSibling;
+                        const isOpening = content.classList.contains('hidden');
+                        accordionButtons.forEach(b => {
+                            if(b !== btn) { b.classList.remove('active'); b.nextElementSibling.classList.add('hidden'); }
+                        });
+                        btn.classList.toggle('active');
+                        content.classList.toggle('hidden');
+                        if (isOpening && window.MathJax) MathJax.typesetPromise([content]);
+                    });
+                });
+
+                document.querySelectorAll('.quiz-option').forEach(opt => {
+                    opt.addEventListener('click', () => {
+                        const container = opt.parentElement;
+                        if (container.classList.contains('answered')) return;
+                        container.classList.add('answered');
+                        const expl = container.nextElementSibling;
+                        expl.classList.remove('hidden');
+                        if (opt.dataset.correct === 'true') opt.classList.add('correct');
+                        else {
+                            opt.classList.add('wrong');
+                            container.querySelector('[data-correct="true"]').classList.add('correct');
+                        }
+                        if (window.MathJax) MathJax.typesetPromise([expl]);
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+</html>
